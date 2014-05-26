@@ -1,0 +1,148 @@
+﻿
+“CUASO”:[
+{
+“id”:10,
+“title”:”Central”,
+“name”:”Restaurante Central",
+“address”:”Praça do Relógio Solar, travessa 8, nº 300,Cidade Universitária, São Paulo - SP” ,
+“phone”:”11 3091-3318",
+“latitude”:”34e304734973”,
+“longitude”:”34e304734973”,
+“photourl”:”http://“,
+“weekday”:[
+{“breakfast”:”Café das 7h às 8h30min”,“lunch”:”Almoço das 11h15min às 14h15min”,“dinner”:”Jantar das 17h30min às 19h45min"}
+],
+“saturday”:[
+{“breakfast”:”Café das 7h30 às 9h00”,“lunch”:”Almoço das 11h15min às 14h15min”,“dinner”:””}
+],
+“sunday”:[
+{“breakfast”:”Café das 8h às 9h30”,“lunch”:”Almoço das 12h00 às 14h15min”,“dinner”:””}
+]
+}
+,
+{
+“id”:20,
+“title”:”Fisica”,
+“name”:”Restaurante da Física”,
+“address”:”Rua do Matão, Travessa R 187 - Instituto de Física - Universitária, São Paulo - SP” ,
+“phone”:”11 3091-6710",
+“latitude”:”34e304734973”,
+“longitude”:”34e304734973”,
+“photourl”:”http://“,
+“weekday”:[
+{“breakfast”:””,“lunch”:”Almoço das 11h15min às 14h15min”,“dinner”:”Jantar das 17h30min às 19h45min"}
+]
+}
+,
+{
+“id”:30,
+“title”:”Quimica”,
+“name”:”Restaurante das Químicas”,
+“address”:”Av. Lineu Prestes, 748 - Instituto de Químicas - Cidade Universitária, São Paulo - SP” ,
+“phone”:”11 3034-1993",
+“latitude”:”34e304734973”,
+“longitude”:”34e304734973”,
+“photourl”:”http://“,
+“weekday”:[
+{“breakfast”:””,“lunch”:”Almoço das 11h00 às 14h00”,“dinner”:”Jantar das 17h30min às 19h45min"}
+]
+}
+,
+{
+“id”:40,
+“title”:”pusp-c”,
+“name”:”Restaurante da PUSP-C”,
+“address”:”Av. Prof. Almeida Prado, 1280 - Cidade Universitária, São Paulo - SP” ,
+“phone”:”11 3091-0129",
+“latitude”:”34e304734973”,
+“longitude”:”34e304734973”,
+“photourl”:”http://“,
+“weekday”:[
+{“breakfast”:””,“lunch”:”Almoço das 11h15min às 14h15min”,“dinner”:””}
+]
+}]
+,
+“EACH”:[
+{
+“id”:60,
+“title”:”EACH”,
+“name”:”Restaurante da EACH",
+“address”:”Rua Arlindo Bettio, 1000 – Ermelino Matarazzo, São Paulo - SP” ,
+“phone”:”11 3091-3318",
+“latitude”:”34e304734973”,
+“longitude”:”34e304734973”,
+“photourl”:”http://“,
+“weekday”:[
+{“breakfast”:””,“lunch”:”Almoço das 11h00min às 14h00min”,“dinner”:”Jantar das 17h30min às 20h00min"},
+]
+}]
+,
+“Lorena”:[
+{
+“id”:70,
+“title”:”Lorena”,
+“name”:”Restaurante da EEL - Lorena”,
+“address”:”Estrada do Campinho s/n- Lorena, São Paulo - SP” ,
+“phone”:”12 3159-5304",
+“latitude”:”34e304734973”,
+“longitude”:”34e304734973”,
+“photourl”:”http://“,
+“weekday”:[
+{“breakfast”:””,“lunch”:”Almoço das 11h00min às 14h00min”,“dinner”:”Jantar das 17h30min às 19h30min"},
+]
+}]
+,
+“Direito”:[
+{
+“id”:80,
+“title”:”Direito”,
+“name”:”Restaurante da Faculdade de Direito”,
+“address”:”Rua Riachuelo, 194 - Faculdade de Direito - Largo São Francisco, São Paulo - SP” ,
+“phone”:”11 3111-4054",
+“latitude”:”34e304734973”,
+“longitude”:”34e304734973”,
+“photourl”:”http://“,
+“weekday”:[
+{“breakfast”:””,“lunch”:”Almoço das 11h30min às 14h00min”,“dinner”:”Jantar das 17h30min às 19h00min"},
+]
+}]
+,
+“FSP”:[
+{
+“id”:90,
+“title”:”FSP”,
+“name”:”Restaurante da Faculdade de Saúde Pública”,
+“address”:”Av. Dr. Arnaldo, 715 - Faculdade de Saúde Pública, Cerqueira Cesar, São Paulo - SP” ,
+“phone”:”11 3061-7785",
+“latitude”:”34e304734973”,
+“longitude”:”34e304734973”,  
+“photourl”:”http://“,
+“weekday”:[
+{“breakfast”:””,“lunch”:”Almoço das 11h15min às 14h15min”,“dinner”:”Jantar das 17h30min às 19h00min"},
+]
+}]
+,
+“EE”:[
+{
+“id”:100, 
+“title”:”EE”,
+“name”:”Restaurante da Escola de Enfermagem”,
+“address”:”Av. Dr. Enéas Carvalho de Aguiar, 419 - Escola de Enfermagem, Cerqueira Cesar, São Paulo - SP” ,
+“phone”:”11 3061-7518",
+“latitude”:”34e304734973”,
+“longitude”:”34e304734973”,  
+“photourl”:”http://“,
+“weekday”:[
+{“breakfast”:””,“lunch”:”Almoço das 11h15min às 14h15min”,“dinner”:””},
+]
+}]
+,
+“CAIXA”:[
+{
+“workinghours:”,”Segundas as Sextas-Feiras, 7h às 19h30”,
+“cost”:[
+      {“category”:”Aluno (graduação e pós-graduação)”,“price”:”1,90”},
+      {“category”:”Especial”,“price”:”6,00”},
+      {“category”:”Visitante”,“price”:”12,00”}
+]
+}]

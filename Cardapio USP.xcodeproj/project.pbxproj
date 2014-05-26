@@ -1,0 +1,599 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BFAC6E7D192A54E100921494 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFAC6E7C192A54E100921494 /* Foundation.framework */; };
+		BFAC6E7F192A54E100921494 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFAC6E7E192A54E100921494 /* CoreGraphics.framework */; };
+		BFAC6E81192A54E100921494 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFAC6E80192A54E100921494 /* UIKit.framework */; };
+		BFAC6E89192A54E100921494 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAC6E88192A54E100921494 /* main.m */; };
+		BFAC6E8D192A54E100921494 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAC6E8C192A54E100921494 /* AppDelegate.m */; };
+		BFAC6E90192A54E100921494 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFAC6E8E192A54E100921494 /* Main_iPhone.storyboard */; };
+		BFAC6E93192A54E100921494 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFAC6E91192A54E100921494 /* Main_iPad.storyboard */; };
+		BFAC6E96192A54E100921494 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAC6E95192A54E100921494 /* MainViewController.m */; };
+		BFAC6E98192A54E100921494 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFAC6E97192A54E100921494 /* Images.xcassets */; };
+		BFAC6E9F192A54E100921494 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFAC6E9E192A54E100921494 /* XCTest.framework */; };
+		BFAC6EA0192A54E100921494 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFAC6E7C192A54E100921494 /* Foundation.framework */; };
+		BFAC6EA1192A54E100921494 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFAC6E80192A54E100921494 /* UIKit.framework */; };
+		BFAC6EA9192A54E100921494 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BFAC6EA7192A54E100921494 /* InfoPlist.strings */; };
+		BFAC6EAB192A54E100921494 /* Cardapio_USPTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAC6EAA192A54E100921494 /* Cardapio_USPTests.m */; };
+		BFAC6EB5192A566200921494 /* central.json in Resources */ = {isa = PBXBuildFile; fileRef = BFAC6EB4192A566200921494 /* central.json */; };
+		BFAC6ECA192A586B00921494 /* RECommonFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAC6EBF192A586B00921494 /* RECommonFunctions.m */; };
+		BFAC6ECB192A586B00921494 /* REFrostedContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAC6EC1192A586B00921494 /* REFrostedContainerViewController.m */; };
+		BFAC6ECC192A586B00921494 /* REFrostedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAC6EC3192A586B00921494 /* REFrostedViewController.m */; };
+		BFAC6ECD192A586B00921494 /* UIImage+REFrostedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAC6EC5192A586B00921494 /* UIImage+REFrostedViewController.m */; };
+		BFAC6ECE192A586B00921494 /* UIView+REFrostedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAC6EC7192A586B00921494 /* UIView+REFrostedViewController.m */; };
+		BFAC6ECF192A586B00921494 /* UIViewController+REFrostedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAC6EC9192A586B00921494 /* UIViewController+REFrostedViewController.m */; };
+		BFAC6EDA192A587900921494 /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAC6ED2192A587900921494 /* GTMNSString+HTML.m */; };
+		BFAC6EDB192A587900921494 /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAC6ED4192A587900921494 /* NSString+HTML.m */; };
+		BFAC6EDC192A587900921494 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BFAC6ED7192A587900921494 /* SVProgressHUD.bundle */; };
+		BFAC6EDD192A587900921494 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAC6ED9192A587900921494 /* SVProgressHUD.m */; };
+		BFAC6EE0192A59E600921494 /* FrostedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAC6EDF192A59E600921494 /* FrostedViewController.m */; };
+		BFAC6EE3192A706900921494 /* SelectorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAC6EE2192A706900921494 /* SelectorViewController.m */; };
+		BFAC6EE6192A71A000921494 /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAC6EE5192A71A000921494 /* InfoViewController.m */; };
+		BFAC6EE9192A7E9700921494 /* MenuDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAC6EE8192A7E9700921494 /* MenuDataModel.m */; };
+		BFAC6EEB192AB50F00921494 /* central.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BFAC6EEA192AB50F00921494 /* central.jpg */; };
+		BFAC6EED192AB98600921494 /* mapa.png in Resources */ = {isa = PBXBuildFile; fileRef = BFAC6EEC192AB98600921494 /* mapa.png */; };
+		BFBE1E76192FB038004C403C /* restaurantes.json in Resources */ = {isa = PBXBuildFile; fileRef = BFBE1E75192FB038004C403C /* restaurantes.json */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		BFAC6EA2192A54E100921494 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFAC6E71192A54E100921494 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BFAC6E78192A54E100921494;
+			remoteInfo = "Cardapio USP";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		BFAC6E79192A54E100921494 /* Cardapio USP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cardapio USP.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFAC6E7C192A54E100921494 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		BFAC6E7E192A54E100921494 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		BFAC6E80192A54E100921494 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		BFAC6E84192A54E100921494 /* Cardapio USP-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Cardapio USP-Info.plist"; sourceTree = "<group>"; };
+		BFAC6E88192A54E100921494 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		BFAC6E8A192A54E100921494 /* Cardapio USP-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Cardapio USP-Prefix.pch"; sourceTree = "<group>"; };
+		BFAC6E8B192A54E100921494 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		BFAC6E8C192A54E100921494 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		BFAC6E8F192A54E100921494 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
+		BFAC6E92192A54E100921494 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
+		BFAC6E94192A54E100921494 /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		BFAC6E95192A54E100921494 /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		BFAC6E97192A54E100921494 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		BFAC6E9D192A54E100921494 /* Cardapio USPTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Cardapio USPTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFAC6E9E192A54E100921494 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		BFAC6EA6192A54E100921494 /* Cardapio USPTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Cardapio USPTests-Info.plist"; sourceTree = "<group>"; };
+		BFAC6EA8192A54E100921494 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		BFAC6EAA192A54E100921494 /* Cardapio_USPTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Cardapio_USPTests.m; sourceTree = "<group>"; };
+		BFAC6EB4192A566200921494 /* central.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; lineEnding = 0; path = central.json; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.javascript; };
+		BFAC6EBE192A586B00921494 /* RECommonFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RECommonFunctions.h; sourceTree = "<group>"; };
+		BFAC6EBF192A586B00921494 /* RECommonFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RECommonFunctions.m; sourceTree = "<group>"; };
+		BFAC6EC0192A586B00921494 /* REFrostedContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REFrostedContainerViewController.h; sourceTree = "<group>"; };
+		BFAC6EC1192A586B00921494 /* REFrostedContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REFrostedContainerViewController.m; sourceTree = "<group>"; };
+		BFAC6EC2192A586B00921494 /* REFrostedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REFrostedViewController.h; sourceTree = "<group>"; };
+		BFAC6EC3192A586B00921494 /* REFrostedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REFrostedViewController.m; sourceTree = "<group>"; };
+		BFAC6EC4192A586B00921494 /* UIImage+REFrostedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+REFrostedViewController.h"; sourceTree = "<group>"; };
+		BFAC6EC5192A586B00921494 /* UIImage+REFrostedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+REFrostedViewController.m"; sourceTree = "<group>"; };
+		BFAC6EC6192A586B00921494 /* UIView+REFrostedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+REFrostedViewController.h"; sourceTree = "<group>"; };
+		BFAC6EC7192A586B00921494 /* UIView+REFrostedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+REFrostedViewController.m"; sourceTree = "<group>"; };
+		BFAC6EC8192A586B00921494 /* UIViewController+REFrostedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+REFrostedViewController.h"; sourceTree = "<group>"; };
+		BFAC6EC9192A586B00921494 /* UIViewController+REFrostedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+REFrostedViewController.m"; sourceTree = "<group>"; };
+		BFAC6ED1192A587900921494 /* GTMNSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GTMNSString+HTML.h"; sourceTree = "<group>"; };
+		BFAC6ED2192A587900921494 /* GTMNSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GTMNSString+HTML.m"; sourceTree = "<group>"; };
+		BFAC6ED3192A587900921494 /* NSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HTML.h"; sourceTree = "<group>"; };
+		BFAC6ED4192A587900921494 /* NSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HTML.m"; sourceTree = "<group>"; };
+		BFAC6ED6192A587900921494 /* SVProgressHUD-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SVProgressHUD-Prefix.pch"; sourceTree = "<group>"; };
+		BFAC6ED7192A587900921494 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
+		BFAC6ED8192A587900921494 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
+		BFAC6ED9192A587900921494 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
+		BFAC6EDE192A59E600921494 /* FrostedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrostedViewController.h; sourceTree = "<group>"; };
+		BFAC6EDF192A59E600921494 /* FrostedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FrostedViewController.m; sourceTree = "<group>"; };
+		BFAC6EE1192A706900921494 /* SelectorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectorViewController.h; sourceTree = "<group>"; };
+		BFAC6EE2192A706900921494 /* SelectorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectorViewController.m; sourceTree = "<group>"; };
+		BFAC6EE4192A71A000921494 /* InfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoViewController.h; sourceTree = "<group>"; };
+		BFAC6EE5192A71A000921494 /* InfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoViewController.m; sourceTree = "<group>"; };
+		BFAC6EE7192A7E9700921494 /* MenuDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuDataModel.h; sourceTree = "<group>"; };
+		BFAC6EE8192A7E9700921494 /* MenuDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuDataModel.m; sourceTree = "<group>"; };
+		BFAC6EEA192AB50F00921494 /* central.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = central.jpg; sourceTree = "<group>"; };
+		BFAC6EEC192AB98600921494 /* mapa.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mapa.png; sourceTree = "<group>"; };
+		BFBE1E75192FB038004C403C /* restaurantes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = restaurantes.json; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BFAC6E76192A54E100921494 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFAC6E7F192A54E100921494 /* CoreGraphics.framework in Frameworks */,
+				BFAC6E81192A54E100921494 /* UIKit.framework in Frameworks */,
+				BFAC6E7D192A54E100921494 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFAC6E9A192A54E100921494 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFAC6E9F192A54E100921494 /* XCTest.framework in Frameworks */,
+				BFAC6EA1192A54E100921494 /* UIKit.framework in Frameworks */,
+				BFAC6EA0192A54E100921494 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BFAC6E70192A54E100921494 = {
+			isa = PBXGroup;
+			children = (
+				BFAC6E82192A54E100921494 /* Cardapio USP */,
+				BFAC6EA4192A54E100921494 /* Cardapio USPTests */,
+				BFAC6E7B192A54E100921494 /* Frameworks */,
+				BFAC6E7A192A54E100921494 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BFAC6E7A192A54E100921494 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BFAC6E79192A54E100921494 /* Cardapio USP.app */,
+				BFAC6E9D192A54E100921494 /* Cardapio USPTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BFAC6E7B192A54E100921494 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BFAC6E7C192A54E100921494 /* Foundation.framework */,
+				BFAC6E7E192A54E100921494 /* CoreGraphics.framework */,
+				BFAC6E80192A54E100921494 /* UIKit.framework */,
+				BFAC6E9E192A54E100921494 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BFAC6E82192A54E100921494 /* Cardapio USP */ = {
+			isa = PBXGroup;
+			children = (
+				BFAC6E8B192A54E100921494 /* AppDelegate.h */,
+				BFAC6E8C192A54E100921494 /* AppDelegate.m */,
+				BFAC6EE7192A7E9700921494 /* MenuDataModel.h */,
+				BFAC6EE8192A7E9700921494 /* MenuDataModel.m */,
+				BFAC6EDE192A59E600921494 /* FrostedViewController.h */,
+				BFAC6EDF192A59E600921494 /* FrostedViewController.m */,
+				BFAC6E8E192A54E100921494 /* Main_iPhone.storyboard */,
+				BFAC6E91192A54E100921494 /* Main_iPad.storyboard */,
+				BFAC6E94192A54E100921494 /* MainViewController.h */,
+				BFAC6E95192A54E100921494 /* MainViewController.m */,
+				BFAC6EE1192A706900921494 /* SelectorViewController.h */,
+				BFAC6EE2192A706900921494 /* SelectorViewController.m */,
+				BFAC6EE4192A71A000921494 /* InfoViewController.h */,
+				BFAC6EE5192A71A000921494 /* InfoViewController.m */,
+				BFAC6E97192A54E100921494 /* Images.xcassets */,
+				BFAC6ED0192A587900921494 /* Categories */,
+				BFAC6ED5192A587900921494 /* SVProgressHUD */,
+				BFAC6EBD192A586B00921494 /* REFrostedViewController */,
+				BFAC6E83192A54E100921494 /* Supporting Files */,
+				BFAC6EB4192A566200921494 /* central.json */,
+				BFBE1E75192FB038004C403C /* restaurantes.json */,
+				BFAC6EEA192AB50F00921494 /* central.jpg */,
+				BFAC6EEC192AB98600921494 /* mapa.png */,
+			);
+			path = "Cardapio USP";
+			sourceTree = "<group>";
+		};
+		BFAC6E83192A54E100921494 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				BFAC6E84192A54E100921494 /* Cardapio USP-Info.plist */,
+				BFAC6E88192A54E100921494 /* main.m */,
+				BFAC6E8A192A54E100921494 /* Cardapio USP-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BFAC6EA4192A54E100921494 /* Cardapio USPTests */ = {
+			isa = PBXGroup;
+			children = (
+				BFAC6EAA192A54E100921494 /* Cardapio_USPTests.m */,
+				BFAC6EA5192A54E100921494 /* Supporting Files */,
+			);
+			path = "Cardapio USPTests";
+			sourceTree = "<group>";
+		};
+		BFAC6EA5192A54E100921494 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				BFAC6EA6192A54E100921494 /* Cardapio USPTests-Info.plist */,
+				BFAC6EA7192A54E100921494 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BFAC6EBD192A586B00921494 /* REFrostedViewController */ = {
+			isa = PBXGroup;
+			children = (
+				BFAC6EBE192A586B00921494 /* RECommonFunctions.h */,
+				BFAC6EBF192A586B00921494 /* RECommonFunctions.m */,
+				BFAC6EC0192A586B00921494 /* REFrostedContainerViewController.h */,
+				BFAC6EC1192A586B00921494 /* REFrostedContainerViewController.m */,
+				BFAC6EC2192A586B00921494 /* REFrostedViewController.h */,
+				BFAC6EC3192A586B00921494 /* REFrostedViewController.m */,
+				BFAC6EC4192A586B00921494 /* UIImage+REFrostedViewController.h */,
+				BFAC6EC5192A586B00921494 /* UIImage+REFrostedViewController.m */,
+				BFAC6EC6192A586B00921494 /* UIView+REFrostedViewController.h */,
+				BFAC6EC7192A586B00921494 /* UIView+REFrostedViewController.m */,
+				BFAC6EC8192A586B00921494 /* UIViewController+REFrostedViewController.h */,
+				BFAC6EC9192A586B00921494 /* UIViewController+REFrostedViewController.m */,
+			);
+			path = REFrostedViewController;
+			sourceTree = "<group>";
+		};
+		BFAC6ED0192A587900921494 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				BFAC6ED1192A587900921494 /* GTMNSString+HTML.h */,
+				BFAC6ED2192A587900921494 /* GTMNSString+HTML.m */,
+				BFAC6ED3192A587900921494 /* NSString+HTML.h */,
+				BFAC6ED4192A587900921494 /* NSString+HTML.m */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		BFAC6ED5192A587900921494 /* SVProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				BFAC6ED7192A587900921494 /* SVProgressHUD.bundle */,
+				BFAC6ED6192A587900921494 /* SVProgressHUD-Prefix.pch */,
+				BFAC6ED8192A587900921494 /* SVProgressHUD.h */,
+				BFAC6ED9192A587900921494 /* SVProgressHUD.m */,
+			);
+			path = SVProgressHUD;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BFAC6E78192A54E100921494 /* Cardapio USP */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BFAC6EAE192A54E100921494 /* Build configuration list for PBXNativeTarget "Cardapio USP" */;
+			buildPhases = (
+				BFAC6E75192A54E100921494 /* Sources */,
+				BFAC6E76192A54E100921494 /* Frameworks */,
+				BFAC6E77192A54E100921494 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Cardapio USP";
+			productName = "Cardapio USP";
+			productReference = BFAC6E79192A54E100921494 /* Cardapio USP.app */;
+			productType = "com.apple.product-type.application";
+		};
+		BFAC6E9C192A54E100921494 /* Cardapio USPTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BFAC6EB1192A54E100921494 /* Build configuration list for PBXNativeTarget "Cardapio USPTests" */;
+			buildPhases = (
+				BFAC6E99192A54E100921494 /* Sources */,
+				BFAC6E9A192A54E100921494 /* Frameworks */,
+				BFAC6E9B192A54E100921494 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BFAC6EA3192A54E100921494 /* PBXTargetDependency */,
+			);
+			name = "Cardapio USPTests";
+			productName = "Cardapio USPTests";
+			productReference = BFAC6E9D192A54E100921494 /* Cardapio USPTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BFAC6E71192A54E100921494 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = EPUSP;
+				TargetAttributes = {
+					BFAC6E9C192A54E100921494 = {
+						TestTargetID = BFAC6E78192A54E100921494;
+					};
+				};
+			};
+			buildConfigurationList = BFAC6E74192A54E100921494 /* Build configuration list for PBXProject "Cardapio USP" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = BFAC6E70192A54E100921494;
+			productRefGroup = BFAC6E7A192A54E100921494 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BFAC6E78192A54E100921494 /* Cardapio USP */,
+				BFAC6E9C192A54E100921494 /* Cardapio USPTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BFAC6E77192A54E100921494 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFAC6EDC192A587900921494 /* SVProgressHUD.bundle in Resources */,
+				BFAC6E93192A54E100921494 /* Main_iPad.storyboard in Resources */,
+				BFAC6E98192A54E100921494 /* Images.xcassets in Resources */,
+				BFAC6E90192A54E100921494 /* Main_iPhone.storyboard in Resources */,
+				BFAC6EB5192A566200921494 /* central.json in Resources */,
+				BFAC6EEB192AB50F00921494 /* central.jpg in Resources */,
+				BFAC6EED192AB98600921494 /* mapa.png in Resources */,
+				BFBE1E76192FB038004C403C /* restaurantes.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFAC6E9B192A54E100921494 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFAC6EA9192A54E100921494 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BFAC6E75192A54E100921494 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFAC6ECF192A586B00921494 /* UIViewController+REFrostedViewController.m in Sources */,
+				BFAC6ECE192A586B00921494 /* UIView+REFrostedViewController.m in Sources */,
+				BFAC6ECB192A586B00921494 /* REFrostedContainerViewController.m in Sources */,
+				BFAC6EDB192A587900921494 /* NSString+HTML.m in Sources */,
+				BFAC6EE3192A706900921494 /* SelectorViewController.m in Sources */,
+				BFAC6E96192A54E100921494 /* MainViewController.m in Sources */,
+				BFAC6EDD192A587900921494 /* SVProgressHUD.m in Sources */,
+				BFAC6ECD192A586B00921494 /* UIImage+REFrostedViewController.m in Sources */,
+				BFAC6EE6192A71A000921494 /* InfoViewController.m in Sources */,
+				BFAC6E8D192A54E100921494 /* AppDelegate.m in Sources */,
+				BFAC6EE9192A7E9700921494 /* MenuDataModel.m in Sources */,
+				BFAC6E89192A54E100921494 /* main.m in Sources */,
+				BFAC6EE0192A59E600921494 /* FrostedViewController.m in Sources */,
+				BFAC6EDA192A587900921494 /* GTMNSString+HTML.m in Sources */,
+				BFAC6ECA192A586B00921494 /* RECommonFunctions.m in Sources */,
+				BFAC6ECC192A586B00921494 /* REFrostedViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFAC6E99192A54E100921494 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFAC6EAB192A54E100921494 /* Cardapio_USPTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BFAC6EA3192A54E100921494 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BFAC6E78192A54E100921494 /* Cardapio USP */;
+			targetProxy = BFAC6EA2192A54E100921494 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		BFAC6E8E192A54E100921494 /* Main_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BFAC6E8F192A54E100921494 /* Base */,
+			);
+			name = Main_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		BFAC6E91192A54E100921494 /* Main_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BFAC6E92192A54E100921494 /* Base */,
+			);
+			name = Main_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		BFAC6EA7192A54E100921494 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BFAC6EA8192A54E100921494 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		BFAC6EAC192A54E100921494 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BFAC6EAD192A54E100921494 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		BFAC6EAF192A54E100921494 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Cardapio USP/Cardapio USP-Prefix.pch";
+				INFOPLIST_FILE = "Cardapio USP/Cardapio USP-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		BFAC6EB0192A54E100921494 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Cardapio USP/Cardapio USP-Prefix.pch";
+				INFOPLIST_FILE = "Cardapio USP/Cardapio USP-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		BFAC6EB2192A54E100921494 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Cardapio USP.app/Cardapio USP";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Cardapio USP/Cardapio USP-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Cardapio USPTests/Cardapio USPTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		BFAC6EB3192A54E100921494 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Cardapio USP.app/Cardapio USP";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Cardapio USP/Cardapio USP-Prefix.pch";
+				INFOPLIST_FILE = "Cardapio USPTests/Cardapio USPTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BFAC6E74192A54E100921494 /* Build configuration list for PBXProject "Cardapio USP" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BFAC6EAC192A54E100921494 /* Debug */,
+				BFAC6EAD192A54E100921494 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BFAC6EAE192A54E100921494 /* Build configuration list for PBXNativeTarget "Cardapio USP" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BFAC6EAF192A54E100921494 /* Debug */,
+				BFAC6EB0192A54E100921494 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BFAC6EB1192A54E100921494 /* Build configuration list for PBXNativeTarget "Cardapio USPTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BFAC6EB2192A54E100921494 /* Debug */,
+				BFAC6EB3192A54E100921494 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BFAC6E71192A54E100921494 /* Project object */;
+}
