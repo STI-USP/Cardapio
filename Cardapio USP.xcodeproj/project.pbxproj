@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AD66F7CD1933B2E8005A31BE /* Menu.m in Sources */ = {isa = PBXBuildFile; fileRef = AD66F7CC1933B2E8005A31BE /* Menu.m */; };
+		AD66F7D01933B3C4005A31BE /* Period.m in Sources */ = {isa = PBXBuildFile; fileRef = AD66F7CF1933B3C4005A31BE /* Period.m */; };
+		AD66F7D91933C4A8005A31BE /* MenuStub.m in Sources */ = {isa = PBXBuildFile; fileRef = AD66F7D81933C4A8005A31BE /* MenuStub.m */; };
 		BFAC6E7D192A54E100921494 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFAC6E7C192A54E100921494 /* Foundation.framework */; };
 		BFAC6E7F192A54E100921494 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFAC6E7E192A54E100921494 /* CoreGraphics.framework */; };
 		BFAC6E81192A54E100921494 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFAC6E80192A54E100921494 /* UIKit.framework */; };
@@ -52,6 +55,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AD66F7CB1933B2E8005A31BE /* Menu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Menu.h; sourceTree = "<group>"; };
+		AD66F7CC1933B2E8005A31BE /* Menu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Menu.m; sourceTree = "<group>"; };
+		AD66F7CE1933B3C4005A31BE /* Period.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Period.h; sourceTree = "<group>"; };
+		AD66F7CF1933B3C4005A31BE /* Period.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Period.m; sourceTree = "<group>"; };
+		AD66F7D71933C4A8005A31BE /* MenuStub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuStub.h; sourceTree = "<group>"; };
+		AD66F7D81933C4A8005A31BE /* MenuStub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuStub.m; sourceTree = "<group>"; };
 		BFAC6E79192A54E100921494 /* Cardapio USP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cardapio USP.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFAC6E7C192A54E100921494 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BFAC6E7E192A54E100921494 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -129,6 +138,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AD66F7C71933B239005A31BE /* model */ = {
+			isa = PBXGroup;
+			children = (
+				AD66F7CB1933B2E8005A31BE /* Menu.h */,
+				AD66F7CC1933B2E8005A31BE /* Menu.m */,
+				AD66F7CE1933B3C4005A31BE /* Period.h */,
+				AD66F7CF1933B3C4005A31BE /* Period.m */,
+				AD66F7D71933C4A8005A31BE /* MenuStub.h */,
+				AD66F7D81933C4A8005A31BE /* MenuStub.m */,
+			);
+			name = model;
+			sourceTree = "<group>";
+		};
 		BFAC6E70192A54E100921494 = {
 			isa = PBXGroup;
 			children = (
@@ -162,6 +184,7 @@
 		BFAC6E82192A54E100921494 /* Cardapio USP */ = {
 			isa = PBXGroup;
 			children = (
+				AD66F7C71933B239005A31BE /* model */,
 				BFAC6E8B192A54E100921494 /* AppDelegate.h */,
 				BFAC6E8C192A54E100921494 /* AppDelegate.m */,
 				BFAC6EE7192A7E9700921494 /* MenuDataModel.h */,
@@ -374,7 +397,10 @@
 				BFAC6E89192A54E100921494 /* main.m in Sources */,
 				BFAC6EE0192A59E600921494 /* FrostedViewController.m in Sources */,
 				BFAC6EDA192A587900921494 /* GTMNSString+HTML.m in Sources */,
+				AD66F7D01933B3C4005A31BE /* Period.m in Sources */,
 				BFAC6ECA192A586B00921494 /* RECommonFunctions.m in Sources */,
+				AD66F7D91933C4A8005A31BE /* MenuStub.m in Sources */,
+				AD66F7CD1933B2E8005A31BE /* Menu.m in Sources */,
 				BFAC6ECC192A586B00921494 /* REFrostedViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
