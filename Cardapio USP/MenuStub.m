@@ -27,7 +27,7 @@ static MenuStub *instancia = nil;
     return instancia;
 }
 
-- (NSMutableArray *) loadMenus
+- (NSMutableArray *) loadMenus:(NSString *) _restaurant;
 {
     NSURL *url1 = [NSURL URLWithString:@"http://kaimbu.uspnet.usp.br:8080/cardapio/central.json"];
     NSMutableURLRequest *req1 = [NSMutableURLRequest requestWithURL:url1];
@@ -62,6 +62,36 @@ static MenuStub *instancia = nil;
         }
     }
     return menus;
+}
+
+
+- (NSMutableArray *) loadRestaurants:(NSString *) _campi
+{
+    NSURL *url1 = [NSURL URLWithString:@"http://kaimbu.uspnet.usp.br:8080/cardapio/restaurantes.json"];
+    NSMutableURLRequest *req1 = [NSMutableURLRequest requestWithURL:url1];
+    
+    NSError *error;
+    NSURLResponse *resp = nil;
+    
+    NSData *data = [NSURLConnection sendSynchronousRequest:req1 returningResponse:&resp error:&error];
+    
+    // Mapeamento de NSData para NSDictionary
+    NSMutableArray* json = [NSJSONSerialization JSONObjectWithData:data  options:NSJSONReadingMutableContainers  error:&error];
+    
+    if (!json)
+    {
+        NSLog(@"Error parsing JSON: %@", nil);
+    } else
+    {
+    
+    }
+    
+    return NULL;
+}
+
+- (NSMutableArray *) loadCash
+{
+    return NULL;
 }
 
 @end

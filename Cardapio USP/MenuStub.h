@@ -23,7 +23,9 @@
  */
 + (MenuStub *) getInstance;
 
-- (NSMutableArray *) loadMenus;
+- (NSMutableArray *) loadMenus:(NSString *) _restaurant;
+- (NSMutableArray *) loadRestaurants:(NSString *) _campi;
+- (NSMutableArray *) loadCash;
 
 
 @end
