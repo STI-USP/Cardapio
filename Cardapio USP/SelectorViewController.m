@@ -10,8 +10,8 @@
 #import "MainViewController.h"
 
 @interface SelectorViewController () {
-  NSMutableArray *restaurantList;
-  NSMutableDictionary *sectionContentDict;
+  NSMutableArray *campiList;
+  NSMutableDictionary *restaurantDict;
   NSMutableArray      *arrayForBool;
 
 }
@@ -32,8 +32,8 @@
 - (void)viewDidLoad{
   [super viewDidLoad];
   
-    if (!restaurantList) {
-        restaurantList = [NSMutableArray arrayWithObjects:@"CUASO", @"EACH", @"SÃO FRANCISCO", @"SAÚDE", @"LORENA", nil];
+    if (!campiList) {
+        campiList = [NSMutableArray arrayWithObjects:@"CUASO", @"EACH", @"SÃO FRANCISCO", @"SAÚDE", @"LORENA", nil];
     }
     if (!arrayForBool) {
         arrayForBool    = [NSMutableArray arrayWithObjects:[NSNumber numberWithBool:NO],
@@ -42,18 +42,18 @@
                            [NSNumber numberWithBool:NO],
                            [NSNumber numberWithBool:NO] , nil];
     }
-    if (!sectionContentDict) {
-        sectionContentDict  = [[NSMutableDictionary alloc] init];
+    if (!restaurantDict) {
+        restaurantDict  = [[NSMutableDictionary alloc] init];
         NSArray *array1     = [NSArray arrayWithObjects:@"Central", @"Física", @"Químicas", @"PUSP-C", nil];
-        [sectionContentDict setValue:array1 forKey:[restaurantList objectAtIndex:0]];
+        [restaurantDict setValue:array1 forKey:[campiList objectAtIndex:0]];
         NSArray *array2     = [NSArray arrayWithObjects:@" ", nil];
-        [sectionContentDict setValue:array2 forKey:[restaurantList objectAtIndex:1]];
+        [restaurantDict setValue:array2 forKey:[campiList objectAtIndex:1]];
         NSArray *array3     = [NSArray arrayWithObjects:@" ", nil];
-        [sectionContentDict setValue:array3 forKey:[restaurantList objectAtIndex:2]];
+        [restaurantDict setValue:array3 forKey:[campiList objectAtIndex:2]];
         NSArray *array4     = [NSArray arrayWithObjects:@" ", nil];
-        [sectionContentDict setValue:array4 forKey:[restaurantList objectAtIndex:3]];
+        [restaurantDict setValue:array4 forKey:[campiList objectAtIndex:3]];
         NSArray *array5     = [NSArray arrayWithObjects:@" ", nil];
-        [sectionContentDict setValue:array5 forKey:[restaurantList objectAtIndex:4]];
+        [restaurantDict setValue:array5 forKey:[campiList objectAtIndex:4]];
     }
 
     
@@ -68,12 +68,12 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [restaurantList count];
+    return [campiList count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if ([[arrayForBool objectAtIndex:section] boolValue]) {
-        return [[sectionContentDict valueForKey:[restaurantList objectAtIndex:section]] count];
+        return [[restaurantDict valueForKey:[campiList objectAtIndex:section]] count];
     }
     return 1;
 }
@@ -85,7 +85,7 @@
     UILabel *headerString           = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, self.view.frame.size.width-20-50, 50)];
     BOOL manyCells                  = [[arrayForBool objectAtIndex:section] boolValue];
 
-    headerString.text = [restaurantList objectAtIndex:section];
+    headerString.text = [campiList objectAtIndex:section];
 
     if (!manyCells) {
         headerString.textColor = [UIColor blackColor];
@@ -130,10 +130,10 @@
     
     BOOL manyCells  = [[arrayForBool objectAtIndex:indexPath.section] boolValue];
     if (!manyCells) {
-        cell.textLabel.text = [restaurantList objectAtIndex:indexPath.section];
+        cell.textLabel.text = [campiList objectAtIndex:indexPath.section];
     }
     else{
-        NSArray *content = [sectionContentDict valueForKey:[restaurantList objectAtIndex:indexPath.section]];
+        NSArray *content = [restaurantDict valueForKey:[campiList objectAtIndex:indexPath.section]];
         cell.textLabel.text = [content objectAtIndex:indexPath.row];
     }
 
