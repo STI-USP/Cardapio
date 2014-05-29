@@ -61,9 +61,20 @@ static MenuStub *instancia = nil;
             [menus addObject:m];
         }
     }
+    
     return menus;
 }
 
+- (Menu *) loadMenu:(NSMutableArray *) _menus Date:(NSString *)_date
+{
+    Menu *menudate;
+    for (Menu *m in _menus) {
+        if ([[m date] isEqualToString:_date]) {
+            menudate = m;
+        }
+    }
+    return menudate;
+}
 
 - (NSMutableArray *) loadRestaurants:(NSString *) _campi
 {
@@ -76,7 +87,7 @@ static MenuStub *instancia = nil;
     NSData *data = [NSURLConnection sendSynchronousRequest:req1 returningResponse:&resp error:&error];
     
     // Mapeamento de NSData para NSDictionary
-    NSMutableArray* json = [NSJSONSerialization JSONObjectWithData:data  options:NSJSONReadingMutableContainers  error:&error];
+    NSMutableArray* json = [NSJSONSerialization JSONObjectWithData:data  options:NSJSONReadingMutableContainers  error:&error];  
     
     if (!json)
     {
@@ -91,6 +102,26 @@ static MenuStub *instancia = nil;
 
 - (NSMutableArray *) loadCash
 {
+    NSURL *url = [NSURL URLWithString:@"http://kaimbu.uspnet.usp.br:8080/cardapio/restaurantes.json"];
+    NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:url];
+    
+    NSError *error;
+    NSURLResponse *resp = nil;
+    
+    NSData *data = [NSURLConnection sendSynchronousRequest:req returningResponse:&resp error:&error];
+    NSString *responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    
+    // Mapeamento de NSData para NSDictionary
+    NSMutableArray* json = [NSJSONSerialization JSONObjectWithData:data  options:NSJSONReadingMutableContainers  error:&error];
+    
+    if (!json)
+    {
+        NSLog(@"Error parsing JSON: %@", nil);
+    } else
+    {
+        NSLog(@"JSON RESTAURANTES : %@",responseString);
+    }
+    
     return NULL;
 }
 
