@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "Menu.h"
+#import "Cash.h"
 
 @interface MenuStub : NSObject{
     Menu *menu;
@@ -26,8 +27,8 @@
 
 - (NSMutableArray *) loadMenus:(NSString *) _restaurant;
 - (Menu *) loadMenu:(NSMutableArray *) _menus Date:(NSString *)_date ;
-- (NSMutableArray *) loadRestaurants:(NSString *) _campi;
-- (NSMutableArray *) loadCash;
+- (NSMutableArray *) loadRestaurantsInformation:(NSString *) _campi;
+- (Cash *) loadCashInformation;
 
 
 @end
