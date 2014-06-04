@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Restaurant.h"
 #import "Menu.h"
 #import "Cash.h"
 
@@ -17,6 +18,7 @@
 
 @property (nonatomic, retain) Menu *menu;
 @property (nonatomic, retain) NSMutableArray *menus;
+@property (nonatomic, retain) NSMutableArray *restaurants;
 
 
 /**
@@ -28,6 +30,7 @@
 - (NSMutableArray *) loadMenus:(NSString *) _restaurant;
 - (Menu *) loadMenu:(NSMutableArray *) _menus Date:(NSString *)_date ;
 - (NSMutableArray *) loadRestaurantsInformation:(NSString *) _campi;
+- (Restaurant *) loadRestaurantInformation:(NSString *)_campi Restaurant:(NSString *)_restaurant;
 - (Cash *) loadCashInformation;
 
 

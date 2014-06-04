@@ -11,9 +11,11 @@
 #import "Period.h"
 #import "Cash.h"
 #import "Items.h"
+#import "Restaurant.h"
+#import "WeeklyPeriod.h"
 
 @implementation MenuStub
-@synthesize menus;
+@synthesize menus,restaurants;
 static MenuStub *instancia = nil;
   
 /*
@@ -92,23 +94,53 @@ static MenuStub *instancia = nil;
     return menudate;
 }
 
+
+/**
+ *  Obtem restaurante, com informacoes a partir de um campi, formato REST JSON
+ *  param _campi
+ *  param _restaurant
+ */
+- (Restaurant *) loadRestaurantInformation:(NSString *)_campi Restaurant:(NSString *)_restaurant
+{
+    Restaurant *res;
+    for (Restaurant *r in [self loadRestaurantsInformation:_campi]) {
+        if ([[r title] isEqualToString:_restaurant]) {
+            res = r;
+        }
+    }  
+    return res;
+}
+
+
 /**
  *  Obtem uma lista de restaurantes, com informacoes de cada um a partir de um campi, formato REST JSON
- *  param _menus
+ *  param _campi
  */
 - (NSMutableArray *) loadRestaurantsInformation:(NSString *)_campi
 {
+    restaurants = [[NSMutableArray alloc] init];
     // Mapeamento de NSData para NSMutableArray
-    NSMutableArray* json = [self iniciar_JSONBinding:@"http://kaimbu.uspnet.usp.br:8080/cardapio/restaurantes.json"];
+    NSDictionary *json = (NSDictionary *) [self iniciar_JSONBinding:@"http://kaimbu.uspnet.usp.br:8080/cardapio/restaurantes.json"];
     
     if (!json)
     {
         NSLog(@"Error parsing JSON: %@", nil);
     } else
     {
-    
+        for(NSDictionary *item in json[_campi]) {
+            NSMutableArray *wpitems = [[NSMutableArray alloc] init];
+            for(NSDictionary *wp in [item objectForKey:@"weeklyperiod"])
+            {
+               //NSLog(@"Horarios : %@ %@ %@ %@", wp[@"period"], wp[@"breakfast"], wp[@"lunch"], wp[@"dinner"]);
+               WeeklyPeriod *weekperiod = [[WeeklyPeriod alloc] initWithWeeklyPeriod:wp[@"period"] Breakfast:wp[@"breakfast"] Lunch:wp[@"lunch"] Dinner:wp[@"dinner"]];
+            [wpitems addObject:weekperiod];
+            }
+            
+            Restaurant *restaurant = [[Restaurant alloc] initWithRestaurant:item[@"id"] Title:item[@"title"] Name:item[@"name"] Address:item[@"address"] Phone:item[@"phone"] Latitude:item[@"latitude"] Longitude:item[@"longitude"] Photourl:item[@"photourl"] WeeklyPeriod:wpitems];
+            [restaurants addObject:restaurant];
+        }
     }
-    return NULL;
+    return restaurants;
 }
 
 /**
