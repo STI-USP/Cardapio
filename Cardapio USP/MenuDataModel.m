@@ -63,12 +63,12 @@
             NSDictionary *dinner = [item objectForKey:@"dinner"];
             
             NSMutableArray *ps = [[NSMutableArray alloc] init];
-            Period *p0 = [[Period alloc ] initWithPeriod:@"lunch" Menu:[lunch objectForKey:@"menu"] Calories:[lunch objectForKey:@"calories"]];
-            Period *p1 = [[Period alloc ] initWithPeriod:@"dinner" Menu:[dinner objectForKey:@"menu"] Calories:[lunch objectForKey:@"calories"]];
+            Period *p0 = [[Period alloc ] initWithPeriod:@"lunch" andMenu:[lunch objectForKey:@"menu"] andCalories:[lunch objectForKey:@"calories"]];
+            Period *p1 = [[Period alloc ] initWithPeriod:@"dinner" andMenu:[dinner objectForKey:@"menu"] andCalories:[lunch objectForKey:@"calories"]];
             [ps addObject:p0];
             [ps addObject:p1];
             
-            Menu *m = [[Menu  alloc ] initWithMenu:hour Period:ps ];
+            Menu *m = [[Menu  alloc ] initWithDate:hour andPeriod:ps ];
             [_menus addObject:m];
         }
     }
@@ -125,11 +125,11 @@
             for(NSDictionary *wp in [item objectForKey:@"weeklyperiod"])
             {
                 //NSLog(@"Horarios : %@ %@ %@ %@", wp[@"period"], wp[@"breakfast"], wp[@"lunch"], wp[@"dinner"]);
-                WeeklyPeriod *weekperiod = [[WeeklyPeriod alloc] initWithWeeklyPeriod:wp[@"period"] Breakfast:wp[@"breakfast"] Lunch:wp[@"lunch"] Dinner:wp[@"dinner"]];
+                WeeklyPeriod *weekperiod = [[WeeklyPeriod alloc] initWithWeeklyPeriod:wp[@"period"] andBreakfast:wp[@"breakfast"] andLunch:wp[@"lunch"] andDinner:wp[@"dinner"]];
                 [wpitems addObject:weekperiod];
             }
             
-            Restaurant *restaurant = [[Restaurant alloc] initWithRestaurant:item[@"id"] Title:item[@"title"] Name:item[@"name"] Address:item[@"address"] Phone:item[@"phone"] Latitude:item[@"latitude"] Longitude:item[@"longitude"] Photourl:item[@"photourl"] WeeklyPeriod:wpitems];
+            Restaurant *restaurant = [[Restaurant alloc] initWithId:item[@"id"] andTitle:item[@"title"] andName:item[@"name"] andAddress:item[@"address"] andPhone:item[@"phone"] andLatitude:item[@"latitude"] andLongitude:item[@"longitude"] andPhotoURL:item[@"photourl"] andWeeklyPeriod:wpitems];
             [_restaurants addObject:restaurant];
         }
     }
@@ -149,10 +149,10 @@
             for(NSDictionary *i in item[@"items"]) {
                 NSString *category = i[@"category"];
                 NSString *price = i[@"price"];
-                Items *i = [[Items alloc] initWithItems:category Price:price];
+                Items *i = [[Items alloc] initWithItems:category andPrice:price];
                 [items addObject:i];
             }
-            _cash = [[Cash alloc] initWithMenu:item[@"workinghours"] Items:items];
+            _cash = [[Cash alloc] initWithMenu:item[@"workinghours"] andItems:items];
         }
     }
     return _cash;

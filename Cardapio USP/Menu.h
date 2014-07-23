@@ -13,8 +13,8 @@
 @interface Menu : NSObject{
     
 }
-@property (nonatomic, retain) NSString * date;
-@property (nonatomic, retain) NSMutableArray * period;
+@property (nonatomic, retain) NSString *date;
+@property (nonatomic, retain) NSMutableArray *period;
 
 
 /**
@@ -22,6 +22,6 @@
  *
  */
 
--(id)initWithMenu:(NSString *) _date Period:(NSMutableArray *) _period;
+-(id)initWithDate:(NSString *)_date andPeriod:(NSMutableArray *)_period;
 
 @end

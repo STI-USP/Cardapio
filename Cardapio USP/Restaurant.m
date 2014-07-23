@@ -15,7 +15,7 @@
  * Construtor da classe Restaurant
  *
  */
--(id)initWithRestaurant:(NSString *) _rid Title:(NSString *) _title Name:(NSString *) _name Address:(NSString *) _address Phone:(NSString *) _phone Latitude:(NSString *) _latitude Longitude:(NSString *) _longitude Photourl:(NSString *) _photourl    WeeklyPeriod:(NSMutableArray *) _weeklyperiod {
+-(id)initWithId:(NSString *)_rid andTitle:(NSString *)_title andName:(NSString *)_name andAddress:(NSString *)_address andPhone:(NSString *)_phone andLatitude:(NSString *)_latitude andLongitude:(NSString *)_longitude andPhotoURL:(NSString *)_photoURL andWeeklyPeriod:(NSMutableArray *)_weeklyperiod{
     
     if(self == [super init]){
         self.rid = _rid;
@@ -25,7 +25,7 @@
         self.phone = _phone;
         self.latitude = _latitude;
         self.longitude = _longitude;
-        self.photourl = _photourl;
+        self.photourl = _photoURL;
         self.weeklyperiod = _weeklyperiod;
     }
     return self;

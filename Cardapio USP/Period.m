@@ -15,7 +15,7 @@
  * Construtor da classe Period
  *
  */
--(id)initWithPeriod:(NSString *)_period Menu:(NSString *)_menu Calories:(NSString *)_calories {
+-(id)initWithPeriod:(NSString *)_period andMenu:(NSString *)_menu andCalories:(NSString *)_calories {
     
     if(self == [super init]){
         self.period = _period;

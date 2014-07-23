@@ -11,13 +11,13 @@
 @interface Cash : NSObject{
     
 }
-@property (nonatomic, retain) NSString * workinghours;
-@property (nonatomic, retain) NSMutableArray * items;
+@property (nonatomic, retain) NSString *workinghours;
+@property (nonatomic, retain) NSMutableArray *items;
 
 /**
  * Construtor da classe cash
  *
  */
 
--(id)initWithMenu:(NSString *) _workinghours Items:(NSMutableArray *) _items;
+-(id)initWithMenu:(NSString *)_workinghours andItems:(NSMutableArray *)_items;
 @end

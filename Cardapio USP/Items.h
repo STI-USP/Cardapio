@@ -11,14 +11,14 @@
 @interface Items : NSObject{
     
 }
-@property (nonatomic, retain) NSString * category;
-@property (nonatomic, retain) NSString * price;
+@property (nonatomic, retain) NSString *category;
+@property (nonatomic, retain) NSString *price;
 
 /**
  * Construtor da classe items
  *
  */
 
--(id)initWithItems:(NSString *) _category Price:(NSString *) _price;
+-(id)initWithItems:(NSString *)_category andPrice:(NSString *)_price;
 
 @end

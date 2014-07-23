@@ -12,9 +12,9 @@
        
 }
 
-@property (nonatomic, retain) NSString * period;
-@property (nonatomic, retain) NSString * menu;
-@property (nonatomic, retain) NSString * calories;
+@property (nonatomic, retain) NSString *period;
+@property (nonatomic, retain) NSString *menu;
+@property (nonatomic, retain) NSString *calories;
 
 
 /**
@@ -22,7 +22,7 @@
  *
  */
 
--(id)initWithPeriod:(NSString *) _period Menu:(NSString *) _menu Calories:(NSString *) _calories;
+-(id)initWithPeriod:(NSString *)_period andMenu:(NSString *)_menu andCalories:(NSString *)_calories;
 
 
 @end

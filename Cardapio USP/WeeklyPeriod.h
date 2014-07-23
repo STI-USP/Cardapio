@@ -12,15 +12,15 @@
     
 }
 
-@property (nonatomic, retain) NSString * period;
-@property (nonatomic, retain) NSString * breakfast;
-@property (nonatomic, retain) NSString * lunch;
-@property (nonatomic, retain) NSString * dinner;
+@property (nonatomic, retain) NSString *period;
+@property (nonatomic, retain) NSString *breakfast;
+@property (nonatomic, retain) NSString *lunch;
+@property (nonatomic, retain) NSString *dinner;
 
 /**
  * Construtor da classe WeeklyPeriod
  *
  */
 
--(id)initWithWeeklyPeriod:(NSString *) _period Breakfast:(NSString *) _breakfast Lunch:(NSString *) _lunch Dinner:(NSString *) _dinner;
+-(id)initWithWeeklyPeriod:(NSString *)_period andBreakfast:(NSString *)_breakfast andLunch:(NSString *)_lunch andDinner:(NSString *)_dinner;
 @end

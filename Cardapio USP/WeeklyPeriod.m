@@ -11,7 +11,7 @@
 @implementation WeeklyPeriod
 @synthesize period, breakfast, lunch, dinner;
 
--(id)initWithWeeklyPeriod:(NSString *) _period Breakfast:(NSString *) _breakfast Lunch:(NSString *) _lunch Dinner:(NSString *) _dinner
+-(id)initWithWeeklyPeriod:(NSString *)_period andBreakfast:(NSString *)_breakfast andLunch:(NSString *)_lunch andDinner:(NSString *)_dinner
 {
     if(self == [super init]){
         self.period = _period;

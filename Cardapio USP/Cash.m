@@ -11,7 +11,7 @@
 @implementation Cash
 @synthesize workinghours, items;
 
--(id)initWithMenu:(NSString *) _workinghours Items:(NSMutableArray *) _items
+-(id)initWithMenu:(NSString *)_workinghours andItems:(NSMutableArray *)_items
 {
     if(self == [super init]){
         self.workinghours = _workinghours;

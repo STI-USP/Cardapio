@@ -6,10 +6,18 @@
 //  Copyright (c) 2014 EPUSP. All rights reserved.
 //
 
+#import "MenuDataModel.h"
+#import "Menu.h"
+#import "Period.h"
 #import "MainViewController.h"
 #import "REFrostedViewController.h"
 
-@interface MainViewController ()
+@interface MainViewController () {
+    NSMutableArray *menuArray;
+    Menu *menu;
+    Period *period;
+    int diaDaSemana;
+}
 
 @end
 
@@ -23,6 +31,12 @@
   [swipe setDirection:UISwipeGestureRecognizerDirectionRight];
   [[self view] addGestureRecognizer: swipe];
   
+    diaDaSemana = 0;
+    
+    menuArray = [[MenuDataModel getInstance] menus];
+    menu = [menuArray objectAtIndex:diaDaSemana];
+
+/*
   // [jo:140523] Teste JSON
   NSError *error = nil;
   NSData *data = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:@"central" ofType:@"json"]];
@@ -33,6 +47,7 @@
   for (NSMutableDictionary *dictionary in array) {
     NSLog(@"%@", dictionary);
   }
+ */
 }
 
 - (void)didReceiveMemoryWarning {
@@ -66,23 +81,21 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
-  if (section == 0) {
-    return @"Valor calórico para uma refeição: 1195 kcal";
-  } else {
-    return @"Valor calórico para uma refeição: 1005 kcal";
-  }
+    
+    NSLog(@"Footer::: %@", [[menu period]objectAtIndex:section]);
+    return [NSString stringWithFormat:@"Valor calórico para uma refeição: %@",
+            [[[menu period] objectAtIndex:section] valueForKey:@"calories"]];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-  static NSString *cellID = @"MenuCell";
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID forIndexPath:indexPath];
-  if (indexPath.section == 0) {
-    cell.textLabel.text = @"Arroz/feijão preto/arroz integral\nCopa lombo com molho de abacaxi\nVirado de milho\nSalada de alcelga\nOpcional: PVT à califórnia\nMexerica/refresco";
-  } else {
-    cell.textLabel.text = @"Arroz/feijão preto/arroz integral\nFrango Assado\nCenoura com ervilha\nSalada de almeirão\nOpcional: Quibe de PVT\nGoiabinha/refresco";
-  }
-
-  return cell;
+    static NSString *cellID = @"MenuCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID forIndexPath:indexPath];
+    
+    //configure cell
+    cell.textLabel.text = [[[menu period] objectAtIndex:indexPath.section] valueForKey:@"menu"];
+    
+    
+    return cell;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

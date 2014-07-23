@@ -17,7 +17,7 @@
  * Construtor da classe Menu
  *
  */
--(id)initWithMenu:(NSString *) _date Period:(NSMutableArray *) _period {
+-(id)initWithDate:(NSString *)_date andPeriod:(NSMutableArray *)_period {
     
     if(self == [super init]){
         self.date = _date;

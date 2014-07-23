@@ -11,7 +11,7 @@
 @implementation Items
 @synthesize category, price;
 
--(id)initWithItems:(NSString *) _category Price:(NSString *) _price
+-(id)initWithItems:(NSString *)_category andPrice:(NSString *) _price
 {
     
     if(self == [super init]){

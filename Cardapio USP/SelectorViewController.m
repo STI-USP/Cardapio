@@ -33,10 +33,12 @@
   [super viewDidLoad];
   
     if (!campiList) {
-        campiList = [NSMutableArray arrayWithObjects:@"CUASO", @"EACH", @"SÃO FRANCISCO", @"SAÚDE", @"LORENA", nil];
+        campiList = [NSMutableArray arrayWithObjects:@"CUASO", @"DIREITO", @"EACH", @"EE", @"FSP", @"LORENA", @"SAÚDE", nil];
     }
     if (!arrayForBool) {
         arrayForBool    = [NSMutableArray arrayWithObjects:[NSNumber numberWithBool:NO],
+                           [NSNumber numberWithBool:NO],
+                           [NSNumber numberWithBool:NO],
                            [NSNumber numberWithBool:NO],
                            [NSNumber numberWithBool:NO],
                            [NSNumber numberWithBool:NO],
@@ -44,16 +46,26 @@
     }
     if (!restaurantDict) {
         restaurantDict  = [[NSMutableDictionary alloc] init];
-        NSArray *array1     = [NSArray arrayWithObjects:@"Central", @"Física", @"Químicas", @"PUSP-C", nil];
-        [restaurantDict setValue:array1 forKey:[campiList objectAtIndex:0]];
-        NSArray *array2     = [NSArray arrayWithObjects:@" ", nil];
-        [restaurantDict setValue:array2 forKey:[campiList objectAtIndex:1]];
-        NSArray *array3     = [NSArray arrayWithObjects:@" ", nil];
-        [restaurantDict setValue:array3 forKey:[campiList objectAtIndex:2]];
-        NSArray *array4     = [NSArray arrayWithObjects:@" ", nil];
-        [restaurantDict setValue:array4 forKey:[campiList objectAtIndex:3]];
-        NSArray *array5     = [NSArray arrayWithObjects:@" ", nil];
-        [restaurantDict setValue:array5 forKey:[campiList objectAtIndex:4]];
+        NSArray *cuasoArray = [NSArray arrayWithObjects:@"Central", @"Física", @"PUSP-C", @"Químicas", nil];
+        [restaurantDict setValue:cuasoArray forKey:[campiList objectAtIndex:0]];
+        
+        NSArray *direitoArray = [NSArray arrayWithObjects:@" ", nil];
+        [restaurantDict setValue:direitoArray forKey:[campiList objectAtIndex:1]];
+        
+        NSArray *eachArray = [NSArray arrayWithObjects:@" ", nil];
+        [restaurantDict setValue:eachArray forKey:[campiList objectAtIndex:2]];
+        
+        NSArray *eeArray = [NSArray arrayWithObjects:@" ", nil];
+        [restaurantDict setValue:eeArray forKey:[campiList objectAtIndex:3]];
+        
+        NSArray *fspArray = [NSArray arrayWithObjects:@" ", nil];
+        [restaurantDict setValue:fspArray forKey:[campiList objectAtIndex:4]];
+        
+        NSArray *lorenaArray = [NSArray arrayWithObjects:@" ", nil];
+        [restaurantDict setValue:lorenaArray forKey:[campiList objectAtIndex:5]];
+        
+        NSArray *saudeArray = [NSArray arrayWithObjects:@" ", nil];
+        [restaurantDict setValue:saudeArray forKey:[campiList objectAtIndex:6]];
     }
 
     
@@ -79,23 +91,24 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    UIView *headerView              = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
-    headerView.tag                  = section;
-    headerView.backgroundColor      = [UIColor whiteColor];
-    UILabel *headerString           = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, self.view.frame.size.width-20-50, 50)];
-    BOOL manyCells                  = [[arrayForBool objectAtIndex:section] boolValue];
-
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
+    headerView.tag = section;
+    headerView.backgroundColor = [UIColor whiteColor];
+    
+    UILabel *headerString = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, self.view.frame.size.width-20-50, 50)];
     headerString.text = [campiList objectAtIndex:section];
+    
+    BOOL manyCells = [[arrayForBool objectAtIndex:section] boolValue];
 
-    if (!manyCells) {
-        headerString.textColor = [UIColor blackColor];
-    }else{
+    if (manyCells) {
         headerString.textColor = [UIColor redColor];
+    }else{
+        headerString.textColor = [UIColor blackColor];
     }
-    headerString.textAlignment      = NSTextAlignmentLeft;
+    headerString.textAlignment = NSTextAlignmentLeft;
     [headerView addSubview:headerString];
     
-    UITapGestureRecognizer  *headerTapped   = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(sectionHeaderTapped:)];
+    UITapGestureRecognizer *headerTapped = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(sectionHeaderTapped:)];
     [headerView addGestureRecognizer:headerTapped];
     
     return headerView;
@@ -129,12 +142,12 @@
   //}
     
     BOOL manyCells  = [[arrayForBool objectAtIndex:indexPath.section] boolValue];
-    if (!manyCells) {
-        cell.textLabel.text = [campiList objectAtIndex:indexPath.section];
-    }
-    else{
+    if (manyCells) {
         NSArray *content = [restaurantDict valueForKey:[campiList objectAtIndex:indexPath.section]];
+        [cell setIndentationLevel:1];
         cell.textLabel.text = [content objectAtIndex:indexPath.row];
+    } else {
+        cell.textLabel.text = [campiList objectAtIndex:indexPath.section];
     }
 
     return cell;
