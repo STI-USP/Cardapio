@@ -33,7 +33,15 @@
   [super viewDidLoad];
   
     if (!campiList) {
-        campiList = [NSMutableArray arrayWithObjects:@"CUASO", @"DIREITO", @"EACH", @"EE", @"FSP", @"LORENA", @"SAÚDE", nil];
+        campiList = [NSMutableArray arrayWithObjects:
+                     @"CUASO",
+                     @"DIREITO",
+                     @"EACH",
+                     @"EE",
+                     @"FSP",
+                     @"LORENA",
+                     @"SAÚDE",
+                     nil];
     }
     if (!arrayForBool) {
         arrayForBool    = [NSMutableArray arrayWithObjects:[NSNumber numberWithBool:NO],
@@ -46,7 +54,12 @@
     }
     if (!restaurantDict) {
         restaurantDict  = [[NSMutableDictionary alloc] init];
-        NSArray *cuasoArray = [NSArray arrayWithObjects:@"Central", @"Física", @"PUSP-C", @"Químicas", nil];
+        NSArray *cuasoArray = [NSArray arrayWithObjects:
+                               @"Central",
+                               @"Física",
+                               @"PUSP-C",
+                               @"Químicas",
+                               nil];
         [restaurantDict setValue:cuasoArray forKey:[campiList objectAtIndex:0]];
         
         NSArray *direitoArray = [NSArray arrayWithObjects:@" ", nil];

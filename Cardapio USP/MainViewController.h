@@ -13,5 +13,6 @@
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 
 - (IBAction)showRestaurantSelector:(id)sender;
+- (void)back:(id)sender;
 
 @end

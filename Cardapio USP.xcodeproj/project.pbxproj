@@ -46,6 +46,8 @@
 		BFAC6EEB192AB50F00921494 /* central.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BFAC6EEA192AB50F00921494 /* central.jpg */; };
 		BFAC6EED192AB98600921494 /* mapa.png in Resources */ = {isa = PBXBuildFile; fileRef = BFAC6EEC192AB98600921494 /* mapa.png */; };
 		BFBE1E76192FB038004C403C /* restaurantes.json in Resources */ = {isa = PBXBuildFile; fileRef = BFBE1E75192FB038004C403C /* restaurantes.json */; };
+		E9818EC3198033A800F741B0 /* DKScrollingTabController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9818EC2198033A800F741B0 /* DKScrollingTabController.m */; };
+		E99B26511980067300F03E04 /* RestaurantDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E99B26501980067300F03E04 /* RestaurantDataModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -124,6 +126,10 @@
 		BFAC6EEA192AB50F00921494 /* central.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = central.jpg; sourceTree = "<group>"; };
 		BFAC6EEC192AB98600921494 /* mapa.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mapa.png; sourceTree = "<group>"; };
 		BFBE1E75192FB038004C403C /* restaurantes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = restaurantes.json; sourceTree = "<group>"; };
+		E9818EC1198033A800F741B0 /* DKScrollingTabController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DKScrollingTabController.h; sourceTree = "<group>"; };
+		E9818EC2198033A800F741B0 /* DKScrollingTabController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DKScrollingTabController.m; sourceTree = "<group>"; };
+		E99B264F1980067300F03E04 /* RestaurantDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestaurantDataModel.h; sourceTree = "<group>"; };
+		E99B26501980067300F03E04 /* RestaurantDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestaurantDataModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -207,8 +213,12 @@
 				AD66F7C71933B239005A31BE /* model */,
 				BFAC6E8B192A54E100921494 /* AppDelegate.h */,
 				BFAC6E8C192A54E100921494 /* AppDelegate.m */,
+				E99B264F1980067300F03E04 /* RestaurantDataModel.h */,
+				E99B26501980067300F03E04 /* RestaurantDataModel.m */,
 				BFAC6EE7192A7E9700921494 /* MenuDataModel.h */,
 				BFAC6EE8192A7E9700921494 /* MenuDataModel.m */,
+				E9818EC1198033A800F741B0 /* DKScrollingTabController.h */,
+				E9818EC2198033A800F741B0 /* DKScrollingTabController.m */,
 				BFAC6EDE192A59E600921494 /* FrostedViewController.h */,
 				BFAC6EDF192A59E600921494 /* FrostedViewController.m */,
 				BFAC6E8E192A54E100921494 /* Main_iPhone.storyboard */,
@@ -407,6 +417,7 @@
 				BFAC6ECE192A586B00921494 /* UIView+REFrostedViewController.m in Sources */,
 				ADB2DCB919375A550068417F /* Cash.m in Sources */,
 				BFAC6ECB192A586B00921494 /* REFrostedContainerViewController.m in Sources */,
+				E99B26511980067300F03E04 /* RestaurantDataModel.m in Sources */,
 				BFAC6EDB192A587900921494 /* NSString+HTML.m in Sources */,
 				BFAC6EE3192A706900921494 /* SelectorViewController.m in Sources */,
 				BFAC6E96192A54E100921494 /* MainViewController.m in Sources */,
@@ -414,6 +425,7 @@
 				BFAC6ECD192A586B00921494 /* UIImage+REFrostedViewController.m in Sources */,
 				BFAC6EE6192A71A000921494 /* InfoViewController.m in Sources */,
 				BFAC6E8D192A54E100921494 /* AppDelegate.m in Sources */,
+				E9818EC3198033A800F741B0 /* DKScrollingTabController.m in Sources */,
 				BFAC6EE9192A7E9700921494 /* MenuDataModel.m in Sources */,
 				BFAC6E89192A54E100921494 /* main.m in Sources */,
 				BFAC6EE0192A59E600921494 /* FrostedViewController.m in Sources */,
