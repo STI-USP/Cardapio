@@ -24,6 +24,8 @@
 
 @implementation MainViewController
 
+@synthesize diaDaSemanaLabel;
+
 - (void)viewDidLoad {
   [super viewDidLoad];
 
@@ -33,16 +35,42 @@
     [[self view] addGestureRecognizer: swipeRight];
     
     UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self
-                                                                                    action:@selector(back:)];
+                                                                                    action:@selector(forwardDate:)];
     [swipeLeft setDirection:UISwipeGestureRecognizerDirectionLeft];
     [[self view] addGestureRecognizer: swipeLeft];
     
     diaDaSemana = 0;
     
-    menuArray = [[MenuDataModel getInstance] menus];
-    menu = [menuArray objectAtIndex:diaDaSemana];
-
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *weekdayComponents =[gregorian components:NSWeekdayCalendarUnit fromDate:[NSDate date]];
+    NSInteger weekday = [weekdayComponents weekday];
     
+    menuArray = [[MenuDataModel getInstance] menus];
+    menu = [menuArray objectAtIndex:weekday];
+
+    [self setupWeekView: menuArray];
+    [self setupDayLabel:diaDaSemana];
+    
+/*
+  // [jo:140523] Teste JSON
+  NSError *error = nil;
+  NSData *data = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:@"central" ofType:@"json"]];
+  NSMutableArray *array = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+  if (error)
+    NSLog(@"JSONObjectWithData error: %@", error);
+  
+  for (NSMutableDictionary *dictionary in array) {
+    NSLog(@"%@", dictionary);
+  }
+ */
+}
+
+- (void)didReceiveMemoryWarning {
+  [super didReceiveMemoryWarning];
+  // Dispose of any resources that can be recreated.
+}
+
+- (void)setupWeekView: (NSArray *) weekMenu {
     DKScrollingTabController *dateTabController = [[DKScrollingTabController alloc] init];
     
     dateTabController.delegate = self;
@@ -63,21 +91,21 @@
     
     dateTabController.selection = @[@"PLACE\n0", @"PLACE\n0", @"PLACE\n0", @"PLACE\n0", @"PLACE\n0", @"PLACE\n0", @"PLACE\n0" ];
     
-    NSString *mondayButtonName = [NSString stringWithFormat:@"S\n21"];
-    NSString *tuesdayButtonName = [NSString stringWithFormat:@"T\n22"];
-    NSString *wednesdayButtonName = [NSString stringWithFormat:@"Q\n23"];
-    NSString *thursdayButtonName = [NSString stringWithFormat:@"Q\n24"];
-    NSString *fridayButtonName = [NSString stringWithFormat:@"S\n25"];
-    NSString *saturdayButtonName = [NSString stringWithFormat:@"S\n26"];
-    NSString *sundayButtonName = [NSString stringWithFormat:@"D\n27"];
+    NSString *monButtonName = [[NSString stringWithFormat:@"S\n%@", [[menuArray objectAtIndex:0] date]]substringToIndex:4];
+    NSString *tueButtonName = [[NSString stringWithFormat:@"T\n%@", [[menuArray objectAtIndex:1] date]]substringToIndex:4];
+    NSString *wedButtonName = [[NSString stringWithFormat:@"Q\n%@", [[menuArray objectAtIndex:2] date]]substringToIndex:4];
+    NSString *thuButtonName = [[NSString stringWithFormat:@"Q\n%@", [[menuArray objectAtIndex:3] date]]substringToIndex:4];
+    NSString *friButtonName = [[NSString stringWithFormat:@"S\n%@", [[menuArray objectAtIndex:4] date]]substringToIndex:4];
+    NSString *satButtonName = [[NSString stringWithFormat:@"S\n%@", [[menuArray objectAtIndex:5] date]]substringToIndex:4];
+    NSString *sunButtonName = [[NSString stringWithFormat:@"D\n%@", [[menuArray objectAtIndex:6] date]] substringToIndex:4];
     
-    [dateTabController setButtonName:mondayButtonName atIndex:0];
-    [dateTabController setButtonName:tuesdayButtonName atIndex:1];
-    [dateTabController setButtonName:wednesdayButtonName atIndex:2];
-    [dateTabController setButtonName:thursdayButtonName atIndex:3];
-    [dateTabController setButtonName:fridayButtonName atIndex:4];
-    [dateTabController setButtonName:saturdayButtonName atIndex:5];
-    [dateTabController setButtonName:sundayButtonName atIndex:6];
+    [dateTabController setButtonName:monButtonName atIndex:0];
+    [dateTabController setButtonName:tueButtonName atIndex:1];
+    [dateTabController setButtonName:wedButtonName atIndex:2];
+    [dateTabController setButtonName:thuButtonName atIndex:3];
+    [dateTabController setButtonName:friButtonName atIndex:4];
+    [dateTabController setButtonName:satButtonName atIndex:5];
+    [dateTabController setButtonName:sunButtonName atIndex:6];
     
     
     [dateTabController.buttons enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
@@ -96,25 +124,59 @@
         [button setAttributedTitle:attributedString forState:UIControlStateNormal];
     }];
 
-    
-/*
-  // [jo:140523] Teste JSON
-  NSError *error = nil;
-  NSData *data = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:@"central" ofType:@"json"]];
-  NSMutableArray *array = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
-  if (error)
-    NSLog(@"JSONObjectWithData error: %@", error);
-  
-  for (NSMutableDictionary *dictionary in array) {
-    NSLog(@"%@", dictionary);
-  }
- */
 }
 
-- (void)didReceiveMemoryWarning {
-  [super didReceiveMemoryWarning];
-  // Dispose of any resources that can be recreated.
+- (void)setupDayLabel:(int)dia {
+    
+    NSString *diaSemana;
+    NSString *diaMes;
+    NSString *mes;
+    
+    //set weekday
+    switch ((int)dia) {
+        case 0:
+            diaSemana = @"Segunda-feira";
+            break;
+        case 1:
+            diaSemana = @"Terça-feira";
+            break;
+        case 2:
+            diaSemana = @"Quarta-feira";
+            break;
+        case 3:
+            diaSemana = @"Quinta-feira";
+            break;
+        case 4:
+            diaSemana = @"Sexta-feira";
+            break;
+        case 5:
+            diaSemana = @"Sábado";
+            break;
+        case 6:
+            diaSemana = @"Domingo";
+            break;
+            
+        default:
+            break;
+    }
+    
+    //set day
+    [[menuArray objectAtIndex:dia] date];
+    NSLog(@"date: %@", [[menuArray objectAtIndex:dia] date]);
+    
+    //set month
+    NSDateFormatter *formatDate = [[NSDateFormatter alloc] init];
+    [formatDate setTimeStyle:NSDateFormatterShortStyle];
+    [formatDate setDateFormat:@"dd"];
+    NSString *date = [formatDate stringFromDate:[[menuArray objectAtIndex:dia] date]];
+    NSLog(@":::%@", date);
+    
+    [diaDaSemanaLabel setText:[NSString stringWithFormat:@"%@", diaSemana]];
+
+    [[self tableView] reloadData];
+
 }
+
 
 #pragma mark - Table View
 
@@ -143,7 +205,6 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
     
-    NSLog(@"Footer::: %@", [[[menu period] objectAtIndex:1] valueForKey:@"calories"]);
     return [NSString stringWithFormat:@"Valor calórico para uma refeição: %@",
             [[[menu period] objectAtIndex:section] valueForKey:@"calories"]];
 }
@@ -169,17 +230,16 @@
   [self.frostedViewController presentMenuViewController];
 }
 
-- (void)back:(id)sender {
-    menu = [menuArray objectAtIndex:++diaDaSemana];
-    [[self tableView] reloadData];
+- (void)forwardDate:(id)sender {
+    //menu = [menuArray objectAtIndex:++diaDaSemana];
+    //[[self tableView] reloadData];
 }
 
 #pragma mark - TabControllerDelegate
 
 - (void)DKScrollingTabController:(DKScrollingTabController *)controller selection:(NSUInteger)selection {
-    NSLog(@"Selection controller action button with index=%lu",(unsigned long)selection);
     menu = [menuArray objectAtIndex:selection];
-    [[self tableView] reloadData];
+    [self setupDayLabel:(int)selection];
 }
 
 

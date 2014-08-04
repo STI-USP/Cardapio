@@ -7,12 +7,14 @@
 //
 
 #import "AppDelegate.h"
+#import "RestaurantDataModel.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    [[RestaurantDataModel getInstance] setRestaurant:@"central"];
     return YES;
 }
 							

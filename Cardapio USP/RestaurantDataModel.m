@@ -7,21 +7,21 @@
 //
 
 #import "RestaurantDataModel.h"
+#import "Restaurant.h"
 
 @implementation RestaurantDataModel
 
-
+@synthesize restaurant;
 
 +(RestaurantDataModel *) getInstance
 {
-    static RestaurantDataModel *instancia = nil;
+    static RestaurantDataModel *instance = nil;
     static dispatch_once_t once;
     dispatch_once(&once, ^{
-        instancia = [[self alloc] init];
+        instance = [[self alloc] init];
     });
     
-    return instancia;
+    return instance;
 }
-
 
 @end

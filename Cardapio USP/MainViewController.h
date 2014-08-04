@@ -11,8 +11,9 @@
 @interface MainViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
+@property (nonatomic, weak) IBOutlet UILabel *diaDaSemanaLabel;
 
 - (IBAction)showRestaurantSelector:(id)sender;
-- (void)back:(id)sender;
+- (void)forwardDate:(id)sender;
 
 @end

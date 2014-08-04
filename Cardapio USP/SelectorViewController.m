@@ -8,6 +8,7 @@
 
 #import "SelectorViewController.h"
 #import "MainViewController.h"
+#import "RestaurantDataModel.h"
 
 @interface SelectorViewController () {
   NSMutableArray *campiList;
@@ -167,8 +168,13 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    NSString *selectedRestaurant = [[restaurantDict valueForKey:[campiList objectAtIndex:indexPath.section]]objectAtIndex:indexPath.row];
 
+    [[RestaurantDataModel getInstance] setRestaurant:selectedRestaurant];
+    NSLog(@"%@", selectedRestaurant);
+    
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark - gesture tapped

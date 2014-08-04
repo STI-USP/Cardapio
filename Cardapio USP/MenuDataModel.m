@@ -10,6 +10,11 @@
 #import "Period.h"
 #import "WeeklyPeriod.h"
 #import "Items.h"
+#import "RestaurantDataModel.h"
+
+#define kRestaurantsURL @"http://kaimbu.uspnet.usp.br:8080/cardapio/%@.json"
+
+
 @implementation MenuDataModel
 
 
@@ -23,7 +28,6 @@
     dispatch_once(&once, ^{
         instancia = [[self alloc] init];
     });
-    
     return instancia;
 }
 
@@ -51,12 +55,12 @@
  */
 - (NSMutableArray *)menus
 {
-    NSMutableArray *json = [self iniciar_JSONBinding:@"http://kaimbu.uspnet.usp.br:8080/cardapio/central.json"];
+    NSMutableArray *json = [self iniciar_JSONBinding:
+                            [NSString stringWithFormat:kRestaurantsURL, [[RestaurantDataModel getInstance] restaurant]]];
     _menus = [[NSMutableArray alloc] init];
     if (!json) {
         NSLog(@"Error parsing JSON: %@", nil);
     } else {
-        
         for(NSDictionary *item in json) {
             NSString *hour = [item objectForKey:@"date"];
             NSDictionary *lunch = [item objectForKey:@"lunch"];
@@ -68,7 +72,7 @@
             [ps addObject:p0];
             [ps addObject:p1];
             
-            Menu *m = [[Menu  alloc ] initWithDate:hour andPeriod:ps ];
+            Menu *m = [[Menu  alloc ] initWithDate:hour andPeriod:ps];
             [_menus addObject:m];
         }
     }
@@ -113,7 +117,7 @@
 {
     _restaurants = [[NSMutableArray alloc] init];
     // Mapeamento de NSData para NSMutableArray
-    NSDictionary *json = (NSDictionary *) [self iniciar_JSONBinding:@"http://kaimbu.uspnet.usp.br:8080/cardapio/restaurantes.json"];
+    NSDictionary *json = (NSDictionary *) [self iniciar_JSONBinding: [NSString stringWithFormat:kRestaurantsURL, @"restaurantes"]];
     
     if (!json)
     {

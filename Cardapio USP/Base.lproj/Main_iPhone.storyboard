@@ -93,6 +93,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="diaDaSemanaLabel" destination="97I-2C-75o" id="Zmc-7Q-Czn"/>
                         <outlet property="tableView" destination="qzl-TK-JUs" id="IlH-0n-Y6u"/>
                     </connections>
                 </viewController>

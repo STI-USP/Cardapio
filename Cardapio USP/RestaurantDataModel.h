@@ -7,10 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Restaurant.h"
 
 @interface RestaurantDataModel : NSObject
 
-
+@property (nonatomic, strong) NSString *restaurant;
 
 + (RestaurantDataModel *) getInstance;
 

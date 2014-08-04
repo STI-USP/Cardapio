@@ -19,6 +19,7 @@
 @property (nonatomic, strong) Cash *cash;
 @property (nonatomic, strong) NSMutableArray *menus;
 @property (nonatomic, strong) NSMutableArray *restaurants;
+@property (nonatomic, strong) NSArray *diasDaSemana;
   
 @property (nonatomic, strong) NSString *rest;
 @property (nonatomic, strong) NSString *campi;
