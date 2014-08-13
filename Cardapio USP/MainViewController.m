@@ -129,8 +129,7 @@
 - (void)setupDayLabel:(int)dia {
     
     NSString *diaSemana;
-    NSString *diaMes;
-    NSString *mes;
+    NSString *strData = [NSString stringWithFormat:@"%@", [[menuArray objectAtIndex:dia] date]];
     
     //set weekday
     switch ((int)dia) {
@@ -160,21 +159,66 @@
             break;
     }
     
+
     //set day
-    [[menuArray objectAtIndex:dia] date];
-    NSLog(@"date: %@", [[menuArray objectAtIndex:dia] date]);
-    
+    NSString *strDay = [NSString stringWithFormat:@"%@", [strData substringToIndex:2]];
+
     //set month
-    NSDateFormatter *formatDate = [[NSDateFormatter alloc] init];
-    [formatDate setTimeStyle:NSDateFormatterShortStyle];
-    [formatDate setDateFormat:@"dd"];
-    NSString *date = [formatDate stringFromDate:[[menuArray objectAtIndex:dia] date]];
-    NSLog(@":::%@", date);
+    NSString *strMonth = [self dayToString:[NSString stringWithFormat:@"%@", [[strData substringFromIndex:3]substringToIndex:2]]];
     
-    [diaDaSemanaLabel setText:[NSString stringWithFormat:@"%@", diaSemana]];
+    //set year
+    NSString *strYear = [NSString stringWithFormat:@"%@", [strData substringFromIndex:6]];
+    
+    //set label
+    [diaDaSemanaLabel setText:[NSString stringWithFormat:@"%@, %@ de %@ de %@", diaSemana, strDay, strMonth, strYear]];
 
     [[self tableView] reloadData];
 
+}
+
+- (NSString *)dayToString: (NSString *)strMonth{
+    switch ([strMonth intValue]) {
+        case 1:
+            return @"Janeiro";
+            break;
+        case 2:
+            return @"Fevereiro";
+            break;
+        case 3:
+            return @"Março";
+            break;
+        case 4:
+            return @"Abril";
+            break;
+        case 5:
+            return @"Maio";
+            break;
+        case 6:
+            return @"Junho";
+            break;
+        case 7:
+            return @"Julho";
+            break;
+        case 8:
+            return @"Agosto";
+            break;
+        case 9:
+            return @"Setembro";
+            break;
+        case 10:
+            return @"Outrubro";
+            break;
+        case 11:
+            return @"Novembro";
+            break;
+        case 12:
+            return @"Dezembro";
+            break;
+            
+        default:
+            return @"";
+            break;
+    }
 }
 
 

@@ -63,22 +63,22 @@
                                nil];
         [restaurantDict setValue:cuasoArray forKey:[campiList objectAtIndex:0]];
         
-        NSArray *direitoArray = [NSArray arrayWithObjects:@" ", nil];
+        NSArray *direitoArray = [NSArray arrayWithObjects:@"Direito", nil];
         [restaurantDict setValue:direitoArray forKey:[campiList objectAtIndex:1]];
         
-        NSArray *eachArray = [NSArray arrayWithObjects:@" ", nil];
+        NSArray *eachArray = [NSArray arrayWithObjects:@"EACH", nil];
         [restaurantDict setValue:eachArray forKey:[campiList objectAtIndex:2]];
         
-        NSArray *eeArray = [NSArray arrayWithObjects:@" ", nil];
+        NSArray *eeArray = [NSArray arrayWithObjects:@"EE", nil];
         [restaurantDict setValue:eeArray forKey:[campiList objectAtIndex:3]];
         
-        NSArray *fspArray = [NSArray arrayWithObjects:@" ", nil];
+        NSArray *fspArray = [NSArray arrayWithObjects:@"FSP", nil];
         [restaurantDict setValue:fspArray forKey:[campiList objectAtIndex:4]];
         
-        NSArray *lorenaArray = [NSArray arrayWithObjects:@" ", nil];
+        NSArray *lorenaArray = [NSArray arrayWithObjects:@"Lorena", nil];
         [restaurantDict setValue:lorenaArray forKey:[campiList objectAtIndex:5]];
         
-        NSArray *saudeArray = [NSArray arrayWithObjects:@" ", nil];
+        NSArray *saudeArray = [NSArray arrayWithObjects:@"Saúde", nil];
         [restaurantDict setValue:saudeArray forKey:[campiList objectAtIndex:6]];
     }
 
