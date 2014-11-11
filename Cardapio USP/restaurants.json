@@ -1,0 +1,426 @@
+{
+    "FSP": [
+                {
+                  "address": "Av. Dr. Arnaldo, 715 - Faculdade de Saúde Pública, Cerqueira Cesar, São Paulo - SP",
+                  "alias": "FSP",
+                  "phones": [
+                                     "(11) 3061-7785"
+                                   ],
+                  "id": 90,
+                  "longitude": 0,
+                  "photourl": "http://www.usp.br/coseas/COSEASHP/ALM/RestFSP/FSP3Mini.jpg",
+                  "RUCARD": {
+                    "address": "Tesouraria da Faculdade Saúde Pública",
+                    "workinghours": "Terças a Sextas-feiras das 09h00 às 13h45min e 14:30 às 16h00"
+                  },
+                  "latitude": 0,
+                  "cashier": {
+                    "address": "Tesouraria da Faculdade Saúde Pública",
+                    "prices": {
+                      "special": {
+                        "dinner": 6,
+                        "lunch": 6,
+                        "breakfast": 6
+                      },
+                      "students": {
+                        "dinner": 1.9,
+                        "lunch": 1.9,
+                        "breakfast": 1.9
+                      },
+                      "visiting": {
+                        "dinner": 12,
+                        "lunch": 12,
+                        "breakfast": 12
+                      }
+                    },
+                    "longitude": 0,
+                    "latitude": 0,
+                    "workinghours": "Segundas-feiras das 10h00 às 13h45min e das 15h00 às 19h00\nTerças a Sextas-feiras das 09h00 às 13h45min e 14:30 às 16h00"
+                  },
+                  "name": "Restaurante da Faculdade de Saúde Pública",
+                  "workinghours": {
+                    "weekdays": {
+                      "dinner": "17h30 às 19h",
+                      "lunch": "11h15min às 14h15min"
+                    }
+                  }
+                }
+              ],
+    "EEL": [
+                {
+                  "address": "Estrada do Campinho s/n- Lorena – São Paulo",
+                  "alias": "EEL",
+                  "phones": [
+                                     "(12) 3159-5304"
+                                   ],
+                  "id": 70,
+                  "longitude": 0,
+                  "photourl": "http://www.usp.br/coseas/COSEASHP/ALM/EEL/Lorena_0278.JPG",
+                  "RUCARD": {
+                    "address": "?",
+                    "workinghours": "Segundas as Sextas-Feiras das 11 às 14h e das 17h30 às 19h30"
+                  },
+                  "latitude": 0,
+                  "cashier": {
+                    "address": "?",
+                    "prices": {
+                      "special": {
+                        "dinner": 6,
+                        "lunch": 6,
+                        "breakfast": 6
+                      },
+                      "students": {
+                        "dinner": 1.9,
+                        "lunch": 1.9,
+                        "breakfast": 1.9
+                      },
+                      "visiting": {
+                        "dinner": 12,
+                        "lunch": 12,
+                        "breakfast": 12
+                      }
+                    },
+                    "longitude": 0,
+                    "latitude": 0,
+                    "workinghours": "Segundas as Sextas-Feiras das 11 às 14h e das 17h30 às 19h30"
+                  },
+                  "name": "Restaurante da EEL - Lorena",
+                  "workinghours": {
+                    "weekdays": {
+                      "dinner": "17h30 às 19h30",
+                      "lunch": "11 às 14h"
+                    }
+                  }
+                }
+              ],
+    "Direito": [
+                    {
+                      "address": "Rua Riachuelo, 194 - Faculdade de Direito - Largo São Francisco, São Paulo - SP ",
+                      "alias": "Direito",
+                      "phones": [
+                                         "(11) 3111-4054"
+                                       ],
+                      "id": 80,
+                      "longitude": 0,
+                      "photourl": "http://www.usp.br/coseas/COSEASHP/ALM/Rest%20Fac%20Direito/Dir1.jpg",
+                      "RUCARD": {
+                        "address": "Tesouraria da Faculdade de Direito",
+                        "workinghours": "Segundas as Sextas-Feiras das 09h00min às 19h"
+                      },
+                      "latitude": 0,
+                      "cashier": {
+                        "address": "Tesouraria da Faculdade de Direito",
+                        "prices": {
+                          "special": {
+                            "dinner": 6,
+                            "lunch": 6,
+                            "breakfast": 6
+                          },
+                          "students": {
+                            "dinner": 1.9,
+                            "lunch": 1.9,
+                            "breakfast": 1.9
+                          },
+                          "visiting": {
+                            "dinner": 12,
+                            "lunch": 12,
+                            "breakfast": 12
+                          }
+                        },
+                        "longitude": 0,
+                        "latitude": 0,
+                        "workinghours": "Segundas as Sextas-Feiras das 09h00min às 19h"
+                      },
+                      "name": "Restaurante da Faculdade de Direito",
+                      "workinghours": {
+                        "weekdays": {
+                          "dinner": "17h30 às 19h",
+                          "lunch": "11h30min às 14h"
+                        }
+                      }
+                    }
+                  ],
+    "CUASO": [
+                  {
+                    "address": "Praça do Relógio Solar, travessa 8, nº 300,Cidade Universitária, São Paulo - SP",
+                    "alias": "Central",
+                    "phones": [
+                                       "(11) 3091-3318"
+                                     ],
+                    "id": 10,
+                    "longitude": -46.721447,
+                    "photourl": "http://www.usp.br/coseas/COSEASHP/ALM/fotosnovaRestCentral/SAS-USP%20Restaurante%20Central%20252-12%20Foto%20Francisco%20Emolo%20043.jpg",
+                    "RUCARD": {
+                      "address": "Prédio da SAS - Rua do Anfiteatro, 295",
+                      "workinghours": "Segundas as Sextas-Feiras das 8h às 18h45"
+                    },
+                    "latitude": -23.559803,
+                    "cashier": {
+                      "address": "Caixa Central - Prédio da Administração da SAS - Rua do Anfiteatro, 295 ",
+                      "prices": {
+                        "special": {
+                          "dinner": 6,
+                          "lunch": 6,
+                          "breakfast": 6
+                        },
+                        "students": {
+                          "dinner": 1.9,
+                          "lunch": 1.9,
+                          "breakfast": 1.9
+                        },
+                        "visiting": {
+                          "dinner": 12,
+                          "lunch": 12,
+                          "breakfast": 12
+                        }
+                      },
+                      "longitude": -46.721664,
+                      "latitude": -23.559526,
+                      "workinghours": "Segundas as Sextas-Feiras das 7h às 19h30"
+                    },
+                    "name": "Restaurante Central",
+                    "workinghours": {
+                      "sunday": {
+                        "lunch": "12h00 às 14h15min",
+                        "breakfast": "8h às 9h30"
+                      },
+                      "weekdays": {
+                        "dinner": "17h30min às 19h45min",
+                        "lunch": "11h15min às 14h15min",
+                        "breakfast": "7h às 8h30min"
+                      },
+                      "saturday": {
+                        "lunch": "11h15min às 14h15min",
+                        "breakfast": "7h30 às 9h00"
+                      }
+                    }
+                  },
+                  {
+                    "address": "Rua do Matão, Travessa R 187 - Instituto de Física - Universitária, São Paulo - SP ",
+                    "alias": "Física",
+                    "phones": [
+                                       "(11) 3091-6710 "
+                                     ],
+                    "id": 20,
+                    "longitude": -46735311,
+                    "photourl": "http://www.usp.br/coseas/COSEASHP/ALM/FotosRestFisica/FisicaNova5Mini.jpg",
+                    "RUCARD": {
+                      "address": "Prédio da SAS - Rua do Anfiteatro, 295",
+                      "workinghours": "Segundas as Sextas-Feiras das 8h às 18h45"
+                    },
+                    "latitude": -23560594,
+                    "cashier": {
+                      "address": "Caixa Central - Prédio da Administração da SAS - Rua do Anfiteatro, 295 ",
+                      "prices": {
+                        "special": {
+                          "dinner": 6,
+                          "lunch": 6,
+                          "breakfast": 6
+                        },
+                        "students": {
+                          "dinner": 1.9,
+                          "lunch": 1.9,
+                          "breakfast": 1.9
+                        },
+                        "visiting": {
+                          "dinner": 12,
+                          "lunch": 12,
+                          "breakfast": 12
+                        }
+                      },
+                      "longitude": -46.721664,
+                      "latitude": -23.559526,
+                      "workinghours": "Segundas as Sextas-Feiras das 7h às 19h30"
+                    },
+                    "name": "Restaurante da Fisica",
+                    "workinghours": {
+                      "weekdays": {
+                        "dinner": "17h30min às 19h45min",
+                        "lunch": "11h15min às 14h15min"
+                      }
+                    }
+                  },
+                  {
+                    "address": "Av. Lineu Prestes, 748 - Instituto de Químicas - Cidade Universitária, São Paulo - SP",
+                    "alias": "Químicas",
+                    "phones": [
+                                       "(11) 3034-1993"
+                                     ],
+                    "id": 30,
+                    "longitude": -46.725597,
+                    "photourl": "http://www.usp.br/coseas/COSEASHP/ALM/Quimica/fotoRQMini.jpg",
+                    "RUCARD": {
+                      "address": "Prédio da SAS - Rua do Anfiteatro, 295",
+                      "workinghours": "Segundas as Sextas-Feiras das 8h às 18h45"
+                    },
+                    "latitude": -23.5637,
+                    "cashier": {
+                      "address": "Caixa Central - Prédio da Administração da SAS - Rua do Anfiteatro, 295 ",
+                      "prices": {
+                        "special": {
+                          "dinner": 6,
+                          "lunch": 6,
+                          "breakfast": 6
+                        },
+                        "students": {
+                          "dinner": 1.9,
+                          "lunch": 1.9,
+                          "breakfast": 1.9
+                        },
+                        "visiting": {
+                          "dinner": 12,
+                          "lunch": 12,
+                          "breakfast": 12
+                        }
+                      },
+                      "longitude": -46.721664,
+                      "latitude": -23.559526,
+                      "workinghours": "Segundas as Sextas-Feiras das 7h às 19h30"
+                    },
+                    "name": "Restaurante das Químicas",
+                    "workinghours": {
+                      "weekdays": {
+                        "dinner": "17h30 às 19h45",
+                        "lunch": "11h às 14h"
+                      }
+                    }
+                  },
+                  {
+                    "address": "Av. Prof. Almeida Prado, 1280 - Cidade Universitária, São Paulo - SP",
+                    "alias": "pusp-c",
+                    "phones": [
+                                       "(11) 3091-0129"
+                                     ],
+                    "id": 40,
+                    "longitude": -46.739693,
+                    "photourl": "http://www.usp.br/coseas/COSEASHP/ALM/PUSPC/PUSPC3Mini.jpg",
+                    "RUCARD": {
+                      "address": "Prédio da SAS - Rua do Anfiteatro, 295",
+                      "workinghours": "Segundas as Sextas-Feiras das 8h às 18h45"
+                    },
+                    "latitude": -23.558887,
+                    "cashier": {
+                      "address": "Caixa Central - Prédio da Administração da SAS - Rua do Anfiteatro, 295 ",
+                      "prices": {
+                        "special": {
+                          "dinner": 6,
+                          "lunch": 6,
+                          "breakfast": 6
+                        },
+                        "students": {
+                          "dinner": 1.9,
+                          "lunch": 1.9,
+                          "breakfast": 1.9
+                        },
+                        "visiting": {
+                          "dinner": 12,
+                          "lunch": 12,
+                          "breakfast": 12
+                        }
+                      },
+                      "longitude": -46.721664,
+                      "latitude": -23.559526,
+                      "workinghours": "Segundas as Sextas-Feiras das 7h às 19h30"
+                    },
+                    "name": "Restaurante da PUSP-C",
+                    "workinghours": {
+                      "weekdays": {
+                        "lunch": "11h15min às 14h15min"
+                      }
+                    }
+                  }
+                ],
+    "EACH": [
+                 {
+                   "address": "Rua Arlindo Bettio, 1000 – Ermelino Matarazzo – São Paulo – SP",
+                   "alias": "EACH",
+                   "phones": [
+                                      "(11) 3091-8824"
+                                    ],
+                   "id": 60,
+                   "longitude": 0,
+                   "photourl": "http://www.usp.br/coseas/COSEASHP/ALM/EACH/EACHMini.jpg",
+                   "RUCARD": {
+                     "address": "?",
+                     "workinghours": "Segundas as Sextas-Feiras das 10 às 14h e das 17h às 19h"
+                   },
+                   "latitude": 0,
+                   "cashier": {
+                     "address": "?",
+                     "prices": {
+                       "special": {
+                         "dinner": 6,
+                         "lunch": 6,
+                         "breakfast": 6
+                       },
+                       "students": {
+                         "dinner": 1.9,
+                         "lunch": 1.9,
+                         "breakfast": 1.9
+                       },
+                       "visiting": {
+                         "dinner": 12,
+                         "lunch": 12,
+                         "breakfast": 12
+                       }
+                     },
+                     "longitude": 0,
+                     "latitude": 0,
+                     "workinghours": "Segundas as Sextas-Feiras das 10 às 14h e das 17h às 19h"
+                   },
+                   "name": "Restaurante da EACH",
+                   "workinghours": {
+                     "weekdays": {
+                       "dinner": "17h30 às 20h",
+                       "lunch": "11 às 14h"
+                     }
+                   }
+                 }
+               ],
+    "EE": [
+               {
+                 "address": "Av. Dr. Enéas Carvalho de Aguiar, 419 - Escola de Enfermagem, Cerqueira Cesar, São Paulo - SP",
+                 "alias": "EE",
+                 "phones": [
+                                    "(11) 3061-7518"
+                                  ],
+                 "id": 100,
+                 "longitude": 0,
+                 "photourl": "http://www.usp.br/coseas/COSEASHP/ALM/Rest%20Esc%20Enfermagem/Enfer2Mini.jpg",
+                 "RUCARD": {
+                   "address": "Tesouraria da Escola de Enfermagem",
+                   "workinghours": "Segundas as Sextas-Feiras das 11h15min às 14h15min"
+                 },
+                 "latitude": 0,
+                 "cashier": {
+                   "address": "Tesouraria da Escola de Enfermagem",
+                   "prices": {
+                     "special": {
+                       "dinner": 6,
+                       "lunch": 6,
+                       "breakfast": 6
+                     },
+                     "students": {
+                       "dinner": 1.9,
+                       "lunch": 1.9,
+                       "breakfast": 1.9
+                     },
+                     "visiting": {
+                       "dinner": 12,
+                       "lunch": 12,
+                       "breakfast": 12
+                     }
+                   },
+                   "longitude": 0,
+                   "latitude": 0,
+                   "workinghours": "Segundas as Sextas-Feiras das 11h15min às 14h15min"
+                 },
+                 "name": "Restaurante da Escola de Enfermagem",
+                 "workinghours": {
+                   "weekdays": {
+                     "lunch": "11h15min às 14h15min"
+                   }
+                 }
+               }
+             ]
+}

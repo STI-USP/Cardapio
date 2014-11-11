@@ -1,0 +1,739 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CUASO</key>
+	<array>
+		<dict>
+			<key>id</key>
+			<integer>10</integer>
+			<key>alias</key>
+			<string>Central</string>
+			<key>name</key>
+			<string>Restaurante Central</string>
+			<key>address</key>
+			<string>Praça do Relógio Solar, travessa 8, nº 300,Cidade Universitária, São Paulo - SP</string>
+			<key>phones</key>
+			<array>
+				<string>(11) 3091-3318</string>
+			</array>
+			<key>latitude</key>
+			<real>-23.559803</real>
+			<key>longitude</key>
+			<real>-46.721447</real>
+			<key>photourl</key>
+			<string>http://www.usp.br/coseas/COSEASHP/ALM/fotosnovaRestCentral/SAS-USP%20Restaurante%20Central%20252-12%20Foto%20Francisco%20Emolo%20043.jpg</string>
+			<key>workinghours</key>
+			<dict>
+				<key>weekdays</key>
+				<dict>
+					<key>breakfast</key>
+					<string>7h às 8h30min</string>
+					<key>lunch</key>
+					<string>11h15min às 14h15min</string>
+					<key>dinner</key>
+					<string>17h30min às 19h45min</string>
+				</dict>
+				<key>saturday</key>
+				<dict>
+					<key>breakfast</key>
+					<string>7h30 às 9h00</string>
+					<key>lunch</key>
+					<string>11h15min às 14h15min</string>
+				</dict>
+				<key>sunday</key>
+				<dict>
+					<key>breakfast</key>
+					<string>8h às 9h30</string>
+					<key>lunch</key>
+					<string>12h00 às 14h15min</string>
+				</dict>
+			</dict>
+			<key>cashier</key>
+			<dict>
+				<key>address</key>
+				<string>Caixa Central - Prédio da Administração da SAS - Rua do Anfiteatro, 295 </string>
+				<key>latitude</key>
+				<real>-23.559526</real>
+				<key>longitude</key>
+				<real>-46.721666</real>
+				<key>workinghours</key>
+				<string>Segundas as Sextas-Feiras das 7h às 19h30</string>
+				<key>prices</key>
+				<dict>
+					<key>students</key>
+					<dict>
+						<key>breakfast</key>
+						<real>1.9</real>
+						<key>lunch</key>
+						<real>1.9</real>
+						<key>dinner</key>
+						<real>1.9</real>
+					</dict>
+					<key>special</key>
+					<dict>
+						<key>breakfast</key>
+						<real>6</real>
+						<key>lunch</key>
+						<integer>6</integer>
+						<key>dinner</key>
+						<integer>6</integer>
+					</dict>
+					<key>visiting</key>
+					<dict>
+						<key>breakfast</key>
+						<integer>12</integer>
+						<key>lunch</key>
+						<integer>12</integer>
+						<key>dinner</key>
+						<integer>12</integer>
+					</dict>
+				</dict>
+			</dict>
+			<key>RUCARD</key>
+			<dict>
+				<key>address</key>
+				<string>Prédio da SAS - Rua do Anfiteatro, 295</string>
+				<key>workinghours</key>
+				<string>Segundas as Sextas-Feiras das 8h às 18h45</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>id</key>
+			<integer>20</integer>
+			<key>alias</key>
+			<string>Física</string>
+			<key>name</key>
+			<string>Restaurante da Fisica</string>
+			<key>address</key>
+			<string>Rua do Matão, Travessa R 187 - Instituto de Física - Universitária, São Paulo - SP </string>
+			<key>phones</key>
+			<array>
+				<string>(11) 3091-6710 </string>
+			</array>
+			<key>latitude</key>
+			<real>-23560594</real>
+			<key>longitude</key>
+			<real>-46735311</real>
+			<key>photourl</key>
+			<string>http://www.usp.br/coseas/COSEASHP/ALM/FotosRestFisica/FisicaNova5Mini.jpg</string>
+			<key>workinghours</key>
+			<dict>
+				<key>weekdays</key>
+				<dict>
+					<key>lunch</key>
+					<string>11h15min às 14h15min</string>
+					<key>dinner</key>
+					<string>17h30min às 19h45min</string>
+				</dict>
+			</dict>
+			<key>cashier</key>
+			<dict>
+				<key>address</key>
+				<string>Caixa Central - Prédio da Administração da SAS - Rua do Anfiteatro, 295 </string>
+				<key>latitude</key>
+				<real>-23.559526</real>
+				<key>longitude</key>
+				<real>-46.721666</real>
+				<key>workinghours</key>
+				<string>Segundas as Sextas-Feiras das 7h às 19h30</string>
+				<key>prices</key>
+				<dict>
+					<key>students</key>
+					<dict>
+						<key>breakfast</key>
+						<real>1.9</real>
+						<key>lunch</key>
+						<real>1.9</real>
+						<key>dinner</key>
+						<real>1.9</real>
+					</dict>
+					<key>special</key>
+					<dict>
+						<key>breakfast</key>
+						<real>6</real>
+						<key>lunch</key>
+						<integer>6</integer>
+						<key>dinner</key>
+						<integer>6</integer>
+					</dict>
+					<key>visiting</key>
+					<dict>
+						<key>breakfast</key>
+						<integer>12</integer>
+						<key>lunch</key>
+						<integer>12</integer>
+						<key>dinner</key>
+						<integer>12</integer>
+					</dict>
+				</dict>
+			</dict>
+			<key>RUCARD</key>
+			<dict>
+				<key>address</key>
+				<string>Prédio da SAS - Rua do Anfiteatro, 295</string>
+				<key>workinghours</key>
+				<string>Segundas as Sextas-Feiras das 8h às 18h45</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>id</key>
+			<integer>30</integer>
+			<key>alias</key>
+			<string>Químicas</string>
+			<key>name</key>
+			<string>Restaurante das Químicas</string>
+			<key>address</key>
+			<string>Av. Lineu Prestes, 748 - Instituto de Químicas - Cidade Universitária, São Paulo - SP</string>
+			<key>phones</key>
+			<array>
+				<string>(11) 3034-1993</string>
+			</array>
+			<key>latitude</key>
+			<real>-23.563699</real>
+			<key>longitude</key>
+			<real>-46.725599</real>
+			<key>photourl</key>
+			<string>http://www.usp.br/coseas/COSEASHP/ALM/Quimica/fotoRQMini.jpg</string>
+			<key>workinghours</key>
+			<dict>
+				<key>weekdays</key>
+				<dict>
+					<key>lunch</key>
+					<string>11h às 14h</string>
+					<key>dinner</key>
+					<string>17h30 às 19h45</string>
+				</dict>
+			</dict>
+			<key>cashier</key>
+			<dict>
+				<key>address</key>
+				<string>Caixa Central - Prédio da Administração da SAS - Rua do Anfiteatro, 295 </string>
+				<key>latitude</key>
+				<real>-23.559526</real>
+				<key>longitude</key>
+				<real>-46.721666</real>
+				<key>workinghours</key>
+				<string>Segundas as Sextas-Feiras das 7h às 19h30</string>
+				<key>prices</key>
+				<dict>
+					<key>students</key>
+					<dict>
+						<key>breakfast</key>
+						<real>1.9</real>
+						<key>lunch</key>
+						<real>1.9</real>
+						<key>dinner</key>
+						<real>1.9</real>
+					</dict>
+					<key>special</key>
+					<dict>
+						<key>breakfast</key>
+						<real>6</real>
+						<key>lunch</key>
+						<integer>6</integer>
+						<key>dinner</key>
+						<integer>6</integer>
+					</dict>
+					<key>visiting</key>
+					<dict>
+						<key>breakfast</key>
+						<integer>12</integer>
+						<key>lunch</key>
+						<integer>12</integer>
+						<key>dinner</key>
+						<integer>12</integer>
+					</dict>
+				</dict>
+			</dict>
+			<key>RUCARD</key>
+			<dict>
+				<key>address</key>
+				<string>Prédio da SAS - Rua do Anfiteatro, 295</string>
+				<key>workinghours</key>
+				<string>Segundas as Sextas-Feiras das 8h às 18h45</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>id</key>
+			<integer>40</integer>
+			<key>alias</key>
+			<string>pusp-c</string>
+			<key>name</key>
+			<string>Restaurante da PUSP-C</string>
+			<key>address</key>
+			<string>Av. Prof. Almeida Prado, 1280 - Cidade Universitária, São Paulo - SP</string>
+			<key>phones</key>
+			<array>
+				<string>(11) 3091-0129</string>
+			</array>
+			<key>latitude</key>
+			<real>-23.558888</real>
+			<key>longitude</key>
+			<real>-46.739691</real>
+			<key>photourl</key>
+			<string>http://www.usp.br/coseas/COSEASHP/ALM/PUSPC/PUSPC3Mini.jpg</string>
+			<key>workinghours</key>
+			<dict>
+				<key>weekdays</key>
+				<dict>
+					<key>lunch</key>
+					<string>11h15min às 14h15min</string>
+				</dict>
+			</dict>
+			<key>cashier</key>
+			<dict>
+				<key>address</key>
+				<string>Caixa Central - Prédio da Administração da SAS - Rua do Anfiteatro, 295 </string>
+				<key>latitude</key>
+				<real>-23.559526</real>
+				<key>longitude</key>
+				<real>-46.721666</real>
+				<key>workinghours</key>
+				<string>Segundas as Sextas-Feiras das 7h às 19h30</string>
+				<key>prices</key>
+				<dict>
+					<key>students</key>
+					<dict>
+						<key>breakfast</key>
+						<real>1.9</real>
+						<key>lunch</key>
+						<real>1.9</real>
+						<key>dinner</key>
+						<real>1.9</real>
+					</dict>
+					<key>special</key>
+					<dict>
+						<key>breakfast</key>
+						<real>6</real>
+						<key>lunch</key>
+						<integer>6</integer>
+						<key>dinner</key>
+						<integer>6</integer>
+					</dict>
+					<key>visiting</key>
+					<dict>
+						<key>breakfast</key>
+						<integer>12</integer>
+						<key>lunch</key>
+						<integer>12</integer>
+						<key>dinner</key>
+						<integer>12</integer>
+					</dict>
+				</dict>
+			</dict>
+			<key>RUCARD</key>
+			<dict>
+				<key>address</key>
+				<string>Prédio da SAS - Rua do Anfiteatro, 295</string>
+				<key>workinghours</key>
+				<string>Segundas as Sextas-Feiras das 8h às 18h45</string>
+			</dict>
+		</dict>
+	</array>
+	<key>Direito</key>
+	<array>
+		<dict>
+			<key>id</key>
+			<integer>80</integer>
+			<key>alias</key>
+			<string>Direito</string>
+			<key>name</key>
+			<string>Restaurante da Faculdade de Direito</string>
+			<key>address</key>
+			<string>Rua Riachuelo, 194 - Faculdade de Direito - Largo São Francisco, São Paulo - SP </string>
+			<key>phones</key>
+			<array>
+				<string>(11) 3111-4054</string>
+			</array>
+			<key>latitude</key>
+			<integer>0</integer>
+			<key>longitude</key>
+			<integer>0</integer>
+			<key>photourl</key>
+			<string>http://www.usp.br/coseas/COSEASHP/ALM/Rest%20Fac%20Direito/Dir1.jpg</string>
+			<key>workinghours</key>
+			<dict>
+				<key>weekdays</key>
+				<dict>
+					<key>lunch</key>
+					<string>11h30min às 14h</string>
+					<key>dinner</key>
+					<string>17h30 às 19h</string>
+				</dict>
+			</dict>
+			<key>cashier</key>
+			<dict>
+				<key>address</key>
+				<string>Tesouraria da Faculdade de Direito</string>
+				<key>latitude</key>
+				<integer>0</integer>
+				<key>longitude</key>
+				<integer>0</integer>
+				<key>workinghours</key>
+				<string>Segundas as Sextas-Feiras das 09h00min às 19h</string>
+				<key>prices</key>
+				<dict>
+					<key>students</key>
+					<dict>
+						<key>breakfast</key>
+						<real>1.9</real>
+						<key>lunch</key>
+						<real>1.9</real>
+						<key>dinner</key>
+						<real>1.9</real>
+					</dict>
+					<key>special</key>
+					<dict>
+						<key>breakfast</key>
+						<real>6</real>
+						<key>lunch</key>
+						<integer>6</integer>
+						<key>dinner</key>
+						<integer>6</integer>
+					</dict>
+					<key>visiting</key>
+					<dict>
+						<key>breakfast</key>
+						<integer>12</integer>
+						<key>lunch</key>
+						<integer>12</integer>
+						<key>dinner</key>
+						<integer>12</integer>
+					</dict>
+				</dict>
+			</dict>
+			<key>RUCARD</key>
+			<dict>
+				<key>address</key>
+				<string>Tesouraria da Faculdade de Direito</string>
+				<key>workinghours</key>
+				<string>Segundas as Sextas-Feiras das 09h00min às 19h</string>
+			</dict>
+		</dict>
+	</array>
+	<key>FSP</key>
+	<array>
+		<dict>
+			<key>id</key>
+			<integer>90</integer>
+			<key>alias</key>
+			<string>FSP</string>
+			<key>name</key>
+			<string>Restaurante da Faculdade de Saúde Pública</string>
+			<key>address</key>
+			<string>Av. Dr. Arnaldo, 715 - Faculdade de Saúde Pública, Cerqueira Cesar, São Paulo - SP</string>
+			<key>phones</key>
+			<array>
+				<string>(11) 3061-7785</string>
+			</array>
+			<key>latitude</key>
+			<integer>0</integer>
+			<key>longitude</key>
+			<integer>0</integer>
+			<key>photourl</key>
+			<string>http://www.usp.br/coseas/COSEASHP/ALM/RestFSP/FSP3Mini.jpg</string>
+			<key>workinghours</key>
+			<dict>
+				<key>weekdays</key>
+				<dict>
+					<key>lunch</key>
+					<string>11h15min às 14h15min</string>
+					<key>dinner</key>
+					<string>17h30 às 19h</string>
+				</dict>
+			</dict>
+			<key>cashier</key>
+			<dict>
+				<key>address</key>
+				<string>Tesouraria da Faculdade Saúde Pública</string>
+				<key>latitude</key>
+				<integer>0</integer>
+				<key>longitude</key>
+				<integer>0</integer>
+				<key>workinghours</key>
+				<string>Segundas-feiras das 10h00 às 13h45min e das 15h00 às 19h00
+Terças a Sextas-feiras das 09h00 às 13h45min e 14:30 às 16h00</string>
+				<key>prices</key>
+				<dict>
+					<key>students</key>
+					<dict>
+						<key>breakfast</key>
+						<real>1.9</real>
+						<key>lunch</key>
+						<real>1.9</real>
+						<key>dinner</key>
+						<real>1.9</real>
+					</dict>
+					<key>special</key>
+					<dict>
+						<key>breakfast</key>
+						<real>6</real>
+						<key>lunch</key>
+						<integer>6</integer>
+						<key>dinner</key>
+						<integer>6</integer>
+					</dict>
+					<key>visiting</key>
+					<dict>
+						<key>breakfast</key>
+						<integer>12</integer>
+						<key>lunch</key>
+						<integer>12</integer>
+						<key>dinner</key>
+						<integer>12</integer>
+					</dict>
+				</dict>
+			</dict>
+			<key>RUCARD</key>
+			<dict>
+				<key>address</key>
+				<string>Tesouraria da Faculdade Saúde Pública</string>
+				<key>workinghours</key>
+				<string>Terças a Sextas-feiras das 09h00 às 13h45min e 14:30 às 16h00</string>
+			</dict>
+		</dict>
+	</array>
+	<key>EE</key>
+	<array>
+		<dict>
+			<key>id</key>
+			<integer>100</integer>
+			<key>alias</key>
+			<string>EE</string>
+			<key>name</key>
+			<string>Restaurante da Escola de Enfermagem</string>
+			<key>address</key>
+			<string>Av. Dr. Enéas Carvalho de Aguiar, 419 - Escola de Enfermagem, Cerqueira Cesar, São Paulo - SP</string>
+			<key>phones</key>
+			<array>
+				<string>(11) 3061-7518</string>
+			</array>
+			<key>latitude</key>
+			<integer>0</integer>
+			<key>longitude</key>
+			<integer>0</integer>
+			<key>photourl</key>
+			<string>http://www.usp.br/coseas/COSEASHP/ALM/Rest%20Esc%20Enfermagem/Enfer2Mini.jpg</string>
+			<key>workinghours</key>
+			<dict>
+				<key>weekdays</key>
+				<dict>
+					<key>lunch</key>
+					<string>11h15min às 14h15min</string>
+				</dict>
+			</dict>
+			<key>cashier</key>
+			<dict>
+				<key>address</key>
+				<string>Tesouraria da Escola de Enfermagem</string>
+				<key>latitude</key>
+				<integer>0</integer>
+				<key>longitude</key>
+				<integer>0</integer>
+				<key>workinghours</key>
+				<string>Segundas as Sextas-Feiras das 11h15min às 14h15min</string>
+				<key>prices</key>
+				<dict>
+					<key>students</key>
+					<dict>
+						<key>breakfast</key>
+						<real>1.9</real>
+						<key>lunch</key>
+						<real>1.9</real>
+						<key>dinner</key>
+						<real>1.9</real>
+					</dict>
+					<key>special</key>
+					<dict>
+						<key>breakfast</key>
+						<real>6</real>
+						<key>lunch</key>
+						<integer>6</integer>
+						<key>dinner</key>
+						<integer>6</integer>
+					</dict>
+					<key>visiting</key>
+					<dict>
+						<key>breakfast</key>
+						<integer>12</integer>
+						<key>lunch</key>
+						<integer>12</integer>
+						<key>dinner</key>
+						<integer>12</integer>
+					</dict>
+				</dict>
+			</dict>
+			<key>RUCARD</key>
+			<dict>
+				<key>address</key>
+				<string>Tesouraria da Escola de Enfermagem</string>
+				<key>workinghours</key>
+				<string>Segundas as Sextas-Feiras das 11h15min às 14h15min</string>
+			</dict>
+		</dict>
+	</array>
+	<key>EACH</key>
+	<array>
+		<dict>
+			<key>id</key>
+			<integer>60</integer>
+			<key>alias</key>
+			<string>EACH</string>
+			<key>name</key>
+			<string>Restaurante da EACH</string>
+			<key>address</key>
+			<string>Rua Arlindo Bettio, 1000 – Ermelino Matarazzo – São Paulo – SP</string>
+			<key>phones</key>
+			<array>
+				<string>(11) 3091-8824</string>
+			</array>
+			<key>latitude</key>
+			<integer>0</integer>
+			<key>longitude</key>
+			<integer>0</integer>
+			<key>photourl</key>
+			<string>http://www.usp.br/coseas/COSEASHP/ALM/EACH/EACHMini.jpg</string>
+			<key>workinghours</key>
+			<dict>
+				<key>weekdays</key>
+				<dict>
+					<key>lunch</key>
+					<string>11 às 14h</string>
+					<key>dinner</key>
+					<string>17h30 às 20h</string>
+				</dict>
+			</dict>
+			<key>cashier</key>
+			<dict>
+				<key>address</key>
+				<string>?</string>
+				<key>latitude</key>
+				<integer>0</integer>
+				<key>longitude</key>
+				<integer>0</integer>
+				<key>workinghours</key>
+				<string>Segundas as Sextas-Feiras das 10 às 14h e das 17h às 19h</string>
+				<key>prices</key>
+				<dict>
+					<key>students</key>
+					<dict>
+						<key>breakfast</key>
+						<real>1.9</real>
+						<key>lunch</key>
+						<real>1.9</real>
+						<key>dinner</key>
+						<real>1.9</real>
+					</dict>
+					<key>special</key>
+					<dict>
+						<key>breakfast</key>
+						<real>6</real>
+						<key>lunch</key>
+						<integer>6</integer>
+						<key>dinner</key>
+						<integer>6</integer>
+					</dict>
+					<key>visiting</key>
+					<dict>
+						<key>breakfast</key>
+						<integer>12</integer>
+						<key>lunch</key>
+						<integer>12</integer>
+						<key>dinner</key>
+						<integer>12</integer>
+					</dict>
+				</dict>
+			</dict>
+			<key>RUCARD</key>
+			<dict>
+				<key>address</key>
+				<string>?</string>
+				<key>workinghours</key>
+				<string>Segundas as Sextas-Feiras das 10 às 14h e das 17h às 19h</string>
+			</dict>
+		</dict>
+	</array>
+	<key>EEL</key>
+	<array>
+		<dict>
+			<key>id</key>
+			<integer>70</integer>
+			<key>alias</key>
+			<string>EEL</string>
+			<key>name</key>
+			<string>Restaurante da EEL - Lorena</string>
+			<key>address</key>
+			<string>Estrada do Campinho s/n- Lorena – São Paulo</string>
+			<key>phones</key>
+			<array>
+				<string>(12) 3159-5304</string>
+			</array>
+			<key>latitude</key>
+			<integer>0</integer>
+			<key>longitude</key>
+			<integer>0</integer>
+			<key>photourl</key>
+			<string>http://www.usp.br/coseas/COSEASHP/ALM/EEL/Lorena_0278.JPG</string>
+			<key>workinghours</key>
+			<dict>
+				<key>weekdays</key>
+				<dict>
+					<key>lunch</key>
+					<string>11 às 14h</string>
+					<key>dinner</key>
+					<string>17h30 às 19h30</string>
+				</dict>
+			</dict>
+			<key>cashier</key>
+			<dict>
+				<key>address</key>
+				<string>?</string>
+				<key>latitude</key>
+				<integer>0</integer>
+				<key>longitude</key>
+				<integer>0</integer>
+				<key>workinghours</key>
+				<string>Segundas as Sextas-Feiras das 11 às 14h e das 17h30 às 19h30</string>
+				<key>prices</key>
+				<dict>
+					<key>students</key>
+					<dict>
+						<key>breakfast</key>
+						<real>1.9</real>
+						<key>lunch</key>
+						<real>1.9</real>
+						<key>dinner</key>
+						<real>1.9</real>
+					</dict>
+					<key>special</key>
+					<dict>
+						<key>breakfast</key>
+						<real>6</real>
+						<key>lunch</key>
+						<integer>6</integer>
+						<key>dinner</key>
+						<integer>6</integer>
+					</dict>
+					<key>visiting</key>
+					<dict>
+						<key>breakfast</key>
+						<integer>12</integer>
+						<key>lunch</key>
+						<integer>12</integer>
+						<key>dinner</key>
+						<integer>12</integer>
+					</dict>
+				</dict>
+			</dict>
+			<key>RUCARD</key>
+			<dict>
+				<key>address</key>
+				<string>?</string>
+				<key>workinghours</key>
+				<string>Segundas as Sextas-Feiras das 11 às 14h e das 17h30 às 19h30</string>
+			</dict>
+		</dict>
+	</array>
+</dict>
+</plist>

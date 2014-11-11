@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>date</key>
+		<string>19/05/2014</string>
+		<key>dinner</key>
+		<dict>
+			<key>calories</key>
+			<integer>1005</integer>
+			<key>menu</key>
+			<string>Arroz/feijão preto/arroz integral\nFrango Assado\nCenoura com ervilha\nSalada de almeirão\nOpcional: Quibe de PVT\nGoiabinha/refresco</string>
+		</dict>
+		<key>lunch</key>
+		<dict>
+			<key>calories</key>
+			<integer>1195</integer>
+			<key>menu</key>
+			<string>Arroz/feijão preto/arroz integral\nCopa lombo com molho de abacaxi\nVirado de milho\nSalada de alcelga\nOpcional: PVT à califórnia\nMexerica/refresco</string>
+		</dict>
+	</dict>
+	<dict>
+		<key>date</key>
+		<string>20/05/2014</string>
+		<key>dinner</key>
+		<dict>
+			<key>calories</key>
+			<integer>1005</integer>
+			<key>menu</key>
+			<string>Arroz/feijão/arroz integral\nFilé de peixe dourado\nEspinhafre provençal\nSalada de beterraba\nOpcional: PVT com vinagrete\nBanana/refresco</string>
+		</dict>
+		<key>lunch</key>
+		<dict>
+			<key>calories</key>
+			<integer>900</integer>
+			<key>menu</key>
+			<string>Arroz/feijão/arroz integral\nIscas de carne com mini-cebola\nChuchu sauté\nSalada de escarola\nOpcional: PVT com mini-cebola\npudim/refresco</string>
+		</dict>
+	</dict>
+	<dict>
+		<key>date</key>
+		<string>21/05/2014</string>
+		<key>dinner</key>
+		<dict>
+			<key>calories</key>
+			<integer>1035</integer>
+			<key>menu</key>
+			<string>Arroz/feijão/arroz integral\nCupim ao molho ferrugem\nJardineira de legumes\nSalada de rúcula\nOpcional: torta de PVT\nPêssego em calda/refresco</string>
+		</dict>
+		<key>lunch</key>
+		<dict>
+			<key>calories</key>
+			<integer>875</integer>
+			<key>menu</key>
+			<string>Arroz/feijão/arroz integral\nBife de caçarola\nPurê de batata\nSalada de alface\nOpcional: almôndega de PVT\nMaçã/refresco</string>
+		</dict>
+	</dict>
+	<dict>
+		<key>date</key>
+		<string>22/05/2014</string>
+		<key>dinner</key>
+		<dict>
+			<key>calories</key>
+			<integer>1000</integer>
+			<key>menu</key>
+			<string>Arroz/feijão/arroz integral\nCopa lombo assado\nLegumes mistos\nSalada de escatola\nOpcional: almôndega de PVT\nLaranja/refresco</string>
+		</dict>
+		<key>lunch</key>
+		<dict>
+			<key>calories</key>
+			<real>1000</real>
+			<key>menu</key>
+			<string>Arroz/feijão/arroz integral\nHamburger ao molho americano\nBatata palha\nSalada de alface\nOpcional: PVT com milho\nMexerica/refresco</string>
+		</dict>
+	</dict>
+	<dict>
+		<key>date</key>
+		<string>23/05/2014</string>
+		<key>dinner</key>
+		<dict>
+			<key>calories</key>
+			<integer>780</integer>
+			<key>menu</key>
+			<string>Arroz/feijão/arroz integral\nOvo frito\nAbobrinha com tomate\nSalada de acelga\nOpcional: PVT com cogumelo\nMaçã/refresco</string>
+		</dict>
+		<key>lunch</key>
+		<dict>
+			<key>calories</key>
+			<integer>905</integer>
+			<key>menu</key>
+			<string>Arroz/feijão/arroz integral\nBife de caçarola\nBerinjela com queijo\nSalada de mostarda\nOpcional: PVT com vagem\nGelatina/refresco</string>
+		</dict>
+	</dict>
+	<dict>
+		<key>date</key>
+		<string>24/05/2014</string>
+		<key>lunch</key>
+		<dict>
+			<key>calories</key>
+			<integer>840</integer>
+			<key>menu</key>
+			<string>Arroz/feijão/arroz integral\nCarne assada\nAbóbora refogada\nSalada de escarola\nOpcional: hambúrguer PVT\nBanana/refresco</string>
+		</dict>
+	</dict>
+	<dict>
+		<key>date</key>
+		<string>25/05/2014</string>
+		<key>lunch</key>
+		<dict>
+			<key>calories</key>
+			<integer>965</integer>
+			<key>menu</key>
+			<string>Arroz/feijão/arroz integral\nFrango assado\nMacarrão ao sugo\nSalada coroada (cenoura/maçã/uva passa/rabanete)\nSalada de agrião com molho de laranja\nOpcional: PVT com couve-flor\nMelancia ou pavê de pêssego/refresco</string>
+		</dict>
+	</dict>
+	<dict>
+		<key>observation</key>
+		<string>O cardápio acompanha mini pão e suco.</string>
+	</dict>
+</array>
+</plist>

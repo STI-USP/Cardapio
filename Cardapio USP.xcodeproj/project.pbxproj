@@ -46,6 +46,9 @@
 		BFAC6EEB192AB50F00921494 /* central.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BFAC6EEA192AB50F00921494 /* central.jpg */; };
 		BFAC6EED192AB98600921494 /* mapa.png in Resources */ = {isa = PBXBuildFile; fileRef = BFAC6EEC192AB98600921494 /* mapa.png */; };
 		BFBE1E76192FB038004C403C /* restaurantes.json in Resources */ = {isa = PBXBuildFile; fileRef = BFBE1E75192FB038004C403C /* restaurantes.json */; };
+		BFBE4D8D1A126003002EDADE /* central.plist in Resources */ = {isa = PBXBuildFile; fileRef = BFBE4D8C1A126003002EDADE /* central.plist */; };
+		BFBE4D8F1A126797002EDADE /* restaurants.plist in Resources */ = {isa = PBXBuildFile; fileRef = BFBE4D8E1A126797002EDADE /* restaurants.plist */; };
+		BFBE4D911A1276EF002EDADE /* restaurants.json in Resources */ = {isa = PBXBuildFile; fileRef = BFBE4D901A1276EF002EDADE /* restaurants.json */; };
 		E9818EC3198033A800F741B0 /* DKScrollingTabController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9818EC2198033A800F741B0 /* DKScrollingTabController.m */; };
 		E99B26511980067300F03E04 /* RestaurantDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E99B26501980067300F03E04 /* RestaurantDataModel.m */; };
 /* End PBXBuildFile section */
@@ -126,6 +129,9 @@
 		BFAC6EEA192AB50F00921494 /* central.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = central.jpg; sourceTree = "<group>"; };
 		BFAC6EEC192AB98600921494 /* mapa.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mapa.png; sourceTree = "<group>"; };
 		BFBE1E75192FB038004C403C /* restaurantes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = restaurantes.json; sourceTree = "<group>"; };
+		BFBE4D8C1A126003002EDADE /* central.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = central.plist; sourceTree = "<group>"; };
+		BFBE4D8E1A126797002EDADE /* restaurants.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = restaurants.plist; sourceTree = "<group>"; };
+		BFBE4D901A1276EF002EDADE /* restaurants.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = restaurants.json; sourceTree = "<group>"; };
 		E9818EC1198033A800F741B0 /* DKScrollingTabController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DKScrollingTabController.h; sourceTree = "<group>"; };
 		E9818EC2198033A800F741B0 /* DKScrollingTabController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DKScrollingTabController.m; sourceTree = "<group>"; };
 		E99B264F1980067300F03E04 /* RestaurantDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestaurantDataModel.h; sourceTree = "<group>"; };
@@ -234,10 +240,13 @@
 				BFAC6ED5192A587900921494 /* SVProgressHUD */,
 				BFAC6EBD192A586B00921494 /* REFrostedViewController */,
 				BFAC6E83192A54E100921494 /* Supporting Files */,
+				BFBE4D8C1A126003002EDADE /* central.plist */,
 				BFAC6EB4192A566200921494 /* central.json */,
 				BFBE1E75192FB038004C403C /* restaurantes.json */,
 				BFAC6EEA192AB50F00921494 /* central.jpg */,
 				BFAC6EEC192AB98600921494 /* mapa.png */,
+				BFBE4D8E1A126797002EDADE /* restaurants.plist */,
+				BFBE4D901A1276EF002EDADE /* restaurants.json */,
 			);
 			path = "Cardapio USP";
 			sourceTree = "<group>";
@@ -392,7 +401,10 @@
 				BFAC6E98192A54E100921494 /* Images.xcassets in Resources */,
 				BFAC6E90192A54E100921494 /* Main_iPhone.storyboard in Resources */,
 				BFAC6EB5192A566200921494 /* central.json in Resources */,
+				BFBE4D8F1A126797002EDADE /* restaurants.plist in Resources */,
 				BFAC6EEB192AB50F00921494 /* central.jpg in Resources */,
+				BFBE4D911A1276EF002EDADE /* restaurants.json in Resources */,
+				BFBE4D8D1A126003002EDADE /* central.plist in Resources */,
 				BFAC6EED192AB98600921494 /* mapa.png in Resources */,
 				BFBE1E76192FB038004C403C /* restaurantes.json in Resources */,
 			);

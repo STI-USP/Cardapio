@@ -1,5 +1,6 @@
 ﻿
-“CUASO”:[
+[
+ {“CUASO”:[
 {
 “id”:10,
 “title”:”Central”,
@@ -146,3 +147,4 @@
       {“category”:”Visitante”,“price”:”12,00”}
 ]
 }]
+]
