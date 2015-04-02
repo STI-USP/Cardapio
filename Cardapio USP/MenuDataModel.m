@@ -16,7 +16,7 @@
 
 
 @implementation MenuDataModel
-
+   
 
 /*
  * Inicializaçao do objeto, singleton
@@ -51,32 +51,46 @@
 
 /**
  *  Obtem a lista de menus relacionados a um restaurante, formato REST JSON
- *  param _restaurant
+ *
  */
 - (NSMutableArray *)menus
 {
-    NSMutableArray *json = [self iniciar_JSONBinding:
-                            [NSString stringWithFormat:kRestaurantsURL, [[RestaurantDataModel getInstance] restaurant]]];
-    _menus = [[NSMutableArray alloc] init];
-    if (!json) {
-        NSLog(@"Error parsing JSON: %@", nil);
-    } else {
-        for(NSDictionary *item in json) {
-            NSString *hour = [item objectForKey:@"date"];
-            NSDictionary *lunch = [item objectForKey:@"lunch"];
-            NSDictionary *dinner = [item objectForKey:@"dinner"];
-            
-            NSMutableArray *ps = [[NSMutableArray alloc] init];
-            Period *p0 = [[Period alloc ] initWithPeriod:@"lunch" andMenu:[lunch objectForKey:@"menu"] andCalories:[lunch objectForKey:@"calories"]];
-            Period *p1 = [[Period alloc ] initWithPeriod:@"dinner" andMenu:[dinner objectForKey:@"menu"] andCalories:[lunch objectForKey:@"calories"]];
-            [ps addObject:p0];
-            [ps addObject:p1];
-            
-            Menu *m = [[Menu  alloc ] initWithDate:hour andPeriod:ps];
-            [_menus addObject:m];
-        }
+  NSMutableArray *json = [self iniciar_JSONBinding:
+                          [NSString stringWithFormat:kRestaurantsURL, [[RestaurantDataModel getInstance] restaurant]]];   
+  _menus = [[NSMutableArray alloc] init];
+  
+  if (!json) {
+    NSLog(@"Error parsing JSON: %@", nil);
+  } else {
+    
+    for(NSMutableDictionary *item in json) {
+      
+      
+      NSMutableArray *period = [[NSMutableArray alloc] init];
+      
+      // [di:150316] Teste se refeicao diaria presente no json, cria o array com os periodos de refeicao
+      if ([item objectForKey:@"breakfast"] != nil) {
+        Period *breakfast = [[Period alloc ] initWithPeriod:@"breakfast" andMenu:[item objectForKey:@"breakfast"][@"menu"] andCalories:[item objectForKey:@"breakfast"][@"calories"]];
+        [period addObject:breakfast];
+      }
+      
+      if ([item objectForKey:@"lunch"] != nil) {
+        Period *lunch = [[Period alloc ] initWithPeriod:@"lunch" andMenu:[item objectForKey:@"lunch"][@"menu"] andCalories:[item objectForKey:@"lunch"][@"calories"]];
+        [period addObject:lunch];
+      }
+      
+      if ([item objectForKey:@"dinner"] != nil) {
+        Period *dinner = [[Period alloc ] initWithPeriod:@"dinner" andMenu:[item objectForKey:@"dinner"][@"menu"] andCalories:[item objectForKey:@"dinner"][@"calories"]];
+        [period addObject:dinner];
+      }
+      
+      // [di:150316] Adiciona os periodos de refeicao no menu
+      Menu *menu = [[Menu alloc] initWithDate:[item objectForKey:@"date"] andPeriod:period];
+      [_menus addObject:menu];
     }
-    return _menus;
+  }
+  
+  return _menus;
 }
 
 /**
