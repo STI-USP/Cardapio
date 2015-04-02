@@ -12,7 +12,7 @@
 #import "Items.h"
 #import "RestaurantDataModel.h"
 
-#define kRestaurantsURL @"http://kaimbu.uspnet.usp.br:8080/cardapio/%@.json"
+#define kRestaurantsURL @"http://kaimbu2.uspnet.usp.br:8080/cardapio/%@.json"
 
 
 @implementation MenuDataModel
