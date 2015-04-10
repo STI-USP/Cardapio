@@ -12,6 +12,7 @@
 @interface RestaurantDataModel : NSObject
 
 @property (nonatomic, strong) NSString *restaurant;
+@property (nonatomic) NSInteger campusOption;
 @property (nonatomic) NSInteger restaurantOption;
 
 

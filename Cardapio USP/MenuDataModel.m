@@ -41,9 +41,9 @@
     NSMutableURLRequest *req1 = [NSMutableURLRequest requestWithURL:url1];
     NSError *error;
     NSURLResponse *resp = nil;
-    //NSData *data = [NSURLConnection sendSynchronousRequest:req1 returningResponse:&resp error:&error];
+    NSData *data = [NSURLConnection sendSynchronousRequest:req1 returningResponse:&resp error:&error];
     // Mapeamento de NSData para NSMutableArray
-    NSMutableArray* json = [NSJSONSerialization JSONObjectWithData:[NSURLConnection sendSynchronousRequest:req1 returningResponse:&resp error:&error]  options:NSJSONReadingMutableContainers  error:&error];
+    NSMutableArray* json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers  error:&error];
     
     return json;
 }
