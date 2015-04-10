@@ -68,17 +68,14 @@
 
         UIFont *selectionFont;
         if (_selectionFont) {
-            selectionFont = _selectionFont;
+          selectionFont = _selectionFont;
         }
         else {
-            selectionFont = [UIFont systemFontOfSize:12];
+          selectionFont = [UIFont systemFontOfSize:12];
         }
         
         if (!_layoutIsVertical) {
-            if ([[UIDevice currentDevice].systemVersion floatValue] >= 7.0)
-                frame.size = [title sizeWithAttributes:  @{NSFontAttributeName: selectionFont} ];
-            else
-                frame.size = [title sizeWithFont:selectionFont];
+          frame.size = [title sizeWithAttributes:  @{NSFontAttributeName: selectionFont} ];
         }
         
         CGFloat padding_vertical = (frame2.size.height - frame.size.height)/2;

@@ -14,6 +14,9 @@
   NSMutableArray *campiList;
   NSMutableDictionary *restaurantDict;
   NSMutableArray      *arrayForBool;
+  RestaurantDataModel *restaurantDataModel;
+  NSInteger oldFilterOption;
+
 
 }
 
@@ -21,8 +24,7 @@
 
 @implementation SelectorViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
+-(id) initWithStyle:(UITableViewStyle)style {
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
@@ -30,7 +32,7 @@
     return self;
 }
 
-- (void)viewDidLoad{
+-(void) viewDidLoad {
   [super viewDidLoad];
   
     if (!campiList) {
@@ -81,30 +83,36 @@
         NSArray *saudeArray = [NSArray arrayWithObjects:@"Saúde", nil];
         [restaurantDict setValue:saudeArray forKey:[campiList objectAtIndex:6]];
     }
-
-    
 }
 
-- (void)didReceiveMemoryWarning
-{
+-(void) viewWillAppear:(BOOL) animated {
+  // Filter Option
+  oldFilterOption = restaurantDataModel.restaurantOption; // pega o filtro que está setado no modelo
+  NSIndexPath *oldFilterOptionIndexPath = [NSIndexPath indexPathForRow:oldFilterOption inSection:0] ; // cria indexPath para opção de filtro que está  armazenada no modelo
+  [self.tableView cellForRowAtIndexPath:oldFilterOptionIndexPath].accessoryType = UITableViewCellAccessoryCheckmark; // marca com check na tabela
+  
+
+}
+
+-(void) didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+-(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
     return [campiList count];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+-(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if ([[arrayForBool objectAtIndex:section] boolValue]) {
         return [[restaurantDict valueForKey:[campiList objectAtIndex:section]] count];
     }
     return 1;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+-(UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
     headerView.tag = section;
     headerView.backgroundColor = [UIColor whiteColor];
@@ -128,27 +136,27 @@
     return headerView;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     UIView *footer  = [[UIView alloc] initWithFrame:CGRectZero];
     return footer;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 42;
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 44;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     return 1;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([[arrayForBool objectAtIndex:indexPath.section] boolValue]) {
-        return 42;
+        return 44;
     }
     return 0;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RestaurantCell" forIndexPath:indexPath];
     //cell.textLabel.text = restaurantList[indexPath.row];
   //if (indexPath.row == 1) {
@@ -167,18 +175,24 @@
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     NSString *selectedRestaurant = [[restaurantDict valueForKey:[campiList objectAtIndex:indexPath.section]]objectAtIndex:indexPath.row];
-
+  
+  NSIndexPath *oldFilterOptionIndexPath = [NSIndexPath indexPathForRow:oldFilterOption inSection:0]; // monta um indexPath com
+  if (oldFilterOptionIndexPath.row != indexPath.row) { // só muda se não tiver tocado na mesma
+    restaurantDataModel.restaurantOption = indexPath.row; // salva como nova opção
+    oldFilterOption = indexPath.row; // salva como opção anterior
+    [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark; // marca a nova
+    [tableView cellForRowAtIndexPath:oldFilterOptionIndexPath].accessoryType = UITableViewCellAccessoryNone; //tira a marca da anterior
     [[RestaurantDataModel getInstance] setRestaurant:selectedRestaurant];
     NSLog(@"%@", selectedRestaurant);
-    
+  }
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark - gesture tapped
-- (void)sectionHeaderTapped:(UITapGestureRecognizer *)gestureRecognizer{
+- (void)sectionHeaderTapped:(UITapGestureRecognizer *)gestureRecognizer {
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:gestureRecognizer.view.tag];
     if (indexPath.row == 0) {
         BOOL collapsed = [[arrayForBool objectAtIndex:indexPath.section] boolValue];

@@ -38,8 +38,7 @@
 }
 
 
--(void)viewDidAppear:(BOOL)animated
-{
+-(void)viewWillAppear:(BOOL)animated {
     [super viewDidAppear:YES];
     _model.date = @"23/05/2014";
     _model.rest = @"Central";

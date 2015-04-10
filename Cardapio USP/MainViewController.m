@@ -49,10 +49,10 @@
   [swipeRight setDirection:UISwipeGestureRecognizerDirectionRight];
   [[self view] addGestureRecognizer: swipeRight];
   
-  UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self
-                                                                                  action:@selector(forwardDate:)];
-  [swipeLeft setDirection:UISwipeGestureRecognizerDirectionLeft];
-  [[self view] addGestureRecognizer: swipeLeft];
+  //UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self
+  //                                                                                action:@selector(forwardDate:)];
+  //[swipeLeft setDirection:UISwipeGestureRecognizerDirectionLeft];
+  //[[self view] addGestureRecognizer: swipeLeft];
   
   diaDaSemana = 0;
   
@@ -249,8 +249,6 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-  
-  
   switch (section) {
     case 0:
       return @"Almoço";
@@ -262,14 +260,10 @@
     default:
       break;
   }
-  
-  
   return nil;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
-  
-  
   switch (section) {
     case 0:
       return [NSString stringWithFormat:@"Valor calórico para uma refeição: %@", [[[menu period] objectAtIndex:0] calories]];
@@ -281,7 +275,6 @@
     default:
       break;
   }
-  
   return nil;
 }
 
@@ -289,21 +282,11 @@
   static NSString *cellID = @"MenuCell";
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID forIndexPath:indexPath];
   
-  
-  
-  
   if (indexPath.section == 0) {
-    //configure cell
-    cell.textLabel.text = [NSString stringWithFormat:@"%@", [[[menu period] objectAtIndex:0] menu]];
-    
-    
+    cell.textLabel.text = [NSString stringWithFormat:@"%@", [[[menu period] objectAtIndex:0] menu]]; //almoço
   } else {
-    
-    cell.textLabel.text = [NSString stringWithFormat:@"%@", [[[menu period] objectAtIndex:1] menu]];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@", [[[menu period] objectAtIndex:1] menu]]; //janta
   }
-  
-  
-  
   return cell;
 }
 

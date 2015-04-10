@@ -9,9 +9,16 @@
 #import "RestaurantDataModel.h"
 #import "Restaurant.h"
 
+@interface RestaurantDataModel () {
+  NSArray *restauratsOption;
+}
+
+@end
+
 @implementation RestaurantDataModel
 
-@synthesize restaurant;
+@synthesize restaurant = _restaurant;
+@synthesize restaurantOption = __restaurantOption;
 
 +(RestaurantDataModel *) getInstance
 {
@@ -23,5 +30,15 @@
     
     return instance;
 }
+
+- (instancetype) init {
+
+  restauratsOption = @[@"all", @"byTitle", @"byAuthor", @"bySubject", @"byIsxn"];
+  restauratsOption = 0; // valor inicial caso não tenha nada salvo
+
+  
+  return self;
+}
+
 
 @end

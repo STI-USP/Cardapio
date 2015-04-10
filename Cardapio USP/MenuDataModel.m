@@ -41,9 +41,9 @@
     NSMutableURLRequest *req1 = [NSMutableURLRequest requestWithURL:url1];
     NSError *error;
     NSURLResponse *resp = nil;
-    NSData *data = [NSURLConnection sendSynchronousRequest:req1 returningResponse:&resp error:&error];
+    //NSData *data = [NSURLConnection sendSynchronousRequest:req1 returningResponse:&resp error:&error];
     // Mapeamento de NSData para NSMutableArray
-    NSMutableArray* json = [NSJSONSerialization JSONObjectWithData:data  options:NSJSONReadingMutableContainers  error:&error];
+    NSMutableArray* json = [NSJSONSerialization JSONObjectWithData:[NSURLConnection sendSynchronousRequest:req1 returningResponse:&resp error:&error]  options:NSJSONReadingMutableContainers  error:&error];
     
     return json;
 }
@@ -53,8 +53,7 @@
  *  Obtem a lista de menus relacionados a um restaurante, formato REST JSON
  *
  */
-- (NSMutableArray *)menus
-{
+- (NSMutableArray *)menus {
   NSMutableArray *json = [self iniciar_JSONBinding:
                           [NSString stringWithFormat:kRestaurantsURL, [[RestaurantDataModel getInstance] restaurant]]];   
   _menus = [[NSMutableArray alloc] init];
@@ -136,8 +135,7 @@
     if (!json)
     {
         NSLog(@"Error parsing JSON: %@", nil);
-    } else
-    {
+    } else {
         for(NSDictionary *item in json[_campi]) {
             NSMutableArray *wpitems = [[NSMutableArray alloc] init];
             for(NSDictionary *wp in [item objectForKey:@"weeklyperiod"])
@@ -157,7 +155,7 @@
 -(Cash *)cash
 {
     NSMutableArray *items = [[NSMutableArray alloc] init];
-    NSDictionary *json = (NSDictionary *)[self iniciar_JSONBinding:@"http://kaimbu.uspnet.usp.br:8080/cardapio/restaurantes.json"];
+    NSDictionary *json = (NSDictionary *)[self iniciar_JSONBinding: [NSString stringWithFormat:kRestaurantsURL, @"restaurantes"]];
     if (!json)
     {
         NSLog(@"Error parsing JSON: %@", nil);
