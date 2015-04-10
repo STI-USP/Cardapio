@@ -29,6 +29,11 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+  oldCampusOption = restaurantDataModel.campusOption;
+  oldRestaurantOption = restaurantDataModel.restaurantOption;
+  NSIndexPath *oldFilterOptionIndexPath = [NSIndexPath indexPathForRow:oldRestaurantOption inSection:oldCampusOption];
+  [self.tableView cellForRowAtIndexPath:oldFilterOptionIndexPath].accessoryType = UITableViewCellAccessoryCheckmark;
+
 }
 
 - (void)didReceiveMemoryWarning {
