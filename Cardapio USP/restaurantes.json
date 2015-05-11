@@ -1,4 +1,48 @@
-﻿
+﻿[
+ {
+ "campus":"FSP",
+ "restaurants":[{
+                “id”:10,
+                “title”:”Central”,
+                “name”:”Restaurante Central",
+                “address”:”Praça do Relógio Solar, travessa 8, nº 300,Cidade Universitária, São Paulo - SP” ,
+                “phone”:”11 3091-3318",
+                “latitude”:”34e304734973”,
+                “longitude”:”34e304734973”,
+                “photourl”:”http://“,
+                }]
+ },
+ {
+ "campus":"CUASO",
+ "restaurants":[{
+                  “id”:10,
+                  “title”:”Central”,
+                  “name”:”Restaurante Central",
+                  “address”:”Praça do Relógio Solar, travessa 8, nº 300,Cidade Universitária, São Paulo - SP” ,
+                  “phone”:”11 3091-3318",
+                  “latitude”:”34e304734973”,
+                  “longitude”:”34e304734973”,
+                  “photourl”:”http://“,
+                },
+                {
+                  “id”:10,
+                  “title”:”Central”,
+                  “name”:”Restaurante Central",
+                  “address”:”Praça do Relógio Solar, travessa 8, nº 300,Cidade Universitária, São Paulo - SP” ,
+                  “phone”:”11 3091-3318",
+                  “latitude”:”34e304734973”,
+                  “longitude”:”34e304734973”,
+                  “photourl”:”http://“,
+                }]
+ }
+]
+ 
+ 
+ /*
+ ]
+ 
+
+
 [
  {“CUASO”:[
 {
@@ -148,3 +192,4 @@
 ]
 }]
 ]
+  */

@@ -21,7 +21,6 @@
 @property (nonatomic, retain) NSString *photourl;
 @property (nonatomic, retain) NSMutableArray *weeklyperiod;
 
-
 /*
  * Construtor da classe Restaurant
  *

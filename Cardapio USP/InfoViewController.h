@@ -12,7 +12,7 @@
 
 @interface InfoViewController : UITableViewController<UITabBarControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 
-@property (strong, nonatomic) IBOutlet MenuDataModel *model;
+@property (strong, nonatomic) IBOutlet MenuDataModel *dataModel;
 @property (strong, nonatomic) IBOutlet Restaurant *restaurant;  
 @property (strong, nonatomic) IBOutlet UIImageView *restImage;
 @property (strong, nonatomic) IBOutlet UIImageView *restMap;

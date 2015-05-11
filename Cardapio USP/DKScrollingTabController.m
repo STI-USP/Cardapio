@@ -194,9 +194,9 @@
 
 
 - (void)setButtonName:(NSString*)name atIndex:(NSUInteger)index {
-    UIButton *button = self.buttons[index];
-    [button setTitle:name forState:UIControlStateNormal];
-    
+  UIButton *button = self.buttons[index];
+  [button setTitle:name forState:UIControlStateNormal];
+  //[button.titleLabel setFont:[UIFont systemFontOfSize:12]];
     //TODO: update layout (in particular, button widths)
 }
 

@@ -18,11 +18,12 @@
 @property (nonatomic, strong) Restaurant *restaurant;
 @property (nonatomic, strong) Cash *cash;
 @property (nonatomic, strong) NSMutableArray *menus;
-@property (nonatomic, strong) NSMutableArray *restaurants;
+@property (nonatomic, strong) NSMutableArray *restaurantsByCampus;
 @property (nonatomic, strong) NSArray *diasDaSemana;
   
-@property (nonatomic, strong) NSString *rest;
-@property (nonatomic, strong) NSString *campi;
+@property (nonatomic, strong) NSString *restaurantId;
+@property (nonatomic, strong) NSString *restaurantName;
+@property (nonatomic, strong) NSString *campus;
 @property (nonatomic, strong) NSString *date;
 
 

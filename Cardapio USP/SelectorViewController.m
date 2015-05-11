@@ -9,6 +9,7 @@
 #import "SelectorViewController.h"
 #import "MainViewController.h"
 #import "RestaurantDataModel.h"
+#import "MenuDataModel.h"
 
 @interface SelectorViewController () {
   NSMutableArray *campiList;
@@ -16,6 +17,7 @@
   NSMutableArray      *arrayForBool;
   RestaurantDataModel *restaurantDataModel;
   NSInteger oldFilterOption;
+  MenuDataModel *dataModel;
 
 
 }
@@ -35,17 +37,16 @@
 -(void) viewDidLoad {
   [super viewDidLoad];
   
+  dataModel = [MenuDataModel getInstance];
+
+  
     if (!campiList) {
-        campiList = [NSMutableArray arrayWithObjects:
-                     @"CUASO",
-                     @"DIREITO",
-                     @"EACH",
-                     @"EE",
-                     @"FSP",
-                     @"LORENA",
-                     @"SAÚDE",
-                     nil];
+      for (id campus in dataModel.restaurantsByCampus){
+        [dataModel setRestaurantName:[campus valueForKey:@"name"]];
+        [campiList addObject:campus];
+      }
     }
+
     if (!arrayForBool) {
         arrayForBool    = [NSMutableArray arrayWithObjects:[NSNumber numberWithBool:NO],
                            [NSNumber numberWithBool:NO],
@@ -56,32 +57,13 @@
                            [NSNumber numberWithBool:NO] , nil];
     }
     if (!restaurantDict) {
-        restaurantDict  = [[NSMutableDictionary alloc] init];
-        NSArray *cuasoArray = [NSArray arrayWithObjects:
-                               @"Central",
-                               @"Física",
-                               @"PUSP-C",
-                               @"Químicas",
-                               nil];
-        [restaurantDict setValue:cuasoArray forKey:[campiList objectAtIndex:0]];
-        
-        NSArray *direitoArray = [NSArray arrayWithObjects:@"Direito", nil];
-        [restaurantDict setValue:direitoArray forKey:[campiList objectAtIndex:1]];
-        
-        NSArray *eachArray = [NSArray arrayWithObjects:@"EACH", nil];
-        [restaurantDict setValue:eachArray forKey:[campiList objectAtIndex:2]];
-        
-        NSArray *eeArray = [NSArray arrayWithObjects:@"EE", nil];
-        [restaurantDict setValue:eeArray forKey:[campiList objectAtIndex:3]];
-        
-        NSArray *fspArray = [NSArray arrayWithObjects:@"FSP", nil];
-        [restaurantDict setValue:fspArray forKey:[campiList objectAtIndex:4]];
-        
-        NSArray *lorenaArray = [NSArray arrayWithObjects:@"Lorena", nil];
-        [restaurantDict setValue:lorenaArray forKey:[campiList objectAtIndex:5]];
-        
-        NSArray *saudeArray = [NSArray arrayWithObjects:@"Saúde", nil];
-        [restaurantDict setValue:saudeArray forKey:[campiList objectAtIndex:6]];
+      
+      restaurantDict  = [[NSMutableDictionary alloc] init];
+      
+      for (int i=0; i<[campiList count]; i++) {
+        NSArray *restArray = [[campiList objectAtIndex:i]valueForKey:@"restaurants"];
+        [restaurantDict setValue:restArray forKey:[campiList objectAtIndex:i]];
+      }
     }
 }
 

@@ -11,9 +11,10 @@
 #import "WeeklyPeriod.h"
 #import "Items.h"
 #import "RestaurantDataModel.h"
+#import "AFNetworking.h"
 
-#define kRestaurantsURL @"http://kaimbu2.uspnet.usp.br:8080/cardapio/%@.json"
-
+#define kRestaurantsURL @"http://kaimbu2.uspnet.usp.br:8080/cardapio/"
+#define kBaseURL @"http://kaimbu2.uspnet.usp.br:8080/"
 
 @implementation MenuDataModel
    
@@ -24,10 +25,8 @@
 +(MenuDataModel *) getInstance
 {
     static MenuDataModel *instancia = nil;
-    static dispatch_once_t once;
-    dispatch_once(&once, ^{
-        instancia = [[self alloc] init];
-    });
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{ instancia = [[MenuDataModel alloc] init]; });
     return instancia;
 }
 
@@ -55,7 +54,7 @@
  */
 - (NSMutableArray *)menus {
   NSMutableArray *json = [self iniciar_JSONBinding:
-                          [NSString stringWithFormat:kRestaurantsURL, [[RestaurantDataModel getInstance] restaurant]]];   
+                          [NSString stringWithFormat:@"%@%@.json", kRestaurantsURL, [[RestaurantDataModel getInstance] restaurant]]];
   _menus = [[NSMutableArray alloc] init];
   
   if (!json) {
@@ -114,8 +113,8 @@
 - (Restaurant *)restaurant
 {
     Restaurant *res;
-    for (Restaurant *r in [self restaurants]) {
-        if ([[r title] isEqualToString:_rest]) {
+    for (Restaurant *r in [self restaurantsByCampus]) {
+        if ([[r title] isEqualToString:_restaurantName]) {
             res = r;
         }
     }
@@ -126,17 +125,68 @@
  *  Obtem uma lista de restaurantes, com informacoes de cada um a partir de um campi, formato REST JSON
  *  param _campi
  */
-- (NSMutableArray *)restaurants
+- (NSMutableArray *)restaurantsByCampus
 {
+  
+  _restaurantsByCampus = [[NSMutableArray alloc] init];
+
+  //read from file
+  NSError *error;
+  NSString *strFileContent = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource: @"restaurantsJson" ofType: @"json"] encoding:NSUTF8StringEncoding error:&error];
+  
+  if (!error) {
+    
+    NSData *objectData = [strFileContent dataUsingEncoding:NSUTF8StringEncoding];
+    NSMutableDictionary *json = [NSJSONSerialization JSONObjectWithData:objectData options: NSJSONReadingMutableContainers error: &error];
+    
+    if (!error) {
+      for (id campus in [json valueForKey:@"campi"])
+        [_restaurantsByCampus addObject:campus];
+    }else{
+      NSLog(@"%@", error);
+    }
+  }
+  
+
+  return _restaurantsByCampus;
+
+
+  /*_restaurants = [[NSMutableArray alloc] init];
+
+  AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+  manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+  NSString *webServiceParameters;
+  //webServiceParameters = [NSString stringWithFormat:kRestaurantsURL, @"restaurantes"];
+  webServiceParameters = [NSString stringWithFormat:@"%@restaurantes.json", kRestaurantsURL];
+  NSLog(@"%@", webServiceParameters);
+  //Chamada para a implementação do SIBi
+  [manager GET:webServiceParameters parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+   
+    // Parse da resposta
+    NSMutableDictionary *json = [NSJSONSerialization JSONObjectWithData:responseObject options: NSJSONReadingMutableContainers error: nil];
+    for (id restaurant in [json valueForKey:@"CUASO"]) {
+      [_restaurants addObject:restaurant];
+      NSLog(@"%@", [restaurant valueForKey:@"name"]);
+    }
+   
+  } failure:^(AFHTTPRequestOperation *operation, NSError *error) { // caso tenha dado erro no acesso aos dados
+    NSLog(@"%@", error);
+  }];
+
+  
+  return _restaurants;
+   */
+
+  /*
     _restaurants = [[NSMutableArray alloc] init];
     // Mapeamento de NSData para NSMutableArray
     NSDictionary *json = (NSDictionary *) [self iniciar_JSONBinding: [NSString stringWithFormat:kRestaurantsURL, @"restaurantes"]];
-    
+   
     if (!json)
     {
         NSLog(@"Error parsing JSON: %@", nil);
     } else {
-        for(NSDictionary *item in json[_campi]) {
+        for(NSDictionary *item in [json objectForKey:@"CUASO"]) {
             NSMutableArray *wpitems = [[NSMutableArray alloc] init];
             for(NSDictionary *wp in [item objectForKey:@"weeklyperiod"])
             {
@@ -144,18 +194,19 @@
                 WeeklyPeriod *weekperiod = [[WeeklyPeriod alloc] initWithWeeklyPeriod:wp[@"period"] andBreakfast:wp[@"breakfast"] andLunch:wp[@"lunch"] andDinner:wp[@"dinner"]];
                 [wpitems addObject:weekperiod];
             }
-            
+   
             Restaurant *restaurant = [[Restaurant alloc] initWithId:item[@"id"] andTitle:item[@"title"] andName:item[@"name"] andAddress:item[@"address"] andPhone:item[@"phone"] andLatitude:item[@"latitude"] andLongitude:item[@"longitude"] andPhotoURL:item[@"photourl"] andWeeklyPeriod:wpitems];
             [_restaurants addObject:restaurant];
         }
     }
     return _restaurants;
+   */
 }
 
 -(Cash *)cash
 {
     NSMutableArray *items = [[NSMutableArray alloc] init];
-    NSDictionary *json = (NSDictionary *)[self iniciar_JSONBinding: [NSString stringWithFormat:kRestaurantsURL, @"restaurantes"]];
+    NSDictionary *json = (NSDictionary *)[self iniciar_JSONBinding: [NSString stringWithFormat:@"%@restaurantes.json", kRestaurantsURL]];
     if (!json)
     {
         NSLog(@"Error parsing JSON: %@", nil);

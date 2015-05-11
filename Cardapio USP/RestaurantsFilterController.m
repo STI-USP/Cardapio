@@ -8,11 +8,14 @@
 
 #import "RestaurantsFilterController.h"
 #import "RestaurantDataModel.h"
+#import "MenuDataModel.h"
 
 @interface RestaurantsFilterController () {
+  NSMutableArray *restaurantList;
   NSMutableArray *campiList;
   NSMutableDictionary *restaurantDict;
   RestaurantDataModel *restaurantDataModel;
+  MenuDataModel *dataModel;
   NSInteger oldCampusOption;
   NSInteger oldRestaurantOption;
 }
@@ -29,11 +32,29 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-  oldCampusOption = restaurantDataModel.campusOption;
-  oldRestaurantOption = restaurantDataModel.restaurantOption;
-  NSIndexPath *oldFilterOptionIndexPath = [NSIndexPath indexPathForRow:oldRestaurantOption inSection:oldCampusOption];
-  [self.tableView cellForRowAtIndexPath:oldFilterOptionIndexPath].accessoryType = UITableViewCellAccessoryCheckmark;
-
+  [self setTitle:@"Restaurantes"];
+  restaurantDataModel = [RestaurantDataModel getInstance];
+  
+  dataModel = [MenuDataModel getInstance];
+  
+  
+  if (!campiList) {
+    campiList = [[NSMutableArray alloc] init];
+    for (id campus in [dataModel restaurantsByCampus]){
+      [dataModel setRestaurantName:[campus objectForKey:@"name"]];
+      [campiList addObject:campus];
+    }
+  }
+  
+  if (!restaurantDict) {
+    
+    restaurantDict  = [[NSMutableDictionary alloc] init];
+    
+    for (int i=0; i<[campiList count]; i++) {
+      restaurantList = [[campiList objectAtIndex:i]valueForKey:@"restaurants"];
+      [restaurantDict setValue:restaurantList forKey:[[campiList objectAtIndex:i] objectForKey:@"name"]];
+    }
+  }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -42,66 +63,58 @@
 }
 
 -(void) viewWillAppear:(BOOL) animated {
+
   // Filter Option
-  oldCampusOption = restaurantDataModel.restaurantOption; // pega o filtro de campus que está setado no modelo
-  oldRestaurantOption = restaurantDataModel.restaurantOption; // pega o filtro de restaurante que está setado no modelo
-  NSIndexPath *oldFilterOptionIndexPath = [NSIndexPath indexPathForRow:oldRestaurantOption inSection:oldCampusOption] ; // cria indexPath para opção de filtro que está  armazenada no modelo
-  [self.tableView cellForRowAtIndexPath:oldFilterOptionIndexPath].accessoryType = UITableViewCellAccessoryCheckmark; // marca com check na tabela
+  //oldCampusOption = [restaurantDataModel campusOption]; // pega o filtro de campus que está setado no modelo
+  //oldRestaurantOption = [restaurantDataModel restaurantOption]; // pega o filtro de restaurante que está setado no modelo
+  NSIndexPath *oldFilterOptionIndexPath = [NSIndexPath indexPathForRow:[restaurantDataModel restaurantOption] inSection:[restaurantDataModel campusOption]];
+  [[self.tableView cellForRowAtIndexPath:oldFilterOptionIndexPath] setAccessoryType: UITableViewCellAccessoryCheckmark];
 }
 
 
 #pragma mark - Table view data source
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-  if (section == 0) {
-    return @"CUASO";
-  }
-  return nil;
+  return [[campiList objectAtIndex:section]valueForKey:@"name"];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   
-  NSString *selectedRestaurant = [[restaurantDict valueForKey:[campiList objectAtIndex:indexPath.section]]objectAtIndex:indexPath.row];
+  //NSString *selectedRestaurant = [[[restaurantDict valueForKey:[restaurantList objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row]valueForKey:@"name"];
   
   NSIndexPath *oldFilterOptionIndexPath = [NSIndexPath indexPathForRow:oldRestaurantOption inSection:oldCampusOption];
-  if ((oldFilterOptionIndexPath.row != indexPath.row) || (oldFilterOptionIndexPath.section != indexPath.section)) { // só muda se não tiver tocado na mesma
+  //if ((oldFilterOptionIndexPath.row != indexPath.row) || (oldFilterOptionIndexPath.section != indexPath.section)) {
     restaurantDataModel.restaurantOption = indexPath.row; // salva como nova opção
+    restaurantDataModel.campusOption = indexPath.section;
     oldCampusOption = indexPath.section; // salva como opção anterior
     oldRestaurantOption = indexPath.row; // salva como opção anterior
-    [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark; // marca a nova
-    [tableView cellForRowAtIndexPath:oldFilterOptionIndexPath].accessoryType = UITableViewCellAccessoryNone; //tira a marca da anterior
-    [[RestaurantDataModel getInstance] setRestaurant:selectedRestaurant];
-    [[RestaurantDataModel getInstance] setCampusOption:indexPath.section];
-    [[RestaurantDataModel getInstance] setRestaurantOption:indexPath.row];
-    
-    NSLog(@"%@", selectedRestaurant);
-  }
+    [tableView cellForRowAtIndexPath:oldFilterOptionIndexPath].accessoryType = UITableViewCellAccessoryNone;
+    [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
+  
+
+  [dataModel setCampus:[campiList objectAtIndex:indexPath.section]];
+  [dataModel setRestaurantId:[[[[campiList objectAtIndex:indexPath.section] valueForKey:@"restaurants"]objectAtIndex:indexPath.row] valueForKey:@"id"]];
+  [dataModel setRestaurantName:[[[[campiList objectAtIndex:indexPath.section] valueForKey:@"restaurants"]objectAtIndex:indexPath.row] valueForKey:@"name"]];
+  
+  //}
   [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-/*
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+    return [campiList count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+  return [[[campiList objectAtIndex:section] valueForKey:@"restaurants"] count];
+  
 }
-*/
 
-/*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
-    return cell;
+  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FilterCell" forIndexPath:indexPath];
+  
+  cell.textLabel.text = [[[[campiList objectAtIndex:indexPath.section] valueForKey:@"restaurants"]objectAtIndex:indexPath.row] valueForKey:@"alias"];
+  return cell;
 }
-*/
 
 /*
 // Override to support conditional editing of the table view.

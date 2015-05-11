@@ -113,7 +113,7 @@
   NSString *thuButtonName = [[NSString stringWithFormat:@"Q\n%@", [[menuArray objectAtIndex:3] date]]substringToIndex:4];
   NSString *friButtonName = [[NSString stringWithFormat:@"S\n%@", [[menuArray objectAtIndex:4] date]]substringToIndex:4];
   NSString *satButtonName = [[NSString stringWithFormat:@"S\n%@", [[menuArray objectAtIndex:5] date]]substringToIndex:4];
-  NSString *sunButtonName = [[NSString stringWithFormat:@"D\n%@", [[menuArray objectAtIndex:6] date]] substringToIndex:4];
+  NSString *sunButtonName = [[NSString stringWithFormat:@"D\n%@", [[menuArray objectAtIndex:6] date]]substringToIndex:4];
   
   [dateTabController setButtonName:monButtonName atIndex:0];
   [dateTabController setButtonName:tueButtonName atIndex:1];
@@ -126,13 +126,13 @@
   
   [dateTabController.buttons enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
     UIButton *button = obj;
-    button.titleLabel.numberOfLines = 2;
+    button.titleLabel.numberOfLines = 0;
     button.titleLabel.textAlignment = NSTextAlignmentCenter;
     
     NSString *buttonName = button.titleLabel.text;
     NSString *text =  [buttonName substringWithRange: NSMakeRange(0, [buttonName rangeOfString: @"\n"].location)];
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:buttonName];
-    NSDictionary *attributes = @{ NSFontAttributeName : [UIFont systemFontOfSize:6] };
+    NSDictionary *attributes = @{ NSFontAttributeName : [UIFont systemFontOfSize:8] };
     NSRange range = [buttonName rangeOfString:text];
     [attributedString addAttributes:attributes range:range];
     
