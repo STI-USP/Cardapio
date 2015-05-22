@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Restaurant : NSObject{
+@interface Restaurant : NSObject {
     
 }
 @property (nonatomic, retain) NSString *rid;

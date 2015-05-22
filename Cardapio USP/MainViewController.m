@@ -12,12 +12,16 @@
 #import "MainViewController.h"
 #import "REFrostedViewController.h"
 #import "DKScrollingTabController.h"
-#import "RestaurantDataModel.h"    
+#import "RestaurantDataModel.h"  
+#import "DataModel.h"
 
 @interface MainViewController () {
-  
-  RestaurantDataModel *restaurantDataModel;
-  MenuDataModel *menuDataModel;
+
+  DKScrollingTabController *dateTabController;
+
+  RestaurantDataModel *_restaurantDataModel;
+  MenuDataModel *_menuDataModel;
+  DataModel *dataModel;
   
   NSMutableArray *menuArray;
   Menu *menu;
@@ -35,8 +39,10 @@
   // precisa inicializar o modelo logo no início pois a busca com o scanner é feita antes de carregar a vista
   self = [super initWithCoder:aDecoder];
   if (self) {
-    restaurantDataModel = [RestaurantDataModel getInstance]; // modelo singleton
-    menuDataModel = [MenuDataModel getInstance];
+    //restaurantDataModel = [RestaurantDataModel getInstance]; // modelo singleton
+    //menuDataModel = [MenuDataModel getInstance];
+    dataModel = [DataModel getInstance];
+    
   }
   return self;
 }   
@@ -49,18 +55,14 @@
   [swipeRight setDirection:UISwipeGestureRecognizerDirectionRight];
   [[self view] addGestureRecognizer: swipeRight];
   
-  //UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self
-  //                                                                                action:@selector(forwardDate:)];
-  //[swipeLeft setDirection:UISwipeGestureRecognizerDirectionLeft];
-  //[[self view] addGestureRecognizer: swipeLeft];
-  
-  diaDaSemana = 0;
-  
+  dateTabController = [[DKScrollingTabController alloc] init];
+
   NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
   NSDateComponents *weekdayComponents =[gregorian components:NSWeekdayCalendarUnit fromDate:[NSDate date]];
-  NSInteger weekday = [weekdayComponents weekday];
+  NSInteger weekday = [weekdayComponents weekday] - 2; //para deixar a segunda feira como 0
+  diaDaSemana = (int)weekday;
   
-  menuArray = menuDataModel.menus;
+  menuArray = [dataModel getMenu];
   menu = [menuArray objectAtIndex:weekday];
   
   [self setupWeekView: menuArray];
@@ -79,6 +81,13 @@
    }
    */
   
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChangeRestaurant:) name:@"DidChangeRestaurant" object:nil];
+
+  
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+  [self.navigationItem setTitle: [dataModel restaurantName]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -87,7 +96,6 @@
 }
 
 - (void)setupWeekView: (NSArray *) weekMenu {
-  DKScrollingTabController *dateTabController = [[DKScrollingTabController alloc] init];
   
   dateTabController.delegate = self;
   [self addChildViewController:dateTabController];
@@ -139,6 +147,8 @@
     button.titleLabel.text = @"";
     [button setAttributedTitle:attributedString forState:UIControlStateNormal];
   }];
+
+  [dateTabController selectButtonWithIndex:diaDaSemana];
   
 }
 
@@ -178,18 +188,14 @@
   
   //set day
   NSString *strDay = [NSString stringWithFormat:@"%@", [strData substringToIndex:2]];
-  
   //set month
   NSString *strMonth = [self dayToString:[NSString stringWithFormat:@"%@", [[strData substringFromIndex:3]substringToIndex:2]]];
-  
   //set year
   NSString *strYear = [NSString stringWithFormat:@"%@", [strData substringFromIndex:6]];
-  
   //set label
   [diaDaSemanaLabel setText:[NSString stringWithFormat:@"%@, %@ de %@ de %@", diaSemana, strDay, strMonth, strYear]];
   
   [[self tableView] reloadData];
-  
 }
 
 - (NSString *)dayToString: (NSString *)strMonth{
@@ -285,7 +291,7 @@
   if (indexPath.section == 0) {
     cell.textLabel.text = [NSString stringWithFormat:@"%@", [[[menu period] objectAtIndex:0] menu]]; //almoço
   } else {
-    cell.textLabel.text = [NSString stringWithFormat:@"%@", [[[menu period] objectAtIndex:1] menu]]; //janta
+    cell.textLabel.text = [NSString stringWithFormat:@"%@", [[[menu period] objectAtIndex:1] menu]]; //jantar
   }
   return cell;
 }
@@ -310,6 +316,16 @@
 - (void)DKScrollingTabController:(DKScrollingTabController *)controller selection:(NSUInteger)selection {
   menu = [menuArray objectAtIndex:selection];
   [self setupDayLabel:(int)selection];
+}
+
+#pragma mark - Model
+
+-(void) didChangeRestaurant:(NSNotification *)notification {
+  NSString *name = [dataModel restaurantName];
+  name = [name stringByReplacingOccurrencesOfString:@"Restaurante da " withString:@""];
+  name = [name stringByReplacingOccurrencesOfString:@"Restaurante " withString:@""];
+
+  [self.navigationItem setTitle: name];
 }
 
 

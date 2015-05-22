@@ -1,69 +1,69 @@
  [
     {
       "dinner": {
-        "menu": "Arroz/feijão preto/arroz integral\\nFrango Assado\\nCenoura com ervilha\\nSalada de almeirão\\nOpcional: Quibe de PVT\\nGoiabinha/refresco",
+        "menu": "Arroz/feijão preto/arroz integral\nFrango Assado\nCenoura com ervilha\nSalada de almeirão\nOpcional: Quibe de PVT\nGoiabinha/refresco",
         "calories": 1005
       },
       "lunch": {
-        "menu": "Arroz/feijão preto/arroz integral\\nCopa lombo com molho de abacaxi\\nVirado de milho\\nSalada de alcelga\\nOpcional: PVT à califórnia\\nMexerica/refresco",
+        "menu": "Arroz/feijão preto/arroz integral\nCopa lombo com molho de abacaxi\nVirado de milho\nSalada de alcelga\nOpcional: PVT à califórnia\nMexerica/refresco",
         "calories": 1195
       },
       "date": "19/05/2014"
     },
     {
       "dinner": {
-        "menu": "Arroz/feijão/arroz integral\\nFilé de peixe dourado\\nEspinhafre provençal\\nSalada de beterraba\\nOpcional: PVT com vinagrete\\nBanana/refresco",
+        "menu": "Arroz/feijão/arroz integral\nFilé de peixe dourado\nEspinhafre provençal\nSalada de beterraba\nOpcional: PVT com vinagrete\nBanana/refresco",
         "calories": 1005
       },
       "lunch": {
-        "menu": "Arroz/feijão/arroz integral\\nIscas de carne com mini-cebola\\nChuchu sauté\\nSalada de escarola\\nOpcional: PVT com mini-cebola\\npudim/refresco",
+        "menu": "Arroz/feijão/arroz integral\nIscas de carne com mini-cebola\nChuchu sauté\nSalada de escarola\nOpcional: PVT com mini-cebola\npudim/refresco",
         "calories": 900
       },
       "date": "20/05/2014"
     },
     {
       "dinner": {
-        "menu": "Arroz/feijão/arroz integral\\nCupim ao molho ferrugem\\nJardineira de legumes\\nSalada de rúcula\\nOpcional: torta de PVT\\nPêssego em calda/refresco",
+        "menu": "Arroz/feijão/arroz integral\nCupim ao molho ferrugem\nJardineira de legumes\nSalada de rúcula\nOpcional: torta de PVT\nPêssego em calda/refresco",
         "calories": 1035
       },
       "lunch": {
-        "menu": "Arroz/feijão/arroz integral\\nBife de caçarola\\nPurê de batata\\nSalada de alface\\nOpcional: almôndega de PVT\\nMaçã/refresco",
+        "menu": "Arroz/feijão/arroz integral\nBife de caçarola\nPurê de batata\nSalada de alface\nOpcional: almôndega de PVT\nMaçã/refresco",
         "calories": 875
       },
       "date": "21/05/2014"
     },
     {
       "dinner": {
-        "menu": "Arroz/feijão/arroz integral\\nCopa lombo assado\\nLegumes mistos\\nSalada de escatola\\nOpcional: almôndega de PVT\\nLaranja/refresco",
+        "menu": "Arroz/feijão/arroz integral\nCopa lombo assado\nLegumes mistos\nSalada de escatola\nOpcional: almôndega de PVT\nLaranja/refresco",
         "calories": 1000
       },
       "lunch": {
-        "menu": "Arroz/feijão/arroz integral\\nHamburger ao molho americano\\nBatata palha\\nSalada de alface\\nOpcional: PVT com milho\\nMexerica/refresco",
+        "menu": "Arroz/feijão/arroz integral\nHamburger ao molho americano\nBatata palha\nSalada de alface\nOpcional: PVT com milho\nMexerica/refresco",
         "calories": 1000
       },
       "date": "22/05/2014"
     },
     {
       "dinner": {
-        "menu": "Arroz/feijão/arroz integral\\nOvo frito\\nAbobrinha com tomate\\nSalada de acelga\\nOpcional: PVT com cogumelo\\nMaçã/refresco",
+        "menu": "Arroz/feijão/arroz integral\nOvo frito\nAbobrinha com tomate\nSalada de acelga\nOpcional: PVT com cogumelo\nMaçã/refresco",
         "calories": 780
       },
       "lunch": {
-        "menu": "Arroz/feijão/arroz integral\\nBife de caçarola\\nBerinjela com queijo\\nSalada de mostarda\\nOpcional: PVT com vagem\\nGelatina/refresco",
+        "menu": "Arroz/feijão/arroz integral\nBife de caçarola\nBerinjela com queijo\nSalada de mostarda\nOpcional: PVT com vagem\nGelatina/refresco",
         "calories": 905
       },
       "date": "23/05/2014"
     },
     {
       "lunch": {
-        "menu": "Arroz/feijão/arroz integral\\nCarne assada\\nAbóbora refogada\\nSalada de escarola\\nOpcional: hambúrguer PVT\\nBanana/refresco",
+        "menu": "Arroz/feijão/arroz integral\nCarne assada\nAbóbora refogada\nSalada de escarola\nOpcional: hambúrguer PVT\nBanana/refresco",
         "calories": 840
       },
       "date": "24/05/2014"
     },
     {
       "lunch": {
-        "menu": "Arroz/feijão/arroz integral\\nFrango assado\\nMacarrão ao sugo\\nSalada coroada (cenoura/maçã/uva passa/rabanete)\\nSalada de agrião com molho de laranja\\nOpcional: PVT com couve-flor\\nMelancia ou pavê de pêssego/refresco",
+        "menu": "Arroz/feijão/arroz integral\nFrango assado\nMacarrão ao sugo\nSalada coroada (cenoura/maçã/uva passa/rabanete)\nSalada de agrião com molho de laranja\nOpcional: PVT com couve-flor\nMelancia ou pavê de pêssego/refresco",
         "calories": 965
       },
       "date": "25/05/2014"

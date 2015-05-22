@@ -12,7 +12,12 @@
 #import "WeeklyPeriod.h"
 #import "Cash.h"
 #import "Items.h"
+#import "DataModel.h"
+
+
 @interface InfoViewController ()
+
+@property (nonatomic, strong) DataModel *dataModel;
 
 @end
 
@@ -31,8 +36,8 @@
   [super viewDidLoad];
   // Do any additional setup after loading the view.
   self.tableView.allowsSelection = NO;
-    
-  self.dataModel = [MenuDataModel getInstance];
+  
+  _dataModel = [DataModel getInstance];
 }
 
 
@@ -40,18 +45,43 @@
   [super viewDidAppear:YES];
   self.dataModel.date = @"23/05/2014"; // segunda feira da semana corrente
   
-  for (id campus in [self.dataModel restaurantsByCampus]){
+  for (id campus in [self.dataModel getRestaurants]){
     if ([[campus valueForKey:@"name"] isEqualToString:[[self.dataModel campus] valueForKey:@"name"]]){
       for (id restaurant in [campus valueForKey:@"restaurants"]) {
-        if ([[restaurant valueForKey:@"name"] isEqualToString:[self.dataModel restaurantName]]){
+        NSString *name = [restaurant valueForKey:@"name"];
+        name = [name stringByReplacingOccurrencesOfString:@"Restaurante da " withString:@""];
+        name = [name stringByReplacingOccurrencesOfString:@"Restaurante " withString:@""];
+        if ([name isEqualToString:[self.dataModel restaurantName]]){
           _restaurant = restaurant;
+          [self setTitle:@"Informações gerais"];
         }
       }
     }
   }
-  _restImage.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[_restaurant valueForKey:@"photourl"]]]];
-  _address.text = [NSString stringWithFormat:@"%@", [_restaurant valueForKey:@"address"]];
   
+  _restImage.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[_restaurant valueForKey:@"photourl"]]]];
+  
+  [_restaurantName setText: [_restaurant valueForKey:@"name"]];
+  [_restaurantName setNumberOfLines:0];
+  [_restaurantName setBackgroundColor:[UIColor clearColor]];
+  [_restaurantName setTextColor:[UIColor whiteColor]];
+  [_restaurantName setFont:[UIFont systemFontOfSize:14]];
+  [_restaurantName setShadowColor:[UIColor blackColor]];
+  [_restaurantName setShadowOffset:CGSizeMake(1, 1)];
+  [_restaurantName setTextAlignment:NSTextAlignmentCenter];
+
+  [_restaurantNameOverlay setText: [_restaurant valueForKey:@"name"]];
+  [_restaurantNameOverlay setNumberOfLines:0];
+  [_restaurantNameOverlay setBackgroundColor:[UIColor clearColor]];
+  [_restaurantNameOverlay setTextColor:[UIColor blackColor]];
+  [_restaurantNameOverlay setFont:[UIFont systemFontOfSize:14]];
+  [_restaurantNameOverlay setShadowColor:[UIColor blackColor]];
+  [_restaurantNameOverlay setShadowOffset:CGSizeMake(1, 1)];
+  [_restaurantNameOverlay setAlpha:0.4];
+  [_restaurantNameOverlay setTextAlignment:NSTextAlignmentCenter];
+  
+  
+  _address.text = [NSString stringWithFormat:@"%@", [_restaurant valueForKey:@"address"]];
   
   //telefone
   NSMutableString *telephones = [[NSMutableString alloc] init];

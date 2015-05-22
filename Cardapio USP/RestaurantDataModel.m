@@ -20,7 +20,7 @@
 
 @implementation RestaurantDataModel
 
-@synthesize restaurant = _restaurant;
+@synthesize restaurantName_ = _restaurant;
 @synthesize campusOption = _campusOption;
 @synthesize restaurantOption = _restaurantOption;
 

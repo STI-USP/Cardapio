@@ -10,6 +10,7 @@
 #import "MainViewController.h"
 #import "RestaurantDataModel.h"
 #import "MenuDataModel.h"
+#import "DataModel.h"
 
 @interface SelectorViewController () {
   NSMutableArray *campiList;
@@ -17,7 +18,7 @@
   NSMutableArray      *arrayForBool;
   RestaurantDataModel *restaurantDataModel;
   NSInteger oldFilterOption;
-  MenuDataModel *dataModel;
+  DataModel *dataModel;
 
 
 }
@@ -37,11 +38,11 @@
 -(void) viewDidLoad {
   [super viewDidLoad];
   
-  dataModel = [MenuDataModel getInstance];
+  dataModel = [DataModel getInstance];
 
   
     if (!campiList) {
-      for (id campus in dataModel.restaurantsByCampus){
+      for (id campus in [dataModel getRestaurants]){
         [dataModel setRestaurantName:[campus valueForKey:@"name"]];
         [campiList addObject:campus];
       }
@@ -167,7 +168,7 @@
     oldFilterOption = indexPath.row; // salva como opção anterior
     [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark; // marca a nova
     [tableView cellForRowAtIndexPath:oldFilterOptionIndexPath].accessoryType = UITableViewCellAccessoryNone; //tira a marca da anterior
-    [[RestaurantDataModel getInstance] setRestaurant:selectedRestaurant];
+    [dataModel setRestaurantName:selectedRestaurant];
     NSLog(@"%@", selectedRestaurant);
   }
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];

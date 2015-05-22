@@ -1,34 +1,44 @@
 //
-//  MenuDataModel.h
+//  DataModel.h
 //  Cardapio USP
 //
-//  Created by Alessandro Souzadidier on 10/06/14.
-//  Copyright (c) 2014 EPUSP. All rights reserved.
+//  Created by Vagner Machado on 5/21/15.
+//  Copyright (c) 2015 EPUSP. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
+#import "MenuDataModel.h"
+#import "RestaurantDataModel.h"
 #import "Restaurant.h"
 #import "Menu.h"
-#import "Cash.h"  
+#import "Cash.h"
 
-@interface MenuDataModel : NSObject
+
+@interface DataModel : NSObject
 
 @property (nonatomic, strong) Menu *menu;
 @property (nonatomic, strong) Restaurant *restaurant;
 @property (nonatomic, strong) Restaurant *defaulRestaurant;
 @property (nonatomic, strong) Cash *cash;
+@property (nonatomic, strong) NSDictionary *currentRestaurant;
+@property (nonatomic, strong) NSDictionary *preferedRestaurant;
 @property (nonatomic, strong) NSMutableArray *menus;
 @property (nonatomic, strong) NSMutableArray *restaurantsByCampus;
 @property (nonatomic, strong) NSArray *diasDaSemana;
-  
+
 @property (nonatomic, strong) NSString *restaurantId;
 @property (nonatomic, strong) NSString *restaurantName;
 @property (nonatomic, strong) NSMutableDictionary *campus;
 @property (nonatomic, strong) NSString *date;
 
-/**
- * Inicializaçao do objeto, singleton
- */
-+ (MenuDataModel *) getInstance;
+@property (nonatomic) NSInteger campusOption;
+@property (nonatomic) NSInteger restaurantOption;
+
+
+
+
++ (DataModel *) getInstance;
+- (NSMutableArray *)getMenu;
+- (NSMutableArray *)getRestaurants;
 
 @end

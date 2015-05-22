@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="nfj-X3-ADh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="nfj-X3-ADh">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <scenes>
         <!--Restaurante Central-->
@@ -242,7 +242,7 @@
             </objects>
             <point key="canvasLocation" x="427" y="-598"/>
         </scene>
-        <!--Restaurante Central-->
+        <!--Informações gerais-->
         <scene sceneID="YGb-cD-IDQ">
             <objects>
                 <tableViewController id="d1C-D8-OLv" customClass="InfoViewController" sceneMemberID="viewController">
@@ -251,7 +251,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <sections>
-                            <tableViewSection headerTitle="Informações Gerais" id="c89-4m-oiV">
+                            <tableViewSection headerTitle="" id="c89-4m-oiV">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="162" id="cpu-4o-gY4">
                                         <rect key="frame" x="0.0" y="86" width="320" height="162"/>
@@ -266,6 +266,20 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="mapa.png" translatesAutoresizingMaskIntoConstraints="NO" id="VyW-rh-gRa">
                                                     <rect key="frame" x="220" y="81" width="80" height="80"/>
                                                 </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Shadow" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gx2-nu-ylo">
+                                                    <rect key="frame" x="9" y="9" width="304" height="21"/>
+                                                    <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0NC-dL-O6O">
+                                                    <rect key="frame" x="8" y="8" width="304" height="21"/>
+                                                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -403,22 +417,6 @@ Almoço: 12h00 as 14h15</string>
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="44" id="yco-Lq-pZy">
-                                        <rect key="frame" x="0.0" y="770" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yco-Lq-pZy" id="I83-hH-IKO">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mw0-pN-gQP">
-                                                    <rect key="frame" x="101" y="7" width="118" height="30"/>
-                                                    <state key="normal" title="Mostrar cardápio">
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                </button>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -427,7 +425,7 @@ Almoço: 12h00 as 14h15</string>
                             <outlet property="delegate" destination="d1C-D8-OLv" id="2of-N8-t5m"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Restaurante Central" id="5GX-rk-GSh">
+                    <navigationItem key="navigationItem" title="Informações gerais" id="5GX-rk-GSh">
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="792-6f-xep">
                             <connections>
                                 <action selector="doneButtonTapped:" destination="d1C-D8-OLv" id="0Ma-CK-Cne"/>
@@ -443,6 +441,8 @@ Almoço: 12h00 as 14h15</string>
                         <outlet property="priceItens" destination="l4a-Pm-ZJe" id="bQO-cU-tGm"/>
                         <outlet property="restImage" destination="vYM-fq-MRu" id="y0w-ln-xQm"/>
                         <outlet property="restMap" destination="VyW-rh-gRa" id="sGp-Lv-qNo"/>
+                        <outlet property="restaurantName" destination="0NC-dL-O6O" id="AmB-rz-Nju"/>
+                        <outlet property="restaurantNameOverlay" destination="gx2-nu-ylo" id="dyU-YS-e1Y"/>
                         <outlet property="weeklyperiod" destination="XBP-hC-DKQ" id="LCq-wy-Ioq"/>
                         <outlet property="workinghours" destination="MTf-99-ph8" id="wcu-ax-Vbj"/>
                     </connections>

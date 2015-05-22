@@ -9,13 +9,15 @@
 #import "RestaurantsFilterController.h"
 #import "RestaurantDataModel.h"
 #import "MenuDataModel.h"
+#import "DataModel.h"
 
 @interface RestaurantsFilterController () {
   NSMutableArray *restaurantList;
   NSMutableArray *campiList;
   NSMutableDictionary *restaurantDict;
-  RestaurantDataModel *restaurantDataModel;
-  MenuDataModel *dataModel;
+  RestaurantDataModel *_restaurantDataModel;
+  MenuDataModel *_menuDataModel;
+  DataModel *dataModel;
   NSInteger oldCampusOption;
   NSInteger oldRestaurantOption;
 }
@@ -33,14 +35,13 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
   [self setTitle:@"Restaurantes"];
-  restaurantDataModel = [RestaurantDataModel getInstance];
-  
-  dataModel = [MenuDataModel getInstance];
-  
+  //restaurantDataModel = [RestaurantDataModel getInstance];
+  //menuDataModel = [MenuDataModel getInstance];
+  dataModel = [DataModel getInstance];
   
   if (!campiList) {
     campiList = [[NSMutableArray alloc] init];
-    for (id campus in [dataModel restaurantsByCampus]){
+    for (id campus in [dataModel getRestaurants]){
       [dataModel setRestaurantName:[campus objectForKey:@"name"]];
       [campiList addObject:campus];
     }
@@ -67,7 +68,7 @@
   // Filter Option
   //oldCampusOption = [restaurantDataModel campusOption]; // pega o filtro de campus que está setado no modelo
   //oldRestaurantOption = [restaurantDataModel restaurantOption]; // pega o filtro de restaurante que está setado no modelo
-  NSIndexPath *oldFilterOptionIndexPath = [NSIndexPath indexPathForRow:[restaurantDataModel restaurantOption] inSection:[restaurantDataModel campusOption]];
+  NSIndexPath *oldFilterOptionIndexPath = [NSIndexPath indexPathForRow:[dataModel restaurantOption] inSection:[dataModel campusOption]];
   [[self.tableView cellForRowAtIndexPath:oldFilterOptionIndexPath] setAccessoryType: UITableViewCellAccessoryCheckmark];
 }
 
@@ -84,8 +85,8 @@
   
   NSIndexPath *oldFilterOptionIndexPath = [NSIndexPath indexPathForRow:oldRestaurantOption inSection:oldCampusOption];
   //if ((oldFilterOptionIndexPath.row != indexPath.row) || (oldFilterOptionIndexPath.section != indexPath.section)) {
-    restaurantDataModel.restaurantOption = indexPath.row; // salva como nova opção
-    restaurantDataModel.campusOption = indexPath.section;
+    dataModel.restaurantOption = indexPath.row; // salva como nova opção
+    dataModel.campusOption = indexPath.section;
     oldCampusOption = indexPath.section; // salva como opção anterior
     oldRestaurantOption = indexPath.row; // salva como opção anterior
     [tableView cellForRowAtIndexPath:oldFilterOptionIndexPath].accessoryType = UITableViewCellAccessoryNone;
@@ -94,7 +95,14 @@
 
   [dataModel setCampus:[campiList objectAtIndex:indexPath.section]];
   [dataModel setRestaurantId:[[[[campiList objectAtIndex:indexPath.section] valueForKey:@"restaurants"]objectAtIndex:indexPath.row] valueForKey:@"id"]];
-  [dataModel setRestaurantName:[[[[campiList objectAtIndex:indexPath.section] valueForKey:@"restaurants"]objectAtIndex:indexPath.row] valueForKey:@"name"]];
+  
+  NSString *name = [[[[campiList objectAtIndex:indexPath.section] valueForKey:@"restaurants"]objectAtIndex:indexPath.row] valueForKey:@"name"];
+  name = [name stringByReplacingOccurrencesOfString:@"Restaurante da " withString:@""];
+  name = [name stringByReplacingOccurrencesOfString:@"Restaurante " withString:@""];
+  [dataModel setRestaurantName:name];
+
+  [[NSNotificationCenter defaultCenter] postNotificationName:@"DidChangeRestaurant" object:self];
+
   
   //}
   [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -112,7 +120,11 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FilterCell" forIndexPath:indexPath];
   
-  cell.textLabel.text = [[[[campiList objectAtIndex:indexPath.section] valueForKey:@"restaurants"]objectAtIndex:indexPath.row] valueForKey:@"alias"];
+  NSString *name = [[[[campiList objectAtIndex:indexPath.section] valueForKey:@"restaurants"]objectAtIndex:indexPath.row] valueForKey:@"name"];
+  name = [name stringByReplacingOccurrencesOfString:@"Restaurante da " withString:@""];
+  name = [name stringByReplacingOccurrencesOfString:@"Restaurante " withString:@""];
+  cell.textLabel.text = name;
+  
   return cell;
 }
 

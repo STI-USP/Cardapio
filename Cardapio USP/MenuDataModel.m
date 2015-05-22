@@ -7,6 +7,7 @@
 //
 
 #import "MenuDataModel.h"
+#import "DataModel.h"
 #import "Period.h"
 #import "WeeklyPeriod.h"
 #import "Items.h"
@@ -15,6 +16,9 @@
 
 #define kRestaurantsURL @"http://kaimbu2.uspnet.usp.br:8080/cardapio/"
 #define kBaseURL @"http://kaimbu2.uspnet.usp.br:8080/"
+
+#define kBaseDevSTIURL @"https://dev.uspdigital.usp.br/rucard/servicos/"
+#define kBaseSTIURL @"https://uspdigital.usp.br/rucard/servicos/"
 
 @implementation MenuDataModel
    
@@ -26,7 +30,15 @@
 {
     static MenuDataModel *instancia = nil;
     static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{ instancia = [[MenuDataModel alloc] init]; });
+    dispatch_once(&onceToken, ^{
+      instancia = [[MenuDataModel alloc] init];
+      //instancia.restaurantId = @"10";
+      //instancia.restaurantName = @"Central";
+      //instancia.campus = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"CUASO", nil]
+        //                                                    forKeys:[NSArray arrayWithObjects:@"name", nil]];
+    });
+  
+  
     return instancia;
 }
 
@@ -47,14 +59,13 @@
     return json;
 }
 
-
 /**
  *  Obtem a lista de menus relacionados a um restaurante, formato REST JSON
  *
  */
 - (NSMutableArray *)menus {
   NSMutableArray *json = [self iniciar_JSONBinding:
-                          [NSString stringWithFormat:@"%@%@.json", kRestaurantsURL, [[RestaurantDataModel getInstance] restaurant]]];
+                          [NSString stringWithFormat:@"%@%@.json", kRestaurantsURL, [[DataModel getInstance] restaurant]]];
   _menus = [[NSMutableArray alloc] init];
   
   if (!json) {
@@ -132,7 +143,7 @@
 
   //read from file
   NSError *error;
-  NSString *strFileContent = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource: @"restaurantsJson" ofType: @"json"] encoding:NSUTF8StringEncoding error:&error];
+  NSString *strFileContent = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource: @"restaurants" ofType: @"json"] encoding:NSUTF8StringEncoding error:&error];
   
   if (!error) {
     
