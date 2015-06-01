@@ -48,12 +48,7 @@ static MenuStub *instancia = nil;
     return json;
 }
 
-/**
- *  Obtem a lista de menus relacionados a um restaurante, formato REST JSON
- *  param _restaurant
- */
-- (NSMutableArray *) loadMenus:(NSString *) _restaurant;
-{
+- (NSMutableArray *) loadMenus:(NSString *)restaurant; {
     NSMutableArray *json = [self iniciar_JSONBinding:@"http://kaimbu.uspnet.usp.br:8080/cardapio/central.json"];
     menus = [[NSMutableArray alloc] init];
     if (!json) {
@@ -83,41 +78,26 @@ static MenuStub *instancia = nil;
  *  param _menus
  *  param _date
  */
-- (Menu *) loadMenu:(NSMutableArray *) _menus Date:(NSString *)_date
-{
+- (Menu *) loadMenu:(NSMutableArray *)menusArray Date:(NSString *)date {
     Menu *menudate;
-    for (Menu *m in _menus) {
-        if ([[m date] isEqualToString:_date]) {
+    for (Menu *m in menusArray)
+        if ([[m date] isEqualToString:date])
             menudate = m;
-        }
-    }
-    return menudate;
+
+  return menudate;
 }
 
 
-/**
- *  Obtem restaurante, com informacoes a partir de um campi, formato REST JSON
- *  param _campi
- *  param _restaurant
- */
-- (Restaurant *) loadRestaurantInformation:(NSString *)_campi Restaurant:(NSString *)_restaurant
-{
+- (Restaurant *) loadRestaurantInformation:(NSString *)campus Restaurant:(NSString *)restaurant {
     Restaurant *res;
-    for (Restaurant *r in [self loadRestaurantsInformation:_campi]) {
-        if ([[r title] isEqualToString:_restaurant]) {
+    for (Restaurant *r in [self loadRestaurantsInformation:campus])
+        if ([[r title] isEqualToString:restaurant])
             res = r;
-        }
-    }  
-    return res;
+
+  return res;
 }
 
-
-/**
- *  Obtem uma lista de restaurantes, com informacoes de cada um a partir de um campi, formato REST JSON
- *  param _campi
- */
-- (NSMutableArray *) loadRestaurantsInformation:(NSString *)_campi
-{
+- (NSMutableArray *) loadRestaurantsInformation:(NSString *)campi {
     restaurants = [[NSMutableArray alloc] init];
     // Mapeamento de NSData para NSMutableArray
     NSDictionary *json = (NSDictionary *) [self iniciar_JSONBinding:@"http://kaimbu.uspnet.usp.br:8080/cardapio/restaurantes.json"];
@@ -127,7 +107,7 @@ static MenuStub *instancia = nil;
         NSLog(@"Error parsing JSON: %@", nil);
     } else
     {
-        for(NSDictionary *item in json[_campi]) {
+        for(NSDictionary *item in json[campi]) {
             NSMutableArray *wpitems = [[NSMutableArray alloc] init];
             for(NSDictionary *wp in [item objectForKey:@"weeklyperiod"])
             {

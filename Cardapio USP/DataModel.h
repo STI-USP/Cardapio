@@ -16,14 +16,15 @@
 
 @interface DataModel : NSObject
 
+@property (nonatomic, strong) NSMutableArray *menuArray;
 @property (nonatomic, strong) Menu *menu;
 @property (nonatomic, strong) Restaurant *restaurant;
-@property (nonatomic, strong) Restaurant *defaulRestaurant;
 @property (nonatomic, strong) Cash *cash;
+@property (nonatomic, strong) NSDictionary *defaulRestaurant;
 @property (nonatomic, strong) NSDictionary *currentRestaurant;
 @property (nonatomic, strong) NSDictionary *preferedRestaurant;
 @property (nonatomic, strong) NSMutableArray *menus;
-@property (nonatomic, strong) NSMutableArray *restaurantsByCampus;
+@property (nonatomic, strong) NSMutableArray *restaurants;
 @property (nonatomic, strong) NSArray *diasDaSemana;
 
 @property (nonatomic, strong) NSString *restaurantId;
@@ -34,11 +35,9 @@
 @property (nonatomic) NSInteger campusOption;
 @property (nonatomic) NSInteger restaurantOption;
 
-
-
-
 + (DataModel *) getInstance;
-- (NSMutableArray *)getMenu;
-- (NSMutableArray *)getRestaurants;
+- (void)getMenu;
+- (void)getRestaurants;
+- (void)setDefault;
 
 @end

@@ -17,9 +17,9 @@
 
 @interface InfoViewController ()
 
-@property (nonatomic, strong) DataModel *dataModel;
-
 @end
+
+DataModel *dataModel;
 
 @implementation InfoViewController
 
@@ -36,132 +36,22 @@
   [super viewDidLoad];
   // Do any additional setup after loading the view.
   self.tableView.allowsSelection = NO;
-  
-  _dataModel = [DataModel getInstance];
+
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveRestaurants) name:@"DidReceiveRestaurants" object:nil];
+
+  dataModel = [DataModel getInstance];
 }
 
 
 -(void)viewWillAppear:(BOOL)animated {
   [super viewDidAppear:YES];
-  self.dataModel.date = @"23/05/2014"; // segunda feira da semana corrente
+  dataModel.date = @"23/05/2014"; // segunda feira da semana corrente
   
-  for (id campus in [self.dataModel getRestaurants]){
-    if ([[campus valueForKey:@"name"] isEqualToString:[[self.dataModel campus] valueForKey:@"name"]]){
-      for (id restaurant in [campus valueForKey:@"restaurants"]) {
-        NSString *name = [restaurant valueForKey:@"name"];
-        name = [name stringByReplacingOccurrencesOfString:@"Restaurante da " withString:@""];
-        name = [name stringByReplacingOccurrencesOfString:@"Restaurante " withString:@""];
-        if ([name isEqualToString:[self.dataModel restaurantName]]){
-          _restaurant = restaurant;
-          [self setTitle:@"Informações gerais"];
-        }
-      }
-    }
+  if ([[dataModel restaurants] count] == 0) {
+    [dataModel getRestaurants];
+  } else {
+    [self setupView];
   }
-  
-  _restImage.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[_restaurant valueForKey:@"photourl"]]]];
-  
-  [_restaurantName setText: [_restaurant valueForKey:@"name"]];
-  [_restaurantName setNumberOfLines:0];
-  [_restaurantName setBackgroundColor:[UIColor clearColor]];
-  [_restaurantName setTextColor:[UIColor whiteColor]];
-  [_restaurantName setFont:[UIFont systemFontOfSize:14]];
-  [_restaurantName setShadowColor:[UIColor blackColor]];
-  [_restaurantName setShadowOffset:CGSizeMake(1, 1)];
-  [_restaurantName setTextAlignment:NSTextAlignmentCenter];
-
-  [_restaurantNameOverlay setText: [_restaurant valueForKey:@"name"]];
-  [_restaurantNameOverlay setNumberOfLines:0];
-  [_restaurantNameOverlay setBackgroundColor:[UIColor clearColor]];
-  [_restaurantNameOverlay setTextColor:[UIColor blackColor]];
-  [_restaurantNameOverlay setFont:[UIFont systemFontOfSize:14]];
-  [_restaurantNameOverlay setShadowColor:[UIColor blackColor]];
-  [_restaurantNameOverlay setShadowOffset:CGSizeMake(1, 1)];
-  [_restaurantNameOverlay setAlpha:0.4];
-  [_restaurantNameOverlay setTextAlignment:NSTextAlignmentCenter];
-  
-  
-  _address.text = [NSString stringWithFormat:@"%@", [_restaurant valueForKey:@"address"]];
-  
-  //telefone
-  NSMutableString *telephones = [[NSMutableString alloc] init];
-  for (NSString *t in [_restaurant valueForKey:@"phones"]) {
-    [telephones appendString:[NSString stringWithFormat:@"%@\n", t]];
-  }
-  if (telephones.length >=1 ) { // se tiver mais de um caracater no string vai ter um \n no final
-    [telephones deleteCharactersInRange:NSMakeRange(telephones.length - 1, 1)]; // retira último \n
-  }
-  _phone.text = telephones;
-    
-  //horario de funcionamento
-  NSMutableString *workingHours = [[NSMutableString alloc] init];
-  
-  //dia de semana
-  [workingHours appendString:@"Segundas as sextas-feiras \n"];
-  //café da manha
-  NSString *weekdayBreakfest = [[[_restaurant valueForKey:@"workinghours"] valueForKey:@"weekdays"]valueForKey:@"breakfest"];
-  if (weekdayBreakfest) {
-    [workingHours appendString:[NSString stringWithFormat:@"Café da manhã: %@\n", weekdayBreakfest]];
-  }
-
-  //almoço
-  NSString *weekdayLunch = [[[_restaurant valueForKey:@"workinghours"] valueForKey:@"weekdays"]valueForKey:@"lunch"];
-  if (weekdayLunch) {
-    [workingHours appendString:[NSString stringWithFormat:@"Almoço: %@\n", weekdayLunch]];
-  }
-
-  //janta
-  NSString *weekdayDinner = [[[_restaurant valueForKey:@"workinghours"] valueForKey:@"weekdays"]valueForKey:@"dinner"];
-  if (weekdayDinner) {
-    [workingHours appendString:[NSString stringWithFormat:@"Jantar: %@\n", weekdayDinner]];
-  }
-
-  //sabado
-  [workingHours appendString:@"\nSábados \n"];
-  //cafe da manha
-  NSString *saturdayBreakfest = [[[_restaurant valueForKey:@"workinghours"] valueForKey:@"saturday"]valueForKey:@"breakfest"];
-  if (saturdayBreakfest) {
-    [workingHours appendString:[NSString stringWithFormat:@"Café da manhã: %@\n", saturdayBreakfest]];
-  }
-
-  //almoço
-  NSString *saturdayLunch = [[[_restaurant valueForKey:@"workinghours"] valueForKey:@"saturday"]valueForKey:@"lunch"];
-  if (saturdayLunch) {
-    [workingHours appendString:[NSString stringWithFormat:@"Almoço: %@\n", saturdayLunch]];
-  }
-
-  //domingo
-  [workingHours appendString:@"\nDomingos \n"];
-  //cafe da manha
-  NSString *sundayBreakfest = [[[_restaurant valueForKey:@"workinghours"] valueForKey:@"sunday"]valueForKey:@"breakfest"];
-  if (sundayBreakfest) {
-    [workingHours appendString:[NSString stringWithFormat:@"Café da manhã: %@\n", sundayBreakfest]];
-  }
-  
-  //almoço
-  NSString *sundayLunch = [[[_restaurant valueForKey:@"workinghours"] valueForKey:@"sunday"]valueForKey:@"lunch"];
-  if (sundayLunch) {
-    [workingHours appendString:[NSString stringWithFormat:@"Almoço: %@\n", sundayLunch]];
-  }
-  
-  _weeklyperiod.text = workingHours;
-
-
-  /*
-    /
-       Informacoes de preco
-     /
-    Cash *cash = [_model cash];
-//    NSLog(@"CASH %@ ",[cash workinghours]);
-    _workinghours.text = [NSString stringWithFormat:@"%@", [cash workinghours]];
-    NSString *i = @"";
-    for (Items *item in [cash items]) {
-        i = [i stringByAppendingString:[NSString stringWithFormat:@"%@: %@\n", [item category], [item price]]];
-    }   
-    _priceItens.text = i;
-     */
-  _priceItens.text = @"";
-
 }
 
 
@@ -171,18 +61,119 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
+- (void)setupView{
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+  [self setTitle:@"Informações gerais"];
+
+  _restaurantDc = [dataModel currentRestaurant];
+  
+  _restImage.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[_restaurantDc valueForKey:@"photourl"]]]];
+  
+  [_restaurantName setText: [_restaurantDc valueForKey:@"name"]];
+  [_restaurantName setNumberOfLines:0];
+  [_restaurantName setBackgroundColor:[UIColor clearColor]];
+  [_restaurantName setTextColor:[UIColor whiteColor]];
+  [_restaurantName setFont:[UIFont systemFontOfSize:14]];
+  [_restaurantName setShadowColor:[UIColor blackColor]];
+  [_restaurantName setShadowOffset:CGSizeMake(1, 1)];
+  [_restaurantName setTextAlignment:NSTextAlignmentCenter];
+  
+  [_restaurantNameOverlay setText: [_restaurantDc valueForKey:@"name"]];
+  [_restaurantNameOverlay setNumberOfLines:0];
+  [_restaurantNameOverlay setBackgroundColor:[UIColor clearColor]];
+  [_restaurantNameOverlay setTextColor:[UIColor blackColor]];
+  [_restaurantNameOverlay setFont:[UIFont systemFontOfSize:14]];
+  [_restaurantNameOverlay setShadowColor:[UIColor blackColor]];
+  [_restaurantNameOverlay setShadowOffset:CGSizeMake(1, 1)];
+  [_restaurantNameOverlay setAlpha:0.4];
+  [_restaurantNameOverlay setTextAlignment:NSTextAlignmentCenter];
+  
+  _address.text = [NSString stringWithFormat:@"%@", [_restaurantDc valueForKey:@"address"]];
+  
+  //telefone
+  NSMutableString *telephones = [[NSMutableString alloc] init];
+  for (NSString *t in [_restaurantDc valueForKey:@"phones"]) {
+    [telephones appendString:[NSString stringWithFormat:@"%@\n", t]];
+  }
+  if (telephones.length >=1 ) { // se tiver mais de um caracater no string vai ter um \n no final
+    [telephones deleteCharactersInRange:NSMakeRange(telephones.length - 1, 1)]; // retira último \n
+  }
+  _phone.text = telephones;
+  
+  //horario de funcionamento
+  NSMutableString *workingHours = [[NSMutableString alloc] init];
+  
+  //dia de semana
+  [workingHours appendString:@"Segundas as sextas-feiras \n"];
+  //café da manha
+  NSString *weekdayBreakfest = [[[_restaurantDc valueForKey:@"workinghours"] valueForKey:@"weekdays"]valueForKey:@"breakfest"];
+  if (weekdayBreakfest) {
+    [workingHours appendString:[NSString stringWithFormat:@"Café da manhã: %@\n", weekdayBreakfest]];
+  }
+  
+  //almoço
+  NSString *weekdayLunch = [[[_restaurantDc valueForKey:@"workinghours"] valueForKey:@"weekdays"]valueForKey:@"lunch"];
+  if (weekdayLunch) {
+    [workingHours appendString:[NSString stringWithFormat:@"Almoço: %@\n", weekdayLunch]];
+  }
+  
+  //janta
+  NSString *weekdayDinner = [[[_restaurantDc valueForKey:@"workinghours"] valueForKey:@"weekdays"]valueForKey:@"dinner"];
+  if (weekdayDinner) {
+    [workingHours appendString:[NSString stringWithFormat:@"Jantar: %@\n", weekdayDinner]];
+  }
+  
+  //sabado
+  [workingHours appendString:@"\nSábado \n"];
+  //cafe da manha
+  NSString *saturdayBreakfest = [[[_restaurantDc valueForKey:@"workinghours"] valueForKey:@"saturday"]valueForKey:@"breakfest"];
+  if (saturdayBreakfest) {
+    [workingHours appendString:[NSString stringWithFormat:@"Café da manhã: %@\n", saturdayBreakfest]];
+  }
+  
+  //almoço
+  NSString *saturdayLunch = [[[_restaurantDc valueForKey:@"workinghours"] valueForKey:@"saturday"]valueForKey:@"lunch"];
+  if (saturdayLunch) {
+    [workingHours appendString:[NSString stringWithFormat:@"Almoço: %@\n", saturdayLunch]];
+  }
+  
+  //domingo
+  [workingHours appendString:@"\nDomingo \n"];
+  //cafe da manha
+  NSString *sundayBreakfest = [[[_restaurantDc valueForKey:@"workinghours"] valueForKey:@"sunday"]valueForKey:@"breakfest"];
+  if (sundayBreakfest) {
+    [workingHours appendString:[NSString stringWithFormat:@"Café da manhã: %@\n", sundayBreakfest]];
+  }
+  
+  //almoço
+  NSString *sundayLunch = [[[_restaurantDc valueForKey:@"workinghours"] valueForKey:@"sunday"]valueForKey:@"lunch"];
+  if (sundayLunch) {
+    [workingHours appendString:[NSString stringWithFormat:@"Almoço: %@\n", sundayLunch]];
+  }
+  
+  _weeklyperiod.text = workingHours;
+  
+  /*
+   Cash *cash = [_model cash];
+   NSLog(@"CASH %@ ",[cash workinghours]);
+   _workinghours.text = [NSString stringWithFormat:@"%@", [cash workinghours]];
+   NSString *i = @"";
+   for (Items *item in [cash items]) {
+   i = [i stringByAppendingString:[NSString stringWithFormat:@"%@: %@\n", [item category], [item price]]];
+   }
+   _priceItens.text = i;
+   */
+  _priceItens.text = @"";
+  
+  [self reloadInputViews];
 }
-*/
 
 - (void)doneButtonTapped:(id)sender {
   [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+- (void)didReceiveRestaurants{
+  [self setupView];
+}
+
 @end

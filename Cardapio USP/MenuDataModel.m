@@ -59,10 +59,6 @@
     return json;
 }
 
-/**
- *  Obtem a lista de menus relacionados a um restaurante, formato REST JSON
- *
- */
 - (NSMutableArray *)menus {
   NSMutableArray *json = [self iniciar_JSONBinding:
                           [NSString stringWithFormat:@"%@%@.json", kRestaurantsURL, [[DataModel getInstance] restaurant]]];
@@ -102,42 +98,25 @@
   return _menus;
 }
 
-/**
- *  Obtem um cardapio a partir de uma data especificada, formato REST JSON
- *  param _date
- */
-- (Menu *)menu
-{
+- (Menu *)menu {
     Menu *menudate;
-    for (Menu *m in [self menus]) {
-        if ([[m date] isEqualToString:_date]) {
+    for (Menu *m in [self menus])
+        if ([[m date] isEqualToString:_date])
             menudate = m;
-        }
-    }
-    return menudate;
+
+  return menudate;
 }
 
-/**
- *  Obtem restaurante, com informacoes a partir de um campi, formato REST JSON
- *  param _rest
- */
-- (Restaurant *)restaurant
-{
+- (Restaurant *)restaurant {
     Restaurant *res;
-    for (Restaurant *r in [self restaurantsByCampus]) {
-        if ([[r title] isEqualToString:_restaurantName]) {
+    for (Restaurant *r in [self restaurantsByCampus])
+        if ([[r title] isEqualToString:_restaurantName])
             res = r;
-        }
-    }
-    return res;
+
+          return res;
 }
 
-/**
- *  Obtem uma lista de restaurantes, com informacoes de cada um a partir de um campi, formato REST JSON
- *  param _campi
- */
-- (NSMutableArray *)restaurantsByCampus
-{
+- (NSMutableArray *)restaurantsByCampus {
   
   _restaurantsByCampus = [[NSMutableArray alloc] init];
 
@@ -157,61 +136,9 @@
       NSLog(@"%@", error);
     }
   }
-  
 
   return _restaurantsByCampus;
 
-
-  /*_restaurants = [[NSMutableArray alloc] init];
-
-  AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-  manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-  NSString *webServiceParameters;
-  //webServiceParameters = [NSString stringWithFormat:kRestaurantsURL, @"restaurantes"];
-  webServiceParameters = [NSString stringWithFormat:@"%@restaurantes.json", kRestaurantsURL];
-  NSLog(@"%@", webServiceParameters);
-  //Chamada para a implementação do SIBi
-  [manager GET:webServiceParameters parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-   
-    // Parse da resposta
-    NSMutableDictionary *json = [NSJSONSerialization JSONObjectWithData:responseObject options: NSJSONReadingMutableContainers error: nil];
-    for (id restaurant in [json valueForKey:@"CUASO"]) {
-      [_restaurants addObject:restaurant];
-      NSLog(@"%@", [restaurant valueForKey:@"name"]);
-    }
-   
-  } failure:^(AFHTTPRequestOperation *operation, NSError *error) { // caso tenha dado erro no acesso aos dados
-    NSLog(@"%@", error);
-  }];
-
-  
-  return _restaurants;
-   */
-
-  /*
-    _restaurants = [[NSMutableArray alloc] init];
-    // Mapeamento de NSData para NSMutableArray
-    NSDictionary *json = (NSDictionary *) [self iniciar_JSONBinding: [NSString stringWithFormat:kRestaurantsURL, @"restaurantes"]];
-   
-    if (!json)
-    {
-        NSLog(@"Error parsing JSON: %@", nil);
-    } else {
-        for(NSDictionary *item in [json objectForKey:@"CUASO"]) {
-            NSMutableArray *wpitems = [[NSMutableArray alloc] init];
-            for(NSDictionary *wp in [item objectForKey:@"weeklyperiod"])
-            {
-                //NSLog(@"Horarios : %@ %@ %@ %@", wp[@"period"], wp[@"breakfast"], wp[@"lunch"], wp[@"dinner"]);
-                WeeklyPeriod *weekperiod = [[WeeklyPeriod alloc] initWithWeeklyPeriod:wp[@"period"] andBreakfast:wp[@"breakfast"] andLunch:wp[@"lunch"] andDinner:wp[@"dinner"]];
-                [wpitems addObject:weekperiod];
-            }
-   
-            Restaurant *restaurant = [[Restaurant alloc] initWithId:item[@"id"] andTitle:item[@"title"] andName:item[@"name"] andAddress:item[@"address"] andPhone:item[@"phone"] andLatitude:item[@"latitude"] andLongitude:item[@"longitude"] andPhotoURL:item[@"photourl"] andWeeklyPeriod:wpitems];
-            [_restaurants addObject:restaurant];
-        }
-    }
-    return _restaurants;
-   */
 }
 
 -(Cash *)cash

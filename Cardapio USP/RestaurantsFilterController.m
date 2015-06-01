@@ -29,19 +29,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
   [self setTitle:@"Restaurantes"];
-  //restaurantDataModel = [RestaurantDataModel getInstance];
-  //menuDataModel = [MenuDataModel getInstance];
   dataModel = [DataModel getInstance];
   
   if (!campiList) {
     campiList = [[NSMutableArray alloc] init];
-    for (id campus in [dataModel getRestaurants]){
+    for (id campus in [dataModel restaurants]){
       [dataModel setRestaurantName:[campus objectForKey:@"name"]];
       [campiList addObject:campus];
     }
@@ -66,8 +59,6 @@
 -(void) viewWillAppear:(BOOL) animated {
 
   // Filter Option
-  //oldCampusOption = [restaurantDataModel campusOption]; // pega o filtro de campus que está setado no modelo
-  //oldRestaurantOption = [restaurantDataModel restaurantOption]; // pega o filtro de restaurante que está setado no modelo
   NSIndexPath *oldFilterOptionIndexPath = [NSIndexPath indexPathForRow:[dataModel restaurantOption] inSection:[dataModel campusOption]];
   [[self.tableView cellForRowAtIndexPath:oldFilterOptionIndexPath] setAccessoryType: UITableViewCellAccessoryCheckmark];
 }
@@ -75,41 +66,8 @@
 
 #pragma mark - Table view data source
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-  return [[campiList objectAtIndex:section]valueForKey:@"name"];
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-  
-  //NSString *selectedRestaurant = [[[restaurantDict valueForKey:[restaurantList objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row]valueForKey:@"name"];
-  
-  NSIndexPath *oldFilterOptionIndexPath = [NSIndexPath indexPathForRow:oldRestaurantOption inSection:oldCampusOption];
-  //if ((oldFilterOptionIndexPath.row != indexPath.row) || (oldFilterOptionIndexPath.section != indexPath.section)) {
-    dataModel.restaurantOption = indexPath.row; // salva como nova opção
-    dataModel.campusOption = indexPath.section;
-    oldCampusOption = indexPath.section; // salva como opção anterior
-    oldRestaurantOption = indexPath.row; // salva como opção anterior
-    [tableView cellForRowAtIndexPath:oldFilterOptionIndexPath].accessoryType = UITableViewCellAccessoryNone;
-    [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
-  
-
-  [dataModel setCampus:[campiList objectAtIndex:indexPath.section]];
-  [dataModel setRestaurantId:[[[[campiList objectAtIndex:indexPath.section] valueForKey:@"restaurants"]objectAtIndex:indexPath.row] valueForKey:@"id"]];
-  
-  NSString *name = [[[[campiList objectAtIndex:indexPath.section] valueForKey:@"restaurants"]objectAtIndex:indexPath.row] valueForKey:@"name"];
-  name = [name stringByReplacingOccurrencesOfString:@"Restaurante da " withString:@""];
-  name = [name stringByReplacingOccurrencesOfString:@"Restaurante " withString:@""];
-  [dataModel setRestaurantName:name];
-
-  [[NSNotificationCenter defaultCenter] postNotificationName:@"DidChangeRestaurant" object:self];
-
-  
-  //}
-  [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-}
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [campiList count];
+  return [campiList count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -117,50 +75,39 @@
   
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+  return [[campiList objectAtIndex:section]valueForKey:@"name"];
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FilterCell" forIndexPath:indexPath];
-  
-  NSString *name = [[[[campiList objectAtIndex:indexPath.section] valueForKey:@"restaurants"]objectAtIndex:indexPath.row] valueForKey:@"name"];
-  name = [name stringByReplacingOccurrencesOfString:@"Restaurante da " withString:@""];
-  name = [name stringByReplacingOccurrencesOfString:@"Restaurante " withString:@""];
-  cell.textLabel.text = name;
-  
+
+  cell.textLabel.font = [UIFont systemFontOfSize:14.0];
+  cell.textLabel.text = [[[[campiList objectAtIndex:indexPath.section] valueForKey:@"restaurants"]objectAtIndex:indexPath.row] valueForKey:@"name"];
+ 
+  UIButton *favButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+  favButton.frame = CGRectMake(240.0f, 5.0f, 25.0f, 30.0f);
+  [favButton setImage:[UIImage imageNamed:@"fav.png"] forState:UIControlStateNormal];
+  [favButton setTintColor:[UIColor colorWithWhite:0.7 alpha:0.5]];
+  [favButton addTarget:self action:@selector(favoriteRestaurant:) forControlEvents:UIControlEventTouchUpInside];
+  cell.accessoryView = favButton;
+
   return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+  
+  [dataModel setCampus:[campiList objectAtIndex:indexPath.section]];
+  [dataModel setCurrentRestaurant:[[[campiList objectAtIndex:indexPath.section] valueForKey:@"restaurants"]objectAtIndex:indexPath.row]];
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+  [[NSNotificationCenter defaultCenter] postNotificationName:@"DidChangeRestaurant" object:self];
+  [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
-*/
 
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
+-(void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
+  NSLog(@"favoritar %@", [[[[campiList objectAtIndex:indexPath.section] valueForKey:@"restaurants"]objectAtIndex:indexPath.row]valueForKey:@"name"]);
 }
-*/
 
 /*
 #pragma mark - Navigation
@@ -171,5 +118,19 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (void)favoriteRestaurant:(id)sender {
+
+  NSLog(@"favoritar");
+  /*
+  NSIndexPath *oldFilterOptionIndexPath = [NSIndexPath indexPathForRow:oldRestaurantOption inSection:oldCampusOption];
+  dataModel.restaurantOption = indexPath.row; // salva como nova opção
+  dataModel.campusOption = indexPath.section;
+  oldCampusOption = indexPath.section; // salva como opção anterior
+  oldRestaurantOption = indexPath.row; // salva como opção anterior
+  [tableView cellForRowAtIndexPath:oldFilterOptionIndexPath].accessoryType = UITableViewCellAccessoryNone;
+  [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
+   */
+}
 
 @end

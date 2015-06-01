@@ -39,10 +39,7 @@
   // precisa inicializar o modelo logo no início pois a busca com o scanner é feita antes de carregar a vista
   self = [super initWithCoder:aDecoder];
   if (self) {
-    //restaurantDataModel = [RestaurantDataModel getInstance]; // modelo singleton
-    //menuDataModel = [MenuDataModel getInstance];
-    dataModel = [DataModel getInstance];
-    
+    dataModel = [DataModel getInstance];    
   }
   return self;
 }   
@@ -62,32 +59,18 @@
   NSInteger weekday = [weekdayComponents weekday] - 2; //para deixar a segunda feira como 0
   diaDaSemana = (int)weekday;
   
-  menuArray = [dataModel getMenu];
-  menu = [menuArray objectAtIndex:weekday];
-  
-  [self setupWeekView: menuArray];
-  [self setupDayLabel:diaDaSemana];
-  
-  /*
-   // [jo:140523] Teste JSON
-   NSError *error = nil;
-   NSData *data = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:@"central" ofType:@"json"]];
-   NSMutableArray *array = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
-   if (error)
-   NSLog(@"JSONObjectWithData error: %@", error);
-   
-   for (NSMutableDictionary *dictionary in array) {
-   NSLog(@"%@", dictionary);
-   }
-   */
+  [dataModel getMenu];
   
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChangeRestaurant:) name:@"DidChangeRestaurant" object:nil];
-
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveMenu:) name:@"DidReceiveMenu" object:nil];
+  
   
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-  [self.navigationItem setTitle: [dataModel restaurantName]];
+  NSString *name;
+  name = [[dataModel currentRestaurant]valueForKey:@"name"];
+  [self.navigationItem setTitle: name];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -321,13 +304,21 @@
 #pragma mark - Model
 
 -(void) didChangeRestaurant:(NSNotification *)notification {
-  NSString *name = [dataModel restaurantName];
-  name = [name stringByReplacingOccurrencesOfString:@"Restaurante da " withString:@""];
-  name = [name stringByReplacingOccurrencesOfString:@"Restaurante " withString:@""];
-
-  [self.navigationItem setTitle: name];
+  [dataModel getMenu];
+  [self.navigationItem setTitle: [[dataModel currentRestaurant]valueForKey:@"name"]];
 }
 
+-(void) didReceiveMenu:(NSNotification *)notification {
+
+  menuArray = [dataModel menuArray];
+  menu = [menuArray objectAtIndex:diaDaSemana];
+  
+  [self setupWeekView: menuArray];
+  [self setupDayLabel:diaDaSemana];
+  
+  [self reloadInputViews];
+  [self.tableView reloadData];
+}
 
 
 @end

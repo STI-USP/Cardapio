@@ -40,32 +40,32 @@
   
   dataModel = [DataModel getInstance];
 
-  
-    if (!campiList) {
-      for (id campus in [dataModel getRestaurants]){
-        [dataModel setRestaurantName:[campus valueForKey:@"name"]];
-        [campiList addObject:campus];
-      }
+#warning ;)
+  if (!campiList) {
+    for (id campus in [dataModel restaurants]){
+      [dataModel setRestaurantName:[campus valueForKey:@"name"]];
+      [campiList addObject:campus];
     }
+  }
 
-    if (!arrayForBool) {
-        arrayForBool    = [NSMutableArray arrayWithObjects:[NSNumber numberWithBool:NO],
-                           [NSNumber numberWithBool:NO],
-                           [NSNumber numberWithBool:NO],
-                           [NSNumber numberWithBool:NO],
-                           [NSNumber numberWithBool:NO],
-                           [NSNumber numberWithBool:NO],
-                           [NSNumber numberWithBool:NO] , nil];
-    }
-    if (!restaurantDict) {
+  if (!arrayForBool) {
+      arrayForBool    = [NSMutableArray arrayWithObjects:[NSNumber numberWithBool:NO],
+                          [NSNumber numberWithBool:NO],
+                          [NSNumber numberWithBool:NO],
+                          [NSNumber numberWithBool:NO],
+                          [NSNumber numberWithBool:NO],
+                          [NSNumber numberWithBool:NO],
+                          [NSNumber numberWithBool:NO] , nil];
+  }
+  if (!restaurantDict) {
       
-      restaurantDict  = [[NSMutableDictionary alloc] init];
+    restaurantDict  = [[NSMutableDictionary alloc] init];
       
-      for (int i=0; i<[campiList count]; i++) {
-        NSArray *restArray = [[campiList objectAtIndex:i]valueForKey:@"restaurants"];
-        [restaurantDict setValue:restArray forKey:[campiList objectAtIndex:i]];
-      }
+    for (int i=0; i<[campiList count]; i++) {
+      NSArray *restArray = [[campiList objectAtIndex:i]valueForKey:@"restaurants"];
+      [restaurantDict setValue:restArray forKey:[campiList objectAtIndex:i]];
     }
+  }
 }
 
 -(void) viewWillAppear:(BOOL) animated {
