@@ -15,11 +15,13 @@
 #import "DataModel.h"
 
 
-@interface InfoViewController ()
+@interface InfoViewController () {
+  DataModel *dataModel;
+}
 
 @end
 
-DataModel *dataModel;
+
 
 @implementation InfoViewController
 
@@ -37,16 +39,15 @@ DataModel *dataModel;
   // Do any additional setup after loading the view.
   self.tableView.allowsSelection = NO;
 
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveRestaurants) name:@"DidReceiveRestaurants" object:nil];
-
   dataModel = [DataModel getInstance];
+
+  
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveRestaurants) name:@"DidReceiveRestaurants" object:nil];
 }
 
 
 -(void)viewWillAppear:(BOOL)animated {
   [super viewDidAppear:YES];
-  dataModel.date = @"23/05/2014"; // segunda feira da semana corrente
-  
   if ([[dataModel restaurants] count] == 0) {
     [dataModel getRestaurants];
   } else {
@@ -92,11 +93,16 @@ DataModel *dataModel;
   
   //telefone
   NSMutableString *telephones = [[NSMutableString alloc] init];
-  for (NSString *t in [_restaurantDc valueForKey:@"phones"]) {
-    [telephones appendString:[NSString stringWithFormat:@"%@\n", t]];
-  }
-  if (telephones.length >=1 ) { // se tiver mais de um caracater no string vai ter um \n no final
-    [telephones deleteCharactersInRange:NSMakeRange(telephones.length - 1, 1)]; // retira último \n
+  if ([[_restaurantDc objectForKey:@"phones"] isKindOfClass:[NSString class]]) {
+    telephones = [_restaurantDc valueForKey:@"phones"];
+  } else {
+    for (NSString *tel in [_restaurantDc valueForKey:@"phones"])
+      [telephones appendString:[NSString stringWithFormat:@"%@\n", tel]];
+
+      if (telephones.length >=1 ) { // se tiver mais de um caracater no string vai ter um \n no final
+      [telephones deleteCharactersInRange:NSMakeRange(telephones.length - 1, 1)]; // retira último \n
+    }
+    
   }
   _phone.text = telephones;
   
@@ -174,6 +180,10 @@ DataModel *dataModel;
 
 - (void)didReceiveRestaurants{
   [self setupView];
+}
+
+-(IBAction)setPreferred:(id)sender{
+  [dataModel setPreferredRestaurant:_restaurantDc];
 }
 
 @end

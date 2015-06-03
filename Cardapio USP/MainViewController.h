@@ -14,6 +14,5 @@
 @property (nonatomic, weak) IBOutlet UILabel *diaDaSemanaLabel;
 
 - (IBAction)showRestaurantSelector:(id)sender;
-- (void)forwardDate:(id)sender;
 
 @end

@@ -10,19 +10,23 @@
 #import "RestaurantDataModel.h"
 #import "MenuDataModel.h"
 #import "DataModel.h"
+#import "REFrostedViewController.h"
+
 
 @interface RestaurantsFilterController () {
   NSMutableArray *restaurantList;
   NSMutableArray *campiList;
   NSMutableDictionary *restaurantDict;
-  RestaurantDataModel *_restaurantDataModel;
-  MenuDataModel *_menuDataModel;
+  NSMutableDictionary *prefRestaurant;
   DataModel *dataModel;
   NSInteger oldCampusOption;
   NSInteger oldRestaurantOption;
+  NSUserDefaults *defaults;
+  NSIndexPath *indexPathForFavoriteRestaurant;
 }
 
 @end
+
 
 @implementation RestaurantsFilterController
 
@@ -30,6 +34,8 @@
     [super viewDidLoad];
     
   [self setTitle:@"Restaurantes"];
+
+  
   dataModel = [DataModel getInstance];
   
   if (!campiList) {
@@ -41,7 +47,6 @@
   }
   
   if (!restaurantDict) {
-    
     restaurantDict  = [[NSMutableDictionary alloc] init];
     
     for (int i=0; i<[campiList count]; i++) {
@@ -49,6 +54,8 @@
       [restaurantDict setValue:restaurantList forKey:[[campiList objectAtIndex:i] objectForKey:@"name"]];
     }
   }
+  
+  defaults = [NSUserDefaults standardUserDefaults];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -61,6 +68,7 @@
   // Filter Option
   NSIndexPath *oldFilterOptionIndexPath = [NSIndexPath indexPathForRow:[dataModel restaurantOption] inSection:[dataModel campusOption]];
   [[self.tableView cellForRowAtIndexPath:oldFilterOptionIndexPath] setAccessoryType: UITableViewCellAccessoryCheckmark];
+  
 }
 
 
@@ -82,13 +90,22 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FilterCell" forIndexPath:indexPath];
 
+  NSString *name = [[[[campiList objectAtIndex:indexPath.section] valueForKey:@"restaurants"]objectAtIndex:indexPath.row] valueForKey:@"name"];
   cell.textLabel.font = [UIFont systemFontOfSize:14.0];
-  cell.textLabel.text = [[[[campiList objectAtIndex:indexPath.section] valueForKey:@"restaurants"]objectAtIndex:indexPath.row] valueForKey:@"name"];
+  cell.textLabel.text = name;
  
   UIButton *favButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
   favButton.frame = CGRectMake(240.0f, 5.0f, 25.0f, 30.0f);
   [favButton setImage:[UIImage imageNamed:@"fav.png"] forState:UIControlStateNormal];
-  [favButton setTintColor:[UIColor colorWithWhite:0.7 alpha:0.5]];
+  
+  prefRestaurant = [NSMutableDictionary dictionaryWithDictionary:[defaults dictionaryForKey:@"preferredRestaurant"]];
+
+  if ([[prefRestaurant valueForKey:@"name"] isEqualToString:[[[[campiList objectAtIndex:indexPath.section] valueForKey:@"restaurants"]objectAtIndex:indexPath.row] valueForKey:@"name"]]) {
+    [favButton setTintColor:[UIColor orangeColor]];
+  } else {
+    [favButton setTintColor:[UIColor colorWithWhite:0.7 alpha:0.5]];
+  }
+  
   [favButton addTarget:self action:@selector(favoriteRestaurant:) forControlEvents:UIControlEventTouchUpInside];
   cell.accessoryView = favButton;
 
@@ -103,34 +120,22 @@
 
   [[NSNotificationCenter defaultCenter] postNotificationName:@"DidChangeRestaurant" object:self];
   [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+  
+  [self.frostedViewController hideMenuViewController];
 }
 
--(void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
-  NSLog(@"favoritar %@", [[[[campiList objectAtIndex:indexPath.section] valueForKey:@"restaurants"]objectAtIndex:indexPath.row]valueForKey:@"name"]);
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 - (void)favoriteRestaurant:(id)sender {
 
-  NSLog(@"favoritar");
-  /*
-  NSIndexPath *oldFilterOptionIndexPath = [NSIndexPath indexPathForRow:oldRestaurantOption inSection:oldCampusOption];
-  dataModel.restaurantOption = indexPath.row; // salva como nova opção
-  dataModel.campusOption = indexPath.section;
-  oldCampusOption = indexPath.section; // salva como opção anterior
-  oldRestaurantOption = indexPath.row; // salva como opção anterior
-  [tableView cellForRowAtIndexPath:oldFilterOptionIndexPath].accessoryType = UITableViewCellAccessoryNone;
-  [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
-   */
+  UITableViewCell *cell = (UITableViewCell *)[sender superview];
+  NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+
+  prefRestaurant = [[[campiList objectAtIndex:[indexPath section]] valueForKey:@"restaurants"] objectAtIndex:[indexPath row]];
+  
+  [dataModel setPreferredRestaurant: prefRestaurant];
+  
+  [self.tableView reloadData];
+  //[self.tableView reloadInputViews];
 }
 
 @end

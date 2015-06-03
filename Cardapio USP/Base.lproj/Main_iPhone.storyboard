@@ -132,7 +132,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5eP-Ee-Zwd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="958" y="-1272"/>
+            <point key="canvasLocation" x="958" y="-590"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="dx3-hN-PxS">
@@ -148,45 +148,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="grx-8J-MXf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="416" y="-1272"/>
-        </scene>
-        <!--Restaurantes-->
-        <scene sceneID="2IK-bV-iOL">
-            <objects>
-                <tableViewController id="cFS-xw-P2F" customClass="SelectorViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="ppW-hs-YFR">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RestaurantCell" textLabel="fUj-0L-LIy" style="IBUITableViewCellStyleDefault" id="95s-pq-IyP">
-                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="95s-pq-IyP" id="jeX-AO-Weo">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fUj-0L-LIy">
-                                            <rect key="frame" x="15" y="0.0" width="290" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="cFS-xw-P2F" id="uGA-Rc-mgd"/>
-                            <outlet property="delegate" destination="cFS-xw-P2F" id="PYK-qa-AiJ"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Restaurantes" id="PUd-P3-btN"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Mat-8A-57s" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="953" y="-598"/>
+            <point key="canvasLocation" x="432" y="-590"/>
         </scene>
         <!--Frosted View Controller-->
         <scene sceneID="TSv-B7-RrX">
@@ -224,24 +186,6 @@
             </objects>
             <point key="canvasLocation" x="432" y="91"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="saB-Ul-k6q">
-            <objects>
-                <navigationController storyboardIdentifier="_selectorController" automaticallyAdjustsScrollViewInsets="NO" id="p3h-az-kJ4" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="f8l-wM-dje">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="cFS-xw-P2F" kind="relationship" relationship="rootViewController" id="Fpl-w7-aLV"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="6kF-SE-01d" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="427" y="-598"/>
-        </scene>
         <!--Informações gerais-->
         <scene sceneID="YGb-cD-IDQ">
             <objects>
@@ -268,16 +212,16 @@
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Shadow" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gx2-nu-ylo">
                                                     <rect key="frame" x="9" y="9" width="304" height="21"/>
-                                                    <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0NC-dL-O6O">
                                                     <rect key="frame" x="8" y="8" width="304" height="21"/>
                                                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -407,6 +351,9 @@ Almoço: 12h00 as 14h15</string>
                                                     <state key="normal" title="Marcar como favorito">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="setPreferred:" destination="d1C-D8-OLv" eventType="touchUpInside" id="ptL-nx-i8L"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </tableViewCellContentView>

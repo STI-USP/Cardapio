@@ -39,32 +39,35 @@
   return instance;
 }
 
-#pragma mark getters
+- (void) getRestaurants{
+  
+  AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+  manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+  manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/x-www-form-urlencoded"];
+  manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+  
+  NSString *webServicePath;
+  webServicePath = [NSString stringWithFormat:@"%@restaurants", kBaseDevSTIURL];
+  
+  NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys: @"596df9effde6f877717b4e81fdb2ca9f" , @"hash", nil];
+  
+  [manager GET:webServicePath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject){
+    //[manager POST:webServicePath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject){
+    self.restaurants = [[NSMutableArray alloc] init];
 
-- (void)setDefault {
-  self.campus = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"CUASO", nil]
-                                                        forKeys:[NSArray arrayWithObjects:@"name", nil]];
+    // Parse da resposta
+    NSMutableDictionary *json = [NSJSONSerialization JSONObjectWithData:responseObject options: NSJSONReadingMutableContainers error: nil];
+    for (id campus in json){
+      [self.restaurants addObject:campus];
+    }
+    
+    // Notifica atualizações
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveRestaurants" object:self];
+    
+  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    NSLog(@"%@", error);
+  }];
   
-  //
-  NSDictionary *dcPhones = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"", nil]
-                                                              forKeys:[NSArray arrayWithObjects:@"", nil]];
-  NSDictionary *dcCashiers = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"", nil]
-                                                                forKeys:[NSArray arrayWithObjects:@"", nil]];
-  NSDictionary *dcWorkingHours = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"", nil]
-                                                                    forKeys:[NSArray arrayWithObjects:@"", nil]];
-  
-  [self setCurrentRestaurant:[NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"Praça do Relógio Solar, travessa 8, n300", @"Central", dcPhones, @"6", @"0", dcCashiers, @"http://www.usp.br/coseas/COSEASHP/ALM/fotosnovaRestCentral/SAS-USP%20Restaurante%20Central%20252-12%20Foto%20Francisco%20Emolo%20043.jpg", @"0", @"CENTRAL - São Paulo", dcWorkingHours, nil]
-                                                                     forKeys:[NSArray arrayWithObjects:@"address", @"alias", @"phones", @"id", @"longitude", @"cashiers", @"photourl", @"latitude", @"name", @"workinghours", nil]]];
-  
-}
-
-#pragma mark Setters
-
-- (void)setRestaurantList:(NSMutableArray *)restaurants {
-  _restaurantList = [restaurants copy]; // copia lista
-  
-  // Notifica atualizações
-  [[NSNotificationCenter defaultCenter] postNotificationName:@"DidRecieveRestaurants" object:self];
 }
 
 - (void)getMenu {
@@ -83,26 +86,22 @@
   parameters = [NSDictionary dictionaryWithObjectsAndKeys:
                 @"596df9effde6f877717b4e81fdb2ca9f" , @"hash",
                 nil];
-
+  
   //[manager POST: webServicePath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
   [manager GET:webServicePath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
     
     // Parse da resposta
     NSMutableDictionary *json = [NSJSONSerialization JSONObjectWithData:responseObject options: NSJSONReadingMutableContainers error: nil];
-    for(NSMutableDictionary *item in json) {
+    for(NSMutableDictionary *rawItem in json) {
+      NSMutableDictionary *item = [self cleanDictionary:rawItem];
+      
       NSMutableArray *period = [[NSMutableArray alloc] init];
-      
-      if ([item objectForKey:@"breakfast"] != nil) {
-        Period *breakfast = [[Period alloc] initWithPeriod:@"breakfast" andMenu:[item   objectForKey:@"breakfast"][@"menu"] andCalories:[item objectForKey:@"breakfast"][@"calories"]];
-        [period addObject:breakfast];
-      }
-      
-      if ([item objectForKey:@"lunch"] != nil) {
+      if (![[item objectForKey:@"lunch"]isKindOfClass:[NSString class]]) {
         Period *lunch = [[Period alloc ] initWithPeriod:@"lunch" andMenu:[item objectForKey:@"lunch"][@"menu"] andCalories:[item objectForKey:@"lunch"][@"calories"]];
         [period addObject:lunch];
       }
       
-      if (![[item valueForKey:@"dinner"] isKindOfClass:[NSNull class]]) {
+      if (![[item valueForKey:@"dinner"] isKindOfClass:[NSString class]]) {
         Period *dinner = [[Period alloc ] initWithPeriod:@"dinner" andMenu:[item objectForKey:@"dinner"][@"menu"] andCalories:[item objectForKey:@"dinner"][@"calories"]];
         [period addObject:dinner];
       }
@@ -113,45 +112,12 @@
     
     // Notifica atualizações
     [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveMenu" object:self];
-
+    
     
   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
     NSLog(@"%@", error);
   }];
   
-}
-
-
-- (void) getRestaurants{
-  _restaurants = [[NSMutableArray alloc] init];
-  
-  AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-  manager.requestSerializer = [AFHTTPRequestSerializer serializer];
-  manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/x-www-form-urlencoded"];
-  manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-  
-  NSString *webServicePath;
-  webServicePath = [NSString stringWithFormat:@"%@restaurants", kBaseDevSTIURL];
-  
-  NSDictionary *parameters = nil;
-  parameters = [NSDictionary dictionaryWithObjectsAndKeys: @"596df9effde6f877717b4e81fdb2ca9f" , @"hash", nil];
-
-  
-  [manager GET:webServicePath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject){
-  //[manager POST:webServicePath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject){
-    
-    // Parse da resposta
-    NSMutableDictionary *json = [NSJSONSerialization JSONObjectWithData:responseObject options: NSJSONReadingMutableContainers error: nil];
-      for (id campus in json)
-        [self.restaurants addObject:campus];
-    
-    // Notifica atualizações
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveRestaurants" object:self];
-
-  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-    NSLog(@"%@", error);
-  }];
-
 }
 
 
@@ -192,6 +158,51 @@
 }
 
 
+#pragma mark Setters
+
+- (void)setDefault {
+  self.campus = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"CUASO", nil]
+                                                   forKeys:[NSArray arrayWithObjects:@"name", nil]];
+  
+  //
+  NSDictionary *dcPhones = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"(11) 2648-1172", nil]
+                                                              forKeys:[NSArray arrayWithObjects:@"", nil]];
+  NSDictionary *dcCashiers = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"", nil]
+                                                                forKeys:[NSArray arrayWithObjects:@"", nil]];
+  NSDictionary *dcWorkingHours = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"", nil]
+                                                                    forKeys:[NSArray arrayWithObjects:@"", nil]];
+  
+  [self setCurrentRestaurant:[NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"Praça do Relógio Solar, travessa 8, n300", @"Central", dcPhones, @"6", @"0", dcCashiers, @"http://www.usp.br/coseas/COSEASHP/ALM/fotosnovaRestCentral/SAS-USP%20Restaurante%20Central%20252-12%20Foto%20Francisco%20Emolo%20043.jpg", @"0", @"CENTRAL - São Paulo", dcWorkingHours, nil]
+                                                                forKeys:[NSArray arrayWithObjects:@"address", @"alias", @"phones", @"id", @"longitude", @"cashiers", @"photourl", @"latitude", @"name", @"workinghours", nil]]];
+  [self setPreferredRestaurant: self.currentRestaurant];
+}
+
+- (void)setPreferredRestaurant:(NSDictionary *)preferredRestaurant {
+  _preferredRestaurant = [preferredRestaurant copy];
+
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  //[defaults setValue:_preferredRestaurant forKey:@"preferredRestaurant"];
+  [defaults synchronize];
+}
+
+- (void)setRestaurantList:(NSMutableArray *)restaurants {
+  _restaurantList = [restaurants copy]; // copia lista
+  
+  // Notifica atualizações
+  [[NSNotificationCenter defaultCenter] postNotificationName:@"DidRecieveRestaurants" object:self];
+}
+
+//limpa os objetos com NULL
+- (NSMutableDictionary *) cleanDictionary: (NSMutableDictionary *)dictionary {
+  [dictionary enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+    if (obj == [NSNull null]) {
+      [dictionary setObject:@"" forKey:key];
+    } else if ([obj isKindOfClass:[NSDictionary class]]) {
+      [self cleanDictionary:obj];
+    }
+  }];
+  return dictionary;
+}
 
 
 @end

@@ -289,11 +289,6 @@
   [self.frostedViewController presentMenuViewController];
 }
 
-- (void)forwardDate:(id)sender {
-  menu = [menuArray objectAtIndex:++diaDaSemana];
-  [[self tableView] reloadData];
-}
-
 #pragma mark - TabControllerDelegate
 
 - (void)DKScrollingTabController:(DKScrollingTabController *)controller selection:(NSUInteger)selection {
