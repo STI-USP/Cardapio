@@ -21,16 +21,16 @@
 @property (nonatomic, strong) Restaurant *restaurant;
 @property (nonatomic, strong) Cash *cash;
 @property (nonatomic, strong) NSDictionary *defaulRestaurant;
-@property (nonatomic, strong) NSDictionary *currentRestaurant;
+@property (nonatomic, strong) NSMutableDictionary *currentRestaurant;
 @property (nonatomic, strong) NSDictionary *preferredRestaurant;
 @property (nonatomic, strong) NSMutableArray *menus;
 @property (nonatomic, strong) NSMutableArray *restaurants;
 @property (nonatomic, strong) NSArray *diasDaSemana;
 
-@property (nonatomic, strong) NSString *restaurantId;
+//@property (nonatomic, strong) NSString *date;
+//@property (nonatomic, strong) NSString *restaurantId;
 @property (nonatomic, strong) NSString *restaurantName;
 @property (nonatomic, strong) NSMutableDictionary *campus;
-@property (nonatomic, strong) NSString *date;
 
 @property (nonatomic) NSInteger campusOption;
 @property (nonatomic) NSInteger restaurantOption;

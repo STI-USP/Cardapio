@@ -61,6 +61,9 @@
 		E9CDD1EC1AD86BFF00BB2E36 /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = E9CDD1E11AD86BFF00BB2E36 /* AFURLRequestSerialization.m */; };
 		E9CDD1ED1AD86BFF00BB2E36 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = E9CDD1E31AD86BFF00BB2E36 /* AFURLResponseSerialization.m */; };
 		E9CDD1EE1AD86BFF00BB2E36 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E9CDD1E51AD86BFF00BB2E36 /* AFURLSessionManager.m */; };
+		E9DF35CF1B3DD306009B92B6 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9DF35CA1B3DD306009B92B6 /* MapViewController.m */; };
+		E9DF35D01B3DD306009B92B6 /* PlaceAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = E9DF35CC1B3DD306009B92B6 /* PlaceAnnotation.m */; };
+		E9DF35D11B3DD306009B92B6 /* MDPinAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = E9DF35CE1B3DD306009B92B6 /* MDPinAnnotationView.m */; };
 		E9E4A0FB1AFBF310005BF7A8 /* restaurants.json in Resources */ = {isa = PBXBuildFile; fileRef = E9E4A0FA1AFBF30F005BF7A8 /* restaurants.json */; };
 		E9E8C5A81B18C5710042DC81 /* fav.png in Resources */ = {isa = PBXBuildFile; fileRef = E9E8C5A71B18C5710042DC81 /* fav.png */; };
 		E9E9B12F1B0E7CC6005BE8A1 /* DataAccess.m in Sources */ = {isa = PBXBuildFile; fileRef = E9E9B12E1B0E7CC6005BE8A1 /* DataAccess.m */; };
@@ -168,6 +171,12 @@
 		E9CDD1E31AD86BFF00BB2E36 /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
 		E9CDD1E41AD86BFF00BB2E36 /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
 		E9CDD1E51AD86BFF00BB2E36 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
+		E9DF35C91B3DD306009B92B6 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		E9DF35CA1B3DD306009B92B6 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
+		E9DF35CB1B3DD306009B92B6 /* PlaceAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceAnnotation.h; sourceTree = "<group>"; };
+		E9DF35CC1B3DD306009B92B6 /* PlaceAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceAnnotation.m; sourceTree = "<group>"; };
+		E9DF35CD1B3DD306009B92B6 /* MDPinAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDPinAnnotationView.h; sourceTree = "<group>"; };
+		E9DF35CE1B3DD306009B92B6 /* MDPinAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDPinAnnotationView.m; sourceTree = "<group>"; };
 		E9E4A0FA1AFBF30F005BF7A8 /* restaurants.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = restaurants.json; sourceTree = "<group>"; };
 		E9E8C5A71B18C5710042DC81 /* fav.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fav.png; sourceTree = "<group>"; };
 		E9E9B12D1B0E7CC6005BE8A1 /* DataAccess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataAccess.h; sourceTree = "<group>"; };
@@ -269,16 +278,22 @@
 				E9E9B12E1B0E7CC6005BE8A1 /* DataAccess.m */,
 				E9E9B1301B0E7D1C005BE8A1 /* DataModel.h */,
 				E9E9B1311B0E7D1C005BE8A1 /* DataModel.m */,
-				E9818EC1198033A800F741B0 /* DKScrollingTabController.h */,
-				E9818EC2198033A800F741B0 /* DKScrollingTabController.m */,
-				BFAC6EDE192A59E600921494 /* FrostedViewController.h */,
-				BFAC6EDF192A59E600921494 /* FrostedViewController.m */,
 				BFAC6E94192A54E100921494 /* MainViewController.h */,
 				BFAC6E95192A54E100921494 /* MainViewController.m */,
 				E9CDD1B91AD81E5100BB2E36 /* RestaurantsFilterController.h */,
 				E9CDD1BA1AD81E5100BB2E36 /* RestaurantsFilterController.m */,
 				BFAC6EE4192A71A000921494 /* InfoViewController.h */,
 				BFAC6EE5192A71A000921494 /* InfoViewController.m */,
+				E9818EC1198033A800F741B0 /* DKScrollingTabController.h */,
+				E9818EC2198033A800F741B0 /* DKScrollingTabController.m */,
+				BFAC6EDE192A59E600921494 /* FrostedViewController.h */,
+				BFAC6EDF192A59E600921494 /* FrostedViewController.m */,
+				E9DF35C91B3DD306009B92B6 /* MapViewController.h */,
+				E9DF35CA1B3DD306009B92B6 /* MapViewController.m */,
+				E9DF35CB1B3DD306009B92B6 /* PlaceAnnotation.h */,
+				E9DF35CC1B3DD306009B92B6 /* PlaceAnnotation.m */,
+				E9DF35CD1B3DD306009B92B6 /* MDPinAnnotationView.h */,
+				E9DF35CE1B3DD306009B92B6 /* MDPinAnnotationView.m */,
 				BFAC6E97192A54E100921494 /* Images.xcassets */,
 				E9E8C5A71B18C5710042DC81 /* fav.png */,
 				BFAC6ED0192A587900921494 /* Categories */,
@@ -527,10 +542,13 @@
 				AD66F7D01933B3C4005A31BE /* Period.m in Sources */,
 				E9E9B12F1B0E7CC6005BE8A1 /* DataAccess.m in Sources */,
 				E9CDD1E91AD86BFF00BB2E36 /* AFNetworkReachabilityManager.m in Sources */,
+				E9DF35CF1B3DD306009B92B6 /* MapViewController.m in Sources */,
 				BFAC6ECA192A586B00921494 /* RECommonFunctions.m in Sources */,
 				ADB2DCB319374FCE0068417F /* Restaurant.m in Sources */,
 				AD66F7D91933C4A8005A31BE /* MenuStub.m in Sources */,
+				E9DF35D11B3DD306009B92B6 /* MDPinAnnotationView.m in Sources */,
 				ADB2DCB619374FE20068417F /* WeeklyPeriod.m in Sources */,
+				E9DF35D01B3DD306009B92B6 /* PlaceAnnotation.m in Sources */,
 				AD66F7CD1933B2E8005A31BE /* Menu.m in Sources */,
 				ADB2DCBC19375F0E0068417F /* Items.m in Sources */,
 				BFAC6ECC192A586B00921494 /* REFrostedViewController.m in Sources */,

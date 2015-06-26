@@ -17,7 +17,6 @@
 #define kBaseDevSTIURL @"https://dev.uspdigital.usp.br/rucard/servicos/"
 #define kBaseSTIURL @"https://uspdigital.usp.br/rucard/servicos/"
 
-
 @interface DataModel ()
 
 @property (strong, nonatomic) NSMutableArray *restaurantList;
@@ -25,11 +24,9 @@
 @property (strong, nonatomic) NSMutableDictionary *restaurantDict;
 @end
 
-
-
 @implementation DataModel
 
-+(DataModel *) getInstance {
++(DataModel *)getInstance {
   static DataModel *instance = nil;
   static dispatch_once_t once;
   dispatch_once(&once, ^{
@@ -39,7 +36,7 @@
   return instance;
 }
 
-- (void) getRestaurants{
+- (void)getRestaurants {
   
   AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
   manager.requestSerializer = [AFHTTPRequestSerializer serializer];
@@ -51,26 +48,23 @@
   
   NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys: @"596df9effde6f877717b4e81fdb2ca9f" , @"hash", nil];
   
-  [manager GET:webServicePath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject){
-    //[manager POST:webServicePath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject){
+  [manager POST:webServicePath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject){
     self.restaurants = [[NSMutableArray alloc] init];
 
     // Parse da resposta
     NSMutableDictionary *json = [NSJSONSerialization JSONObjectWithData:responseObject options: NSJSONReadingMutableContainers error: nil];
-    for (id campus in json){
+    for (NSMutableDictionary *campus in json){
       [self.restaurants addObject:campus];
     }
-    
     // Notifica atualizações
     [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveRestaurants" object:self];
     
   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
     NSLog(@"%@", error);
   }];
-  
 }
 
-- (void)getMenu {
+- (void)getMenu{
   
   self.menuArray = [[NSMutableArray alloc] init];
   
@@ -87,9 +81,7 @@
                 @"596df9effde6f877717b4e81fdb2ca9f" , @"hash",
                 nil];
   
-  //[manager POST: webServicePath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-  [manager GET:webServicePath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-    
+  [manager POST: webServicePath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
     // Parse da resposta
     NSMutableDictionary *json = [NSJSONSerialization JSONObjectWithData:responseObject options: NSJSONReadingMutableContainers error: nil];
     for(NSMutableDictionary *rawItem in json) {
@@ -109,15 +101,11 @@
       Menu *menu = [[Menu alloc] initWithDate:[item objectForKey:@"date"] andPeriod:period];
       [self.menuArray addObject:menu];
     }
-    
     // Notifica atualizações
     [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveMenu" object:self];
-    
-    
   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
     NSLog(@"%@", error);
   }];
-  
 }
 
 
@@ -125,8 +113,7 @@
   return self.restaurantList;
 }
 
-- (NSMutableArray *) iniciar_JSONBinding:(NSString *)_url
-{
+- (NSMutableArray *)iniciar_JSONBinding:(NSString *)_url {
   NSURL *url1 = [NSURL URLWithString:_url];
   NSMutableURLRequest *req1 = [NSMutableURLRequest requestWithURL:url1];
   NSError *error;
@@ -136,14 +123,12 @@
   return json;
 }
 
--(Cash *)cash {
+- (Cash *)cash{
   NSMutableArray *items = [[NSMutableArray alloc] init];
   NSDictionary *json = (NSDictionary *)[self iniciar_JSONBinding: [NSString stringWithFormat:@"%@restaurantes.json", kRestaurantsURL]];
-  if (!json)
-  {
+  if (!json) {
     NSLog(@"Error parsing JSON: %@", nil);
-  } else
-  {
+  } else {
     for(NSDictionary *item in json[@"CAIXA"]) {
       for(NSDictionary *i in item[@"items"]) {
         NSString *category = i[@"category"];
@@ -160,28 +145,55 @@
 
 #pragma mark Setters
 
-- (void)setDefault {
-  self.campus = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"CUASO", nil]
+- (void)setDefault { //restaurante default para quando não houver nenhum selecionado
+  self.campus = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"São Paulo - Cidade Universitária \"Armando de Salles Oliveira\"", nil]
                                                    forKeys:[NSArray arrayWithObjects:@"name", nil]];
   
-  //
-  NSDictionary *dcPhones = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"(11) 2648-1172", nil]
+  NSDictionary *dcPhones = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"(11) 3091-3318", nil]
                                                               forKeys:[NSArray arrayWithObjects:@"", nil]];
   NSDictionary *dcCashiers = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"", nil]
                                                                 forKeys:[NSArray arrayWithObjects:@"", nil]];
   NSDictionary *dcWorkingHours = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"", nil]
                                                                     forKeys:[NSArray arrayWithObjects:@"", nil]];
   
-  [self setCurrentRestaurant:[NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"Praça do Relógio Solar, travessa 8, n300", @"Central", dcPhones, @"6", @"0", dcCashiers, @"http://www.usp.br/coseas/COSEASHP/ALM/fotosnovaRestCentral/SAS-USP%20Restaurante%20Central%20252-12%20Foto%20Francisco%20Emolo%20043.jpg", @"0", @"CENTRAL - São Paulo", dcWorkingHours, nil]
+  [self setCurrentRestaurant:[NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"Praça do Relógio Solar, travessa 8, 300, Cidade Universitária, São Paulo - SP", @"Central", dcPhones, @"6", @"-46.7212049", dcCashiers, @"http://bahamas.uspnet.usp.br/dominios/cce/servicos/restaurantesUSP/central.jpg", @"-23.5598117", @"Restaurante Central", dcWorkingHours, nil]
                                                                 forKeys:[NSArray arrayWithObjects:@"address", @"alias", @"phones", @"id", @"longitude", @"cashiers", @"photourl", @"latitude", @"name", @"workinghours", nil]]];
   [self setPreferredRestaurant: self.currentRestaurant];
 }
 
+- (void)setCurrentRestaurant:(NSDictionary *)currentRestaurant {
+  _currentRestaurant = [currentRestaurant copy];
+  
+  NSMutableDictionary *emptyDc = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"", @"", @"", nil] forKeys:[NSArray arrayWithObjects:@"breakfast", @"lunch", @"dinner", nil]];
+  
+  if ([[[_currentRestaurant valueForKey:@"workinghours"] valueForKey:@"weekdays"] isKindOfClass:[NSNull class]]) {
+    [[_currentRestaurant valueForKey:@"workinghours"] setValue:emptyDc forKey:@"weekdays"];
+  }
+  if ([[[_currentRestaurant valueForKey:@"workinghours"] valueForKey:@"saturday"] isKindOfClass:[NSNull class]]) {
+    [[_currentRestaurant valueForKey:@"workinghours"] setValue:emptyDc forKey:@"saturday"];
+  }
+  if ([[[_currentRestaurant valueForKey:@"workinghours"] valueForKey:@"sunday"] isKindOfClass:[NSNull class]]) {
+    [[_currentRestaurant valueForKey:@"workinghours"] setValue:emptyDc forKey:@"sunday"];
+  }
+}
+
 - (void)setPreferredRestaurant:(NSDictionary *)preferredRestaurant {
   _preferredRestaurant = [preferredRestaurant copy];
+  
+  NSMutableDictionary *emptyDc = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"", @"", @"", nil] forKeys:[NSArray arrayWithObjects:@"breakfast", @"lunch", @"dinner", nil]];
+  
+  if ([[[_preferredRestaurant valueForKey:@"workinghours"] valueForKey:@"weekdays"] isKindOfClass:[NSNull class]]) {
+    [[_preferredRestaurant valueForKey:@"workinghours"] setValue:emptyDc forKey:@"weekdays"];
+  }
+  if ([[[_preferredRestaurant valueForKey:@"workinghours"] valueForKey:@"saturday"] isKindOfClass:[NSNull class]]) {
+    [[_preferredRestaurant valueForKey:@"workinghours"] setValue:emptyDc forKey:@"saturday"];
+  }
+  if ([[[_preferredRestaurant valueForKey:@"workinghours"] valueForKey:@"sunday"] isKindOfClass:[NSNull class]]) {
+    [[_preferredRestaurant valueForKey:@"workinghours"] setValue:emptyDc forKey:@"sunday"];
+  }
 
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  //[defaults setValue:_preferredRestaurant forKey:@"preferredRestaurant"];
+  [defaults setValue:_preferredRestaurant forKey:@"preferredRestaurant"];
   [defaults synchronize];
 }
 
@@ -193,7 +205,7 @@
 }
 
 //limpa os objetos com NULL
-- (NSMutableDictionary *) cleanDictionary: (NSMutableDictionary *)dictionary {
+- (NSMutableDictionary *)cleanDictionary: (NSMutableDictionary *)dictionary {
   [dictionary enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
     if (obj == [NSNull null]) {
       [dictionary setObject:@"" forKey:key];
@@ -203,6 +215,5 @@
   }];
   return dictionary;
 }
-
 
 @end

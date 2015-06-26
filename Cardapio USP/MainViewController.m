@@ -35,15 +35,6 @@
 
 @synthesize diaDaSemanaLabel;
 
--(id)initWithCoder:(NSCoder *)aDecoder {
-  // precisa inicializar o modelo logo no início pois a busca com o scanner é feita antes de carregar a vista
-  self = [super initWithCoder:aDecoder];
-  if (self) {
-    dataModel = [DataModel getInstance];    
-  }
-  return self;
-}   
-
 - (void)viewDidLoad {
   [super viewDidLoad];
 
@@ -59,6 +50,7 @@
   NSInteger weekday = [weekdayComponents weekday] - 2; //para deixar a segunda feira como 0
   diaDaSemana = (int)weekday;
   
+  dataModel = [DataModel getInstance];
   [dataModel getMenu];
   
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChangeRestaurant:) name:@"DidChangeRestaurant" object:nil];
@@ -143,39 +135,29 @@
   //set weekday
   switch ((int)dia) {
     case 0:
-      diaSemana = @"Segunda-feira";
-      break;
+      diaSemana = @"Segunda-feira"; break;
     case 1:
-      diaSemana = @"Terça-feira";
-      break;
+      diaSemana = @"Terça-feira"; break;
     case 2:
-      diaSemana = @"Quarta-feira";
-      break;
+      diaSemana = @"Quarta-feira"; break;
     case 3:
-      diaSemana = @"Quinta-feira";
-      break;
+      diaSemana = @"Quinta-feira"; break;
     case 4:
-      diaSemana = @"Sexta-feira";
-      break;
+      diaSemana = @"Sexta-feira"; break;
     case 5:
-      diaSemana = @"Sábado";
-      break;
+      diaSemana = @"Sábado"; break;
     case 6:
-      diaSemana = @"Domingo";
-      break;
+      diaSemana = @"Domingo"; break;
       
     default:
       break;
   }
   
-  
-  //set day
+  //set date
   NSString *strDay = [NSString stringWithFormat:@"%@", [strData substringToIndex:2]];
-  //set month
   NSString *strMonth = [self dayToString:[NSString stringWithFormat:@"%@", [[strData substringFromIndex:3]substringToIndex:2]]];
-  //set year
   NSString *strYear = [NSString stringWithFormat:@"%@", [strData substringFromIndex:6]];
-  //set label
+  //set date label
   [diaDaSemanaLabel setText:[NSString stringWithFormat:@"%@, %@ de %@ de %@", diaSemana, strDay, strMonth, strYear]];
   
   [[self tableView] reloadData];
@@ -184,45 +166,32 @@
 - (NSString *)dayToString: (NSString *)strMonth{
   switch ([strMonth intValue]) {
     case 1:
-      return @"Janeiro";
-      break;
+      return @"Janeiro"; break;
     case 2:
-      return @"Fevereiro";
-      break;
+      return @"Fevereiro"; break;
     case 3:
-      return @"Março";
-      break;
+      return @"Março"; break;
     case 4:
-      return @"Abril";
-      break;
+      return @"Abril"; break;
     case 5:
-      return @"Maio";
-      break;
+      return @"Maio"; break;
     case 6:
-      return @"Junho";
-      break;
+      return @"Junho"; break;
     case 7:
-      return @"Julho";
-      break;
+      return @"Julho"; break;
     case 8:
-      return @"Agosto";
-      break;
+      return @"Agosto"; break;
     case 9:
-      return @"Setembro";
-      break;
+      return @"Setembro"; break;
     case 10:
-      return @"Outrubro";
-      break;
+      return @"Outrubro"; break;
     case 11:
-      return @"Novembro";
-      break;
+      return @"Novembro"; break;
     case 12:
-      return @"Dezembro";
-      break;
+      return @"Dezembro"; break;
       
     default:
-      return @"";
-      break;
+      return @""; break;
   }
 }
 
@@ -240,11 +209,9 @@
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
   switch (section) {
     case 0:
-      return @"Almoço";
-      break;
+      return @"Almoço"; break;
     case 1:
-      return @"Jantar";
-      break;
+      return @"Jantar"; break;
       
     default:
       break;
