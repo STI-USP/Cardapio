@@ -110,22 +110,22 @@
   NSMutableString *workingHours = [[NSMutableString alloc] init];
   
   //dia de semana
-  [workingHours appendString:@"Segundas as sextas-feiras \n"];
+  [workingHours appendString:@"Segunda à sexta-feira \n"];
   //café da manha
   NSString *weekdayBreakfest = [[[_restaurantDc valueForKey:@"workinghours"] valueForKey:@"weekdays"]valueForKey:@"breakfest"];
-  if (weekdayBreakfest) {
+  if (weekdayBreakfest && ![weekdayBreakfest isEqualToString:@""]) {
     [workingHours appendString:[NSString stringWithFormat:@"Café da manhã: %@\n", weekdayBreakfest]];
   }
   
   //almoço
   NSString *weekdayLunch = [[[_restaurantDc valueForKey:@"workinghours"] valueForKey:@"weekdays"]valueForKey:@"lunch"];
-  if (weekdayLunch) {
+  if (weekdayLunch && ![weekdayLunch isEqualToString:@""]) {
     [workingHours appendString:[NSString stringWithFormat:@"Almoço: %@\n", weekdayLunch]];
   }
   
   //janta
   NSString *weekdayDinner = [[[_restaurantDc valueForKey:@"workinghours"] valueForKey:@"weekdays"]valueForKey:@"dinner"];
-  if (weekdayDinner) {
+  if (weekdayDinner && ![weekdayDinner isEqualToString:@""]) {
     [workingHours appendString:[NSString stringWithFormat:@"Jantar: %@\n", weekdayDinner]];
   }
   
@@ -133,13 +133,13 @@
   [workingHours appendString:@"\nSábado \n"];
   //cafe da manha
   NSString *saturdayBreakfest = [[[_restaurantDc valueForKey:@"workinghours"] valueForKey:@"saturday"]valueForKey:@"breakfest"];
-  if (saturdayBreakfest) {
+  if (saturdayBreakfest && ![saturdayBreakfest isEqualToString:@""]) {
     [workingHours appendString:[NSString stringWithFormat:@"Café da manhã: %@\n", saturdayBreakfest]];
   }
   
   //almoço
   NSString *saturdayLunch = [[[_restaurantDc valueForKey:@"workinghours"] valueForKey:@"saturday"]valueForKey:@"lunch"];
-  if (saturdayLunch) {
+  if (saturdayLunch && ![saturdayLunch isEqualToString:@""]) {
     [workingHours appendString:[NSString stringWithFormat:@"Almoço: %@\n", saturdayLunch]];
   }
   
@@ -147,30 +147,26 @@
   [workingHours appendString:@"\nDomingo \n"];
   //cafe da manha
   NSString *sundayBreakfest = [[[_restaurantDc valueForKey:@"workinghours"] valueForKey:@"sunday"]valueForKey:@"breakfest"];
-  if (sundayBreakfest) {
+  if (sundayBreakfest && ![sundayBreakfest isEqualToString:@""]) {
     [workingHours appendString:[NSString stringWithFormat:@"Café da manhã: %@\n", sundayBreakfest]];
   }
   
   //almoço
   NSString *sundayLunch = [[[_restaurantDc valueForKey:@"workinghours"] valueForKey:@"sunday"]valueForKey:@"lunch"];
-  if (sundayLunch) {
+  if (sundayLunch && ![sundayLunch isEqualToString:@""]) {
     [workingHours appendString:[NSString stringWithFormat:@"Almoço: %@\n", sundayLunch]];
   }
   
   _weeklyperiod.text = workingHours;
   
-  /*
-   Cash *cash = [_model cash];
-   NSLog(@"CASH %@ ",[cash workinghours]);
-   _workinghours.text = [NSString stringWithFormat:@"%@", [cash workinghours]];
-   NSString *i = @"";
-   for (Items *item in [cash items]) {
-   i = [i stringByAppendingString:[NSString stringWithFormat:@"%@: %@\n", [item category], [item price]]];
-   }
-   _priceItens.text = i;
-   */
-  _priceItens.text = @"";
+  //preços
+  NSMutableString *prices = [[NSMutableString alloc] init];
+  [prices appendString:[NSString stringWithFormat:@"Aluno: %@\n", [[[[[_restaurantDc valueForKey:@"cashiers"] objectAtIndex:0] valueForKey:@"prices"] valueForKey:@"students"] valueForKey:@"lunch"]]];
+  [prices appendString:[NSString stringWithFormat:@"Especial: %@\n", [[[[[_restaurantDc valueForKey:@"cashiers"] objectAtIndex:0] valueForKey:@"prices"] valueForKey:@"special"] valueForKey:@"lunch"]]];
+  [prices appendString:[NSString stringWithFormat:@"Visitante: %@\n", [[[[[_restaurantDc valueForKey:@"cashiers"] objectAtIndex:0] valueForKey:@"prices"] valueForKey:@"visiting"] valueForKey:@"lunch"]]];
   
+  [_priceItens setText:prices];
+
   [self reloadInputViews];
 }
 

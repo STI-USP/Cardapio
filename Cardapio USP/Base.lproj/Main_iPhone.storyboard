@@ -31,10 +31,10 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="97I-2C-75o" firstAttribute="top" secondItem="deo-xP-DuH" secondAttribute="top" constant="43" id="DdD-02-Xu6"/>
-                                    <constraint firstItem="97I-2C-75o" firstAttribute="leading" secondItem="deo-xP-DuH" secondAttribute="leadingMargin" id="RT6-bb-e0B"/>
-                                    <constraint firstItem="97I-2C-75o" firstAttribute="trailing" secondItem="deo-xP-DuH" secondAttribute="trailingMargin" id="vow-5Y-Cks"/>
-                                    <constraint firstAttribute="bottom" secondItem="97I-2C-75o" secondAttribute="bottom" constant="6" id="vwa-5A-QBw"/>
+                                    <constraint firstItem="97I-2C-75o" firstAttribute="trailing" secondItem="deo-xP-DuH" secondAttribute="trailingMargin" id="Hne-pA-rXa"/>
+                                    <constraint firstAttribute="bottom" secondItem="97I-2C-75o" secondAttribute="bottom" constant="6" id="e2Q-6j-3su"/>
+                                    <constraint firstItem="97I-2C-75o" firstAttribute="top" secondItem="deo-xP-DuH" secondAttribute="top" constant="43" id="nbD-H2-z32"/>
+                                    <constraint firstItem="97I-2C-75o" firstAttribute="leading" secondItem="deo-xP-DuH" secondAttribute="leadingMargin" id="zI1-g8-QNB"/>
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sbL-Z2-9rH">
@@ -70,26 +70,26 @@
                                     </tableView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="qzl-TK-JUs" firstAttribute="top" secondItem="sbL-Z2-9rH" secondAttribute="top" id="9tI-Wv-Vxg"/>
-                                    <constraint firstItem="qzl-TK-JUs" firstAttribute="centerX" secondItem="sbL-Z2-9rH" secondAttribute="centerX" id="I7G-06-vBr"/>
-                                    <constraint firstAttribute="trailing" secondItem="qzl-TK-JUs" secondAttribute="trailing" id="Oxl-Og-zjB"/>
-                                    <constraint firstAttribute="bottom" secondItem="qzl-TK-JUs" secondAttribute="bottom" id="huz-aP-J8n"/>
-                                    <constraint firstItem="qzl-TK-JUs" firstAttribute="centerY" secondItem="sbL-Z2-9rH" secondAttribute="centerY" id="in0-B2-cwF"/>
-                                    <constraint firstItem="qzl-TK-JUs" firstAttribute="leading" secondItem="sbL-Z2-9rH" secondAttribute="leading" id="uOy-R6-pEg"/>
+                                    <constraint firstItem="qzl-TK-JUs" firstAttribute="top" secondItem="sbL-Z2-9rH" secondAttribute="top" id="OeM-yk-4fe"/>
+                                    <constraint firstItem="qzl-TK-JUs" firstAttribute="leading" secondItem="sbL-Z2-9rH" secondAttribute="leading" id="YXC-3F-xhR"/>
+                                    <constraint firstAttribute="bottom" secondItem="qzl-TK-JUs" secondAttribute="bottom" id="bba-DM-AqE"/>
+                                    <constraint firstItem="qzl-TK-JUs" firstAttribute="centerY" secondItem="sbL-Z2-9rH" secondAttribute="centerY" id="gCs-Rh-Oq2"/>
+                                    <constraint firstAttribute="trailing" secondItem="qzl-TK-JUs" secondAttribute="trailing" id="jiq-Ll-n8K"/>
+                                    <constraint firstItem="qzl-TK-JUs" firstAttribute="centerX" secondItem="sbL-Z2-9rH" secondAttribute="centerX" id="zEw-hM-j62"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" red="0.97254908084869385" green="0.97254908084869385" blue="0.97254908084869385" alpha="1" colorSpace="deviceRGB"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="sbL-Z2-9rH" firstAttribute="leading" secondItem="deo-xP-DuH" secondAttribute="leading" id="0xx-cA-JJl"/>
-                            <constraint firstAttribute="trailing" secondItem="deo-xP-DuH" secondAttribute="trailing" id="2Rd-6z-uZT"/>
-                            <constraint firstItem="sbL-Z2-9rH" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="2vo-c9-iEW"/>
-                            <constraint firstItem="sbL-Z2-9rH" firstAttribute="top" secondItem="deo-xP-DuH" secondAttribute="bottom" constant="6" id="Bk3-tQ-yMF"/>
-                            <constraint firstItem="deo-xP-DuH" firstAttribute="top" secondItem="dQe-91-Iuw" secondAttribute="bottom" constant="1" id="FC8-aG-Y1v"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="sbL-Z2-9rH" secondAttribute="trailing" constant="-21" id="Irt-No-gqb"/>
-                            <constraint firstItem="sbL-Z2-9rH" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" constant="141" id="hyv-XE-tUL"/>
-                            <constraint firstItem="sbL-Z2-9rH" firstAttribute="bottom" secondItem="qoa-El-HXd" secondAttribute="top" id="zU7-4n-7gJ"/>
+                            <constraint firstItem="deo-xP-DuH" firstAttribute="leading" secondItem="sbL-Z2-9rH" secondAttribute="leading" id="21u-oG-dEk"/>
+                            <constraint firstItem="sbL-Z2-9rH" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" constant="141" id="6hB-fl-684"/>
+                            <constraint firstItem="sbL-Z2-9rH" firstAttribute="top" secondItem="deo-xP-DuH" secondAttribute="bottom" constant="6" id="E80-ot-bn8"/>
+                            <constraint firstItem="sbL-Z2-9rH" firstAttribute="bottom" secondItem="qoa-El-HXd" secondAttribute="top" id="FUg-QH-UBR"/>
+                            <constraint firstAttribute="trailing" secondItem="deo-xP-DuH" secondAttribute="trailing" id="KIl-VQ-4D7"/>
+                            <constraint firstItem="deo-xP-DuH" firstAttribute="top" secondItem="dQe-91-Iuw" secondAttribute="bottom" constant="1" id="QcV-3e-rKI"/>
+                            <constraint firstItem="deo-xP-DuH" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="ZxH-CN-tZ1"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="sbL-Z2-9rH" secondAttribute="trailing" constant="-21" id="zmd-uK-QPb"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Restaurante Central" id="5Gz-r1-zrz">
@@ -369,7 +369,7 @@ Almoço: 12h00 as 14h15</string>
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="jrc-yF-f0b" detailTextLabel="l4a-Pm-ZJe" rowHeight="110" style="IBUITableViewCellStyleValue2" id="n7b-d2-Qsq">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="jrc-yF-f0b" detailTextLabel="l4a-Pm-ZJe" rowHeight="71" style="IBUITableViewCellStyleValue2" id="n7b-d2-Qsq">
                                         <rect key="frame" x="0.0" y="594" width="320" height="110"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="n7b-d2-Qsq" id="ChJ-oH-epd">
@@ -386,8 +386,32 @@ Almoço: 12h00 as 14h15</string>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="none" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="193" id="l4a-Pm-ZJe">
                                                     <rect key="frame" x="112" y="21" width="193" height="67"/>
                                                     <autoresizingMask key="autoresizingMask"/>
-                                                    <string key="text">Aluno (graducao e pos-graducao):1,90                                                        Especial: 6,00                                    Visitante: 12,00</string>
+                                                    <string key="text">Aluno:1,90                                                        Especial: 6,00                                    Visitante: 12,00</string>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="gxY-te-Gw9" detailTextLabel="Hk5-0v-GHN" rowHeight="71" style="IBUITableViewCellStyleValue2" id="fcS-gl-RYX">
+                                        <rect key="frame" x="0.0" y="248" width="320" height="71"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fcS-gl-RYX" id="xTP-bR-mTL">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Ponto de venda" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gxY-te-Gw9">
+                                                    <rect key="frame" x="15" y="10" width="91" height="17"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" tag="10" contentMode="left" text="Praça do Relógio Solar, travessa 8, no. 300 Cidade Universitária, São Paulo, SP" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="181" id="Hk5-0v-GHN">
+                                                    <rect key="frame" x="112" y="10" width="181" height="51"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -404,8 +428,8 @@ Almoço: 12h00 as 14h15</string>
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8co-mt-NsO">
-                                                    <rect key="frame" x="87" y="7" width="147" height="30"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8co-mt-NsO">
+                                                    <rect key="frame" x="8" y="7" width="304" height="30"/>
                                                     <state key="normal" title="Marcar como favorito">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
@@ -414,6 +438,11 @@ Almoço: 12h00 as 14h15</string>
                                                     </connections>
                                                 </button>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="8co-mt-NsO" firstAttribute="top" secondItem="iVF-MB-eMe" secondAttribute="topMargin" constant="-1" id="2Hd-Bq-UOO"/>
+                                                <constraint firstItem="8co-mt-NsO" firstAttribute="leading" secondItem="iVF-MB-eMe" secondAttribute="leadingMargin" id="I47-XW-5EQ"/>
+                                                <constraint firstItem="8co-mt-NsO" firstAttribute="centerX" secondItem="iVF-MB-eMe" secondAttribute="centerX" id="Qct-ll-eZF"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
