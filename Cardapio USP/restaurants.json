@@ -1,232 +1,644 @@
-{
-  "campi": [
-            {
-            "name": "CUASO",
-            "rucard": {
-            "address": "Pr√©dio da SAS - Rua do Anfiteatro, 295",
-            "workinghours": "Segundas as Sextas-Feiras das 8h √†s 18h45"
-            },
-            "cashier": {
-            "address": "Caixa Central - Pr√©dio da Administra√ß√£o da SAS - Rua do Anfiteatro, 295 ",
-            "prices": {
-            "special": {
-            "dinner": "6,00",
-            "lunch": "6,00",
-            "breakfast": "6,00"
-            },
-            "students": {
-            "dinner": "1,90",
-            "lunch": "1,90",
-            "breakfast": "1,90"
-            },
-            "visiting": {
-            "dinner": "12,00",
-            "lunch": "12,00",
-            "breakfast": "12,00"
-            }
-            },
-            "longitude": 0,
-            "latitude": 0,
-            "workinghours": "Segundas-feiras das 10h00 √†s 13h45min e das 15h00 √†s 19h00\nTer√ßas a Sextas-feiras das 09h00 √†s 13h45min e 14:30 √†s 16h00"
-            },
-            "restaurants": [
-                            {
-                            "address": "Pra√ßa do Rel√≥gio Solar, travessa 8, n¬∫ 300,Cidade Universit√°ria, S√£o Paulo - SP",
-                            "alias": "Central",
-                            "name": "Restaurante Central",
-                            "phones": [
-                                       "(11) 3091-3318"
-                                       ],
-                            "id": 10,
-                            "latitude": -23.559803,
-                            "longitude": -46.721447,
-                            "photourl": "http://www.usp.br/coseas/COSEASHP/ALM/fotosnovaRestCentral/SAS-USP%20Restaurante%20Central%20252-12%20Foto%20Francisco%20Emolo%20043.jpg",
-                            "workinghours": {
-                            "sunday": {
-                            "lunch": "12h00 √†s 14h15",
-                            "breakfast": "8h00 √†s 9h30"
-                            },
-                            "weekdays": {
-                            "dinner": "17h30 √†s 19h45",
-                            "lunch": "11h15 √†s 14h15",
-                            "breakfast": "7h00 √†s 8h30"
-                            },
-                            "saturday": {
-                            "lunch": "11h15 √†s 14h15",
-                            "breakfast": "7h30 √†s 9h00"
-                            }
-                            }
-                            },
-                            {
-                            "address": "Rua do Mat√£o, Travessa R 187 - Instituto de F√≠sica - Universit√°ria, S√£o Paulo - SP ",
-                            "alias": "F√≠sica",
-                            "name": "Restaurante da Fisica",
-                            "phones": [
-                                       "(11) 3091-6710"
-                                       ],
-                            "id": 20,
-                            "latitude": -23560594,
-                            "longitude": -46735311,
-                            "photourl": "http://www.usp.br/coseas/COSEASHP/ALM/FotosRestFisica/FisicaNova5Mini.jpg",
-                            "workinghours": {
-                            "weekdays": {
-                            "dinner": "17h30 √†s 19h45",
-                            "lunch": "11h15 √†s 14h15",
-                            "breakfast": "7h00 √†s 8h30"
-                            }
-                            }
-                            }
-                            ]
-            },
-            {
-            "name": "Direito",
-            "rucard": {
-            "address": "",
-            "workinghours": ""
-            },
-            "cashier": {
-            "address": "",
-            "prices": {
-            "special": {
-            "dinner": "6,00",
-            "lunch": "6,00",
-            "breakfast": "6,00"
-            },
-            "students": {
-            "dinner": "1,90",
-            "lunch": "1,90",
-            "breakfast": "1,90"
-            },
-            "visiting": {
-            "dinner": "12,00",
-            "lunch": "12,00",
-            "breakfast": "12,00"
-            }
-            },
-            "longitude": 0,
-            "latitude": 0,
-            "workinghours": ""
-            },
-            "restaurants": [
-                            {
-                            "address": "Rua Riachuelo, 194 - Faculdade de Direito - Largo S√£o Francisco, S√£o Paulo - SP ",
-                            "alias": "Direito",
-                            "name": "Restaurante da Faculdade de Direito",
-                            "phones": [
-                                       "(11) 3111-4054"
-                                       ],
-                            "id": 80,
-                            "latitude": 0,
-                            "longitude": 0,
-                            "photourl": "http://www.usp.br/coseas/COSEASHP/ALM/Rest%20Fac%20Direito/Dir1.jpg",
-                            "workinghours": {
-                            "weekdays": {
-                            "dinner": "17h30 √†s 19h00",
-                            "lunch": "11h30 √†s 14h00"
-                            }
-                            }
-                            }
-                            ]
-            },
-            {
-            "name": "EEL",
-            "rucard": {
-            "address": "",
-            "workinghours": ""
-            },
-            "cashier": {
-            "address": "",
-            "prices": {
-            "special": {
-            "dinner": "6,00",
-            "lunch": "6,00",
-            "breakfast": "6,00"
-            },
-            "students": {
-            "dinner": "1,90",
-            "lunch": "1,90",
-            "breakfast": "1,90"
-            },
-            "visiting": {
-            "dinner": "12,00",
-            "lunch": "12,00",
-            "breakfast": "12,00"
-            }
-            },
-            "longitude": 0,
-            "latitude": 0,
-            "workinghours": ""
-            },
-            "restaurants": [
-                            {
-                            "address": "Estrada do Campinho - Lorena ‚Äì S√£o Paulo",
-                            "alias": "EEL",
-                            "name": "Restaurante da EEL - Lorena",
-                            "phones": [
-                                       "(12) 3159-5304"
-                                       ],
-                            "id": 70,
-                            "latitude": 0,
-                            "longitude": 0,
-                            "photourl": "http://www.usp.br/coseas/COSEASHP/ALM/EEL/Lorena_0278.JPG",
-                            "workinghours": {
-                            "weekdays": {
-                            "dinner": "17h30 √†s 19h30",
-                            "lunch": "11h00 √†s 14h00"
-                            }
-                            }
-                            }
-                            ]
-            },
-            {
-            "name": "FSP",
-            "rucard": {
-            "address": "",
-            "workinghours": ""
-            },
-            "cashier": {
-            "address": "",
-            "prices": {
-            "special": {
-            "dinner": "6,00",
-            "lunch": "6,00",
-            "breakfast": "6,00"
-            },
-            "students": {
-            "dinner": "1,90",
-            "lunch": "1,90",
-            "breakfast": "1,90"
-            },
-            "visiting": {
-            "dinner": "12,00",
-            "lunch": "12,00",
-            "breakfast": "12,00"
-            }
-            },
-            "longitude": 0,
-            "latitude": 0,
-            "workinghours": ""
-            },
-            "restaurants": [
-                            {
-                            "address": "Av. Dr. Arnaldo, 715 - Faculdade de Sa√∫de P√∫blica, Cerqueira Cesar, S√£o Paulo - SP",
-                            "alias": "FSP",
-                            "name": "Restaurante da Faculdade de Sa√∫de P√∫blica",
-                            "phones": [
-                                       "(11) 3061-7785"
-                                       ],
-                            "id": 90,
-                            "latitude": 0,
-                            "longitude": 0,
-                            "photourl": "http://www.usp.br/coseas/COSEASHP/ALM/RestFSP/FSP3Mini.jpg",
-                            "workinghours": {
-                            "weekdays": {
-                            "dinner": "17h30 √†s 19h00",
-                            "lunch": "11h15 √†s 14h15"
-                            }
-                            }
-                            }
-                            ]
-            }
-            ]
-}
+[ {
+  "name" : "São Paulo - Cidade Universitária \"Armando de Salles Oliveira\"",
+  "restaurants" : [ {
+    "alias" : "",
+    "address" : "Rua do Matão, Travessa R 187, Cidade Universitária, São Paulo - SP",
+    "name" : "FISICA - São Paulo",
+    "phones" : "(11) 3091-6710",
+    "id" : "8",
+    "latitude" : "-23.5606780",
+    "longitude" : "-46.7356010",
+    "photourl" : "http://bahamas.uspnet.usp.br/dominios/cce/servicos/restaurantesUSP/fisica.jpg",
+    "workinghours" : {
+      "sunday" : {
+        "lunch" : "",
+        "breakfast" : "",
+        "dinner" : ""
+      },
+      "saturday" : {
+        "lunch" : "",
+        "breakfast" : "",
+        "dinner" : ""
+      },
+      "weekdays" : {
+        "lunch" : "",
+        "breakfast" : "",
+        "dinner" : ""
+      }
+    },
+    "cashiers" : [ {
+      "address" : "Praça do Relógio Solar, travessa 8, 300 - Cidade Universitária - São Paulo",
+      "prices" : {
+        "special" : {
+          "dinner" : "6.00",
+          "lunch" : "6.00",
+          "breakfast" : ""
+        },
+        "students" : {
+          "dinner" : "1.90",
+          "lunch" : "1.90",
+          "breakfast" : ""
+        },
+        "visiting" : {
+          "dinner" : "12.00",
+          "lunch" : "12.00",
+          "breakfast" : ""
+        },
+        "employees" : {
+          "dinner" : "12.00",
+          "lunch" : "12.00",
+          "breakfast" : ""
+        }
+      },
+      "longitude" : "-46.6366320",
+      "latitude" : "-23.5598120",
+      "workinghours" : "Segundas as Sextas-Feiras, das 7h as 19h30"
+    } ],
+    "hasCashier" : "false"
+  }, {
+    "alias" : "",
+    "address" : "Av. Lineu Prestes, 748, Cidade Universitária, São Paulo - SP",
+    "name" : "QUIMICA - São Paulo",
+    "phones" : "(11) 3034-1993",
+    "id" : "9",
+    "latitude" : "0E-7",
+    "longitude" : "0E-7",
+    "photourl" : "http://bahamas.uspnet.usp.br/dominios/cce/servicos/restaurantesUSP/quimicas.jpg",
+    "workinghours" : {
+      "sunday" : {
+        "lunch" : "",
+        "breakfast" : "",
+        "dinner" : ""
+      },
+      "saturday" : {
+        "lunch" : "",
+        "breakfast" : "",
+        "dinner" : ""
+      },
+      "weekdays" : {
+        "lunch" : "",
+        "breakfast" : "",
+        "dinner" : ""
+      }
+    },
+    "cashiers" : [ {
+      "address" : "Praça do Relógio Solar, travessa 8, 300 - Cidade Universitária - São Paulo",
+      "prices" : {
+        "special" : {
+          "dinner" : "6.00",
+          "lunch" : "6.00",
+          "breakfast" : ""
+        },
+        "students" : {
+          "dinner" : "1.90",
+          "lunch" : "1.90",
+          "breakfast" : ""
+        },
+        "visiting" : {
+          "dinner" : "12.00",
+          "lunch" : "12.00",
+          "breakfast" : ""
+        },
+        "employees" : {
+          "dinner" : "12.00",
+          "lunch" : "12.00",
+          "breakfast" : ""
+        }
+      },
+      "longitude" : "-46.6366320",
+      "latitude" : "-23.5598120",
+      "workinghours" : "Segundas as Sextas-Feiras, das 7h as 19h30"
+    } ],
+    "hasCashier" : "false"
+  }, {
+    "alias" : "",
+    "address" : "Praça do Relógio Solar, travessa 8, 300, Cidade Universitária, São Paulo - SP",
+    "name" : "CENTRAL - São Paulo",
+    "phones" : "(11) 3091-3318",
+    "id" : "6",
+    "latitude" : "-23.5598117",
+    "longitude" : "-46.7212049",
+    "photourl" : "http://bahamas.uspnet.usp.br/dominios/cce/servicos/restaurantesUSP/central.jpg",
+    "workinghours" : {
+      "sunday" : {
+        "lunch" : "",
+        "breakfast" : "",
+        "dinner" : ""
+      },
+      "saturday" : {
+        "lunch" : "",
+        "breakfast" : "",
+        "dinner" : ""
+      },
+      "weekdays" : {
+        "lunch" : "",
+        "breakfast" : "",
+        "dinner" : ""
+      }
+    },
+    "cashiers" : [ {
+      "address" : "Praça do Relógio Solar, travessa 8, 300 - Cidade Universitária - São Paulo",
+      "prices" : {
+        "special" : {
+          "dinner" : "6.00",
+          "lunch" : "6.00",
+          "breakfast" : ""
+        },
+        "students" : {
+          "dinner" : "1.90",
+          "lunch" : "1.90",
+          "breakfast" : ""
+        },
+        "visiting" : {
+          "dinner" : "12.00",
+          "lunch" : "12.00",
+          "breakfast" : ""
+        },
+        "employees" : {
+          "dinner" : "12.00",
+          "lunch" : "12.00",
+          "breakfast" : ""
+        }
+      },
+      "longitude" : "-46.6366320",
+      "latitude" : "-23.5598120",
+      "workinghours" : "Segundas as Sextas-Feiras, das 7h as 19h30"
+    } ],
+    "hasCashier" : "false"
+  }, {
+    "alias" : "",
+    "address" : ", ,  - ",
+    "name" : "ADMINISTRACAO - São Paulo",
+    "phones" : "(11) 2648-1172",
+    "id" : "10",
+    "latitude" : "0",
+    "longitude" : "0",
+    "photourl" : "",
+    "workinghours" : {
+      "sunday" : {
+        "lunch" : "",
+        "breakfast" : "",
+        "dinner" : ""
+      },
+      "saturday" : {
+        "lunch" : "",
+        "breakfast" : "",
+        "dinner" : ""
+      },
+      "weekdays" : {
+        "lunch" : "",
+        "breakfast" : "",
+        "dinner" : ""
+      }
+    },
+    "cashiers" : [ ],
+    "hasCashier" : "false"
+  }, {
+    "alias" : "",
+    "address" : ", ,  - ",
+    "name" : "DPS CUASO - São Paulo",
+    "phones" : "(11) 2648-1172",
+    "id" : "15",
+    "latitude" : "0",
+    "longitude" : "0",
+    "photourl" : "",
+    "workinghours" : {
+      "sunday" : {
+        "lunch" : "",
+        "breakfast" : "",
+        "dinner" : ""
+      },
+      "saturday" : {
+        "lunch" : "",
+        "breakfast" : "",
+        "dinner" : ""
+      },
+      "weekdays" : {
+        "lunch" : "",
+        "breakfast" : "",
+        "dinner" : ""
+      }
+    },
+    "cashiers" : [ ],
+    "hasCashier" : "false"
+  } ]
+}, {
+  "name" : "São Paulo - Quadrilátero Saúde",
+  "restaurants" : [ {
+    "alias" : "",
+    "address" : "Av. Dr. Arnaldo, 715, Cerqueira Cesar, São Paulo - SP",
+    "name" : "SAUDE PUBLICA - São Paulo",
+    "phones" : "(11) 3061-7785",
+    "id" : "11",
+    "latitude" : "0E-7",
+    "longitude" : "0E-7",
+    "photourl" : "http://bahamas.uspnet.usp.br/dominios/cce/servicos/restaurantesUSP/fsp.jpg",
+    "workinghours" : {
+      "sunday" : {
+        "lunch" : "",
+        "breakfast" : "",
+        "dinner" : ""
+      },
+      "saturday" : {
+        "lunch" : "",
+        "breakfast" : "",
+        "dinner" : ""
+      },
+      "weekdays" : {
+        "lunch" : "",
+        "breakfast" : "",
+        "dinner" : ""
+      }
+    },
+    "cashiers" : [ ],
+    "hasCashier" : "false"
+  }, {
+    "alias" : "",
+    "address" : ", ,  - ",
+    "name" : "MEDICINA - São Paulo",
+    "phones" : "(11) 2648-1172",
+    "id" : "18",
+    "latitude" : "0",
+    "longitude" : "0",
+    "photourl" : "",
+    "workinghours" : {
+      "sunday" : {
+        "lunch" : "",
+        "breakfast" : "",
+        "dinner" : ""
+      },
+      "saturday" : {
+        "lunch" : "",
+        "breakfast" : "",
+        "dinner" : ""
+      },
+      "weekdays" : {
+        "lunch" : "",
+        "breakfast" : "",
+        "dinner" : ""
+      }
+    },
+    "cashiers" : [ ],
+    "hasCashier" : "false"
+  }, {
+    "alias" : "",
+    "address" : "Av. Dr. Enéas Carvalho de Aguiar, 419, Cerqueira Cesar, São Paulo - SP",
+    "name" : "ENFERMAGEM - São Paulo",
+    "phones" : "(11) 3061-7518",
+    "id" : "12",
+    "latitude" : "0E-7",
+    "longitude" : "0E-7",
+    "photourl" : "http://bahamas.uspnet.usp.br/dominios/cce/servicos/restaurantesUSP/enfermagem.jpg",
+    "workinghours" : {
+      "sunday" : {
+        "lunch" : "",
+        "breakfast" : "",
+        "dinner" : ""
+      },
+      "saturday" : {
+        "lunch" : "",
+        "breakfast" : "",
+        "dinner" : ""
+      },
+      "weekdays" : {
+        "lunch" : "",
+        "breakfast" : "",
+        "dinner" : ""
+      }
+    },
+    "cashiers" : [ ],
+    "hasCashier" : "false"
+  } ]
+}, {
+  "name" : "São Paulo - USP Leste",
+  "restaurants" : [ {
+    "alias" : "",
+    "address" : "Rua Arlindo Bettio, 1000, Ermelino Matarazzo, São Paulo - SP",
+    "name" : "EACH - São Paulo",
+    "phones" : "(11) 3091-8824",
+    "id" : "13",
+    "latitude" : "0E-7",
+    "longitude" : "0E-7",
+    "photourl" : "http://bahamas.uspnet.usp.br/dominios/cce/servicos/restaurantesUSP/each.jpg",
+    "workinghours" : {
+      "sunday" : {
+        "lunch" : "",
+        "breakfast" : "",
+        "dinner" : ""
+      },
+      "saturday" : {
+        "lunch" : "",
+        "breakfast" : "",
+        "dinner" : ""
+      },
+      "weekdays" : {
+        "lunch" : "",
+        "breakfast" : "",
+        "dinner" : ""
+      }
+    },
+    "cashiers" : [ ],
+    "hasCashier" : "false"
+  }, {
+    "alias" : "",
+    "address" : ", ,  - ",
+    "name" : "DPS EACH - São Paulo",
+    "phones" : "(11) 2648-1172",
+    "id" : "16",
+    "latitude" : "0",
+    "longitude" : "0",
+    "photourl" : "",
+    "workinghours" : {
+      "sunday" : {
+        "lunch" : "",
+        "breakfast" : "",
+        "dinner" : ""
+      },
+      "saturday" : {
+        "lunch" : "",
+        "breakfast" : "",
+        "dinner" : ""
+      },
+      "weekdays" : {
+        "lunch" : "",
+        "breakfast" : "",
+        "dinner" : ""
+      }
+    },
+    "cashiers" : [ ],
+    "hasCashier" : "false"
+  } ]
+}, {
+  "name" : "Bauru - Campus de Bauru",
+  "restaurants" : [ {
+    "alias" : "",
+    "address" : ", ,  - ",
+    "name" : "RESTAURANTE UNIVERSITARIO DE BAURU",
+    "phones" : "(11) 2648-1172",
+    "id" : "20",
+    "latitude" : "0",
+    "longitude" : "0",
+    "photourl" : "",
+    "workinghours" : {
+      "sunday" : {
+        "lunch" : "",
+        "breakfast" : "",
+        "dinner" : ""
+      },
+      "saturday" : {
+        "lunch" : "",
+        "breakfast" : "",
+        "dinner" : ""
+      },
+      "weekdays" : {
+        "lunch" : "",
+        "breakfast" : "",
+        "dinner" : ""
+      }
+    },
+    "cashiers" : [ ],
+    "hasCashier" : "false"
+  } ]
+}, {
+  "name" : "Piracicaba - Campus \"Luiz de Queiroz\"",
+  "restaurants" : [ {
+    "alias" : "",
+    "address" : ", ,  - ",
+    "name" : "RESTAURANTE DE PIRACICABA",
+    "phones" : "(11) 2648-1172",
+    "id" : "1",
+    "latitude" : "0",
+    "longitude" : "0",
+    "photourl" : "",
+    "workinghours" : {
+      "sunday" : {
+        "lunch" : "",
+        "breakfast" : "",
+        "dinner" : ""
+      },
+      "saturday" : {
+        "lunch" : "",
+        "breakfast" : "",
+        "dinner" : ""
+      },
+      "weekdays" : {
+        "lunch" : "",
+        "breakfast" : "",
+        "dinner" : ""
+      }
+    },
+    "cashiers" : [ ],
+    "hasCashier" : "false"
+  } ]
+}, {
+  "name" : "São Carlos - Campus de São Carlos",
+  "restaurants" : [ {
+    "alias" : "",
+    "address" : ", ,  - ",
+    "name" : "RU - CENTRAL (SÃO CARLOS)",
+    "phones" : "(11) 2648-1172",
+    "id" : "2",
+    "latitude" : "0",
+    "longitude" : "0",
+    "photourl" : "",
+    "workinghours" : {
+      "sunday" : {
+        "lunch" : "12:00 às 14:30",
+        "breakfast" : "",
+        "dinner" : ""
+      },
+      "saturday" : {
+        "lunch" : "11:30 às 13:30",
+        "breakfast" : "",
+        "dinner" : "19:00 às 21:00"
+      },
+      "weekdays" : {
+        "lunch" : "12:00 às 14:00",
+        "breakfast" : "",
+        "dinner" : "17:30 às 19:00"
+      }
+    },
+    "cashiers" : [ ],
+    "hasCashier" : "false"
+  }, {
+    "alias" : "",
+    "address" : ", ,  - ",
+    "name" : "RU - CAMPUS II (SÃO CARLOS)",
+    "phones" : "(11) 2648-1172",
+    "id" : "3",
+    "latitude" : "0",
+    "longitude" : "0",
+    "photourl" : "",
+    "workinghours" : {
+      "sunday" : {
+        "lunch" : "",
+        "breakfast" : "",
+        "dinner" : ""
+      },
+      "saturday" : {
+        "lunch" : "",
+        "breakfast" : "",
+        "dinner" : ""
+      },
+      "weekdays" : {
+        "lunch" : "",
+        "breakfast" : "",
+        "dinner" : ""
+      }
+    },
+    "cashiers" : [ ],
+    "hasCashier" : "false"
+  }, {
+    "alias" : "",
+    "address" : ", ,  - ",
+    "name" : "RU - CRHEA (SÃO CARLOS)",
+    "phones" : "(11) 2648-1172",
+    "id" : "4",
+    "latitude" : "0",
+    "longitude" : "0",
+    "photourl" : "",
+    "workinghours" : {
+      "sunday" : {
+        "lunch" : "",
+        "breakfast" : "",
+        "dinner" : ""
+      },
+      "saturday" : {
+        "lunch" : "",
+        "breakfast" : "",
+        "dinner" : ""
+      },
+      "weekdays" : {
+        "lunch" : "",
+        "breakfast" : "",
+        "dinner" : ""
+      }
+    },
+    "cashiers" : [ ],
+    "hasCashier" : "false"
+  } ]
+}, {
+  "name" : "Ribeirão Preto - Campus de Ribeirão Preto",
+  "restaurants" : [ {
+    "alias" : "",
+    "address" : ", ,  - ",
+    "name" : "RESTAURANTE CENTRAL - Ribeirão Preto",
+    "phones" : "(11) 2648-1172",
+    "id" : "19",
+    "latitude" : "0",
+    "longitude" : "0",
+    "photourl" : "",
+    "workinghours" : {
+      "sunday" : {
+        "lunch" : "",
+        "breakfast" : "",
+        "dinner" : ""
+      },
+      "saturday" : {
+        "lunch" : "",
+        "breakfast" : "",
+        "dinner" : ""
+      },
+      "weekdays" : {
+        "lunch" : "",
+        "breakfast" : "",
+        "dinner" : ""
+      }
+    },
+    "cashiers" : [ ],
+    "hasCashier" : "false"
+  } ]
+}, {
+  "name" : "Lorena - Campus de Lorena",
+  "restaurants" : [ {
+    "alias" : "",
+    "address" : "Estrada do Campinho s/n, , Lorena - SP",
+    "name" : "RESTAURANTE DE LORENA",
+    "phones" : "(12) 3159-5304",
+    "id" : "17",
+    "latitude" : "0E-7",
+    "longitude" : "0E-7",
+    "photourl" : "http://bahamas.uspnet.usp.br/dominios/cce/servicos/restaurantesUSP/lorena.jpg",
+    "workinghours" : {
+      "sunday" : {
+        "lunch" : "",
+        "breakfast" : "",
+        "dinner" : ""
+      },
+      "saturday" : {
+        "lunch" : "",
+        "breakfast" : "",
+        "dinner" : ""
+      },
+      "weekdays" : {
+        "lunch" : "",
+        "breakfast" : "",
+        "dinner" : ""
+      }
+    },
+    "cashiers" : [ ],
+    "hasCashier" : "false"
+  } ]
+}, {
+  "name" : "São Paulo - Largo São Francisco",
+  "restaurants" : [ {
+    "alias" : "",
+    "address" : "Rua Riachuelo, 194, Centro, São Paulo - SP",
+    "name" : "DIREITO - São Paulo",
+    "phones" : "(11) 3111-4054",
+    "id" : "14",
+    "latitude" : "-23.5498990",
+    "longitude" : "-46.6366323",
+    "photourl" : "http://bahamas.uspnet.usp.br/dominios/cce/servicos/restaurantesUSP/direito.jpg",
+    "workinghours" : {
+      "sunday" : {
+        "lunch" : "",
+        "breakfast" : "",
+        "dinner" : ""
+      },
+      "saturday" : {
+        "lunch" : "",
+        "breakfast" : "",
+        "dinner" : ""
+      },
+      "weekdays" : {
+        "lunch" : "",
+        "breakfast" : "",
+        "dinner" : ""
+      }
+    },
+    "cashiers" : [ ],
+    "hasCashier" : "false"
+  } ]
+}, {
+  "name" : "Pirassununga - Campus de Pirassununga",
+  "restaurants" : [ {
+    "alias" : "",
+    "address" : ", ,  - ",
+    "name" : "RU - PIRASSUNUNGA",
+    "phones" : "(11) 2648-1172",
+    "id" : "5",
+    "latitude" : "0",
+    "longitude" : "0",
+    "photourl" : "",
+    "workinghours" : {
+      "sunday" : {
+        "lunch" : "",
+        "breakfast" : "",
+        "dinner" : ""
+      },
+      "saturday" : {
+        "lunch" : "",
+        "breakfast" : "",
+        "dinner" : ""
+      },
+      "weekdays" : {
+        "lunch" : "",
+        "breakfast" : "",
+        "dinner" : ""
+      }
+    },
+    "cashiers" : [ ],
+    "hasCashier" : "false"
+  } ]
+} ]

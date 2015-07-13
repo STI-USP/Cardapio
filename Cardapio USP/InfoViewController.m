@@ -49,7 +49,7 @@
 -(void)viewWillAppear:(BOOL)animated {
   [super viewDidAppear:YES];
   if ([[dataModel restaurants] count] == 0) {
-    [dataModel getRestaurants];
+    [dataModel getRestaurantList];
   } else {
     [self setupView];
   }

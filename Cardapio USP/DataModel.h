@@ -37,7 +37,7 @@
 
 + (DataModel *) getInstance;
 - (void)getMenu;
-- (void)getRestaurants;
+- (void)getRestaurantList;
 - (void)setDefault;
 - (NSMutableDictionary *) cleanDictionary: (NSMutableDictionary *)dictionary;
 

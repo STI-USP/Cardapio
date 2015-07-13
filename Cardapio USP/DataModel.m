@@ -36,7 +36,7 @@
   return instance;
 }
 
-- (void)getRestaurants {
+- (void)getRestaurantList {
   
   AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
   manager.requestSerializer = [AFHTTPRequestSerializer serializer];
@@ -57,9 +57,11 @@
       [self.restaurants addObject:campus];
     }
     // Notifica atualizações
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveRestaurants" object:self];
+    //[[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveRestaurants" object:self];
     
   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    //ler do arquivo
+    
     NSLog(@"%@", error);
   }];
 }
@@ -142,8 +144,29 @@
   return _cash;
 }
 
+#pragma mark Getters
+
+- (NSMutableArray *)restaurants{
+  NSString *filePath = [[NSBundle mainBundle] pathForResource:@"restaurants" ofType:@"json"];
+  if (filePath) {
+    NSString *jsonString = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
+    if (jsonString) {
+      NSData *data = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+      NSMutableDictionary *json = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingMutableContainers error: nil];
+      for (NSMutableDictionary *campus in json){
+        [self.restaurants addObject:campus];
+      }
+    }
+  }
+  return self.restaurants;
+}
+
 
 #pragma mark Setters
+
+- (void)setRestaurants:(NSMutableArray *)restaurants {
+  
+}
 
 - (void)setDefault { //restaurante default para quando não houver nenhum selecionado
   self.campus = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"São Paulo - Cidade Universitária \"Armando de Salles Oliveira\"", nil]
