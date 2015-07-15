@@ -22,7 +22,7 @@
 @property (nonatomic, strong) Cash *cash;
 @property (nonatomic, strong) NSDictionary *defaulRestaurant;
 @property (nonatomic, strong) NSMutableDictionary *currentRestaurant;
-@property (nonatomic, strong) NSDictionary *preferredRestaurant;
+@property (nonatomic, strong) NSMutableDictionary *preferredRestaurant;
 @property (nonatomic, strong) NSMutableArray *menus;
 @property (nonatomic, strong) NSMutableArray *restaurants;
 @property (nonatomic, strong) NSArray *diasDaSemana;

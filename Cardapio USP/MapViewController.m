@@ -105,8 +105,10 @@
   //annotation.library = library;
   [self.mapView addAnnotation:annotation];
   
-  // inicialmente, o centro do mapa na USP CUASO, por enquanto
-  MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance([self.cuaso coordinate], kRegion, kRegion); // zoom dentro da região do usuário
+  // Centro do mapa no Restaurante escolhido
+  [self.mapView setCenterCoordinate:CLLocationCoordinate2DMake([self.dataModel.currentRestaurant[@"latitude"] doubleValue], [self.dataModel.currentRestaurant[@"longitude"] doubleValue])];
+  MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2DMake([self.dataModel.currentRestaurant[@"latitude"] doubleValue], [self.dataModel.currentRestaurant[@"longitude"] doubleValue]), kRegion, kRegion);
+  //MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance([self.cuaso coordinate], kRegion, kRegion); // zoom dentro da região do usuário
   [self.mapView setRegion:region animated:YES]; // ajusta mapa na região em volta do usuário
   
 }
@@ -231,7 +233,7 @@
 }
 
 - (void)locationUpdate:(CLLocation *)location {
-  [self.mapView setCenterCoordinate:location.coordinate];
+  //[self.mapView setCenterCoordinate:location.coordinate];
   if ([self.mapView showsUserLocation] == NO) {
     [self.mapView setShowsUserLocation:YES];
   }

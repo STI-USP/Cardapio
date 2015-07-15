@@ -161,11 +161,26 @@
   
   //preços
   NSMutableString *prices = [[NSMutableString alloc] init];
-  [prices appendString:[NSString stringWithFormat:@"Aluno: %@\n", [[[[[_restaurantDc valueForKey:@"cashiers"] objectAtIndex:0] valueForKey:@"prices"] valueForKey:@"students"] valueForKey:@"lunch"]]];
-  [prices appendString:[NSString stringWithFormat:@"Especial: %@\n", [[[[[_restaurantDc valueForKey:@"cashiers"] objectAtIndex:0] valueForKey:@"prices"] valueForKey:@"special"] valueForKey:@"lunch"]]];
-  [prices appendString:[NSString stringWithFormat:@"Visitante: %@\n", [[[[[_restaurantDc valueForKey:@"cashiers"] objectAtIndex:0] valueForKey:@"prices"] valueForKey:@"visiting"] valueForKey:@"lunch"]]];
+  if ([[_restaurantDc valueForKey:@"cashiers"] isKindOfClass:[NSArray class]]) {
+    [prices appendString:[NSString stringWithFormat:@"Aluno: %@\n", [[[[[_restaurantDc valueForKey:@"cashiers"] objectAtIndex:0] valueForKey:@"prices"] valueForKey:@"students"] valueForKey:@"lunch"]]];
+    [prices appendString:[NSString stringWithFormat:@"Especial: %@\n", [[[[[_restaurantDc valueForKey:@"cashiers"] objectAtIndex:0] valueForKey:@"prices"] valueForKey:@"special"] valueForKey:@"lunch"]]];
+    [prices appendString:[NSString stringWithFormat:@"Visitante: %@\n", [[[[[_restaurantDc valueForKey:@"cashiers"] objectAtIndex:0] valueForKey:@"prices"] valueForKey:@"visiting"] valueForKey:@"lunch"]]];
+  } else {
+    [prices appendString:[NSString stringWithFormat:@"Aluno: 1,90\n"]];
+    [prices appendString:[NSString stringWithFormat:@"Especial: 6,00\n"]];
+    [prices appendString:[NSString stringWithFormat:@"Visitante: 12,00"]];
+  }
   
   [_priceItens setText:prices];
+  
+  
+  if ([[_restaurantDc valueForKey:@"id"] isEqualToString:[dataModel.preferredRestaurant valueForKey:@"id"]]) {
+    [self.prefButton setTitle:@"Desmarcar como favorito" forState:UIControlStateNormal];
+  } else {
+    [self.prefButton setTitle:@"Marcar como favorito" forState:UIControlStateNormal];
+  }
+  
+
 
   [self reloadInputViews];
 }
@@ -178,8 +193,16 @@
   [self setupView];
 }
 
--(IBAction)setPreferred:(id)sender{
-  [dataModel setPreferredRestaurant:_restaurantDc];
+-(void)setPreferred:(id)sender {
+  if ([[_restaurantDc valueForKey:@"id"] isEqualToString:[dataModel.preferredRestaurant valueForKey:@"id"]]) {
+    [dataModel setPreferredRestaurant:nil]; // se for igual, está desmarcando como favorito
+    [self.prefButton setTitle:@"Marcar como favorito" forState:UIControlStateNormal];
+  } else {
+    [dataModel setPreferredRestaurant:_restaurantDc]; // senão, está marcando como favorito
+    [self.prefButton setTitle:@"Desmarcar como favorito" forState:UIControlStateNormal];
+  }
+
+  [self reloadInputViews];
 }
 
 @end

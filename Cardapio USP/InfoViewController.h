@@ -14,7 +14,7 @@
 
 @interface InfoViewController : UITableViewController<UITabBarControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 
-@property (strong, nonatomic) NSDictionary *restaurantDc;
+@property (strong, nonatomic) NSMutableDictionary *restaurantDc;
 
 @property (strong, nonatomic) IBOutlet MenuDataModel *_menuDataModel;
 @property (strong, nonatomic) IBOutlet Restaurant *restaurant;
@@ -26,6 +26,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *phone;
 @property (strong, nonatomic) IBOutlet UILabel *hour;
 @property (strong, nonatomic) IBOutlet UILabel *weeklyperiod;
+@property (strong, nonatomic) IBOutlet UIButton *prefButton;
 
 
 @property (strong, nonatomic) IBOutlet UILabel *workinghours;
