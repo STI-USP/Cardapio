@@ -65,30 +65,10 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     self.restaurants = [defaults objectForKey:@"Restaurants"];
     NSLog(@"%@", error);
-    
     // Notifica atualizações
     [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveRestaurants" object:self];
 
   }];
-}
-
-- (void)readFile {
-  // Read in and store as string
-  NSString *filePath = [[NSBundle mainBundle] pathForResource:@"restaurants" ofType:@"json"];
-  NSData* data = [NSData dataWithContentsOfFile:filePath];
-  
-  NSLog(@"%@", [data description]);
-  __autoreleasing NSError* error = nil;
-  
-  NSMutableDictionary *json = [NSJSONSerialization JSONObjectWithData:data
-                                                              options:NSJSONReadingMutableContainers
-                                                                error:&error];
-  for (NSMutableDictionary *campus in json){
-    [self.restaurants addObject:campus];
-  }
-
-  if (error == nil)
-    NSLog(@"%@", json);
 }
 
 - (void)getMenu{
@@ -101,7 +81,9 @@
   manager.responseSerializer = [AFHTTPResponseSerializer serializer];
   
   NSString *webServicePath;
-  webServicePath = [NSString stringWithFormat:@"%@menu/%d", kBaseDevSTIURL, 1];
+  webServicePath = [NSString stringWithFormat:@"%@menu/%@", kBaseDevSTIURL, [self.currentRestaurant valueForKey:@"id"]];
+  
+  NSLog(@"%@", webServicePath);
   
   NSDictionary *parameters = nil;
   parameters = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -111,25 +93,52 @@
   [manager POST: webServicePath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
     // Parse da resposta
     NSMutableDictionary *json = [NSJSONSerialization JSONObjectWithData:responseObject options: NSJSONReadingMutableContainers error: nil];
-    for(NSMutableDictionary *rawItem in json) {
-      NSMutableDictionary *item = [self cleanDictionary:rawItem];
-      
-      NSMutableArray *period = [[NSMutableArray alloc] init];
-      if (![[item objectForKey:@"lunch"]isKindOfClass:[NSString class]]) {
-        Period *lunch = [[Period alloc ] initWithPeriod:@"lunch" andMenu:[item objectForKey:@"lunch"][@"menu"] andCalories:[item objectForKey:@"lunch"][@"calories"]];
-        [period addObject:lunch];
+    
+    if (![[[json valueForKey:@"message"] valueForKey:@"error"] boolValue]) {
+      for(NSMutableDictionary *rawItem in [json valueForKey:@"meals"]) {
+        NSMutableDictionary *item = [self cleanDictionary:rawItem];
+        
+        NSMutableArray *period = [[NSMutableArray alloc] init];
+        if (![[item objectForKey:@"lunch"]isKindOfClass:[NSString class]]) {
+          Period *lunch = [[Period alloc ] initWithPeriod:@"lunch" andMenu:[item objectForKey:@"lunch"][@"menu"] andCalories:[item objectForKey:@"lunch"][@"calories"]];
+          [period addObject:lunch];
+        }
+        
+        if (![[item valueForKey:@"dinner"] isKindOfClass:[NSString class]]) {
+          Period *dinner = [[Period alloc ] initWithPeriod:@"dinner" andMenu:[item objectForKey:@"dinner"][@"menu"] andCalories:[item objectForKey:@"dinner"][@"calories"]];
+          [period addObject:dinner];
+        }
+        
+        Menu *menu = [[Menu alloc] initWithDate:[item objectForKey:@"date"] andPeriod:period];
+        [self.menuArray addObject:menu];
       }
+    } else {
       
-      if (![[item valueForKey:@"dinner"] isKindOfClass:[NSString class]]) {
-        Period *dinner = [[Period alloc ] initWithPeriod:@"dinner" andMenu:[item objectForKey:@"dinner"][@"menu"] andCalories:[item objectForKey:@"dinner"][@"calories"]];
-        [period addObject:dinner];
+      for (int i = 1; i<=7; i++) {
+        NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+        
+        NSDate *today = [NSDate date];
+        NSDate *beginningOfWeek = nil;
+        [gregorian rangeOfUnit:NSWeekCalendarUnit startDate:&beginningOfWeek interval:NULL forDate:today];
+        
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"dd-MM-yyyy"];
+        
+        NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
+        [dateComponents setDay:i];
+        
+        NSDate *newDate = [[NSCalendar currentCalendar] dateByAddingComponents:dateComponents toDate:beginningOfWeek options:0];
+        
+        Menu *menu = [[Menu alloc] initWithDate:[dateFormatter stringFromDate:newDate] andPeriod:nil];
+        [self.menuArray addObject:menu];
       }
-      
-      Menu *menu = [[Menu alloc] initWithDate:[item objectForKey:@"date"] andPeriod:period];
-      [self.menuArray addObject:menu];
+      UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Erro" message:@"Não foi possível obter o cardápio. \nTente novamente mais tarde." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+      [alertView show];
     }
+
     // Notifica atualizações
     [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveMenu" object:self];
+
   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Erro" message:@"Não foi possível obter o cardápio. \nTente novamente mais tarde." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
     [alertView show];
@@ -187,7 +196,7 @@
   
   [self setCurrentRestaurant:[NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"Praça do Relógio Solar, travessa 8, 300, Cidade Universitária, São Paulo - SP", @"Central", dcPhones, @"6", @"-46.7212049", dcCashiers, @"http://bahamas.uspnet.usp.br/dominios/cce/servicos/restaurantesUSP/central.jpg", @"-23.5598117", @"Restaurante Central", dcWorkingHours, nil]
                                                                 forKeys:[NSArray arrayWithObjects:@"address", @"alias", @"phones", @"id", @"longitude", @"cashiers", @"photourl", @"latitude", @"name", @"workinghours", nil]]];
-  [self setPreferredRestaurant: self.currentRestaurant];
+  //[self setPreferredRestaurant: self.currentRestaurant];
 }
 
 - (void)setCurrentRestaurant:(NSDictionary *)currentRestaurant {

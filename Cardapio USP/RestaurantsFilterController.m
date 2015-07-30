@@ -32,9 +32,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
   [self setTitle:@"Restaurantes"];
-
   
   dataModel = [DataModel getInstance];
   
@@ -101,7 +99,7 @@
   
   prefRestaurant = [NSMutableDictionary dictionaryWithDictionary:[defaults dictionaryForKey:@"preferredRestaurant"]];
 
-  if ([[prefRestaurant valueForKey:@"name"] isEqualToString:[[[[campiList objectAtIndex:indexPath.section] valueForKey:@"restaurants"]objectAtIndex:indexPath.row] valueForKey:@"name"]]) {
+  if ([[prefRestaurant valueForKey:@"id"] isEqualToString:[[[[campiList objectAtIndex:indexPath.section] valueForKey:@"restaurants"]objectAtIndex:indexPath.row] valueForKey:@"id"]]) {
     [favButton setTintColor:[UIColor orangeColor]];
   } else {
     [favButton setTintColor:[UIColor colorWithWhite:0.7 alpha:0.5]];

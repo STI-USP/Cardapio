@@ -43,41 +43,19 @@
   [swipeRight setDirection:UISwipeGestureRecognizerDirectionRight];
   [[self view] addGestureRecognizer: swipeRight];
   
-  dateTabController = [[DKScrollingTabController alloc] init];
-
+  
   NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
   NSDateComponents *weekdayComponents =[gregorian components:NSWeekdayCalendarUnit fromDate:[NSDate date]];
   NSInteger weekday = [weekdayComponents weekday] - 2; //para deixar a segunda feira como 0
   diaDaSemana = (int)weekday;
   
-  dataModel = [DataModel getInstance];
-  [dataModel getMenu];
   
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChangeRestaurant:) name:@"DidChangeRestaurant" object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveMenu:) name:@"DidReceiveMenu" object:nil];
-  
-  
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-  NSString *name;
-  name = [[dataModel currentRestaurant]valueForKey:@"name"];
-  [self.navigationItem setTitle: name];
-}
-
-- (void)didReceiveMemoryWarning {
-  [super didReceiveMemoryWarning];
-  // Dispose of any resources that can be recreated.
-}
-
-- (void)setupWeekView: (NSArray *) weekMenu {
-  
+  dateTabController = [[DKScrollingTabController alloc] init];
   dateTabController.delegate = self;
   [self addChildViewController:dateTabController];
   [dateTabController didMoveToParentViewController:self];
   [self.view addSubview:dateTabController.view];
   dateTabController.view.frame = CGRectMake(0, 65, 320, 40);
-  
   dateTabController.view.backgroundColor = [UIColor lightTextColor];
   dateTabController.buttonPadding = 3.2;
   dateTabController.underlineIndicator = YES;
@@ -87,8 +65,34 @@
   dateTabController.selectedTextColor = [UIColor blackColor];
   dateTabController.unselectedTextColor = [UIColor grayColor];
   dateTabController.unselectedBackgroundColor = [UIColor clearColor];
-  
   dateTabController.selection = @[@"PLACE\n0", @"PLACE\n0", @"PLACE\n0", @"PLACE\n0", @"PLACE\n0", @"PLACE\n0", @"PLACE\n0" ];
+  
+  
+  dataModel = [DataModel getInstance];
+  
+  if ([dataModel preferredRestaurant]) {
+    [dataModel setCurrentRestaurant:[dataModel preferredRestaurant]];
+  }
+  
+  [dataModel getMenu];
+  
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChangeRestaurant:) name:@"DidChangeRestaurant" object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveMenu:) name:@"DidReceiveMenu" object:nil];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+  NSString *name;
+  name = [[dataModel currentRestaurant]valueForKey:@"name"];
+  [self.navigationItem setTitle: name];
+  
+}
+
+- (void)didReceiveMemoryWarning {
+  [super didReceiveMemoryWarning];
+  // Dispose of any resources that can be recreated.
+}
+
+- (void)setupWeekView: (NSArray *) weekMenu {
   
   NSString *monButtonName = [[NSString stringWithFormat:@"S\n%@", [[menuArray objectAtIndex:0] date]]substringToIndex:4];
   NSString *tueButtonName = [[NSString stringWithFormat:@"T\n%@", [[menuArray objectAtIndex:1] date]]substringToIndex:4];
@@ -97,7 +101,7 @@
   NSString *friButtonName = [[NSString stringWithFormat:@"S\n%@", [[menuArray objectAtIndex:4] date]]substringToIndex:4];
   NSString *satButtonName = [[NSString stringWithFormat:@"S\n%@", [[menuArray objectAtIndex:5] date]]substringToIndex:4];
   NSString *sunButtonName = [[NSString stringWithFormat:@"D\n%@", [[menuArray objectAtIndex:6] date]]substringToIndex:4];
-  
+
   [dateTabController setButtonName:monButtonName atIndex:0];
   [dateTabController setButtonName:tueButtonName atIndex:1];
   [dateTabController setButtonName:wedButtonName atIndex:2];
@@ -105,7 +109,6 @@
   [dateTabController setButtonName:friButtonName atIndex:4];
   [dateTabController setButtonName:satButtonName atIndex:5];
   [dateTabController setButtonName:sunButtonName atIndex:6];
-  
   
   [dateTabController.buttons enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
     UIButton *button = obj;
