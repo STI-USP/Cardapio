@@ -45,9 +45,16 @@
   
   
   NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+  [gregorian setFirstWeekday:2];
   NSDateComponents *weekdayComponents =[gregorian components:NSWeekdayCalendarUnit fromDate:[NSDate date]];
   NSInteger weekday = [weekdayComponents weekday] - 2; //para deixar a segunda feira como 0
-  diaDaSemana = (int)weekday;
+  
+  if ((int)weekday == -1) {
+    diaDaSemana = 6;
+  } else {
+    diaDaSemana = (int)weekday;
+  }
+  
   
   
   dateTabController = [[DKScrollingTabController alloc] init];
@@ -225,10 +232,10 @@
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
   switch (section) {
     case 0:
-      return [NSString stringWithFormat:@"Valor calórico para uma refeição: %@", [[[menu period] objectAtIndex:0] calories]];
+      return [NSString stringWithFormat:@"Valor calórico para uma refeição: %@ kcal", [[[menu period] objectAtIndex:0] calories]];
       break;
     case 1:
-      return [NSString stringWithFormat:@"Valor calórico para uma refeição: %@", [[[menu period] objectAtIndex:1] calories]];
+      return [NSString stringWithFormat:@"Valor calórico para uma refeição: %@ kcal", [[[menu period] objectAtIndex:1] calories]];
       break;
       
     default:

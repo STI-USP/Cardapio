@@ -10,6 +10,7 @@
 #import "Period.h"
 #import "Items.h"
 #import "AFNetworking.h"
+#import "SVProgressHUD.h"
 
 #define kRestaurantsURL @"http://kaimbu2.uspnet.usp.br:8080/cardapio/"
 #define kBaseURL @"http://kaimbu2.uspnet.usp.br:8080/"
@@ -43,7 +44,7 @@
   manager.responseSerializer = [AFHTTPResponseSerializer serializer];
   
   NSString *webServicePath;
-  webServicePath = [NSString stringWithFormat:@"%@restaurants", kBaseDevSTIURL];
+  webServicePath = [NSString stringWithFormat:@"%@restaurants", kBaseSTIURL];
   
   NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys: @"596df9effde6f877717b4e81fdb2ca9f" , @"hash", nil];
   
@@ -73,6 +74,8 @@
 
 - (void)getMenu{
   
+  [SVProgressHUD show];
+  
   self.menuArray = [[NSMutableArray alloc] init];
   
   AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -81,7 +84,7 @@
   manager.responseSerializer = [AFHTTPResponseSerializer serializer];
   
   NSString *webServicePath;
-  webServicePath = [NSString stringWithFormat:@"%@menu/%@", kBaseDevSTIURL, [self.currentRestaurant valueForKey:@"id"]];
+  webServicePath = [NSString stringWithFormat:@"%@menu/%@", kBaseSTIURL, [self.currentRestaurant valueForKey:@"id"]];
   
   NSLog(@"%@", webServicePath);
   
@@ -132,16 +135,18 @@
         Menu *menu = [[Menu alloc] initWithDate:[dateFormatter stringFromDate:newDate] andPeriod:nil];
         [self.menuArray addObject:menu];
       }
-      UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Erro" message:@"Não foi possível obter o cardápio. \nTente novamente mais tarde." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+      UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Aviso" message:@"Não foi possível obter o cardápio. \nTente novamente mais tarde." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
       [alertView show];
     }
 
     // Notifica atualizações
     [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveMenu" object:self];
+    [SVProgressHUD dismiss];
 
   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Erro" message:@"Não foi possível obter o cardápio. \nTente novamente mais tarde." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Aviso" message:@"Não foi possível obter o cardápio. \nTente novamente mais tarde." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
     [alertView show];
+    [SVProgressHUD dismiss];
 
     NSLog(@"%@", error);
   }];

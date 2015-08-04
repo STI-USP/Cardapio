@@ -30,6 +30,7 @@
 
 
 @property (strong, nonatomic) IBOutlet UILabel *workinghours;
+@property (strong, nonatomic) IBOutlet UILabel *cashiers;
 @property (strong, nonatomic) IBOutlet UILabel *priceItens;
 
 - (IBAction)doneButtonTapped:(id)sender;

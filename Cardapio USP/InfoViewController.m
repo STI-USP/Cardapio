@@ -161,17 +161,22 @@
   
   //preços
   NSMutableString *prices = [[NSMutableString alloc] init];
-  if ([[_restaurantDc valueForKey:@"cashiers"] isKindOfClass:[NSArray class]]) {
+  if (([[_restaurantDc valueForKey:@"cashiers"] isKindOfClass:[NSArray class]]) && ([[_restaurantDc valueForKey:@"cashiers"] count] > 0)) {
     [prices appendString:[NSString stringWithFormat:@"Aluno: %@\n", [[[[[_restaurantDc valueForKey:@"cashiers"] objectAtIndex:0] valueForKey:@"prices"] valueForKey:@"students"] valueForKey:@"lunch"]]];
     [prices appendString:[NSString stringWithFormat:@"Especial: %@\n", [[[[[_restaurantDc valueForKey:@"cashiers"] objectAtIndex:0] valueForKey:@"prices"] valueForKey:@"special"] valueForKey:@"lunch"]]];
     [prices appendString:[NSString stringWithFormat:@"Visitante: %@\n", [[[[[_restaurantDc valueForKey:@"cashiers"] objectAtIndex:0] valueForKey:@"prices"] valueForKey:@"visiting"] valueForKey:@"lunch"]]];
+    [prices appendString:[NSString stringWithFormat:@"Funcionário: %@\n", [[[[[_restaurantDc valueForKey:@"cashiers"] objectAtIndex:0] valueForKey:@"prices"] valueForKey:@"employees"] valueForKey:@"lunch"]]];
   } else {
     [prices appendString:[NSString stringWithFormat:@"Aluno: 1,90\n"]];
     [prices appendString:[NSString stringWithFormat:@"Especial: 6,00\n"]];
-    [prices appendString:[NSString stringWithFormat:@"Visitante: 12,00"]];
+    [prices appendString:[NSString stringWithFormat:@"Visitante: 12,00\n"]];
+    [prices appendString:[NSString stringWithFormat:@"Funcionário: 12,00"]];
   }
   
   [_priceItens setText:prices];
+  
+  
+  //[_cashiers setText: [_restaurantDc valueForKey:@"cashiers"]];
   
   
   if ([[_restaurantDc valueForKey:@"id"] isEqualToString:[dataModel.preferredRestaurant valueForKey:@"id"]]) {
