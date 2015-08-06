@@ -229,7 +229,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="161"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="4691191C-FD1E-4975-97EA-CDCE91F302EB" translatesAutoresizingMaskIntoConstraints="NO" id="vYM-fq-MRu">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="6D41C26B-C137-4DD7-9CE0-26EB379F7CF5" translatesAutoresizingMaskIntoConstraints="NO" id="vYM-fq-MRu">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="114"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shadow" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gx2-nu-ylo">
@@ -259,7 +259,7 @@
                                                         <segue destination="eqg-Tr-gcI" kind="push" id="Xdg-6Z-BC8"/>
                                                     </connections>
                                                 </button>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="B563B01C-C270-45E8-BF87-DBD8460F8BC8" translatesAutoresizingMaskIntoConstraints="NO" id="VyW-rh-gRa">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AC2DFC88-D493-4EFE-992C-884671147188" translatesAutoresizingMaskIntoConstraints="NO" id="VyW-rh-gRa">
                                                     <rect key="frame" x="220" y="81" width="80" height="80"/>
                                                 </imageView>
                                             </subviews>
@@ -333,7 +333,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="x5s-vK-AOu" detailTextLabel="XBP-hC-DKQ" rowHeight="231" style="IBUITableViewCellStyleValue2" id="pD8-Wy-w9x">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="x5s-vK-AOu" detailTextLabel="XBP-hC-DKQ" rowHeight="188" style="IBUITableViewCellStyleValue2" id="pD8-Wy-w9x">
                                         <rect key="frame" x="0.0" y="363" width="320" height="231"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pD8-Wy-w9x" id="ZDL-GV-pD5">
@@ -350,17 +350,14 @@
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="190" id="XBP-hC-DKQ">
                                                     <rect key="frame" x="112" y="6" width="190" height="218"/>
                                                     <autoresizingMask key="autoresizingMask"/>
-                                                    <string key="text">Segunda a sexta
-Café da manhã: 7h as 8h30h 
+                                                    <string key="text">Segunda a sexta 
 Almoço: 11h15 as 14h15 
 Jantar: 17h30 as 19h45
 
 Sábados
-Café da manhã: 7h30 as 9h00
 Almoço: 11h15 as 14h15
 
 Domingos
-Café da manhã: 8h as 9h30
 Almoço: 12h00 as 14h15</string>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -369,7 +366,7 @@ Almoço: 12h00 as 14h15</string>
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="jrc-yF-f0b" detailTextLabel="l4a-Pm-ZJe" rowHeight="71" style="IBUITableViewCellStyleValue2" id="n7b-d2-Qsq">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="jrc-yF-f0b" detailTextLabel="l4a-Pm-ZJe" rowHeight="87" style="IBUITableViewCellStyleValue2" id="n7b-d2-Qsq">
                                         <rect key="frame" x="0.0" y="594" width="320" height="110"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="n7b-d2-Qsq" id="ChJ-oH-epd">
@@ -386,7 +383,7 @@ Almoço: 12h00 as 14h15</string>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="none" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="193" id="l4a-Pm-ZJe">
                                                     <rect key="frame" x="112" y="21" width="193" height="67"/>
                                                     <autoresizingMask key="autoresizingMask"/>
-                                                    <string key="text">Aluno:1,90                                                        Especial: 6,00                                    Visitante: 12,00</string>
+                                                    <string key="text">Aluno: 1,90                                                        Especial: 6,00                                                        Visitante: 12,00                                                        Funcionário: 12,00</string>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -400,7 +397,7 @@ Almoço: 12h00 as 14h15</string>
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Ponto de venda" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gxY-te-Gw9">
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" placeholderIntrinsicWidth="91" placeholderIntrinsicHeight="44" text="Ponto de venda" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gxY-te-Gw9">
                                                     <rect key="frame" x="15" y="10" width="91" height="17"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -465,6 +462,7 @@ Almoço: 12h00 as 14h15</string>
                     <connections>
                         <outlet property="address" destination="o26-GG-gVH" id="F3C-5C-iEA"/>
                         <outlet property="cashiers" destination="Hk5-0v-GHN" id="mDt-xP-mOK"/>
+                        <outlet property="cashiersTitle" destination="gxY-te-Gw9" id="oE6-Nf-dsc"/>
                         <outlet property="hour" destination="XBP-hC-DKQ" id="Ng6-31-JqV"/>
                         <outlet property="phone" destination="PUf-ZE-0iC" id="IRJ-r9-C95"/>
                         <outlet property="prefButton" destination="8co-mt-NsO" id="F0e-3z-mik"/>
@@ -533,7 +531,7 @@ Almoço: 12h00 as 14h15</string>
         </scene>
     </scenes>
     <resources>
-        <image name="4691191C-FD1E-4975-97EA-CDCE91F302EB" width="800" height="532">
+        <image name="6D41C26B-C137-4DD7-9CE0-26EB379F7CF5" width="800" height="532">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -28961,7 +28959,7 @@ GgQ+ABoEQgAaBEkAGgRRABoEXgAaBGMAGgRlABoEZwAaBGwAGgR0ABoEdwAaBHwAGgSEABoEhwAaBJkA
 GgScABoEoQAAAAAAAAQBAAAAAAAAAEIAAAAAAAAAAAAAAAAAGgSjA
 </mutableData>
         </image>
-        <image name="B563B01C-C270-45E8-BF87-DBD8460F8BC8" width="229" height="237">
+        <image name="AC2DFC88-D493-4EFE-992C-884671147188" width="229" height="237">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOzxYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISksLzU4VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA

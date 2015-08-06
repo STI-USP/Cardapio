@@ -176,7 +176,15 @@
   [_priceItens setText:prices];
   
   
-  //[_cashiers setText: [_restaurantDc valueForKey:@"cashiers"]];
+  [_cashiersTitle setLineBreakMode: NSLineBreakByWordWrapping];
+  [_cashiersTitle setNumberOfLines:0];
+  if ([[_restaurantDc valueForKey:@"cashiers"] count] > 0) {
+    [_cashiers setText: [[[_restaurantDc valueForKey:@"cashiers"] objectAtIndex:0] valueForKey:@"address"]];
+  } else {
+    [_cashiers setText: @""];
+    [_cashiers setHidden:YES];
+  }
+  
   
   
   if ([[_restaurantDc valueForKey:@"id"] isEqualToString:[dataModel.preferredRestaurant valueForKey:@"id"]]) {
