@@ -109,7 +109,7 @@
   //horario de funcionamento
   NSMutableString *workingHours = [[NSMutableString alloc] init];
   
-  //dia de semana
+  //DIA DA SEMANA
   [workingHours appendString:@"Segunda à sexta-feira \n"];
   //café da manha
   NSString *weekdayBreakfest = [[[_restaurantDc valueForKey:@"workinghours"] valueForKey:@"weekdays"]valueForKey:@"breakfest"];
@@ -129,7 +129,7 @@
     [workingHours appendString:[NSString stringWithFormat:@"Jantar: %@\n", weekdayDinner]];
   }
   
-  //sabado
+  //SABADO
   [workingHours appendString:@"\nSábado \n"];
   //cafe da manha
   NSString *saturdayBreakfest = [[[_restaurantDc valueForKey:@"workinghours"] valueForKey:@"saturday"]valueForKey:@"breakfest"];
@@ -143,7 +143,7 @@
     [workingHours appendString:[NSString stringWithFormat:@"Almoço: %@\n", saturdayLunch]];
   }
   
-  //domingo
+  //DOMINGO
   [workingHours appendString:@"\nDomingo \n"];
   //cafe da manha
   NSString *sundayBreakfest = [[[_restaurantDc valueForKey:@"workinghours"] valueForKey:@"sunday"]valueForKey:@"breakfest"];
@@ -164,28 +164,23 @@
   if (([[_restaurantDc valueForKey:@"cashiers"] isKindOfClass:[NSArray class]]) && ([[_restaurantDc valueForKey:@"cashiers"] count] > 0)) {
     [prices appendString:[NSString stringWithFormat:@"Aluno: %@\n", [[[[[_restaurantDc valueForKey:@"cashiers"] objectAtIndex:0] valueForKey:@"prices"] valueForKey:@"students"] valueForKey:@"lunch"]]];
     [prices appendString:[NSString stringWithFormat:@"Especial: %@\n", [[[[[_restaurantDc valueForKey:@"cashiers"] objectAtIndex:0] valueForKey:@"prices"] valueForKey:@"special"] valueForKey:@"lunch"]]];
-    [prices appendString:[NSString stringWithFormat:@"Visitante: %@\n", [[[[[_restaurantDc valueForKey:@"cashiers"] objectAtIndex:0] valueForKey:@"prices"] valueForKey:@"visiting"] valueForKey:@"lunch"]]];
-    [prices appendString:[NSString stringWithFormat:@"Funcionário: %@\n", [[[[[_restaurantDc valueForKey:@"cashiers"] objectAtIndex:0] valueForKey:@"prices"] valueForKey:@"employees"] valueForKey:@"lunch"]]];
+    [prices appendString:[NSString stringWithFormat:@"Visitante: %@", [[[[[_restaurantDc valueForKey:@"cashiers"] objectAtIndex:0] valueForKey:@"prices"] valueForKey:@"visiting"] valueForKey:@"lunch"]]];
   } else {
-    [prices appendString:[NSString stringWithFormat:@"Aluno: 1,90\n"]];
-    [prices appendString:[NSString stringWithFormat:@"Especial: 6,00\n"]];
-    [prices appendString:[NSString stringWithFormat:@"Visitante: 12,00\n"]];
-    [prices appendString:[NSString stringWithFormat:@"Funcionário: 12,00"]];
+    [prices appendString:[NSString stringWithFormat:@"Aluno: 1.90\n"]];
+    [prices appendString:[NSString stringWithFormat:@"Especial: 6.00\n"]];
+    [prices appendString:[NSString stringWithFormat:@"Visitante: 12.00"]];
   }
   
   [_priceItens setText:prices];
   
-  
   [_cashiersTitle setLineBreakMode: NSLineBreakByWordWrapping];
   [_cashiersTitle setNumberOfLines:0];
   if ([[_restaurantDc valueForKey:@"cashiers"] count] > 0) {
-    [_cashiers setText: [[[_restaurantDc valueForKey:@"cashiers"] objectAtIndex:0] valueForKey:@"address"]];
+    [_cashiers setText:[NSString stringWithFormat:@"%@ \n\n%@", [[[_restaurantDc valueForKey:@"cashiers"] objectAtIndex:0] valueForKey:@"address"], [[[_restaurantDc valueForKey:@"cashiers"] objectAtIndex:0] valueForKey:@"workinghours"]]];
   } else {
     [_cashiers setText: @""];
     [_cashiers setHidden:YES];
   }
-  
-  
   
   if ([[_restaurantDc valueForKey:@"id"] isEqualToString:[dataModel.preferredRestaurant valueForKey:@"id"]]) {
     [self.prefButton setTitle:@"Desmarcar como favorito" forState:UIControlStateNormal];
