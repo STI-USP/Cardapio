@@ -209,7 +209,7 @@
 #pragma mark - Table View
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-  return [menu.period count];
+  return [menu.period count] + 1;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -222,6 +222,8 @@
       return @"Almoço"; break;
     case 1:
       return @"Jantar"; break;
+    case 2:
+      return @"Observação"; break;
       
     default:
       break;
@@ -248,16 +250,34 @@
   static NSString *cellID = @"MenuCell";
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID forIndexPath:indexPath];
   
-  if (indexPath.section == 0) {
-    cell.textLabel.text = [NSString stringWithFormat:@"%@", [[[menu period] objectAtIndex:0] menu]]; //almoço
-  } else {
-    cell.textLabel.text = [NSString stringWithFormat:@"%@", [[[menu period] objectAtIndex:1] menu]]; //jantar
+  switch ([indexPath section]) {
+    case 0:
+      cell.textLabel.text = [NSString stringWithFormat:@"%@", [[[menu period] objectAtIndex:0] menu]]; //almoço
+      break;
+    case 1:
+      cell.textLabel.text = [NSString stringWithFormat:@"%@", [[[menu period] objectAtIndex:1] menu]]; //jantar
+      break;
+    case 2:
+      cell.textLabel.text = [NSString stringWithFormat:@"observação"]; //jantar
+      break;
+      
+    default:
+      break;
   }
+
   return cell;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-  return 130.0;
+  switch ([indexPath section]) {
+    case 2:
+      return 66;
+      break;
+  
+    default:
+      return 130.0;
+      break;
+  }
 }
 
 #pragma mark - Button

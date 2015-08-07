@@ -16,8 +16,8 @@
 
 @property (strong, nonatomic) NSMutableDictionary *restaurantDc;
 
-@property (strong, nonatomic) IBOutlet MenuDataModel *_menuDataModel;
-@property (strong, nonatomic) IBOutlet Restaurant *restaurant;
+@property (strong, nonatomic) MenuDataModel *_menuDataModel;
+@property (strong, nonatomic) Restaurant *restaurant;
 @property (strong, nonatomic) IBOutlet UIImageView *restImage;
 @property (strong, nonatomic) IBOutlet UIImageView *restMap;
 @property (strong, nonatomic) IBOutlet UILabel *restaurantName;

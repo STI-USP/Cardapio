@@ -34,8 +34,8 @@
   [self.contentView updateConstraintsIfNeeded];
   [self.contentView layoutIfNeeded];
   
-  self.titleLabel.preferredMaxLayoutWidth = CGRectGetWidth(self.titleLabel.frame);
-  self.subtitleLabel.preferredMaxLayoutWidth = CGRectGetWidth(self.subtitleLabel.frame);
+  self.title.preferredMaxLayoutWidth = CGRectGetWidth(self.title.frame);
+  self.subtitle.preferredMaxLayoutWidth = CGRectGetWidth(self.subtitle.frame);
 }
 
 @end

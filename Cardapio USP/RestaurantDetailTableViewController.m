@@ -145,15 +145,15 @@
   if (indexPath.section == 0) {
     switch (indexPath.row) {
       case 0: {
-        cell.titleLabel.text = @"Endereço";
-        cell.subtitleLabel.text = [NSString stringByReplacingLineBreaks:self.restaurant[@"address"]];
+        cell.title.text = @"Endereço";
+        cell.subtitle.text = [NSString stringByReplacingLineBreaks:self.restaurant[@"address"]];
       }
         break;
       case 1: { // telefone
         if ([self.restaurant[@"phones"] count] == 1) {
-          cell.titleLabel.text = @"Telefone";
+          cell.title.text = @"Telefone";
         } else { // mais de 1 telefone
-          cell.titleLabel.text = @"Telefones";
+          cell.title.text = @"Telefones";
         }
         NSMutableString *telephones = [[NSMutableString alloc] init];
         for (NSString *t in self.restaurant[@"phones"]) {
@@ -162,7 +162,7 @@
         if (telephones.length >=1 ) {
           [telephones deleteCharactersInRange:NSMakeRange(telephones.length - 1, 1)];
         }
-        cell.subtitleLabel.text = telephones;
+        cell.subtitle.text = telephones;
         
         UIImage *image = [UIImage imageNamed:@"phone.png"];
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -176,7 +176,7 @@
       }
         break;
       case 2: {
-        cell.titleLabel.text = @"Horários";
+        cell.title.text = @"Horários";
         NSMutableString *workingHours = [[NSMutableString alloc] init];
         //dia de semana
         [workingHours appendString:@"Segunda à sexta-feira \n"];
@@ -219,22 +219,22 @@
         if (sundayLunch && ![sundayLunch isEqualToString:@""]) {
           [workingHours appendString:[NSString stringWithFormat:@"Almoço: %@\n", sundayLunch]];
         }
-        cell.subtitleLabel.text = workingHours;
+        cell.subtitle.text = workingHours;
       }
         break;
       case 3: {
-        cell.titleLabel.text = @"Preços";
+        cell.title.text = @"Preços";
         NSMutableString *prices = [[NSMutableString alloc] init];
         [prices appendString:[NSString stringWithFormat:@"Aluno: %@\n", [[[[[self.restaurant valueForKey:@"cashiers"] objectAtIndex:0] valueForKey:@"prices"] valueForKey:@"students"] valueForKey:@"lunch"]]];
         [prices appendString:[NSString stringWithFormat:@"Especial: %@\n", [[[[[self.restaurant valueForKey:@"cashiers"] objectAtIndex:0] valueForKey:@"prices"] valueForKey:@"special"] valueForKey:@"lunch"]]];
         [prices appendString:[NSString stringWithFormat:@"Visitante: %@\n", [[[[[self.restaurant valueForKey:@"cashiers"] objectAtIndex:0] valueForKey:@"prices"] valueForKey:@"visiting"] valueForKey:@"lunch"]]];
 
-        cell.subtitleLabel.text = prices;
+        cell.subtitle.text = prices;
       }
         break;
       case 4:{
-        cell.titleLabel.text = @"Pontos de venda";
-        //cell.subtitleLabel.text = [NSString stringByReplacingLineBreaks:self.library[@"workingHours"]];
+        cell.title.text = @"Pontos de venda";
+        //cell.subtitle.text = [NSString stringByReplacingLineBreaks:self.library[@"workingHours"]];
       }
         break;
       default:
