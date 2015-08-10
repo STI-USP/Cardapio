@@ -213,15 +213,18 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-  return 2;
+  return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
   switch (section) {
     case 0:
-      return 5;
+      return 1;
       break;
     case 1:
+      return 5;
+      break;
+    case 2:
       return 1;
       break;
       
@@ -235,13 +238,22 @@
 
   _restaurantDc = [dataModel currentRestaurant];
   
-  //Imagem do cabeçalho
-  _restImage.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[_restaurantDc valueForKey:@"photourl"]]]];
   
   DetailCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RestaurantDetailCell" forIndexPath:indexPath];
+  
 
   switch ([indexPath section]) {
     case 0:{
+      UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ImageCell" forIndexPath:indexPath];
+
+      //Imagem do cabeçalho
+      _restImage.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[_restaurantDc valueForKey:@"photourl"]]]];
+
+      return cell;
+      break;
+    }
+      
+    case 1:{
       
       // Configure the cell...
       [cell.title setNumberOfLines:0];
@@ -369,7 +381,7 @@
       break;
     }
       
-    case 1: {
+    case 2: {
       UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PreferredCell" forIndexPath:indexPath];
       if ([[_restaurantDc valueForKey:@"id"] isEqualToString:[dataModel.preferredRestaurant valueForKey:@"id"]]) {
         [self.prefButton setTitle:@"Desmarcar como favorito" forState:UIControlStateNormal];

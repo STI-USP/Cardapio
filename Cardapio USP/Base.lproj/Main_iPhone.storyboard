@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Restaurante Central-->
@@ -189,17 +190,39 @@
         <!--Informações gerais-->
         <scene sceneID="YGb-cD-IDQ">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="EOL-oP-iIC" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="d1C-D8-OLv" customClass="InfoViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="zYz-Bi-Lsi">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="783"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <imageView key="tableHeaderView" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="I9E-qb-QUN">
-                            <rect key="frame" x="0.0" y="64" width="320" height="141"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        </imageView>
+                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ImageCell" rowHeight="171" id="Hfw-cw-ufF">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Hfw-cw-ufF" id="lO4-Ci-3fV">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Szl-Mz-1nf">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="136"/>
+                                        </imageView>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y8J-bh-Tof">
+                                            <rect key="frame" x="232" y="82" width="80" height="80"/>
+                                            <state key="normal" image="mapa.png">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <segue destination="eqg-Tr-gcI" kind="modal" id="KJF-Oa-Ebk"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="Szl-Mz-1nf" firstAttribute="top" secondItem="lO4-Ci-3fV" secondAttribute="top" id="ASS-Ab-o4Y"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="Szl-Mz-1nf" secondAttribute="bottom" constant="26.5" id="Aq9-kz-KJK"/>
+                                        <constraint firstAttribute="trailing" secondItem="Szl-Mz-1nf" secondAttribute="trailing" id="O3S-3I-etn"/>
+                                        <constraint firstItem="Szl-Mz-1nf" firstAttribute="leading" secondItem="lO4-Ci-3fV" secondAttribute="leading" id="rKh-dZ-abE"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                            </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="RestaurantDetailCell" id="MzP-zA-sQk" customClass="DetailCell">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MzP-zA-sQk" id="JkY-GI-2zt">
@@ -234,9 +257,6 @@
                                             <state key="normal" title="Preferred Restaurant Button">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
-                                            <connections>
-                                                <action selector="setPreferred:" destination="d1C-D8-OLv" eventType="touchUpInside" id="NyW-w3-xih"/>
-                                            </connections>
                                         </button>
                                     </subviews>
                                 </tableViewCellContentView>
@@ -258,11 +278,12 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="783"/>
                     <connections>
-                        <outlet property="restImage" destination="I9E-qb-QUN" id="Nfp-2T-H1g"/>
+                        <outlet property="restImage" destination="Hfw-cw-ufF" id="NCP-Ak-ich"/>
                     </connections>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EOL-oP-iIC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1810" y="97.5"/>
+            <point key="canvasLocation" x="1809" y="183.5"/>
         </scene>
         <!--Localização-->
         <scene sceneID="BuO-bi-fzF">
@@ -289,7 +310,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JF3-4q-wbx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2232" y="98"/>
+            <point key="canvasLocation" x="2236" y="91"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="GRT-kb-frR">
@@ -329,6 +350,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="mapa.png" width="229" height="237"/>
         <image name="menu" width="22" height="22"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
