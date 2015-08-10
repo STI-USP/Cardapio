@@ -19,11 +19,6 @@
 @property (strong, nonatomic) MenuDataModel *_menuDataModel;
 @property (strong, nonatomic) Restaurant *restaurant;
 
-@property (weak, nonatomic) IBOutlet UITableViewCell *restImage;
-
-@property (strong, nonatomic) IBOutlet UIImageView *restMap;
-@property (strong, nonatomic) IBOutlet UILabel *restaurantName;
-@property (strong, nonatomic) IBOutlet UILabel *restaurantNameOverlay;
 @property (strong, nonatomic) IBOutlet UILabel *address;
 @property (strong, nonatomic) IBOutlet UILabel *phone;
 @property (strong, nonatomic) IBOutlet UILabel *hour;

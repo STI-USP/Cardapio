@@ -115,6 +115,7 @@
         Menu *menu = [[Menu alloc] initWithDate:[item objectForKey:@"date"] andPeriod:period];
         [self.menuArray addObject:menu];
       }
+      self.observation = [[json objectForKey:@"observation"]valueForKey:@"observation"];
     } else {
       
       for (int i = 1; i<=7; i++) {

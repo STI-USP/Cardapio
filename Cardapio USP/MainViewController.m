@@ -258,7 +258,7 @@
       cell.textLabel.text = [NSString stringWithFormat:@"%@", [[[menu period] objectAtIndex:1] menu]]; //jantar
       break;
     case 2:
-      cell.textLabel.text = [NSString stringWithFormat:@"observação"]; //jantar
+      cell.textLabel.text = [NSString stringWithFormat:@"%@", dataModel.observation];
       break;
       
     default:

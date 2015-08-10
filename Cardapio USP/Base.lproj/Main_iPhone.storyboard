@@ -196,32 +196,53 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ImageCell" rowHeight="171" id="Hfw-cw-ufF">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ImageCell" rowHeight="171" id="Hfw-cw-ufF" customClass="ImageCell">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Hfw-cw-ufF" id="lO4-Ci-3fV">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Szl-Mz-1nf">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="136"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="140"/>
                                         </imageView>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y8J-bh-Tof">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y8J-bh-Tof">
                                             <rect key="frame" x="232" y="82" width="80" height="80"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="80" id="7bg-0C-2qK"/>
+                                            </constraints>
                                             <state key="normal" image="mapa.png">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                             <connections>
-                                                <segue destination="eqg-Tr-gcI" kind="modal" id="KJF-Oa-Ebk"/>
+                                                <segue destination="eqg-Tr-gcI" kind="push" id="gTa-Fr-qLW"/>
                                             </connections>
                                         </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Restaurant name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8bJ-jF-hgs">
+                                            <rect key="frame" x="8" y="8" width="304" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="21" id="qZR-SJ-MGk"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="Szl-Mz-1nf" firstAttribute="top" secondItem="lO4-Ci-3fV" secondAttribute="top" id="ASS-Ab-o4Y"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="Szl-Mz-1nf" secondAttribute="bottom" constant="26.5" id="Aq9-kz-KJK"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="Szl-Mz-1nf" secondAttribute="bottom" constant="23" id="Aq9-kz-KJK"/>
+                                        <constraint firstItem="Y8J-bh-Tof" firstAttribute="top" secondItem="lO4-Ci-3fV" secondAttribute="topMargin" constant="74" id="HDe-sm-sg2"/>
+                                        <constraint firstItem="8bJ-jF-hgs" firstAttribute="leading" secondItem="lO4-Ci-3fV" secondAttribute="leadingMargin" id="JX5-ho-HhS"/>
                                         <constraint firstAttribute="trailing" secondItem="Szl-Mz-1nf" secondAttribute="trailing" id="O3S-3I-etn"/>
+                                        <constraint firstItem="8bJ-jF-hgs" firstAttribute="top" secondItem="lO4-Ci-3fV" secondAttribute="topMargin" id="Uj1-bf-uyR"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="Y8J-bh-Tof" secondAttribute="bottom" constant="0.5" id="nkl-xk-Zgq"/>
                                         <constraint firstItem="Szl-Mz-1nf" firstAttribute="leading" secondItem="lO4-Ci-3fV" secondAttribute="leading" id="rKh-dZ-abE"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="Y8J-bh-Tof" secondAttribute="trailing" id="vv0-Mt-uSw"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="restImage" destination="Szl-Mz-1nf" id="nSg-yC-U4X"/>
+                                    <outlet property="restaurantName" destination="8bJ-jF-hgs" id="RJl-7Y-lgw"/>
+                                </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="RestaurantDetailCell" id="MzP-zA-sQk" customClass="DetailCell">
                                 <autoresizingMask key="autoresizingMask"/>
@@ -246,7 +267,7 @@
                                     <outlet property="title" destination="Evh-lk-Ek3" id="pCx-0u-N0X"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PreferredCell" id="8Wh-I0-8Sb">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PreferredCell" id="8Wh-I0-8Sb" customClass="PreferredCell">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8Wh-I0-8Sb" id="B8S-GG-19y">
@@ -254,12 +275,19 @@
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="14F-2v-PUz">
                                             <rect key="frame" x="8" y="8" width="304" height="27.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                             <state key="normal" title="Preferred Restaurant Button">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
+                                            <connections>
+                                                <action selector="setPreferred:" destination="d1C-D8-OLv" eventType="touchUpInside" id="aKW-Cu-Hqv"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="preferredButton" destination="14F-2v-PUz" id="6u4-d9-L7w"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <sections/>
@@ -277,13 +305,10 @@
                     </navigationItem>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="783"/>
-                    <connections>
-                        <outlet property="restImage" destination="Hfw-cw-ufF" id="NCP-Ak-ich"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EOL-oP-iIC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1809" y="183.5"/>
+            <point key="canvasLocation" x="1827" y="90.5"/>
         </scene>
         <!--Localização-->
         <scene sceneID="BuO-bi-fzF">
@@ -294,7 +319,7 @@
                         <viewControllerLayoutGuide type="bottom" id="1Mb-cl-gPK"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="SIF-X7-wtW">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="783"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Eeq-cA-scL">

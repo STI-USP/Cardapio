@@ -14,10 +14,14 @@
 #import "Items.h"
 #import "DataModel.h"
 #import "DetailCell.h"
+#import "ImageCell.h"
+#import "PreferredCell.h"
+#import "ThumbnailViewImageProxy.h"
 
 
 @interface InfoViewController () {
   DataModel *dataModel;
+  PreferredCell *prefCell;
 }
 
 @end
@@ -55,7 +59,7 @@
     //[self setupView];
   }
   
-  self.tableView.estimatedRowHeight = 70.0; // for example. Set your average height
+  self.tableView.estimatedRowHeight = 44.0; // for example. Set your average height
   self.tableView.rowHeight = UITableViewAutomaticDimension;
   [self.tableView reloadData];
   
@@ -213,21 +217,18 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-  return 3;
+  return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
   switch (section) {
     case 0:
-      return 1;
+      return 6;
       break;
     case 1:
-      return 5;
-      break;
-    case 2:
       return 1;
       break;
-      
+
     default:
       return 0;
       break;
@@ -239,38 +240,57 @@
   _restaurantDc = [dataModel currentRestaurant];
   
   
-  DetailCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RestaurantDetailCell" forIndexPath:indexPath];
-  
-
   switch ([indexPath section]) {
     case 0:{
-      UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ImageCell" forIndexPath:indexPath];
-
-      //Imagem do cabeçalho
-      _restImage.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[_restaurantDc valueForKey:@"photourl"]]]];
-
-      return cell;
-      break;
-    }
-      
-    case 1:{
-      
+      DetailCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RestaurantDetailCell" forIndexPath:indexPath];
       // Configure the cell...
       [cell.title setNumberOfLines:0];
-      [cell.subtitle setNumberOfLines:0];
       [cell.title setLineBreakMode:NSLineBreakByWordWrapping];
-      [cell.subtitle setLineBreakMode:NSLineBreakByWordWrapping];
       
-      switch (indexPath.row) {
+      [cell.subtitle setNumberOfLines:0];
+      [cell.subtitle setLineBreakMode:NSLineBreakByWordWrapping];
+
+      
+      switch ([indexPath row]) {
+      
         case 0: {
-          cell.title.text = @"Endereço";
-          cell.subtitle.text = [NSString stringWithFormat:@"%@", [_restaurantDc valueForKey:@"address"]];
-        }
-          break;
+
+          ImageCell *imgCell = [tableView dequeueReusableCellWithIdentifier:@"ImageCell" forIndexPath:indexPath];
+
+          ThumbnailViewImageProxy *imageViewProxy = [[ThumbnailViewImageProxy alloc] init];
+          imageViewProxy.aspect = ThumbnailAspectZoom;
+          imageViewProxy.hasBorders = NO;
+          NSString *photoUrl = [_restaurantDc valueForKey:@"photourl"];
+          if (photoUrl.length != 0) {
+            imageViewProxy.imagePath = photoUrl;
+          }
           
+          
+          //Imagem do cabeçalho
+          imgCell.restImage.image = imageViewProxy.image;
+          imgCell.restImage.contentMode = UIViewContentModeScaleAspectFit;
+
+          //texto da imagem de cabeçalho
+          [imgCell.restaurantName setText: [_restaurantDc valueForKey:@"name"]];
+          [imgCell.restaurantName setNumberOfLines:0];
+          [imgCell.restaurantName setBackgroundColor:[UIColor clearColor]];
+          [imgCell.restaurantName setTextColor:[UIColor whiteColor]];
+          [imgCell.restaurantName setFont:[UIFont systemFontOfSize:14]];
+          [imgCell.restaurantName setShadowColor:[UIColor blackColor]];
+          [imgCell.restaurantName setShadowOffset:CGSizeMake(1, 1)];
+          [imgCell.restaurantName setTextAlignment:NSTextAlignmentCenter];
+
+          return imgCell;
+          break;
+        }
         case 1: {
           
-          cell.title.text = @"Telefone(s)";
+          [cell.title setText: @"Endereço"];
+          [cell.subtitle setText: [_restaurantDc valueForKey:@"address"]];
+          break;
+        }
+        case 2: {
+          [cell.title setText: @"Telefone(s)"];
           NSMutableString *telephones = [[NSMutableString alloc] init];
           if ([[_restaurantDc objectForKey:@"phones"] isKindOfClass:[NSString class]]) {
             telephones = [_restaurantDc valueForKey:@"phones"];
@@ -283,12 +303,12 @@
             }
             
           }
-          cell.subtitle.text = telephones;
+          [cell.subtitle setText: telephones];
           break;
         }
 
-        case 2:{
-          cell.title.text = @"Horários";
+        case 3:{
+          [cell.title setText: @"Horários"];
           NSMutableString *workingHours = [[NSMutableString alloc] init];
           
           //DIA DA SEMANA
@@ -343,12 +363,12 @@
             [workingHours appendString:@"Fechado"];
           }
           
-          cell.subtitle.text = workingHours;
+          [cell.subtitle setText: workingHours];
         }
           break;
           
-        case 3: {
-          cell.title.text = @"Preços";
+        case 4: {
+          [cell.title setText: @"Preços"];
           NSMutableString *prices = [[NSMutableString alloc] init];
           if (([[_restaurantDc valueForKey:@"cashiers"] isKindOfClass:[NSArray class]]) && ([[_restaurantDc valueForKey:@"cashiers"] count] > 0)) {
             [prices appendString:[NSString stringWithFormat:@"Aluno: %@\n", [[[[[_restaurantDc valueForKey:@"cashiers"] objectAtIndex:0] valueForKey:@"prices"] valueForKey:@"students"] valueForKey:@"lunch"]]];
@@ -360,11 +380,11 @@
             [prices appendString:[NSString stringWithFormat:@"Visitante: 12.00"]];
           }
           
-          cell.subtitle.text = prices;
+          [cell.subtitle setText: prices];
           break;
       }
-        case 4: {
-          cell.title.text = @"Ponto de venda";
+        case 5: {
+          [cell.title setText: @"Ponto de venda"];
           if ([[_restaurantDc valueForKey:@"cashiers"] count] > 0) {
             [cell.subtitle setText:[NSString stringWithFormat:@"%@ \n\n%@", [[[_restaurantDc valueForKey:@"cashiers"] objectAtIndex:0] valueForKey:@"address"], [[[_restaurantDc valueForKey:@"cashiers"] objectAtIndex:0] valueForKey:@"workinghours"]]];
           } else {
@@ -381,15 +401,15 @@
       break;
     }
       
-    case 2: {
-      UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PreferredCell" forIndexPath:indexPath];
+    case 1: {
+      prefCell = [tableView dequeueReusableCellWithIdentifier:@"PreferredCell" forIndexPath:indexPath];
       if ([[_restaurantDc valueForKey:@"id"] isEqualToString:[dataModel.preferredRestaurant valueForKey:@"id"]]) {
-        [self.prefButton setTitle:@"Desmarcar como favorito" forState:UIControlStateNormal];
+        [prefCell.preferredButton setTitle:@"Desmarcar como favorito" forState:UIControlStateNormal];
       } else {
-        [self.prefButton setTitle:@"Marcar como favorito" forState:UIControlStateNormal];
+        [prefCell.preferredButton setTitle:@"Marcar como favorito" forState:UIControlStateNormal];
       }
 
-      return cell;
+      return prefCell;
       break;
 
     }
@@ -403,6 +423,13 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+  if ([indexPath section]==0) {
+    if ([indexPath row]==0) {
+      return 170;
+    }
+  } else {
+    return UITableViewAutomaticDimension;
+  }
   return UITableViewAutomaticDimension;
 }
 
@@ -420,10 +447,10 @@
 -(void)setPreferred:(id)sender {
   if ([[_restaurantDc valueForKey:@"id"] isEqualToString:[dataModel.preferredRestaurant valueForKey:@"id"]]) {
     [dataModel setPreferredRestaurant:nil]; // se for igual, está desmarcando como favorito
-    [self.prefButton setTitle:@"Marcar como favorito" forState:UIControlStateNormal];
+    [prefCell.preferredButton setTitle:@"Marcar como favorito" forState:UIControlStateNormal];
   } else {
     [dataModel setPreferredRestaurant:_restaurantDc]; // senão, está marcando como favorito
-    [self.prefButton setTitle:@"Desmarcar como favorito" forState:UIControlStateNormal];
+    [prefCell.preferredButton setTitle:@"Desmarcar como favorito" forState:UIControlStateNormal];
   }
 
   [self reloadInputViews];
