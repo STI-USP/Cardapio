@@ -17,6 +17,7 @@
 #import "ImageCell.h"
 #import "PreferredCell.h"
 #import "ThumbnailViewImageProxy.h"
+#import "MapViewController.h"
 
 
 @interface InfoViewController () {
@@ -93,7 +94,7 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
   
-  UIView *imageView = [[UIView alloc] initWithFrame:CGRectMake(0., 0., self.tableView.frame.size.width, 80.)];
+  UIView *imageView = [[UIView alloc] initWithFrame:CGRectMake(0., 0., self.tableView.frame.size.width+44, 80.)];
   if (section == 0) { // a 1a. seção contém as informações da biblioteca
     ThumbnailViewImageProxy *imageViewProxy = [[ThumbnailViewImageProxy alloc] init];
     imageViewProxy.aspect = ThumbnailAspectZoom;
@@ -129,9 +130,11 @@
     
 
     // view para o mapa
-    UIView *mapView = [[UIView alloc] initWithFrame:CGRectMake(200., 80., 80., 80.)];
-    [mapView setBackgroundColor:[UIColor blackColor]];
-    [imageView addSubview:mapView];
+    UIButton *mapButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    mapButton.frame = CGRectMake(200., 80., 80., 80.);
+    [mapButton setBackgroundImage:[UIImage imageNamed:@"mapa.png"] forState:UIControlStateNormal];
+    [mapButton addTarget:self action:@selector(showMap) forControlEvents:UIControlEventTouchUpInside];
+    [imageView addSubview:mapButton];
     
   } // fim 1a. seção
   return imageView;
@@ -464,6 +467,10 @@
  */
 //
 
+- (void)showMap{
+  MapViewController *mapController = [self.storyboard instantiateViewControllerWithIdentifier:@"MapViewController"];
+  [self.navigationController pushViewController:mapController animated:YES];
+}
 
 - (void)doneButtonTapped:(id)sender {
   [self dismissViewControllerAnimated:YES completion:nil];
