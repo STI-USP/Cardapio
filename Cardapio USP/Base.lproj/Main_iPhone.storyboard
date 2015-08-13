@@ -235,29 +235,28 @@
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="80" id="7bg-0C-2qK"/>
                                             </constraints>
-                                            <state key="normal" image="C2D72C4F-5349-4A2D-8F32-0E38E769DE23">
+                                            <state key="normal" image="19D1BAA5-1A29-41D3-84F1-0B100A1216FC">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                         </button>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Restaurant name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8bJ-jF-hgs">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Restaurant name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8bJ-jF-hgs">
                                             <rect key="frame" x="8" y="8" width="304" height="21"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="21" id="qZR-SJ-MGk"/>
-                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="8bJ-jF-hgs" firstAttribute="top" secondItem="lO4-Ci-3fV" secondAttribute="topMargin" id="8VN-Y8-bv8"/>
+                                        <constraint firstItem="8bJ-jF-hgs" firstAttribute="leading" secondItem="lO4-Ci-3fV" secondAttribute="leadingMargin" id="AO5-1J-u5d"/>
                                         <constraint firstItem="Szl-Mz-1nf" firstAttribute="top" secondItem="lO4-Ci-3fV" secondAttribute="top" id="ASS-Ab-o4Y"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="Szl-Mz-1nf" secondAttribute="bottom" constant="23" id="Aq9-kz-KJK"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="Szl-Mz-1nf" secondAttribute="bottom" constant="22" id="Aq9-kz-KJK"/>
                                         <constraint firstItem="Y8J-bh-Tof" firstAttribute="top" secondItem="lO4-Ci-3fV" secondAttribute="topMargin" constant="74" id="HDe-sm-sg2"/>
-                                        <constraint firstItem="8bJ-jF-hgs" firstAttribute="leading" secondItem="lO4-Ci-3fV" secondAttribute="leadingMargin" id="JX5-ho-HhS"/>
                                         <constraint firstAttribute="trailing" secondItem="Szl-Mz-1nf" secondAttribute="trailing" id="O3S-3I-etn"/>
-                                        <constraint firstItem="8bJ-jF-hgs" firstAttribute="top" secondItem="lO4-Ci-3fV" secondAttribute="topMargin" id="Uj1-bf-uyR"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="Y8J-bh-Tof" secondAttribute="bottom" constant="0.5" id="nkl-xk-Zgq"/>
+                                        <constraint firstItem="8bJ-jF-hgs" firstAttribute="trailing" secondItem="Y8J-bh-Tof" secondAttribute="trailing" id="qgB-yp-8Kd"/>
                                         <constraint firstItem="Szl-Mz-1nf" firstAttribute="leading" secondItem="lO4-Ci-3fV" secondAttribute="leading" id="rKh-dZ-abE"/>
+                                        <constraint firstItem="8bJ-jF-hgs" firstAttribute="centerX" secondItem="Szl-Mz-1nf" secondAttribute="centerX" id="sHP-T6-QnW"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="Y8J-bh-Tof" secondAttribute="trailing" id="vv0-Mt-uSw"/>
                                     </constraints>
                                 </tableViewCellContentView>
@@ -450,7 +449,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="C2D72C4F-5349-4A2D-8F32-0E38E769DE23" width="229" height="237">
+        <image name="19D1BAA5-1A29-41D3-84F1-0B100A1216FC" width="229" height="237">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOzxYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISksLzU4VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
