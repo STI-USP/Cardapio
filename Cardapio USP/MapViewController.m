@@ -92,7 +92,8 @@
   self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
   self.locationManager.distanceFilter = 50; // distância mínima de deslocamento do usuário antes de disparar update em metros
   if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) { // verifica se pode pedir autorização, para compatibilidade com iOS 8
-    [self.locationManager requestWhenInUseAuthorization];
+//    [self.locationManager requestWhenInUseAuthorization];
+    [self.locationManager requestAlwaysAuthorization]; // [jo:150807]
   }
   [self.locationManager startUpdatingLocation]; // inicia atualização da posição do usuário
   
