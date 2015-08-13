@@ -11,7 +11,7 @@
 
 @interface DetailCell : UITableViewCell
 
-@property (nonatomic, weak) IBOutlet RWLabel *titleLabel;
-@property (nonatomic, weak) IBOutlet RWLabel *subtitleLabel;
+@property (nonatomic, weak) IBOutlet RWLabel *title;
+@property (nonatomic, weak) IBOutlet RWLabel *subtitle;
 
 @end

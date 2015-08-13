@@ -26,6 +26,7 @@
 @property (nonatomic, strong) NSMutableArray *menus;
 @property (nonatomic, strong) NSMutableArray *restaurants;
 @property (nonatomic, strong) NSArray *diasDaSemana;
+@property (nonatomic, strong) NSString *observation;
 
 //@property (nonatomic, strong) NSString *date;
 //@property (nonatomic, strong) NSString *restaurantId;
