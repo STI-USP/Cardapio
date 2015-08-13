@@ -67,6 +67,9 @@
 		E9DF35D11B3DD306009B92B6 /* MDPinAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = E9DF35CE1B3DD306009B92B6 /* MDPinAnnotationView.m */; };
 		E9E1843E1B792C1700637771 /* ImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E9E1843D1B792C1700637771 /* ImageCell.m */; };
 		E9E184411B7931D900637771 /* PreferredCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E9E184401B7931D900637771 /* PreferredCell.m */; };
+		E9E4BCD81B7BFBFC005633AD /* CarrierDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E9E4BCD51B7BFBFC005633AD /* CarrierDataModel.m */; };
+		E9E4BCD91B7BFBFC005633AD /* TelephoneUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = E9E4BCD71B7BFBFC005633AD /* TelephoneUtils.m */; };
+		E9E4BCDC1B7BFC33005633AD /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E9E4BCDB1B7BFC33005633AD /* Settings.bundle */; };
 		E9E55FB81B5591A100994BCB /* RestaurantDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9E55FB71B5591A100994BCB /* RestaurantDetailTableViewController.m */; };
 		E9E55FBB1B55933F00994BCB /* DetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E9E55FBA1B55933F00994BCB /* DetailCell.m */; };
 		E9E55FBE1B55944F00994BCB /* ThumbnailViewImageProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = E9E55FBD1B55944F00994BCB /* ThumbnailViewImageProxy.m */; };
@@ -188,6 +191,11 @@
 		E9E1843D1B792C1700637771 /* ImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCell.m; sourceTree = "<group>"; };
 		E9E1843F1B7931D900637771 /* PreferredCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferredCell.h; sourceTree = "<group>"; };
 		E9E184401B7931D900637771 /* PreferredCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferredCell.m; sourceTree = "<group>"; };
+		E9E4BCD41B7BFBFC005633AD /* CarrierDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarrierDataModel.h; sourceTree = "<group>"; };
+		E9E4BCD51B7BFBFC005633AD /* CarrierDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarrierDataModel.m; sourceTree = "<group>"; };
+		E9E4BCD61B7BFBFC005633AD /* TelephoneUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TelephoneUtils.h; sourceTree = "<group>"; };
+		E9E4BCD71B7BFBFC005633AD /* TelephoneUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TelephoneUtils.m; sourceTree = "<group>"; };
+		E9E4BCDB1B7BFC33005633AD /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		E9E55FB61B5591A100994BCB /* RestaurantDetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestaurantDetailTableViewController.h; sourceTree = "<group>"; };
 		E9E55FB71B5591A100994BCB /* RestaurantDetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestaurantDetailTableViewController.m; sourceTree = "<group>"; };
 		E9E55FB91B55933F00994BCB /* DetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailCell.h; sourceTree = "<group>"; };
@@ -332,8 +340,9 @@
 				BFAC6EBD192A586B00921494 /* REFrostedViewController */,
 				E9CDD1D21AD86BE000BB2E36 /* AFNetworking */,
 				BFAC6E83192A54E100921494 /* Supporting Files */,
-				BFBE4D8C1A126003002EDADE /* central.plist */,
+				E9E4BCDA1B7BFC05005633AD /* Telephony */,
 				BFAC6EB4192A566200921494 /* central.json */,
+				BFBE4D8C1A126003002EDADE /* central.plist */,
 				BFBE1E75192FB038004C403C /* restaurantes.json */,
 				BFAC6EEA192AB50F00921494 /* central.jpg */,
 				BFBE4D8E1A126797002EDADE /* restaurants_old.plist */,
@@ -438,6 +447,18 @@
 			name = AFNetworking;
 			sourceTree = "<group>";
 		};
+		E9E4BCDA1B7BFC05005633AD /* Telephony */ = {
+			isa = PBXGroup;
+			children = (
+				E9E4BCD41B7BFBFC005633AD /* CarrierDataModel.h */,
+				E9E4BCD51B7BFBFC005633AD /* CarrierDataModel.m */,
+				E9E4BCD61B7BFBFC005633AD /* TelephoneUtils.h */,
+				E9E4BCD71B7BFBFC005633AD /* TelephoneUtils.m */,
+				E9E4BCDB1B7BFC33005633AD /* Settings.bundle */,
+			);
+			name = Telephony;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -520,6 +541,7 @@
 				BFAC6E98192A54E100921494 /* Images.xcassets in Resources */,
 				BFAC6E90192A54E100921494 /* Main_iPhone.storyboard in Resources */,
 				BFAC6EB5192A566200921494 /* central.json in Resources */,
+				E9E4BCDC1B7BFC33005633AD /* Settings.bundle in Resources */,
 				BFBE4D8F1A126797002EDADE /* restaurants_old.plist in Resources */,
 				BFAC6EEB192AB50F00921494 /* central.jpg in Resources */,
 				BFBE4D911A1276EF002EDADE /* restaurants_old.json in Resources */,
@@ -575,12 +597,14 @@
 				BFAC6EDA192A587900921494 /* GTMNSString+HTML.m in Sources */,
 				AD66F7D01933B3C4005A31BE /* Period.m in Sources */,
 				E9E9B12F1B0E7CC6005BE8A1 /* DataAccess.m in Sources */,
+				E9E4BCD91B7BFBFC005633AD /* TelephoneUtils.m in Sources */,
 				E9E184411B7931D900637771 /* PreferredCell.m in Sources */,
 				E9CDD1E91AD86BFF00BB2E36 /* AFNetworkReachabilityManager.m in Sources */,
 				E9E1843E1B792C1700637771 /* ImageCell.m in Sources */,
 				E9DF35CF1B3DD306009B92B6 /* MapViewController.m in Sources */,
 				BFAC6ECA192A586B00921494 /* RECommonFunctions.m in Sources */,
 				ADB2DCB319374FCE0068417F /* Restaurant.m in Sources */,
+				E9E4BCD81B7BFBFC005633AD /* CarrierDataModel.m in Sources */,
 				AD66F7D91933C4A8005A31BE /* MenuStub.m in Sources */,
 				E9DF35D11B3DD306009B92B6 /* MDPinAnnotationView.m in Sources */,
 				ADB2DCB619374FE20068417F /* WeeklyPeriod.m in Sources */,

@@ -18,6 +18,7 @@
 #import "PreferredCell.h"
 #import "ThumbnailViewImageProxy.h"
 #import "MapViewController.h"
+#import "TelephoneUtils.h"
 
 
 @interface InfoViewController () {
@@ -46,7 +47,6 @@
 
   dataModel = [DataModel getInstance];
 
-  
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveRestaurants) name:@"DidReceiveRestaurants" object:nil];
 }
 
@@ -174,11 +174,21 @@
   _restaurantDc = [dataModel currentRestaurant];
   
   
-  switch ([indexPath section]) {
-    case 0:{
       return [self basicCellAtIndexPath:indexPath];
-    }
-      
+}
+
+
+- (UITableViewCell *)basicCellAtIndexPath:(NSIndexPath *)indexPath {
+  DetailCell *cell = nil;
+
+  switch (indexPath.section) {
+    case 0:
+      if (indexPath.row == 2) {
+        cell = [self.tableView dequeueReusableCellWithIdentifier:@"ContactCell" forIndexPath:indexPath];
+      } else {
+        cell = [self.tableView dequeueReusableCellWithIdentifier:@"RestaurantDetailCell" forIndexPath:indexPath];
+      }
+      break;
     case 1: {
       prefCell = [[PreferredCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
       if ([[_restaurantDc valueForKey:@"id"] isEqualToString:[dataModel.preferredRestaurant valueForKey:@"id"]]) {
@@ -187,23 +197,17 @@
         [prefCell.preferredButton setTitle:@"Marcar como favorito" forState:UIControlStateNormal];
       }
       return prefCell;
-      break;
     }
+      break;
     default:
       break;
   }
-  return nil;
-}
 
-
-- (DetailCell *)basicCellAtIndexPath:(NSIndexPath *)indexPath {
-  DetailCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"RestaurantDetailCell" forIndexPath:indexPath];
   [self configureBasicCell:cell atIndexPath:indexPath];
   return cell;
 }
 
 - (void)configureBasicCell:(DetailCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-  //DetailCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RestaurantDetailCell" forIndexPath:indexPath];
   // Configure the cell...
   [cell.title setNumberOfLines:0];
   [cell.title setLineBreakMode:NSLineBreakByWordWrapping];
@@ -215,13 +219,11 @@
   switch ([indexPath row]) {
       
     case 0: { // espaço para altura do botão de mapas
-      
-      [cell.title setText: @""];
-      [cell.subtitle setText: @""];
+      [cell.title setText: @" "];
+      [cell.subtitle setText: @" "];
       break;
     }
     case 1: {
-      
       [cell.title setText: @"Endereço"];
       [cell.subtitle setText: [_restaurantDc valueForKey:@"address"]];
       break;
@@ -241,6 +243,16 @@
         
       }
       [cell.subtitle setText: telephones];
+      
+      UIImage *image = [UIImage imageNamed:@"phone.png"];
+      UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+      CGRect frame = CGRectMake(0.0, 0.0, image.size.width, image.size.height);
+      button.frame = frame;
+      [button setBackgroundImage:image forState:UIControlStateNormal];
+      [button addTarget:self action:@selector(callButtonTapped:event:)  forControlEvents:UIControlEventTouchUpInside];
+      button.backgroundColor = [UIColor clearColor];
+      button.tintColor = [UIColor blueColor];
+      cell.accessoryView = button;
       break;
     }
       
@@ -319,7 +331,7 @@
       [cell.subtitle setText: prices];
       break;
     }
-    case 5: {
+    case 5:
       [cell.title setText: @"Ponto de venda"];
       if ([[_restaurantDc valueForKey:@"cashiers"] count] > 0) {
         [cell.subtitle setText:[NSString stringWithFormat:@"%@ \n\n%@", [[[_restaurantDc valueForKey:@"cashiers"] objectAtIndex:0] valueForKey:@"address"], [[[_restaurantDc valueForKey:@"cashiers"] objectAtIndex:0] valueForKey:@"workinghours"]]];
@@ -328,10 +340,49 @@
         [cell.subtitle setHidden:YES];
       }
       break;
-    }
+    
       
     default:
       break;
+  }
+}
+
+
+/// Trata telefone e email
+- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
+  if (indexPath.section == 0 && indexPath.row == 1) {
+        if ([[UIDevice currentDevice].model isEqualToString:@"iPhone"]) {
+          NSArray *telephoneListToDial = [NSArray arrayWithArray:[_restaurantDc objectForKey:@"phones"]];
+          UIActionSheet *actionSheet = [[UIActionSheet alloc] init];
+          actionSheet.title =  [NSString stringWithFormat:@"Ligar para restaurante"];
+          actionSheet.delegate = self;
+          for (NSString *s in telephoneListToDial) {
+            [actionSheet addButtonWithTitle:[TelephoneUtils telephoneWithCarrierFromString:s]];
+          }
+          actionSheet.cancelButtonIndex = [actionSheet addButtonWithTitle:@"Cancelar"];
+          [[actionSheet viewWithTag:0] setOpaque:NO];
+          [[actionSheet viewWithTag:0] setAlpha:0.8];
+          [actionSheet showFromTabBar:super.tabBarController.tabBar];
+        }
+  }
+}
+
+- (void)callButtonTapped:(id)sender event:(id)event {
+  NSSet *touches = [event allTouches];
+  UITouch *touch = [touches anyObject];
+  CGPoint currentTouchPosition = [touch locationInView:self.tableView];
+  NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint: currentTouchPosition];
+  
+  if (indexPath != nil)
+    [self tableView: self.tableView accessoryButtonTappedForRowWithIndexPath: indexPath];
+}
+
+
+#pragma mark - Action Sheet
+
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
+  if ([actionSheet cancelButtonIndex] != buttonIndex) { // se não for o botão cancelar disca o telefone
+    [TelephoneUtils dialToTelephone:[actionSheet buttonTitleAtIndex:buttonIndex]];
   }
 }
 
@@ -361,30 +412,7 @@
     [prefCell.preferredButton setTitle:@"Desmarcar como favorito" forState:UIControlStateNormal];
   }
 
-  //[self saveUserData];
   [self reloadInputViews];
 }
-
-- (void) saveUserData{
-  // Store the data
-
-  NSError *jsonError;
-  
-  NSString *jsonString = @"{ emailAlternativoUsuario = \"gustavolourenco7@hotmail.com\"; emailPrincipalUsuario = \"gustavo.paula.lourenco@usp.br\"; emailUspUsuario = \"gustavo.paula.lourenco@usp.br\"; loginUsuario = 9312842; nomeUsuario = \"Gustavo de Paula Lourenço\"; numeroTelefoneFormatado = \"(0xx16)3373-9229\"; tipoUsuario = I; vinculo = ( { codigoSetor = 0; codigoUnidade = 0; nomeAbreviadoSetor = \"<null>\"; nomeSetor = \"<null>\"; nomeUnidade = \"<null>\"; siglaUnidade = \"<null>\"; tipoVinculo = ALUNOGR; } ); wsuserid = \"YqmPXf8k7DOZz_dax0Ms3UdK9nvo-vqnp8fxC16TGusXTj_kyGRiZA\"; }";
-
-  
-  NSData *objectData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
-  NSDictionary *jsonDc = [NSJSONSerialization JSONObjectWithData:objectData
-                                                              options:NSJSONReadingMutableContainers
-                                                                error:&jsonError];
-  
-  
-  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  [defaults setObject:jsonDc forKey:@"userData"];
-  [defaults synchronize];
-
-  
-}
-
 
 @end

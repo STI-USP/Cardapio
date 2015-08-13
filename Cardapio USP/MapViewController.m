@@ -108,8 +108,7 @@
   // Centro do mapa no Restaurante escolhido
   [self.mapView setCenterCoordinate:CLLocationCoordinate2DMake([self.dataModel.currentRestaurant[@"latitude"] doubleValue], [self.dataModel.currentRestaurant[@"longitude"] doubleValue])];
   MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2DMake([self.dataModel.currentRestaurant[@"latitude"] doubleValue], [self.dataModel.currentRestaurant[@"longitude"] doubleValue]), kRegion, kRegion);
-  //MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance([self.cuaso coordinate], kRegion, kRegion); // zoom dentro da região do usuário
-  [self.mapView setRegion:region animated:YES]; // ajusta mapa na região em volta do usuário
+  [self.mapView setRegion:region animated:YES]; // ajusta mapa na região em volta do restaurante
   
 }
 

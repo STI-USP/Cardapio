@@ -55,26 +55,6 @@
     diaDaSemana = (int)weekday;
   }
   
-  
-  
-  dateTabController = [[DKScrollingTabController alloc] init];
-  dateTabController.delegate = self;
-  [self addChildViewController:dateTabController];
-  [dateTabController didMoveToParentViewController:self];
-  [self.view addSubview:dateTabController.view];
-  dateTabController.view.frame = CGRectMake(0, 65, 320, 40);
-  dateTabController.view.backgroundColor = [UIColor lightTextColor];
-  dateTabController.buttonPadding = 3.2;
-  dateTabController.underlineIndicator = YES;
-  dateTabController.underlineIndicatorColor = [UIColor redColor];
-  dateTabController.buttonsScrollView.showsHorizontalScrollIndicator = NO;
-  dateTabController.selectedBackgroundColor = [UIColor clearColor];
-  dateTabController.selectedTextColor = [UIColor blackColor];
-  dateTabController.unselectedTextColor = [UIColor grayColor];
-  dateTabController.unselectedBackgroundColor = [UIColor clearColor];
-  dateTabController.selection = @[@"PLACE\n0", @"PLACE\n0", @"PLACE\n0", @"PLACE\n0", @"PLACE\n0", @"PLACE\n0", @"PLACE\n0" ];
-  
-  
   dataModel = [DataModel getInstance];
   
   if ([dataModel preferredRestaurant]) {
@@ -101,6 +81,24 @@
 
 - (void)setupWeekView: (NSArray *) weekMenu {
   
+  dateTabController = [[DKScrollingTabController alloc] init];
+  dateTabController.delegate = self;
+  [self addChildViewController:dateTabController];
+  [dateTabController didMoveToParentViewController:self];
+  [self.view addSubview:dateTabController.view];
+  dateTabController.view.frame = CGRectMake(0, 65, 320, 40);
+  dateTabController.view.backgroundColor = [UIColor lightTextColor];
+  dateTabController.buttonPadding = 3.2;
+  dateTabController.underlineIndicator = YES;
+  dateTabController.underlineIndicatorColor = [UIColor redColor];
+  dateTabController.buttonsScrollView.showsHorizontalScrollIndicator = NO;
+  dateTabController.selectedBackgroundColor = [UIColor clearColor];
+  dateTabController.selectedTextColor = [UIColor blackColor];
+  dateTabController.unselectedTextColor = [UIColor grayColor];
+  dateTabController.unselectedBackgroundColor = [UIColor clearColor];
+  dateTabController.selection = @[@"PLACE\n0", @"PLACE\n0", @"PLACE\n0", @"PLACE\n0", @"PLACE\n0", @"PLACE\n0", @"PLACE\n0" ];
+  
+
   NSString *monButtonName = [[NSString stringWithFormat:@"S\n%@", [[menuArray objectAtIndex:0] date]]substringToIndex:4];
   NSString *tueButtonName = [[NSString stringWithFormat:@"T\n%@", [[menuArray objectAtIndex:1] date]]substringToIndex:4];
   NSString *wedButtonName = [[NSString stringWithFormat:@"Q\n%@", [[menuArray objectAtIndex:2] date]]substringToIndex:4];
@@ -234,10 +232,14 @@
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
   switch (section) {
     case 0:
-      return [NSString stringWithFormat:@"Valor calórico para uma refeição: %@ kcal", [[[menu period] objectAtIndex:0] calories]];
+      if (![[[[menu period] objectAtIndex:0] calories] isEqualToString:@""]) {
+        return [NSString stringWithFormat:@"Valor calórico para uma refeição: %@ kcal", [[[menu period] objectAtIndex:0] calories]];
+      }
       break;
     case 1:
-      return [NSString stringWithFormat:@"Valor calórico para uma refeição: %@ kcal", [[[menu period] objectAtIndex:1] calories]];
+      if ((![[[[menu period] objectAtIndex:1] calories] isEqualToString:@""]) || (![[[[menu period] objectAtIndex:1] calories] isEqualToString:@"0"])) {
+        return [NSString stringWithFormat:@"Valor calórico para uma refeição: %@ kcal", [[[menu period] objectAtIndex:1] calories]];
+      }
       break;
       
     default:

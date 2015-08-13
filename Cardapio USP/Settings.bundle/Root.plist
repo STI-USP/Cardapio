@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>PreferenceSpecifiers</key>
+	<array>
+		<dict>
+			<key>Title</key>
+			<string>Preferências</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSMultiValueSpecifier</string>
+			<key>Title</key>
+			<string>Operadora</string>
+			<key>Key</key>
+			<string>carrierCode</string>
+			<key>DefaultValue</key>
+			<string></string>
+			<key>Titles</key>
+			<array>
+				<string>CTBC (12)</string>
+				<string>Brasil Telecom (14)</string>
+				<string>Vivo (15)</string>
+				<string>Embratel (21)</string>
+				<string>Intelig (23)</string>
+				<string>GVT (25)</string>
+				<string>Oi (31)</string>
+				<string>TIM (41)</string>
+				<string>Sercomtel (43)</string>
+			</array>
+			<key>Values</key>
+			<array>
+				<string>12</string>
+				<string>14</string>
+				<string>15</string>
+				<string>21</string>
+				<string>23</string>
+				<string>25</string>
+				<string>31</string>
+				<string>41</string>
+				<string>43</string>
+			</array>
+		</dict>
+	</array>
+	<key>StringsTable</key>
+	<string>Root</string>
+</dict>
+</plist>
