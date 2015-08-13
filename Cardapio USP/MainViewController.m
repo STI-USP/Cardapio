@@ -57,6 +57,9 @@
   
   dataModel = [DataModel getInstance];
   
+  dateTabController = [[DKScrollingTabController alloc] init];
+  dateTabController.delegate = self;
+  
   if ([dataModel preferredRestaurant]) {
     [dataModel setCurrentRestaurant:[dataModel preferredRestaurant]];
   }
@@ -81,8 +84,6 @@
 
 - (void)setupWeekView: (NSArray *) weekMenu {
   
-  dateTabController = [[DKScrollingTabController alloc] init];
-  dateTabController.delegate = self;
   [self addChildViewController:dateTabController];
   [dateTabController didMoveToParentViewController:self];
   [self.view addSubview:dateTabController.view];
@@ -232,12 +233,16 @@
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
   switch (section) {
     case 0:
-      if (![[[[menu period] objectAtIndex:0] calories] isEqualToString:@""]) {
+      if (([[[[menu period] objectAtIndex:0] calories] isEqualToString:@""]) || ([[[[menu period] objectAtIndex:0] calories] isEqualToString:@"0"])) {
+        return @"";
+      } else {
         return [NSString stringWithFormat:@"Valor calórico para uma refeição: %@ kcal", [[[menu period] objectAtIndex:0] calories]];
       }
       break;
     case 1:
-      if ((![[[[menu period] objectAtIndex:1] calories] isEqualToString:@""]) || (![[[[menu period] objectAtIndex:1] calories] isEqualToString:@"0"])) {
+      if (([[[[menu period] objectAtIndex:1] calories] isEqualToString:@""]) || ([[[[menu period] objectAtIndex:1] calories] isEqualToString:@"0"])) {
+        return @"";
+      } else {
         return [NSString stringWithFormat:@"Valor calórico para uma refeição: %@ kcal", [[[menu period] objectAtIndex:1] calories]];
       }
       break;

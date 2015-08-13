@@ -136,18 +136,14 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
   if (section == 0) {
-    return 130;
+    return 120;
   } else {
     return 0;
   }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-  if ([indexPath section]==0 && [indexPath row]==0) {
-    return 44;
-  } else {
     return [self heightForBasicCellAtIndexPath:indexPath];
-  }
 }
 
 - (CGFloat)heightForBasicCellAtIndexPath:(NSIndexPath *)indexPath {
@@ -158,7 +154,12 @@
   });
   
   [self configureBasicCell:sizingCell atIndexPath:indexPath];
-  return [self calculateHeightForConfiguredSizingCell:sizingCell];
+  
+  if ([indexPath section]== 0 && [indexPath row]!=0) {
+    return [self calculateHeightForConfiguredSizingCell:sizingCell];
+  } else {
+    return 44;
+  }
 }
 
 - (CGFloat)calculateHeightForConfiguredSizingCell:(UITableViewCell *)sizingCell {
@@ -166,7 +167,7 @@
   [sizingCell layoutIfNeeded];
   
   CGSize size = [sizingCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
-  return size.height + 1.0f; // Add 1.0f for the cell separator height
+  return size.height; // Add 1.0f for the cell separator height
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
