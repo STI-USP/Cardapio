@@ -190,19 +190,23 @@
 #pragma mark Setters
 
 - (void)setDefault { //restaurante default para quando não houver nenhum selecionado
-  self.campus = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"São Paulo - Cidade Universitária \"Armando de Salles Oliveira\"", nil]
-                                                   forKeys:[NSArray arrayWithObjects:@"name", nil]];
+
+  NSError *jsonError;
+
+  NSString *defString = @"{\"alias\" : \"Central\",\"address\" : \"Praça do Relógio Solar, travessa 8, no 300, Campus Butantã, São Paulo - SP\",\"name\" : \"Central\",\"phones\" : \"(11) 3091-3318\",\"id\" : \"6\",\"latitude\" : \"-23.5598120\",\"longitude\" : \"-46.6366320\",\"photourl\" : \"http://bahamas.uspnet.usp.br/dominios/cce/servicos/restaurantesUSP/central.jpg\",\"workinghours\" : {\"sunday\" : {\"lunch\" : \"12:00 às 14:15\",\"breakfast\" : \"08:00 às 09:30\",\"dinner\" : \"\"},\"saturday\" : {\"lunch\" : \"11:15 às 14:15\",\"breakfast\" : \"07:30 às 09:00\",\"dinner\" : \"\"},\"weekdays\" : {\"lunch\" : \"11:15 às 14:15\",\"breakfast\" : \"07:00 às 08:30\",\"dinner\" : \"17:30 às 19:45\"}},\"cashiers\" : [ {\"address\" : \"Rua do Anfiteatro, nº 295 - Cidade Universitária - São Paulo - CEP 05508-060\",\"prices\" : {\"special\" : {\"dinner\" : \"6,00\",\"lunch\" : \"6,00\",\"breakfast\" : \"\"},\"students\" : {\"dinner\" : \"1,90\",\"lunch\" : \"1,90\",\"breakfast\" : \"\"},\"visiting\" : {\"dinner\" : \"12,00\",\"lunch\" : \"12,00\",\"breakfast\" : \"\"},\"employees\" : {\"dinner\" : \"12,00\",\"lunch\" : \"12,00\",\"breakfast\" : \"\"}},\"longitude\" : \"-46.7216980\",\"latitude\" : \"-23.5594340\",\"workinghours\" : \"Segunda à Sexta - 7h as 19h30\"} ],\"hasCashier\" : \"false\"}";
   
-  NSDictionary *dcPhones = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"(11) 3091-3318", nil]
-                                                              forKeys:[NSArray arrayWithObjects:@"", nil]];
-  NSDictionary *dcCashiers = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"", nil]
-                                                                forKeys:[NSArray arrayWithObjects:@"", nil]];
-  NSDictionary *dcWorkingHours = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"", nil]
-                                                                    forKeys:[NSArray arrayWithObjects:@"", nil]];
+  NSData *objectData = [defString dataUsingEncoding:NSUTF8StringEncoding];
+  NSMutableDictionary *defaultRestaurant = [NSJSONSerialization JSONObjectWithData:objectData
+                                                       options:NSJSONReadingMutableContainers
+                                                         error:&jsonError];
   
-  [self setCurrentRestaurant:[NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"Praça do Relógio Solar, travessa 8, 300, Cidade Universitária, São Paulo - SP", @"Central", dcPhones, @"6", @"-46.7212049", dcCashiers, @"http://bahamas.uspnet.usp.br/dominios/cce/servicos/restaurantesUSP/central.jpg", @"-23.5598117", @"Restaurante Central", dcWorkingHours, nil]
-                                                                forKeys:[NSArray arrayWithObjects:@"address", @"alias", @"phones", @"id", @"longitude", @"cashiers", @"photourl", @"latitude", @"name", @"workinghours", nil]]];
-  //[self setPreferredRestaurant: self.currentRestaurant];
+  if (!jsonError) {
+    [self setCurrentRestaurant:defaultRestaurant];
+    //[self setPreferredRestaurant: self.currentRestaurant];
+  } else {
+    NSLog(@"%@", [jsonError description]);
+  }
+  
 }
 
 - (void)setCurrentRestaurant:(NSDictionary *)currentRestaurant {

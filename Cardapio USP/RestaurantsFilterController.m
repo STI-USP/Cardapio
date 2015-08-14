@@ -126,7 +126,12 @@
 
 - (void)favoriteRestaurant:(id)sender {
 
-  UITableViewCell *cell = (UITableViewCell *)[sender superview];
+  UIView *view = sender;
+  while (view != nil && ![view isKindOfClass:[UITableViewCell class]]) {
+    view = [view superview];
+  }
+
+  UITableViewCell *cell = (UITableViewCell *)view;
   NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
 
   prefRestaurant = [[[campiList objectAtIndex:[indexPath section]] valueForKey:@"restaurants"] objectAtIndex:[indexPath row]];
