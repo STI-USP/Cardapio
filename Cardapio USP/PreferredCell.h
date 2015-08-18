@@ -10,6 +10,6 @@
 
 @interface PreferredCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UIButton *preferredButton;
+@property (strong, nonatomic) IBOutlet UIButton *preferredButton;
 
 @end

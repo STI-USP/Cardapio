@@ -48,17 +48,18 @@
   dataModel = [DataModel getInstance];
 
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveRestaurants) name:@"DidReceiveRestaurants" object:nil];
-}
+  }
 
 -(void)viewWillAppear:(BOOL)animated {
   [super viewDidAppear:YES];
   if ([[dataModel restaurants] count] == 0) {
     [dataModel getRestaurantList];
-  } else {
-    //[self setupView];
   }
-}
 
+  _restaurantDc = [dataModel currentRestaurant];
+  [self setHeaderView];
+
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -75,7 +76,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
   switch (section) {
     case 0:
-      return 6;
+      return 5;
       break;
     case 1:
       return 1;
@@ -87,62 +88,12 @@
   }
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-  
-  UIView *imageView = [[UIView alloc] initWithFrame:CGRectMake(0., 0., self.tableView.frame.size.width, 80.)];
-  if (section == 0) {
-    ThumbnailViewImageProxy *imageViewProxy = [[ThumbnailViewImageProxy alloc] init];
-    imageViewProxy.aspect = ThumbnailAspectZoom;
-    imageViewProxy.hasBorders = NO;
-    NSString *photoUrl = [_restaurantDc valueForKey:@"photourl"];
-    if (photoUrl.length != 0) {
-      imageViewProxy.imagePath = photoUrl;
-    }
-    imageView = imageViewProxy;
-    
-    CATextLayer *border = [[CATextLayer alloc] init];
-
-    border.foregroundColor = CFBridgingRetain((__bridge id)[UIColor blackColor].CGColor);
-    border.alignmentMode = kCAAlignmentCenter;
-    border.font = (__bridge CFTypeRef)(@"HelveticaNeue-Bold");
-    border.fontSize = 14.0;
-    border.wrapped = YES;
-    border.frame = CGRectMake(11.0, 11.0, self.tableView.frame.size.width - 11., 40.0);
-    border.string = [_restaurantDc valueForKey:@"name"];
-    border.name = @"border";
-    [imageView.layer addSublayer:border];
-    
-    CATextLayer *label = [[CATextLayer alloc] init];
-    label.foregroundColor = CFBridgingRetain((__bridge id)[UIColor whiteColor].CGColor);
-    label.alignmentMode = kCAAlignmentCenter;
-    label.font = (__bridge CFTypeRef)(@"HelveticaNeue-Bold");
-    label.fontSize = 14.0;
-    label.wrapped = YES;
-    label.frame = CGRectMake(10.0, 10.0, self.tableView.frame.size.width - 10., 40.0);
-    label.string = [_restaurantDc valueForKey:@"name"];
-    label.name = @"text";
-    [imageView.layer addSublayer:label];
-    
-    // view para o mapa
-    UIButton *mapButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    mapButton.frame = CGRectMake(200., 80., 80., 80.);
-    [mapButton setBackgroundImage:[UIImage imageNamed:@"mapa.png"] forState:UIControlStateNormal];
-    [mapButton addTarget:self action:@selector(showMap) forControlEvents:UIControlEventTouchUpInside];
-    [imageView addSubview:mapButton];
-    
-  } // fim 1a. seção
-  return imageView;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-  if (section == 0) {
-    return 120;
-  } else {
-    return 0;
-  }
-}
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+  if ([indexPath section] == 0) {
+    if ([indexPath row]==1) {
+      return 44;
+    }
+  }
     return [self heightForBasicCellAtIndexPath:indexPath];
 }
 
@@ -155,10 +106,11 @@
   
   [self configureBasicCell:sizingCell atIndexPath:indexPath];
   
-  if ([indexPath section]== 0 && [indexPath row]!=0) {
-    return [self calculateHeightForConfiguredSizingCell:sizingCell];
-  } else {
+  if ([indexPath section] == 1) {
     return 44;
+  } else {
+    return [self calculateHeightForConfiguredSizingCell:sizingCell];
+
   }
 }
 
@@ -167,69 +119,59 @@
   [sizingCell layoutIfNeeded];
   
   CGSize size = [sizingCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
-  return size.height; // Add 1.0f for the cell separator height
+  return size.height + 1.; // Add 1.0f for the cell separator height
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-  
-  _restaurantDc = [dataModel currentRestaurant];
-  
   
       return [self basicCellAtIndexPath:indexPath];
 }
 
 
 - (UITableViewCell *)basicCellAtIndexPath:(NSIndexPath *)indexPath {
-  DetailCell *cell = nil;
+  DetailCell *aCell = nil;
 
   switch (indexPath.section) {
     case 0:
-      if (indexPath.row == 2) {
-        cell = [self.tableView dequeueReusableCellWithIdentifier:@"ContactCell" forIndexPath:indexPath];
+      if (indexPath.row == 1) {
+        aCell = [self.tableView dequeueReusableCellWithIdentifier:@"ContactCell" forIndexPath:indexPath];
       } else {
-        cell = [self.tableView dequeueReusableCellWithIdentifier:@"RestaurantDetailCell" forIndexPath:indexPath];
+        aCell = [self.tableView dequeueReusableCellWithIdentifier:@"RestaurantDetailCell" forIndexPath:indexPath];
       }
       break;
     case 1: {
-      prefCell = [[PreferredCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+      //prefCell = [[PreferredCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+      //prefCell.preferredButton = UIButtonTypeCustom;
       if ([[_restaurantDc valueForKey:@"id"] isEqualToString:[dataModel.preferredRestaurant valueForKey:@"id"]]) {
-        [prefCell.preferredButton setTitle:@"Desmarcar como favorito" forState:UIControlStateNormal];
+        //[prefCell.preferredButton setTitle:@"Desmarcar como favorito" forState:UIControlStateNormal];
+        aCell = [self.tableView dequeueReusableCellWithIdentifier:@"ResetPreferredCell" forIndexPath:indexPath];// se for coloca botão de reset
       } else {
-        [prefCell.preferredButton setTitle:@"Marcar como favorito" forState:UIControlStateNormal];
+        //[prefCell.preferredButton setTitle:@"Marcar como favorito" forState:UIControlStateNormal];
+        aCell = [self.tableView dequeueReusableCellWithIdentifier:@"SetPreferredCell" forIndexPath:indexPath];// se for coloca botão de reset
+
       }
-      return prefCell;
+      //return prefCell;
     }
       break;
     default:
       break;
   }
 
-  [self configureBasicCell:cell atIndexPath:indexPath];
-  return cell;
+  [self configureBasicCell:aCell atIndexPath:indexPath];
+  return aCell;
 }
 
 - (void)configureBasicCell:(DetailCell *)cell atIndexPath:(NSIndexPath *)indexPath {
   // Configure the cell...
-  [cell.title setNumberOfLines:0];
-  [cell.title setLineBreakMode:NSLineBreakByWordWrapping];
-  
-  [cell.subtitle setNumberOfLines:0];
-  [cell.subtitle setLineBreakMode:NSLineBreakByWordWrapping];
-  
   
   switch ([indexPath row]) {
       
-    case 0: { // espaço para altura do botão de mapas
-      [cell.title setText: @" "];
-      [cell.subtitle setText: @" "];
-      break;
-    }
-    case 1: {
+    case 0: {
       [cell.title setText: @"Endereço"];
       [cell.subtitle setText: [_restaurantDc valueForKey:@"address"]];
       break;
     }
-    case 2: {
+    case 1: {
       [cell.title setText: @"Telefone(s)"];
       NSMutableString *telephones = [[NSMutableString alloc] init];
       if ([[_restaurantDc objectForKey:@"phones"] isKindOfClass:[NSString class]]) {
@@ -241,7 +183,6 @@
         if (telephones.length >=1 ) { // se tiver mais de um caracater no string vai ter um \n no final
           [telephones deleteCharactersInRange:NSMakeRange(telephones.length - 1, 1)]; // retira último \n
         }
-        
       }
       [cell.subtitle setText: telephones];
       
@@ -254,10 +195,11 @@
       button.backgroundColor = [UIColor clearColor];
       button.tintColor = [UIColor blueColor];
       cell.accessoryView = button;
+      
       break;
     }
       
-    case 3:{
+    case 2:{
       [cell.title setText: @"Horários"];
       NSMutableString *workingHours = [[NSMutableString alloc] init];
       
@@ -316,7 +258,7 @@
       [cell.subtitle setText: workingHours];
       break;
     }
-    case 4: {
+    case 3: {
       [cell.title setText: @"Preços"];
       NSMutableString *prices = [[NSMutableString alloc] init];
       if (([[_restaurantDc valueForKey:@"cashiers"] isKindOfClass:[NSArray class]]) && ([[_restaurantDc valueForKey:@"cashiers"] count] > 0)) {
@@ -332,7 +274,7 @@
       [cell.subtitle setText: prices];
       break;
     }
-    case 5:
+    case 4:
       [cell.title setText: @"Ponto de venda"];
       if ([[_restaurantDc valueForKey:@"cashiers"] count] > 0) {
         [cell.subtitle setText:[NSString stringWithFormat:@"%@ \n\n%@", [[[_restaurantDc valueForKey:@"cashiers"] objectAtIndex:0] valueForKey:@"address"], [[[_restaurantDc valueForKey:@"cashiers"] objectAtIndex:0] valueForKey:@"workinghours"]]];
@@ -387,6 +329,55 @@
   }
 }
 
+- (void)setHeaderView{
+  //TableView Header
+  UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, 160)];
+  
+  //imagem do restaurante
+  UIView *imageView = [[UIView alloc] initWithFrame:CGRectMake(0., 0., self.tableView.frame.size.width, 120.)];
+  ThumbnailViewImageProxy *imageViewProxy = [[ThumbnailViewImageProxy alloc] init];
+  imageViewProxy.aspect = ThumbnailAspectZoom;
+  imageViewProxy.hasBorders = NO;
+
+  NSString *photoUrl = [_restaurantDc valueForKey:@"photourl"];
+  if (photoUrl.length != 0) {
+    imageViewProxy.imagePath = photoUrl;
+  }
+  imageView = imageViewProxy;
+  
+  CATextLayer *border = [[CATextLayer alloc] init];
+  border.foregroundColor = CFBridgingRetain((__bridge id)[UIColor blackColor].CGColor);
+  border.alignmentMode = kCAAlignmentCenter;
+  border.font = (__bridge CFTypeRef)(@"HelveticaNeue-Bold");
+  border.fontSize = 14.0;
+  border.wrapped = YES;
+  border.frame = CGRectMake(11.0, 11.0, self.tableView.frame.size.width - 11., 40.0);
+  border.string = [_restaurantDc valueForKey:@"name"];
+  border.name = @"border";
+  [imageView.layer addSublayer:border];
+  
+  CATextLayer *label = [[CATextLayer alloc] init];
+  label.foregroundColor = CFBridgingRetain((__bridge id)[UIColor whiteColor].CGColor);
+  label.alignmentMode = kCAAlignmentCenter;
+  label.font = (__bridge CFTypeRef)(@"HelveticaNeue-Bold");
+  label.fontSize = 14.0;
+  label.wrapped = YES;
+  label.frame = CGRectMake(10.0, 10.0, self.tableView.frame.size.width - 10., 40.0);
+  label.string = [_restaurantDc valueForKey:@"name"];
+  label.name = @"text";
+  [imageView.layer addSublayer:label];
+  [headerView addSubview:imageView];
+  
+  //View para o mapa
+  UIButton *mapButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+  mapButton.frame = CGRectMake(200., 80., 80., 80.);
+  [mapButton setBackgroundImage:[UIImage imageNamed:@"mapa.png"] forState:UIControlStateNormal];
+  [mapButton addTarget:self action:@selector(showMap) forControlEvents:UIControlEventTouchUpInside];
+  [headerView addSubview:mapButton];
+  
+  [self.tableView setTableHeaderView: headerView];
+}
+
 
 #pragma mark Actions
 
@@ -400,20 +391,19 @@
 }
 
 - (void)didReceiveRestaurants{
-  //[self setupView];
   [self.tableView reloadData];
 }
 
--(void)setPreferred:(id)sender {
-  if ([[_restaurantDc valueForKey:@"id"] isEqualToString:[dataModel.preferredRestaurant valueForKey:@"id"]]) {
-    [dataModel setPreferredRestaurant:nil]; // se for igual, está desmarcando como favorito
-    [prefCell.preferredButton setTitle:@"Marcar como favorito" forState:UIControlStateNormal];
-  } else {
-    [dataModel setPreferredRestaurant:_restaurantDc]; // senão, está marcando como favorito
-    [prefCell.preferredButton setTitle:@"Desmarcar como favorito" forState:UIControlStateNormal];
-  }
-
-  [self reloadInputViews];
+- (void)setAsPreferred:(id)sender {
+  [dataModel setPreferredRestaurant:_restaurantDc];
+  [self.tableView reloadData];
 }
+
+- (void)resetPreferred:(id)sender {
+  [dataModel setPreferredRestaurant:nil];
+  [self.tableView reloadData];
+}
+
+
 
 @end

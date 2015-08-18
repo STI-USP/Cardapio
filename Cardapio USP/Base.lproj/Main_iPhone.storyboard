@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="nfj-X3-ADh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="nfj-X3-ADh">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
@@ -217,7 +217,7 @@
             <objects>
                 <tableViewController id="d1C-D8-OLv" customClass="InfoViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="zYz-Bi-Lsi">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="783"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
@@ -292,32 +292,44 @@
                                     <outlet property="title" destination="Evh-lk-Ek3" id="pCx-0u-N0X"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PreferredCell" id="8Wh-I0-8Sb" customClass="PreferredCell">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="SetPreferredCell" id="6n6-eR-BPu" customClass="DetailCell">
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8Wh-I0-8Sb" id="B8S-GG-19y">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6n6-eR-BPu" id="nLp-9q-nt9">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="14F-2v-PUz">
-                                            <rect key="frame" x="8" y="8" width="304" height="28"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                            <state key="normal" title="Preferred Restaurant Button">
+                                        <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="geH-Av-Uuk">
+                                            <rect key="frame" x="84" y="5" width="153" height="30"/>
+                                            <state key="normal" title="Definir como preferida">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                             <connections>
-                                                <action selector="setPreferred:" destination="d1C-D8-OLv" eventType="touchUpInside" id="aKW-Cu-Hqv"/>
+                                                <action selector="setAsPreferred:" destination="d1C-D8-OLv" eventType="touchUpInside" id="N5w-sm-Beq"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                            <tableViewCell tag="2" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ResetPreferredCell" id="B2w-eb-Xso" customClass="DetailCell">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="B2w-eb-Xso" id="IBz-rt-Uqq">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DqB-rz-775">
+                                            <rect key="frame" x="29" y="6" width="263" height="30"/>
+                                            <state key="normal" title="Cancelar definição como preferida">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="resetPreferred:" destination="d1C-D8-OLv" eventType="touchUpInside" id="ngw-b0-WTt"/>
                                             </connections>
                                         </button>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="14F-2v-PUz" firstAttribute="top" secondItem="B8S-GG-19y" secondAttribute="topMargin" id="2Bb-ku-CPI"/>
-                                        <constraint firstItem="14F-2v-PUz" firstAttribute="centerX" secondItem="B8S-GG-19y" secondAttribute="centerX" id="Ifc-us-t61"/>
-                                        <constraint firstItem="14F-2v-PUz" firstAttribute="leading" secondItem="B8S-GG-19y" secondAttribute="leadingMargin" id="jCM-Qu-v7n"/>
+                                        <constraint firstItem="DqB-rz-775" firstAttribute="centerY" secondItem="IBz-rt-Uqq" secondAttribute="centerY" constant="-1" id="iS6-pb-ccG"/>
+                                        <constraint firstItem="DqB-rz-775" firstAttribute="centerX" secondItem="IBz-rt-Uqq" secondAttribute="centerX" id="kuc-n2-9Eh"/>
+                                        <constraint firstItem="DqB-rz-775" firstAttribute="leading" secondItem="IBz-rt-Uqq" secondAttribute="leadingMargin" constant="21" id="lwd-3h-pl8"/>
                                     </constraints>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="preferredButton" destination="14F-2v-PUz" id="6u4-d9-L7w"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <sections/>
@@ -333,8 +345,6 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="320" height="783"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EOL-oP-iIC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -384,24 +394,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tB2-ja-Vbv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1374" y="91"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="cNH-li-oVK">
-            <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="q7n-GA-Qgf" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="4gk-fj-h1G"/>
-                        <viewControllerLayoutGuide type="bottom" id="VU2-GK-yct"/>
-                    </layoutGuides>
-                    <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="M3p-px-3T4">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <toolbarItems/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="OUv-KE-LQ9" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
         </scene>
     </scenes>
     <resources>

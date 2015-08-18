@@ -32,7 +32,9 @@
 @property (strong, nonatomic) IBOutlet UILabel *priceItens;
 
 - (IBAction)doneButtonTapped:(id)sender;
-- (IBAction)setPreferred:(id)sender;
+- (IBAction)setAsPreferred:(id)sender;
+- (IBAction)resetPreferred:(id)sender;
+
 
 @end
   

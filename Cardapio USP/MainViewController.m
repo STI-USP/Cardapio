@@ -265,7 +265,9 @@
       cell.textLabel.text = [NSString stringWithFormat:@"%@", [[[menu period] objectAtIndex:1] menu]]; //jantar
       break;
     case 2:
-      cell.textLabel.text = [NSString stringWithFormat:@"%@", dataModel.observation];
+      [cell.textLabel setText:[NSString stringWithFormat:@"%@", dataModel.observation]];
+      [cell.textLabel setTextColor:[UIColor grayColor]];
+      [cell setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
       break;
       
     default:

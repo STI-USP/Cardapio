@@ -10,6 +10,8 @@
 
 @implementation PreferredCell
 
+@synthesize preferredButton;
+
 - (void)awakeFromNib {
     // Initialization code
 }
