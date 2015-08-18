@@ -231,24 +231,28 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
-  switch (section) {
-    case 0:
-      if (([[[[menu period] objectAtIndex:0] calories] isEqualToString:@""]) || ([[[[menu period] objectAtIndex:0] calories] isEqualToString:@"0"])) {
-        return @"";
-      } else {
-        return [NSString stringWithFormat:@"Valor calórico para uma refeição: %@ kcal", [[[menu period] objectAtIndex:0] calories]];
-      }
-      break;
-    case 1:
-      if (([[[[menu period] objectAtIndex:1] calories] isEqualToString:@""]) || ([[[[menu period] objectAtIndex:1] calories] isEqualToString:@"0"])) {
-        return @"";
-      } else {
-        return [NSString stringWithFormat:@"Valor calórico para uma refeição: %@ kcal", [[[menu period] objectAtIndex:1] calories]];
-      }
-      break;
-      
-    default:
-      break;
+  if (menu) {
+    switch (section) {
+      case 0:
+        if (([[[[menu period] objectAtIndex:0] calories] isEqualToString:@""]) || ([[[[menu period] objectAtIndex:0] calories] isEqualToString:@"0"])) {
+          return @"";
+        } else {
+          return [NSString stringWithFormat:@"Valor calórico para uma refeição: %@ kcal", [[[menu period] objectAtIndex:0] calories]];
+        }
+        break;
+      case 1:
+        if (([[[[menu period] objectAtIndex:1] calories] isEqualToString:@""]) || ([[[[menu period] objectAtIndex:1] calories] isEqualToString:@"0"])) {
+          return @"";
+        } else {
+          return [NSString stringWithFormat:@"Valor calórico para uma refeição: %@ kcal", [[[menu period] objectAtIndex:1] calories]];
+        }
+        break;
+        
+      default:
+        break;
+    }
+  } else {
+    return @"";
   }
   return nil;
 }
@@ -257,21 +261,24 @@
   static NSString *cellID = @"MenuCell";
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID forIndexPath:indexPath];
   
-  switch ([indexPath section]) {
-    case 0:
-      cell.textLabel.text = [NSString stringWithFormat:@"%@", [[[menu period] objectAtIndex:0] menu]]; //almoço
-      break;
-    case 1:
-      cell.textLabel.text = [NSString stringWithFormat:@"%@", [[[menu period] objectAtIndex:1] menu]]; //jantar
-      break;
-    case 2:
-      [cell.textLabel setText:[NSString stringWithFormat:@"%@", dataModel.observation]];
-      [cell.textLabel setTextColor:[UIColor grayColor]];
-      [cell setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
-      break;
-      
-    default:
-      break;
+  if (menu) {
+    switch ([indexPath section]) {
+      case 0:
+        cell.textLabel.text = [NSString stringWithFormat:@"%@", [[[menu period] objectAtIndex:0] menu]];
+        break;
+      case 1:
+        cell.textLabel.text = [NSString stringWithFormat:@"%@", [[[menu period] objectAtIndex:1] menu]];
+        break;
+      case 2:
+        [cell.textLabel setText:[NSString stringWithFormat:@"%@", dataModel.observation]];
+        [cell.textLabel setTextColor:[UIColor grayColor]];
+        [cell setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
+        break;
+        
+      default:
+        break;
+    }
+
   }
 
   return cell;
