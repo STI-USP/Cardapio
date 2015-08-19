@@ -70,6 +70,7 @@
 		E9E4BCD81B7BFBFC005633AD /* CarrierDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E9E4BCD51B7BFBFC005633AD /* CarrierDataModel.m */; };
 		E9E4BCD91B7BFBFC005633AD /* TelephoneUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = E9E4BCD71B7BFBFC005633AD /* TelephoneUtils.m */; };
 		E9E4BCDC1B7BFC33005633AD /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E9E4BCDB1B7BFC33005633AD /* Settings.bundle */; };
+		E9E543661B84C3DC00BC81B8 /* Carriers.plist in Resources */ = {isa = PBXBuildFile; fileRef = E9E543651B84C3DC00BC81B8 /* Carriers.plist */; };
 		E9E55FB81B5591A100994BCB /* RestaurantDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9E55FB71B5591A100994BCB /* RestaurantDetailTableViewController.m */; };
 		E9E55FBB1B55933F00994BCB /* DetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E9E55FBA1B55933F00994BCB /* DetailCell.m */; };
 		E9E55FBE1B55944F00994BCB /* ThumbnailViewImageProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = E9E55FBD1B55944F00994BCB /* ThumbnailViewImageProxy.m */; };
@@ -196,6 +197,7 @@
 		E9E4BCD61B7BFBFC005633AD /* TelephoneUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TelephoneUtils.h; sourceTree = "<group>"; };
 		E9E4BCD71B7BFBFC005633AD /* TelephoneUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TelephoneUtils.m; sourceTree = "<group>"; };
 		E9E4BCDB1B7BFC33005633AD /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		E9E543651B84C3DC00BC81B8 /* Carriers.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Carriers.plist; sourceTree = "<group>"; };
 		E9E55FB61B5591A100994BCB /* RestaurantDetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestaurantDetailTableViewController.h; sourceTree = "<group>"; };
 		E9E55FB71B5591A100994BCB /* RestaurantDetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestaurantDetailTableViewController.m; sourceTree = "<group>"; };
 		E9E55FB91B55933F00994BCB /* DetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailCell.h; sourceTree = "<group>"; };
@@ -355,6 +357,7 @@
 		BFAC6E83192A54E100921494 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				E9E543651B84C3DC00BC81B8 /* Carriers.plist */,
 				BFAC6E84192A54E100921494 /* Cardapio USP-Info.plist */,
 				BFAC6E88192A54E100921494 /* main.m */,
 				BFAC6E8A192A54E100921494 /* Cardapio USP-Prefix.pch */,
@@ -547,6 +550,7 @@
 				BFBE4D911A1276EF002EDADE /* restaurants_old.json in Resources */,
 				E9E8C5A81B18C5710042DC81 /* fav.png in Resources */,
 				BFBE4D8D1A126003002EDADE /* central.plist in Resources */,
+				E9E543661B84C3DC00BC81B8 /* Carriers.plist in Resources */,
 				BFAC6EED192AB98600921494 /* mapa.png in Resources */,
 				BFBE1E76192FB038004C403C /* restaurantes.json in Resources */,
 			);

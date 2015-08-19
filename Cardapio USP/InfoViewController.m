@@ -140,24 +140,18 @@
       }
       break;
     case 1: {
-      //prefCell = [[PreferredCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-      //prefCell.preferredButton = UIButtonTypeCustom;
       if ([[_restaurantDc valueForKey:@"id"] isEqualToString:[dataModel.preferredRestaurant valueForKey:@"id"]]) {
-        //[prefCell.preferredButton setTitle:@"Desmarcar como favorito" forState:UIControlStateNormal];
         aCell = [self.tableView dequeueReusableCellWithIdentifier:@"ResetPreferredCell" forIndexPath:indexPath];// se for coloca botão de reset
       } else {
-        //[prefCell.preferredButton setTitle:@"Marcar como favorito" forState:UIControlStateNormal];
         aCell = [self.tableView dequeueReusableCellWithIdentifier:@"SetPreferredCell" forIndexPath:indexPath];// se for coloca botão de reset
-
       }
-      //return prefCell;
     }
       break;
     default:
       break;
   }
 
-  [self configureBasicCell:aCell atIndexPath:indexPath];
+  //[self configureBasicCell:aCell atIndexPath:indexPath];
   return aCell;
 }
 
@@ -294,19 +288,21 @@
 /// Trata telefone e email
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
   if (indexPath.section == 0 && indexPath.row == 1) {
-        if ([[UIDevice currentDevice].model isEqualToString:@"iPhone"]) {
-          NSArray *telephoneListToDial = [NSArray arrayWithArray:[_restaurantDc objectForKey:@"phones"]];
-          UIActionSheet *actionSheet = [[UIActionSheet alloc] init];
-          actionSheet.title =  [NSString stringWithFormat:@"Ligar para restaurante"];
-          actionSheet.delegate = self;
-          for (NSString *s in telephoneListToDial) {
-            [actionSheet addButtonWithTitle:[TelephoneUtils telephoneWithCarrierFromString:s]];
-          }
-          actionSheet.cancelButtonIndex = [actionSheet addButtonWithTitle:@"Cancelar"];
-          [[actionSheet viewWithTag:0] setOpaque:NO];
-          [[actionSheet viewWithTag:0] setAlpha:0.8];
-          [actionSheet showFromTabBar:super.tabBarController.tabBar];
-        }
+    if ([[UIDevice currentDevice].model isEqualToString:@"iPhone"]) {
+      //NSArray *telephoneListToDial = [NSArray arrayWithArray:[_restaurantDc objectForKey:@"phones"]];
+      UIActionSheet *actionSheet = [[UIActionSheet alloc] init];
+      actionSheet.title =  [NSString stringWithFormat:@"Ligar para restaurante"];
+      actionSheet.delegate = self;
+        //for (NSString *s in telephoneListToDial) {
+        //  [actionSheet addButtonWithTitle:[TelephoneUtils telephoneWithCarrierFromString:s]];
+        // }
+      [actionSheet addButtonWithTitle:[TelephoneUtils telephoneWithCarrierFromString:[_restaurantDc objectForKey:@"phones"]]];
+        
+      actionSheet.cancelButtonIndex = [actionSheet addButtonWithTitle:@"Cancelar"];
+      [[actionSheet viewWithTag:0] setOpaque:NO];
+      [[actionSheet viewWithTag:0] setAlpha:0.8];
+      [actionSheet showInView:self.view];
+    }
   }
 }
 
@@ -324,7 +320,7 @@
 #pragma mark - Action Sheet
 
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
-  if ([actionSheet cancelButtonIndex] != buttonIndex) { // se não for o botão cancelar disca o telefone
+  if ([actionSheet cancelButtonIndex] != buttonIndex) {
     [TelephoneUtils dialToTelephone:[actionSheet buttonTitleAtIndex:buttonIndex]];
   }
 }
