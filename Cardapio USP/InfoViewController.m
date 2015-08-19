@@ -106,13 +106,13 @@
   
   [self configureBasicCell:sizingCell atIndexPath:indexPath];
   
-  if ([indexPath section] == 1) {
+  if ([indexPath section]==1) {
     return 44;
   } else {
     return [self calculateHeightForConfiguredSizingCell:sizingCell];
-
   }
 }
+
 
 - (CGFloat)calculateHeightForConfiguredSizingCell:(UITableViewCell *)sizingCell {
   [sizingCell setNeedsLayout];
@@ -122,8 +122,68 @@
   return size.height + 1.; // Add 1.0f for the cell separator height
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+/*
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
   
+  UIView *imageView = [[UIView alloc] initWithFrame:CGRectMake(0., 0., self.tableView.frame.size.width, 80.)];
+  if (section == 0) {
+    ThumbnailViewImageProxy *imageViewProxy = [[ThumbnailViewImageProxy alloc] init];
+    imageViewProxy.aspect = ThumbnailAspectZoom;
+    imageViewProxy.hasBorders = NO;
+    NSString *photoUrl = _restaurantDc[@"photourl"];
+    if (photoUrl.length != 0) {
+      imageViewProxy.imagePath = photoUrl;
+    }
+    UIImageView *imgView = [[UIImageView alloc] initWithImage: imageViewProxy.image];
+    imageView = imageViewProxy;
+    
+    CATextLayer *border = [[CATextLayer alloc] init];
+    border.foregroundColor = CFBridgingRetain((__bridge id)[UIColor blackColor].CGColor);
+    border.alignmentMode = kCAAlignmentCenter;
+    border.font = (__bridge CFTypeRef)(@"HelveticaNeue-Bold");
+    border.fontSize = 14.0;
+    border.wrapped = YES;
+    border.frame = CGRectMake(11.0, 11.0, self.tableView.frame.size.width - 11., 40.0);
+    border.string = _restaurantDc[@"name"];
+    border.name = @"border";
+    [imageView.layer addSublayer:border];
+    
+    CATextLayer *label = [[CATextLayer alloc] init];
+    label.foregroundColor = CFBridgingRetain((__bridge id)[UIColor whiteColor].CGColor);
+    label.alignmentMode = kCAAlignmentCenter;
+    label.font = (__bridge CFTypeRef)(@"HelveticaNeue-Bold");
+    label.fontSize = 14.0;
+    label.wrapped = YES;
+    label.frame = CGRectMake(10.0, 10.0, self.tableView.frame.size.width - 10., 40.0);
+    label.string = _restaurantDc[@"name"];
+    label.name = @"text";
+    [imageView.layer addSublayer:label];
+    
+    
+    //View para o mapa
+    UIButton *mapButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    mapButton.frame = CGRectMake(200., 80., 80., 80.);
+    [mapButton setBackgroundImage:[UIImage imageNamed:@"mapa.png"] forState:UIControlStateNormal];
+    [mapButton addTarget:self action:@selector(showMap) forControlEvents:UIControlEventTouchUpInside];
+    [imageView addSubview:mapButton];
+    
+  } // fim 1a. seção
+  return imageView;
+}
+
+/// Ajusta a altura do header da 1. seção para caber a imagem
+/// as demais seções permanecem com a altura padrão
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+  CGFloat headerHeight = 22.0; // altura padrão para section header
+  if (section == 0) {
+    headerHeight = 160.;
+  }
+  return headerHeight;
+}
+*/
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
       return [self basicCellAtIndexPath:indexPath];
 }
 
@@ -141,151 +201,153 @@
       break;
     case 1: {
       if ([[_restaurantDc valueForKey:@"id"] isEqualToString:[dataModel.preferredRestaurant valueForKey:@"id"]]) {
-        aCell = [self.tableView dequeueReusableCellWithIdentifier:@"ResetPreferredCell" forIndexPath:indexPath];// se for coloca botão de reset
+        aCell = [self.tableView dequeueReusableCellWithIdentifier:@"ResetPreferredCell" forIndexPath:indexPath];
       } else {
-        aCell = [self.tableView dequeueReusableCellWithIdentifier:@"SetPreferredCell" forIndexPath:indexPath];// se for coloca botão de reset
+        aCell = [self.tableView dequeueReusableCellWithIdentifier:@"SetPreferredCell" forIndexPath:indexPath];
       }
     }
       break;
     default:
       break;
   }
-
-  //[self configureBasicCell:aCell atIndexPath:indexPath];
+  [self configureBasicCell:aCell atIndexPath:indexPath];
   return aCell;
 }
 
 - (void)configureBasicCell:(DetailCell *)cell atIndexPath:(NSIndexPath *)indexPath {
   // Configure the cell...
   
-  switch ([indexPath row]) {
-      
-    case 0: {
-      [cell.title setText: @"Endereço"];
-      [cell.subtitle setText: [_restaurantDc valueForKey:@"address"]];
-      break;
-    }
-    case 1: {
-      [cell.title setText: @"Telefone(s)"];
-      NSMutableString *telephones = [[NSMutableString alloc] init];
-      if ([[_restaurantDc objectForKey:@"phones"] isKindOfClass:[NSString class]]) {
-        telephones = [_restaurantDc valueForKey:@"phones"];
-      } else {
-        for (NSString *tel in [_restaurantDc valueForKey:@"phones"])
-          [telephones appendString:[NSString stringWithFormat:@"%@\n", tel]];
+  if ([indexPath section]==0) {
+    switch ([indexPath row]) {
         
-        if (telephones.length >=1 ) { // se tiver mais de um caracater no string vai ter um \n no final
-          [telephones deleteCharactersInRange:NSMakeRange(telephones.length - 1, 1)]; // retira último \n
+      case 0: {
+        [cell.title setText: @"Endereço"];
+        [cell.subtitle setText: [_restaurantDc valueForKey:@"address"]];
+        break;
+      }
+      case 1: {
+        [cell.title setText: @"Telefone(s)"];
+        NSMutableString *telephones = [[NSMutableString alloc] init];
+        if ([[_restaurantDc objectForKey:@"phones"] isKindOfClass:[NSString class]]) {
+          telephones = [_restaurantDc valueForKey:@"phones"];
+        } else {
+          for (NSString *tel in [_restaurantDc valueForKey:@"phones"])
+            [telephones appendString:[NSString stringWithFormat:@"%@\n", tel]];
+          
+          if (telephones.length >=1 ) { // se tiver mais de um caracater no string vai ter um \n no final
+            [telephones deleteCharactersInRange:NSMakeRange(telephones.length - 1, 1)]; // retira último \n
+          }
         }
+        [cell.subtitle setText: telephones];
+        
+        UIImage *image = [UIImage imageNamed:@"phone.png"];
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        CGRect frame = CGRectMake(0.0, 0.0, image.size.width, image.size.height);
+        button.frame = frame;
+        [button setBackgroundImage:image forState:UIControlStateNormal];
+        [button addTarget:self action:@selector(callButtonTapped:event:)  forControlEvents:UIControlEventTouchUpInside];
+        button.backgroundColor = [UIColor clearColor];
+        button.tintColor = [UIColor blueColor];
+        cell.accessoryView = button;
+        break;
       }
-      [cell.subtitle setText: telephones];
-      
-      UIImage *image = [UIImage imageNamed:@"phone.png"];
-      UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-      CGRect frame = CGRectMake(0.0, 0.0, image.size.width, image.size.height);
-      button.frame = frame;
-      [button setBackgroundImage:image forState:UIControlStateNormal];
-      [button addTarget:self action:@selector(callButtonTapped:event:)  forControlEvents:UIControlEventTouchUpInside];
-      button.backgroundColor = [UIColor clearColor];
-      button.tintColor = [UIColor blueColor];
-      cell.accessoryView = button;
-      
-      break;
+        
+      case 2:{
+        [cell.title setText: @"Horários"];
+        NSMutableString *workingHours = [[NSMutableString alloc] init];
+        
+        //DIA DA SEMANA
+        [workingHours appendString:@"Segunda à sexta-feira \n"];
+        //café da manha
+        NSString *weekdayBreakfest = [[[_restaurantDc valueForKey:@"workinghours"] valueForKey:@"weekdays"]valueForKey:@"breakfest"];
+        if (weekdayBreakfest && ![weekdayBreakfest isEqualToString:@""]) {
+          [workingHours appendString:[NSString stringWithFormat:@"Café da manhã: %@\n", weekdayBreakfest]];
+        }
+        
+        //almoço
+        NSString *weekdayLunch = [[[_restaurantDc valueForKey:@"workinghours"] valueForKey:@"weekdays"]valueForKey:@"lunch"];
+        if (weekdayLunch && ![weekdayLunch isEqualToString:@""]) {
+          [workingHours appendString:[NSString stringWithFormat:@"Almoço: %@\n", weekdayLunch]];
+        }
+        
+        //janta
+        NSString *weekdayDinner = [[[_restaurantDc valueForKey:@"workinghours"] valueForKey:@"weekdays"]valueForKey:@"dinner"];
+        if (weekdayDinner && ![weekdayDinner isEqualToString:@""]) {
+          [workingHours appendString:[NSString stringWithFormat:@"Jantar: %@\n", weekdayDinner]];
+        }
+        
+        //SABADO
+        [workingHours appendString:@"\nSábado \n"];
+        //cafe da manha
+        NSString *saturdayBreakfest = [[[_restaurantDc valueForKey:@"workinghours"] valueForKey:@"saturday"]valueForKey:@"breakfest"];
+        if (saturdayBreakfest && ![saturdayBreakfest isEqualToString:@""]) {
+          [workingHours appendString:[NSString stringWithFormat:@"Café da manhã: %@\n", saturdayBreakfest]];
+        }
+        
+        //almoço
+        NSString *saturdayLunch = [[[_restaurantDc valueForKey:@"workinghours"] valueForKey:@"saturday"]valueForKey:@"lunch"];
+        if (saturdayLunch && ![saturdayLunch isEqualToString:@""]) {
+          [workingHours appendString:[NSString stringWithFormat:@"Almoço: %@\n", saturdayLunch]];
+        } else {
+          [workingHours appendString:@"Fechado \n"];
+        }
+        
+        //DOMINGO
+        [workingHours appendString:@"\nDomingo \n"];
+        //cafe da manha
+        NSString *sundayBreakfest = [[[_restaurantDc valueForKey:@"workinghours"] valueForKey:@"sunday"]valueForKey:@"breakfest"];
+        if (sundayBreakfest && ![sundayBreakfest isEqualToString:@""]) {
+          [workingHours appendString:[NSString stringWithFormat:@"Café da manhã: %@\n", sundayBreakfest]];
+        }
+        
+        //almoço
+        NSString *sundayLunch = [[[_restaurantDc valueForKey:@"workinghours"] valueForKey:@"sunday"]valueForKey:@"lunch"];
+        if (sundayLunch && ![sundayLunch isEqualToString:@""]) {
+          [workingHours appendString:[NSString stringWithFormat:@"Almoço: %@", sundayLunch]];
+        } else {
+          [workingHours appendString:@"Fechado"];
+        }
+        
+        [cell.subtitle setText: workingHours];
+        break;
+      }
+      case 3: {
+        [cell.title setText: @"Preços"];
+        NSMutableString *prices = [[NSMutableString alloc] init];
+        if (([[_restaurantDc valueForKey:@"cashiers"] isKindOfClass:[NSArray class]]) && ([[_restaurantDc valueForKey:@"cashiers"] count] > 0)) {
+          [prices appendString:[NSString stringWithFormat:@"Aluno: %@\n", [[[[[_restaurantDc valueForKey:@"cashiers"] objectAtIndex:0] valueForKey:@"prices"] valueForKey:@"students"] valueForKey:@"lunch"]]];
+          [prices appendString:[NSString stringWithFormat:@"Especial: %@\n", [[[[[_restaurantDc valueForKey:@"cashiers"] objectAtIndex:0] valueForKey:@"prices"] valueForKey:@"special"] valueForKey:@"lunch"]]];
+          [prices appendString:[NSString stringWithFormat:@"Visitante: %@", [[[[[_restaurantDc valueForKey:@"cashiers"] objectAtIndex:0] valueForKey:@"prices"] valueForKey:@"visiting"] valueForKey:@"lunch"]]];
+        } else {
+          [prices appendString:[NSString stringWithFormat:@"Aluno: 1.90\n"]];
+          [prices appendString:[NSString stringWithFormat:@"Especial: 6.00\n"]];
+          [prices appendString:[NSString stringWithFormat:@"Visitante: 12.00"]];
+        }
+        
+        [cell.subtitle setText: prices];
+        break;
+      }
+      case 4:
+        [cell.title setText: @"Ponto de venda"];
+        if ([[_restaurantDc valueForKey:@"cashiers"] count] > 0) {
+          [cell.subtitle setText:[NSString stringWithFormat:@"%@ \n\n%@", [[[_restaurantDc valueForKey:@"cashiers"] objectAtIndex:0] valueForKey:@"address"], [[[_restaurantDc valueForKey:@"cashiers"] objectAtIndex:0] valueForKey:@"workinghours"]]];
+        } else {
+          [cell.subtitle setText: @""];
+          [cell.subtitle setHidden:YES];
+        }
+        break;
+        
+        
+      default:
+        break;
     }
-      
-    case 2:{
-      [cell.title setText: @"Horários"];
-      NSMutableString *workingHours = [[NSMutableString alloc] init];
-      
-      //DIA DA SEMANA
-      [workingHours appendString:@"Segunda à sexta-feira \n"];
-      //café da manha
-      NSString *weekdayBreakfest = [[[_restaurantDc valueForKey:@"workinghours"] valueForKey:@"weekdays"]valueForKey:@"breakfest"];
-      if (weekdayBreakfest && ![weekdayBreakfest isEqualToString:@""]) {
-        [workingHours appendString:[NSString stringWithFormat:@"Café da manhã: %@\n", weekdayBreakfest]];
-      }
-      
-      //almoço
-      NSString *weekdayLunch = [[[_restaurantDc valueForKey:@"workinghours"] valueForKey:@"weekdays"]valueForKey:@"lunch"];
-      if (weekdayLunch && ![weekdayLunch isEqualToString:@""]) {
-        [workingHours appendString:[NSString stringWithFormat:@"Almoço: %@\n", weekdayLunch]];
-      }
-      
-      //janta
-      NSString *weekdayDinner = [[[_restaurantDc valueForKey:@"workinghours"] valueForKey:@"weekdays"]valueForKey:@"dinner"];
-      if (weekdayDinner && ![weekdayDinner isEqualToString:@""]) {
-        [workingHours appendString:[NSString stringWithFormat:@"Jantar: %@\n", weekdayDinner]];
-      }
-      
-      //SABADO
-      [workingHours appendString:@"\nSábado \n"];
-      //cafe da manha
-      NSString *saturdayBreakfest = [[[_restaurantDc valueForKey:@"workinghours"] valueForKey:@"saturday"]valueForKey:@"breakfest"];
-      if (saturdayBreakfest && ![saturdayBreakfest isEqualToString:@""]) {
-        [workingHours appendString:[NSString stringWithFormat:@"Café da manhã: %@\n", saturdayBreakfest]];
-      }
-      
-      //almoço
-      NSString *saturdayLunch = [[[_restaurantDc valueForKey:@"workinghours"] valueForKey:@"saturday"]valueForKey:@"lunch"];
-      if (saturdayLunch && ![saturdayLunch isEqualToString:@""]) {
-        [workingHours appendString:[NSString stringWithFormat:@"Almoço: %@\n", saturdayLunch]];
-      } else {
-        [workingHours appendString:@"Fechado \n"];
-      }
-      
-      //DOMINGO
-      [workingHours appendString:@"\nDomingo \n"];
-      //cafe da manha
-      NSString *sundayBreakfest = [[[_restaurantDc valueForKey:@"workinghours"] valueForKey:@"sunday"]valueForKey:@"breakfest"];
-      if (sundayBreakfest && ![sundayBreakfest isEqualToString:@""]) {
-        [workingHours appendString:[NSString stringWithFormat:@"Café da manhã: %@\n", sundayBreakfest]];
-      }
-      
-      //almoço
-      NSString *sundayLunch = [[[_restaurantDc valueForKey:@"workinghours"] valueForKey:@"sunday"]valueForKey:@"lunch"];
-      if (sundayLunch && ![sundayLunch isEqualToString:@""]) {
-        [workingHours appendString:[NSString stringWithFormat:@"Almoço: %@", sundayLunch]];
-      } else {
-        [workingHours appendString:@"Fechado"];
-      }
-      
-      [cell.subtitle setText: workingHours];
-      break;
-    }
-    case 3: {
-      [cell.title setText: @"Preços"];
-      NSMutableString *prices = [[NSMutableString alloc] init];
-      if (([[_restaurantDc valueForKey:@"cashiers"] isKindOfClass:[NSArray class]]) && ([[_restaurantDc valueForKey:@"cashiers"] count] > 0)) {
-        [prices appendString:[NSString stringWithFormat:@"Aluno: %@\n", [[[[[_restaurantDc valueForKey:@"cashiers"] objectAtIndex:0] valueForKey:@"prices"] valueForKey:@"students"] valueForKey:@"lunch"]]];
-        [prices appendString:[NSString stringWithFormat:@"Especial: %@\n", [[[[[_restaurantDc valueForKey:@"cashiers"] objectAtIndex:0] valueForKey:@"prices"] valueForKey:@"special"] valueForKey:@"lunch"]]];
-        [prices appendString:[NSString stringWithFormat:@"Visitante: %@", [[[[[_restaurantDc valueForKey:@"cashiers"] objectAtIndex:0] valueForKey:@"prices"] valueForKey:@"visiting"] valueForKey:@"lunch"]]];
-      } else {
-        [prices appendString:[NSString stringWithFormat:@"Aluno: 1.90\n"]];
-        [prices appendString:[NSString stringWithFormat:@"Especial: 6.00\n"]];
-        [prices appendString:[NSString stringWithFormat:@"Visitante: 12.00"]];
-      }
-      
-      [cell.subtitle setText: prices];
-      break;
-    }
-    case 4:
-      [cell.title setText: @"Ponto de venda"];
-      if ([[_restaurantDc valueForKey:@"cashiers"] count] > 0) {
-        [cell.subtitle setText:[NSString stringWithFormat:@"%@ \n\n%@", [[[_restaurantDc valueForKey:@"cashiers"] objectAtIndex:0] valueForKey:@"address"], [[[_restaurantDc valueForKey:@"cashiers"] objectAtIndex:0] valueForKey:@"workinghours"]]];
-      } else {
-        [cell.subtitle setText: @""];
-        [cell.subtitle setHidden:YES];
-      }
-      break;
-    
-      
-    default:
-      break;
+
   }
+  
 }
 
 
-/// Trata telefone e email
+/// Trata telefone
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
   if (indexPath.section == 0 && indexPath.row == 1) {
     if ([[UIDevice currentDevice].model isEqualToString:@"iPhone"]) {
@@ -325,12 +387,14 @@
   }
 }
 
+
 - (void)setHeaderView{
   //TableView Header
   UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, 160)];
+  [headerView setBackgroundColor:[UIColor whiteColor]];
   
   //imagem do restaurante
-  UIView *imageView = [[UIView alloc] initWithFrame:CGRectMake(0., 0., self.tableView.frame.size.width, 120.)];
+  UIView *imageView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, 120)];
   ThumbnailViewImageProxy *imageViewProxy = [[ThumbnailViewImageProxy alloc] init];
   imageViewProxy.aspect = ThumbnailAspectZoom;
   imageViewProxy.hasBorders = NO;
@@ -339,7 +403,15 @@
   if (photoUrl.length != 0) {
     imageViewProxy.imagePath = photoUrl;
   }
+  
   imageView = imageViewProxy;
+  
+  UIImageView *viewForImage = [[UIImageView alloc] initWithImage:imageViewProxy.image];
+  [viewForImage setFrame:CGRectMake(0., 0., self.tableView.frame.size.width, 130.)];
+  //[viewForImage setContentMode: UIViewContentModeScaleAspectFill];
+  //[viewForImage setContentMode: UIViewContentModeScaleAspectFit];
+  [viewForImage setContentMode: UIViewContentModeScaleToFill];
+  [imageView addSubview:viewForImage];
   
   CATextLayer *border = [[CATextLayer alloc] init];
   border.foregroundColor = CFBridgingRetain((__bridge id)[UIColor blackColor].CGColor);
@@ -375,6 +447,7 @@
 }
 
 
+
 #pragma mark Actions
 
 - (void)showMap{
@@ -399,7 +472,5 @@
   [dataModel setPreferredRestaurant:nil];
   [self.tableView reloadData];
 }
-
-
 
 @end
