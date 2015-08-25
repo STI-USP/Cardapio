@@ -19,18 +19,6 @@
 @property (strong, nonatomic) MenuDataModel *_menuDataModel;
 @property (strong, nonatomic) Restaurant *restaurant;
 
-@property (strong, nonatomic) IBOutlet UILabel *address;
-@property (strong, nonatomic) IBOutlet UILabel *phone;
-@property (strong, nonatomic) IBOutlet UILabel *hour;
-@property (strong, nonatomic) IBOutlet UILabel *weeklyperiod;
-@property (strong, nonatomic) IBOutlet UIButton *prefButton;
-
-
-@property (strong, nonatomic) IBOutlet UILabel *workinghours;
-@property (strong, nonatomic) IBOutlet UILabel *cashiers;
-@property (strong, nonatomic) IBOutlet UILabel *cashiersTitle;
-@property (strong, nonatomic) IBOutlet UILabel *priceItens;
-
 - (IBAction)doneButtonTapped:(id)sender;
 - (IBAction)setAsPreferred:(id)sender;
 - (IBAction)resetPreferred:(id)sender;

@@ -45,8 +45,7 @@
 
 @implementation REFrostedViewController
 
-- (id)init
-{
+- (id)init {
     self = [super init];
     if (self) {
         [self commonInit];
@@ -54,8 +53,7 @@
     return self;
 }
 
-- (id)initWithCoder:(NSCoder *)decoder
-{
+- (id)initWithCoder:(NSCoder *)decoder {
     self = [super initWithCoder:decoder];
     if (self) {
         [self commonInit];
@@ -63,8 +61,7 @@
     return self;
 }
 
-- (void)commonInit
-{
+- (void)commonInit {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
     self.wantsFullScreenLayout = YES;
@@ -82,8 +79,7 @@
     _automaticSize = YES;
 }
 
-- (id)initWithContentViewController:(UIViewController *)contentViewController menuViewController:(UIViewController *)menuViewController
-{
+- (id)initWithContentViewController:(UIViewController *)contentViewController menuViewController:(UIViewController *)menuViewController {
     self = [self init];
     if (self) {
         _contentViewController = contentViewController;
@@ -92,55 +88,46 @@
     return self;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     [self re_displayController:self.contentViewController frame:self.view.frame];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
     [self.contentViewController beginAppearanceTransition:YES animated:animated];
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
+- (void)viewDidAppear:(BOOL)animated {
     [self.contentViewController endAppearanceTransition];
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
+- (void)viewWillDisappear:(BOOL)animated {
     [self.contentViewController beginAppearanceTransition:NO animated:animated];
 }
 
-- (void)viewDidDisappear:(BOOL)animated
-{
+- (void)viewDidDisappear:(BOOL)animated {
     [self.contentViewController endAppearanceTransition];
 }
 
-- (UIViewController *)childViewControllerForStatusBarStyle
-{
+- (UIViewController *)childViewControllerForStatusBarStyle {
     return self.contentViewController;
 }
 
-- (UIViewController *)childViewControllerForStatusBarHidden
-{
+- (UIViewController *)childViewControllerForStatusBarHidden {
     return self.contentViewController;
 }
 
 #pragma mark -
 #pragma mark Setters
 
-- (void)setContentViewController:(UIViewController *)contentViewController
-{
+- (void)setContentViewController:(UIViewController *)contentViewController {
     _contentViewController = contentViewController;
     if ([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]) {
         [self performSelector:@selector(setNeedsStatusBarAppearanceUpdate)];
     }
 }
 
-- (void)setMenuViewController:(UIViewController *)menuViewController
-{
+- (void)setMenuViewController:(UIViewController *)menuViewController {
     if (!_menuViewController) {
         _menuViewController = menuViewController;
         return;
@@ -159,21 +146,18 @@
     [menuViewController didMoveToParentViewController:self];
 }
 
-- (void)setMenuViewSize:(CGSize)menuViewSize
-{
+- (void)setMenuViewSize:(CGSize)menuViewSize {
     _menuViewSize = menuViewSize;
     self.automaticSize = NO;
 }
 
 #pragma mark -
 
-- (void)presentMenuViewController
-{
+- (void)presentMenuViewController {
     [self presentMenuViewControllerWithAnimatedApperance:YES];
 }
 
-- (void)presentMenuViewControllerWithAnimatedApperance:(BOOL)animateApperance
-{
+- (void)presentMenuViewControllerWithAnimatedApperance:(BOOL)animateApperance {
     if ([self.delegate conformsToProtocol:@protocol(REFrostedViewControllerDelegate)] && [self.delegate respondsToSelector:@selector(frostedViewController:willShowMenuViewController:)]) {
         [self.delegate frostedViewController:self willShowMenuViewController:self.menuViewController];
     }
@@ -216,8 +200,7 @@
     
 }
 
-- (void)hideMenuViewController
-{
+- (void)hideMenuViewController {
     if (!self.liveBlur) {
         self.containerViewController.screenshotImage = [[self.contentViewController.view re_screenshot] re_applyBlurWithRadius:self.blurRadius tintColor:self.blurTintColor saturationDeltaFactor:self.blurSaturationDeltaFactor maskImage:nil];
         [self.containerViewController refreshBackgroundImage];
@@ -225,8 +208,7 @@
     [self.containerViewController hide];
 }
 
-- (void)panGestureRecognized:(UIPanGestureRecognizer *)recognizer
-{
+- (void)panGestureRecognized:(UIPanGestureRecognizer *)recognizer {
     if ([self.delegate conformsToProtocol:@protocol(REFrostedViewControllerDelegate)] && [self.delegate respondsToSelector:@selector(frostedViewController:didRecognizePanGesture:)])
         [self.delegate frostedViewController:self didRecognizePanGesture:recognizer];
     
@@ -243,13 +225,11 @@
 #pragma mark -
 #pragma mark Rotation handler
 
-- (BOOL)shouldAutorotate
-{
+- (BOOL)shouldAutorotate {
     return self.contentViewController.shouldAutorotate;
 }
 
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
     [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
     if ([self.delegate conformsToProtocol:@protocol(REFrostedViewControllerDelegate)] && [self.delegate respondsToSelector:@selector(frostedViewController:willAnimateRotationToInterfaceOrientation:duration:)])
         [self.delegate frostedViewController:self willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
@@ -262,14 +242,12 @@
             if (self.direction == REFrostedViewControllerDirectionTop || self.direction == REFrostedViewControllerDirectionBottom)
                 self.calculatedMenuViewSize = CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height - 50.0f);
         } else {
-            self.calculatedMenuViewSize = CGSizeMake(_menuViewSize.width > 0 ? _menuViewSize.width : self.view.bounds.size.width,
-                                                     _menuViewSize.height > 0 ? _menuViewSize.height : self.view.bounds.size.height);
+            self.calculatedMenuViewSize = CGSizeMake(_menuViewSize.width > 0 ? _menuViewSize.width : self.view.bounds.size.width, _menuViewSize.height > 0 ? _menuViewSize.height : self.view.bounds.size.height);
         }
     }
 }
 
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
-{
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
     [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
     if (!self.visible) {
         self.calculatedMenuViewSize = CGSizeZero;
