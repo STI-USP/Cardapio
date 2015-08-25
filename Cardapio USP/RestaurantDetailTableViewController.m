@@ -121,9 +121,11 @@
   switch (indexPath.section) {
     case 0:
       if (indexPath.row == 1) {
-        cell = [self.tableView dequeueReusableCellWithIdentifier:@"ContactCell" forIndexPath:indexPath];
+        cell =  (DetailCell *)[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ContactCell"];
+        //cell = [self.tableView dequeueReusableCellWithIdentifier:@"ContactCell" forIndexPath:indexPath];
       } else {
-        cell = [self.tableView dequeueReusableCellWithIdentifier:@"AboutDetailCell" forIndexPath:indexPath];
+        cell =  (DetailCell *)[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"AboutDetailCell"];
+        //cell = [self.tableView dequeueReusableCellWithIdentifier:@"AboutDetailCell" forIndexPath:indexPath];
       }
       break;
     case 1: {

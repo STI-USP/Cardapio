@@ -89,11 +89,6 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-  if ([indexPath section] == 0) {
-    if ([indexPath row]==1) {
-      return 44;
-    }
-  }
     return [self heightForBasicCellAtIndexPath:indexPath];
 }
 
@@ -106,18 +101,37 @@
   
   [self configureBasicCell:sizingCell atIndexPath:indexPath];
   
-  if ([indexPath section]==1) {
-    return 44;
+  if ([indexPath section] == 0) {
+    switch ([indexPath row]) {
+      case 0: //endereço
+        return [self calculateHeightForConfiguredSizingCell:sizingCell];
+        break;
+      case 1: //telefone
+        return 44;
+        break;
+      case 2: //horarios
+        return 150;
+        break;
+      case 3: //preços
+        return 66;
+        break;
+      case 4: //ponto de venda
+        return [self calculateHeightForConfiguredSizingCell:sizingCell];
+        break;
+        
+      default:
+        break;
+    }
   } else {
-    return [self calculateHeightForConfiguredSizingCell:sizingCell];
+    return 44;
   }
+  return 44;
 }
 
 
 - (CGFloat)calculateHeightForConfiguredSizingCell:(UITableViewCell *)sizingCell {
   [sizingCell setNeedsLayout];
   [sizingCell layoutIfNeeded];
-  
   CGSize size = [sizingCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
   return size.height + 1.; // Add 1.0f for the cell separator height
 }
@@ -190,14 +204,21 @@
 
 - (UITableViewCell *)basicCellAtIndexPath:(NSIndexPath *)indexPath {
   DetailCell *aCell = nil;
-
+  
   switch (indexPath.section) {
-    case 0:
-      if (indexPath.row == 1) {
-        aCell = [self.tableView dequeueReusableCellWithIdentifier:@"ContactCell" forIndexPath:indexPath];
-      } else {
-        aCell = [self.tableView dequeueReusableCellWithIdentifier:@"RestaurantDetailCell" forIndexPath:indexPath];
+    case 0: {
+      switch ([indexPath row]) {
+        case 1:
+          aCell = [self.tableView dequeueReusableCellWithIdentifier:@"ContactCell" forIndexPath:indexPath];
+          //aCell =  (DetailCell *)[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ContactCell"];
+          break;
+          
+        default:
+          aCell = [self.tableView dequeueReusableCellWithIdentifier:@"RestaurantDetailCell" forIndexPath:indexPath];
+          //aCell =  (DetailCell *)[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"RestaurantDetailCell"];
+          break;
       }
+    }
       break;
     case 1: {
       if ([[_restaurantDc valueForKey:@"id"] isEqualToString:[dataModel.preferredRestaurant valueForKey:@"id"]]) {
@@ -207,10 +228,12 @@
       }
     }
       break;
+
     default:
       break;
   }
   [self configureBasicCell:aCell atIndexPath:indexPath];
+  
   return aCell;
 }
 
@@ -218,6 +241,12 @@
   // Configure the cell...
   
   if ([indexPath section]==0) {
+    [cell.title setNumberOfLines:0];
+    [cell.title setLineBreakMode:NSLineBreakByWordWrapping];
+    [cell.subtitle setNumberOfLines:0];
+    [cell.subtitle setLineBreakMode:NSLineBreakByWordWrapping];
+    
+
     switch ([indexPath row]) {
         
       case 0: {
