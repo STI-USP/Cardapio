@@ -8,6 +8,9 @@
 
 #import "AppDelegate.h"
 #import "DataModel.h"
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
+
 
 @interface AppDelegate()
 
@@ -20,6 +23,8 @@ DataModel *dataModel;
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+  [Fabric with:@[[Crashlytics class]]];
+  
   dataModel = [DataModel getInstance];
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   [dataModel setPreferredRestaurant:[defaults objectForKey:@"preferredRestaurant"]];
