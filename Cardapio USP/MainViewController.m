@@ -15,6 +15,9 @@
 #import "RestaurantDataModel.h"  
 #import "DataModel.h"
 
+#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+
+
 @interface MainViewController () {
 
   DKScrollingTabController *dateTabController;
@@ -261,6 +264,8 @@
 
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MenuCell" forIndexPath:indexPath];
   
+  self.tableView.estimatedRowHeight = 150.;
+
   if (menu) {
     NSString *menuString = @"";
     switch ([indexPath section]) {
@@ -303,7 +308,11 @@
       break;
   
     default:
-      return 130.0;
+      if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")) {
+        return UITableViewAutomaticDimension;
+      } else {
+        return 150.;
+      }
       break;
   }
 }

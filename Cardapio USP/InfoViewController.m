@@ -20,6 +20,8 @@
 #import "MapViewController.h"
 #import "TelephoneUtils.h"
 
+#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+
 
 @interface InfoViewController () {
   DataModel *dataModel;
@@ -89,7 +91,11 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+  if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")) {
+    return UITableViewAutomaticDimension;
+  } else {
     return [self heightForBasicCellAtIndexPath:indexPath];
+  }
 }
 
 - (CGFloat)heightForBasicCellAtIndexPath:(NSIndexPath *)indexPath {
@@ -240,13 +246,14 @@
 - (void)configureBasicCell:(DetailCell *)cell atIndexPath:(NSIndexPath *)indexPath {
   // Configure the cell...
   
-  if ([indexPath section]==0) {
-    [cell.title setNumberOfLines:0];
-    [cell.title setLineBreakMode:NSLineBreakByWordWrapping];
-    [cell.subtitle setNumberOfLines:0];
-    [cell.subtitle setLineBreakMode:NSLineBreakByWordWrapping];
-    
+  self.tableView.estimatedRowHeight = 44.;
+  [cell.title setNumberOfLines:0];
+  [cell.title setLineBreakMode:NSLineBreakByWordWrapping];
+  [cell.subtitle setNumberOfLines:0];
+  [cell.subtitle setLineBreakMode:NSLineBreakByWordWrapping];
 
+  
+  if ([indexPath section]==0) {
     switch ([indexPath row]) {
         
       case 0: {
