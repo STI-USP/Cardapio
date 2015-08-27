@@ -17,7 +17,6 @@
 - (void)awakeFromNib {
   self.contentViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"restaurantController"];
   self.menuViewController = [ self.storyboard instantiateViewControllerWithIdentifier:@"selectorController"];
-  
 }
 
 @end
