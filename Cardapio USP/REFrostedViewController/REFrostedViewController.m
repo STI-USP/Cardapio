@@ -74,7 +74,8 @@
     _containerViewController = [[REFrostedContainerViewController alloc] init];
     _containerViewController.frostedViewController = self;
     _menuViewSize = CGSizeZero;
-    _liveBlur = REUIKitIsFlatMode();
+    //_liveBlur = REUIKitIsFlatMode();
+    _liveBlur = YES;
     _panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:_containerViewController action:@selector(panGestureRecognized:)];
     _automaticSize = YES;
 }

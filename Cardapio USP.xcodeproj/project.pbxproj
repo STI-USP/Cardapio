@@ -65,6 +65,8 @@
 		E9DF35CF1B3DD306009B92B6 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9DF35CA1B3DD306009B92B6 /* MapViewController.m */; };
 		E9DF35D01B3DD306009B92B6 /* PlaceAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = E9DF35CC1B3DD306009B92B6 /* PlaceAnnotation.m */; };
 		E9DF35D11B3DD306009B92B6 /* MDPinAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = E9DF35CE1B3DD306009B92B6 /* MDPinAnnotationView.m */; };
+		E9E12CCC1B8DF25E006BC33B /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9E12CCA1B8DF25E006BC33B /* Fabric.framework */; };
+		E9E12CCD1B8DF25E006BC33B /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9E12CCB1B8DF25E006BC33B /* Crashlytics.framework */; };
 		E9E1843E1B792C1700637771 /* ImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E9E1843D1B792C1700637771 /* ImageCell.m */; };
 		E9E184411B7931D900637771 /* PreferredCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E9E184401B7931D900637771 /* PreferredCell.m */; };
 		E9E4BCD81B7BFBFC005633AD /* CarrierDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E9E4BCD51B7BFBFC005633AD /* CarrierDataModel.m */; };
@@ -188,6 +190,8 @@
 		E9DF35CC1B3DD306009B92B6 /* PlaceAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceAnnotation.m; sourceTree = "<group>"; };
 		E9DF35CD1B3DD306009B92B6 /* MDPinAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDPinAnnotationView.h; sourceTree = "<group>"; };
 		E9DF35CE1B3DD306009B92B6 /* MDPinAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDPinAnnotationView.m; sourceTree = "<group>"; };
+		E9E12CCA1B8DF25E006BC33B /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		E9E12CCB1B8DF25E006BC33B /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		E9E1843C1B792C1700637771 /* ImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCell.h; sourceTree = "<group>"; };
 		E9E1843D1B792C1700637771 /* ImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCell.m; sourceTree = "<group>"; };
 		E9E1843F1B7931D900637771 /* PreferredCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferredCell.h; sourceTree = "<group>"; };
@@ -218,7 +222,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9E12CCC1B8DF25E006BC33B /* Fabric.framework in Frameworks */,
 				E9CDD1D11AD86B6800BB2E36 /* Security.framework in Frameworks */,
+				E9E12CCD1B8DF25E006BC33B /* Crashlytics.framework in Frameworks */,
 				E9CDD1CF1AD8682900BB2E36 /* SystemConfiguration.framework in Frameworks */,
 				E9CDD1CD1AD8681800BB2E36 /* MobileCoreServices.framework in Frameworks */,
 				BFAC6E7F192A54E100921494 /* CoreGraphics.framework in Frameworks */,
@@ -268,6 +274,8 @@
 				BFAC6E7B192A54E100921494 /* Frameworks */,
 				BFAC6EA4192A54E100921494 /* Cardapio USPTests */,
 				BFAC6E7A192A54E100921494 /* Products */,
+				E9E12CCA1B8DF25E006BC33B /* Fabric.framework */,
+				E9E12CCB1B8DF25E006BC33B /* Crashlytics.framework */,
 			);
 			sourceTree = "<group>";
 		};
@@ -472,6 +480,7 @@
 				BFAC6E75192A54E100921494 /* Sources */,
 				BFAC6E76192A54E100921494 /* Frameworks */,
 				BFAC6E77192A54E100921494 /* Resources */,
+				E9E12CC91B8DF20B006BC33B /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -568,6 +577,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		E9E12CC91B8DF20B006BC33B /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run 8c23ab978a3a83031ccf364f626ff13dc038fc99 757bf493be1880fe2aa3929d7853cd1f1f0d4d68f922f70045415488ae58c7e2";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		BFAC6E75192A54E100921494 /* Sources */ = {

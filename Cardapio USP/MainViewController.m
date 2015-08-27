@@ -258,16 +258,27 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-  static NSString *cellID = @"MenuCell";
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID forIndexPath:indexPath];
+
+  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MenuCell" forIndexPath:indexPath];
   
   if (menu) {
+    NSString *menuString = @"";
     switch ([indexPath section]) {
       case 0:
-        cell.textLabel.text = [NSString stringWithFormat:@"%@", [[[menu period] objectAtIndex:0] menu]];
+        menuString = [NSString stringWithFormat:@"%@", [[[menu period] objectAtIndex:0] menu]];
+        if ([menuString isEqualToString:@""]) {
+          cell.textLabel.text = @"Fechado";
+        } else {
+          cell.textLabel.text = menuString;
+        }
         break;
       case 1:
-        cell.textLabel.text = [NSString stringWithFormat:@"%@", [[[menu period] objectAtIndex:1] menu]];
+        menuString = [NSString stringWithFormat:@"%@", [[[menu period] objectAtIndex:1] menu]];
+        if ([menuString isEqualToString:@""]) {
+          cell.textLabel.text = @"Fechado";
+        } else {
+          cell.textLabel.text = menuString;
+        }
         break;
       case 2:
         [cell.textLabel setText:[NSString stringWithFormat:@"%@", dataModel.observation]];
