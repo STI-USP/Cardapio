@@ -77,7 +77,6 @@
   NSString *name;
   name = [[dataModel currentRestaurant]valueForKey:@"name"];
   [self.navigationItem setTitle: name];
-  
 }
 
 - (void)didReceiveMemoryWarning {
@@ -311,7 +310,7 @@
       if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")) {
         return UITableViewAutomaticDimension;
       } else {
-        return 150.;
+        return 140.;
       }
       break;
   }
