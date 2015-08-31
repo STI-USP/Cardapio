@@ -129,14 +129,10 @@
     
     button.titleLabel.text = @"";
     [button setAttributedTitle:attributedString forState:UIControlStateNormal];
+    [button.viewForBaselineLayout setNeedsDisplay]; 
   }];
 
   _dateTabController.delegate = self;
-  
-  for (int i = 0; i<7; i++) { //força que todos os botões estejam visiveis no iOS7
-    [_dateTabController selectButtonWithIndex:i];
-  }
-  
   [_dateTabController selectButtonWithIndex:diaDaSemana];
 }
 
