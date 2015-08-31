@@ -20,6 +20,8 @@
 #import "MapViewController.h"
 #import "TelephoneUtils.h"
 
+#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+
 
 @interface InfoViewController () {
   DataModel *dataModel;
@@ -44,6 +46,9 @@
   [super viewDidLoad];
   // Do any additional setup after loading the view.
   self.tableView.allowsSelection = NO;
+  
+  self.tableView.estimatedRowHeight = 44.0;
+  self.tableView.rowHeight = UITableViewAutomaticDimension;
 
   dataModel = [DataModel getInstance];
 
@@ -89,7 +94,11 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+  if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")) {
+    return UITableViewAutomaticDimension;
+  } else {
     return [self heightForBasicCellAtIndexPath:indexPath];
+  }
 }
 
 - (CGFloat)heightForBasicCellAtIndexPath:(NSIndexPath *)indexPath {
@@ -102,99 +111,31 @@
   [self configureBasicCell:sizingCell atIndexPath:indexPath];
   
   if ([indexPath section] == 0) {
-    switch ([indexPath row]) {
-      case 0: //endereço
-        return [self calculateHeightForConfiguredSizingCell:sizingCell];
-        break;
-      case 1: //telefone
-        return 44;
-        break;
-      case 2: //horarios
-        return 150;
-        break;
-      case 3: //preços
-        return 66;
-        break;
-      case 4: //ponto de venda
-        return [self calculateHeightForConfiguredSizingCell:sizingCell];
-        break;
-        
-      default:
-        break;
+    int cellHeight = (int) [self calculateHeightForConfiguredSizingCell:sizingCell];
+    if (cellHeight < 44) {
+      return 44;
+    } else {
+      return cellHeight;
     }
   } else {
     return 44;
   }
-  return 44;
 }
 
 
-- (CGFloat)calculateHeightForConfiguredSizingCell:(UITableViewCell *)sizingCell {
+- (CGFloat)calculateHeightForConfiguredSizingCell:(DetailCell *)sizingCell {
+
+  [sizingCell setNeedsUpdateConstraints];
+  [sizingCell updateConstraintsIfNeeded];
+  
+  sizingCell.bounds = CGRectMake(0.0f, 0.0f, CGRectGetWidth(self.tableView.bounds), CGRectGetHeight(sizingCell.bounds));
+  
   [sizingCell setNeedsLayout];
   [sizingCell layoutIfNeeded];
-  CGSize size = [sizingCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
-  return size.height + 1.; // Add 1.0f for the cell separator height
+  //CGSize size = [sizingCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+  CGSize size = [sizingCell.subtitle systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+  return size.height + 20.; // Add 1.0f for the cell separator height
 }
-
-/*
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-  
-  UIView *imageView = [[UIView alloc] initWithFrame:CGRectMake(0., 0., self.tableView.frame.size.width, 80.)];
-  if (section == 0) {
-    ThumbnailViewImageProxy *imageViewProxy = [[ThumbnailViewImageProxy alloc] init];
-    imageViewProxy.aspect = ThumbnailAspectZoom;
-    imageViewProxy.hasBorders = NO;
-    NSString *photoUrl = _restaurantDc[@"photourl"];
-    if (photoUrl.length != 0) {
-      imageViewProxy.imagePath = photoUrl;
-    }
-    UIImageView *imgView = [[UIImageView alloc] initWithImage: imageViewProxy.image];
-    imageView = imageViewProxy;
-    
-    CATextLayer *border = [[CATextLayer alloc] init];
-    border.foregroundColor = CFBridgingRetain((__bridge id)[UIColor blackColor].CGColor);
-    border.alignmentMode = kCAAlignmentCenter;
-    border.font = (__bridge CFTypeRef)(@"HelveticaNeue-Bold");
-    border.fontSize = 14.0;
-    border.wrapped = YES;
-    border.frame = CGRectMake(11.0, 11.0, self.tableView.frame.size.width - 11., 40.0);
-    border.string = _restaurantDc[@"name"];
-    border.name = @"border";
-    [imageView.layer addSublayer:border];
-    
-    CATextLayer *label = [[CATextLayer alloc] init];
-    label.foregroundColor = CFBridgingRetain((__bridge id)[UIColor whiteColor].CGColor);
-    label.alignmentMode = kCAAlignmentCenter;
-    label.font = (__bridge CFTypeRef)(@"HelveticaNeue-Bold");
-    label.fontSize = 14.0;
-    label.wrapped = YES;
-    label.frame = CGRectMake(10.0, 10.0, self.tableView.frame.size.width - 10., 40.0);
-    label.string = _restaurantDc[@"name"];
-    label.name = @"text";
-    [imageView.layer addSublayer:label];
-    
-    
-    //View para o mapa
-    UIButton *mapButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    mapButton.frame = CGRectMake(200., 80., 80., 80.);
-    [mapButton setBackgroundImage:[UIImage imageNamed:@"mapa.png"] forState:UIControlStateNormal];
-    [mapButton addTarget:self action:@selector(showMap) forControlEvents:UIControlEventTouchUpInside];
-    [imageView addSubview:mapButton];
-    
-  } // fim 1a. seção
-  return imageView;
-}
-
-/// Ajusta a altura do header da 1. seção para caber a imagem
-/// as demais seções permanecem com a altura padrão
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-  CGFloat headerHeight = 22.0; // altura padrão para section header
-  if (section == 0) {
-    headerHeight = 160.;
-  }
-  return headerHeight;
-}
-*/
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -203,6 +144,7 @@
 
 
 - (UITableViewCell *)basicCellAtIndexPath:(NSIndexPath *)indexPath {
+  
   DetailCell *aCell = nil;
   
   switch (indexPath.section) {
@@ -210,12 +152,10 @@
       switch ([indexPath row]) {
         case 1:
           aCell = [self.tableView dequeueReusableCellWithIdentifier:@"ContactCell" forIndexPath:indexPath];
-          //aCell =  (DetailCell *)[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ContactCell"];
           break;
           
         default:
           aCell = [self.tableView dequeueReusableCellWithIdentifier:@"RestaurantDetailCell" forIndexPath:indexPath];
-          //aCell =  (DetailCell *)[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"RestaurantDetailCell"];
           break;
       }
     }
@@ -232,8 +172,20 @@
     default:
       break;
   }
+  
+  [aCell.title setNumberOfLines:0];
+  [aCell.title setLineBreakMode:NSLineBreakByWordWrapping];
+  [aCell.title setTranslatesAutoresizingMaskIntoConstraints:NO];
+  
+  [aCell.subtitle setNumberOfLines:0];
+  [aCell.subtitle setLineBreakMode:NSLineBreakByWordWrapping];
+  [aCell.subtitle setTranslatesAutoresizingMaskIntoConstraints:NO];
+  
+
   [self configureBasicCell:aCell atIndexPath:indexPath];
   
+  [aCell updateConstraintsIfNeeded];
+
   return aCell;
 }
 
@@ -241,12 +193,6 @@
   // Configure the cell...
   
   if ([indexPath section]==0) {
-    [cell.title setNumberOfLines:0];
-    [cell.title setLineBreakMode:NSLineBreakByWordWrapping];
-    [cell.subtitle setNumberOfLines:0];
-    [cell.subtitle setLineBreakMode:NSLineBreakByWordWrapping];
-    
-
     switch ([indexPath row]) {
         
       case 0: {
@@ -356,7 +302,7 @@
         [cell.subtitle setText: prices];
         break;
       }
-      case 4:
+      case 4: {
         [cell.title setText: @"Ponto de venda"];
         if ([[_restaurantDc valueForKey:@"cashiers"] count] > 0) {
           [cell.subtitle setText:[NSString stringWithFormat:@"%@ \n\n%@", [[[_restaurantDc valueForKey:@"cashiers"] objectAtIndex:0] valueForKey:@"address"], [[[_restaurantDc valueForKey:@"cashiers"] objectAtIndex:0] valueForKey:@"workinghours"]]];
@@ -365,14 +311,11 @@
           [cell.subtitle setHidden:YES];
         }
         break;
-        
-        
+      }
       default:
         break;
     }
-
   }
-  
 }
 
 

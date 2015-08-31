@@ -15,6 +15,9 @@
 #import "RestaurantDataModel.h"  
 #import "DataModel.h"
 
+#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+
+
 @interface MainViewController () {
 
   DKScrollingTabController *dateTabController;
@@ -58,6 +61,10 @@
   dataModel = [DataModel getInstance];
   
   dateTabController = [[DKScrollingTabController alloc] init];
+  [self addChildViewController:dateTabController];
+  [dateTabController didMoveToParentViewController:self];
+  [self.view addSubview:dateTabController.view];
+  
   dateTabController.delegate = self;
   
   if ([dataModel preferredRestaurant]) {
@@ -74,7 +81,6 @@
   NSString *name;
   name = [[dataModel currentRestaurant]valueForKey:@"name"];
   [self.navigationItem setTitle: name];
-  
 }
 
 - (void)didReceiveMemoryWarning {
@@ -84,9 +90,6 @@
 
 - (void)setupWeekView: (NSArray *) weekMenu {
   
-  [self addChildViewController:dateTabController];
-  [dateTabController didMoveToParentViewController:self];
-  [self.view addSubview:dateTabController.view];
   dateTabController.view.frame = CGRectMake(0, 65, 320, 40);
   dateTabController.view.backgroundColor = [UIColor lightTextColor];
   dateTabController.buttonPadding = 3.2;
@@ -261,6 +264,8 @@
 
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MenuCell" forIndexPath:indexPath];
   
+  self.tableView.estimatedRowHeight = 150.;
+
   if (menu) {
     NSString *menuString = @"";
     switch ([indexPath section]) {
@@ -303,7 +308,11 @@
       break;
   
     default:
-      return 130.0;
+      if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")) {
+        return UITableViewAutomaticDimension;
+      } else {
+        return 140.;
+      }
       break;
   }
 }
