@@ -133,10 +133,11 @@
 
   _dateTabController.delegate = self;
   
-  [self.view setNeedsDisplay];
+  for (int i = 0; i<7; i++) { //força que todos os botões estejam visiveis no iOS7
+    [_dateTabController selectButtonWithIndex:i];
+  }
   
   [_dateTabController selectButtonWithIndex:diaDaSemana];
-  
 }
 
 - (void)setupDayLabel:(int)dia {
@@ -341,12 +342,6 @@
   menu = [menuArray objectAtIndex:diaDaSemana];
   
   [self setupWeekView: menuArray];
-  
-  for (int i = 0; i<7; i++) {
-    [_dateTabController selectButtonWithIndex:i];
-  }
-  [_dateTabController selectButtonWithIndex:diaDaSemana];
-
   [self setupDayLabel:diaDaSemana];
   
   [self reloadInputViews];
