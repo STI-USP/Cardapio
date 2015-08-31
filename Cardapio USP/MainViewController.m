@@ -18,7 +18,7 @@
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
 
-@interface MainViewController () {
+@interface MainViewController () <DKScrollingTabControllerDelegate> {
 
   DKScrollingTabController *dateTabController;
 
@@ -65,7 +65,6 @@
   [dateTabController didMoveToParentViewController:self];
   [self.view addSubview:dateTabController.view];
   
-  dateTabController.delegate = self;
   
   if ([dataModel preferredRestaurant]) {
     [dataModel setCurrentRestaurant:[dataModel preferredRestaurant]];
@@ -135,6 +134,8 @@
     [button setAttributedTitle:attributedString forState:UIControlStateNormal];
   }];
 
+  dateTabController.delegate = self;
+  
   [dateTabController selectButtonWithIndex:diaDaSemana];
   
 }
