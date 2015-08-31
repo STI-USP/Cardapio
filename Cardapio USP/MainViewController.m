@@ -61,6 +61,10 @@
   dataModel = [DataModel getInstance];
   
   dateTabController = [[DKScrollingTabController alloc] init];
+  [self addChildViewController:dateTabController];
+  [dateTabController didMoveToParentViewController:self];
+  [self.view addSubview:dateTabController.view];
+  
   dateTabController.delegate = self;
   
   if ([dataModel preferredRestaurant]) {
@@ -86,9 +90,6 @@
 
 - (void)setupWeekView: (NSArray *) weekMenu {
   
-  [self addChildViewController:dateTabController];
-  [dateTabController didMoveToParentViewController:self];
-  [self.view addSubview:dateTabController.view];
   dateTabController.view.frame = CGRectMake(0, 65, 320, 40);
   dateTabController.view.backgroundColor = [UIColor lightTextColor];
   dateTabController.buttonPadding = 3.2;

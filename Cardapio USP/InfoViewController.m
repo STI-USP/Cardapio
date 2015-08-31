@@ -155,8 +155,6 @@
           break;
           
         default:
-          //aCell = [[DetailCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"RestaurantDetailCell"];
-
           aCell = [self.tableView dequeueReusableCellWithIdentifier:@"RestaurantDetailCell" forIndexPath:indexPath];
           break;
       }
