@@ -7,11 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DKScrollingTabController.h"
 
 @interface MainViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, weak) IBOutlet UILabel *diaDaSemanaLabel;
+@property (nonatomic, strong) DKScrollingTabController *dateTabController;
+@property (nonatomic) BOOL isClosed;
+
+
 
 - (IBAction)showRestaurantSelector:(id)sender;
 

@@ -17,10 +17,9 @@
 
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
-
 @interface MainViewController () <DKScrollingTabControllerDelegate> {
 
-  DKScrollingTabController *dateTabController;
+  //DKScrollingTabController *dateTabController;
 
   RestaurantDataModel *_restaurantDataModel;
   MenuDataModel *_menuDataModel;
@@ -60,12 +59,30 @@
   
   dataModel = [DataModel getInstance];
   
-  dateTabController = [[DKScrollingTabController alloc] init];
-  [self addChildViewController:dateTabController];
-  [dateTabController didMoveToParentViewController:self];
-  [self.view addSubview:dateTabController.view];
-  
-  
+  // Cria e configura inicio do DKScrollingTabController
+  _dateTabController = [[DKScrollingTabController alloc] init];
+  [self addChildViewController:_dateTabController];
+  [_dateTabController didMoveToParentViewController:self];
+  [self.view addSubview:_dateTabController.view];
+  _dateTabController.view.frame = CGRectMake(0, 65, 320, 40);
+  _dateTabController.view.backgroundColor = [UIColor lightTextColor];
+  _dateTabController.buttonPadding = 3.2;
+  _dateTabController.underlineIndicator = YES;
+  _dateTabController.underlineIndicatorColor = [UIColor redColor];
+  _dateTabController.buttonsScrollView.showsHorizontalScrollIndicator = NO;
+  _dateTabController.selectedBackgroundColor = [UIColor clearColor];
+  _dateTabController.selectedTextColor = [UIColor blackColor];
+  _dateTabController.unselectedTextColor = [UIColor grayColor];
+  _dateTabController.unselectedBackgroundColor = [UIColor clearColor];
+  _dateTabController.selection = @[@"           \n0",
+                                   @"           \n0",
+                                   @"           \n0",
+                                   @"           \n0",
+                                   @"           \n0",
+                                   @"           \n0",
+                                   @"           \n0"
+                                   ];
+
   if ([dataModel preferredRestaurant]) {
     [dataModel setCurrentRestaurant:[dataModel preferredRestaurant]];
   }
@@ -89,19 +106,6 @@
 
 - (void)setupWeekView: (NSArray *) weekMenu {
   
-  dateTabController.view.frame = CGRectMake(0, 65, 320, 40);
-  dateTabController.view.backgroundColor = [UIColor lightTextColor];
-  dateTabController.buttonPadding = 3.2;
-  dateTabController.underlineIndicator = YES;
-  dateTabController.underlineIndicatorColor = [UIColor redColor];
-  dateTabController.buttonsScrollView.showsHorizontalScrollIndicator = NO;
-  dateTabController.selectedBackgroundColor = [UIColor clearColor];
-  dateTabController.selectedTextColor = [UIColor blackColor];
-  dateTabController.unselectedTextColor = [UIColor grayColor];
-  dateTabController.unselectedBackgroundColor = [UIColor clearColor];
-  dateTabController.selection = @[@"PLACE\n0", @"PLACE\n0", @"PLACE\n0", @"PLACE\n0", @"PLACE\n0", @"PLACE\n0", @"PLACE\n0" ];
-  
-
   NSString *monButtonName = [[NSString stringWithFormat:@"S\n%@", [[menuArray objectAtIndex:0] date]]substringToIndex:4];
   NSString *tueButtonName = [[NSString stringWithFormat:@"T\n%@", [[menuArray objectAtIndex:1] date]]substringToIndex:4];
   NSString *wedButtonName = [[NSString stringWithFormat:@"Q\n%@", [[menuArray objectAtIndex:2] date]]substringToIndex:4];
@@ -110,15 +114,15 @@
   NSString *satButtonName = [[NSString stringWithFormat:@"S\n%@", [[menuArray objectAtIndex:5] date]]substringToIndex:4];
   NSString *sunButtonName = [[NSString stringWithFormat:@"D\n%@", [[menuArray objectAtIndex:6] date]]substringToIndex:4];
 
-  [dateTabController setButtonName:monButtonName atIndex:0];
-  [dateTabController setButtonName:tueButtonName atIndex:1];
-  [dateTabController setButtonName:wedButtonName atIndex:2];
-  [dateTabController setButtonName:thuButtonName atIndex:3];
-  [dateTabController setButtonName:friButtonName atIndex:4];
-  [dateTabController setButtonName:satButtonName atIndex:5];
-  [dateTabController setButtonName:sunButtonName atIndex:6];
+  [_dateTabController setButtonName:monButtonName atIndex:0];
+  [_dateTabController setButtonName:tueButtonName atIndex:1];
+  [_dateTabController setButtonName:wedButtonName atIndex:2];
+  [_dateTabController setButtonName:thuButtonName atIndex:3];
+  [_dateTabController setButtonName:friButtonName atIndex:4];
+  [_dateTabController setButtonName:satButtonName atIndex:5];
+  [_dateTabController setButtonName:sunButtonName atIndex:6];
   
-  [dateTabController.buttons enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+  [_dateTabController.buttons enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
     UIButton *button = obj;
     button.titleLabel.numberOfLines = 0;
     button.titleLabel.textAlignment = NSTextAlignmentCenter;
@@ -132,12 +136,11 @@
     
     button.titleLabel.text = @"";
     [button setAttributedTitle:attributedString forState:UIControlStateNormal];
+    [button.viewForBaselineLayout setNeedsDisplay]; 
   }];
 
-  dateTabController.delegate = self;
-  
-  [dateTabController selectButtonWithIndex:diaDaSemana];
-  
+  _dateTabController.delegate = self;
+  [_dateTabController selectButtonWithIndex:diaDaSemana];
 }
 
 - (void)setupDayLabel:(int)dia {
@@ -212,7 +215,11 @@
 #pragma mark - Table View
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-  return [menu.period count] + 1;
+  if ([self isClosed]) {
+    return [menu.period count];
+  } else {
+    return [menu.period count] + 1;
+  }
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -296,9 +303,7 @@
       default:
         break;
     }
-
   }
-
   return cell;
 }
 
@@ -326,7 +331,7 @@
 
 #pragma mark - TabControllerDelegate
 
-- (void)DKScrollingTabController:(DKScrollingTabController *)controller selection:(NSUInteger)selection {
+- (void)ScrollingTabController:(DKScrollingTabController *)controller selection:(NSUInteger)selection {
   menu = [menuArray objectAtIndex:selection];
   [self setupDayLabel:(int)selection];
 }
@@ -350,5 +355,19 @@
   [self.tableView reloadData];
 }
 
+
+-(BOOL)isClosed{
+  NSString *strLunch = [[[[NSString stringWithFormat:@"%@", [[[menu period] objectAtIndex:0] menu]] capitalizedString] stringByReplacingOccurrencesOfString:@" " withString:@""] stringByReplacingOccurrencesOfString:@"." withString:@""];
+
+  NSString *strDinner = [[[[NSString stringWithFormat:@"%@", [[[menu period] objectAtIndex:1] menu]] capitalizedString] stringByReplacingOccurrencesOfString:@" " withString:@""] stringByReplacingOccurrencesOfString:@"." withString:@""];
+
+  
+  if ([strLunch isEqualToString:@"Fechado"] || [strLunch isEqualToString:@""]) {
+    if ([strDinner isEqualToString:@"Fechado"] || [strDinner isEqualToString:@""]) {
+      return YES;
+    }
+  }
+  return NO;
+}
 
 @end
