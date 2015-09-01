@@ -320,7 +320,7 @@
 
 #pragma mark - TabControllerDelegate
 
-- (void)DKScrollingTabController:(DKScrollingTabController *)controller selection:(NSUInteger)selection {
+- (void)ScrollingTabController:(DKScrollingTabController *)controller selection:(NSUInteger)selection {
   menu = [menuArray objectAtIndex:selection];
   [self setupDayLabel:(int)selection];
 }
