@@ -208,7 +208,11 @@
 #pragma mark - Table View
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-  return [menu.period count] + 1;
+  if ([self isClosed]) {
+    return [menu.period count];
+  } else {
+    return [menu.period count] + 1;
+  }
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -344,5 +348,19 @@
   [self.tableView reloadData];
 }
 
+
+-(BOOL)isClosed{
+  NSString *strLunch = [[[[NSString stringWithFormat:@"%@", [[[menu period] objectAtIndex:0] menu]] capitalizedString] stringByReplacingOccurrencesOfString:@" " withString:@""] stringByReplacingOccurrencesOfString:@"." withString:@""];
+
+  NSString *strDinner = [[[[NSString stringWithFormat:@"%@", [[[menu period] objectAtIndex:1] menu]] capitalizedString] stringByReplacingOccurrencesOfString:@" " withString:@""] stringByReplacingOccurrencesOfString:@"." withString:@""];
+
+  
+  if ([strLunch isEqualToString:@"Fechado"] || [strLunch isEqualToString:@""]) {
+    if ([strDinner isEqualToString:@"Fechado"] || [strDinner isEqualToString:@""]) {
+      return YES;
+    }
+  }
+  return NO;
+}
 
 @end
