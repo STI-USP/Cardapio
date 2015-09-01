@@ -74,7 +74,14 @@
   _dateTabController.selectedTextColor = [UIColor blackColor];
   _dateTabController.unselectedTextColor = [UIColor grayColor];
   _dateTabController.unselectedBackgroundColor = [UIColor clearColor];
-  _dateTabController.selection = @[@"PLACE\n0", @"PLACE\n0", @"PLACE\n0", @"PLACE\n0", @"PLACE\n0", @"PLACE\n0", @"PLACE\n0" ];
+  _dateTabController.selection = @[@"           \n0",
+                                   @"           \n0",
+                                   @"           \n0",
+                                   @"           \n0",
+                                   @"           \n0",
+                                   @"           \n0",
+                                   @"           \n0"
+                                   ];
 
   if ([dataModel preferredRestaurant]) {
     [dataModel setCurrentRestaurant:[dataModel preferredRestaurant]];
