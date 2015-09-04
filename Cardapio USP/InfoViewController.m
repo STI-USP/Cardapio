@@ -19,6 +19,7 @@
 #import "ThumbnailViewImageProxy.h"
 #import "MapViewController.h"
 #import "TelephoneUtils.h"
+#import "SVProgressHUD.h"
 
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
@@ -361,6 +362,7 @@
 
 
 - (void)setHeaderView{
+
   //TableView Header
   UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, 160)];
   [headerView setBackgroundColor:[UIColor whiteColor]];
@@ -416,6 +418,7 @@
   [headerView addSubview:mapButton];
   
   [self.tableView setTableHeaderView: headerView];
+  [SVProgressHUD dismiss];
 }
 
 

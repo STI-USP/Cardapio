@@ -14,6 +14,7 @@
 #import "DKScrollingTabController.h"
 #import "RestaurantDataModel.h"  
 #import "DataModel.h"
+#import "SVProgressHUD.h"
 
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
@@ -370,4 +371,7 @@
   return NO;
 }
 
+- (IBAction)infoButtonPressed:(id)sender {
+  [SVProgressHUD show];
+}
 @end

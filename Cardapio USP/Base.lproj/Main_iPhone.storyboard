@@ -107,6 +107,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
+                                    <action selector="infoButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="9hU-1P-tWN"/>
                                     <segue destination="Vsr-ph-tNM" kind="modal" id="UcB-pv-0Ec"/>
                                 </connections>
                             </button>
