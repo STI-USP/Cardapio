@@ -349,7 +349,7 @@
   menuArray = [dataModel menuArray];
   menu = [menuArray objectAtIndex:diaDaSemana];
   
-  [self setupWeekView: menuArray];
+  [self setupWeekView:menuArray];
   [self setupDayLabel:diaDaSemana];
   
   [self reloadInputViews];
