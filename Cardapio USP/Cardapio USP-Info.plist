@@ -45,6 +45,8 @@
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>${PRODUCT_NAME}</string>
+	<key>UILaunchStoryboardName</key>
+	<string>Main_iPhone</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main_iPhone</string>
 	<key>UIMainStoryboardFile~ipad</key>

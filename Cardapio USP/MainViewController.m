@@ -47,17 +47,6 @@
   [[self view] addGestureRecognizer: swipeRight];
   
   
-  NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-  [gregorian setFirstWeekday:2];
-  NSDateComponents *weekdayComponents =[gregorian components:NSWeekdayCalendarUnit fromDate:[NSDate date]];
-  NSInteger weekday = [weekdayComponents weekday] - 2; //para deixar a segunda feira como 0
-  
-  if ((int)weekday == -1) {
-    diaDaSemana = 6;
-  } else {
-    diaDaSemana = (int)weekday;
-  }
-  
   dataModel = [DataModel getInstance];
   
   // Cria e configura inicio do DKScrollingTabController
@@ -98,6 +87,7 @@
   NSString *name;
   name = [[dataModel currentRestaurant]valueForKey:@"name"];
   [self.navigationItem setTitle: name];
+  [diaDaSemanaLabel setText:@""];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -106,6 +96,18 @@
 }
 
 - (void)setupWeekView: (NSArray *) weekMenu {
+  
+  NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+  [gregorian setFirstWeekday:2];
+  NSDateComponents *weekdayComponents =[gregorian components:NSWeekdayCalendarUnit fromDate:[NSDate date]];
+  NSInteger weekday = [weekdayComponents weekday] - 2; //para deixar a segunda feira como 0
+  
+  if ((int)weekday == -1) {
+    diaDaSemana = 6;
+  } else {
+    diaDaSemana = (int)weekday;
+  }
+
   
   NSString *monButtonName = [[NSString stringWithFormat:@"S\n%@", [[menuArray objectAtIndex:0] date]]substringToIndex:4];
   NSString *tueButtonName = [[NSString stringWithFormat:@"T\n%@", [[menuArray objectAtIndex:1] date]]substringToIndex:4];
@@ -339,12 +341,12 @@
 
 #pragma mark - Model
 
--(void) didChangeRestaurant:(NSNotification *)notification {
+- (void)didChangeRestaurant:(NSNotification *)notification {
   [dataModel getMenu];
   [self.navigationItem setTitle: [[dataModel currentRestaurant]valueForKey:@"name"]];
 }
 
--(void) didReceiveMenu:(NSNotification *)notification {
+- (void)didReceiveMenu:(NSNotification *)notification {
 
   menuArray = [dataModel menuArray];
   menu = [menuArray objectAtIndex:diaDaSemana];
@@ -357,7 +359,7 @@
 }
 
 
--(BOOL)isClosed{
+- (BOOL)isClosed{
   NSString *strLunch = [[[[NSString stringWithFormat:@"%@", [[[menu period] objectAtIndex:0] menu]] capitalizedString] stringByReplacingOccurrencesOfString:@" " withString:@""] stringByReplacingOccurrencesOfString:@"." withString:@""];
 
   NSString *strDinner = [[[[NSString stringWithFormat:@"%@", [[[menu period] objectAtIndex:1] menu]] capitalizedString] stringByReplacingOccurrencesOfString:@" " withString:@""] stringByReplacingOccurrencesOfString:@"." withString:@""];
