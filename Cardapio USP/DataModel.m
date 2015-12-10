@@ -11,6 +11,7 @@
 #import "Items.h"
 #import "AFNetworking.h"
 #import "SVProgressHUD.h"
+#import "OAuthUSP.h"
 
 #define kRestaurantsURL @"http://kaimbu2.uspnet.usp.br:8080/cardapio/"
 #define kBaseURL @"http://kaimbu2.uspnet.usp.br:8080/"
@@ -18,7 +19,9 @@
 #define kBaseDevSTIURL @"https://dev.uspdigital.usp.br/rucard/servicos/"
 #define kBaseSTIURL @"https://uspdigital.usp.br/rucard/servicos/"
 
-@interface DataModel ()
+@interface DataModel () {
+  OAuthUSP *oauth;
+}
 
 @property (strong, nonatomic) NSMutableArray *restaurantList;
 @property (strong, nonatomic) NSMutableArray *campiList;
@@ -26,6 +29,8 @@
 @end
 
 @implementation DataModel
+
+
 
 +(DataModel *)getInstance {
   static DataModel *instance = nil;
@@ -151,6 +156,51 @@
 
     NSLog(@"%@", error);
   }];
+}
+
+
+- (void)getCreditoRUCard{
+  [SVProgressHUD show];
+  
+  self.menuArray = [[NSMutableArray alloc] init];
+
+  //Recupera dados do usuario
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  NSData *data = [defaults objectForKey:@"userData"];
+  NSData *userData;
+  
+  if (data) {
+    userData = [NSJSONSerialization JSONObjectWithData:[data copy] options: NSJSONReadingMutableContainers error: nil];
+  }
+  
+  AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+  manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+  manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/x-www-form-urlencoded"];
+  manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+  
+  
+  NSString *webServicePath;
+  webServicePath = [NSString stringWithFormat:@"%@saldo", kBaseDevSTIURL];
+  
+  NSDictionary *parameters = nil;
+  parameters = [NSDictionary dictionaryWithObjectsAndKeys:
+                @"596df9effde6f877717b4e81fdb2ca9f" , @"hash",
+                nil];
+  
+  [manager POST: webServicePath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    NSString *credit = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+    [self setRuCardCredit:credit];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveCredits" object:self];
+    [SVProgressHUD dismiss];
+    
+  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Aviso" message:@"Não foi possível obter o saldo. \nTente novamente mais tarde." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+    [alertView show];
+    [SVProgressHUD dismiss];
+    
+    NSLog(@"%@", error);
+  }];
+
 }
 
 

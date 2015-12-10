@@ -15,6 +15,8 @@
 #import "RestaurantDataModel.h"  
 #import "DataModel.h"
 #import "SVProgressHUD.h"
+#import "OAuthUSP.h"
+#import "LoginWebViewController.h"
 
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
@@ -30,6 +32,11 @@
   Menu *menu;
   Period *period;
   int diaDaSemana;
+  NSMutableString *stringForLunch;
+  
+  OAuthUSP *oauth;
+  LoginWebViewController *loginViewController;
+
 }
 
 @end
@@ -48,6 +55,8 @@
   
   
   dataModel = [DataModel getInstance];
+  oauth = [OAuthUSP sharedInstance];
+  stringForLunch = [NSMutableString stringWithFormat:@""];
   
   // Cria e configura inicio do DKScrollingTabController
   _dateTabController = [[DKScrollingTabController alloc] init];
@@ -81,13 +90,15 @@
   
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChangeRestaurant:) name:@"DidChangeRestaurant" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveMenu:) name:@"DidReceiveMenu" object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRecieveUserData:) name:@"DidRecieveUserData" object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRecieveCredits:) name:@"DidReceiveCredits" object:nil];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
   NSString *name;
   name = [[dataModel currentRestaurant]valueForKey:@"name"];
   [self.navigationItem setTitle: name];
-  [diaDaSemanaLabel setText:@""];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -229,20 +240,52 @@
   return 1;
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+  return 26;
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+  UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 22)];
+
+  //imagem
+  UIImage *myImage = nil;
+  UIImageView *imageView = nil;
+  
+  //texto
+  UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(34, 0, tableView.frame.size.width, 22)];
+  [label setFont:[UIFont systemFontOfSize:13]];
+  [label setTextColor:[UIColor grayColor]];
+
+  //posiciona imagem e texto
   switch (section) {
     case 0:
-      return @"Almoço"; break;
+      [label setText:stringForLunch];
+      myImage = [UIImage imageNamed:@"almoco"];
+      imageView = [[UIImageView alloc] initWithImage:myImage];
+      imageView.frame = CGRectMake(12, 2 , 18, 18);
+      break;
     case 1:
-      return @"Jantar"; break;
+      [label setText:@"JANTAR"];
+      myImage = [UIImage imageNamed:@"jantar"];
+      imageView = [[UIImageView alloc] initWithImage:myImage];
+      imageView.frame = CGRectMake(12, 2 , 18, 18);
+      break;
     case 2:
-      return @"Observação"; break;
+      [label setText:@"OBSERVAÇÃO"];
+      [label setFrame:CGRectMake(12, 0 , tableView.frame.size.width, 22)];
+      break;
       
     default:
       break;
   }
-  return nil;
+  [imageView setTintColor:[UIColor grayColor]];
+  [view addSubview:imageView];
+  [view addSubview:label];
+
+  return view;
 }
+
+
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
   if (menu) {
@@ -332,6 +375,15 @@
   [self.frostedViewController presentMenuViewController];
 }
 
+- (IBAction)showCredits:(id)sender {
+  if ([oauth isLoggedIn]) {
+    [dataModel getCreditoRUCard];
+  } else {
+    loginViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"loginWebViewController"];
+    [self presentViewController:loginViewController animated:YES completion:nil];
+  }
+}
+
 #pragma mark - TabControllerDelegate
 
 - (void)ScrollingTabController:(DKScrollingTabController *)controller selection:(NSUInteger)selection {
@@ -354,8 +406,44 @@
   [self setupWeekView:menuArray];
   [self setupDayLabel:diaDaSemana];
   
+  stringForLunch = [NSMutableString stringWithFormat:@"ALMOÇO"];
+
   [self reloadInputViews];
   [self.tableView reloadData];
+}
+
+- (void)didRecieveUserData:(NSNotification *)notification {
+  [dataModel getCreditoRUCard];
+}
+
+- (void)didRecieveCredits:(NSNotification *)notification {
+  
+  NSMutableString *message = nil;
+
+  if ([[dataModel ruCardCredit] integerValue] == 1) {
+    message = [NSMutableString stringWithFormat: @"Seu saldo é de 1 crédito."];
+  } else {
+    message = [NSMutableString stringWithFormat: @"Seu saldo é de %@ créditos.", [dataModel ruCardCredit]];
+  }
+  
+  if([[[UIDevice currentDevice] systemVersion] floatValue] < 8.0) {
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"RUCard" message:message delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"Logout", nil];
+    [alertView show];
+
+  } else { //[vm:151210] implementação do AlertViewController para iOS8+
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"RUCard" message:message preferredStyle:UIAlertControllerStyleAlert];
+  
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Logout", @"Logout action") style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+      [oauth logout];
+    }];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", @"OK action") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    }];
+  
+    [alertController addAction:okAction];
+    [alertController addAction:cancelAction];
+  
+    [self presentViewController:alertController animated:YES completion:nil];
+  }
 }
 
 
@@ -376,4 +464,15 @@
 - (IBAction)infoButtonPressed:(id)sender {
   [SVProgressHUD show];
 }
+
+
+#pragma mark - AlertViewDelegate - iOS7
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+  if (buttonIndex != [alertView cancelButtonIndex]){
+    [oauth logout]; //se for botão de logout
+  }
+}
+
+
 @end

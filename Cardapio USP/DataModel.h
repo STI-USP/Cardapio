@@ -20,6 +20,7 @@
 @property (nonatomic, strong) Menu *menu;
 @property (nonatomic, strong) Restaurant *restaurant;
 @property (nonatomic, strong) Cash *cash;
+@property (nonatomic, strong) NSString *ruCardCredit;
 @property (nonatomic, strong) NSDictionary *defaulRestaurant;
 @property (nonatomic, strong) NSMutableDictionary *currentRestaurant;
 @property (nonatomic, strong) NSMutableDictionary *preferredRestaurant;
@@ -39,6 +40,7 @@
 + (DataModel *) getInstance;
 - (void)getMenu;
 - (void)getRestaurantList;
+- (void)getCreditoRUCard;
 - (void)setDefault;
 - (NSMutableDictionary *) cleanDictionary: (NSMutableDictionary *)dictionary;
 

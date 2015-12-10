@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "DKScrollingTabController.h"
 
-@interface MainViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
+@interface MainViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UIAlertViewDelegate>
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, weak) IBOutlet UILabel *diaDaSemanaLabel;
@@ -19,5 +19,6 @@
 
 
 - (IBAction)showRestaurantSelector:(id)sender;
+- (IBAction)showCredits:(id)sender;
 
 @end
