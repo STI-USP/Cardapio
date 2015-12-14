@@ -180,7 +180,7 @@
   
   
   NSString *webServicePath;
-  webServicePath = [NSString stringWithFormat:@"%@saldo", kBaseDevSTIURL];
+  webServicePath = [NSString stringWithFormat:@"%@saldo", kBaseSTIURL];
   
   NSDictionary *parameters = nil;
   parameters = [NSDictionary dictionaryWithObjectsAndKeys:
