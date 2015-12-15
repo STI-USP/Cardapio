@@ -185,6 +185,7 @@
   NSDictionary *parameters = nil;
   parameters = [NSDictionary dictionaryWithObjectsAndKeys:
                 @"596df9effde6f877717b4e81fdb2ca9f" , @"hash",
+                [userData valueForKey:@"loginUsuario"], @"nusp",
                 nil];
   
   [manager POST: webServicePath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
