@@ -431,7 +431,7 @@
     [alertView show];
 
   } else { //[vm:151210] implementação do AlertViewController para iOS8+
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"RUCard" message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Rucard" message:message preferredStyle:UIAlertControllerStyleAlert];
   
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Logout", @"Logout action") style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
       [oauth logout];
