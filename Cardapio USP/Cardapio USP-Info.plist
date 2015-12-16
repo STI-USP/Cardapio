@@ -45,6 +45,17 @@
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>${PRODUCT_NAME}</string>
+	<key>UILaunchImages</key>
+	<array>
+		<dict>
+			<key>UILaunchImageMinimumOSVersion</key>
+			<string>7.1</string>
+			<key>UILaunchImageName</key>
+			<string>LaunchImage</string>
+			<key>UILaunchImageSize</key>
+			<string>(358, 568)</string>
+		</dict>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>Main_iPhone</string>
 	<key>UIMainStoryboardFile</key>

@@ -14,6 +14,7 @@
 		ADB2DCB619374FE20068417F /* WeeklyPeriod.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB2DCB519374FE20068417F /* WeeklyPeriod.m */; };
 		ADB2DCB919375A550068417F /* Cash.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB2DCB819375A550068417F /* Cash.m */; };
 		ADB2DCBC19375F0E0068417F /* Items.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB2DCBB19375F0E0068417F /* Items.m */; };
+		BFAAC4751C217E37004F2700 /* LaunchImage.png in Resources */ = {isa = PBXBuildFile; fileRef = BFAAC4741C217E37004F2700 /* LaunchImage.png */; };
 		BFAC6E7D192A54E100921494 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFAC6E7C192A54E100921494 /* Foundation.framework */; };
 		BFAC6E7F192A54E100921494 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFAC6E7E192A54E100921494 /* CoreGraphics.framework */; };
 		BFAC6E81192A54E100921494 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFAC6E80192A54E100921494 /* UIKit.framework */; };
@@ -115,6 +116,7 @@
 		ADB2DCB819375A550068417F /* Cash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cash.m; sourceTree = "<group>"; };
 		ADB2DCBA19375F0E0068417F /* Items.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Items.h; sourceTree = "<group>"; };
 		ADB2DCBB19375F0E0068417F /* Items.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Items.m; sourceTree = "<group>"; };
+		BFAAC4741C217E37004F2700 /* LaunchImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LaunchImage.png; sourceTree = "<group>"; };
 		BFAC6E79192A54E100921494 /* Cardapio USP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cardapio USP.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFAC6E7C192A54E100921494 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BFAC6E7E192A54E100921494 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -329,6 +331,7 @@
 		BFAC6E82192A54E100921494 /* Cardapio USP */ = {
 			isa = PBXGroup;
 			children = (
+				BFAAC4741C217E37004F2700 /* LaunchImage.png */,
 				AD66F7C71933B239005A31BE /* model */,
 				BFAC6E8B192A54E100921494 /* AppDelegate.h */,
 				BFAC6E8C192A54E100921494 /* AppDelegate.m */,
@@ -606,6 +609,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFAAC4751C217E37004F2700 /* LaunchImage.png in Resources */,
 				E9DEA0231B4DC1FC00422524 /* restaurants.json in Resources */,
 				BFAC6EDC192A587900921494 /* SVProgressHUD.bundle in Resources */,
 				BFAC6E93192A54E100921494 /* Main_iPad.storyboard in Resources */,
