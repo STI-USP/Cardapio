@@ -92,6 +92,7 @@
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveMenu:) name:@"DidReceiveMenu" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRecieveUserData:) name:@"DidRecieveUserData" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRecieveCredits:) name:@"DidReceiveCredits" object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRecieveCreditsError:) name:@"DidReceiveCreditsError" object:nil];
 
 }
 
@@ -419,7 +420,7 @@
 - (void)didRecieveCredits:(NSNotification *)notification {
   
   NSMutableString *message = nil;
-
+  
   if ([[dataModel ruCardCredit] integerValue] == 1) {
     message = [NSMutableString stringWithFormat: @"Seu saldo é de 1 crédito."];
   } else {
@@ -429,22 +430,50 @@
   if([[[UIDevice currentDevice] systemVersion] floatValue] < 8.0) {
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"RUCard" message:message delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"Logout", nil];
     [alertView show];
-
+    
   } else { //[vm:151210] implementação do AlertViewController para iOS8+
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Rucard" message:message preferredStyle:UIAlertControllerStyleAlert];
-  
+    
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Logout", @"Logout action") style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
       [oauth logout];
     }];
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", @"OK action") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
     }];
-  
+    
     [alertController addAction:okAction];
     [alertController addAction:cancelAction];
-  
+    
     [self presentViewController:alertController animated:YES completion:nil];
   }
 }
+
+
+- (void)didRecieveCreditsError:(NSNotification *)notification {
+  
+  NSString *message = @"Não foi possível obter o saldo. \nTente novamente mais tarde.";
+  
+  if([[[UIDevice currentDevice] systemVersion] floatValue] < 8.0) {
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Aviso" message:message delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"Logout", nil];
+    [alertView show];
+    
+  } else { //[vm:151210] implementação do AlertViewController para iOS8+
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Aviso" message:message preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Logout", @"Logout action") style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+      [oauth logout];
+    }];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", @"OK action") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    }];
+    
+    [alertController addAction:okAction];
+    [alertController addAction:cancelAction];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
+  }
+}
+
+
+
 
 
 - (BOOL)isClosed{

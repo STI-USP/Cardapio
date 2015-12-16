@@ -184,7 +184,7 @@
   
   NSDictionary *parameters = nil;
   parameters = [NSDictionary dictionaryWithObjectsAndKeys:
-                @"596df9effde6f877717b4e81fdb2ca9f" , @"hash",
+                //@"596df9effde6f877717b4e81fdb2ca9f" , @"hash",
                 [userData valueForKey:@"loginUsuario"], @"nusp",
                 nil];
   
@@ -195,11 +195,8 @@
     [SVProgressHUD dismiss];
     
   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Aviso" message:@"Não foi possível obter o saldo. \nTente novamente mais tarde." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-    [alertView show];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveCreditsError" object:self];
     [SVProgressHUD dismiss];
-    
-    NSLog(@"%@", error);
   }];
 
 }
