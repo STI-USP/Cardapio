@@ -184,7 +184,7 @@
   
   NSDictionary *parameters = nil;
   parameters = [NSDictionary dictionaryWithObjectsAndKeys:
-                //@"596df9effde6f877717b4e81fdb2ca9f" , @"hash",
+                @"596df9effde6f877717b4e81fdb2ca9f" , @"hash",
                 [userData valueForKey:@"loginUsuario"], @"nusp",
                 nil];
   
@@ -198,7 +198,6 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveCreditsError" object:self];
     [SVProgressHUD dismiss];
   }];
-
 }
 
 
