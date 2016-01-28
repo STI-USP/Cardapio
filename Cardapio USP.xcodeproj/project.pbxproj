@@ -853,7 +853,7 @@
 				GCC_PREFIX_HEADER = "Cardapio USP/Cardapio USP-Prefix.pch";
 				INFOPLIST_FILE = "Cardapio USP/Cardapio USP-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "86272d9f-d080-4fd5-8d49-190f009a7f17";
+				PROVISIONING_PROFILE = "c1d53b8b-73b8-4a58-8e1e-3b1c1535aa5e";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
