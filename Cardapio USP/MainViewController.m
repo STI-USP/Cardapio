@@ -63,9 +63,24 @@
   [self addChildViewController:_dateTabController];
   [_dateTabController didMoveToParentViewController:self];
   [self.view addSubview:_dateTabController.view];
-  _dateTabController.view.frame = CGRectMake(0, 65, 320, 40);
+  _dateTabController.view.frame = CGRectMake(0, 65, CGRectGetWidth(self.view.bounds), 40);
   _dateTabController.view.backgroundColor = [UIColor lightTextColor];
-  _dateTabController.buttonPadding = 3.2;
+  if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ){
+    CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
+    CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
+    if( screenHeight < screenWidth ){
+      screenHeight = screenWidth;
+    }
+    if( screenHeight > 480 && screenHeight < 667 ){
+      _dateTabController.buttonPadding = 3.2;
+    } else if ( screenHeight > 480 && screenHeight < 736 ){
+      _dateTabController.buttonPadding = 8.2;
+    } else if ( screenHeight > 480 ){
+      _dateTabController.buttonPadding = 11;
+    } else {
+      _dateTabController.buttonPadding = 3.2;
+    }
+  }
   _dateTabController.underlineIndicator = YES;
   _dateTabController.underlineIndicatorColor = [UIColor redColor];
   _dateTabController.buttonsScrollView.showsHorizontalScrollIndicator = NO;
