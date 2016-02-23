@@ -191,10 +191,12 @@
   if (annotation == mapView.userLocation) return nil; // mostra círculo azul se a anotação for localização do usuário
   
   // se for biblioteca, mostra pino e pode mostrar detail discolosure
-  MDPinAnnotationView *newAnnotationView = [[MDPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"pinLocation"];
-  newAnnotationView.animatesDrop = YES; // anima colocação
-  newAnnotationView.pinColor = MKPinAnnotationColorPurple; // usa cor roxa
+  MKAnnotationView *newAnnotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"pinLocation"];
+  //newAnnotationView.animatesDrop = YES; // anima colocação
+  //newAnnotationView.pinColor = MKPinAnnotationColorPurple; // usa cor roxa
   newAnnotationView.canShowCallout = YES; // não permite botão
+  newAnnotationView.image = [UIImage imageNamed:@"restaurante"];
+
   
   // O comprimento do título da anotação atrapalha a posição do Detail Diclosure Button
   // para acertar isso é necessário alterar a altura da view do botão
@@ -237,6 +239,8 @@
     [self.mapView setShowsUserLocation:YES];
   }
 }
+
+
 
 #pragma mark - Navigation
 

@@ -322,8 +322,8 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="geH-Av-Uuk">
-                                            <rect key="frame" x="84" y="5" width="153" height="30"/>
+                                        <button opaque="NO" tag="1" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="geH-Av-Uuk">
+                                            <rect key="frame" x="8" y="7" width="304" height="30"/>
                                             <state key="normal" title="Definir como preferido">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
@@ -332,6 +332,10 @@
                                             </connections>
                                         </button>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="geH-Av-Uuk" firstAttribute="width" secondItem="nLp-9q-nt9" secondAttribute="width" constant="-16" id="9W3-3n-7yt"/>
+                                        <constraint firstItem="geH-Av-Uuk" firstAttribute="centerX" secondItem="nLp-9q-nt9" secondAttribute="centerX" id="Fsu-N5-Z26"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
                             <tableViewCell tag="2" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ResetPreferredCell" id="B2w-eb-Xso" customClass="DetailCell">
@@ -342,7 +346,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <button opaque="NO" tag="1" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DqB-rz-775">
-                                            <rect key="frame" x="29" y="6" width="542" height="30"/>
+                                            <rect key="frame" x="8" y="6" width="304" height="30"/>
                                             <state key="normal" title="Cancelar definição como preferido">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
@@ -352,9 +356,10 @@
                                         </button>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="DqB-rz-775" firstAttribute="centerY" secondItem="IBz-rt-Uqq" secondAttribute="centerY" id="5W8-3f-eMa"/>
                                         <constraint firstItem="DqB-rz-775" firstAttribute="centerY" secondItem="IBz-rt-Uqq" secondAttribute="centerY" constant="-1" id="iS6-pb-ccG"/>
+                                        <constraint firstItem="DqB-rz-775" firstAttribute="width" secondItem="IBz-rt-Uqq" secondAttribute="width" id="kr8-7R-DZ5"/>
                                         <constraint firstItem="DqB-rz-775" firstAttribute="centerX" secondItem="IBz-rt-Uqq" secondAttribute="centerX" id="kuc-n2-9Eh"/>
-                                        <constraint firstItem="DqB-rz-775" firstAttribute="leading" secondItem="IBz-rt-Uqq" secondAttribute="leadingMargin" constant="21" id="lwd-3h-pl8"/>
                                     </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -375,7 +380,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EOL-oP-iIC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1822" y="90.999999999999986"/>
+            <point key="canvasLocation" x="1822" y="91"/>
         </scene>
         <!--Localização-->
         <scene sceneID="BuO-bi-fzF">
