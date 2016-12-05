@@ -52,10 +52,10 @@
 		E92D5EA51C19B32B00ECA5D1 /* hmac.c in Sources */ = {isa = PBXBuildFile; fileRef = E92D5E961C19B32B00ECA5D1 /* hmac.c */; };
 		E92D5EA61C19B32B00ECA5D1 /* sha1.c in Sources */ = {isa = PBXBuildFile; fileRef = E92D5E981C19B32B00ECA5D1 /* sha1.c */; };
 		E92D5EA71C19B32B00ECA5D1 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = E92D5E9B1C19B32B00ECA5D1 /* KeychainItemWrapper.m */; };
-		E92D5EA81C19B32B00ECA5D1 /* LoginWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E92D5E9D1C19B32B00ECA5D1 /* LoginWebViewController.m */; };
 		E92D5EA91C19B32B00ECA5D1 /* NSString+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = E92D5E9F1C19B32B00ECA5D1 /* NSString+URLEncoding.m */; };
 		E92D5EAA1C19B32B00ECA5D1 /* OAuth1Controller.m in Sources */ = {isa = PBXBuildFile; fileRef = E92D5EA11C19B32B00ECA5D1 /* OAuth1Controller.m */; };
 		E92D5EAB1C19B32B00ECA5D1 /* OAuthUSP.m in Sources */ = {isa = PBXBuildFile; fileRef = E92D5EA31C19B32B00ECA5D1 /* OAuthUSP.m */; };
+		E9387BED1DF5F024005BC821 /* LoginWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9387BEC1DF5F024005BC821 /* LoginWebViewController.m */; };
 		E9818EC3198033A800F741B0 /* DKScrollingTabController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9818EC2198033A800F741B0 /* DKScrollingTabController.m */; };
 		E9CDD1BB1AD81E5100BB2E36 /* RestaurantsFilterController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9CDD1BA1AD81E5100BB2E36 /* RestaurantsFilterController.m */; };
 		E9CDD1CD1AD8681800BB2E36 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9CDD1CC1AD8681800BB2E36 /* MobileCoreServices.framework */; };
@@ -175,14 +175,14 @@
 		E92D5E991C19B32B00ECA5D1 /* sha1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sha1.h; sourceTree = "<group>"; };
 		E92D5E9A1C19B32B00ECA5D1 /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
 		E92D5E9B1C19B32B00ECA5D1 /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
-		E92D5E9C1C19B32B00ECA5D1 /* LoginWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginWebViewController.h; sourceTree = "<group>"; };
-		E92D5E9D1C19B32B00ECA5D1 /* LoginWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginWebViewController.m; sourceTree = "<group>"; };
 		E92D5E9E1C19B32B00ECA5D1 /* NSString+URLEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URLEncoding.h"; sourceTree = "<group>"; };
 		E92D5E9F1C19B32B00ECA5D1 /* NSString+URLEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URLEncoding.m"; sourceTree = "<group>"; };
 		E92D5EA01C19B32B00ECA5D1 /* OAuth1Controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAuth1Controller.h; sourceTree = "<group>"; };
 		E92D5EA11C19B32B00ECA5D1 /* OAuth1Controller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAuth1Controller.m; sourceTree = "<group>"; };
 		E92D5EA21C19B32B00ECA5D1 /* OAuthUSP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAuthUSP.h; sourceTree = "<group>"; };
 		E92D5EA31C19B32B00ECA5D1 /* OAuthUSP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAuthUSP.m; sourceTree = "<group>"; };
+		E9387BEB1DF5F024005BC821 /* LoginWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginWebViewController.h; sourceTree = "<group>"; };
+		E9387BEC1DF5F024005BC821 /* LoginWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginWebViewController.m; sourceTree = "<group>"; };
 		E9818EC1198033A800F741B0 /* DKScrollingTabController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DKScrollingTabController.h; sourceTree = "<group>"; };
 		E9818EC2198033A800F741B0 /* DKScrollingTabController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DKScrollingTabController.m; sourceTree = "<group>"; };
 		E9CDD1B91AD81E5100BB2E36 /* RestaurantsFilterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestaurantsFilterController.h; sourceTree = "<group>"; };
@@ -466,8 +466,8 @@
 				E92D5E931C19B32B00ECA5D1 /* Crypto */,
 				E92D5E9A1C19B32B00ECA5D1 /* KeychainItemWrapper.h */,
 				E92D5E9B1C19B32B00ECA5D1 /* KeychainItemWrapper.m */,
-				E92D5E9C1C19B32B00ECA5D1 /* LoginWebViewController.h */,
-				E92D5E9D1C19B32B00ECA5D1 /* LoginWebViewController.m */,
+				E9387BEB1DF5F024005BC821 /* LoginWebViewController.h */,
+				E9387BEC1DF5F024005BC821 /* LoginWebViewController.m */,
 				E92D5E9E1C19B32B00ECA5D1 /* NSString+URLEncoding.h */,
 				E92D5E9F1C19B32B00ECA5D1 /* NSString+URLEncoding.m */,
 				E92D5EA01C19B32B00ECA5D1 /* OAuth1Controller.h */,
@@ -680,6 +680,7 @@
 				E92D5EA91C19B32B00ECA5D1 /* NSString+URLEncoding.m in Sources */,
 				BFAC6EE6192A71A000921494 /* InfoViewController.m in Sources */,
 				BFAC6E8D192A54E100921494 /* AppDelegate.m in Sources */,
+				E9387BED1DF5F024005BC821 /* LoginWebViewController.m in Sources */,
 				E9CDD1BB1AD81E5100BB2E36 /* RestaurantsFilterController.m in Sources */,
 				E92D5EA51C19B32B00ECA5D1 /* hmac.c in Sources */,
 				E9CDD1EB1AD86BFF00BB2E36 /* AFURLConnectionOperation.m in Sources */,
@@ -688,7 +689,6 @@
 				E9CDD1EC1AD86BFF00BB2E36 /* AFURLRequestSerialization.m in Sources */,
 				BFAC6E89192A54E100921494 /* main.m in Sources */,
 				BFAC6EE0192A59E600921494 /* FrostedViewController.m in Sources */,
-				E92D5EA81C19B32B00ECA5D1 /* LoginWebViewController.m in Sources */,
 				E9E55FB81B5591A100994BCB /* RestaurantDetailTableViewController.m in Sources */,
 				E9E9B1321B0E7D1C005BE8A1 /* DataModel.m in Sources */,
 				E92D5EA71C19B32B00ECA5D1 /* KeychainItemWrapper.m in Sources */,
