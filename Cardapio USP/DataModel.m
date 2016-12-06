@@ -163,7 +163,7 @@
   [SVProgressHUD show];
   
   self.menuArray = [[NSMutableArray alloc] init];
-
+  
   //Recupera dados do usuario
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   NSData *data = [defaults objectForKey:@"userData"];
@@ -198,6 +198,11 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveCreditsError" object:self];
     [SVProgressHUD dismiss];
   }];
+}
+
+
+- (void)getBill{
+  [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveBill" object:self];
 }
 
 

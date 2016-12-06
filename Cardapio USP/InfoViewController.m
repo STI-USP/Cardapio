@@ -24,6 +24,13 @@
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
 
+#define UIColorFromRGB(rgbValue) \
+[UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
+green:((float)((rgbValue & 0x00FF00) >>  8))/255.0 \
+blue:((float)((rgbValue & 0x0000FF) >>  0))/255.0 \
+alpha:1.0]
+
+
 @interface InfoViewController () {
   DataModel *dataModel;
   PreferredCell *prefCell;
@@ -50,6 +57,7 @@
   
   self.tableView.estimatedRowHeight = 44.0;
   self.tableView.rowHeight = UITableViewAutomaticDimension;
+  [[UITableViewCell appearance] setTintColor:UIColorFromRGB(0x1094AB)];
 
   dataModel = [DataModel getInstance];
 

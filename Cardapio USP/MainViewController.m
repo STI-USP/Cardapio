@@ -17,8 +17,18 @@
 #import "SVProgressHUD.h"
 #import "OAuthUSP.h"
 #import "LoginWebViewController.h"
+#import "CreditsViewController.h"
+#import "BoletoViewController.h"
 
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+
+
+#define UIColorFromRGB(rgbValue) \
+[UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
+green:((float)((rgbValue & 0x00FF00) >>  8))/255.0 \
+blue:((float)((rgbValue & 0x0000FF) >>  0))/255.0 \
+alpha:1.0]
+
 
 @interface MainViewController () <DKScrollingTabControllerDelegate> {
 
@@ -36,7 +46,8 @@
   
   OAuthUSP *oauth;
   LoginWebViewController *loginViewController;
-
+  CreditsViewController *creditsViewController;
+  BoletoViewController *boletoViewController;
 }
 
 @end
@@ -57,6 +68,8 @@
   dataModel = [DataModel getInstance];
   oauth = [OAuthUSP sharedInstance];
   stringForLunch = [NSMutableString stringWithFormat:@""];
+  
+  [[UIView appearance] setTintColor:UIColorFromRGB(0x1094AB)];
   
   // Cria e configura inicio do DKScrollingTabController
   _dateTabController = [[DKScrollingTabController alloc] init];
@@ -82,7 +95,7 @@
     }
   }
   _dateTabController.underlineIndicator = YES;
-  _dateTabController.underlineIndicatorColor = [UIColor redColor];
+  _dateTabController.underlineIndicatorColor = [UIColor orangeColor];
   _dateTabController.buttonsScrollView.showsHorizontalScrollIndicator = NO;
   _dateTabController.selectedBackgroundColor = [UIColor clearColor];
   _dateTabController.selectedTextColor = [UIColor blackColor];
@@ -106,8 +119,10 @@
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChangeRestaurant:) name:@"DidChangeRestaurant" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveMenu:) name:@"DidReceiveMenu" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRecieveUserData:) name:@"DidRecieveUserData" object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRecieveCredits:) name:@"DidReceiveCredits" object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRecieveCreditsError:) name:@"DidReceiveCreditsError" object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveBill:) name:@"DidReceiveBill" object:nil];
+
+  //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRecieveCredits:) name:@"DidReceiveCredits" object:nil];
+  //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRecieveCreditsError:) name:@"DidReceiveCreditsError" object:nil];
 
 }
 
@@ -392,11 +407,13 @@
 }
 
 - (IBAction)showCredits:(id)sender {
-  if ([oauth isLoggedIn]) {
-    [dataModel getCreditoRUCard];
-  } else {
+  creditsViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"creditsViewController"];
+
+  if (![oauth isLoggedIn]) {
     loginViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"loginWebViewController"];
     [self presentViewController:loginViewController animated:YES completion:nil];
+  } else {
+    [self presentViewController:creditsViewController animated:YES completion:nil];
   }
 }
 
@@ -429,66 +446,13 @@
 }
 
 - (void)didRecieveUserData:(NSNotification *)notification {
-  [dataModel getCreditoRUCard];
+  [self presentViewController:creditsViewController animated:YES completion:nil];
 }
 
-- (void)didRecieveCredits:(NSNotification *)notification {
-  
-  NSMutableString *message = nil;
-  
-  if ([[dataModel ruCardCredit] integerValue] == 1) {
-    message = [NSMutableString stringWithFormat: @"Seu saldo é de 1 crédito."];
-  } else {
-    message = [NSMutableString stringWithFormat: @"Seu saldo é de %@ créditos.", [dataModel ruCardCredit]];
-  }
-  
-  if([[[UIDevice currentDevice] systemVersion] floatValue] < 8.0) {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"RUCard" message:message delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"Logout", nil];
-    [alertView show];
-    
-  } else { //[vm:151210] implementação do AlertViewController para iOS8+
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Rucard" message:message preferredStyle:UIAlertControllerStyleAlert];
-    
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Logout", @"Logout action") style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
-      [oauth logout];
-    }];
-    UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", @"OK action") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-    }];
-    
-    [alertController addAction:okAction];
-    [alertController addAction:cancelAction];
-    
-    [self presentViewController:alertController animated:YES completion:nil];
-  }
+- (void)didReceiveBill:(NSNotification *)notification {
+  boletoViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"boletoViewController"];
+  [self presentViewController:boletoViewController animated:NO completion:nil];
 }
-
-
-- (void)didRecieveCreditsError:(NSNotification *)notification {
-  
-  NSString *message = @"Não foi possível obter o saldo. \nTente novamente mais tarde.";
-  
-  if([[[UIDevice currentDevice] systemVersion] floatValue] < 8.0) {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Aviso" message:message delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"Logout", nil];
-    [alertView show];
-    
-  } else { //[vm:151210] implementação do AlertViewController para iOS8+
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Aviso" message:message preferredStyle:UIAlertControllerStyleAlert];
-    
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Logout", @"Logout action") style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
-      [oauth logout];
-    }];
-    UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", @"OK action") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-    }];
-    
-    [alertController addAction:okAction];
-    [alertController addAction:cancelAction];
-    
-    [self presentViewController:alertController animated:YES completion:nil];
-  }
-}
-
-
-
 
 
 - (BOOL)isClosed{
@@ -510,13 +474,13 @@
 }
 
 
+/*
 #pragma mark - AlertViewDelegate - iOS7
-
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
   if (buttonIndex != [alertView cancelButtonIndex]){
     [oauth logout]; //se for botão de logout
   }
 }
-
+*/
 
 @end

@@ -10,8 +10,8 @@
     },
     {
       "idiom" : "universal",
-      "scale" : "3x",
-      "filename" : "phone.png"
+      "filename" : "phone.png",
+      "scale" : "3x"
     }
   ],
   "info" : {

@@ -32,8 +32,15 @@
 
 @end
 
-#pragma mark - Restaurants Detail View Controller
 
+#define UIColorFromRGB(rgbValue) \
+[UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
+green:((float)((rgbValue & 0x00FF00) >>  8))/255.0 \
+blue:((float)((rgbValue & 0x0000FF) >>  0))/255.0 \
+alpha:1.0]
+
+
+#pragma mark - Restaurants Detail View Controller
 @interface RestaurantDetailTableViewController () {
   DataModel *dataModel;
 }
@@ -45,7 +52,10 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   dataModel = [DataModel getInstance];
-  
+
+  [[UITableViewCell appearance] setTintColor:UIColorFromRGB(0x1094AB)];
+  [[DetailCell appearance] setTintColor:UIColorFromRGB(0x1094AB)];
+
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveRestaurants) name:@"DidReceiveRestaurants" object:nil];
 
 }
@@ -144,6 +154,9 @@
 }
 
 - (void)configureCell:(DetailCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+  
+  [cell.title setTintColor:UIColorFromRGB(0x1094AB)];
+  
   if (indexPath.section == 0) {
     switch (indexPath.row) {
       case 0: {
@@ -166,15 +179,16 @@
         }
         cell.subtitle.text = telephones;
         
-        UIImage *image = [UIImage imageNamed:@"phone.png"];
+        UIImage *image = [[UIImage imageNamed:@"phone.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         CGRect frame = CGRectMake(0.0, 0.0, image.size.width, image.size.height);
         button.frame = frame;
         [button setBackgroundImage:image forState:UIControlStateNormal];
         [button addTarget:self action:@selector(checkButtonTapped:event:)  forControlEvents:UIControlEventTouchUpInside];
         button.backgroundColor = [UIColor clearColor];
-        button.tintColor = [UIColor blueColor];
+        [button setTintColor:UIColorFromRGB(0x1094AB)];
         cell.accessoryView = button;
+        [cell.accessoryView setTintColor:UIColorFromRGB(0x1094AB)];
       }
         break;
       case 2: {

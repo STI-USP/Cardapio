@@ -41,6 +41,7 @@
 - (void)getMenu;
 - (void)getRestaurantList;
 - (void)getCreditoRUCard;
+- (void)getBill;
 - (void)setDefault;
 - (NSMutableDictionary *) cleanDictionary: (NSMutableDictionary *)dictionary;
 

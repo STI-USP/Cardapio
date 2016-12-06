@@ -89,6 +89,11 @@
 
 - (void)login {
   [self.oauthController loginWithWebView:self.webView completion:^(NSDictionary *oauthTokens, NSError *error) {
+
+    [self dismissViewControllerAnimated:YES completion: ^{
+      self.oauthController = nil;
+    }];
+
     if (!error) {
       // Store your tokens for authenticating your later requests, consider storing the tokens in the Keychain
       //[_keychainWrapper setObject:oauthTokens[@"oauth_token"] forKey:(__bridge id)(kSecAttrAccount)];
@@ -96,6 +101,7 @@
       
       [_oAuthUSP setOauthToken:oauthTokens[@"oauth_token"]];
       [_oAuthUSP setOauthTokenSecret:oauthTokens[@"oauth_token_secret"]];
+
       [self saveUserData];
       
     } else {
@@ -103,9 +109,6 @@
       [alertView show];
     }
     
-    [self dismissViewControllerAnimated:YES completion: ^{
-      self.oauthController = nil;
-    }];
   }];
   
 }
