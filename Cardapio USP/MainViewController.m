@@ -69,8 +69,6 @@ alpha:1.0]
   oauth = [OAuthUSP sharedInstance];
   stringForLunch = [NSMutableString stringWithFormat:@""];
   
-  [[UIView appearance] setTintColor:UIColorFromRGB(0x1094AB)];
-  
   // Cria e configura inicio do DKScrollingTabController
   _dateTabController = [[DKScrollingTabController alloc] init];
   [self addChildViewController:_dateTabController];

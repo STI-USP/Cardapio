@@ -54,7 +54,7 @@
                                                 <rect key="frame" x="0.0" y="55.5" width="380" height="200"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Hwe-Uf-pnQ" id="cdo-Wr-BUX">
-                                                    <rect key="frame" x="0.0" y="0.0" width="380" height="199.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="380" height="199"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="295" id="JQO-xN-qeF">
@@ -106,7 +106,7 @@
                             </connections>
                         </barButtonItem>
                         <rightBarButtonItems>
-                            <barButtonItem style="plain" id="s13-TJ-urk">
+                            <barButtonItem image="saldo" style="plain" id="s13-TJ-urk">
                                 <button key="customView" opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="fQo-l8-6FC">
                                     <rect key="frame" x="333" y="9" width="26" height="26"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -120,7 +120,7 @@
                                     <action selector="showCredits:" destination="vXZ-lx-hvc" id="as3-lk-05P"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem id="7du-yg-5yv">
+                            <barButtonItem style="plain" id="7du-yg-5yv">
                                 <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="FBE-Cj-wgq">
                                     <rect key="frame" x="303" y="11" width="22" height="22"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
