@@ -132,10 +132,8 @@ alpha:1.0]
     case 0:
       if (indexPath.row == 1) {
         cell =  (DetailCell *)[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ContactCell"];
-        //cell = [self.tableView dequeueReusableCellWithIdentifier:@"ContactCell" forIndexPath:indexPath];
       } else {
         cell =  (DetailCell *)[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"AboutDetailCell"];
-        //cell = [self.tableView dequeueReusableCellWithIdentifier:@"AboutDetailCell" forIndexPath:indexPath];
       }
       break;
     case 1: {
@@ -179,16 +177,12 @@ alpha:1.0]
         }
         cell.subtitle.text = telephones;
         
-        UIImage *image = [[UIImage imageNamed:@"phone.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        CGRect frame = CGRectMake(0.0, 0.0, image.size.width, image.size.height);
-        button.frame = frame;
-        [button setBackgroundImage:image forState:UIControlStateNormal];
-        [button addTarget:self action:@selector(checkButtonTapped:event:)  forControlEvents:UIControlEventTouchUpInside];
-        button.backgroundColor = [UIColor clearColor];
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        button.frame = CGRectMake(0.0, 0.0, 25., 30.);
+        [button setImage:[UIImage imageNamed:@"phone.png"] forState:UIControlStateNormal];
         [button setTintColor:UIColorFromRGB(0x1094AB)];
+        [button addTarget:self action:@selector(checkButtonTapped:event:) forControlEvents:UIControlEventTouchUpInside];
         cell.accessoryView = button;
-        [cell.accessoryView setTintColor:UIColorFromRGB(0x1094AB)];
       }
         break;
       case 2: {

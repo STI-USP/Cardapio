@@ -16,7 +16,6 @@
 
 - (IBAction)dismiss:(id)sender;
 - (IBAction)copyToPasteboard:(id)sender;
-- (IBAction)sendMail:(id)sender;
 
 
 @end

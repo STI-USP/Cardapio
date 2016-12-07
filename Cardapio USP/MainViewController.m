@@ -93,7 +93,7 @@ alpha:1.0]
     }
   }
   _dateTabController.underlineIndicator = YES;
-  _dateTabController.underlineIndicatorColor = [UIColor orangeColor];
+  _dateTabController.underlineIndicatorColor = UIColorFromRGB(0xF5A616);
   _dateTabController.buttonsScrollView.showsHorizontalScrollIndicator = NO;
   _dateTabController.selectedBackgroundColor = [UIColor clearColor];
   _dateTabController.selectedTextColor = [UIColor blackColor];

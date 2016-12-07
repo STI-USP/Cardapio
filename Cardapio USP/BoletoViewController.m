@@ -7,6 +7,7 @@
 //
 
 #import "BoletoViewController.h"
+#import "SVProgressHUD.h"
 
 @interface BoletoViewController ()
 
@@ -39,8 +40,9 @@
 }
 
 - (IBAction)copyToPasteboard:(id)sender {
+  [[UIPasteboard generalPasteboard] setString:_codBarrasLabel.text];
+  [SVProgressHUD showSuccessWithStatus:@"copiado"];
 }
 
-- (IBAction)sendMail:(id)sender {
-}
+
 @end

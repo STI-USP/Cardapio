@@ -224,14 +224,11 @@ alpha:1.0]
         }
         [cell.subtitle setText: telephones];
         
-        UIImage *image = [UIImage imageNamed:@"phone.png"];
-        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        CGRect frame = CGRectMake(0.0, 0.0, image.size.width, image.size.height);
-        button.frame = frame;
-        [button setBackgroundImage:image forState:UIControlStateNormal];
-        [button addTarget:self action:@selector(callButtonTapped:event:)  forControlEvents:UIControlEventTouchUpInside];
-        button.backgroundColor = [UIColor clearColor];
-        button.tintColor = [UIColor blueColor];
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        button.frame = CGRectMake(0.0, 0.0, 25., 30.);
+        [button setImage:[UIImage imageNamed:@"phone.png"] forState:UIControlStateNormal];
+        [button setTintColor:UIColorFromRGB(0x1094AB)];
+        [button addTarget:self action:@selector(callButtonTapped:event:) forControlEvents:UIControlEventTouchUpInside];
         cell.accessoryView = button;
         break;
       }

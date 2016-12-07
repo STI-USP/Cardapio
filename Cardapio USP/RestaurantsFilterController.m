@@ -12,6 +12,11 @@
 #import "DataModel.h"
 #import "REFrostedViewController.h"
 
+#define UIColorFromRGB(rgbValue) \
+[UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
+green:((float)((rgbValue & 0x00FF00) >>  8))/255.0 \
+blue:((float)((rgbValue & 0x0000FF) >>  0))/255.0 \
+alpha:1.0]
 
 @interface RestaurantsFilterController () {
   NSMutableArray *restaurantList;
@@ -100,7 +105,7 @@
   prefRestaurant = [NSMutableDictionary dictionaryWithDictionary:[defaults dictionaryForKey:@"preferredRestaurant"]];
 
   if ([[prefRestaurant valueForKey:@"id"] isEqualToString:[[[[campiList objectAtIndex:indexPath.section] valueForKey:@"restaurants"]objectAtIndex:indexPath.row] valueForKey:@"id"]]) {
-    [favButton setTintColor:[UIColor orangeColor]];
+    [favButton setTintColor:UIColorFromRGB(0xF5A616)];
   } else {
     [favButton setTintColor:[UIColor colorWithWhite:0.7 alpha:0.5]];
   }
