@@ -18,11 +18,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+  [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
+  //[SVProgressHUD setSuccessImage:nil];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+  [SVProgressHUD showSuccessWithStatus:@"O boleto foi gerado e enviado para seu e-mail institucional"];
 }
 
 /*
