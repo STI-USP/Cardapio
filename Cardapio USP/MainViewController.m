@@ -411,6 +411,7 @@ alpha:1.0]
     loginViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"loginWebViewController"];
     [self presentViewController:loginViewController animated:YES completion:nil];
   } else {
+    [dataModel getCreditoRUCard];
     [self presentViewController:creditsViewController animated:YES completion:nil];
   }
 }
@@ -449,7 +450,7 @@ alpha:1.0]
 
 - (void)didReceiveBill:(NSNotification *)notification {
   boletoViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"boletoViewController"];
-  [self presentViewController:boletoViewController animated:NO completion:nil];
+  [self presentViewController:boletoViewController animated:YES completion:nil];
 }
 
 

@@ -11,8 +11,8 @@
 #import "OAuth1Controller.h"
 #import "OAuthUSP.h"
 
-//#define UserURLString    @"https://dev.uspdigital.usp.br/wsusuario/oauth/usuariousp" //dev
-#define UserURLString    @"https://uspdigital.usp.br/wsusuario/oauth/usuariousp"
+#define UserURLString    @"https://dev.uspdigital.usp.br/wsusuario/oauth/usuariousp" //dev
+//#define UserURLString    @"https://uspdigital.usp.br/wsusuario/oauth/usuariousp"
 
 @interface LoginWebViewController ()
 
@@ -107,6 +107,7 @@
     } else {
       UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Erro" message:@"Não foi possível fazer o login no momento. Tente novamente mais tarde." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
       [alertView show];
+      NSLog(@"%@", [error description]);
     }
     
   }];

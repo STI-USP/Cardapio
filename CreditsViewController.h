@@ -10,12 +10,11 @@
 
 @interface CreditsViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UILabel *username;
 @property (weak, nonatomic) IBOutlet UILabel *saldoLabel;
-@property (weak, nonatomic) IBOutlet UILabel *valorLabel;
-@property (weak, nonatomic) IBOutlet UIButton *gerarBoleto;
-@property (weak, nonatomic) IBOutlet UITextField *maisCreditos;
 
-- (IBAction)gerarBoleto:(id)sender;
+- (IBAction)gerarNovoBoleto:(id)sender;
+- (IBAction)visualizarBoleto:(id)sender;
 
 - (IBAction)logout:(id)sender;
 - (IBAction)dismiss:(id)sender;

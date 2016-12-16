@@ -10,9 +10,13 @@
 #import "DataModel.h"
 #import "SVProgressHUD.h"
 #import "OAuthUSP.h"
+#import "BoletoDataModel.h"
+#import "BoletoViewController.h"
 
 @interface CreditsViewController () {
   DataModel *dataModel;
+  BoletoDataModel *boletoDataModel;
+  BoletoViewController *boletoViewController;
   OAuthUSP *oauth;
 }
 
@@ -21,19 +25,23 @@
 @implementation CreditsViewController
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
+  [super viewDidLoad];
+  // Do any additional setup after loading the view.
+  
+  [_username setText:@""];
 
   //Modelo
   dataModel = [DataModel getInstance];
+  boletoDataModel = [BoletoDataModel sharedInstance];
   oauth = [OAuthUSP sharedInstance];
   
-  [_gerarBoleto.titleLabel setLineBreakMode:NSLineBreakByWordWrapping];
   [_saldoLabel setText:@"Saldo do RUCard \n"];
   
   //Notificacoes
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRecieveCredits:) name:@"DidReceiveCredits" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRecieveCreditsError:) name:@"DidReceiveCreditsError" object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didCreateBill:) name:@"DidCreateBill" object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveBill:) name:@"DidReceiveBill" object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -44,7 +52,8 @@
 - (void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
 
-  [dataModel getCreditoRUCard];
+  [_username setText:[dataModel.userData objectForKey:@"nomeUsuario"]];
+  //[dataModel getCreditoRUCard];
 }
 
 /*
@@ -58,24 +67,11 @@
 */
 
 - (void)didRecieveCredits:(NSNotification *)notification {
-  
   NSMutableString *message = nil;
-  
-  if ([[dataModel ruCardCredit] integerValue] == 1) {
-    message = [NSMutableString stringWithFormat: @"Saldo do RUCard \n1 crédito"];
-  } else {
-    message = [NSMutableString stringWithFormat: @"Saldo do RUCard \n%@ créditos", [dataModel ruCardCredit]];
-  }
-  
+  message = [NSMutableString stringWithFormat: @"Saldo do RUCard \nR$ %@", [dataModel ruCardCredit]];
   [_saldoLabel setNumberOfLines:0];
   [_saldoLabel setLineBreakMode:NSLineBreakByWordWrapping];
   [_saldoLabel setText:message];
-  
-  UIToolbar *keyboardDoneButtonView = [[UIToolbar alloc] init];
-  [keyboardDoneButtonView sizeToFit];
-  UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"   OK" style:UIBarButtonItemStylePlain target:self action:@selector(doneClicked:)];
-  [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:doneButton, nil]];
-  _maisCreditos.inputAccessoryView = keyboardDoneButtonView;
 }
 
 
@@ -84,17 +80,33 @@
   [SVProgressHUD showErrorWithStatus:message];
 }
 
-- (IBAction)gerarBoleto:(id)sender {
-  [self dismissViewControllerAnimated:NO completion:nil];
-  [dataModel getBill];
+- (IBAction)visualizarBoleto:(id)sender {
+  [SVProgressHUD show];
+  //[self dismissViewControllerAnimated:YES completion:nil];
+  [boletoDataModel getBoleto];
 }
 
-- (IBAction)doneClicked:(id)sender {
+- (IBAction)gerarBoleto:(id)sender {
+}
+
+- (IBAction)gerarNovoBoleto:(id)sender {
+}
+
+- (void)didCreateBill:(NSNotification *)notification {
+  //[self dismissViewControllerAnimated:NO completion:nil];
+  //[[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveBill" object:self];
+  if (!boletoViewController) {
+    boletoViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"boletoViewController"];
+  }
   
-  float valor = [_maisCreditos.text integerValue] * 1.90;
-  [_valorLabel setText:[[NSString stringWithFormat: @"R$ %2.2f", valor] stringByReplacingOccurrencesOfString:@"." withString:@","]];
-  
-  [self.view endEditing:YES];
+  [self presentViewController:boletoViewController animated:YES completion:nil];
+}
+
+- (void)didReceiveBill:(NSNotification *)notification {
+  if (!boletoViewController) {
+    boletoViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"boletoViewController"];
+  }
+  [self presentViewController:boletoViewController animated:YES completion:nil];
 }
 
 - (IBAction)logout:(id)sender {

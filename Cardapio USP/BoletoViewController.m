@@ -8,8 +8,11 @@
 
 #import "BoletoViewController.h"
 #import "SVProgressHUD.h"
+#import "BoletoDataModel.h"
 
-@interface BoletoViewController ()
+@interface BoletoViewController () {
+  BoletoDataModel *boletoDataModel;
+}
 
 @end
 
@@ -18,8 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-  [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
-  //[SVProgressHUD setSuccessImage:nil];
+  boletoDataModel = [BoletoDataModel sharedInstance];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -27,8 +29,33 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-  [SVProgressHUD showSuccessWithStatus:@"O boleto foi gerado e enviado para seu e-mail institucional"];
+- (void)viewWillAppear:(BOOL)animated {
+  
+  NSString *valor = [boletoDataModel.boleto valueForKey:@"valor"];
+  NSString *codBarras = [boletoDataModel.boleto valueForKey:@"codigoBarras"];
+  NSString *vencimento = [boletoDataModel.boleto valueForKey:@"vencimento"];
+  NSString *email = [boletoDataModel.boleto valueForKey:@"email"];
+  
+  if (valor != (id)[NSNull null])
+    [_valorLabel setText:[NSString stringWithFormat:@"R$ %@", valor]];
+  else
+    [_valorLabel setText:@"R$ 0,00"];
+  
+  if (codBarras != (id)[NSNull null])
+    [_codBarrasLabel setText:codBarras];
+  else
+    [_codBarrasLabel setText:@""];
+  
+  if (vencimento != (id)[NSNull null])
+    [_vencimentoLabel setText:[NSString stringWithFormat:@"Vencimento em %@", vencimento]];
+  else
+    [_vencimentoLabel setText:@""];
+  
+  if (email != (id)[NSNull null])
+    [_emailTxt setText:[NSString stringWithFormat:@"Uma cópia do boleto foi enviado para o email %@", email]];
+  else
+    [_emailTxt setText:@"  Uma cópia do boleto foi enviado para seu email institucional"];
+  
 }
 
 /*

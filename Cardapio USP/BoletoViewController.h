@@ -11,7 +11,9 @@
 @interface BoletoViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UILabel *valorLabel;
+@property (weak, nonatomic) IBOutlet UILabel *vencimentoLabel;
 @property (weak, nonatomic) IBOutlet UILabel *codBarrasLabel;
+@property (weak, nonatomic) IBOutlet UILabel *emailTxt;
 
 
 - (IBAction)dismiss:(id)sender;
