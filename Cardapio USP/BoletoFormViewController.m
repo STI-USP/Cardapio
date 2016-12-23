@@ -36,7 +36,6 @@
   UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"   OK" style:UIBarButtonItemStylePlain target:self action:@selector(doneClicked:)];
   [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:doneButton, nil]];
   _maisCreditos.inputAccessoryView = keyboardDoneButtonView;
-
   [_maisCreditos setFont:[UIFont systemFontOfSize:17]];
 }
 
@@ -57,7 +56,6 @@
 
 - (IBAction)gerarBoleto:(id)sender {
   //[self dismissViewControllerAnimated:NO completion:nil];
-  
   if (([boletoDataModel.valorRecarga floatValue] >= 20) && ([boletoDataModel.valorRecarga floatValue] <= 200)) {
     [self.navigationController popViewControllerAnimated:YES];
     [boletoDataModel createBoleto];
@@ -80,9 +78,10 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
   //validar valores
-  
+  [boletoDataModel setValorRecarga:[textField text]];
+
   if (([[textField text] floatValue] >= 20) && ([[textField text] floatValue] <= 200)) {
-    [boletoDataModel setValorRecarga:[textField text]];
+    [textField setText:[NSString stringWithFormat:@"R$ %@", textField.text]];
   } else {
     [SVProgressHUD showErrorWithStatus:@"Insira um valor entre R$ 20,00 e R$ 200,00"];
   }
