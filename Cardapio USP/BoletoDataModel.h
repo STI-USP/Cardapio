@@ -11,9 +11,12 @@
 @interface BoletoDataModel : NSObject
 
 @property (nonatomic, strong) NSMutableDictionary *boleto;
+@property (nonatomic, strong) NSMutableArray *boletosPendentes;
+@property (nonatomic, strong) NSString *valorRecarga;
 
 + (BoletoDataModel *)sharedInstance;
 - (void)getBoleto;
+- (void)getBoletos;
 - (void)createBoleto;
 
 

@@ -39,6 +39,11 @@
   [dataAccess getBoleto];
 }
 
+- (void)getBoletos {
+  [dataAccess getBoletos];
+}
+
+
 - (void)createBoleto {
   [dataAccess createBoleto];
 }

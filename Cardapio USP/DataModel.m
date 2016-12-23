@@ -12,6 +12,7 @@
 #import "AFNetworking.h"
 #import "SVProgressHUD.h"
 #import "OAuthUSP.h"
+#import "DataAccess.h"
 
 #define kRestaurantsURL @"http://kaimbu2.uspnet.usp.br:8080/cardapio/"
 #define kBaseURL @"http://kaimbu2.uspnet.usp.br:8080/"
@@ -23,6 +24,7 @@
 
 @interface DataModel () {
   OAuthUSP *oauth;
+  DataAccess *dataAccess;
 }
 
 @property (strong, nonatomic) NSMutableArray *restaurantList;
@@ -48,6 +50,8 @@
   self = [super init];
   if (self) {
     oauth = [OAuthUSP sharedInstance];
+    dataAccess = [DataAccess sharedInstance];
+    [dataAccess setDataModel:self];
   }
   return self;
 }
@@ -182,6 +186,10 @@
 
 
 - (void)getCreditoRUCard{
+  
+  [dataAccess consultarSaldo];
+  
+  /*
   [SVProgressHUD show];
   
   self.menuArray = [[NSMutableArray alloc] init];
@@ -220,6 +228,7 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveCreditsError" object:self];
     [SVProgressHUD dismiss];
   }];
+   */
 }
 
 - (NSMutableArray *)getCampiList{

@@ -18,7 +18,9 @@
 #import "OAuthUSP.h"
 #import "LoginWebViewController.h"
 #import "CreditsViewController.h"
+#import "CreditsNavigationViewController.h"
 #import "BoletoViewController.h"
+
 
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
@@ -406,13 +408,16 @@ alpha:1.0]
 
 - (IBAction)showCredits:(id)sender {
   creditsViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"creditsViewController"];
+  
 
   if (![oauth isLoggedIn]) {
     loginViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"loginWebViewController"];
     [self presentViewController:loginViewController animated:YES completion:nil];
   } else {
     [dataModel getCreditoRUCard];
-    [self presentViewController:creditsViewController animated:YES completion:nil];
+    //[self presentViewController:creditsViewController animated:YES completion:nil];
+    CreditsNavigationViewController *navController = [self.storyboard instantiateViewControllerWithIdentifier:@"navController"];
+    [self presentViewController:navController animated:YES completion:nil];
   }
 }
 

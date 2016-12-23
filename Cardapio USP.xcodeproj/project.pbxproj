@@ -50,6 +50,8 @@
 		E90555B01E01D42F00B8516E /* OAuthUSP.m in Sources */ = {isa = PBXBuildFile; fileRef = E90555AD1E01D42F00B8516E /* OAuthUSP.m */; };
 		E90555B11E01D42F00B8516E /* STIOauth.m in Sources */ = {isa = PBXBuildFile; fileRef = E90555AF1E01D42F00B8516E /* STIOauth.m */; };
 		E90555B41E030EEA00B8516E /* BoletoDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E90555B31E030EEA00B8516E /* BoletoDataModel.m */; };
+		E90555B71E086AAF00B8516E /* CreditsNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E90555B61E086AAF00B8516E /* CreditsNavigationViewController.m */; };
+		E90555BA1E099B6900B8516E /* BoletosPendentesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E90555B91E099B6900B8516E /* BoletosPendentesTableViewController.m */; };
 		E92D5EA41C19B32B00ECA5D1 /* Base64Transcoder.c in Sources */ = {isa = PBXBuildFile; fileRef = E92D5E941C19B32B00ECA5D1 /* Base64Transcoder.c */; };
 		E92D5EA51C19B32B00ECA5D1 /* hmac.c in Sources */ = {isa = PBXBuildFile; fileRef = E92D5E961C19B32B00ECA5D1 /* hmac.c */; };
 		E92D5EA61C19B32B00ECA5D1 /* sha1.c in Sources */ = {isa = PBXBuildFile; fileRef = E92D5E981C19B32B00ECA5D1 /* sha1.c */; };
@@ -177,6 +179,10 @@
 		E90555AF1E01D42F00B8516E /* STIOauth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STIOauth.m; sourceTree = "<group>"; };
 		E90555B21E030EEA00B8516E /* BoletoDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoletoDataModel.h; sourceTree = "<group>"; };
 		E90555B31E030EEA00B8516E /* BoletoDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoletoDataModel.m; sourceTree = "<group>"; };
+		E90555B51E086AAF00B8516E /* CreditsNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditsNavigationViewController.h; sourceTree = "<group>"; };
+		E90555B61E086AAF00B8516E /* CreditsNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreditsNavigationViewController.m; sourceTree = "<group>"; };
+		E90555B81E099B6900B8516E /* BoletosPendentesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoletosPendentesTableViewController.h; sourceTree = "<group>"; };
+		E90555B91E099B6900B8516E /* BoletosPendentesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoletosPendentesTableViewController.m; sourceTree = "<group>"; };
 		E92D5E941C19B32B00ECA5D1 /* Base64Transcoder.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Base64Transcoder.c; sourceTree = "<group>"; };
 		E92D5E951C19B32B00ECA5D1 /* Base64Transcoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64Transcoder.h; sourceTree = "<group>"; };
 		E92D5E961C19B32B00ECA5D1 /* hmac.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hmac.c; sourceTree = "<group>"; };
@@ -581,8 +587,12 @@
 			children = (
 				E9387BF11DF5F476005BC821 /* CreditsViewController.h */,
 				E9387BF21DF5F476005BC821 /* CreditsViewController.m */,
+				E90555B51E086AAF00B8516E /* CreditsNavigationViewController.h */,
+				E90555B61E086AAF00B8516E /* CreditsNavigationViewController.m */,
 				E9387BF71DF727C0005BC821 /* BoletoViewController.h */,
 				E9387BF81DF727C0005BC821 /* BoletoViewController.m */,
+				E90555B81E099B6900B8516E /* BoletosPendentesTableViewController.h */,
+				E90555B91E099B6900B8516E /* BoletosPendentesTableViewController.m */,
 				E9F097671E007CD200C6A464 /* BoletoFormViewController.h */,
 				E9F097681E007CD200C6A464 /* BoletoFormViewController.m */,
 			);
@@ -742,6 +752,7 @@
 				E90555B01E01D42F00B8516E /* OAuthUSP.m in Sources */,
 				E9CDD1E81AD86BFF00BB2E36 /* AFHTTPSessionManager.m in Sources */,
 				BFAC6EDB192A587900921494 /* NSString+HTML.m in Sources */,
+				E90555BA1E099B6900B8516E /* BoletosPendentesTableViewController.m in Sources */,
 				BFAC6E96192A54E100921494 /* MainViewController.m in Sources */,
 				E9E55FBB1B55933F00994BCB /* DetailCell.m in Sources */,
 				E9CDD1EE1AD86BFF00BB2E36 /* AFURLSessionManager.m in Sources */,
@@ -779,6 +790,7 @@
 				E9DF35CF1B3DD306009B92B6 /* MapViewController.m in Sources */,
 				E92D5EA61C19B32B00ECA5D1 /* sha1.c in Sources */,
 				BFAC6ECA192A586B00921494 /* RECommonFunctions.m in Sources */,
+				E90555B71E086AAF00B8516E /* CreditsNavigationViewController.m in Sources */,
 				ADB2DCB319374FCE0068417F /* Restaurant.m in Sources */,
 				E92D5EA41C19B32B00ECA5D1 /* Base64Transcoder.c in Sources */,
 				E9E4BCD81B7BFBFC005633AD /* CarrierDataModel.m in Sources */,

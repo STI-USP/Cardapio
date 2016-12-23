@@ -52,8 +52,11 @@
 - (void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
 
-  [_username setText:[dataModel.userData objectForKey:@"nomeUsuario"]];
-  //[dataModel getCreditoRUCard];
+  [self.navigationItem setTitle:[[[dataModel.userData objectForKey:@"nomeUsuario"] componentsSeparatedByString:@" "] objectAtIndex:0]];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+  [self.navigationItem setTitle:@""];
 }
 
 /*
@@ -84,6 +87,10 @@
   [SVProgressHUD show];
   //[self dismissViewControllerAnimated:YES completion:nil];
   [boletoDataModel getBoleto];
+}
+
+- (IBAction)listarBoletos:(id)sender {
+  [boletoDataModel getBoletos];
 }
 
 - (IBAction)gerarBoleto:(id)sender {

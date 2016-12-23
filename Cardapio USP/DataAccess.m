@@ -22,7 +22,6 @@
 
 @property (strong, nonatomic) NSURLSession *session;
 
-
 @end
 
 @implementation DataAccess
@@ -41,7 +40,6 @@
   self = [super init];
   if (self) {
     oauth = [OAuthUSP sharedInstance];
-    //_boletoDataModel = [BoletoDataModel sharedInstance];
   }
   return self;
 }
@@ -70,9 +68,13 @@
       if ([httpResponse statusCode] == 200) {
   
         NSDictionary* json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-        [_boletoDataModel setBoleto:[NSMutableDictionary dictionaryWithDictionary:json]];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveBill" object:self];
-
+        
+        if ([[json valueForKey:@"erro"] boolValue]) {
+          [SVProgressHUD showErrorWithStatus:[json valueForKey:@"mensagemErro"]];
+        } else {
+          [_boletoDataModel setBoleto:[NSMutableDictionary dictionaryWithDictionary:json]];
+          [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveBill" object:self];
+        }
       } else {
         [SVProgressHUD showErrorWithStatus:@"Não foi possível obter o boleto. Tente novamente mais tarde."];
       }
@@ -89,13 +91,62 @@
 }
 
 
+- (void)getBoletos {
+  //configura parametros
+  NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
+                              [oauth.userData valueForKey:@"wsuserid"] , @"token",
+                              nil];
+  
+  NSString *path = @"boletosEmAberto";
+  NSData* params = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
+  NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", kBaseSTIURL, path]];
+  NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
+  [urlRequest setHTTPMethod:@"POST"];
+  [urlRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+  [urlRequest setHTTPBody:params];
+  
+  //Executa requisição
+  NSURLSessionDataTask *dataTask = [[self session] dataTaskWithRequest:urlRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+    
+    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+    
+    if ([data length] > 0 && error == nil) {
+      if ([httpResponse statusCode] == 200) {
+        
+        NSDictionary* json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+        
+        if ([[json valueForKey:@"erro"] boolValue]) {
+          [SVProgressHUD showErrorWithStatus:[json valueForKey:@"mensagemErro"]];
+        } else {
+          
+          NSMutableArray *boletos = [[NSMutableArray alloc] init];
+          for (NSMutableDictionary *boleto in [json objectForKey:@"boletos"]) {
+            [boletos addObject:boleto];
+          }
+          [_boletoDataModel setBoletosPendentes:boletos];
+          [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveBills" object:self];
+        }
+      } else {
+        [SVProgressHUD showErrorWithStatus:@"Não foi possível obter o boleto. Tente novamente mais tarde."];
+      }
+    } else if (error) {
+      [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }
+    
+    // Notifica atualizações
+    [SVProgressHUD dismiss];
+    
+  }];
+  
+  [dataTask resume];
 
+}
 
 - (void)createBoleto {
   //configura parametros
   NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
                               [oauth.userData valueForKey:@"wsuserid"] , @"token",
-                              @"20,00" , @"valor",
+                              [_boletoDataModel valorRecarga] , @"valor",
                               nil];
   
   NSString *path = @"gerarBoleto";
@@ -115,9 +166,13 @@
       if ([httpResponse statusCode] == 200) {
         
         NSDictionary* json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-        [_boletoDataModel setBoleto:[NSMutableDictionary dictionaryWithDictionary:json]];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"DidCreateBill" object:self];
         
+        if ([[json valueForKey:@"erro"] boolValue]) {
+          [SVProgressHUD showErrorWithStatus:[json valueForKey:@"mensagemErro"]];
+        } else {
+          [_boletoDataModel setBoleto:[NSMutableDictionary dictionaryWithDictionary:json]];
+          [[NSNotificationCenter defaultCenter] postNotificationName:@"DidCreateBill" object:self];
+        }
       } else {
         [SVProgressHUD showErrorWithStatus:@"Não foi possível gerar o boleto. Tente novamente mais tarde."];
       }
@@ -132,6 +187,55 @@
   
   [dataTask resume];
 }
+
+
+- (void)consultarSaldo {
+  //configura parametros
+  NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
+                              [oauth.userData valueForKey:@"wsuserid"] , @"token",
+                              nil];
+  
+  NSString *path = @"consultarSaldo";
+  NSData* params = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
+  NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", kBaseSTIURL, path]];
+  NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
+  [urlRequest setHTTPMethod:@"POST"];
+  [urlRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+  [urlRequest setHTTPBody:params];
+  
+  //Executa requisição
+  NSURLSessionDataTask *dataTask = [[self session] dataTaskWithRequest:urlRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+    
+    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+    
+    if ([data length] > 0 && error == nil) {
+      if ([httpResponse statusCode] == 200) {
+        
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+        
+        if ([[json valueForKey:@"erro"] boolValue]) {
+          [SVProgressHUD showErrorWithStatus:[json valueForKey:@"mensagemErro"]];
+        } else {
+          [_dataModel setRuCardCredit:[json valueForKey:@"saldo"]];
+        }
+      } else {
+        [SVProgressHUD showErrorWithStatus:@"Não foi possível obter o boleto. Tente novamente mais tarde."];
+        [_dataModel setRuCardCredit:@"--,--"];
+      }
+    } else if (error) {
+      [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+      [_dataModel setRuCardCredit:@"--,--"];
+    }
+
+    // Notifica atualizações
+    [SVProgressHUD dismiss];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveCredits" object:self];
+  }];
+  
+  [dataTask resume];
+  
+}
+
 
 
 - (NSURLSession *)session {

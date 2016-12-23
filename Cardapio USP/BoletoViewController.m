@@ -9,9 +9,11 @@
 #import "BoletoViewController.h"
 #import "SVProgressHUD.h"
 #import "BoletoDataModel.h"
+#import "DataModel.h"
 
 @interface BoletoViewController () {
   BoletoDataModel *boletoDataModel;
+  DataModel *dataModel;
 }
 
 @end
@@ -22,6 +24,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
   boletoDataModel = [BoletoDataModel sharedInstance];
+  dataModel = [DataModel getInstance];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -51,11 +54,13 @@
   else
     [_vencimentoLabel setText:@""];
   
+  [_emailTxt setText:@""];
   if (email != (id)[NSNull null])
-    [_emailTxt setText:[NSString stringWithFormat:@"Uma cópia do boleto foi enviado para o email %@", email]];
-  else
-    [_emailTxt setText:@"  Uma cópia do boleto foi enviado para seu email institucional"];
-  
+    if (email) {
+      [_emailTxt setText:[NSString stringWithFormat:@"Uma cópia do boleto foi enviado para o email %@", email]];
+    }
+  [_emailTxt sizeToFit];
+
 }
 
 /*

@@ -19,5 +19,4 @@
 - (IBAction)dismiss:(id)sender;
 - (IBAction)copyToPasteboard:(id)sender;
 
-
 @end
