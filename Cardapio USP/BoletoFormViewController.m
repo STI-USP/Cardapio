@@ -80,7 +80,8 @@
   //validar valores
   [boletoDataModel setValorRecarga:[textField text]];
 
-  if (([[textField text] floatValue] >= 20) && ([[textField text] floatValue] <= 200)) {
+  NSString *value = [[textField text]stringByReplacingOccurrencesOfString:@"," withString:@"."];
+  if (([value floatValue] >= 20) && ([value floatValue] <= 200)) {
     [textField setText:[NSString stringWithFormat:@"R$ %@", textField.text]];
   } else {
     [SVProgressHUD showErrorWithStatus:@"Insira um valor entre R$ 20,00 e R$ 200,00"];
