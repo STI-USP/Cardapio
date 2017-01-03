@@ -56,7 +56,8 @@
 
 - (IBAction)gerarBoleto:(id)sender {
   //[self dismissViewControllerAnimated:NO completion:nil];
-  if (([boletoDataModel.valorRecarga floatValue] >= 20) && ([boletoDataModel.valorRecarga floatValue] <= 200)) {
+  float valorRecarga = [[boletoDataModel.valorRecarga stringByReplacingOccurrencesOfString:@"R$ " withString:@""] floatValue];
+  if ((valorRecarga >= 20) && (valorRecarga <= 200)) {
     [self.navigationController popViewControllerAnimated:YES];
     [boletoDataModel createBoleto];
   } else {
@@ -78,34 +79,28 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
   //validar valores
+  [textField setText:[[textField text] stringByReplacingOccurrencesOfString:@"R$ " withString:@""]];
+
   [boletoDataModel setValorRecarga:[textField text]];
 
-  NSString *value = [[textField text]stringByReplacingOccurrencesOfString:@"," withString:@"."];
+  NSString *value = [[boletoDataModel valorRecarga]stringByReplacingOccurrencesOfString:@"," withString:@"."];
+  
   if (([value floatValue] >= 20) && ([value floatValue] <= 200)) {
-    [textField setText:[NSString stringWithFormat:@"R$ %@", textField.text]];
+    //[textField setText:[textField.text stringByReplacingOccurrencesOfString:@"." withString:@","]];
+    [textField setText:[[NSString localizedStringWithFormat:@"R$ %.2f", [textField.text floatValue]] stringByReplacingOccurrencesOfString:@"." withString:@","]];
   } else {
     [SVProgressHUD showErrorWithStatus:@"Insira um valor entre R$ 20,00 e R$ 200,00"];
   }
-  
 }
 
-/*
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-  if (string.length) {
-    if (textField.text.length<=9) {
-      if (textField.text.length>0) {
-        NSString *tempStr=[NSString stringWithFormat:@"R$ %@",textField.text];
-        textField.text=tempStr;
-      } else if (textField.text.length==10) {
-        NSString *tempStr=[NSString stringWithFormat:@"%@-",textField.text];
-        textField.text=tempStr;
-      }
-    } else {
-      return NO;
-    }
-  }
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+  [textField setText:@""];
   return YES;
 }
-*/
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
+  [textField resignFirstResponder];
+  return YES;
+}
 
 @end

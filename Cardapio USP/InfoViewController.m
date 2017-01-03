@@ -240,7 +240,7 @@ alpha:1.0]
         //DIA DA SEMANA
         [workingHours appendString:@"Segunda à sexta-feira \n"];
         //café da manha
-        NSString *weekdayBreakfest = [[[_restaurantDc valueForKey:@"workinghours"] valueForKey:@"weekdays"]valueForKey:@"breakfest"];
+        NSString *weekdayBreakfest = [[[_restaurantDc valueForKey:@"workinghours"] valueForKey:@"weekdays"]valueForKey:@"breakfast"];
         if (weekdayBreakfest && ![weekdayBreakfest isEqualToString:@""]) {
           [workingHours appendString:[NSString stringWithFormat:@"Café da manhã: %@\n", weekdayBreakfest]];
         }

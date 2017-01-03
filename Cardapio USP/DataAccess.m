@@ -146,7 +146,7 @@
   //configura parametros
   NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
                               [oauth.userData valueForKey:@"wsuserid"] , @"token",
-                              [_boletoDataModel valorRecarga] , @"valor",
+                              [[NSString localizedStringWithFormat:@"%.2f", [[_boletoDataModel valorRecarga] floatValue]] stringByReplacingOccurrencesOfString:@"." withString:@","], @"valor",
                               nil];
   
   NSString *path = @"gerarBoleto";
