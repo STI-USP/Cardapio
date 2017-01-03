@@ -56,7 +56,7 @@
 
 - (IBAction)gerarBoleto:(id)sender {
   //[self dismissViewControllerAnimated:NO completion:nil];
-  float valorRecarga = [[boletoDataModel.valorRecarga stringByReplacingOccurrencesOfString:@"R$ " withString:@""] floatValue];
+  float valorRecarga = [[[[boletoDataModel.valorRecarga stringByReplacingOccurrencesOfString:@"R" withString:@""] stringByReplacingOccurrencesOfString:@"$" withString:@""] stringByReplacingOccurrencesOfString:@"," withString:@"."] floatValue];
   if ((valorRecarga >= 20) && (valorRecarga <= 200)) {
     [self.navigationController popViewControllerAnimated:YES];
     [boletoDataModel createBoleto];
@@ -79,17 +79,21 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
   //validar valores
-  [textField setText:[[textField text] stringByReplacingOccurrencesOfString:@"R$ " withString:@""]];
+  [textField setText:[[textField text] stringByReplacingOccurrencesOfString:@"R$" withString:@""]];
 
   [boletoDataModel setValorRecarga:[textField text]];
 
   NSString *value = [[boletoDataModel valorRecarga]stringByReplacingOccurrencesOfString:@"," withString:@"."];
   
   if (([value floatValue] >= 20) && ([value floatValue] <= 200)) {
-    //[textField setText:[textField.text stringByReplacingOccurrencesOfString:@"." withString:@","]];
-    [textField setText:[[NSString localizedStringWithFormat:@"R$ %.2f", [textField.text floatValue]] stringByReplacingOccurrencesOfString:@"." withString:@","]];
+    NSNumberFormatter *currencyFormatter = [[NSNumberFormatter alloc] init];
+    [currencyFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+    [textField setText:[[currencyFormatter stringFromNumber:[NSNumber numberWithFloat:[value floatValue]]] stringByReplacingOccurrencesOfString:@"." withString:@","]];
+
+    [boletoDataModel setValorRecarga:[currencyFormatter stringFromNumber:[NSNumber numberWithFloat:[value floatValue]]]];
+
   } else {
-    [SVProgressHUD showErrorWithStatus:@"Insira um valor entre R$ 20,00 e R$ 200,00"];
+    [SVProgressHUD showErrorWithStatus:@"Insira um valor entre R$20,00 e R$200,00"];
   }
 }
 
