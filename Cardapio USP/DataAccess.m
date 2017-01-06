@@ -83,7 +83,7 @@
     }
     
     // Notifica atualizações
-    [SVProgressHUD dismiss];
+    //[SVProgressHUD dismiss];
 
   }];
   
@@ -92,6 +92,8 @@
 
 
 - (void)getBoletos {
+  [SVProgressHUD show];
+
   //configura parametros
   NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
                               [oauth.userData valueForKey:@"wsuserid"] , @"token",
@@ -134,7 +136,7 @@
     }
     
     // Notifica atualizações
-    [SVProgressHUD dismiss];
+    //[SVProgressHUD dismiss];
     
   }];
   
@@ -143,6 +145,8 @@
 }
 
 - (void)createBoleto {
+  [SVProgressHUD show];
+
   //configura parametros
   NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
                               [oauth.userData valueForKey:@"wsuserid"] , @"token",
@@ -181,7 +185,7 @@
     }
     
     // Notifica atualizações
-    [SVProgressHUD dismiss];
+    //[SVProgressHUD dismiss];
     
   }];
   

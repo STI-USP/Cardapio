@@ -100,16 +100,15 @@
 }
 
 - (void)didCreateBill:(NSNotification *)notification {
-  //[self dismissViewControllerAnimated:NO completion:nil];
-  //[[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveBill" object:self];
+  [SVProgressHUD dismiss];
   if (!boletoViewController) {
     boletoViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"boletoViewController"];
   }
-  
   [self presentViewController:boletoViewController animated:YES completion:nil];
 }
 
 - (void)didReceiveBill:(NSNotification *)notification {
+  [SVProgressHUD dismiss];
   if (!boletoViewController) {
     boletoViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"boletoViewController"];
   }

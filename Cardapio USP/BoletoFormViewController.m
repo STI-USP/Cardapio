@@ -79,7 +79,7 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
   //validar valores
-  [textField setText:[[textField text] stringByReplacingOccurrencesOfString:@"R$" withString:@""]];
+  [textField setText:[[[textField text] stringByReplacingOccurrencesOfString:@"R" withString:@""] stringByReplacingOccurrencesOfString:@"$" withString:@""]];
 
   [boletoDataModel setValorRecarga:[textField text]];
 

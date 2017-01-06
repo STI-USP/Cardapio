@@ -9,11 +9,16 @@
 #import "BoletosPendentesTableViewController.h"
 #import "BoletoDataModel.h"
 #import "DataModel.h"
+#import "SVProgressHUD.h"
+#import "SwipeableCell.h"
 
-@interface BoletosPendentesTableViewController () {
+@interface BoletosPendentesTableViewController () <SwipeableCellDelegate> {
   BoletoDataModel *boletoDataModel;
   DataModel *dataModel;
+  SwipeableCell *openedCell;
 }
+
+@property (nonatomic, strong) NSMutableSet *cellsCurrentlyEditing;
 
 @end
 
@@ -24,6 +29,8 @@
 
   boletoDataModel = [BoletoDataModel sharedInstance];
   dataModel = [DataModel getInstance];
+  self.cellsCurrentlyEditing = [NSMutableSet new];
+
   
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveBills:) name:@"DidReceiveBills" object:nil];
   
@@ -51,17 +58,25 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"boletosPendentes" forIndexPath:indexPath];
-  
-  UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"boletosPendentes"];
+  SwipeableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SwipeableCell" forIndexPath:indexPath];
+
+  //UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"boletosPendentes"];
   
   // Configure the cell...
-  [cell.textLabel setText: [NSString stringWithFormat:@"%@ \t\t\t\t R$ %@", [[[boletoDataModel boletosPendentes] objectAtIndex:indexPath.row] valueForKey:@"vencimento"], [[[boletoDataModel boletosPendentes] objectAtIndex:indexPath.row] valueForKey:@"valor"]]];
-  [cell.detailTextLabel setText:[[[boletoDataModel boletosPendentes] objectAtIndex:indexPath.row] valueForKey:@"codigoBarras"]];
+  [cell setTitle:[[[boletoDataModel boletosPendentes] objectAtIndex:indexPath.row] valueForKey:@"vencimento"]];
+  [cell setValue:[[[boletoDataModel boletosPendentes] objectAtIndex:indexPath.row] valueForKey:@"valor"]];
+  [cell setSubTitle:[[[boletoDataModel boletosPendentes] objectAtIndex:indexPath.row] valueForKey:@"codigoBarras"]];
+
+  [cell setDelegate: self];
+  
+  if ([self.cellsCurrentlyEditing containsObject:indexPath])
+    [cell openCell];
 
   return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+  [tableView deselectRowAtIndexPath:indexPath animated:YES];
   [boletoDataModel setBoleto:[[boletoDataModel boletosPendentes] objectAtIndex:indexPath.row]];
   [self performSegueWithIdentifier:@"showDetail" sender:self];
 }
@@ -76,15 +91,47 @@
 }
 */
 
+#pragma mark - SwipeableCellDelegate
+- (void)buttonOneActionForItemText:(NSString *)itemText {
+  [self copyToPasteboard];
+}
+
+- (void)buttonTwoActionForItemText:(NSString *)itemText {
+}
+
+- (void)closeModal {
+  [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)cellDidOpen:(UITableViewCell *)cell {
+  if (![cell isEqual:openedCell]) {
+    [openedCell closeCell]; // fecha celula anterior
+    NSIndexPath *currentEditingIndexPath = [self.tableView indexPathForCell:cell];
+    self.cellsCurrentlyEditing = nil;
+    [self.cellsCurrentlyEditing addObject:currentEditingIndexPath];
+    openedCell = [[SwipeableCell alloc] init];
+    openedCell = (SwipeableCell *)cell; //atribui novo valor à celula de edição
+  }
+}
+
+- (void)cellDidClose:(UITableViewCell *)cell {
+  [self.cellsCurrentlyEditing removeObject:[self.tableView indexPathForCell:cell]];
+}
+
+
 - (void)didReceiveBills:(NSNotification *)notification {
-  NSLog(@"recebeu lista de pendentes");
+  [SVProgressHUD dismiss];
   [self.tableView reloadData];
+  
 }
 
 - (IBAction)dismiss:(id)sender {
   [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-
+- (void)copyToPasteboard {
+  [[UIPasteboard generalPasteboard] setString:[openedCell subTitle]];
+  [openedCell closeCell];
+}
 
 @end
