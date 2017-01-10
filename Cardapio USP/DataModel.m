@@ -12,15 +12,19 @@
 #import "AFNetworking.h"
 #import "SVProgressHUD.h"
 #import "OAuthUSP.h"
+#import "DataAccess.h"
 
 #define kRestaurantsURL @"http://kaimbu2.uspnet.usp.br:8080/cardapio/"
 #define kBaseURL @"http://kaimbu2.uspnet.usp.br:8080/"
 
-#define kBaseDevSTIURL @"https://dev.uspdigital.usp.br/rucard/servicos/"
-#define kBaseSTIURL @"https://uspdigital.usp.br/rucard/servicos/"
+#define kBaseSTIURL @"https://dev.uspdigital.usp.br/rucard/servicos/" //dev
+//#define kBaseSTIURL @"https://uspdigital.usp.br/rucard/servicos/" //prod
+
+#define kToken @"596df9effde6f877717b4e81fdb2ca9f"
 
 @interface DataModel () {
   OAuthUSP *oauth;
+  DataAccess *dataAccess;
 }
 
 @property (strong, nonatomic) NSMutableArray *restaurantList;
@@ -42,6 +46,28 @@
   return instance;
 }
 
+- (instancetype)init {
+  self = [super init];
+  if (self) {
+    oauth = [OAuthUSP sharedInstance];
+    dataAccess = [DataAccess sharedInstance];
+    [dataAccess setDataModel:self];
+  }
+  return self;
+}
+
+- (NSDictionary *)userData {
+  if ([self isLoggedIn]) {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    _userData = [NSJSONSerialization JSONObjectWithData:[[defaults objectForKey:@"userData"] copy] options: NSJSONReadingMutableContainers error: nil];
+    
+    return _userData;
+  } else {
+    return nil;
+  }
+}
+
 - (void)getRestaurantList {
   AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
   manager.requestSerializer = [AFHTTPRequestSerializer serializer];
@@ -51,7 +77,7 @@
   NSString *webServicePath;
   webServicePath = [NSString stringWithFormat:@"%@restaurants", kBaseSTIURL];
   
-  NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys: @"596df9effde6f877717b4e81fdb2ca9f" , @"hash", nil];
+  NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys: kToken , @"hash", nil];
   
   [manager POST:webServicePath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject){
     self.restaurants = [[NSMutableArray alloc] init];
@@ -95,7 +121,7 @@
   
   NSDictionary *parameters = nil;
   parameters = [NSDictionary dictionaryWithObjectsAndKeys:
-                @"596df9effde6f877717b4e81fdb2ca9f" , @"hash",
+                kToken , @"hash",
                 nil];
   
   [manager POST: webServicePath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -160,10 +186,14 @@
 
 
 - (void)getCreditoRUCard{
+  
+  [dataAccess consultarSaldo];
+  
+  /*
   [SVProgressHUD show];
   
   self.menuArray = [[NSMutableArray alloc] init];
-
+  
   //Recupera dados do usuario
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   NSData *data = [defaults objectForKey:@"userData"];
@@ -184,7 +214,7 @@
   
   NSDictionary *parameters = nil;
   parameters = [NSDictionary dictionaryWithObjectsAndKeys:
-                @"596df9effde6f877717b4e81fdb2ca9f" , @"hash",
+                kToken , @"hash",
                 [userData valueForKey:@"loginUsuario"], @"nusp",
                 nil];
   
@@ -198,8 +228,8 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveCreditsError" object:self];
     [SVProgressHUD dismiss];
   }];
+   */
 }
-
 
 - (NSMutableArray *)getCampiList{
   return self.restaurantList;
@@ -306,6 +336,10 @@
     }
   }];
   return dictionary;
+}
+
+- (BOOL) isLoggedIn {
+  return [oauth isLoggedIn];
 }
 
 @end

@@ -24,6 +24,13 @@
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
 
+#define UIColorFromRGB(rgbValue) \
+[UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
+green:((float)((rgbValue & 0x00FF00) >>  8))/255.0 \
+blue:((float)((rgbValue & 0x0000FF) >>  0))/255.0 \
+alpha:1.0]
+
+
 @interface InfoViewController () {
   DataModel *dataModel;
   PreferredCell *prefCell;
@@ -50,6 +57,7 @@
   
   self.tableView.estimatedRowHeight = 44.0;
   self.tableView.rowHeight = UITableViewAutomaticDimension;
+  [[UITableViewCell appearance] setTintColor:UIColorFromRGB(0x1094AB)];
 
   dataModel = [DataModel getInstance];
 
@@ -216,14 +224,11 @@
         }
         [cell.subtitle setText: telephones];
         
-        UIImage *image = [UIImage imageNamed:@"phone.png"];
-        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        CGRect frame = CGRectMake(0.0, 0.0, image.size.width, image.size.height);
-        button.frame = frame;
-        [button setBackgroundImage:image forState:UIControlStateNormal];
-        [button addTarget:self action:@selector(callButtonTapped:event:)  forControlEvents:UIControlEventTouchUpInside];
-        button.backgroundColor = [UIColor clearColor];
-        button.tintColor = [UIColor blueColor];
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        button.frame = CGRectMake(0.0, 0.0, 25., 30.);
+        [button setImage:[UIImage imageNamed:@"phone.png"] forState:UIControlStateNormal];
+        [button setTintColor:UIColorFromRGB(0x1094AB)];
+        [button addTarget:self action:@selector(callButtonTapped:event:) forControlEvents:UIControlEventTouchUpInside];
         cell.accessoryView = button;
         break;
       }
@@ -235,7 +240,7 @@
         //DIA DA SEMANA
         [workingHours appendString:@"Segunda à sexta-feira \n"];
         //café da manha
-        NSString *weekdayBreakfest = [[[_restaurantDc valueForKey:@"workinghours"] valueForKey:@"weekdays"]valueForKey:@"breakfest"];
+        NSString *weekdayBreakfest = [[[_restaurantDc valueForKey:@"workinghours"] valueForKey:@"weekdays"]valueForKey:@"breakfast"];
         if (weekdayBreakfest && ![weekdayBreakfest isEqualToString:@""]) {
           [workingHours appendString:[NSString stringWithFormat:@"Café da manhã: %@\n", weekdayBreakfest]];
         }

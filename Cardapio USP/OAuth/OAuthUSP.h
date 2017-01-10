@@ -21,10 +21,15 @@
 //WSUsuario
 @property (nonatomic, copy) NSDictionary *userData;
 
+//HTTPSession
+@property (strong, nonatomic) NSURLSession *session;
 
 - (BOOL)isLoggedIn;
-- (void)checkUser;
 - (void)login;
 - (void)logout;
+- (void)registrarToken;
+- (void)invalidarToken;
+- (void)consultarToken;
+//- (void)checkUser;
 
 @end

@@ -29,6 +29,8 @@
 @property (nonatomic, strong) NSArray *diasDaSemana;
 @property (nonatomic, strong) NSString *observation;
 
+@property (nonatomic, copy) NSDictionary *userData;
+
 //@property (nonatomic, strong) NSString *date;
 //@property (nonatomic, strong) NSString *restaurantId;
 @property (nonatomic, strong) NSString *restaurantName;
