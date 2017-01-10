@@ -169,7 +169,7 @@
     [defaults synchronize];
     //NSLog(@"%@", self.userData);
     [_oAuthUSP setUserData:self.userData];
-    //[_oAuthUSP registrarToken];
+    [_oAuthUSP registrarToken];
   }
 }
 
