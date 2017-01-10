@@ -219,6 +219,7 @@
         
         if ([[json valueForKey:@"erro"] boolValue]) {
           [SVProgressHUD showErrorWithStatus:[json valueForKey:@"mensagemErro"]];
+          [_dataModel setRuCardCredit:@"--,--"];
         } else {
           [_dataModel setRuCardCredit:[json valueForKey:@"saldo"]];
         }
