@@ -17,8 +17,8 @@
 #define kRestaurantsURL @"http://kaimbu2.uspnet.usp.br:8080/cardapio/"
 #define kBaseURL @"http://kaimbu2.uspnet.usp.br:8080/"
 
-#define kBaseSTIURL @"https://dev.uspdigital.usp.br/rucard/servicos/" //dev
-//#define kBaseSTIURL @"https://uspdigital.usp.br/rucard/servicos/" //prod
+//#define kBaseSTIURL @"https://dev.uspdigital.usp.br/rucard/servicos/" //dev
+#define kBaseSTIURL @"https://uspdigital.usp.br/rucard/servicos/" //prod
 
 #define kToken @"596df9effde6f877717b4e81fdb2ca9f"
 
