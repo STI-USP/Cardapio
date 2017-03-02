@@ -122,7 +122,6 @@
 - (void)didReceiveBills:(NSNotification *)notification {
   [SVProgressHUD dismiss];
   [self.tableView reloadData];
-  
 }
 
 - (IBAction)dismiss:(id)sender {

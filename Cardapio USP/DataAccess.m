@@ -218,12 +218,18 @@
         NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
         
         if ([[json valueForKey:@"erro"] boolValue]) {
+          [_dataModel setRuCardCredit:@"--,--"];
           [SVProgressHUD showErrorWithStatus:[json valueForKey:@"mensagemErro"]];
+
+          if ([[json valueForKey:@"mensagemErro"] isEqualToString:@"Usuário não está logado!"])
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveLoginError" object:self];
+
         } else {
           [_dataModel setRuCardCredit:[json valueForKey:@"saldo"]];
+          [SVProgressHUD dismiss];
         }
       } else {
-        [SVProgressHUD showErrorWithStatus:@"Não foi possível obter o boleto. Tente novamente mais tarde."];
+        [SVProgressHUD showErrorWithStatus:@"Não foi possível obter o saldo. Tente novamente mais tarde."];
         [_dataModel setRuCardCredit:@"--,--"];
       }
     } else if (error) {
@@ -232,7 +238,7 @@
     }
 
     // Notifica atualizações
-    [SVProgressHUD dismiss];
+    //[SVProgressHUD dismiss];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveCredits" object:self];
   }];
   
