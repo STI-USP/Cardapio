@@ -48,15 +48,13 @@ static CGFloat const kBounceValue = 20.0f;
     [self resetConstraintContstantsToZero:NO notifyDelegateDidClose:NO];
 }
 
-- (void)setBounds:(CGRect)bounds
-{
+- (void)setBounds:(CGRect)bounds {
   [super setBounds:bounds];
   
   self.contentView.frame = self.bounds;
 }
 
-- (void)layoutSubviews
-{
+- (void)layoutSubviews {
   [super layoutSubviews];
   
   [self.contentView updateConstraintsIfNeeded];
@@ -84,7 +82,8 @@ static CGFloat const kBounceValue = 20.0f;
 
 - (void)setTitle:(NSString *)title {
   _title = title;
-  self.titleLabel.text = _title;
+  self.titleLabel.text = [NSString stringWithFormat:@"R$ %@", _title];
+  [self.titleLabel setFont:[UIFont boldSystemFontOfSize:16.f]];
 }
 
 - (void)setSubTitle:(NSString *)subTitle {
@@ -94,7 +93,7 @@ static CGFloat const kBounceValue = 20.0f;
 
 - (void)setValue:(NSString *)value {
   _value = value;
-  [self.valueLabel setText:[NSString stringWithFormat:@"R$ %@", _value]];
+  [self.valueLabel setText:_value];
 }
 
 - (void)setItemText:(NSString *)itemText {

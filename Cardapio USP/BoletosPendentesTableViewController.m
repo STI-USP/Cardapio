@@ -57,21 +57,18 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-  //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"boletosPendentes" forIndexPath:indexPath];
   SwipeableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SwipeableCell" forIndexPath:indexPath];
-
-  //UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"boletosPendentes"];
   
   // Configure the cell...
-  [cell setTitle:[[[boletoDataModel boletosPendentes] objectAtIndex:indexPath.row] valueForKey:@"vencimento"]];
-  [cell setValue:[[[boletoDataModel boletosPendentes] objectAtIndex:indexPath.row] valueForKey:@"valor"]];
+  [cell setTitle:[[[boletoDataModel boletosPendentes] objectAtIndex:indexPath.row] valueForKey:@"valor"]];
+  [cell setValue:[NSString stringWithFormat:@"vencimento em %@", [[[boletoDataModel boletosPendentes] objectAtIndex:indexPath.row] valueForKey:@"vencimento"]]];
   [cell setSubTitle:[[[boletoDataModel boletosPendentes] objectAtIndex:indexPath.row] valueForKey:@"codigoBarras"]];
 
   [cell setDelegate: self];
   
   if ([self.cellsCurrentlyEditing containsObject:indexPath])
     [cell openCell];
-
+  
   return cell;
 }
 
@@ -79,6 +76,10 @@
   [tableView deselectRowAtIndexPath:indexPath animated:YES];
   [boletoDataModel setBoleto:[[boletoDataModel boletosPendentes] objectAtIndex:indexPath.row]];
   [self performSegueWithIdentifier:@"showDetail" sender:self];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+  return 55.f;
 }
 
 /*
