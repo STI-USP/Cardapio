@@ -59,7 +59,7 @@
   float valorRecarga = [[[[boletoDataModel.valorRecarga stringByReplacingOccurrencesOfString:@"R" withString:@""] stringByReplacingOccurrencesOfString:@"$" withString:@""] stringByReplacingOccurrencesOfString:@"," withString:@"."] floatValue];
   if ((valorRecarga >= 20) && (valorRecarga <= 200)) {
     [self.navigationController popViewControllerAnimated:YES];
-    [boletoDataModel createBoleto];
+    [boletoDataModel createBill];
   } else {
     [SVProgressHUD showErrorWithStatus:@"Insira um valor entre R$ 20,00 e R$ 200,00"];
   }

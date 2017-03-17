@@ -10,6 +10,7 @@
 #import "SVProgressHUD.h"
 #import "BoletoDataModel.h"
 #import "DataModel.h"
+#import "CreditsNavigationViewController.h"
 
 @interface BoletoViewController () {
   BoletoDataModel *boletoDataModel;
@@ -25,6 +26,8 @@
     // Do any additional setup after loading the view.
   boletoDataModel = [BoletoDataModel sharedInstance];
   dataModel = [DataModel getInstance];
+  
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didDeleteBill:) name:@"DidDeleteBill" object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -80,6 +83,20 @@
 - (IBAction)copyToPasteboard:(id)sender {
   [[UIPasteboard generalPasteboard] setString:_codBarrasLabel.text];
   [SVProgressHUD showSuccessWithStatus:@"copiado"];
+}
+
+- (IBAction)deleteBill:(id)sender {
+  [boletoDataModel deleteBill];
+}
+
+- (void)didDeleteBill:(NSNotification *)notification {
+
+  [SVProgressHUD dismiss];
+  if ([self.parentViewController isKindOfClass:[CreditsNavigationViewController class]]) {
+    [self.navigationController popViewControllerAnimated:YES];
+  } else {
+    [self dismissViewControllerAnimated:YES completion:nil];
+  }
 }
 
 

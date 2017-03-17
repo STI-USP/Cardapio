@@ -10,8 +10,8 @@
 #import "SVProgressHUD.h"
 #import "OAuthUSP.h"
 
-//#define kBaseSTIURL @"https://dev.uspdigital.usp.br/mobile/servicos/cardapio/" //dev
-#define kBaseSTIURL @"https://uspdigital.usp.br/mobile/servicos/cardapio/" //prod
+#define kBaseSTIURL @"https://dev.uspdigital.usp.br/mobile/servicos/cardapio/" //dev
+//#define kBaseSTIURL @"https://uspdigital.usp.br/mobile/servicos/cardapio/" //prod
 
 #define kToken @"596df9effde6f877717b4e81fdb2ca9f"
 
@@ -144,9 +144,9 @@
 
 }
 
-- (void)createBoleto {
+- (void)createBill {
   [SVProgressHUD show];
-
+  
   //configura parametros
   NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
                               [oauth.userData valueForKey:@"wsuserid"] , @"token",
@@ -187,6 +187,50 @@
     // Notifica atualizações
     //[SVProgressHUD dismiss];
     
+  }];
+  
+  [dataTask resume];
+}
+
+- (void)deleteBill {
+  [SVProgressHUD show];
+  
+  //configura parametros
+  NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
+                              [oauth.userData valueForKey:@"wsuserid"] , @"token",
+                              [_boletoDataModel.boleto valueForKey:@"id"], @"id",
+                              nil];
+  
+  NSString *path = @"cancelarBoleto";
+  NSData* params = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
+  NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", kBaseSTIURL, path]];
+  NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
+  [urlRequest setHTTPMethod:@"POST"];
+  [urlRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+  [urlRequest setHTTPBody:params];
+  
+  //Executa requisição
+  NSURLSessionDataTask *dataTask = [[self session] dataTaskWithRequest:urlRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+    
+    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+    
+    if ([data length] > 0 && error == nil) {
+      if ([httpResponse statusCode] == 200) {
+        
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+        
+        if ([[json valueForKey:@"erro"] boolValue]) {
+          [SVProgressHUD showErrorWithStatus:[json valueForKey:@"mensagemErro"]];
+        }
+      } else {
+        [SVProgressHUD showErrorWithStatus:@"Não foi possível apagar o boleto. Tente novamente mais tarde."];
+      }
+    } else if (error) {
+      [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"DidDeleteBill" object:self];
+
   }];
   
   [dataTask resume];

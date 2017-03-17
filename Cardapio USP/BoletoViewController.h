@@ -18,5 +18,6 @@
 
 - (IBAction)dismiss:(id)sender;
 - (IBAction)copyToPasteboard:(id)sender;
+- (IBAction)deleteBill:(id)sender;
 
 @end

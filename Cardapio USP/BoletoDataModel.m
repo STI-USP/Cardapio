@@ -44,8 +44,12 @@
 }
 
 
-- (void)createBoleto {
-  [dataAccess createBoleto];
+- (void)createBill {
+  [dataAccess createBill];
+}
+
+- (void)deleteBill {
+  [dataAccess deleteBill];
 }
 
 

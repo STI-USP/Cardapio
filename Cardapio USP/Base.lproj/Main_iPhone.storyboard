@@ -522,10 +522,10 @@
                                 <rect key="frame" x="66" y="408" width="188" height="39"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                 <state key="normal" title="apagar boleto">
-                                    <color key="titleColor" red="0.75686274509999996" green="0.12549019610000001" blue="0.28627450980000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" red="0.96078431372549022" green="0.65098039215686276" blue="0.086274509803921567" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="copyToPasteboard:" destination="SA2-md-Wjj" eventType="touchUpInside" id="8fu-g2-lJD"/>
+                                    <action selector="deleteBill:" destination="SA2-md-Wjj" eventType="touchUpInside" id="7M5-da-pxi"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Utilize o número do código de barras abaixo para realizar o pagamento" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S1Z-Ij-HhO">

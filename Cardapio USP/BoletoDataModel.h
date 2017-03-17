@@ -17,7 +17,8 @@
 + (BoletoDataModel *)sharedInstance;
 - (void)getBoleto;
 - (void)getBoletos;
-- (void)createBoleto;
+- (void)createBill;
+- (void)deleteBill;
 
 
 
