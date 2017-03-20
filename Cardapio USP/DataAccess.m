@@ -10,8 +10,8 @@
 #import "SVProgressHUD.h"
 #import "OAuthUSP.h"
 
-#define kBaseSTIURL @"https://dev.uspdigital.usp.br/mobile/servicos/cardapio/" //dev
-//#define kBaseSTIURL @"https://uspdigital.usp.br/mobile/servicos/cardapio/" //prod
+//#define kBaseSTIURL @"https://dev.uspdigital.usp.br/mobile/servicos/cardapio/" //dev
+#define kBaseSTIURL @"https://uspdigital.usp.br/mobile/servicos/cardapio/" //prod
 
 #define kToken @"596df9effde6f877717b4e81fdb2ca9f"
 
