@@ -82,24 +82,27 @@
   [manager POST:webServicePath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject){
     self.restaurants = [[NSMutableArray alloc] init];
 
-    // Parse da resposta
-    NSMutableDictionary *json = [NSJSONSerialization JSONObjectWithData:responseObject options: NSJSONReadingMutableContainers error: nil];
-    for (NSMutableDictionary *campus in json){
-      [self.restaurants addObject:campus];
-    }
-    if ([self.restaurants count] != 0) {
-      NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-      [defaults setObject:self.restaurants forKey:@"Restaurants"];
-      [defaults synchronize];    }
+    
+    NSInteger statusCode = [operation.response statusCode];
+    if (statusCode == 200) {
+      // Parse da resposta
+      NSMutableDictionary *json = [NSJSONSerialization JSONObjectWithData:responseObject options: NSJSONReadingMutableContainers error: nil];
+      for (NSMutableDictionary *campus in json){
+        [self.restaurants addObject:campus];
+      }
+      if ([self.restaurants count] != 0) {
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setObject:self.restaurants forKey:@"Restaurants"];
+        [defaults synchronize];    }
       // Notifica atualizações
       [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveRestaurants" object:self];
+    }
   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     self.restaurants = [defaults objectForKey:@"Restaurants"];
     NSLog(@"%@", error);
     // Notifica atualizações
     [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveRestaurants" object:self];
-
   }];
 }
 
@@ -117,70 +120,67 @@
   NSString *webServicePath;
   webServicePath = [NSString stringWithFormat:@"%@menu/%@", kBaseSTIURL, [self.currentRestaurant valueForKey:@"id"]];
   
-  NSLog(@"%@", webServicePath);
+  //NSLog(@"%@", webServicePath);
   
   NSDictionary *parameters = nil;
   parameters = [NSDictionary dictionaryWithObjectsAndKeys:
                 kToken , @"hash",
                 nil];
   
-  [manager POST: webServicePath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-    // Parse da resposta
-    NSMutableDictionary *json = [NSJSONSerialization JSONObjectWithData:responseObject options: NSJSONReadingMutableContainers error: nil];
+  [manager POST:webServicePath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
     
-    if (![[[json valueForKey:@"message"] valueForKey:@"error"] boolValue]) {
-      for(NSMutableDictionary *rawItem in [json valueForKey:@"meals"]) {
-        NSMutableDictionary *item = [self cleanDictionary:rawItem];
-        
-        NSMutableArray *period = [[NSMutableArray alloc] init];
-        if (![[item objectForKey:@"lunch"]isKindOfClass:[NSString class]]) {
-          Period *lunch = [[Period alloc ] initWithPeriod:@"lunch" andMenu:[item objectForKey:@"lunch"][@"menu"] andCalories:[item objectForKey:@"lunch"][@"calories"]];
-          [period addObject:lunch];
-        }
-        
-        if (![[item valueForKey:@"dinner"] isKindOfClass:[NSString class]]) {
-          Period *dinner = [[Period alloc ] initWithPeriod:@"dinner" andMenu:[item objectForKey:@"dinner"][@"menu"] andCalories:[item objectForKey:@"dinner"][@"calories"]];
-          [period addObject:dinner];
-        }
-        
-        Menu *menu = [[Menu alloc] initWithDate:[item objectForKey:@"date"] andPeriod:period];
-        [self.menuArray addObject:menu];
-      }
-      self.observation = [[json objectForKey:@"observation"]valueForKey:@"observation"];
-    } else {
+    
+    NSInteger statusCode = [operation.response statusCode];
+    if (statusCode == 200) {
+      // Parse da resposta
+      NSMutableDictionary *json = [NSJSONSerialization JSONObjectWithData:responseObject options: NSJSONReadingMutableContainers error: nil];
       
-      for (int i = 1; i<=7; i++) {
-        NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-        
-        NSDate *today = [NSDate date];
-        NSDate *beginningOfWeek = nil;
-        [gregorian rangeOfUnit:NSWeekCalendarUnit startDate:&beginningOfWeek interval:NULL forDate:today];
-        
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"dd-MM-yyyy"];
-        
-        NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
-        [dateComponents setDay:i];
-        
-        NSDate *newDate = [[NSCalendar currentCalendar] dateByAddingComponents:dateComponents toDate:beginningOfWeek options:0];
-        
-        Menu *menu = [[Menu alloc] initWithDate:[dateFormatter stringFromDate:newDate] andPeriod:nil];
-        [self.menuArray addObject:menu];
+      if (![[[json valueForKey:@"message"] valueForKey:@"error"] boolValue]) {
+        for(NSMutableDictionary *rawItem in [json valueForKey:@"meals"]) {
+          NSMutableDictionary *item = [self cleanDictionary:rawItem];
+          
+          NSMutableArray *period = [[NSMutableArray alloc] init];
+          if (![[item objectForKey:@"lunch"]isKindOfClass:[NSString class]]) {
+            Period *lunch = [[Period alloc ] initWithPeriod:@"lunch" andMenu:[item objectForKey:@"lunch"][@"menu"] andCalories:[item objectForKey:@"lunch"][@"calories"]];
+            [period addObject:lunch];
+          }
+          
+          if (![[item valueForKey:@"dinner"] isKindOfClass:[NSString class]]) {
+            Period *dinner = [[Period alloc ] initWithPeriod:@"dinner" andMenu:[item objectForKey:@"dinner"][@"menu"] andCalories:[item objectForKey:@"dinner"][@"calories"]];
+            [period addObject:dinner];
+          }
+          
+          Menu *menu = [[Menu alloc] initWithDate:[item objectForKey:@"date"] andPeriod:period];
+          [self.menuArray addObject:menu];
+        }
+        self.observation = [[json objectForKey:@"observation"]valueForKey:@"observation"];
+        [SVProgressHUD dismiss];
+      } else {
+        for (int i = 1; i<=7; i++) {
+          NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+          
+          NSDate *today = [NSDate date];
+          NSDate *beginningOfWeek = nil;
+          [gregorian rangeOfUnit:NSCalendarUnitWeekOfMonth startDate:&beginningOfWeek interval:NULL forDate:today];
+          NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+          [dateFormatter setDateFormat:@"dd-MM-yyyy"];
+          NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
+          [dateComponents setDay:i];
+          NSDate *newDate = [[NSCalendar currentCalendar] dateByAddingComponents:dateComponents toDate:beginningOfWeek options:0];
+          
+          Menu *menu = [[Menu alloc] initWithDate:[dateFormatter stringFromDate:newDate] andPeriod:nil];
+          [self.menuArray addObject:menu];
+        }
+        [SVProgressHUD showErrorWithStatus:@"Não foi possível obter o cardápio. Tente novamente mais tarde."];
       }
-      UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Aviso" message:@"Não foi possível obter o cardápio. \nTente novamente mais tarde." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-      [alertView show];
+      // Notifica atualizações
+      [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveMenu" object:self];
+    } else {
+      [SVProgressHUD showErrorWithStatus:@"Não foi possível obter o cardápio. Tente novamente mais tarde."];
     }
-
-    // Notifica atualizações
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveMenu" object:self];
-    [SVProgressHUD dismiss];
-
   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Aviso" message:@"Não foi possível obter o cardápio. \nTente novamente mais tarde." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-    [alertView show];
-    [SVProgressHUD dismiss];
-
-    NSLog(@"%@", error);
+    [SVProgressHUD showErrorWithStatus:@"Não foi possível obter o cardápio. Tente novamente mais tarde."];
+    //NSLog(@"%@", error);
   }];
 }
 

@@ -438,15 +438,21 @@ alpha:1.0]
 - (void)didReceiveMenu:(NSNotification *)notification {
 
   menuArray = [dataModel menuArray];
-  menu = [menuArray objectAtIndex:diaDaSemana];
-  
-  [self setupWeekView:menuArray];
-  [self setupDayLabel:diaDaSemana];
-  
+
+  if ([menuArray count] > 0) {
+    menu = [menuArray objectAtIndex:diaDaSemana];
+    
+    [self setupWeekView:menuArray];
+    [self setupDayLabel:diaDaSemana];
+    
+    [self viewDidAppear:YES];
+    [self.tableView reloadData];
+  } else {
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Aviso" message:@"Não foi possível obter o cardápio. \nTente novamente mais tarde." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+    [alertView show];
+  }
   stringForLunch = [NSMutableString stringWithFormat:@"ALMOÇO"];
 
-  [self reloadInputViews];
-  [self.tableView reloadData];
 }
 
 - (void)didRecieveUserData:(NSNotification *)notification {
