@@ -11,6 +11,7 @@
 #import "OAuth1Controller.h"
 #import "LoginWebViewController.h"
 
+#define AppKey @"AppCardapi"
 //#define OAuthServiceURL @"https://dev.uspdigital.usp.br/mobile/servicos/oauth" //dev
 #define OAuthServiceURL @"https://uspdigital.usp.br/mobile/servicos/oauth" //prod
 
@@ -116,14 +117,14 @@
   if (tokenNotificacao) {
     dict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
             token, @"token",
-            @"AppCardapi", @"app",
+            AppKey, @"app",
             tokenNotificacao, @"tokenNotificacao",
             @"I", @"ambiente", //iOS
             nil];
   } else {
     dict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
             token, @"token",
-            @"AppCardapi", @"app",
+            AppKey, @"app",
             nil];
   }
   
