@@ -311,7 +311,16 @@ alpha:1.0]
       case 4: {
         [cell.title setText: @"Ponto de venda"];
         if ([[_restaurantDc valueForKey:@"cashiers"] count] > 0) {
-          [cell.subtitle setText:[NSString stringWithFormat:@"%@ \n\n%@", [[[_restaurantDc valueForKey:@"cashiers"] objectAtIndex:0] valueForKey:@"address"], [[[_restaurantDc valueForKey:@"cashiers"] objectAtIndex:0] valueForKey:@"workinghours"]]];
+          if ([[_restaurantDc valueForKey:@"cashiers"] count] == 1) {
+            [cell.subtitle setText:[NSString stringWithFormat:@"%@ \n\n%@", [[[_restaurantDc valueForKey:@"cashiers"] objectAtIndex:0] valueForKey:@"address"], [[[_restaurantDc valueForKey:@"cashiers"] objectAtIndex:0] valueForKey:@"workinghours"]]];
+          } else {
+            NSString *rest1 = [NSString stringWithFormat:@"\u2022 %@ \n\n%@", [[[_restaurantDc valueForKey:@"cashiers"] objectAtIndex:0] valueForKey:@"address"], [[[_restaurantDc valueForKey:@"cashiers"] objectAtIndex:0] valueForKey:@"workinghours"]];
+
+            NSString *rest2 = [NSString stringWithFormat:@"\u2022 %@ \n\n%@", [[[_restaurantDc valueForKey:@"cashiers"] objectAtIndex:1] valueForKey:@"address"], [[[_restaurantDc valueForKey:@"cashiers"] objectAtIndex:1] valueForKey:@"workinghours"]];
+
+            [cell.title setText: @"Pontos de venda"];
+            [cell.subtitle setText:[NSString stringWithFormat:@"%@ \n\n\n %@", rest1, rest2]];
+          }
         } else {
           [cell.subtitle setText: @""];
           [cell.subtitle setHidden:YES];
