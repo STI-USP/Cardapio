@@ -100,7 +100,7 @@
                               nil];
   
   NSString *path = @"boletosEmAberto";
-  NSData* params = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
+  NSData *params = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
   NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", kBaseSTIURL, path]];
   NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
   [urlRequest setHTTPMethod:@"POST"];

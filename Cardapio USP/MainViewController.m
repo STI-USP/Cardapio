@@ -20,6 +20,7 @@
 #import "CreditsViewController.h"
 #import "CreditsNavigationViewController.h"
 #import "BoletoViewController.h"
+#import <Crashlytics/Crashlytics.h>
 
 
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
@@ -433,9 +434,20 @@ alpha:1.0]
 - (void)didChangeRestaurant:(NSNotification *)notification {
   [dataModel getMenu];
   [self.navigationItem setTitle: [[dataModel currentRestaurant]valueForKey:@"name"]];
+  
+  [Answers logContentViewWithName:@"altera o restaurante"
+                      contentType:@"restaurante"
+                        contentId:@"restaurante-001"
+                 customAttributes:@{}];
+  
 }
 
 - (void)didReceiveMenu:(NSNotification *)notification {
+
+  [Answers logContentViewWithName:@"visualiza o cardapio do dia"
+                      contentType:@"refeicao"
+                        contentId:@"refeicao-001"
+                 customAttributes:@{}];
 
   menuArray = [dataModel menuArray];
 
