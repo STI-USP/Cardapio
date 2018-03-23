@@ -160,7 +160,7 @@
   
   [Answers logContentViewWithName:@"altera o dia da semana"
                       contentType:@"refeicao"
-                        contentId:@"refeicao-002"
+                        contentId:@"refeicao-001"
                  customAttributes:@{}];
   
 }

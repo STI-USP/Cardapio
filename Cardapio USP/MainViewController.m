@@ -444,11 +444,6 @@ alpha:1.0]
 
 - (void)didReceiveMenu:(NSNotification *)notification {
 
-  [Answers logContentViewWithName:@"visualiza o cardapio do dia"
-                      contentType:@"refeicao"
-                        contentId:@"refeicao-001"
-                 customAttributes:@{}];
-
   menuArray = [dataModel menuArray];
 
   if ([menuArray count] > 0) {
