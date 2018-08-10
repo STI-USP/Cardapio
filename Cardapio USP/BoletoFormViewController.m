@@ -56,7 +56,16 @@
 
 - (IBAction)gerarBoleto:(id)sender {
   //[self dismissViewControllerAnimated:NO completion:nil];
-  float valorRecarga = [[[[boletoDataModel.valorRecarga stringByReplacingOccurrencesOfString:@"R" withString:@""] stringByReplacingOccurrencesOfString:@"$" withString:@""] stringByReplacingOccurrencesOfString:@"," withString:@"."] floatValue];
+  
+  NSString *numberString;
+  
+  NSScanner *scanner = [NSScanner scannerWithString:boletoDataModel.valorRecarga];
+  NSCharacterSet *numbers = [NSCharacterSet characterSetWithCharactersInString:@"0123456789,."];
+  
+  [scanner scanUpToCharactersFromSet:numbers intoString:NULL];
+  [scanner scanCharactersFromSet:numbers intoString:&numberString];
+  
+  float valorRecarga = [numberString floatValue];
   if ((valorRecarga >= 20) && (valorRecarga <= 200)) {
     [self.navigationController popViewControllerAnimated:YES];
     [boletoDataModel createBill];
@@ -79,18 +88,22 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
   //validar valores
-  [textField setText:[[[textField text] stringByReplacingOccurrencesOfString:@"R" withString:@""] stringByReplacingOccurrencesOfString:@"$" withString:@""]];
-
+  
+  NSString *numberString;
+  
+  NSScanner *scanner = [NSScanner scannerWithString:textField.text];
+  NSCharacterSet *numbers = [NSCharacterSet characterSetWithCharactersInString:@"0123456789,."];
+  
+  [scanner scanUpToCharactersFromSet:numbers intoString:NULL];
+  [scanner scanCharactersFromSet:numbers intoString:&numberString];
+  
+  [textField setText:numberString];
   [boletoDataModel setValorRecarga:[textField text]];
-
+  
   NSString *value = [[boletoDataModel valorRecarga]stringByReplacingOccurrencesOfString:@"," withString:@"."];
   
   if (([value floatValue] >= 20) && ([value floatValue] <= 200)) {
-    NSNumberFormatter *currencyFormatter = [[NSNumberFormatter alloc] init];
-    [currencyFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
-    [textField setText:[[currencyFormatter stringFromNumber:[NSNumber numberWithFloat:[value floatValue]]] stringByReplacingOccurrencesOfString:@"." withString:@","]];
-
-    [boletoDataModel setValorRecarga:[currencyFormatter stringFromNumber:[NSNumber numberWithFloat:[value floatValue]]]];
+    [textField setText:[[NSString stringWithFormat:@"R$ %.2f", [value floatValue]]stringByReplacingOccurrencesOfString:@"." withString:@","]];
 
   } else {
     [SVProgressHUD showErrorWithStatus:@"Insira um valor entre R$20,00 e R$200,00"];
