@@ -378,11 +378,11 @@ alpha:1.0]
 - (void)setHeaderView{
 
   //TableView Header
-  UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, 160)];
+  UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, self.tableView.frame.size.width*9/16 +30)];
   [headerView setBackgroundColor:[UIColor whiteColor]];
   
   //imagem do restaurante
-  UIView *imageView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, 120)];
+  UIView *imageView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, self.tableView.frame.size.width*9/16 -10)];
   ThumbnailViewImageProxy *imageViewProxy = [[ThumbnailViewImageProxy alloc] init];
   imageViewProxy.aspect = ThumbnailAspectZoom;
   imageViewProxy.hasBorders = NO;
@@ -395,9 +395,7 @@ alpha:1.0]
   imageView = imageViewProxy;
   
   UIImageView *viewForImage = [[UIImageView alloc] initWithImage:imageViewProxy.image];
-  [viewForImage setFrame:CGRectMake(0., 0., self.tableView.frame.size.width, 130.)];
-  //[viewForImage setContentMode: UIViewContentModeScaleAspectFill];
-  //[viewForImage setContentMode: UIViewContentModeScaleAspectFit];
+  [viewForImage setFrame:CGRectMake(0., 0., self.tableView.frame.size.width, self.tableView.frame.size.width*9/16)];
   [viewForImage setContentMode: UIViewContentModeScaleToFill];
   [imageView addSubview:viewForImage];
   
@@ -426,7 +424,7 @@ alpha:1.0]
   
   //View para o mapa
   UIButton *mapButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-  mapButton.frame = CGRectMake(200., 80., 80., 80.);
+  mapButton.frame = CGRectMake(self.tableView.frame.size.width-120, self.tableView.frame.size.width*9/16-50, 80., 80.);
   [mapButton setBackgroundImage:[UIImage imageNamed:@"mapa.png"] forState:UIControlStateNormal];
   [mapButton addTarget:self action:@selector(showMap) forControlEvents:UIControlEventTouchUpInside];
   [headerView addSubview:mapButton];

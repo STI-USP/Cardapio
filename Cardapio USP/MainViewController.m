@@ -77,7 +77,18 @@ alpha:1.0]
   [self addChildViewController:_dateTabController];
   [_dateTabController didMoveToParentViewController:self];
   [self.view addSubview:_dateTabController.view];
-  _dateTabController.view.frame = CGRectMake(0, 65, CGRectGetWidth(self.view.bounds), 40);
+  
+  if([[UIDevice currentDevice]userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+    CGFloat topPadding = 65.;
+    if ((int)[[UIScreen mainScreen] nativeBounds].size.height == 2436) {
+      UIWindow *window = UIApplication.sharedApplication.keyWindow;
+      if (@available(iOS 11.0, *)) {
+        topPadding += window.safeAreaInsets.top - 20;
+      }
+    }
+    _dateTabController.view.frame = CGRectMake(0, topPadding, CGRectGetWidth(self.view.bounds), 40);
+  }
+  
   _dateTabController.view.backgroundColor = [UIColor lightTextColor];
   if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ){
     CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
@@ -121,9 +132,6 @@ alpha:1.0]
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveMenu:) name:@"DidReceiveMenu" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRecieveUserData:) name:@"DidRecieveUserData" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveBill:) name:@"DidReceiveBill" object:nil];
-
-  //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRecieveCredits:) name:@"DidReceiveCredits" object:nil];
-  //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRecieveCreditsError:) name:@"DidReceiveCreditsError" object:nil];
 
 }
 
