@@ -80,7 +80,7 @@ alpha:1.0]
   
   if([[UIDevice currentDevice]userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
     CGFloat topPadding = 65.;
-    if ((int)[[UIScreen mainScreen] nativeBounds].size.height == 2436) {
+    if (((int)[[UIScreen mainScreen] nativeBounds].size.height == 2436) || ((int)[[UIScreen mainScreen] nativeBounds].size.height == 2688)) {
       UIWindow *window = UIApplication.sharedApplication.keyWindow;
       if (@available(iOS 11.0, *)) {
         topPadding += window.safeAreaInsets.top - 20;
@@ -99,6 +99,10 @@ alpha:1.0]
     if( screenHeight > 480 && screenHeight < 667 ){
       _dateTabController.buttonPadding = 3.2;
     } else if ( screenHeight > 480 && screenHeight < 736 ){
+      _dateTabController.buttonPadding = 8.2;
+    } else if ( screenHeight > 480 && screenHeight < 812 ){
+      _dateTabController.buttonPadding = 11;
+    } else if ( screenHeight > 480 && screenHeight < 896){
       _dateTabController.buttonPadding = 8.2;
     } else if ( screenHeight > 480 ){
       _dateTabController.buttonPadding = 11;

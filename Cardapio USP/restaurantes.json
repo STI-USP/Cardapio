@@ -1,4 +1,4 @@
-﻿[
+[
  {
  "campus":"FSP",
  "restaurants":[{
@@ -186,9 +186,9 @@
 {
 “workinghours:”,”Segundas as Sextas-Feiras, 7h às 19h30”,
 “cost”:[
-      {“category”:”Aluno (graduação e pós-graduação)”,“price”:”1,90”},
-      {“category”:”Especial”,“price”:”6,00”},
-      {“category”:”Visitante”,“price”:”12,00”}
+      {“category”:”Aluno (graduação e pós-graduação)”,“price”:”2,00”},
+      {“category”:”Especial”,“price”:”10,00”},
+      {“category”:”Visitante autorizado”,“price”:”15,00”}
 ]
 }]
 ]

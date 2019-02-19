@@ -245,7 +245,7 @@ alpha:1.0]
         NSMutableString *prices = [[NSMutableString alloc] init];
         [prices appendString:[NSString stringWithFormat:@"Aluno: %@\n", [[[[[self.restaurant valueForKey:@"cashiers"] objectAtIndex:0] valueForKey:@"prices"] valueForKey:@"students"] valueForKey:@"lunch"]]];
         [prices appendString:[NSString stringWithFormat:@"Especial: %@\n", [[[[[self.restaurant valueForKey:@"cashiers"] objectAtIndex:0] valueForKey:@"prices"] valueForKey:@"special"] valueForKey:@"lunch"]]];
-        [prices appendString:[NSString stringWithFormat:@"Visitante: %@\n", [[[[[self.restaurant valueForKey:@"cashiers"] objectAtIndex:0] valueForKey:@"prices"] valueForKey:@"visiting"] valueForKey:@"lunch"]]];
+        [prices appendString:[NSString stringWithFormat:@"Visitante autorizado: %@\n", [[[[[self.restaurant valueForKey:@"cashiers"] objectAtIndex:0] valueForKey:@"prices"] valueForKey:@"visiting"] valueForKey:@"lunch"]]];
 
         cell.subtitle.text = prices;
       }
