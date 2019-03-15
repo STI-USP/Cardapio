@@ -296,13 +296,13 @@ alpha:1.0]
         [cell.title setText: @"Preços"];
         NSMutableString *prices = [[NSMutableString alloc] init];
         if (([[_restaurantDc valueForKey:@"cashiers"] isKindOfClass:[NSArray class]]) && ([[_restaurantDc valueForKey:@"cashiers"] count] > 0)) {
-          [prices appendString:[NSString stringWithFormat:@"Aluno: %@\n", [[[[[_restaurantDc valueForKey:@"cashiers"] objectAtIndex:0] valueForKey:@"prices"] valueForKey:@"students"] valueForKey:@"lunch"]]];
-          [prices appendString:[NSString stringWithFormat:@"Especial: %@\n", [[[[[_restaurantDc valueForKey:@"cashiers"] objectAtIndex:0] valueForKey:@"prices"] valueForKey:@"special"] valueForKey:@"lunch"]]];
-          [prices appendString:[NSString stringWithFormat:@"Visitante autorizado: %@", [[[[[_restaurantDc valueForKey:@"cashiers"] objectAtIndex:0] valueForKey:@"prices"] valueForKey:@"visiting"] valueForKey:@"lunch"]]];
+          [prices appendString:[NSString stringWithFormat:@"Aluno: R$ %@\n", [[[[[_restaurantDc valueForKey:@"cashiers"] objectAtIndex:0] valueForKey:@"prices"] valueForKey:@"students"] valueForKey:@"lunch"]]];
+          [prices appendString:[NSString stringWithFormat:@"Especial: R$ %@\n", [[[[[_restaurantDc valueForKey:@"cashiers"] objectAtIndex:0] valueForKey:@"prices"] valueForKey:@"special"] valueForKey:@"lunch"]]];
+          [prices appendString:[NSString stringWithFormat:@"Visitante autorizado: R$ %@", [[[[[_restaurantDc valueForKey:@"cashiers"] objectAtIndex:0] valueForKey:@"prices"] valueForKey:@"visiting"] valueForKey:@"lunch"]]];
         } else {
-          [prices appendString:[NSString stringWithFormat:@"Aluno: 2.00\n"]];
-          [prices appendString:[NSString stringWithFormat:@"Especial: 10.00\n"]];
-          [prices appendString:[NSString stringWithFormat:@"Visitante autorizado: 15.00"]];
+          [prices appendString:[NSString stringWithFormat:@"Aluno: R$ 2.00\n"]];
+          [prices appendString:[NSString stringWithFormat:@"Especial: R$ 10.00\n"]];
+          [prices appendString:[NSString stringWithFormat:@"Visitante autorizado: R$ 15.00"]];
         }
         
         [cell.subtitle setText: prices];
