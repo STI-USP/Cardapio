@@ -11,6 +11,8 @@
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 
+@import Firebase;
+
 #define UIColorFromRGB(rgbValue) \
 [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
 green:((float)((rgbValue & 0x00FF00) >>  8))/255.0 \
@@ -29,6 +31,7 @@ DataModel *dataModel;
 {
     // Override point for customization after application launch.
   [Fabric with:@[[Crashlytics class]]];
+  [FIRApp configure];
   
   dataModel = [DataModel getInstance];
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
