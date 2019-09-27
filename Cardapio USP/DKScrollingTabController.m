@@ -38,8 +38,7 @@
   }
   
   // Remove any existing buttons.
-  for (UIButton *button in self.buttons)
-  {
+  for (UIButton *button in self.buttons) {
     [button removeFromSuperview];
   }
   
@@ -113,21 +112,9 @@
   if (!_layoutIsVertical && selection.count > 0) {
     UIButton *button = self.buttons[selection.count-1];
     [self.buttonsScrollView setContentSize:CGSizeMake(button.frame.origin.x+button.frame.size.width +_firstButtonInset +inset, frame2.size.height)];
-    
-    //TODO: removed for now, this breaks demo's 5th tab
-    //        // If content's width is smaller than the view's width, put it in the center.
-    //        if (self.buttonsScrollView.contentSize.width < self.view.frame.size.width)
-    //        {
-    //            [self.buttonsScrollView setFrame:CGRectMake(self.buttonsScrollView.frame.origin.x,
-    //                                                        self.buttonsScrollView.frame.origin.y,
-    //                                                        self.buttonsScrollView.contentSize.width,
-    //                                                        self.buttonsScrollView.frame.size.height)];
-    //            self.buttonsScrollView.center = self.view.center;
-    //        }
   }
   
-  if (self.buttons.count > self.startingIndex)
-  {
+  if (self.buttons.count > self.startingIndex) {
     [self dk_controlSelect:self.buttons[self.startingIndex]];
   }
 }
@@ -217,7 +204,7 @@
 - (void)setButtonName:(NSString*)name atIndex:(NSUInteger)index {
   UIButton *button = self.buttons[index];
   [button setTitle:name forState:UIControlStateNormal];
-  
+
   //TODO: update layout (in particular, button widths)
 }
 
@@ -225,6 +212,7 @@
 #pragma mark - Private
 
 - (void)dk_commonInitialization {
+    
   self.toolbar = [[UIToolbar alloc] init];
   [self.view addSubview:self.toolbar];
   
@@ -238,6 +226,7 @@
   self.underlineIndicatorOffset = 0;
   self.startingIndex = 0;
   self.buttonTitleEdgeInsets = UIEdgeInsetsZero;
+  
 }
 
 

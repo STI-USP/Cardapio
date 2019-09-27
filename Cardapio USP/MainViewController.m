@@ -86,7 +86,14 @@ alpha:1.0]
         topPadding += window.safeAreaInsets.top - 20;
       }
     }
-    _dateTabController.view.frame = CGRectMake(0, topPadding, CGRectGetWidth(self.view.bounds), 40);
+
+    
+    UIWindow *window = UIApplication.sharedApplication.keyWindow;
+    if (@available(iOS 13.0, *)) {
+      topPadding += window.safeAreaInsets.top - 20;
+    }
+
+    _dateTabController.view.frame = CGRectMake(0, topPadding, CGRectGetWidth(self.view.bounds), 56);
   }
   
   _dateTabController.view.backgroundColor = [UIColor lightTextColor];
@@ -97,7 +104,7 @@ alpha:1.0]
       screenHeight = screenWidth;
     }
     if( screenHeight > 480 && screenHeight < 667 ){
-      _dateTabController.buttonPadding = 3.2;
+      _dateTabController.buttonPadding = 4.2;
     } else if ( screenHeight > 480 && screenHeight < 736 ){
       _dateTabController.buttonPadding = 8.2;
     } else if ( screenHeight > 480 && screenHeight < 812 ){
@@ -152,9 +159,9 @@ alpha:1.0]
 
 - (void)setupWeekView: (NSArray *) weekMenu {
   
-  NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+  NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
   [gregorian setFirstWeekday:2];
-  NSDateComponents *weekdayComponents =[gregorian components:NSWeekdayCalendarUnit fromDate:[NSDate date]];
+  NSDateComponents *weekdayComponents =[gregorian components:NSCalendarUnitWeekday fromDate:[NSDate date]];
   NSInteger weekday = [weekdayComponents weekday] - 2; //para deixar a segunda feira como 0
   
   if ((int)weekday == -1) {
@@ -164,13 +171,13 @@ alpha:1.0]
   }
 
   
-  NSString *monButtonName = [[NSString stringWithFormat:@"S\n%@", [[menuArray objectAtIndex:0] date]]substringToIndex:4];
-  NSString *tueButtonName = [[NSString stringWithFormat:@"T\n%@", [[menuArray objectAtIndex:1] date]]substringToIndex:4];
-  NSString *wedButtonName = [[NSString stringWithFormat:@"Q\n%@", [[menuArray objectAtIndex:2] date]]substringToIndex:4];
-  NSString *thuButtonName = [[NSString stringWithFormat:@"Q\n%@", [[menuArray objectAtIndex:3] date]]substringToIndex:4];
-  NSString *friButtonName = [[NSString stringWithFormat:@"S\n%@", [[menuArray objectAtIndex:4] date]]substringToIndex:4];
-  NSString *satButtonName = [[NSString stringWithFormat:@"S\n%@", [[menuArray objectAtIndex:5] date]]substringToIndex:4];
-  NSString *sunButtonName = [[NSString stringWithFormat:@"D\n%@", [[menuArray objectAtIndex:6] date]]substringToIndex:4];
+  NSString *monButtonName = [[NSString stringWithFormat:@"S\n%@", [[menuArray objectAtIndex:0] date]] substringToIndex:4];
+  NSString *tueButtonName = [[NSString stringWithFormat:@"T\n%@", [[menuArray objectAtIndex:1] date]] substringToIndex:4];
+  NSString *wedButtonName = [[NSString stringWithFormat:@"Q\n%@", [[menuArray objectAtIndex:2] date]] substringToIndex:4];
+  NSString *thuButtonName = [[NSString stringWithFormat:@"Q\n%@", [[menuArray objectAtIndex:3] date]] substringToIndex:4];
+  NSString *friButtonName = [[NSString stringWithFormat:@"S\n%@", [[menuArray objectAtIndex:4] date]] substringToIndex:4];
+  NSString *satButtonName = [[NSString stringWithFormat:@"S\n%@", [[menuArray objectAtIndex:5] date]] substringToIndex:4];
+  NSString *sunButtonName = [[NSString stringWithFormat:@"D\n%@", [[menuArray objectAtIndex:6] date]] substringToIndex:4];
 
   [_dateTabController setButtonName:monButtonName atIndex:0];
   [_dateTabController setButtonName:tueButtonName atIndex:1];
@@ -192,9 +199,9 @@ alpha:1.0]
     NSRange range = [buttonName rangeOfString:text];
     [attributedString addAttributes:attributes range:range];
     
-    button.titleLabel.text = @"";
-    [button setAttributedTitle:attributedString forState:UIControlStateNormal];
-    [button.viewForBaselineLayout setNeedsDisplay]; 
+    button.titleLabel.text = @"S";
+    //[button setAttributedTitle:attributedString forState:UIControlStateNormal];
+    [button.viewForFirstBaselineLayout setNeedsDisplay];
   }];
 
   _dateTabController.delegate = self;
