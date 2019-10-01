@@ -10,6 +10,7 @@
 #import "KeychainItemWrapper.h"
 #import "OAuth1Controller.h"
 #import "OAuthUSP.h"
+#import "SVProgressHUD.h"
 
 //#define UserURLString    @"https://dev.uspdigital.usp.br/wsusuario/oauth/usuariousp" //dev
 #define UserURLString    @"https://uspdigital.usp.br/wsusuario/oauth/usuariousp" //prod
@@ -105,13 +106,9 @@
       [self saveUserData];
       
     } else {
-      UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Erro" message:@"Não foi possível fazer o login no momento. Tente novamente mais tarde." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-      [alertView show];
-      NSLog(@"%@", [error description]);
+      [SVProgressHUD showErrorWithStatus:@"Não foi possível fazer o login no momento. Tente novamente mais tarde."];
     }
-    
   }];
-  
 }
 - (void)logout {
   // Clear cookies so no session cookies can be used for the UIWebview
