@@ -1025,6 +1025,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 44;
 				DEVELOPMENT_TEAM = SYF585KJR7;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1033,6 +1034,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Cardapio USP/Cardapio USP-Prefix.pch";
 				INFOPLIST_FILE = "Cardapio USP/Cardapio USP-Info.plist";
+				MARKETING_VERSION = 2.2.9;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -1050,6 +1052,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 44;
 				DEVELOPMENT_TEAM = SYF585KJR7;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1058,6 +1061,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Cardapio USP/Cardapio USP-Prefix.pch";
 				INFOPLIST_FILE = "Cardapio USP/Cardapio USP-Info.plist";
+				MARKETING_VERSION = 2.2.9;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
