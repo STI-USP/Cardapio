@@ -83,9 +83,11 @@ alpha:1.0]
     if (((int)[[UIScreen mainScreen] nativeBounds].size.height == 2436) || ((int)[[UIScreen mainScreen] nativeBounds].size.height == 2688)) {
       UIWindow *window = UIApplication.sharedApplication.keyWindow;
       if (@available(iOS 11.0, *)) {
-        topPadding += window.safeAreaInsets.top - 20;
+        topPadding += window.safeAreaInsets.top - 40;
       }
     }
+    
+    
 
     
     UIWindow *window = UIApplication.sharedApplication.keyWindow;
