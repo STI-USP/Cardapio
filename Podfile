@@ -7,6 +7,7 @@ target 'Cardapio USP' do
 
   # Pods for Cardapio USP
   pod 'Firebase/Core'
+  pod 'SVProgressHUD'
   
   target 'Cardapio USPTests' do
     inherit! :search_paths

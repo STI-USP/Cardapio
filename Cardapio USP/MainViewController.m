@@ -98,7 +98,11 @@ alpha:1.0]
     _dateTabController.view.frame = CGRectMake(0, topPadding, CGRectGetWidth(self.view.bounds), 56);
   }
   
-  _dateTabController.view.backgroundColor = [UIColor lightTextColor];
+  if (@available(iOS 13.0, *)) {
+    _dateTabController.view.backgroundColor = [UIColor systemGroupedBackgroundColor];
+  } else {
+    _dateTabController.view.backgroundColor = [UIColor lightTextColor];
+  }
   if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ){
     CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
     CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
@@ -119,11 +123,17 @@ alpha:1.0]
       _dateTabController.buttonPadding = 3.2;
     }
   }
+  
   _dateTabController.underlineIndicator = YES;
-  _dateTabController.underlineIndicatorColor = UIColorFromRGB(0xF5A616);
+  _dateTabController.underlineIndicatorColor = UIColorFromRGB(0xFCB421);
   _dateTabController.buttonsScrollView.showsHorizontalScrollIndicator = NO;
   _dateTabController.selectedBackgroundColor = [UIColor clearColor];
-  _dateTabController.selectedTextColor = [UIColor blackColor];
+  if (@available(iOS 13.0, *)) {
+    _dateTabController.selectedTextColor = [UIColor labelColor];
+  } else {
+    // Fallback on earlier versions
+    _dateTabController.selectedTextColor = [UIColor blackColor];
+  }
   _dateTabController.unselectedTextColor = [UIColor grayColor];
   _dateTabController.unselectedBackgroundColor = [UIColor clearColor];
   _dateTabController.selection = @[@"           \n0",

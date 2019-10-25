@@ -40,7 +40,6 @@
 		BFAC6ECF192A586B00921494 /* UIViewController+REFrostedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAC6EC9192A586B00921494 /* UIViewController+REFrostedViewController.m */; };
 		BFAC6EDA192A587900921494 /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAC6ED2192A587900921494 /* GTMNSString+HTML.m */; };
 		BFAC6EDB192A587900921494 /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAC6ED4192A587900921494 /* NSString+HTML.m */; };
-		BFAC6EDD192A587900921494 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAC6ED9192A587900921494 /* SVProgressHUD.m */; };
 		BFAC6EE0192A59E600921494 /* FrostedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAC6EDF192A59E600921494 /* FrostedViewController.m */; };
 		BFAC6EE6192A71A000921494 /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAC6EE5192A71A000921494 /* InfoViewController.m */; };
 		BFAC6EEB192AB50F00921494 /* central.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BFAC6EEA192AB50F00921494 /* central.jpg */; };
@@ -63,7 +62,6 @@
 		E9387BED1DF5F024005BC821 /* LoginWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9387BEC1DF5F024005BC821 /* LoginWebViewController.m */; };
 		E9387BF31DF5F476005BC821 /* CreditsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9387BF21DF5F476005BC821 /* CreditsViewController.m */; };
 		E9387BF91DF727C0005BC821 /* BoletoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9387BF81DF727C0005BC821 /* BoletoViewController.m */; };
-		E9387BFB1DF9EF8D005BC821 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E9387BFA1DF9EF8C005BC821 /* SVProgressHUD.bundle */; };
 		E97B390C225556FE0070AC9B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E97B390B225556FE0070AC9B /* GoogleService-Info.plist */; };
 		E9818EC3198033A800F741B0 /* DKScrollingTabController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9818EC2198033A800F741B0 /* DKScrollingTabController.m */; };
 		E99837FD1E201B540065ED08 /* BoletoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E99837FC1E201B540065ED08 /* BoletoTableViewCell.m */; };
@@ -168,9 +166,6 @@
 		BFAC6ED2192A587900921494 /* GTMNSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GTMNSString+HTML.m"; sourceTree = "<group>"; };
 		BFAC6ED3192A587900921494 /* NSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HTML.h"; sourceTree = "<group>"; };
 		BFAC6ED4192A587900921494 /* NSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HTML.m"; sourceTree = "<group>"; };
-		BFAC6ED6192A587900921494 /* SVProgressHUD-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SVProgressHUD-Prefix.pch"; sourceTree = "<group>"; };
-		BFAC6ED8192A587900921494 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
-		BFAC6ED9192A587900921494 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		BFAC6EDE192A59E600921494 /* FrostedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrostedViewController.h; sourceTree = "<group>"; };
 		BFAC6EDF192A59E600921494 /* FrostedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FrostedViewController.m; sourceTree = "<group>"; };
 		BFAC6EE4192A71A000921494 /* InfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoViewController.h; sourceTree = "<group>"; };
@@ -211,7 +206,6 @@
 		E9387BF21DF5F476005BC821 /* CreditsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CreditsViewController.m; path = ../CreditsViewController.m; sourceTree = "<group>"; };
 		E9387BF71DF727C0005BC821 /* BoletoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoletoViewController.h; sourceTree = "<group>"; };
 		E9387BF81DF727C0005BC821 /* BoletoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoletoViewController.m; sourceTree = "<group>"; };
-		E9387BFA1DF9EF8C005BC821 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
 		E97B390B225556FE0070AC9B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E9818EC1198033A800F741B0 /* DKScrollingTabController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DKScrollingTabController.h; sourceTree = "<group>"; };
 		E9818EC2198033A800F741B0 /* DKScrollingTabController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DKScrollingTabController.m; sourceTree = "<group>"; };
@@ -480,10 +474,6 @@
 		BFAC6ED5192A587900921494 /* SVProgressHUD */ = {
 			isa = PBXGroup;
 			children = (
-				BFAC6ED6192A587900921494 /* SVProgressHUD-Prefix.pch */,
-				E9387BFA1DF9EF8C005BC821 /* SVProgressHUD.bundle */,
-				BFAC6ED8192A587900921494 /* SVProgressHUD.h */,
-				BFAC6ED9192A587900921494 /* SVProgressHUD.m */,
 			);
 			path = SVProgressHUD;
 			sourceTree = "<group>";
@@ -661,6 +651,7 @@
 				BFAC6E76192A54E100921494 /* Frameworks */,
 				BFAC6E77192A54E100921494 /* Resources */,
 				E9E12CC91B8DF20B006BC33B /* ShellScript */,
+				109A88EBD94A82474439F885 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -746,7 +737,6 @@
 				BFBE4D911A1276EF002EDADE /* restaurants_old.json in Resources */,
 				E97B390C225556FE0070AC9B /* GoogleService-Info.plist in Resources */,
 				E9E8C5A81B18C5710042DC81 /* fav.png in Resources */,
-				E9387BFB1DF9EF8D005BC821 /* SVProgressHUD.bundle in Resources */,
 				BFBE4D8D1A126003002EDADE /* central.plist in Resources */,
 				E9E543661B84C3DC00BC81B8 /* Carriers.plist in Resources */,
 				BFAC6EED192AB98600921494 /* mapa.png in Resources */,
@@ -765,6 +755,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		109A88EBD94A82474439F885 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Cardapio USP/Pods-Cardapio USP-resources.sh",
+				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Cardapio USP/Pods-Cardapio USP-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		A1CD10114D92C7E316E30CD7 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -843,7 +851,6 @@
 				E9E55FBB1B55933F00994BCB /* DetailCell.m in Sources */,
 				E9CDD1EE1AD86BFF00BB2E36 /* AFURLSessionManager.m in Sources */,
 				E92D5EAA1C19B32B00ECA5D1 /* OAuth1Controller.m in Sources */,
-				BFAC6EDD192A587900921494 /* SVProgressHUD.m in Sources */,
 				E90555B41E030EEA00B8516E /* BoletoDataModel.m in Sources */,
 				E9CDD1EA1AD86BFF00BB2E36 /* AFSecurityPolicy.m in Sources */,
 				E9CDD1ED1AD86BFF00BB2E36 /* AFURLResponseSerialization.m in Sources */,

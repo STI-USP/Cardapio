@@ -379,7 +379,7 @@ alpha:1.0]
 
   //TableView Header
   UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, self.tableView.frame.size.width*9/16 +30)];
-  [headerView setBackgroundColor:[UIColor whiteColor]];
+  //[headerView setBackgroundColor:[UIColor whiteColor]];
   
   //imagem do restaurante
   UIView *imageView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, self.tableView.frame.size.width*9/16 -10)];
