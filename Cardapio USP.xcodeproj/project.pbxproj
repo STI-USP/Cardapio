@@ -213,6 +213,7 @@
 		E99837FC1E201B540065ED08 /* BoletoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoletoTableViewCell.m; sourceTree = "<group>"; };
 		E99837FE1E201B710065ED08 /* SwipeableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwipeableCell.h; sourceTree = "<group>"; };
 		E99837FF1E201B710065ED08 /* SwipeableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwipeableCell.m; sourceTree = "<group>"; };
+		E998B8422551D9800028B3C5 /* libFirebaseCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9CDD1B91AD81E5100BB2E36 /* RestaurantsFilterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestaurantsFilterController.h; sourceTree = "<group>"; };
 		E9CDD1BA1AD81E5100BB2E36 /* RestaurantsFilterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestaurantsFilterController.m; sourceTree = "<group>"; };
 		E9CDD1CC1AD8681800BB2E36 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -362,6 +363,7 @@
 		BFAC6E7B192A54E100921494 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E998B8422551D9800028B3C5 /* libFirebaseCore.a */,
 				E9CDD1D01AD86B6800BB2E36 /* Security.framework */,
 				E9CDD1CE1AD8682900BB2E36 /* SystemConfiguration.framework */,
 				E9CDD1CC1AD8681800BB2E36 /* MobileCoreServices.framework */,
@@ -980,7 +982,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "c1d53b8b-73b8-4a58-8e1e-3b1c1535aa5e";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1015,7 +1017,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "ce355316-16b1-4de8-b0da-d380e9e3ef30";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1043,6 +1045,10 @@
 				INFOPLIST_FILE = "Cardapio USP/Cardapio USP-Info.plist";
 				MARKETING_VERSION = 2.2.10;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1070,6 +1076,10 @@
 				INFOPLIST_FILE = "Cardapio USP/Cardapio USP-Info.plist";
 				MARKETING_VERSION = 2.2.10;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";

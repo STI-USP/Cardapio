@@ -419,7 +419,11 @@ alpha:1.0]
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
   switch ([indexPath section]) {
     case 2:
-      return 66;
+      if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")) {
+        return UITableViewAutomaticDimension;
+      } else {
+        return 66.;
+      }
       break;
   
     default:
