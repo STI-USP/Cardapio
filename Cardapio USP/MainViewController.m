@@ -20,7 +20,6 @@
 #import "CreditsViewController.h"
 #import "CreditsNavigationViewController.h"
 #import "BoletoViewController.h"
-#import <Crashlytics/Crashlytics.h>
 
 
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
@@ -469,12 +468,6 @@ alpha:1.0]
 - (void)didChangeRestaurant:(NSNotification *)notification {
   [dataModel getMenu];
   [self.navigationItem setTitle: [[dataModel currentRestaurant]valueForKey:@"name"]];
-  
-  [Answers logContentViewWithName:@"altera o restaurante"
-                      contentType:@"restaurante"
-                        contentId:@"restaurante-001"
-                 customAttributes:@{}];
-  
 }
 
 - (void)didReceiveMenu:(NSNotification *)notification {
@@ -490,8 +483,7 @@ alpha:1.0]
     [self viewDidAppear:YES];
     [self.tableView reloadData];
   } else {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Aviso" message:@"Não foi possível obter o cardápio. \nTente novamente mais tarde." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-    [alertView show];
+    [SVProgressHUD showInfoWithStatus:@"Não foi possível obter o cardápio. \nTente novamente mais tarde."];
   }
   stringForLunch = [NSMutableString stringWithFormat:@"ALMOÇO"];
 

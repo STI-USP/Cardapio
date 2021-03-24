@@ -72,7 +72,7 @@
         if ([[json valueForKey:@"erro"] boolValue]) {
           [SVProgressHUD showErrorWithStatus:[json valueForKey:@"mensagemErro"]];
         } else {
-          [_boletoDataModel setBoleto:[NSMutableDictionary dictionaryWithDictionary:json]];
+          [self->_boletoDataModel setBoleto:[NSMutableDictionary dictionaryWithDictionary:json]];
           [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveBill" object:self];
         }
       } else {
@@ -125,7 +125,7 @@
           for (NSMutableDictionary *boleto in [json objectForKey:@"boletos"]) {
             [boletos addObject:boleto];
           }
-          [_boletoDataModel setBoletosPendentes:boletos];
+          [self->_boletoDataModel setBoletosPendentes:boletos];
           [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveBills" object:self];
         }
       } else {
@@ -174,7 +174,7 @@
         if ([[json valueForKey:@"erro"] boolValue]) {
           [SVProgressHUD showErrorWithStatus:[json valueForKey:@"mensagemErro"]];
         } else {
-          [_boletoDataModel setBoleto:[NSMutableDictionary dictionaryWithDictionary:json]];
+          [self->_boletoDataModel setBoleto:[NSMutableDictionary dictionaryWithDictionary:json]];
           [[NSNotificationCenter defaultCenter] postNotificationName:@"DidCreateBill" object:self];
         }
       } else {
@@ -262,23 +262,23 @@
         NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
         
         if ([[json valueForKey:@"erro"] boolValue]) {
-          [_dataModel setRuCardCredit:@"--,--"];
+          [self->_dataModel setRuCardCredit:@"--,--"];
           [SVProgressHUD showErrorWithStatus:[json valueForKey:@"mensagemErro"]];
 
           if ([[json valueForKey:@"mensagemErro"] isEqualToString:@"Usuário não está logado!"])
             [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveLoginError" object:self];
 
         } else {
-          [_dataModel setRuCardCredit:[json valueForKey:@"saldo"]];
+          [self->_dataModel setRuCardCredit:[json valueForKey:@"saldo"]];
           [SVProgressHUD dismiss];
         }
       } else {
         [SVProgressHUD showErrorWithStatus:@"Não foi possível obter o saldo. Tente novamente mais tarde."];
-        [_dataModel setRuCardCredit:@"--,--"];
+        [self->_dataModel setRuCardCredit:@"--,--"];
       }
     } else if (error) {
       [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
-      [_dataModel setRuCardCredit:@"--,--"];
+      [self->_dataModel setRuCardCredit:@"--,--"];
     }
 
     // Notifica atualizações

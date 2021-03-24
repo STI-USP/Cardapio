@@ -100,8 +100,8 @@
       //[_keychainWrapper setObject:oauthTokens[@"oauth_token"] forKey:(__bridge id)(kSecAttrAccount)];
       //[_keychainWrapper setObject:oauthTokens[@"oauth_token_secret"] forKey:(__bridge id)(kSecValueData)];
       
-      [_oAuthUSP setOauthToken:oauthTokens[@"oauth_token"]];
-      [_oAuthUSP setOauthTokenSecret:oauthTokens[@"oauth_token_secret"]];
+      [self->_oAuthUSP setOauthToken:oauthTokens[@"oauth_token"]];
+      [self->_oAuthUSP setOauthTokenSecret:oauthTokens[@"oauth_token_secret"]];
 
       [self saveUserData];
       

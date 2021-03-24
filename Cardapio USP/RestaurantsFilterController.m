@@ -11,7 +11,6 @@
 #import "MenuDataModel.h"
 #import "DataModel.h"
 #import "REFrostedViewController.h"
-#import <Crashlytics/Crashlytics.h>
 
 #define UIColorFromRGB(rgbValue) \
 [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
@@ -143,12 +142,6 @@ alpha:1.0]
   prefRestaurant = [[[campiList objectAtIndex:[indexPath section]] valueForKey:@"restaurants"] objectAtIndex:[indexPath row]];
   
   [dataModel setPreferredRestaurant: prefRestaurant];
-  
-  [Answers logContentViewWithName:@"favorita restaurante - menu"
-                      contentType:@"restaurante"
-                        contentId:@"restaurante-002"
-                 customAttributes:@{}];
-
   
   [self.tableView reloadData];
   //[self.tableView reloadInputViews];

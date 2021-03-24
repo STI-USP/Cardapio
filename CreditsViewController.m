@@ -12,7 +12,6 @@
 #import "OAuthUSP.h"
 #import "BoletoDataModel.h"
 #import "BoletoViewController.h"
-#import <Crashlytics/Crashlytics.h>
 
 
 @interface CreditsViewController () {
@@ -78,12 +77,6 @@
   [_saldoLabel setNumberOfLines:0];
   [_saldoLabel setLineBreakMode:NSLineBreakByWordWrapping];
   [_saldoLabel setText:message];
-  
-  [Answers logContentViewWithName:@"consulta saldo"
-                      contentType:@"financeiro"
-                        contentId:@"financeiro-001"
-                 customAttributes:@{}];
-
 }
 
 
@@ -105,12 +98,6 @@
 }
 
 - (IBAction)gerarNovoBoleto:(id)sender {
-  
-  [Answers logContentViewWithName:@"gera boleto"
-                      contentType:@"financeiro"
-                        contentId:@"financeiro-002"
-                 customAttributes:@{}];
-
 }
 
 - (void)didCreateBill:(NSNotification *)notification {

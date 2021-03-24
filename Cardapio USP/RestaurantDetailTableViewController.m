@@ -11,7 +11,6 @@
 #import "DataModel.h"
 #import "DetailCell.h"
 #import "ThumbnailViewImageProxy.h"
-#import <Crashlytics/Crashlytics.h>
 
 
 #pragma mark - NSString Category
@@ -100,11 +99,6 @@ alpha:1.0]
 - (void)viewDidAppear:(BOOL)animated {
   [super viewDidAppear:animated];
   
-  [Answers logContentViewWithName:@"acessa as informações dos restaurantes"
-                      contentType:@"restaurante"
-                        contentId:@"restaurante-004"
-                 customAttributes:@{}];
-
 }
 
 #pragma mark - Table view data source
@@ -343,18 +337,13 @@ alpha:1.0]
   [self.tableView reloadData];
 }
 
--(IBAction)setAsPreferred:(id)sender{
+- (IBAction)setAsPreferred:(id)sender{
   [dataModel setPreferredRestaurant:self.restaurant];
   [self.tableView reloadData];
   
-  [Answers logContentViewWithName:@"favorita restaurante - detalhe"
-                      contentType:@"restaurante"
-                        contentId:@"restaurante-003"
-                 customAttributes:@{}];
-  
 }
 
--(IBAction)resetPreferred:(id)sender {
+- (IBAction)resetPreferred:(id)sender {
   [dataModel setPreferredRestaurant: nil]; // retira preferência
   [self.tableView reloadData];
 }

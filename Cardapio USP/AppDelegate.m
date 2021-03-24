@@ -8,8 +8,6 @@
 
 #import "AppDelegate.h"
 #import "DataModel.h"
-#import <Fabric/Fabric.h>
-#import <Crashlytics/Crashlytics.h>
 
 @import Firebase;
 

@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		67ABEC48C12A42E7BED2EB4F /* libPods-Cardapio USPTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85E86C4FE0743D74F42515E5 /* libPods-Cardapio USPTests.a */; };
-		85A2926E41B5145F21AD6961 /* libPods-Cardapio USP.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD83E20805156EB0F9CCDBF /* libPods-Cardapio USP.a */; };
+		4E5A27FA22CBDFBA7124C0AE /* libPods-Cardapio USPTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139F385B0D1D0460E44959F4 /* libPods-Cardapio USPTests.a */; };
+		56C150BE3E8E7DF14A5D3690 /* libPods-Cardapio USP.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 96D40057E3FADD7DCC98153D /* libPods-Cardapio USP.a */; };
 		AD66F7CD1933B2E8005A31BE /* Menu.m in Sources */ = {isa = PBXBuildFile; fileRef = AD66F7CC1933B2E8005A31BE /* Menu.m */; };
 		AD66F7D01933B3C4005A31BE /* Period.m in Sources */ = {isa = PBXBuildFile; fileRef = AD66F7CF1933B3C4005A31BE /* Period.m */; };
 		AD66F7D91933C4A8005A31BE /* MenuStub.m in Sources */ = {isa = PBXBuildFile; fileRef = AD66F7D81933C4A8005A31BE /* MenuStub.m */; };
@@ -66,8 +66,8 @@
 		E9818EC3198033A800F741B0 /* DKScrollingTabController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9818EC2198033A800F741B0 /* DKScrollingTabController.m */; };
 		E99837FD1E201B540065ED08 /* BoletoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E99837FC1E201B540065ED08 /* BoletoTableViewCell.m */; };
 		E99838001E201B710065ED08 /* SwipeableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E99837FF1E201B710065ED08 /* SwipeableCell.m */; };
+		E9B61B55260BA3E700A52672 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9B61B54260BA3E700A52672 /* CoreServices.framework */; };
 		E9CDD1BB1AD81E5100BB2E36 /* RestaurantsFilterController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9CDD1BA1AD81E5100BB2E36 /* RestaurantsFilterController.m */; };
-		E9CDD1CD1AD8681800BB2E36 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9CDD1CC1AD8681800BB2E36 /* MobileCoreServices.framework */; };
 		E9CDD1CF1AD8682900BB2E36 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9CDD1CE1AD8682900BB2E36 /* SystemConfiguration.framework */; };
 		E9CDD1D11AD86B6800BB2E36 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9CDD1D01AD86B6800BB2E36 /* Security.framework */; };
 		E9CDD1E61AD86BFF00BB2E36 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = E9CDD1D41AD86BFF00BB2E36 /* AFHTTPRequestOperation.m */; };
@@ -83,8 +83,6 @@
 		E9DF35CF1B3DD306009B92B6 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9DF35CA1B3DD306009B92B6 /* MapViewController.m */; };
 		E9DF35D01B3DD306009B92B6 /* PlaceAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = E9DF35CC1B3DD306009B92B6 /* PlaceAnnotation.m */; };
 		E9DF35D11B3DD306009B92B6 /* MDPinAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = E9DF35CE1B3DD306009B92B6 /* MDPinAnnotationView.m */; };
-		E9E12CCC1B8DF25E006BC33B /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9E12CCA1B8DF25E006BC33B /* Fabric.framework */; };
-		E9E12CCD1B8DF25E006BC33B /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9E12CCB1B8DF25E006BC33B /* Crashlytics.framework */; };
 		E9E1843E1B792C1700637771 /* ImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E9E1843D1B792C1700637771 /* ImageCell.m */; };
 		E9E184411B7931D900637771 /* PreferredCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E9E184401B7931D900637771 /* PreferredCell.m */; };
 		E9E4BCD81B7BFBFC005633AD /* CarrierDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E9E4BCD51B7BFBFC005633AD /* CarrierDataModel.m */; };
@@ -112,9 +110,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2CD83E20805156EB0F9CCDBF /* libPods-Cardapio USP.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Cardapio USP.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		4D3B082CEFF2DA615DFC6B28 /* Pods-Cardapio USPTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cardapio USPTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Cardapio USPTests/Pods-Cardapio USPTests.release.xcconfig"; sourceTree = "<group>"; };
-		85E86C4FE0743D74F42515E5 /* libPods-Cardapio USPTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Cardapio USPTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		139F385B0D1D0460E44959F4 /* libPods-Cardapio USPTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Cardapio USPTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		44BEDA2F17EC17B8BE66E9F5 /* Pods-Cardapio USPTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cardapio USPTests.debug.xcconfig"; path = "Target Support Files/Pods-Cardapio USPTests/Pods-Cardapio USPTests.debug.xcconfig"; sourceTree = "<group>"; };
+		49738C0A9EE8685EF1886E0C /* Pods-Cardapio USP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cardapio USP.debug.xcconfig"; path = "Target Support Files/Pods-Cardapio USP/Pods-Cardapio USP.debug.xcconfig"; sourceTree = "<group>"; };
+		79727ED40BC6FB7E8DC61587 /* Pods-Cardapio USPTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cardapio USPTests.release.xcconfig"; path = "Target Support Files/Pods-Cardapio USPTests/Pods-Cardapio USPTests.release.xcconfig"; sourceTree = "<group>"; };
+		96D40057E3FADD7DCC98153D /* libPods-Cardapio USP.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Cardapio USP.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD66F7CB1933B2E8005A31BE /* Menu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Menu.h; sourceTree = "<group>"; };
 		AD66F7CC1933B2E8005A31BE /* Menu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Menu.m; sourceTree = "<group>"; };
 		AD66F7CE1933B3C4005A31BE /* Period.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Period.h; sourceTree = "<group>"; };
@@ -176,8 +176,7 @@
 		BFBE4D8C1A126003002EDADE /* central.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = central.plist; sourceTree = "<group>"; };
 		BFBE4D8E1A126797002EDADE /* restaurants_old.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = restaurants_old.plist; sourceTree = "<group>"; };
 		BFBE4D901A1276EF002EDADE /* restaurants_old.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = restaurants_old.json; sourceTree = "<group>"; };
-		CD8DD8360D33438B94DFA2E4 /* Pods-Cardapio USP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cardapio USP.release.xcconfig"; path = "Pods/Target Support Files/Pods-Cardapio USP/Pods-Cardapio USP.release.xcconfig"; sourceTree = "<group>"; };
-		D9EA8FB6890130F9298505E6 /* Pods-Cardapio USPTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cardapio USPTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Cardapio USPTests/Pods-Cardapio USPTests.debug.xcconfig"; sourceTree = "<group>"; };
+		D181144EAFC6742001652012 /* Pods-Cardapio USP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cardapio USP.release.xcconfig"; path = "Target Support Files/Pods-Cardapio USP/Pods-Cardapio USP.release.xcconfig"; sourceTree = "<group>"; };
 		E90555AC1E01D42F00B8516E /* OAuthUSP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAuthUSP.h; sourceTree = "<group>"; };
 		E90555AD1E01D42F00B8516E /* OAuthUSP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAuthUSP.m; sourceTree = "<group>"; };
 		E90555AE1E01D42F00B8516E /* STIOauth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STIOauth.h; sourceTree = "<group>"; };
@@ -214,6 +213,7 @@
 		E99837FE1E201B710065ED08 /* SwipeableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwipeableCell.h; sourceTree = "<group>"; };
 		E99837FF1E201B710065ED08 /* SwipeableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwipeableCell.m; sourceTree = "<group>"; };
 		E998B8422551D9800028B3C5 /* libFirebaseCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		E9B61B54260BA3E700A52672 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
 		E9CDD1B91AD81E5100BB2E36 /* RestaurantsFilterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestaurantsFilterController.h; sourceTree = "<group>"; };
 		E9CDD1BA1AD81E5100BB2E36 /* RestaurantsFilterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestaurantsFilterController.m; sourceTree = "<group>"; };
 		E9CDD1CC1AD8681800BB2E36 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -238,7 +238,6 @@
 		E9CDD1E31AD86BFF00BB2E36 /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
 		E9CDD1E41AD86BFF00BB2E36 /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
 		E9CDD1E51AD86BFF00BB2E36 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
-		E9DA9504CECEED8B9F5C21AA /* Pods-Cardapio USP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cardapio USP.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Cardapio USP/Pods-Cardapio USP.debug.xcconfig"; sourceTree = "<group>"; };
 		E9DEA0221B4DC1FC00422524 /* restaurants.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = restaurants.json; sourceTree = "<group>"; };
 		E9DF35C91B3DD306009B92B6 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
 		E9DF35CA1B3DD306009B92B6 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
@@ -246,8 +245,6 @@
 		E9DF35CC1B3DD306009B92B6 /* PlaceAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceAnnotation.m; sourceTree = "<group>"; };
 		E9DF35CD1B3DD306009B92B6 /* MDPinAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDPinAnnotationView.h; sourceTree = "<group>"; };
 		E9DF35CE1B3DD306009B92B6 /* MDPinAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDPinAnnotationView.m; sourceTree = "<group>"; };
-		E9E12CCA1B8DF25E006BC33B /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
-		E9E12CCB1B8DF25E006BC33B /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		E9E1843C1B792C1700637771 /* ImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCell.h; sourceTree = "<group>"; };
 		E9E1843D1B792C1700637771 /* ImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCell.m; sourceTree = "<group>"; };
 		E9E1843F1B7931D900637771 /* PreferredCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferredCell.h; sourceTree = "<group>"; };
@@ -280,15 +277,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E9E12CCC1B8DF25E006BC33B /* Fabric.framework in Frameworks */,
 				E9CDD1D11AD86B6800BB2E36 /* Security.framework in Frameworks */,
-				E9E12CCD1B8DF25E006BC33B /* Crashlytics.framework in Frameworks */,
 				E9CDD1CF1AD8682900BB2E36 /* SystemConfiguration.framework in Frameworks */,
-				E9CDD1CD1AD8681800BB2E36 /* MobileCoreServices.framework in Frameworks */,
+				E9B61B55260BA3E700A52672 /* CoreServices.framework in Frameworks */,
 				BFAC6E7F192A54E100921494 /* CoreGraphics.framework in Frameworks */,
 				BFAC6E81192A54E100921494 /* UIKit.framework in Frameworks */,
 				BFAC6E7D192A54E100921494 /* Foundation.framework in Frameworks */,
-				85A2926E41B5145F21AD6961 /* libPods-Cardapio USP.a in Frameworks */,
+				56C150BE3E8E7DF14A5D3690 /* libPods-Cardapio USP.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -299,24 +294,13 @@
 				BFAC6E9F192A54E100921494 /* XCTest.framework in Frameworks */,
 				BFAC6EA1192A54E100921494 /* UIKit.framework in Frameworks */,
 				BFAC6EA0192A54E100921494 /* Foundation.framework in Frameworks */,
-				67ABEC48C12A42E7BED2EB4F /* libPods-Cardapio USPTests.a in Frameworks */,
+				4E5A27FA22CBDFBA7124C0AE /* libPods-Cardapio USPTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		6246DC1F1226CEFAF22CE82A /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				E9DA9504CECEED8B9F5C21AA /* Pods-Cardapio USP.debug.xcconfig */,
-				CD8DD8360D33438B94DFA2E4 /* Pods-Cardapio USP.release.xcconfig */,
-				D9EA8FB6890130F9298505E6 /* Pods-Cardapio USPTests.debug.xcconfig */,
-				4D3B082CEFF2DA615DFC6B28 /* Pods-Cardapio USPTests.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		AD66F7C71933B239005A31BE /* model */ = {
 			isa = PBXGroup;
 			children = (
@@ -345,9 +329,7 @@
 				BFAC6E7B192A54E100921494 /* Frameworks */,
 				BFAC6EA4192A54E100921494 /* Cardapio USPTests */,
 				BFAC6E7A192A54E100921494 /* Products */,
-				E9E12CCA1B8DF25E006BC33B /* Fabric.framework */,
-				E9E12CCB1B8DF25E006BC33B /* Crashlytics.framework */,
-				6246DC1F1226CEFAF22CE82A /* Pods */,
+				E0162C335702D1DC2F80DBCE /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -363,6 +345,7 @@
 		BFAC6E7B192A54E100921494 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E9B61B54260BA3E700A52672 /* CoreServices.framework */,
 				E998B8422551D9800028B3C5 /* libFirebaseCore.a */,
 				E9CDD1D01AD86B6800BB2E36 /* Security.framework */,
 				E9CDD1CE1AD8682900BB2E36 /* SystemConfiguration.framework */,
@@ -371,8 +354,8 @@
 				BFAC6E7E192A54E100921494 /* CoreGraphics.framework */,
 				BFAC6E80192A54E100921494 /* UIKit.framework */,
 				BFAC6E9E192A54E100921494 /* XCTest.framework */,
-				2CD83E20805156EB0F9CCDBF /* libPods-Cardapio USP.a */,
-				85E86C4FE0743D74F42515E5 /* libPods-Cardapio USPTests.a */,
+				96D40057E3FADD7DCC98153D /* libPods-Cardapio USP.a */,
+				139F385B0D1D0460E44959F4 /* libPods-Cardapio USPTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -478,6 +461,17 @@
 			children = (
 			);
 			path = SVProgressHUD;
+			sourceTree = "<group>";
+		};
+		E0162C335702D1DC2F80DBCE /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				49738C0A9EE8685EF1886E0C /* Pods-Cardapio USP.debug.xcconfig */,
+				D181144EAFC6742001652012 /* Pods-Cardapio USP.release.xcconfig */,
+				44BEDA2F17EC17B8BE66E9F5 /* Pods-Cardapio USPTests.debug.xcconfig */,
+				79727ED40BC6FB7E8DC61587 /* Pods-Cardapio USPTests.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 		E92D5E921C19B32B00ECA5D1 /* OAuth */ = {
@@ -648,12 +642,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BFAC6EAE192A54E100921494 /* Build configuration list for PBXNativeTarget "Cardapio USP" */;
 			buildPhases = (
-				A1CD10114D92C7E316E30CD7 /* [CP] Check Pods Manifest.lock */,
+				668297471BB773C8290599CF /* [CP] Check Pods Manifest.lock */,
 				BFAC6E75192A54E100921494 /* Sources */,
 				BFAC6E76192A54E100921494 /* Frameworks */,
 				BFAC6E77192A54E100921494 /* Resources */,
 				E9E12CC91B8DF20B006BC33B /* ShellScript */,
-				109A88EBD94A82474439F885 /* [CP] Copy Pods Resources */,
+				E161211886CE43DC2C6DDFBA /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -668,7 +662,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BFAC6EB1192A54E100921494 /* Build configuration list for PBXNativeTarget "Cardapio USPTests" */;
 			buildPhases = (
-				FB61722D7E16B1132C609EE9 /* [CP] Check Pods Manifest.lock */,
+				D44AFCA2BBA57446E267B884 /* [CP] Check Pods Manifest.lock */,
 				BFAC6E99192A54E100921494 /* Sources */,
 				BFAC6E9A192A54E100921494 /* Frameworks */,
 				BFAC6E9B192A54E100921494 /* Resources */,
@@ -689,7 +683,7 @@
 		BFAC6E71192A54E100921494 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0640;
+				LastUpgradeCheck = 1240;
 				ORGANIZATIONNAME = USP;
 				TargetAttributes = {
 					BFAC6E78192A54E100921494 = {
@@ -704,10 +698,9 @@
 			};
 			buildConfigurationList = BFAC6E74192A54E100921494 /* Build configuration list for PBXProject "Cardapio USP" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 			);
@@ -757,25 +750,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		109A88EBD94A82474439F885 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Cardapio USP/Pods-Cardapio USP-resources.sh",
-				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Cardapio USP/Pods-Cardapio USP-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A1CD10114D92C7E316E30CD7 /* [CP] Check Pods Manifest.lock */ = {
+		668297471BB773C8290599CF /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -797,20 +772,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E9E12CC91B8DF20B006BC33B /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run 8c23ab978a3a83031ccf364f626ff13dc038fc99 757bf493be1880fe2aa3929d7853cd1f1f0d4d68f922f70045415488ae58c7e2";
-		};
-		FB61722D7E16B1132C609EE9 /* [CP] Check Pods Manifest.lock */ = {
+		D44AFCA2BBA57446E267B884 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -831,6 +793,39 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		E161211886CE43DC2C6DDFBA /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Cardapio USP/Pods-Cardapio USP-resources.sh",
+				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Cardapio USP/Pods-Cardapio USP-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E9E12CC91B8DF20B006BC33B /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -953,22 +948,39 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				EXCLUDED_ARCHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -981,12 +993,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "c1d53b8b-73b8-4a58-8e1e-3b1c1535aa5e";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALID_ARCHS = "arm64 armv7 armv7s";
+				VALID_ARCHS = "$(ARCHS_STANDARD)";
 			};
 			name = Debug;
 		};
@@ -994,41 +1007,58 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Universidade de São Paulo (SYF585KJR7)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXCLUDED_ARCHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "ce355316-16b1-4de8-b0da-d380e9e3ef30";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
-				VALID_ARCHS = "arm64 armv7 armv7s";
+				VALID_ARCHS = "$(ARCHS_STANDARD)";
 			};
 			name = Release;
 		};
 		BFAC6EAF192A54E100921494 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E9DA9504CECEED8B9F5C21AA /* Pods-Cardapio USP.debug.xcconfig */;
+			baseConfigurationReference = 49738C0A9EE8685EF1886E0C /* Pods-Cardapio USP.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1036,30 +1066,32 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 47;
 				DEVELOPMENT_TEAM = SYF585KJR7;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)",
-				);
+				EXCLUDED_ARCHS = arm64;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Cardapio USP/Cardapio USP-Prefix.pch";
 				INFOPLIST_FILE = "Cardapio USP/Cardapio USP-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MARKETING_VERSION = 2.2.11;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "br.com.solveng.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
+				VALID_ARCHS = "$(ARCHS_STANDARD)";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
 		};
 		BFAC6EB0192A54E100921494 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CD8DD8360D33438B94DFA2E4 /* Pods-Cardapio USP.release.xcconfig */;
+			baseConfigurationReference = D181144EAFC6742001652012 /* Pods-Cardapio USP.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1067,30 +1099,32 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 47;
 				DEVELOPMENT_TEAM = SYF585KJR7;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)",
-				);
+				EXCLUDED_ARCHS = arm64;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Cardapio USP/Cardapio USP-Prefix.pch";
 				INFOPLIST_FILE = "Cardapio USP/Cardapio USP-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MARKETING_VERSION = 2.2.11;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "br.com.solveng.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
+				VALID_ARCHS = "$(ARCHS_STANDARD)";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
 		};
 		BFAC6EB2192A54E100921494 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D9EA8FB6890130F9298505E6 /* Pods-Cardapio USPTests.debug.xcconfig */;
+			baseConfigurationReference = 44BEDA2F17EC17B8BE66E9F5 /* Pods-Cardapio USPTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Cardapio USP.app/Cardapio USP";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1107,6 +1141,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "Cardapio USPTests/Cardapio USPTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "br.usp.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUNDLE_LOADER)";
@@ -1116,7 +1151,7 @@
 		};
 		BFAC6EB3192A54E100921494 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4D3B082CEFF2DA615DFC6B28 /* Pods-Cardapio USPTests.release.xcconfig */;
+			baseConfigurationReference = 79727ED40BC6FB7E8DC61587 /* Pods-Cardapio USPTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Cardapio USP.app/Cardapio USP";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1129,6 +1164,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Cardapio USP/Cardapio USP-Prefix.pch";
 				INFOPLIST_FILE = "Cardapio USPTests/Cardapio USPTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "br.usp.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUNDLE_LOADER)";

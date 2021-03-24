@@ -5,7 +5,6 @@
 //
 
 #import "DKScrollingTabController.h"
-#import <Crashlytics/Crashlytics.h>
 
 
 @interface DKScrollingTabController ()
@@ -144,12 +143,6 @@
 // muda dia da semana
 - (void)selectButtonWithIndex:(NSUInteger)index {
   [self selectButtonWithIndex:index delegate:NO];
-  
-  [Answers logContentViewWithName:@"altera o dia da semana"
-                      contentType:@"refeicao"
-                        contentId:@"refeicao-001"
-                 customAttributes:@{}];
-  
 }
 
 

@@ -15,6 +15,7 @@
 @implementation FrostedViewController
 
 - (void)awakeFromNib {
+  [super awakeFromNib];
   self.contentViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"restaurantController"];
   self.menuViewController = [ self.storyboard instantiateViewControllerWithIdentifier:@"selectorController"];
 }

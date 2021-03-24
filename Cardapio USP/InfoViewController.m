@@ -338,19 +338,21 @@ alpha:1.0]
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
   if (indexPath.section == 0 && indexPath.row == 1) {
     if ([[UIDevice currentDevice].model isEqualToString:@"iPhone"]) {
-      //NSArray *telephoneListToDial = [NSArray arrayWithArray:[_restaurantDc objectForKey:@"phones"]];
-      UIActionSheet *actionSheet = [[UIActionSheet alloc] init];
-      actionSheet.title =  [NSString stringWithFormat:@"Ligar para restaurante"];
-      actionSheet.delegate = self;
-        //for (NSString *s in telephoneListToDial) {
-        //  [actionSheet addButtonWithTitle:[TelephoneUtils telephoneWithCarrierFromString:s]];
-        // }
-      [actionSheet addButtonWithTitle:[TelephoneUtils telephoneWithCarrierFromString:[_restaurantDc objectForKey:@"phones"]]];
+
+      UIAlertController *telAlert = [UIAlertController alertControllerWithTitle:@"Ligar para restaurante" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
+      
+      //telefones da biblioteca
+      UIAlertAction *telButton = [UIAlertAction actionWithTitle:[TelephoneUtils telephoneWithCarrierFromString:[_restaurantDc objectForKey:@"phones"]] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
-      actionSheet.cancelButtonIndex = [actionSheet addButtonWithTitle:@"Cancelar"];
-      [[actionSheet viewWithTag:0] setOpaque:NO];
-      [[actionSheet viewWithTag:0] setAlpha:0.8];
-      [actionSheet showInView:self.view];
+        [TelephoneUtils dialToTelephone:[TelephoneUtils telephoneWithCarrierFromString:[self->_restaurantDc objectForKey:@"phones"]]];
+      }];
+      [telAlert addAction:telButton];
+
+      //cancelar
+      UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancelar" style:UIAlertActionStyleCancel handler:nil];
+      [telAlert addAction:cancel];
+
+      [self presentViewController:telAlert animated:YES completion:nil];
     }
   }
 }
@@ -363,15 +365,6 @@ alpha:1.0]
   
   if (indexPath != nil)
     [self tableView: self.tableView accessoryButtonTappedForRowWithIndexPath: indexPath];
-}
-
-
-#pragma mark - Action Sheet
-
-- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
-  if ([actionSheet cancelButtonIndex] != buttonIndex) {
-    [TelephoneUtils dialToTelephone:[actionSheet buttonTitleAtIndex:buttonIndex]];
-  }
 }
 
 

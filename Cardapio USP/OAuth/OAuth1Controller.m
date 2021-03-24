@@ -119,30 +119,28 @@ NSArray * CHQueryStringPairsFromKeyAndValue(NSString *key, id value) {
 }
 
 
-static inline NSDictionary *CHParametersFromQueryString(NSString *queryString)
-{
+static inline NSDictionary *CHParametersFromQueryString(NSString *queryString) {
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    if (queryString)
-    {
-        NSScanner *parameterScanner = [[NSScanner alloc] initWithString:queryString];
-        NSString *name = nil;
-        NSString *value = nil;
+    if (queryString) {
+      NSScanner *parameterScanner = [[NSScanner alloc] initWithString:queryString];
+      NSString *name = nil;
+      NSString *value = nil;
         
-        while (![parameterScanner isAtEnd]) {
-            name = nil;
-            [parameterScanner scanUpToString:@"=" intoString:&name];
-            [parameterScanner scanString:@"=" intoString:NULL];
+      while (![parameterScanner isAtEnd]) {
+        name = nil;
+        [parameterScanner scanUpToString:@"=" intoString:&name];
+        [parameterScanner scanString:@"=" intoString:NULL];
             
-            value = nil;
-            [parameterScanner scanUpToString:@"&" intoString:&value];
-            [parameterScanner scanString:@"&" intoString:NULL];
+        value = nil;
+        [parameterScanner scanUpToString:@"&" intoString:&value];
+        [parameterScanner scanString:@"&" intoString:NULL];
             
-            if (name && value)
-            {
-                [parameters setValue:[value stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
-                              forKey:[name stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-            }
+        if (name && value) {
+          [parameters setValue:[value stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]]
+                        forKey:[name stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]]];
         }
+      }
+  
     }
     return parameters;
 }

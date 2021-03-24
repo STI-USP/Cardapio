@@ -12,7 +12,7 @@
 #import "Restaurant.h"
 
 
-@interface InfoViewController : UITableViewController<UITabBarControllerDelegate, UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate>
+@interface InfoViewController : UITableViewController<UITabBarControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @property (strong, nonatomic) NSMutableDictionary *restaurantDc;
 

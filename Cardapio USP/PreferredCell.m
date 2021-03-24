@@ -13,7 +13,8 @@
 @synthesize preferredButton;
 
 - (void)awakeFromNib {
-    // Initialization code
+  [super awakeFromNib];
+  // Initialization code
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

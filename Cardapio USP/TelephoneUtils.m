@@ -110,7 +110,7 @@
   
 //  NSLog(@"%@", telephoneToDial);
   
-  [[UIApplication sharedApplication] openURL:[NSURL URLWithString:telephoneToDial]]; // disca pelo telefone
+  [[UIApplication sharedApplication] openURL:[NSURL URLWithString:telephoneToDial] options:@{} completionHandler:nil]; // disca pelo telefone
 
 }
 
