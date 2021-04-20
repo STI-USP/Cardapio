@@ -74,12 +74,14 @@ PODS:
   - nanopb/encode (2.30907.0)
   - PromisesObjC (1.2.12)
   - SVProgressHUD (2.2.5)
+  - SWRevealViewController (2.3.0)
 
 DEPENDENCIES:
   - Firebase/Analytics
   - Firebase/Core
   - Firebase/Crashlytics
   - SVProgressHUD
+  - SWRevealViewController (~> 2.3)
 
 SPEC REPOS:
   trunk:
@@ -95,6 +97,7 @@ SPEC REPOS:
     - nanopb
     - PromisesObjC
     - SVProgressHUD
+    - SWRevealViewController
 
 SPEC CHECKSUMS:
   Firebase: d59ad4129167f9f0d2a4f6c1f0c462254b6002c8
@@ -109,7 +112,8 @@ SPEC CHECKSUMS:
   nanopb: 59221d7f958fb711001e6a449489542d92ae113e
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
+  SWRevealViewController: 6d3fd97f70112fd7cef9de14df4260eacce4c63a
 
-PODFILE CHECKSUM: 6980d0d1b9c771b2b42b55aa83eb0a3ea691adab
+PODFILE CHECKSUM: f233fe038e2702d46c7a31141a85c207557c4c45
 
 COCOAPODS: 1.10.1

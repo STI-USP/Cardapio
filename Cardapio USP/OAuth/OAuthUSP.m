@@ -144,6 +144,8 @@
     if ([data length] > 0 && error == nil) {
       if ([httpResponse statusCode] == 200) {
         NSLog(@"registro: %@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"DidRegisterUser" object:self];
+
       } else {
         NSLog(@"error: %ld", (long)[httpResponse statusCode]);
       }

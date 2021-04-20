@@ -24,7 +24,7 @@
 		BFAC6E8D192A54E100921494 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAC6E8C192A54E100921494 /* AppDelegate.m */; };
 		BFAC6E90192A54E100921494 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFAC6E8E192A54E100921494 /* Main_iPhone.storyboard */; };
 		BFAC6E93192A54E100921494 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFAC6E91192A54E100921494 /* Main_iPad.storyboard */; };
-		BFAC6E96192A54E100921494 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAC6E95192A54E100921494 /* MainViewController.m */; };
+		BFAC6E96192A54E100921494 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAC6E95192A54E100921494 /* MenuViewController.m */; };
 		BFAC6E98192A54E100921494 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFAC6E97192A54E100921494 /* Images.xcassets */; };
 		BFAC6E9F192A54E100921494 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFAC6E9E192A54E100921494 /* XCTest.framework */; };
 		BFAC6EA0192A54E100921494 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFAC6E7C192A54E100921494 /* Foundation.framework */; };
@@ -40,7 +40,6 @@
 		BFAC6ECF192A586B00921494 /* UIViewController+REFrostedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAC6EC9192A586B00921494 /* UIViewController+REFrostedViewController.m */; };
 		BFAC6EDA192A587900921494 /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAC6ED2192A587900921494 /* GTMNSString+HTML.m */; };
 		BFAC6EDB192A587900921494 /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAC6ED4192A587900921494 /* NSString+HTML.m */; };
-		BFAC6EE0192A59E600921494 /* FrostedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAC6EDF192A59E600921494 /* FrostedViewController.m */; };
 		BFAC6EE6192A71A000921494 /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAC6EE5192A71A000921494 /* InfoViewController.m */; };
 		BFAC6EEB192AB50F00921494 /* central.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BFAC6EEA192AB50F00921494 /* central.jpg */; };
 		BFAC6EED192AB98600921494 /* mapa.png in Resources */ = {isa = PBXBuildFile; fileRef = BFAC6EEC192AB98600921494 /* mapa.png */; };
@@ -62,8 +61,12 @@
 		E9387BED1DF5F024005BC821 /* LoginWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9387BEC1DF5F024005BC821 /* LoginWebViewController.m */; };
 		E9387BF31DF5F476005BC821 /* CreditsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9387BF21DF5F476005BC821 /* CreditsViewController.m */; };
 		E9387BF91DF727C0005BC821 /* BoletoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9387BF81DF727C0005BC821 /* BoletoViewController.m */; };
+		E9490C74262F54B5000A035B /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9490C73262F54B5000A035B /* WebViewController.m */; };
+		E9490C78262F5C10000A035B /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9490C77262F5C0F000A035B /* WebKit.framework */; };
 		E97B390C225556FE0070AC9B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E97B390B225556FE0070AC9B /* GoogleService-Info.plist */; };
 		E9818EC3198033A800F741B0 /* DKScrollingTabController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9818EC2198033A800F741B0 /* DKScrollingTabController.m */; };
+		E990FE6E262751F0005FF207 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E990FE6D262751F0005FF207 /* MainViewController.m */; };
+		E990FE7626279E41005FF207 /* CALayer+XibConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = E990FE7526279E41005FF207 /* CALayer+XibConfiguration.m */; };
 		E99837FD1E201B540065ED08 /* BoletoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E99837FC1E201B540065ED08 /* BoletoTableViewCell.m */; };
 		E99838001E201B710065ED08 /* SwipeableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E99837FF1E201B710065ED08 /* SwipeableCell.m */; };
 		E9B61B55260BA3E700A52672 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9B61B54260BA3E700A52672 /* CoreServices.framework */; };
@@ -141,8 +144,8 @@
 		BFAC6E8C192A54E100921494 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		BFAC6E8F192A54E100921494 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		BFAC6E92192A54E100921494 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
-		BFAC6E94192A54E100921494 /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
-		BFAC6E95192A54E100921494 /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		BFAC6E94192A54E100921494 /* MenuViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
+		BFAC6E95192A54E100921494 /* MenuViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
 		BFAC6E97192A54E100921494 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		BFAC6E9D192A54E100921494 /* Cardapio USPTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Cardapio USPTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFAC6E9E192A54E100921494 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -166,8 +169,6 @@
 		BFAC6ED2192A587900921494 /* GTMNSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GTMNSString+HTML.m"; sourceTree = "<group>"; };
 		BFAC6ED3192A587900921494 /* NSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HTML.h"; sourceTree = "<group>"; };
 		BFAC6ED4192A587900921494 /* NSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HTML.m"; sourceTree = "<group>"; };
-		BFAC6EDE192A59E600921494 /* FrostedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrostedViewController.h; sourceTree = "<group>"; };
-		BFAC6EDF192A59E600921494 /* FrostedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FrostedViewController.m; sourceTree = "<group>"; };
 		BFAC6EE4192A71A000921494 /* InfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoViewController.h; sourceTree = "<group>"; };
 		BFAC6EE5192A71A000921494 /* InfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoViewController.m; sourceTree = "<group>"; };
 		BFAC6EEA192AB50F00921494 /* central.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = central.jpg; sourceTree = "<group>"; };
@@ -205,9 +206,16 @@
 		E9387BF21DF5F476005BC821 /* CreditsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CreditsViewController.m; path = ../CreditsViewController.m; sourceTree = "<group>"; };
 		E9387BF71DF727C0005BC821 /* BoletoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoletoViewController.h; sourceTree = "<group>"; };
 		E9387BF81DF727C0005BC821 /* BoletoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoletoViewController.m; sourceTree = "<group>"; };
+		E9490C72262F54B5000A035B /* WebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
+		E9490C73262F54B5000A035B /* WebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
+		E9490C77262F5C0F000A035B /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		E97B390B225556FE0070AC9B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E9818EC1198033A800F741B0 /* DKScrollingTabController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DKScrollingTabController.h; sourceTree = "<group>"; };
 		E9818EC2198033A800F741B0 /* DKScrollingTabController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DKScrollingTabController.m; sourceTree = "<group>"; };
+		E990FE6C262751F0005FF207 /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		E990FE6D262751F0005FF207 /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		E990FE7426279E41005FF207 /* CALayer+XibConfiguration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CALayer+XibConfiguration.h"; sourceTree = "<group>"; };
+		E990FE7526279E41005FF207 /* CALayer+XibConfiguration.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "CALayer+XibConfiguration.m"; sourceTree = "<group>"; };
 		E99837FB1E201B540065ED08 /* BoletoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoletoTableViewCell.h; sourceTree = "<group>"; };
 		E99837FC1E201B540065ED08 /* BoletoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoletoTableViewCell.m; sourceTree = "<group>"; };
 		E99837FE1E201B710065ED08 /* SwipeableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwipeableCell.h; sourceTree = "<group>"; };
@@ -277,6 +285,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9490C78262F5C10000A035B /* WebKit.framework in Frameworks */,
 				E9CDD1D11AD86B6800BB2E36 /* Security.framework in Frameworks */,
 				E9CDD1CF1AD8682900BB2E36 /* SystemConfiguration.framework in Frameworks */,
 				E9B61B55260BA3E700A52672 /* CoreServices.framework in Frameworks */,
@@ -345,6 +354,7 @@
 		BFAC6E7B192A54E100921494 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E9490C77262F5C0F000A035B /* WebKit.framework */,
 				E9B61B54260BA3E700A52672 /* CoreServices.framework */,
 				E998B8422551D9800028B3C5 /* libFirebaseCore.a */,
 				E9CDD1D01AD86B6800BB2E36 /* Security.framework */,
@@ -373,10 +383,7 @@
 				BFAC6E91192A54E100921494 /* Main_iPad.storyboard */,
 				BFAC6E97192A54E100921494 /* Images.xcassets */,
 				E9F0976F1E007D8500C6A464 /* Model */,
-				E9F0976A1E007CE300C6A464 /* Cardapio */,
-				E9F0976E1E007D7700C6A464 /* RUCard */,
-				E9F0976B1E007D0C00C6A464 /* Restaurantes */,
-				E9F0976C1E007D4400C6A464 /* Mapas */,
+				E990FE7126275210005FF207 /* View */,
 				E9F0976D1E007D4E00C6A464 /* ViewHelper */,
 				BFAC6ED0192A587900921494 /* Categories */,
 				BFAC6ED5192A587900921494 /* SVProgressHUD */,
@@ -507,6 +514,21 @@
 			path = Crypto;
 			sourceTree = "<group>";
 		};
+		E990FE7126275210005FF207 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E990FE6C262751F0005FF207 /* MainViewController.h */,
+				E990FE6D262751F0005FF207 /* MainViewController.m */,
+				E9490C72262F54B5000A035B /* WebViewController.h */,
+				E9490C73262F54B5000A035B /* WebViewController.m */,
+				E9F0976A1E007CE300C6A464 /* Cardapio */,
+				E9F0976E1E007D7700C6A464 /* RUCard */,
+				E9F0976B1E007D0C00C6A464 /* Restaurantes */,
+				E9F0976C1E007D4400C6A464 /* Mapas */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
 		E9CDD1D21AD86BE000BB2E36 /* AFNetworking */ = {
 			isa = PBXGroup;
 			children = (
@@ -548,8 +570,8 @@
 		E9F0976A1E007CE300C6A464 /* Cardapio */ = {
 			isa = PBXGroup;
 			children = (
-				BFAC6E94192A54E100921494 /* MainViewController.h */,
-				BFAC6E95192A54E100921494 /* MainViewController.m */,
+				BFAC6E94192A54E100921494 /* MenuViewController.h */,
+				BFAC6E95192A54E100921494 /* MenuViewController.m */,
 				E9CDD1B91AD81E5100BB2E36 /* RestaurantsFilterController.h */,
 				E9CDD1BA1AD81E5100BB2E36 /* RestaurantsFilterController.m */,
 			);
@@ -591,12 +613,12 @@
 			children = (
 				E9E1843F1B7931D900637771 /* PreferredCell.h */,
 				E9E184401B7931D900637771 /* PreferredCell.m */,
+				E990FE7426279E41005FF207 /* CALayer+XibConfiguration.h */,
+				E990FE7526279E41005FF207 /* CALayer+XibConfiguration.m */,
 				E9E55FBF1B55970E00994BCB /* RWLabel.h */,
 				E9E55FC01B55970E00994BCB /* RWLabel.m */,
 				E9818EC1198033A800F741B0 /* DKScrollingTabController.h */,
 				E9818EC2198033A800F741B0 /* DKScrollingTabController.m */,
-				BFAC6EDE192A59E600921494 /* FrostedViewController.h */,
-				BFAC6EDF192A59E600921494 /* FrostedViewController.m */,
 			);
 			name = ViewHelper;
 			sourceTree = "<group>";
@@ -841,10 +863,11 @@
 				ADB2DCB919375A550068417F /* Cash.m in Sources */,
 				BFAC6ECB192A586B00921494 /* REFrostedContainerViewController.m in Sources */,
 				E90555B01E01D42F00B8516E /* OAuthUSP.m in Sources */,
+				E990FE7626279E41005FF207 /* CALayer+XibConfiguration.m in Sources */,
 				E9CDD1E81AD86BFF00BB2E36 /* AFHTTPSessionManager.m in Sources */,
 				BFAC6EDB192A587900921494 /* NSString+HTML.m in Sources */,
 				E90555BA1E099B6900B8516E /* BoletosPendentesTableViewController.m in Sources */,
-				BFAC6E96192A54E100921494 /* MainViewController.m in Sources */,
+				BFAC6E96192A54E100921494 /* MenuViewController.m in Sources */,
 				E9E55FBB1B55933F00994BCB /* DetailCell.m in Sources */,
 				E9CDD1EE1AD86BFF00BB2E36 /* AFURLSessionManager.m in Sources */,
 				E92D5EAA1C19B32B00ECA5D1 /* OAuth1Controller.m in Sources */,
@@ -855,8 +878,10 @@
 				BFAC6ECD192A586B00921494 /* UIImage+REFrostedViewController.m in Sources */,
 				E92D5EA91C19B32B00ECA5D1 /* NSString+URLEncoding.m in Sources */,
 				BFAC6EE6192A71A000921494 /* InfoViewController.m in Sources */,
+				E9490C74262F54B5000A035B /* WebViewController.m in Sources */,
 				BFAC6E8D192A54E100921494 /* AppDelegate.m in Sources */,
 				E9387BED1DF5F024005BC821 /* LoginWebViewController.m in Sources */,
+				E990FE6E262751F0005FF207 /* MainViewController.m in Sources */,
 				E9387BF31DF5F476005BC821 /* CreditsViewController.m in Sources */,
 				E9CDD1BB1AD81E5100BB2E36 /* RestaurantsFilterController.m in Sources */,
 				E92D5EA51C19B32B00ECA5D1 /* hmac.c in Sources */,
@@ -867,7 +892,6 @@
 				E9CDD1EC1AD86BFF00BB2E36 /* AFURLRequestSerialization.m in Sources */,
 				E99837FD1E201B540065ED08 /* BoletoTableViewCell.m in Sources */,
 				BFAC6E89192A54E100921494 /* main.m in Sources */,
-				BFAC6EE0192A59E600921494 /* FrostedViewController.m in Sources */,
 				E9E55FB81B5591A100994BCB /* RestaurantDetailTableViewController.m in Sources */,
 				E9E9B1321B0E7D1C005BE8A1 /* DataModel.m in Sources */,
 				E92D5EA71C19B32B00ECA5D1 /* KeychainItemWrapper.m in Sources */,
@@ -1066,7 +1090,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 47;
 				DEVELOPMENT_TEAM = SYF585KJR7;
-				EXCLUDED_ARCHS = arm64;
+				EXCLUDED_ARCHS = "";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Cardapio USP/Cardapio USP-Prefix.pch";
@@ -1099,7 +1123,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 47;
 				DEVELOPMENT_TEAM = SYF585KJR7;
-				EXCLUDED_ARCHS = arm64;
+				EXCLUDED_ARCHS = "";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Cardapio USP/Cardapio USP-Prefix.pch";

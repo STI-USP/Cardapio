@@ -12,6 +12,7 @@
 #import "OAuthUSP.h"
 #import "BoletoDataModel.h"
 #import "BoletoViewController.h"
+#import "LoginWebViewController.h"
 
 
 @interface CreditsViewController () {
@@ -19,6 +20,8 @@
   BoletoDataModel *boletoDataModel;
   BoletoViewController *boletoViewController;
   OAuthUSP *oauth;
+  LoginWebViewController *loginViewController;
+
 }
 
 @end
@@ -40,10 +43,12 @@
   
   //Notificacoes
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRecieveCredits:) name:@"DidReceiveCredits" object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logout:) name:@"DidReceiveLoginError" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRecieveCreditsError:) name:@"DidReceiveCreditsError" object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logout:) name:@"DidReceiveLoginError" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didCreateBill:) name:@"DidCreateBill" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveBill:) name:@"DidReceiveBill" object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRegisterUser:) name:@"DidRegisterUser" object:nil];
+  
 }
 
 - (void)didReceiveMemoryWarning {
@@ -54,7 +59,13 @@
 - (void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
 
-  [self.navigationItem setTitle:[[[dataModel.userData objectForKey:@"nomeUsuario"] componentsSeparatedByString:@" "] objectAtIndex:0]];
+  if (![oauth isLoggedIn]) {
+    loginViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"loginWebViewController"];
+    [self presentViewController:loginViewController animated:YES completion:nil];
+  } else {
+    [dataModel getCreditoRUCard];
+    [self.navigationItem setTitle:[[[dataModel.userData objectForKey:@"nomeUsuario"] componentsSeparatedByString:@" "] objectAtIndex:0]];
+  }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -78,7 +89,6 @@
   [_saldoLabel setLineBreakMode:NSLineBreakByWordWrapping];
   [_saldoLabel setText:message];
 }
-
 
 - (void)didRecieveCreditsError:(NSNotification *)notification {
   NSString *message = @"Não foi possível obter o saldo. \nTente novamente mais tarde.";
@@ -116,9 +126,16 @@
   [self presentViewController:boletoViewController animated:YES completion:nil];
 }
 
+- (void)didRegisterUser:(NSNotification *)notification {
+  [SVProgressHUD dismiss];
+  [dataModel getCreditoRUCard];
+}
+
+
+
 - (IBAction)logout:(id)sender {
   [oauth logout];
-  [self dismissViewControllerAnimated:YES completion:nil];
+  [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)dismiss:(id)sender {

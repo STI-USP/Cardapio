@@ -2,23 +2,31 @@
 //  MainViewController.h
 //  Cardapio USP
 //
-//  Created by Jun Okamoto Jr. on 19/05/14.
-//  Copyright (c) 2014 EPUSP. All rights reserved.
+//  Created by Vagner Machado on 14/04/21.
+//  Copyright © 2021 USP. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-#import "DKScrollingTabController.h"
 
-@interface MainViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UIAlertViewDelegate>
+NS_ASSUME_NONNULL_BEGIN
 
-@property (nonatomic, weak) IBOutlet UITableView *tableView;
-@property (nonatomic, weak) IBOutlet UILabel *diaDaSemanaLabel;
-@property (nonatomic, strong) DKScrollingTabController *dateTabController;
-@property (nonatomic) BOOL isClosed;
+@interface MainViewController : UIViewController
 
 
+@property (weak, nonatomic) IBOutlet UILabel *restaurante;
+@property (weak, nonatomic) IBOutlet UILabel *data;
+@property (weak, nonatomic) IBOutlet UILabel *tipoRefeicao;
+@property (weak, nonatomic) IBOutlet UILabel *cardapioAtual;
+@property (weak, nonatomic) IBOutlet UILabel *saldo;
 
-- (IBAction)showRestaurantSelector:(id)sender;
-- (IBAction)showCredits:(id)sender;
-
+- (IBAction)showInstitucional:(id)sender;
+- (IBAction)showTransporte:(id)sender;
+- (IBAction)showAvisos:(id)sender;
+- (IBAction)showSaudeMental:(id)sender;
+- (IBAction)showMoradia:(id)sender;
+- (IBAction)showCreche:(id)sender;
+- (IBAction)showServicoSocial:(id)sender;
+- (IBAction)showAcolhe:(id)sender;
 @end
+
+NS_ASSUME_NONNULL_END
