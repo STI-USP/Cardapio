@@ -16,8 +16,9 @@
 @implementation WebViewController
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
+  [super viewDidLoad];
+  // Do any additional setup after loading the view.
+  [self.view addSubview:_webview];
   _webview.navigationDelegate = self;
 }
 
@@ -57,6 +58,26 @@
 - (void)webView:(WKWebView *)webView didFailNavigation:(WKNavigation *)navigation withError:(NSError *)error {
   NSLog(@"didFailNavigation");
   [SVProgressHUD showErrorWithStatus:error.localizedDescription];
+}
+
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(nonnull WKNavigationAction *)navigationAction decisionHandler:(nonnull void (^)(WKNavigationActionPolicy))decisionHandler {
+
+  if (navigationAction.navigationType == WKNavigationTypeLinkActivated) {
+    if (navigationAction.request.URL) {
+      NSLog(@"%@", navigationAction.request.URL.host);
+      if ([navigationAction.request.URL.resourceSpecifier containsString:@"usp.br"]) {
+        if ([[UIApplication sharedApplication] canOpenURL:navigationAction.request.URL]) {
+          UIApplication *application = [UIApplication sharedApplication];
+          [application openURL:navigationAction.request.URL options:@{} completionHandler:nil];
+          decisionHandler(WKNavigationActionPolicyCancel);
+        }
+      } else {
+        decisionHandler(WKNavigationActionPolicyAllow);
+      }
+    }
+  } else {
+    decisionHandler(WKNavigationActionPolicyAllow);
+  }
 }
 
 @end

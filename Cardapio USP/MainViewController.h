@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SWRevealViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MainViewController : UIViewController
+@interface MainViewController : UIViewController <SWRevealViewControllerDelegate>
 
 
 @property (weak, nonatomic) IBOutlet UILabel *restaurante;
@@ -18,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *tipoRefeicao;
 @property (weak, nonatomic) IBOutlet UILabel *cardapioAtual;
 @property (weak, nonatomic) IBOutlet UILabel *saldo;
+@property (weak, nonatomic) IBOutlet UIButton *menuButton;
 
 - (IBAction)showInstitucional:(id)sender;
 - (IBAction)showTransporte:(id)sender;

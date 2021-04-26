@@ -30,6 +30,8 @@ green:((float)((rgbValue & 0x00FF00) >>  8))/255.0 \
 blue:((float)((rgbValue & 0x0000FF) >>  0))/255.0 \
 alpha:1.0]
 
+#define kWIDTH UIScreen.mainScreen.bounds.size.width
+
 
 @interface MenuViewController () <DKScrollingTabControllerDelegate> {
 
@@ -51,8 +53,6 @@ alpha:1.0]
   BoletoViewController *boletoViewController;
 }
 
-#define kWIDTH          UIScreen.mainScreen.bounds.size.width
-
 @end
 
 @implementation MenuViewController
@@ -68,6 +68,9 @@ alpha:1.0]
   
   [dataModel getMenu];
 
+  self.revealViewController.delegate = self;
+  [self.rightButton setAction: @selector(rightRevealToggle:)];
+  
   //DKScrollingTabController
   _dateTabController = [[DKScrollingTabController alloc] init];
   [self addChildViewController:_dateTabController];
@@ -144,21 +147,6 @@ alpha:1.0]
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRecieveUserData:) name:@"DidRecieveUserData" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveBill:) name:@"DidReceiveBill" object:nil];
 
-  //Reveal View Controller ----------------
-  SWRevealViewController *revealViewController = self.revealViewController;
-  if ( revealViewController ) {
-    revealViewController.rightViewRevealWidth = kWIDTH-60;
-    revealViewController.rightViewRevealOverdraw = 0;
-      
-    [self.rightButton setTarget:revealViewController];
-    [self.rightButton setAction: @selector(rightRevealToggle:)];
-      
-    [self.revealViewController panGestureRecognizer];
-    [self.revealViewController tapGestureRecognizer];
-    self.revealViewController.delegate = self;
-
-  }
-  
   
   //Float Button - info
   CGFloat topPadding = 0.0;
@@ -187,6 +175,14 @@ alpha:1.0]
   NSString *name;
   name = [[dataModel currentRestaurant]valueForKey:@"name"];
   [self.navigationItem setTitle:name];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+  [super viewWillDisappear:animated];
+  
+  if ([self isMovingFromParentViewController]) {
+    NSLog(@"View controller was popped");
+  }
 }
 
 - (void)didReceiveMemoryWarning {

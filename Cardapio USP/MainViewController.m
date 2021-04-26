@@ -14,6 +14,7 @@
 #import "SVProgressHUD.h"
 #import "WebViewController.h"
 
+#define kWIDTH UIScreen.mainScreen.bounds.size.width
 
 @interface MainViewController () {
   RestaurantDataModel *_restaurantDataModel;
@@ -45,11 +46,29 @@
   //Notificacoes
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveMenu:) name:@"DidReceiveMenu" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRecieveCredits:) name:@"DidReceiveCredits" object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChangeRestaurant:) name:@"DidChangeRestaurant" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRecieveCreditsError:) name:@"DidReceiveCreditsError" object:nil];
-
+  
+  
+  //Reveal View Controller ----------------
+  SWRevealViewController *revealViewController = self.revealViewController;
+  if (revealViewController) {
+    revealViewController.rightViewRevealWidth = kWIDTH-60;
+    revealViewController.rightViewRevealOverdraw = 0;
+      
+    [self.revealViewController panGestureRecognizer];
+    [self.revealViewController tapGestureRecognizer];
+    self.revealViewController.delegate = self;
+  }
+  
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+  
+  [super viewWillAppear:animated];
+
+  self.revealViewController.delegate = self;
+
   [dataModel getMenu];
   NSString *name;
   name = [[dataModel currentRestaurant]valueForKey:@"name"];
@@ -59,9 +78,13 @@
     [dataModel getCreditoRUCard];
   else
     [_saldo setText:@"R$ --,--"];
-
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+  [super viewDidAppear:animated];
+  
+
+}
 
 #pragma mark - Navigation
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -74,44 +97,47 @@
     
     UIButton *btn = (UIButton *)sender;
     switch (btn.tag) {
+      case 0: //RUCard
+        break;
+
       case 1:
-        urlString = @"https://sites.usp.br/sas/";
         title = @"Apoio Institucional";
+        urlString = @"https://sites.usp.br/sas/";
         break;
 
       case 2:
-        urlString = @"https://sites.usp.br/sas/";
         title = @"Transporte";
+        urlString = @"https://sites.usp.br/sas/passe-escolar/";
         break;
 
       case 3:
-        urlString = @"https://sites.usp.br/sas/";
         title = @"Avisos";
+        urlString = @"https://sites.usp.br/sas/avisos-gerais/";
         break;
 
       case 4:
-        urlString = @"https://sites.usp.br/sas/";
         title = @"Saúde Mental";
+        urlString = @"https://sites.usp.br/sas/";
         break;
 
       case 5:
-        urlString = @"https://sites.usp.br/sas/";
         title = @"Moradia";
+        urlString = @"https://sites.usp.br/sas/moradia/";
         break;
 
       case 6:
-        urlString = @"https://sites.usp.br/sas/";
         title = @"Creche";
+        urlString = @"https://sites.usp.br/sas/";
         break;
 
       case 7:
-        urlString = @"https://sites.usp.br/sas/";
         title = @"Serviço Social";
+        urlString = @"https://sites.usp.br/sas/";
         break;
 
       case 8:
         title = @"Acolhe USP";
-        urlString = @"https://sites.usp.br/sas/";
+        urlString = @"https://sites.usp.br/sas/acolhe-usp-2/";
         break;
 
       default:
@@ -305,6 +331,48 @@
 
 - (IBAction)showInstitucional:(id)sender {
   [self performSegueWithIdentifier:@"showWebContent" sender:sender];
+}
+
+- (void)didChangeRestaurant:(NSNotification *)notification {
+  [dataModel getMenu];
+}
+
+
+#pragma mark - SWRevealViewControllerDelegate
+
+
+// Implement this to return NO when you want the pan gesture recognizer to be ignored
+- (BOOL)revealControllerPanGestureShouldBegin:(SWRevealViewController *)revealController {
+  if ([self.navigationController.topViewController isKindOfClass:self.class]) {
+    return NO;
+  } else {
+    return YES;
+  }
+}
+
+
+// The following delegate methods will be called before and after the front view moves to a position
+- (void)revealController:(SWRevealViewController *)revealController willMoveToPosition:(FrontViewPosition)position {
+  if (position == 2) {
+
+    //desabilita botão do cardapio
+    [_menuButton setEnabled:NO];
+
+    //desabilita swipe na tela
+    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+      self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+    }
+  }
+  else {
+
+    //habilita botão do cardapio
+    [_menuButton setEnabled:YES];
+
+    //habilita swipe na tela
+    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+      self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+    }
+  }
 }
 
 @end
