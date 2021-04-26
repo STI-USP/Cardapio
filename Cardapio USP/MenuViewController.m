@@ -77,6 +77,20 @@ alpha:1.0]
   [_dateTabController didMoveToParentViewController:self];
   [self.view addSubview:_dateTabController.view];
   
+  
+  CGFloat topPadding = 0.0;
+  CGFloat bottomPadding = 0.0;
+  
+  if (@available(iOS 11.0, *)) { //Safe Área
+    UIWindow *window = UIApplication.sharedApplication.windows.firstObject;
+    topPadding = window.safeAreaInsets.top;
+    bottomPadding = window.safeAreaInsets.bottom;
+    
+    _dateTabController.view.frame = CGRectMake(0, topPadding+40., CGRectGetWidth(self.view.bounds), 56);
+  }
+
+  
+  /*
   if([[UIDevice currentDevice]userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
     CGFloat topPadding = 65.;
     if (((int)[[UIScreen mainScreen] nativeBounds].size.height == 2436) || ((int)[[UIScreen mainScreen] nativeBounds].size.height == 2688)) {
@@ -93,6 +107,7 @@ alpha:1.0]
 
     _dateTabController.view.frame = CGRectMake(0, topPadding, CGRectGetWidth(self.view.bounds), 56);
   }
+   */
   
   if (@available(iOS 13.0, *)) {
     _dateTabController.view.backgroundColor = [UIColor systemGroupedBackgroundColor];
@@ -149,15 +164,6 @@ alpha:1.0]
 
   
   //Float Button - info
-  CGFloat topPadding = 0.0;
-  CGFloat bottomPadding = 0.0;
-  
-  if (@available(iOS 11.0, *)) { //Safe Área
-    UIWindow *window = UIApplication.sharedApplication.windows.firstObject;
-    topPadding = window.safeAreaInsets.top;
-    bottomPadding = window.safeAreaInsets.bottom;
-  }
-
   CGFloat width = [UIScreen mainScreen].bounds.size.width - 40;
   CGFloat height = ([UIScreen mainScreen].bounds.size.height - (40 + bottomPadding));
   self.infoButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
