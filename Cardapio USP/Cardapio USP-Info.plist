@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>pt</string>
 	<key>CFBundleDisplayName</key>
-	<string>Cardápio</string>
+	<string>Cardápio+</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIdentifier</key>
