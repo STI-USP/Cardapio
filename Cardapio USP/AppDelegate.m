@@ -67,6 +67,9 @@ DataModel *dataModel;
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   [dataModel setPreferredRestaurant:[defaults objectForKey:@"preferredRestaurant"]];
   [dataModel getRestaurantList];
+
+  if ([dataModel preferredRestaurant])
+    [dataModel setCurrentRestaurant:dataModel.preferredRestaurant];
   [dataModel getMenu];
 
 }

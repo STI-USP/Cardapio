@@ -24,7 +24,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
-  self.navigationItem.title = self.title;
+  [self.navigationItem setTitle:self.navTitle];
   [SVProgressHUD show];
 }
 

@@ -27,6 +27,11 @@
   Period *period;
   int diaDaSemana;
 
+  CGFloat originalMenuHeight;
+  NSLayoutConstraint *newHeightConstraint;
+
+  UIVisualEffectView *blurEffectView;
+
 }
 
 @end
@@ -53,7 +58,7 @@
   //Reveal View Controller ----------------
   SWRevealViewController *revealViewController = self.revealViewController;
   if (revealViewController) {
-    revealViewController.rightViewRevealWidth = kWIDTH-60;
+    revealViewController.rightViewRevealWidth = kWIDTH - 60;
     revealViewController.rightViewRevealOverdraw = 0;
       
     [self.revealViewController panGestureRecognizer];
@@ -61,17 +66,22 @@
     self.revealViewController.delegate = self;
   }
   
+  //Animate View
+  UILongPressGestureRecognizer *recoginzer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(onPress:)];
+  [_menuButton addGestureRecognizer:recoginzer];
+  
 }
 
 - (void)viewWillAppear:(BOOL)animated {
   
   [super viewWillAppear:animated];
-
   self.revealViewController.delegate = self;
 
+  [_expandMenuView setHidden:YES];
+  
   [dataModel getMenu];
   NSString *name;
-  name = [[dataModel currentRestaurant]valueForKey:@"name"];
+  name = [[dataModel currentRestaurant] valueForKey:@"name"];
   [self.navigationController.navigationItem setTitle: name];
   
   if ([oauth isLoggedIn])
@@ -82,9 +92,81 @@
 
 - (void)viewDidAppear:(BOOL)animated {
   [super viewDidAppear:animated];
-  
-
 }
+
+
+//expande menu e adiciona transparencia
+- (void)onPress:(UILongPressGestureRecognizer*)longpress {
+
+  if (longpress.state == UIGestureRecognizerStateBegan) {
+    
+    //verifica se texto está truncado
+    CGSize size = [_cardapioAtual.text sizeWithAttributes:@{NSFontAttributeName:_cardapioAtual.font}];
+    if (size.height > _cardapioAtual.bounds.size.height) {
+    
+
+      [_expandMenuView setHidden:NO];
+      
+      //only apply the blur if the user hasn't disabled transparency effects
+      if (!UIAccessibilityIsReduceTransparencyEnabled()) {
+
+        UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
+        blurEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+        blurEffectView.frame = self.view.bounds;
+        blurEffectView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+
+        [self.view insertSubview:blurEffectView atIndex:18];
+      }
+
+
+      //self.heightConstraint.active = NO;
+
+      /*
+      CGFloat multiplier = 0.33 + ((size.height-60)/self.view.bounds.size.height);
+      newHeightConstraint = [NSLayoutConstraint constraintWithItem:_expandMenuView
+                                                      attribute:NSLayoutAttributeHeight
+                                                      relatedBy:NSLayoutRelationEqual
+                                                         toItem:self.view
+                                                      attribute:NSLayoutAttributeHeight
+                                                     multiplier:multiplier
+                                                       constant:0.0];
+       */
+      
+      //[self.view addSubview:_expandMenuView];
+      //[self.view addConstraint:newHeightConstraint];
+      //[self.menuView updateConstraints];
+      //[self.view layoutIfNeeded];
+    }
+    
+    NSLog(@"Long press");
+  } else if (longpress.state == UIGestureRecognizerStateEnded || longpress.state == UIGestureRecognizerStateCancelled || longpress.state == UIGestureRecognizerStateFailed) {
+
+    //[_expandMenuView setHidden:YES];
+
+    /*
+    [_expandMenuView removeFromSuperview];
+    self.heightConstraint.active = YES;
+    [self.view removeConstraint:newHeightConstraint];
+    [self.menuView updateConstraints];
+    [self.view layoutIfNeeded];
+    */
+    
+    NSLog(@"long press done");
+  }
+}
+
+//recolhe menu expandido e retira transparencia
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event  {
+
+  [blurEffectView removeFromSuperview];
+  
+  UITouch *touch = [touches anyObject];
+  if(touch.view != self.expandMenuView) {
+    [_expandMenuView setHidden:YES];
+  }
+}
+
+
 
 #pragma mark - Navigation
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -148,31 +230,46 @@
     WebViewController *webViewController = (WebViewController *)[segue destinationViewController];
     webViewController.urlString = urlString;
     webViewController.navTitle = title;
+    
+  } else if ([[segue identifier] isEqualToString:@"showWeekMenu"]) {
+    [blurEffectView removeFromSuperview];
+    [_expandMenuView setHidden:YES];
   }
 }
 
 
-- (void)didReceiveMenu:(NSNotification *)notification {
+static void setupView(MainViewController *object) {
 
   //Nome do restaurante
-  if (dataModel.currentRestaurant) {
-    [_restaurante setText:[(NSString *)[dataModel.currentRestaurant valueForKey:@"name"] uppercaseString]];
-  } else if (dataModel.preferredRestaurant) {
-    [_restaurante setText:[(NSString *)[dataModel.preferredRestaurant valueForKey:@"name"] uppercaseString]];
+  if (object->dataModel.currentRestaurant) {
+    [object->_restaurante setText:[(NSString *)[object->dataModel.currentRestaurant valueForKey:@"name"] uppercaseString]];
+    [object->_restauranteExp setText:[(NSString *)[object->dataModel.currentRestaurant valueForKey:@"name"] uppercaseString]];
+  } else if (object->dataModel.preferredRestaurant) {
+    [object->_restaurante setText:[(NSString *)[object->dataModel.preferredRestaurant valueForKey:@"name"] uppercaseString]];
+    [object->_restauranteExp setText:[(NSString *)[object->dataModel.preferredRestaurant valueForKey:@"name"] uppercaseString]];
   } else {
-    [_restaurante setText:@"CENTRAL"];
+    [object->_restaurante setText:@"CENTRAL"];
+    [object->_restauranteExp setText:@"CENTRAL"];
   }
-
+  
   //Periodo
-  [_tipoRefeicao setText:[self period]];
+  [object->_tipoRefeicao setText:[object period]];
+  [object->_tipoRefeicaoExp setText:[object period]];
 
   //Refeição
-  [self setupMenuView];
+  [object setupMenuView];
+  
+  object->originalMenuHeight = object->_menuView.frame.size.height;
+}
+
+- (void)didReceiveMenu:(NSNotification *)notification {
+  setupView(self);
 }
 
 
 - (void)didRecieveCredits:(NSNotification *)notification {
   [_saldo setText:[NSString stringWithFormat:@"R$ %@", [dataModel ruCardCredit]]];
+  [_saldoExp setText:[NSString stringWithFormat:@"R$ %@", [dataModel ruCardCredit]]];
 }
 
 - (void)didRecieveCreditsError:(NSNotification *)notification {
@@ -278,6 +375,7 @@
   NSString *strYear = [NSString stringWithFormat:@"%@", [strData substringFromIndex:6]];
   
   [_data setText:[NSString stringWithFormat:@"%@/%@/%@", strDay, strMonth, strYear]];
+  [_dataExp setText:[NSString stringWithFormat:@"%@/%@/%@", strDay, strMonth, strYear]];
 
   if ([menuArray count] > 0) {
     mainMenu = [menuArray objectAtIndex:diaDaSemana];
@@ -285,15 +383,19 @@
       NSString *lunch = [[[mainMenu period] objectAtIndex:0] menu];
       if ([lunch isEqualToString:@""]) {
         [_cardapioAtual setText:@"Fechado"];
+        [_cardapioAtualExp setText:@"Fechado"];
       } else {
         [_cardapioAtual setText:lunch];
+        [_cardapioAtualExp setText:lunch];
       }
     } else {
       NSString *dinner = [[[mainMenu period] objectAtIndex:1] menu];
       if ([dinner isEqualToString:@""]) {
         [_cardapioAtual setText:@"Fechado"];
+        [_cardapioAtualExp setText:@"Fechado"];
       } else {
         [_cardapioAtual setText:dinner];
+        [_cardapioAtualExp setText:dinner];
       }
     }
   }
@@ -375,4 +477,6 @@
   }
 }
 
+- (IBAction)menuBtnExpClicked:(id)sender {
+}
 @end
