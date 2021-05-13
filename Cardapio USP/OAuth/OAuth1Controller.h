@@ -8,10 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import <WebKit/WebKit.h>
 
-@interface OAuth1Controller : NSObject <UIWebViewDelegate>
+@interface OAuth1Controller : NSObject <WKNavigationDelegate>
 
-- (void)loginWithWebView:(UIWebView *)webWiew
+- (void)loginWithWebView:(WKWebView *)webWiew
               completion:(void (^)(NSDictionary *oauthTokens, NSError *error))completion;
 
 - (void)requestAccessToken:(NSString *)oauth_token_secret

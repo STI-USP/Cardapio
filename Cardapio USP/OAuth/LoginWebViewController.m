@@ -41,7 +41,8 @@
   [super viewDidLoad];
   // Do any additional setup after loading the view.
   
-  
+  [_webView setNavigationDelegate:self];
+
   _oAuthUSP = [OAuthUSP sharedInstance];
   //_keychainWrapper = [[KeychainItemWrapper alloc] initWithIdentifier:@"UserAuthToken" accessGroup:nil];
   
@@ -89,11 +90,13 @@
 #pragma mark - STIOauth
 
 - (void)login {
-  [self.oauthController loginWithWebView:self.webView completion:^(NSDictionary *oauthTokens, NSError *error) {
+  [self.oauthController loginWithWebView:_webView completion:^(NSDictionary *oauthTokens, NSError *error) {
 
-    [self dismissViewControllerAnimated:YES completion: ^{
-      self.oauthController = nil;
-    }];
+    dispatch_async(dispatch_get_main_queue(), ^{
+      [self dismissViewControllerAnimated:YES completion: ^{
+        self.oauthController = nil;
+      }];
+    });
 
     if (!error) {
       // Store your tokens for authenticating your later requests, consider storing the tokens in the Keychain
@@ -151,23 +154,22 @@
                                                                oauthSecret:_oAuthUSP.oauthTokenSecret];
   
   
-  // Request sincrono para travar as opções que dependem dessa resposta
-  NSURLResponse *response = nil;
-  NSError *error = nil;
-  NSData *data = [NSURLConnection sendSynchronousRequest:preparedRequest
-                                       returningResponse:&response
-                                                   error:&error];
-  if (error) {
-    //NSLog(@"Error in API request: %@", error.localizedDescription);
-  } else {
-    self.userData = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingMutableContainers error: nil];
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:data forKey:@"userData"];
-    [defaults synchronize];
-    //NSLog(@"%@", self.userData);
-    [_oAuthUSP setUserData:self.userData];
-    [_oAuthUSP registrarToken];
-  }
+  NSURLSession *session = [NSURLSession sharedSession];
+  [[session dataTaskWithRequest:preparedRequest completionHandler:^(NSData *data,
+                                NSURLResponse *response,
+                                NSError *error) {
+    // handle response
+    if (error) {
+      NSLog(@"Error in API request: %@", error.localizedDescription);
+    } else {
+      self.userData = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingMutableContainers error: nil];
+      NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+      [defaults setObject:data forKey:@"userData"];
+      [defaults synchronize];
+      [self->_oAuthUSP setUserData:self.userData];
+      [self->_oAuthUSP registrarToken];
+    }
+  }] resume];
 }
 
 @end

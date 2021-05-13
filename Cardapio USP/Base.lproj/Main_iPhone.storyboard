@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -1431,43 +1432,6 @@ Sobremesa: Espumone de uva
             </objects>
             <point key="canvasLocation" x="-79" y="223"/>
         </scene>
-        <!--Login Web View Controller-->
-        <scene sceneID="7GK-1h-DU5">
-            <objects>
-                <viewController storyboardIdentifier="loginWebViewController" id="6Fh-j1-D0l" customClass="LoginWebViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Pjp-f6-BWM"/>
-                        <viewControllerLayoutGuide type="bottom" id="459-DA-IF7"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="MIw-6L-Py3">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k3F-8q-Xmg">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </webView>
-                        </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="k3F-8q-Xmg" firstAttribute="height" secondItem="MIw-6L-Py3" secondAttribute="height" constant="-64" id="5zh-Iz-krg"/>
-                            <constraint firstItem="k3F-8q-Xmg" firstAttribute="bottom" secondItem="459-DA-IF7" secondAttribute="top" id="6Bn-EE-vrn"/>
-                            <constraint firstItem="k3F-8q-Xmg" firstAttribute="centerX" secondItem="MIw-6L-Py3" secondAttribute="centerX" id="OWO-el-cPd"/>
-                            <constraint firstItem="k3F-8q-Xmg" firstAttribute="width" secondItem="MIw-6L-Py3" secondAttribute="width" id="cii-OZ-7Xc"/>
-                            <constraint firstItem="k3F-8q-Xmg" firstAttribute="centerY" secondItem="MIw-6L-Py3" secondAttribute="centerY" id="oSd-Rd-GaE"/>
-                            <constraint firstItem="k3F-8q-Xmg" firstAttribute="leading" secondItem="MIw-6L-Py3" secondAttribute="leading" id="zgE-f1-LJV"/>
-                        </constraints>
-                    </view>
-                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
-                    <connections>
-                        <outlet property="webView" destination="k3F-8q-Xmg" id="mMZ-1L-6Qg"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="9Kn-Fi-eJB" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-2730" y="1048"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="pvV-UB-ucy">
             <objects>
@@ -1544,6 +1508,41 @@ Sobremesa: Espumone de uva
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yn5-nM-wmJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-935" y="-573"/>
+        </scene>
+        <!--Login Web View Controller-->
+        <scene sceneID="e6R-uD-pBj">
+            <objects>
+                <viewController storyboardIdentifier="loginWebViewController" id="Dgd-Qe-i9p" customClass="LoginWebViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="M2u-6X-Fhz" customClass="Login">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n12-NK-RX7">
+                                <rect key="frame" x="20" y="96" width="335" height="571"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Ny9-xK-BZL"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Ny9-xK-BZL" firstAttribute="trailing" secondItem="n12-NK-RX7" secondAttribute="trailing" constant="20" id="4Ph-7y-q6K"/>
+                            <constraint firstItem="n12-NK-RX7" firstAttribute="top" secondItem="Ny9-xK-BZL" secondAttribute="top" constant="96" id="CNd-j2-gXB"/>
+                            <constraint firstItem="Ny9-xK-BZL" firstAttribute="bottom" secondItem="n12-NK-RX7" secondAttribute="bottom" id="CyV-PI-JlT"/>
+                            <constraint firstItem="n12-NK-RX7" firstAttribute="leading" secondItem="Ny9-xK-BZL" secondAttribute="leading" constant="20" id="ZOH-vT-Vqw"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="XyT-vX-yj4"/>
+                    <connections>
+                        <outlet property="webView" destination="n12-NK-RX7" id="mYx-qb-9Gg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8bP-w2-Xfx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2730" y="1048"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

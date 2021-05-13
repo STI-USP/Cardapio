@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <WebKit/WebKit.h>
 
-@interface LoginWebViewController : UIViewController
+@interface LoginWebViewController : UIViewController <WKNavigationDelegate>
 
-@property (weak, nonatomic) IBOutlet UIWebView *webView;
+@property (weak, nonatomic) IBOutlet WKWebView *webView;
 
 // OAuth credentials
 //@property (nonatomic, strong) NSString *oauthToken;

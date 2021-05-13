@@ -11,6 +11,7 @@
 #import "NSString+URLEncoding.h"
 #include "hmac.h"
 #include "Base64Transcoder.h"
+#import <WebKit/WebKit.h>
 
 typedef void (^WebWiewDelegateHandler)(NSDictionary *oauthParams);
 
@@ -149,7 +150,7 @@ static inline NSDictionary *CHParametersFromQueryString(NSString *queryString) {
 
 @interface OAuth1Controller ()
 
-@property (nonatomic, weak) UIWebView *webView;
+@property (nonatomic, weak) WKWebView *webView;
 @property (nonatomic, strong) UIActivityIndicatorView *loadingIndicator;
 @property (nonatomic, strong) WebWiewDelegateHandler delegateHandler;
 
@@ -157,11 +158,11 @@ static inline NSDictionary *CHParametersFromQueryString(NSString *queryString) {
 
 @implementation OAuth1Controller
 
-- (void)loginWithWebView:(UIWebView *)webWiew completion:(void (^)(NSDictionary *oauthTokens, NSError *error))completion
-{
+- (void)loginWithWebView:(WKWebView *)webWiew completion:(void (^)(NSDictionary *oauthTokens, NSError *error))completion {
+
     self.webView = webWiew;
-    self.webView.delegate = self;
-    
+    self.webView.navigationDelegate = self;
+
     self.loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     self.loadingIndicator.color = [UIColor grayColor];
     [self.loadingIndicator startAnimating];
@@ -231,12 +232,15 @@ static inline NSDictionary *CHParametersFromQueryString(NSString *queryString) {
     NSString *oAuthHeader = [@"OAuth " stringByAppendingFormat:@"%@", [parameterPairs componentsJoinedByString:@", "]];
     [request setValue:oAuthHeader forHTTPHeaderField:@"Authorization"];
     
-    [NSURLConnection sendAsynchronousRequest:request
-                                       queue:[NSOperationQueue mainQueue]
-                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-                               NSString *reponseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                               completion(nil, CHParametersFromQueryString(reponseString));
-                           }];
+  NSURLSession *session = [NSURLSession sharedSession];
+  [[session dataTaskWithRequest:request completionHandler:^(NSData *data,
+                                NSURLResponse *response,
+                                NSError *error) {
+              // handle response
+    NSString *reponseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    completion(nil, CHParametersFromQueryString(reponseString));
+
+    }] resume];
 }
 
 
@@ -249,48 +253,80 @@ static inline NSDictionary *CHParametersFromQueryString(NSString *queryString) {
     authenticate_url = [authenticate_url stringByAppendingFormat:@"&oauth_callback=%@", oauth_callback.utf8AndURLEncode];
   
   
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:authenticate_url]];
-    [request setValue:[NSString stringWithFormat:@"%@/%@ (%@; iOS %@; Scale/%0.2f)", [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString *)kCFBundleExecutableKey] ?: [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString *)kCFBundleIdentifierKey], (__bridge id)CFBundleGetValueForInfoDictionaryKey(CFBundleGetMainBundle(), kCFBundleVersionKey) ?: [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString *)kCFBundleVersionKey], [[UIDevice currentDevice] model], [[UIDevice currentDevice] systemVersion], ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] ? [[UIScreen mainScreen] scale] : 1.0f)] forHTTPHeaderField:@"User-Agent"];
-    
-    _delegateHandler = ^(NSDictionary *oauthParams) {
-        if (oauthParams[@"oauth_verifier"] == nil) {
-            NSError *authenticateError = [NSError errorWithDomain:@"com.ideaflasher.oauth.authenticate" code:0 userInfo:@{@"userInfo" : @"oauth_verifier not received and/or user denied access"}];
-            completion(authenticateError, oauthParams);
-        } else {
-            completion(nil, oauthParams);
-        }
-    };
+  NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:authenticate_url]];
+  //[request setValue:[NSString stringWithFormat:@"%@/%@ (%@; iOS %@; Scale/%0.2f)", [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString *)kCFBundleExecutableKey] ?: [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString *)kCFBundleIdentifierKey], (__bridge id)CFBundleGetValueForInfoDictionaryKey(CFBundleGetMainBundle(), kCFBundleVersionKey) ?: [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString *)kCFBundleVersionKey], [[UIDevice currentDevice] model], [[UIDevice currentDevice] systemVersion], ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] ? [[UIScreen mainScreen] scale] : 1.0f)] forHTTPHeaderField:@"User-Agent"];
+  
+ 
+  _delegateHandler = ^(NSDictionary *oauthParams) {
+    if (oauthParams[@"oauth_verifier"] == nil) {
+      NSError *authenticateError = [NSError errorWithDomain:@"com.ideaflasher.oauth.authenticate" code:0 userInfo:@{@"userInfo" : @"oauth_verifier not received and/or user denied access"}];
+      completion(authenticateError, oauthParams);
+    } else {
+      completion(nil, oauthParams);
+    }
+  };
+
+  dispatch_async(dispatch_get_main_queue(), ^{
     [self.webView loadRequest:request];
+  });
 }
 
 
 
 #pragma mark - Webview delegate
 #pragma mark Turn off spinner
-- (void)webViewDidFinishLoad:(UIWebView *)webView
-{
-    [self.loadingIndicator removeFromSuperview];
-    self.loadingIndicator = nil;
+- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
+  [self.loadingIndicator removeFromSuperview];
+  self.loadingIndicator = nil;
 }
 
-
 #pragma mark Used to detect call back in step 2
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
-{
-    if (_delegateHandler) {
-        // For other Oauth 1.0a service providers than LinkedIn, the callback URL might be part of the query of the URL (after the "?"). In this case use index 1 below. In any case NSLog the request URL after the user taps 'Allow'/'Authenticate' after he/she entered his/her username and password and see where in the URL the call back is. Note for some services the callback URL is set once on their website when registering an app, and the OAUTH_CALLBACK set here is ignored.
-        NSString *urlWithoutQueryString = [request.URL.absoluteString componentsSeparatedByString:@"?"][0];
-        if ([urlWithoutQueryString rangeOfString:OAUTH_CALLBACK].location != NSNotFound)
-        {
-            NSString *queryString = [request.URL.absoluteString substringFromIndex:[request.URL.absoluteString rangeOfString:@"?"].location + 1];
-            NSDictionary *parameters = CHParametersFromQueryString(queryString);
-            parameters = [self removeAppendedSubstringOnVerifierIfPresent:parameters];
-            
-            _delegateHandler(parameters);
-            _delegateHandler = nil;
-        }
-    }
-    return YES;
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction
+decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
+  
+  
+  //this is a 'new window action' (aka target="_blank") > open this URL externally. If we´re doing nothing here, WKWebView will also just do nothing. Maybe this will change in a later stage of the iOS 8 Beta
+  NSString *urlWithoutQueryString = [webView.URL.absoluteString componentsSeparatedByString:@"?"][0];
+  if ([urlWithoutQueryString rangeOfString:OAUTH_CALLBACK].location != NSNotFound) {
+      NSString *queryString = [webView.URL.absoluteString substringFromIndex:[webView.URL.absoluteString rangeOfString:@"?"].location + 1];
+      NSDictionary *parameters = CHParametersFromQueryString(queryString);
+      parameters = [self removeAppendedSubstringOnVerifierIfPresent:parameters];
+      
+      _delegateHandler(parameters);
+      _delegateHandler = nil;
+  }
+  decisionHandler(WKNavigationActionPolicyAllow);
+
+  /*
+  if (_delegateHandler) {
+      // For other Oauth 1.0a service providers than LinkedIn, the callback URL might be part of the query of the URL (after the "?"). In this case use index 1 below. In any case NSLog the request URL after the user taps 'Allow'/'Authenticate' after he/she entered his/her username and password and see where in the URL the call back is. Note for some services the callback URL is set once on their website when registering an app, and the OAUTH_CALLBACK set here is ignored.
+      NSString *urlWithoutQueryString = [webView.URL.absoluteString componentsSeparatedByString:@"?"][0];
+      if ([urlWithoutQueryString rangeOfString:OAUTH_CALLBACK].location != NSNotFound) {
+          NSString *queryString = [webView.URL.absoluteString substringFromIndex:[webView.URL.absoluteString rangeOfString:@"?"].location + 1];
+          NSDictionary *parameters = CHParametersFromQueryString(queryString);
+          parameters = [self removeAppendedSubstringOnVerifierIfPresent:parameters];
+          
+          _delegateHandler(parameters);
+          _delegateHandler = nil;
+      }
+  }
+   */
+}
+
+- (BOOL)webView:(WKWebView *)webView decidePolicyForNavigationAction:decisionHandler {
+  if (_delegateHandler) {
+      // For other Oauth 1.0a service providers than LinkedIn, the callback URL might be part of the query of the URL (after the "?"). In this case use index 1 below. In any case NSLog the request URL after the user taps 'Allow'/'Authenticate' after he/she entered his/her username and password and see where in the URL the call back is. Note for some services the callback URL is set once on their website when registering an app, and the OAUTH_CALLBACK set here is ignored.
+      NSString *urlWithoutQueryString = [webView.URL.absoluteString componentsSeparatedByString:@"?"][0];
+      if ([urlWithoutQueryString rangeOfString:OAUTH_CALLBACK].location != NSNotFound) {
+          NSString *queryString = [webView.URL.absoluteString substringFromIndex:[webView.URL.absoluteString rangeOfString:@"?"].location + 1];
+          NSDictionary *parameters = CHParametersFromQueryString(queryString);
+          parameters = [self removeAppendedSubstringOnVerifierIfPresent:parameters];
+          
+          _delegateHandler(parameters);
+          _delegateHandler = nil;
+      }
+  }
+  return YES;
 }
 
 
@@ -342,12 +378,25 @@ static inline NSDictionary *CHParametersFromQueryString(NSString *queryString) {
     NSString *oAuthHeader = [@"OAuth " stringByAppendingFormat:@"%@", [parameterPairs componentsJoinedByString:@", "]];
     [request setValue:oAuthHeader forHTTPHeaderField:@"Authorization"];
     
+  NSURLSession *session = [NSURLSession sharedSession];
+  [[session dataTaskWithRequest:request completionHandler:^(NSData *data,
+                                NSURLResponse *response,
+                                NSError *error) {
+
+      // handle response
+      NSString *responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+      completion(nil, CHParametersFromQueryString(responseString));
+    }] resume];
+  
+  
+  /*
     [NSURLConnection sendAsynchronousRequest:request
                                        queue:[NSOperationQueue mainQueue]
                            completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
                                NSString *responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
                                completion(nil, CHParametersFromQueryString(responseString));
                            }];
+   */
 }
 
 
