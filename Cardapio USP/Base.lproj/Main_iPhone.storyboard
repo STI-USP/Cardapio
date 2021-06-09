@@ -642,13 +642,13 @@ R$ 0,00</string>
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ex0-R8-d26">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ex0-R8-d26">
                                 <rect key="frame" x="20" y="268" width="98.5" height="98.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="ex0-R8-d26" secondAttribute="height" multiplier="1:1" id="l1N-SP-mJC"/>
                                 </constraints>
-                                <state key="normal" title="RUCard"/>
+                                <state key="normal" image="icone_rucard"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="10"/>
@@ -658,13 +658,13 @@ R$ 0,00</string>
                                     <segue destination="AxZ-1C-gpO" kind="push" id="KMX-Ly-HGd"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m8w-sW-uqz">
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m8w-sW-uqz">
                                 <rect key="frame" x="138.5" y="268" width="98" height="98.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="m8w-sW-uqz" secondAttribute="height" multiplier="1:1" id="uQf-Sq-qpr"/>
                                 </constraints>
-                                <state key="normal" title="Apoio institucional"/>
+                                <state key="normal" image="icone_apoio"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="10"/>
@@ -675,13 +675,13 @@ R$ 0,00</string>
                                     <action selector="showInstitucional:" destination="k9H-OG-xlV" eventType="touchUpInside" id="i39-RC-0b8"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NZE-ES-n2E">
+                            <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NZE-ES-n2E">
                                 <rect key="frame" x="138.5" y="536.5" width="98" height="98.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="NZE-ES-n2E" secondAttribute="height" multiplier="1:1" id="7Du-4z-SKd"/>
                                 </constraints>
-                                <state key="normal" title="Serviço social"/>
+                                <state key="normal" image="icone_social"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="10"/>
@@ -692,13 +692,13 @@ R$ 0,00</string>
                                     <action selector="showServicoSocial:" destination="5nO-Wp-Wxb" eventType="touchUpInside" id="sMt-Ot-MIx"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b84-MO-oXP">
+                            <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b84-MO-oXP">
                                 <rect key="frame" x="138.5" y="402.5" width="98" height="98"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="b84-MO-oXP" secondAttribute="height" multiplier="1:1" id="ub6-4L-XBG"/>
                                 </constraints>
-                                <state key="normal" title="Saúde mental"/>
+                                <state key="normal" image="icone_saude"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="10"/>
@@ -709,13 +709,13 @@ R$ 0,00</string>
                                     <action selector="showSaudeMental:" destination="5nO-Wp-Wxb" eventType="touchUpInside" id="o6H-hB-gQf"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EHN-u4-rk9">
+                            <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EHN-u4-rk9">
                                 <rect key="frame" x="256.5" y="402.5" width="98.5" height="98"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="EHN-u4-rk9" secondAttribute="height" multiplier="1:1" id="6uV-OV-LBx"/>
                                 </constraints>
-                                <state key="normal" title="Moradia"/>
+                                <state key="normal" image="icone_moradia"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="10"/>
@@ -726,13 +726,13 @@ R$ 0,00</string>
                                     <action selector="showMoradia:" destination="5nO-Wp-Wxb" eventType="touchUpInside" id="dcO-So-krr"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zal-DI-etX">
+                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zal-DI-etX">
                                 <rect key="frame" x="256.5" y="268" width="98.5" height="98.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="zal-DI-etX" secondAttribute="height" multiplier="1:1" id="OHD-IG-esW"/>
                                 </constraints>
-                                <state key="normal" title="Transporte"/>
+                                <state key="normal" image="icone_transporte"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="10"/>
@@ -743,13 +743,13 @@ R$ 0,00</string>
                                     <action selector="showTransporte:" destination="k9H-OG-xlV" eventType="touchUpInside" id="dy6-ee-4IC"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c6B-O2-3HW">
+                            <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c6B-O2-3HW">
                                 <rect key="frame" x="20" y="536.5" width="98.5" height="98.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="c6B-O2-3HW" secondAttribute="height" multiplier="1:1" id="47Y-QZ-KUR"/>
                                 </constraints>
-                                <state key="normal" title="Creche"/>
+                                <state key="normal" image="icone_creche"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="10"/>
@@ -760,13 +760,13 @@ R$ 0,00</string>
                                     <action selector="showCreche:" destination="k9H-OG-xlV" eventType="touchUpInside" id="tnl-R7-ZZL"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W7c-eG-T4I">
+                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W7c-eG-T4I">
                                 <rect key="frame" x="20" y="402.5" width="98.5" height="98"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="W7c-eG-T4I" secondAttribute="height" multiplier="1:1" id="6ad-Kw-HP9"/>
                                 </constraints>
-                                <state key="normal" title="Avisos"/>
+                                <state key="normal" image="icone_avisos"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="10"/>
@@ -777,13 +777,13 @@ R$ 0,00</string>
                                     <action selector="showAvisos:" destination="k9H-OG-xlV" eventType="touchUpInside" id="SdP-LZ-v4D"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GmK-oa-DP4">
+                            <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GmK-oa-DP4">
                                 <rect key="frame" x="256.5" y="536.5" width="98.5" height="98.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="GmK-oa-DP4" secondAttribute="height" multiplier="1:1" id="mDe-66-o40"/>
                                 </constraints>
-                                <state key="normal" title="Acolhe USP"/>
+                                <state key="normal" image="icone_acolhe"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="10"/>
@@ -1549,8 +1549,17 @@ Sobremesa: Espumone de uva
         <segue reference="SoV-R3-dON"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="icone_acolhe" width="100" height="100"/>
+        <image name="icone_apoio" width="100" height="100"/>
+        <image name="icone_avisos" width="100" height="100"/>
+        <image name="icone_creche" width="100" height="100"/>
+        <image name="icone_moradia" width="100" height="100"/>
+        <image name="icone_rucard" width="100" height="100"/>
+        <image name="icone_saude" width="100" height="100"/>
+        <image name="icone_social" width="100" height="100"/>
+        <image name="icone_transporte" width="100" height="100"/>
         <image name="menu" width="22" height="17"/>
-        <image name="talheres" width="43" height="62"/>
+        <image name="talheres" width="100" height="100"/>
         <systemColor name="groupTableViewBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
