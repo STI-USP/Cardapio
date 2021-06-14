@@ -169,7 +169,7 @@ alpha:1.0]
   self.infoButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
   self.infoButton.frame = CGRectMake(width, height, 24., 24.);
   self.infoButton.layer.cornerRadius = self.infoButton.layer.frame.size.width/2;
-  self.infoButton.backgroundColor = UIColorFromRGB(0x00A4B9);
+  self.infoButton.backgroundColor = [UIColor colorNamed:@"usp_green"];
   self.infoButton.tintColor = [UIColor whiteColor];
   //[self.infoButton setImage:[UIImage imageNamed:@"CameraButton56x56.png"] forState:UIControlStateNormal];
   [self.infoButton addTarget:self action:@selector(showInfo) forControlEvents:UIControlEventTouchUpInside];

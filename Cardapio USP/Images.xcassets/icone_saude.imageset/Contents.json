@@ -1,17 +1,50 @@
 {
   "images" : [
     {
-      "filename" : "SAS_ICONESArtboard 19.png",
+      "filename" : "SAS lightArtboard 6_3@1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "SAS_ICONESArtboard 19@2x.png",
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "SAS darkArtboard 6_3@1x.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "SAS lightArtboard 6_3@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "SAS_ICONESArtboard 19@3x.png",
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "SAS darkArtboard 6_3@2x.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "SAS lightArtboard 6_3@3x.png",
+      "idiom" : "universal",
+      "scale" : "3x"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "SAS darkArtboard 6_3@2x-1.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

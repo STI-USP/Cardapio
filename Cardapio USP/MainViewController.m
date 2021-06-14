@@ -104,53 +104,23 @@
     CGSize size = [_cardapioAtual.text sizeWithAttributes:@{NSFontAttributeName:_cardapioAtual.font}];
     if (size.height > _cardapioAtual.bounds.size.height) {
     
-
-      [_expandMenuView setHidden:NO];
-      
-      //only apply the blur if the user hasn't disabled transparency effects
-      if (!UIAccessibilityIsReduceTransparencyEnabled()) {
-
-        UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
-        blurEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
-        blurEffectView.frame = self.view.bounds;
-        blurEffectView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-
-        [self.view insertSubview:blurEffectView atIndex:18];
-      }
-
-
-      //self.heightConstraint.active = NO;
-
-      /*
-      CGFloat multiplier = 0.33 + ((size.height-60)/self.view.bounds.size.height);
-      newHeightConstraint = [NSLayoutConstraint constraintWithItem:_expandMenuView
-                                                      attribute:NSLayoutAttributeHeight
-                                                      relatedBy:NSLayoutRelationEqual
-                                                         toItem:self.view
-                                                      attribute:NSLayoutAttributeHeight
-                                                     multiplier:multiplier
-                                                       constant:0.0];
-       */
-      
-      //[self.view addSubview:_expandMenuView];
-      //[self.view addConstraint:newHeightConstraint];
-      //[self.menuView updateConstraints];
-      //[self.view layoutIfNeeded];
     }
+
+    [_expandMenuView setHidden:NO];
     
+    //only apply the blur if the user hasn't disabled transparency effects
+    if (!UIAccessibilityIsReduceTransparencyEnabled()) {
+
+      UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleSystemMaterial];
+      blurEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+      blurEffectView.frame = self.view.bounds;
+      blurEffectView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+
+      [self.view insertSubview:blurEffectView atIndex:18];
+    }
+
     NSLog(@"Long press");
   } else if (longpress.state == UIGestureRecognizerStateEnded || longpress.state == UIGestureRecognizerStateCancelled || longpress.state == UIGestureRecognizerStateFailed) {
-
-    //[_expandMenuView setHidden:YES];
-
-    /*
-    [_expandMenuView removeFromSuperview];
-    self.heightConstraint.active = YES;
-    [self.view removeConstraint:newHeightConstraint];
-    [self.menuView updateConstraints];
-    [self.view layoutIfNeeded];
-    */
-    
     NSLog(@"long press done");
   }
 }
