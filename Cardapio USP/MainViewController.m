@@ -166,7 +166,7 @@
 
       case 2:
         title = @"Transporte";
-        urlString = @"https://sites.usp.br/sas/passe-escolar/";
+        urlString = @"https://sas.usp.br/passe-escolar/";
         break;
 
       case 3:
@@ -196,7 +196,7 @@
 
       case 8:
         title = @"Acolhe USP";
-        urlString = @"https://sites.usp.br/sas/acolhe-usp-2/";
+        urlString = @"https://sas.usp.br/acolheusp/";
         break;
 
       default:
