@@ -99,15 +99,14 @@
 - (void)onPress:(UILongPressGestureRecognizer*)longpress {
 
   if (longpress.state == UIGestureRecognizerStateBegan) {
-    
+
+    /*
     //verifica se texto está truncado
     CGSize size = [_cardapioAtual.text sizeWithAttributes:@{NSFontAttributeName:_cardapioAtual.font}];
     if (size.height > _cardapioAtual.bounds.size.height) {
-    
     }
+     */
 
-    [_expandMenuView setHidden:NO];
-    
     //only apply the blur if the user hasn't disabled transparency effects
     if (!UIAccessibilityIsReduceTransparencyEnabled()) {
 
@@ -118,22 +117,30 @@
 
       [self.view insertSubview:blurEffectView atIndex:18];
     }
+    
+    [_expandMenuView setHidden:NO];
+    
+    
+    //feedback haptico
+    UIImpactFeedbackGenerator *gen = [[UIImpactFeedbackGenerator alloc] initWithStyle:(UIImpactFeedbackStyleMedium)];
+    [gen impactOccurred];
+    gen = NULL;
+    
 
-    NSLog(@"Long press");
+    //NSLog(@"Long press");
   } else if (longpress.state == UIGestureRecognizerStateEnded || longpress.state == UIGestureRecognizerStateCancelled || longpress.state == UIGestureRecognizerStateFailed) {
-    NSLog(@"long press done");
+    //NSLog(@"long press done");
   }
 }
 
 //recolhe menu expandido e retira transparencia
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event  {
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 
   [blurEffectView removeFromSuperview];
   
   UITouch *touch = [touches anyObject];
-  if(touch.view != self.expandMenuView) {
+  if(touch.view != self.expandMenuView)
     [_expandMenuView setHidden:YES];
-  }
 }
 
 
