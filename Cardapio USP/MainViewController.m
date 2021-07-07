@@ -149,10 +149,23 @@
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
   
+  //DEV
+
+  NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:@"https://dev.uspdigital.usp.br/mobile/json/sas.json"]];
+  NSError *error = nil;
+  
+  NSMutableDictionary *dcResponse = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingMutableContainers | NSJSONReadingMutableLeaves error:&error];
+
+  if (error) {
+    NSLog(@"%@",[error localizedDescription]);
+  }
+
+  
+  
   //Web Content
   if ([[segue identifier] isEqualToString:@"showWebContent"]) {
-    NSString *urlString = @"";
-    NSString *title = @"";
+    NSString *urlString = @"https://sas.usp.br/";
+    NSString *title = @"SAS";
     
     UIButton *btn = (UIButton *)sender;
     switch (btn.tag) {
@@ -160,47 +173,88 @@
         break;
 
       case 1:
-        title = @"Apoio Institucional";
-        urlString = @"https://sites.usp.br/sas/";
+        for (id object in dcResponse) {
+          if ([[object valueForKey:@"servico"] isEqualToString:@"apoio institucional"]) {
+            title = @"Apoio Institucional";
+            urlString = [object valueForKey:@"url"];
+            NSLog(@"%@", urlString);
+          }
+        }
         break;
 
       case 2:
-        title = @"Transporte";
-        urlString = @"https://sas.usp.br/passe-escolar/";
+        for (id object in dcResponse) {
+          if ([[object valueForKey:@"servico"] isEqualToString:@"transporte"]) {
+            title = @"Transporte";
+            urlString = [object valueForKey:@"url"];
+            NSLog(@"%@", urlString);
+          }
+        }
         break;
 
       case 3:
-        title = @"Avisos";
-        urlString = @"https://sites.usp.br/sas/avisos-gerais/";
+        for (id object in dcResponse) {
+          if ([[object valueForKey:@"servico"] isEqualToString:@"restaurantes"]) {
+            title = @"Avisos";
+            urlString = [object valueForKey:@"url"];
+            NSLog(@"%@", urlString);
+          }
+        }
         break;
 
       case 4:
-        title = @"Saúde Mental";
-        urlString = @"https://sites.usp.br/sas/";
+        for (id object in dcResponse) {
+          if ([[object valueForKey:@"servico"] isEqualToString:@"saude mental"]) {
+            title = @"Saúde Mental";
+            urlString = [object valueForKey:@"url"];
+            NSLog(@"%@", urlString);
+          }
+        }
         break;
 
       case 5:
-        title = @"Moradia";
-        urlString = @"https://sites.usp.br/sas/moradia/";
+        for (id object in dcResponse) {
+          if ([[object valueForKey:@"servico"] isEqualToString:@"moradia"]) {
+            title = @"Moradia";
+            urlString = [object valueForKey:@"url"];
+            NSLog(@"%@", urlString);
+          }
+        }
         break;
 
       case 6:
-        title = @"Creche";
-        urlString = @"https://sites.usp.br/sas/";
+        for (id object in dcResponse) {
+          if ([[object valueForKey:@"servico"] isEqualToString:@"creche"]) {
+            title = @"Creche";
+            urlString = [object valueForKey:@"url"];
+            NSLog(@"%@", urlString);
+          }
+        }
         break;
 
       case 7:
-        title = @"Serviço Social";
-        urlString = @"https://sites.usp.br/sas/";
+        for (id object in dcResponse) {
+          if ([[object valueForKey:@"servico"] isEqualToString:@"servico social"]) {
+            title = @"Serviço Social";
+            urlString = [object valueForKey:@"url"];
+            NSLog(@"%@", urlString);
+          }
+        }
         break;
 
       case 8:
-        title = @"Acolhe USP";
-        urlString = @"https://sas.usp.br/acolheusp/";
+        for (id object in dcResponse) {
+          if ([[object valueForKey:@"servico"] isEqualToString:@"acolhe USP"]) {
+            title = @"Acolhe USP";
+            urlString = [object valueForKey:@"url"];
+            NSLog(@"%@", urlString);
+          }
+        }
         break;
 
       default:
         urlString = @"https://sites.usp.br/sas/";
+        title = @"SAS";
         break;
     }
     
