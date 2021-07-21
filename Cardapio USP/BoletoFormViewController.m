@@ -33,10 +33,9 @@
   
   UIToolbar *keyboardDoneButtonView = [[UIToolbar alloc] init];
   [keyboardDoneButtonView sizeToFit];
-  UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"   OK" style:UIBarButtonItemStylePlain target:self action:@selector(doneClicked:)];
+  UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"OK" style:UIBarButtonItemStylePlain target:self action:@selector(doneClicked:)];
   [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:doneButton, nil]];
   _maisCreditos.inputAccessoryView = keyboardDoneButtonView;
-  [_maisCreditos setFont:[UIFont systemFontOfSize:17]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -56,6 +55,9 @@
 
 - (IBAction)gerarBoleto:(id)sender {
   //[self dismissViewControllerAnimated:NO completion:nil];
+  
+  [self.view endEditing:YES];
+
   
   NSString *numberString;
   
@@ -106,7 +108,7 @@
     [textField setText:[[NSString stringWithFormat:@"R$ %.2f", [value floatValue]]stringByReplacingOccurrencesOfString:@"." withString:@","]];
 
   } else {
-    [SVProgressHUD showErrorWithStatus:@"Insira um valor entre R$20,00 e R$200,00"];
+    [SVProgressHUD showInfoWithStatus:@"Insira um valor entre R$20,00 e R$200,00"];
   }
 }
 

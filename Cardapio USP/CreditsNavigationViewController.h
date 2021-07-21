@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SWRevealViewController.h"
 
-@interface CreditsNavigationViewController : UINavigationController
+@interface CreditsNavigationViewController : UINavigationController <SWRevealViewControllerDelegate>
 
 @end

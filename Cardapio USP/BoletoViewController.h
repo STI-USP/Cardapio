@@ -7,13 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SWRevealViewController.h"
 
-@interface BoletoViewController : UIViewController
+@interface BoletoViewController : UIViewController <SWRevealViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *valorLabel;
 @property (weak, nonatomic) IBOutlet UILabel *vencimentoLabel;
 @property (weak, nonatomic) IBOutlet UILabel *codBarrasLabel;
 @property (weak, nonatomic) IBOutlet UILabel *emailTxt;
+@property (weak, nonatomic) IBOutlet UIButton *okButton;
 
 
 - (IBAction)dismiss:(id)sender;

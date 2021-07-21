@@ -39,7 +39,7 @@
   boletoDataModel = [BoletoDataModel sharedInstance];
   oauth = [OAuthUSP sharedInstance];
   
-  [_saldoLabel setText:@"Saldo do RUCard \n"];
+  [_saldoLabel setText:@"R$ --,--"];
   
   //Notificacoes
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRecieveCredits:) name:@"DidReceiveCredits" object:nil];
@@ -48,6 +48,15 @@
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didCreateBill:) name:@"DidCreateBill" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveBill:) name:@"DidReceiveBill" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRegisterUser:) name:@"DidRegisterUser" object:nil];
+  
+  //Reveal View Controller ----------------
+  SWRevealViewController *revealViewController = self.revealViewController;
+  if (revealViewController) {
+    [self.revealViewController panGestureRecognizer];
+    [self.revealViewController tapGestureRecognizer];
+    self.revealViewController.delegate = self;
+  }
+
   
 }
 
@@ -64,7 +73,8 @@
     [self presentViewController:loginViewController animated:YES completion:nil];
   } else {
     [dataModel getCreditoRUCard];
-    [self.navigationItem setTitle:[[[dataModel.userData objectForKey:@"nomeUsuario"] componentsSeparatedByString:@" "] objectAtIndex:0]];
+    [_username setText:[dataModel.userData objectForKey:@"nomeUsuario"]];
+    //[self.navigationItem setTitle:[[[dataModel.userData objectForKey:@"nomeUsuario"] componentsSeparatedByString:@" "] objectAtIndex:0]];
   }
 }
 
@@ -84,10 +94,12 @@
 
 - (void)didRecieveCredits:(NSNotification *)notification {
   NSMutableString *message = nil;
-  message = [NSMutableString stringWithFormat: @"Saldo do RUCard \nR$ %@", [dataModel ruCardCredit]];
+  message = [NSMutableString stringWithFormat: @"R$ %@", [dataModel ruCardCredit]];
   [_saldoLabel setNumberOfLines:0];
   [_saldoLabel setLineBreakMode:NSLineBreakByWordWrapping];
   [_saldoLabel setText:message];
+  
+  [_username setText:[dataModel.userData objectForKey:@"nomeUsuario"]];
 }
 
 - (void)didRecieveCreditsError:(NSNotification *)notification {
@@ -140,6 +152,14 @@
 
 - (IBAction)dismiss:(id)sender {
   [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+#pragma mark - SWRevealViewControllerDelegate
+
+// Implement this to return NO when you want the pan gesture recognizer to be ignored
+- (BOOL)revealControllerPanGestureShouldBegin:(SWRevealViewController *)revealController {
+  return NO;
 }
 
 @end

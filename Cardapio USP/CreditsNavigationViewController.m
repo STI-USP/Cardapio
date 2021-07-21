@@ -17,6 +17,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+  
+  //Reveal View Controller ----------------
+  SWRevealViewController *revealViewController = self.revealViewController;
+  if (revealViewController) {
+    [self.revealViewController panGestureRecognizer];
+    [self.revealViewController tapGestureRecognizer];
+    self.revealViewController.delegate = self;
+  }
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -33,5 +42,12 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+#pragma mark - SWRevealViewControllerDelegate
+
+// Implement this to return NO when you want the pan gesture recognizer to be ignored
+- (BOOL)revealControllerPanGestureShouldBegin:(SWRevealViewController *)revealController {
+  return NO;
+}
 
 @end
