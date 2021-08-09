@@ -174,8 +174,8 @@
 
       case 1:
         for (id object in dcResponse) {
-          if ([[object valueForKey:@"servico"] isEqualToString:@"apoio institucional"]) {
-            title = @"Apoio Institucional";
+          if ([[object valueForKey:@"servico"] isEqualToString:@"apoio estudantil"]) {
+            title = @"Apoio Estudantil";
             urlString = [object valueForKey:@"url"];
             NSLog(@"%@", urlString);
           }
