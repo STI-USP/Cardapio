@@ -140,7 +140,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Nwn-hH-S3C" secondAttribute="height" multiplier="2:1" id="bx5-1g-JrS"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="34"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                                 <userDefinedRuntimeAttributes>
@@ -368,7 +368,7 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
+                        <color key="backgroundColor" red="0.88235294117647056" green="0.88235294117647056" blue="0.89803921568627454" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="aFE-d4-dht" secondAttribute="trailing" constant="20" symbolic="YES" id="8ua-NO-Vnt"/>
                             <constraint firstItem="Quy-Cy-3Tx" firstAttribute="top" secondItem="z5E-aD-rbv" secondAttribute="bottom" constant="48" id="LtF-m6-2VS"/>

@@ -37,9 +37,9 @@ DataModel *dataModel;
   [dataModel getRestaurantList];
   
   [self.window setTintColor:UIColorFromRGB(0x1094AB)];
-  [[UIView appearance] setTintColor:UIColorFromRGB(0x1094AB)];
+  //[[UIView appearance] setTintColor:UIColorFromRGB(0x1094AB)];
 
-
+  
   return YES;
 }
 							
