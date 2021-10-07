@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import <WebKit/WebKit.h>
+#import "SWRevealViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface WebViewController : UIViewController <WKNavigationDelegate>
+@interface WebViewController : UIViewController <WKNavigationDelegate, SWRevealViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet WKWebView *webview;
 @property (strong, nonatomic) NSString *urlString;

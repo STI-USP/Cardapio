@@ -20,6 +20,16 @@
   // Do any additional setup after loading the view.
   [self.view addSubview:_webview];
   _webview.navigationDelegate = self;
+  
+  
+  //Reveal View Controller ----------------
+  SWRevealViewController *revealViewController = self.revealViewController;
+  if (revealViewController) {
+    [self.revealViewController panGestureRecognizer];
+    [self.revealViewController tapGestureRecognizer];
+    self.revealViewController.delegate = self;
+  }
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -79,5 +89,13 @@
     decisionHandler(WKNavigationActionPolicyAllow);
   }
 }
+
+#pragma mark - SWRevealViewControllerDelegate
+
+// Implement this to return NO when you want the pan gesture recognizer to be ignored
+- (BOOL)revealControllerPanGestureShouldBegin:(SWRevealViewController *)revealController {
+  return NO;
+}
+
 
 @end
