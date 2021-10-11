@@ -98,7 +98,7 @@ alpha:1.0]
   cell.textLabel.font = [UIFont systemFontOfSize:14.0];
   cell.textLabel.text = name;
  
-  UIButton *favButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+  UIButton *favButton = [UIButton buttonWithType:UIButtonTypeCustom];
   favButton.frame = CGRectMake(240.0f, 5.0f, 25.0f, 30.0f);
   //[favButton setImage:[UIImage imageNamed:@"fav.png"] forState:UIControlStateNormal];
   
@@ -107,6 +107,7 @@ alpha:1.0]
   if ([[prefRestaurant valueForKey:@"id"] isEqualToString:[[[[campiList objectAtIndex:indexPath.section] valueForKey:@"restaurants"]objectAtIndex:indexPath.row] valueForKey:@"id"]]) {
     [favButton setImage:[UIImage imageNamed:@"fav_yes"] forState:UIControlStateNormal];
     [favButton setTintColor:UIColorFromRGB(0xF5A616)];
+    
   } else {
     [favButton setImage:[UIImage imageNamed:@"fav_no"] forState:UIControlStateNormal];
     [favButton setTintColor:[UIColor colorWithWhite:0.7 alpha:0.5]];
