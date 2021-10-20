@@ -49,6 +49,14 @@
   }
 
   self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+
+  
+  [self.navigationItem.backBarButtonItem setImage:[UIImage imageNamed:@"home"]];
+  
+  //[[UINavigationBar appearance] setBackIndicatorImage:[UIImage systemImageNamed:@"homekit"]];
+  //[[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:[UIImage systemImageNamed:@"homekit"]];
+
+  
   
   //Notificacoes
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveMenu:) name:@"DidReceiveMenu" object:nil];
@@ -262,7 +270,7 @@
     
     WebViewController *webViewController = (WebViewController *)[segue destinationViewController];
     webViewController.urlString = urlString;
-    webViewController.navTitle = title;
+    //webViewController.navTitle = title;
     
   } else if ([[segue identifier] isEqualToString:@"showWeekMenu"]) {
     [blurEffectView removeFromSuperview];

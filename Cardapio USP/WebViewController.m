@@ -19,9 +19,10 @@
   [super viewDidLoad];
   // Do any additional setup after loading the view.
   [self.view addSubview:_webview];
+
   _webview.navigationDelegate = self;
-  
-  
+  _webview.allowsBackForwardNavigationGestures = true;
+    
   //Reveal View Controller ----------------
   SWRevealViewController *revealViewController = self.revealViewController;
   if (revealViewController) {
@@ -35,6 +36,10 @@
 - (void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
   [self.navigationItem setTitle:self.navTitle];
+
+  [_goBackBtn setEnabled:NO];
+  [_goForwardBtn setEnabled:NO];
+
   [SVProgressHUD show];
 }
 
@@ -56,6 +61,14 @@
 }
 */
 
+- (IBAction)forwardPressed:(id)sender {
+  [_webview goForward];
+}
+
+- (IBAction)backPressed:(id)sender {
+  [_webview goBack];
+}
+
 - (void)webView:(WKWebView *)webView didCommitNavigation:(WKNavigation *)navigation {
   NSLog(@"didCommitNavigation");
 }
@@ -63,6 +76,11 @@
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
   NSLog(@"didFinishNavigation");
   [SVProgressHUD dismiss];
+
+  self.navigationController.interactivePopGestureRecognizer.enabled = _webview.canGoBack ? NO : YES;
+  [_goBackBtn setEnabled:_webview.canGoBack];
+  [_goForwardBtn setEnabled:_webview.canGoForward];
+  
 }
 
 - (void)webView:(WKWebView *)webView didFailNavigation:(WKNavigation *)navigation withError:(NSError *)error {
