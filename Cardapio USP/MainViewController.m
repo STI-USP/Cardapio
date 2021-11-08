@@ -209,7 +209,7 @@
           if ([[object valueForKey:@"servico"] isEqualToString:@"avisos"]) {
             title = @"Avisos";
             //urlString = [object valueForKey:@"url"];
-            urlString = @"https://sas.usp.br/";
+            urlString = @"https://sas.usp.br/novidades/";
             NSLog(@"%@", urlString);
           }
         }
