@@ -22,6 +22,8 @@
   DataModel *dataModel;
   OAuthUSP *oauth;
   
+  NSMutableDictionary *dcResponse;
+  
   NSMutableArray *menuArray;
   Menu *mainMenu;
   Period *period;
@@ -102,6 +104,20 @@
 
 - (void)viewDidAppear:(BOOL)animated {
   [super viewDidAppear:animated];
+  
+  //DEV
+  NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:@"https://dev.uspdigital.usp.br/mobile/json/sas.json"]];
+  NSError *error = nil;
+  
+  if (data) {
+    dcResponse = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingMutableContainers | NSJSONReadingMutableLeaves error:&error];
+  }
+
+  if (error) {
+    NSLog(@"%@",[error localizedDescription]);
+  }
+
+
 }
 
 
@@ -157,129 +173,131 @@
 
 #pragma mark - Navigation
 // In a storyboard-based application, you will often want to do a little preparation before navigation
+
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
+
+  if ([identifier isEqualToString:@"showWebContent"]) {
+    if (dcResponse) {
+      return true;
+    } else {
+      return false;
+    }
+  } else {
+    return true;
+  }
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
   
-  //DEV
 
-  NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:@"https://dev.uspdigital.usp.br/mobile/json/sas.json"]];
-  NSError *error = nil;
-  
-  NSMutableDictionary *dcResponse = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingMutableContainers | NSJSONReadingMutableLeaves error:&error];
-
-  if (error) {
-    NSLog(@"%@",[error localizedDescription]);
-  }
-
-  
-  
   //Web Content
   if ([[segue identifier] isEqualToString:@"showWebContent"]) {
+    
     NSString *urlString = @"https://sas.usp.br/";
     NSString *title = @"SAS";
-    
-    UIButton *btn = (UIButton *)sender;
-    switch (btn.tag) {
-      case 0: //RUCard
-        break;
+      
+      UIButton *btn = (UIButton *)sender;
+      switch (btn.tag) {
+        case 0: //RUCard
+          break;
 
-      case 1:
-        for (id object in dcResponse) {
-          if ([[object valueForKey:@"servico"] isEqualToString:@"apoio estudantil"]) {
-            title = @"Apoio Estudantil";
-            //urlString = [object valueForKey:@"url"];
-            urlString = @"https://sas.usp.br/a-estudantil-princ/";
-            NSLog(@"%@", urlString);
+        case 1:
+          for (id object in dcResponse) {
+            if ([[object valueForKey:@"servico"] isEqualToString:@"apoio estudantil"]) {
+              title = @"Apoio Estudantil";
+              //urlString = [object valueForKey:@"url"];
+              urlString = @"https://sas.usp.br/a-estudantil-princ/";
+              NSLog(@"%@", urlString);
+            }
           }
-        }
-        break;
+          break;
 
-      case 2:
-        for (id object in dcResponse) {
-          if ([[object valueForKey:@"servico"] isEqualToString:@"transporte"]) {
-            title = @"Transporte";
-            //urlString = [object valueForKey:@"url"];
-            urlString = @"https://sas.usp.br/transporte-princ/";
-            NSLog(@"%@", urlString);
+        case 2:
+          for (id object in dcResponse) {
+            if ([[object valueForKey:@"servico"] isEqualToString:@"transporte"]) {
+              title = @"Transporte";
+              //urlString = [object valueForKey:@"url"];
+              urlString = @"https://sas.usp.br/transporte-princ/";
+              NSLog(@"%@", urlString);
+            }
           }
-        }
-        break;
+          break;
 
-      case 3:
-        for (id object in dcResponse) {
-          if ([[object valueForKey:@"servico"] isEqualToString:@"avisos"]) {
-            title = @"Avisos";
-            //urlString = [object valueForKey:@"url"];
-            urlString = @"https://sas.usp.br/novidades/";
-            NSLog(@"%@", urlString);
+        case 3:
+          for (id object in dcResponse) {
+            if ([[object valueForKey:@"servico"] isEqualToString:@"avisos"]) {
+              title = @"Avisos";
+              //urlString = [object valueForKey:@"url"];
+              urlString = @"https://sas.usp.br/novidades/";
+              NSLog(@"%@", urlString);
+            }
           }
-        }
-        break;
+          break;
 
-      case 4:
-        for (id object in dcResponse) {
-          if ([[object valueForKey:@"servico"] isEqualToString:@"saude mental"]) {
-            title = @"Saúde Mental";
-            //urlString = [object valueForKey:@"url"];
-            urlString = @"https://sas.usp.br/saude-mental-princ/";
-            NSLog(@"%@", urlString);
+        case 4:
+          for (id object in dcResponse) {
+            if ([[object valueForKey:@"servico"] isEqualToString:@"saude mental"]) {
+              title = @"Saúde Mental";
+              //urlString = [object valueForKey:@"url"];
+              urlString = @"https://sas.usp.br/saude-mental-princ/";
+              NSLog(@"%@", urlString);
+            }
           }
-        }
-        break;
+          break;
 
-      case 5:
-        for (id object in dcResponse) {
-          if ([[object valueForKey:@"servico"] isEqualToString:@"moradia"]) {
-            title = @"Moradia";
-            //urlString = [object valueForKey:@"url"];
-            urlString = @"https://sas.usp.br/moradia-princ/";
-            NSLog(@"%@", urlString);
+        case 5:
+          for (id object in dcResponse) {
+            if ([[object valueForKey:@"servico"] isEqualToString:@"moradia"]) {
+              title = @"Moradia";
+              //urlString = [object valueForKey:@"url"];
+              urlString = @"https://sas.usp.br/moradia-princ/";
+              NSLog(@"%@", urlString);
+            }
           }
-        }
-        break;
+          break;
 
-      case 6:
-        for (id object in dcResponse) {
-          if ([[object valueForKey:@"servico"] isEqualToString:@"creche"]) {
-            title = @"Creche";
-            //urlString = [object valueForKey:@"url"];
-            urlString = @"https://sas.usp.br/creche-princ/";
-            NSLog(@"%@", urlString);
+        case 6:
+          for (id object in dcResponse) {
+            if ([[object valueForKey:@"servico"] isEqualToString:@"creche"]) {
+              title = @"Creche";
+              //urlString = [object valueForKey:@"url"];
+              urlString = @"https://sas.usp.br/creche-princ/";
+              NSLog(@"%@", urlString);
+            }
           }
-        }
-        break;
+          break;
 
-      case 7:
-        for (id object in dcResponse) {
-          if ([[object valueForKey:@"servico"] isEqualToString:@"servico social"]) {
-            title = @"Serviço Social";
-            //urlString = [object valueForKey:@"url"];
-            urlString = @"https://sas.usp.br/servico-social-princ/";
-            NSLog(@"%@", urlString);
+        case 7:
+          for (id object in dcResponse) {
+            if ([[object valueForKey:@"servico"] isEqualToString:@"servico social"]) {
+              title = @"Serviço Social";
+              //urlString = [object valueForKey:@"url"];
+              urlString = @"https://sas.usp.br/servico-social-princ/";
+              NSLog(@"%@", urlString);
+            }
           }
-        }
-        break;
+          break;
 
-      case 8:
-        for (id object in dcResponse) {
-          if ([[object valueForKey:@"servico"] isEqualToString:@"acolhe USP"]) {
-            title = @"Acolhe USP";
-            //urlString = [object valueForKey:@"url"];
-            urlString = @"https://sas.usp.br/acolhe-princ/";
-            NSLog(@"%@", urlString);
+        case 8:
+          for (id object in dcResponse) {
+            if ([[object valueForKey:@"servico"] isEqualToString:@"acolhe USP"]) {
+              title = @"Acolhe USP";
+              //urlString = [object valueForKey:@"url"];
+              urlString = @"https://sas.usp.br/acolhe-princ/";
+              NSLog(@"%@", urlString);
+            }
           }
-        }
-        break;
+          break;
 
-      default:
-        urlString = @"https://sites.usp.br/sas/";
-        title = @"SAS";
-        break;
-    }
-    
-    WebViewController *webViewController = (WebViewController *)[segue destinationViewController];
-    webViewController.urlString = urlString;
-    //webViewController.navTitle = title;
-    
+        default:
+          urlString = @"https://sites.usp.br/sas/";
+          title = @"SAS";
+          break;
+      }
+      
+      WebViewController *webViewController = (WebViewController *)[segue destinationViewController];
+      webViewController.urlString = urlString;
+      //webViewController.navTitle = title;
   } else if ([[segue identifier] isEqualToString:@"showWeekMenu"]) {
     [blurEffectView removeFromSuperview];
     [_expandMenuView setHidden:YES];
@@ -452,36 +470,67 @@ static void setupView(MainViewController *object) {
 }
 
 - (IBAction)showAcolhe:(id)sender {
-  
-  [self performSegueWithIdentifier:@"showWebContent" sender:(UIButton *)sender];
+  if ([self shouldPerformSegueWithIdentifier:@"showWebContent" sender:self]) {
+    [self performSegueWithIdentifier:@"showWebContent" sender:(UIButton *)sender];
+  } else {
+    [SVProgressHUD showInfoWithStatus:@"Serviço indisponível. Tente novamente mais tarde."];
+  }
 }
 
 - (IBAction)showServicoSocial:(id)sender {
-  [self performSegueWithIdentifier:@"showWebContent" sender:(UIButton *)sender];
+  if ([self shouldPerformSegueWithIdentifier:@"showWebContent" sender:self]) {
+    [self performSegueWithIdentifier:@"showWebContent" sender:(UIButton *)sender];
+  } else {
+    [SVProgressHUD showInfoWithStatus:@"Serviço indisponível. Tente novamente mais tarde."];
+  }
 }
 
 - (IBAction)showCreche:(id)sender {
-  [self performSegueWithIdentifier:@"showWebContent" sender:(UIButton *)sender];
+  if ([self shouldPerformSegueWithIdentifier:@"showWebContent" sender:self]) {
+    [self performSegueWithIdentifier:@"showWebContent" sender:(UIButton *)sender];
+  } else {
+    [SVProgressHUD showInfoWithStatus:@"Serviço indisponível. Tente novamente mais tarde."];
+  }
 }
 
 - (IBAction)showMoradia:(id)sender {
-  [self performSegueWithIdentifier:@"showWebContent" sender:(UIButton *)sender];
+  if ([self shouldPerformSegueWithIdentifier:@"showWebContent" sender:self]) {
+    [self performSegueWithIdentifier:@"showWebContent" sender:(UIButton *)sender];
+  } else {
+    [SVProgressHUD showInfoWithStatus:@"Serviço indisponível. Tente novamente mais tarde."];
+  }
 }
 
 - (IBAction)showSaudeMental:(id)sender {
-  [self performSegueWithIdentifier:@"showWebContent" sender:sender];
+  if ([self shouldPerformSegueWithIdentifier:@"showWebContent" sender:self]) {
+    [self performSegueWithIdentifier:@"showWebContent" sender:(UIButton *)sender];
+  } else {
+    [SVProgressHUD showInfoWithStatus:@"Serviço indisponível. Tente novamente mais tarde."];
+  }
 }
 
 - (IBAction)showAvisos:(id)sender {
-  [self performSegueWithIdentifier:@"showWebContent" sender:sender];
+  if ([self shouldPerformSegueWithIdentifier:@"showWebContent" sender:self]) {
+    [self performSegueWithIdentifier:@"showWebContent" sender:(UIButton *)sender];
+  } else {
+    [SVProgressHUD showInfoWithStatus:@"Serviço indisponível. Tente novamente mais tarde."];
+  }
 }
 
 - (IBAction)showTransporte:(id)sender {
-  [self performSegueWithIdentifier:@"showWebContent" sender:sender];
+  if ([self shouldPerformSegueWithIdentifier:@"showWebContent" sender:self]) {
+    [self performSegueWithIdentifier:@"showWebContent" sender:(UIButton *)sender];
+  } else {
+    [SVProgressHUD showInfoWithStatus:@"Serviço indisponível. Tente novamente mais tarde."];
+  }
 }
 
 - (IBAction)showInstitucional:(id)sender {
-  [self performSegueWithIdentifier:@"showWebContent" sender:sender];
+  if ([self shouldPerformSegueWithIdentifier:@"showWebContent" sender:self]) {
+    [self performSegueWithIdentifier:@"showWebContent" sender:(UIButton *)sender];
+  } else {
+    [SVProgressHUD showInfoWithStatus:@"Serviço indisponível. Tente novamente mais tarde."];
+  }
 }
 
 - (void)didChangeRestaurant:(NSNotification *)notification {
