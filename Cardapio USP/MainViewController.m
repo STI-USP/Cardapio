@@ -438,16 +438,19 @@ static void setupView(MainViewController *object) {
     diaDaSemana = (int)weekday;
   }
 
-  //Data
-  NSString *strData = [NSString stringWithFormat:@"%@", [[menuArray objectAtIndex:diaDaSemana] date]];
-  NSString *strDay = [NSString stringWithFormat:@"%@", [strData substringToIndex:2]];
-  NSString *strMonth = [NSString stringWithFormat:@"%@", [[strData substringFromIndex:3]substringToIndex:2]];
-  NSString *strYear = [NSString stringWithFormat:@"%@", [strData substringFromIndex:6]];
-  
-  [_data setText:[NSString stringWithFormat:@"%@/%@/%@", strDay, strMonth, strYear]];
-  [_dataExp setText:[NSString stringWithFormat:@"%@/%@/%@", strDay, strMonth, strYear]];
 
   if ([menuArray count] > 0) {
+
+    //Data
+    NSString *strData = [NSString stringWithFormat:@"%@", [[menuArray objectAtIndex:diaDaSemana] date]];
+    NSString *strDay = [NSString stringWithFormat:@"%@", [strData substringToIndex:2]];
+    NSString *strMonth = [NSString stringWithFormat:@"%@", [[strData substringFromIndex:3]substringToIndex:2]];
+    NSString *strYear = [NSString stringWithFormat:@"%@", [strData substringFromIndex:6]];
+    
+    [_data setText:[NSString stringWithFormat:@"%@/%@/%@", strDay, strMonth, strYear]];
+    [_dataExp setText:[NSString stringWithFormat:@"%@/%@/%@", strDay, strMonth, strYear]];
+
+    //Cardapio
     mainMenu = [menuArray objectAtIndex:diaDaSemana];
     if ([[self period] isEqualToString:@"almoço"]) {
       NSString *lunch = [[[mainMenu period] objectAtIndex:0] menu];
