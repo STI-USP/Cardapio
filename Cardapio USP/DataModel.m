@@ -14,6 +14,8 @@
 #import "OAuthUSP.h"
 #import "DataAccess.h"
 
+@import Firebase;
+
 #define kRestaurantsURL @"http://kaimbu2.uspnet.usp.br:8080/cardapio/"
 #define kBaseURL @"http://kaimbu2.uspnet.usp.br:8080/"
 
@@ -93,7 +95,8 @@
       if ([self.restaurants count] != 0) {
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         [defaults setObject:self.restaurants forKey:@"Restaurants"];
-        [defaults synchronize];    }
+        [defaults synchronize];
+      }
       // Notifica atualizações
       [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveRestaurants" object:self];
     }
@@ -110,6 +113,14 @@
   
   [SVProgressHUD show];
   
+  [[FIRCrashlytics crashlytics] setCustomValue:@"" forKey:@""];
+  
+  [FIRAnalytics logEventWithName:@"share_image"
+                      parameters:@{
+                                   @"name": @"",
+                                   @"full_text": @""
+                                   }];
+
   self.menuArray = [[NSMutableArray alloc] init];
   
   AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];

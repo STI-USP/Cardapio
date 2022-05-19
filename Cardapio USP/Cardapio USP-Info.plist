@@ -40,6 +40,8 @@
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>br.usp.Cardapio</string>
+		<string>comgooglemaps</string>
+		<string>waze</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>

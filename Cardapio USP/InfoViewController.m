@@ -21,6 +21,10 @@
 #import "TelephoneUtils.h"
 #import "SVProgressHUD.h"
 
+#import <MapKit/MapKit.h>
+#import <CoreLocation/CoreLocation.h>
+
+
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
 
@@ -418,6 +422,8 @@ alpha:1.0]
   //View para o mapa
   UIButton *mapButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
   mapButton.frame = CGRectMake(self.tableView.frame.size.width-120, self.tableView.frame.size.width*9/16-50, 80., 80.);
+  mapButton.layer.cornerRadius = 10;
+  mapButton.layer.masksToBounds = true;
   [mapButton setBackgroundImage:[UIImage imageNamed:@"mapa.png"] forState:UIControlStateNormal];
   [mapButton addTarget:self action:@selector(showMap) forControlEvents:UIControlEventTouchUpInside];
   [headerView addSubview:mapButton];
@@ -430,10 +436,60 @@ alpha:1.0]
 
 #pragma mark Actions
 
-- (void)showMap{
-  MapViewController *mapController = [self.storyboard instantiateViewControllerWithIdentifier:@"MapViewController"];
-  [self.navigationController pushViewController:mapController animated:YES];
+//- (void)showMap {
+//  MapViewController *mapController = [self.storyboard instantiateViewControllerWithIdentifier:@"MapViewController"];
+//  [self.navigationController pushViewController:mapController animated:YES];
+//}
+
+- (void)showMap {
+  UIAlertController *alert = [UIAlertController alertControllerWithTitle:[_restaurantDc valueForKey:@"name"]  message:[_restaurantDc valueForKey:@"address"] preferredStyle:UIAlertControllerStyleActionSheet];
+  
+  
+  //Maps
+  UIAlertAction *mapsButton = [UIAlertAction actionWithTitle:@"Maps" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+
+    CLLocationCoordinate2D restaurantLocation = CLLocationCoordinate2DMake([[self->_restaurantDc valueForKey:@"latitude"] doubleValue], [[self->_restaurantDc valueForKey:@"longitude"] doubleValue]);
+    MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:restaurantLocation addressDictionary:nil];
+    MKMapItem *mapItem = [[MKMapItem alloc] initWithPlacemark:placemark];
+    
+    [mapItem setName:[self->_restaurantDc valueForKey:@"name"]];
+    NSDictionary *options = @{MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving};
+    [mapItem openInMapsWithLaunchOptions:options];
+  }];
+  if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"maps://"]])
+    [alert addAction:mapsButton];
+
+  //Google Maps
+  UIAlertAction *googleMapsButton = [UIAlertAction actionWithTitle:@"Google Maps" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"comgooglemaps://?daddr=%f,%f", [[self->_restaurantDc valueForKey:@"latitude"] doubleValue], [[self->_restaurantDc valueForKey:@"longitude"] doubleValue]]] options:@{} completionHandler:nil];
+  }];
+  if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"comgooglemaps://"]])
+    [alert addAction:googleMapsButton];
+
+  //Waze
+  UIAlertAction *wazeButton = [UIAlertAction actionWithTitle:@"Waze" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"waze://?ll=%f,%f&navigate=yes", [[self->_restaurantDc valueForKey:@"latitude"] doubleValue], [[self->_restaurantDc valueForKey:@"longitude"] doubleValue]]] options:@{} completionHandler:nil];
+
+  }];
+
+  if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"waze://"]]) {
+    [alert addAction:wazeButton];
+  }
+
+  [alert addAction:[UIAlertAction actionWithTitle:@"Cancelar" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+    // Cancel button tappped.
+    
+
+    [self dismissViewControllerAnimated:YES completion:^{
+    }];
+  }]];
+
+  [self presentViewController:alert animated:YES completion:nil];
+
 }
+
 
 - (void)doneButtonTapped:(id)sender {
   [self dismissViewControllerAnimated:YES completion:nil];
