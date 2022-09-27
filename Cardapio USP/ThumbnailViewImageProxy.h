@@ -17,6 +17,8 @@ typedef enum {
   ThumbnailAspectZoom
 } ThumbnailAspect;
 
+typedef void (^ResponseBlock)(UIImage *image, NSError *error);
+
 @interface ThumbnailViewImageProxy : UIView {
     
 @protected
@@ -27,6 +29,8 @@ typedef enum {
   BOOL _loadingThreadHasLaunched;
   UIActivityIndicatorView *_activityIndicator;   // [jo:120328]
 }
+
+- (void)getImageWithCompletionHandler:(ResponseBlock)completionBlock;
 
 @property (unsafe_unretained, nonatomic, readonly) UIImage *image;
 @property (nonatomic, copy) NSString *imagePath;

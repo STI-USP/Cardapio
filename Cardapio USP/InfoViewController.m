@@ -75,8 +75,10 @@ alpha:1.0]
   }
 
   _restaurantDc = [dataModel currentRestaurant];
+  
+  
+  
   [self setHeaderView];
-
 }
 
 - (void)didReceiveMemoryWarning
@@ -391,10 +393,12 @@ alpha:1.0]
   
   imageView = imageViewProxy;
   
-  UIImageView *viewForImage = [[UIImageView alloc] initWithImage:imageViewProxy.image];
-  [viewForImage setFrame:CGRectMake(0., 0., self.tableView.frame.size.width, self.tableView.frame.size.width*9/16)];
-  [viewForImage setContentMode: UIViewContentModeScaleToFill];
-  [imageView addSubview:viewForImage];
+  [imageViewProxy getImageWithCompletionHandler:^(UIImage *image, NSError *error) {
+    UIImageView *viewForImage = [[UIImageView alloc] initWithImage:imageViewProxy.image];
+    [viewForImage setFrame:CGRectMake(0., 0., self.tableView.frame.size.width, self.tableView.frame.size.width*9/16)];
+    [viewForImage setContentMode: UIViewContentModeScaleToFill];
+    [imageView addSubview:viewForImage];
+  }];
   
   CATextLayer *border = [[CATextLayer alloc] init];
   border.foregroundColor = CFBridgingRetain((__bridge id)[UIColor blackColor].CGColor);
@@ -480,10 +484,6 @@ alpha:1.0]
 
   [alert addAction:[UIAlertAction actionWithTitle:@"Cancelar" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
     // Cancel button tappped.
-    
-
-    [self dismissViewControllerAnimated:YES completion:^{
-    }];
   }]];
 
   [self presentViewController:alert animated:YES completion:nil];

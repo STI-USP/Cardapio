@@ -66,9 +66,32 @@ alpha:1.0]
     [dataModel getRestaurantList];
   }
   self.restaurant = [dataModel currentRestaurant];
-  [self setTitle:@"Informações gerais"];
+  [self configureUI];
+}
+
+- (void)didReceiveMemoryWarning {
+  [super didReceiveMemoryWarning];
+  // Dispose of any resources that can be recreated.
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+  [super viewDidAppear:animated];
   
-  _restImage.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[self.restaurant valueForKey:@"photourl"]]]];
+}
+
+- (void)configureUI {
+  [self setTitle:@"Informações gerais"];
+
+  dispatch_async(dispatch_get_global_queue(0,0), ^{
+      NSData *data = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString:[self.restaurant valueForKey:@"photourl"]]];
+      if (data == nil)
+          return;
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+      self->_restImage.image = [UIImage imageWithData: data];
+      });
+  });
+  
   
   [_restaurantName setText: [self.restaurant valueForKey:@"name"]];
   [_restaurantName setNumberOfLines:0];
@@ -89,16 +112,6 @@ alpha:1.0]
   [_restaurantNameOverlay setAlpha:0.4];
   [_restaurantNameOverlay setTextAlignment:NSTextAlignmentCenter];
 
-}
-
-- (void)didReceiveMemoryWarning {
-  [super didReceiveMemoryWarning];
-  // Dispose of any resources that can be recreated.
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-  [super viewDidAppear:animated];
-  
 }
 
 #pragma mark - Table view data source

@@ -34,16 +34,23 @@
 // Clients can use this method directly to forward-load a real image
 // if there is no need to show this object on a view
 - (UIImage *)image {
-  if (_realImage == nil) {
-    //  // [jo:120328] originalmente, lê imagem de arquivo
-    //  _realImage = [[UIImage alloc] initWithContentsOfFile:_imagePath];
-    // [jo:120328] alterado para pegar imagem da Internet
-    NSURL *url = [NSURL URLWithString:_imagePath];
-    NSData *imageData = [NSData dataWithContentsOfURL:url];
-    _realImage = [[UIImage alloc] initWithData:imageData]; // obs: método de convêniênica não funciona
-  }
   return _realImage;
 }
+
+- (void)getImageWithCompletionHandler:(ResponseBlock)completionBlock {
+  NSURL *url = [NSURL URLWithString:_imagePath];
+  dispatch_async(dispatch_get_global_queue(0,0), ^{
+      NSData * data = [[NSData alloc] initWithContentsOfURL:url];
+      if ( data == nil )
+          return;
+      dispatch_async(dispatch_get_main_queue(), ^{
+          // WARNING: is the cell still using the same data by this point??
+        self->_realImage = [UIImage imageWithData: data];
+        completionBlock(self->_realImage, nil);
+      });
+  });
+}
+
 
 // A foward call will be established in a separate thread to get
 // a real payload from a real image.

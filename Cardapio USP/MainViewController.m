@@ -57,8 +57,6 @@
   
   //[[UINavigationBar appearance] setBackIndicatorImage:[UIImage systemImageNamed:@"homekit"]];
   //[[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:[UIImage systemImageNamed:@"homekit"]];
-
-  
   
   //Notificacoes
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveMenu:) name:@"DidReceiveMenu" object:nil];
