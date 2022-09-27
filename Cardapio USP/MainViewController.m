@@ -188,110 +188,39 @@
           break;
 
         case 1:
-          urlString = @"https://sas.usp.br/a-estudantil-princ/";
-/*
-          for (id object in dcResponse) {
-            if ([[object valueForKey:@"servico"] isEqualToString:@"apoio estudantil"]) {
-              title = @"Apoio Estudantil";
-              //urlString = [object valueForKey:@"url"];
-              NSLog(@"%@", urlString);
-            }
-*/
+          urlString = @"https://prip.usp.br/apoio-estudantil/";
           break;
 
         case 2:
-          urlString = @"https://sas.usp.br/transporte-princ/";
-/*
-          for (id object in dcResponse) {
-            if ([[object valueForKey:@"servico"] isEqualToString:@"transporte"]) {
-              title = @"Transporte";
-              //urlString = [object valueForKey:@"url"];
-              NSLog(@"%@", urlString);
-            }
-          }
-*/
+          urlString = @"https://prip.usp.br/transporte/";
           break;
 
         case 3:
-          urlString = @"https://sas.usp.br/novidades/";
-/*
-          for (id object in dcResponse) {
-            if ([[object valueForKey:@"servico"] isEqualToString:@"avisos"]) {
-              title = @"Avisos";
-              //urlString = [object valueForKey:@"url"];
-              NSLog(@"%@", urlString);
-            }
-          }
-*/
+          urlString = @"https://prip.usp.br/category/destaques/";
           break;
 
         case 4:
-          urlString = @"https://sas.usp.br/saude-mental-princ/";
-/*
-          for (id object in dcResponse) {
-            if ([[object valueForKey:@"servico"] isEqualToString:@"saude mental"]) {
-              title = @"Saúde Mental";
-              //urlString = [object valueForKey:@"url"];
-              NSLog(@"%@", urlString);
-            }
-          }
- */
+          urlString = @"https://prip.usp.br/apresentacao-saude-mental/";
           break;
 
         case 5:
-          urlString = @"https://sas.usp.br/moradia-princ/";
-/*
-          for (id object in dcResponse) {
-            if ([[object valueForKey:@"servico"] isEqualToString:@"moradia"]) {
-              title = @"Moradia";
-              //urlString = [object valueForKey:@"url"];
-              NSLog(@"%@", urlString);
-            }
-          }
-*/
+          urlString = @"https://prip.usp.br/moradia/";
           break;
 
         case 6:
-          urlString = @"https://sas.usp.br/creche-princ/";
-/*
-          for (id object in dcResponse) {
-            if ([[object valueForKey:@"servico"] isEqualToString:@"creche"]) {
-              title = @"Creche";
-              //urlString = [object valueForKey:@"url"];
-              NSLog(@"%@", urlString);
-            }
-          }
- */
+          urlString = @"https://prip.usp.br/creches/";
           break;
 
         case 7:
-          urlString = @"https://sas.usp.br/servico-social-princ/";
-/*
-          for (id object in dcResponse) {
-            if ([[object valueForKey:@"servico"] isEqualToString:@"servico social"]) {
-              title = @"Serviço Social";
-              //urlString = [object valueForKey:@"url"];
-              NSLog(@"%@", urlString);
-            }
-          }
-*/
+          urlString = @"https://prip.usp.br/apoio-estudantil/";
           break;
 
         case 8:
-          urlString = @"https://sas.usp.br/acolhe-princ/";
-/*
-          for (id object in dcResponse) {
-            if ([[object valueForKey:@"servico"] isEqualToString:@"acolhe USP"]) {
-              title = @"Acolhe USP";
-              //urlString = [object valueForKey:@"url"];
-              NSLog(@"%@", urlString);
-            }
-          }
-*/
+          urlString = @"https://prip.usp.br/programa-ecos/";
           break;
 
         default:
-          urlString = @"https://sites.usp.br/sas/";
+          urlString = @"https://prip.usp.br/";
           title = @"SAS";
           break;
       }
