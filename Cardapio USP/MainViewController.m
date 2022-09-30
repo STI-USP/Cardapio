@@ -212,7 +212,7 @@
           break;
 
         case 7:
-          urlString = @"https://prip.usp.br/apoio-estudantil/";
+          urlString = @"https://prip.usp.br/servico-social/";
           break;
 
         case 8:
