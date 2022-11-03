@@ -112,7 +112,6 @@
 - (void)getMenu {
   
   [SVProgressHUD show];
-  
   [[FIRCrashlytics crashlytics] setCustomValue:@"" forKey:@""];
   
   [FIRAnalytics logEventWithName:@"share_image"
@@ -190,6 +189,7 @@
       [SVProgressHUD showErrorWithStatus:@"Não foi possível obter o cardápio. Tente novamente mais tarde."];
     }
   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    NSLog(@"error::: %@", error.localizedDescription);
     [SVProgressHUD showErrorWithStatus:@"Não foi possível obter o cardápio. Tente novamente mais tarde."];
     //NSLog(@"%@", error);
   }];

@@ -21,5 +21,9 @@
 - (void)createBill;
 - (void)deleteBill;
 - (void)consultarSaldo;
+- (void)createPix;
+- (void)checkPix:(NSString *)pixId;
+
+
 
 @end

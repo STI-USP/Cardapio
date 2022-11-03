@@ -11,6 +11,7 @@
 @interface BoletoDataModel : NSObject
 
 @property (nonatomic, strong) NSMutableDictionary *boleto;
+@property (nonatomic, strong) NSMutableDictionary *pix;
 @property (nonatomic, strong) NSMutableArray *boletosPendentes;
 @property (nonatomic, strong) NSString *valorRecarga;
 
@@ -19,6 +20,8 @@
 - (void)getBoletos;
 - (void)createBill;
 - (void)deleteBill;
+- (void)createPix;
+- (void)checkPix:(NSString *)pixId;
 
 
 

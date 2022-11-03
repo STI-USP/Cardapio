@@ -33,7 +33,15 @@
   // Do any additional setup after loading the view.
   
   [_username setText:@""];
+  
+  _maisCreditos.delegate = self;
+  UIToolbar *keyboardDoneButtonView = [[UIToolbar alloc] init];
+  [keyboardDoneButtonView sizeToFit];
+  UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"OK" style:UIBarButtonItemStylePlain target:self action:@selector(doneClicked:)];
+  [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:doneButton, nil]];
+  _maisCreditos.inputAccessoryView = keyboardDoneButtonView;
 
+  
   //Modelo
   dataModel = [DataModel getInstance];
   boletoDataModel = [BoletoDataModel sharedInstance];
@@ -47,6 +55,7 @@
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logout:) name:@"DidReceiveLoginError" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didCreateBill:) name:@"DidCreateBill" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveBill:) name:@"DidReceiveBill" object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didCreatePix:) name:@"DidCreatePix" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRegisterUser:) name:@"DidRegisterUser" object:nil];
   
   //Reveal View Controller ----------------
@@ -82,6 +91,12 @@
   [self.navigationItem setTitle:@""];
 }
 
+- (void)doneClicked:(id)sender {
+  [[self maisCreditos] resignFirstResponder];
+  [self updateTextField];
+}
+
+
 /*
 #pragma mark - Navigation
 
@@ -93,8 +108,7 @@
 */
 
 - (void)didRecieveCredits:(NSNotification *)notification {
-  NSMutableString *message = nil;
-  message = [NSMutableString stringWithFormat: @"R$ %@", [dataModel ruCardCredit]];
+  NSMutableString *message = [NSMutableString stringWithFormat: @"R$ %@", [dataModel ruCardCredit]];
   [_saldoLabel setNumberOfLines:0];
   [_saldoLabel setLineBreakMode:NSLineBreakByWordWrapping];
   [_saldoLabel setText:message];
@@ -116,14 +130,64 @@
   [boletoDataModel getBoletos];
 }
 
-- (IBAction)gerarBoleto:(id)sender {
+- (IBAction)gerarNovoBoleto:(id)sender {
+  if ([self validarValorRecarga:20]) {
+    [boletoDataModel createBill];
+  }
 }
 
-- (IBAction)gerarNovoBoleto:(id)sender {
+- (IBAction)gerarPix:(id)sender {
+  if ([self validarValorRecarga:20]) {
+    [SVProgressHUD show];
+    [boletoDataModel createPix];
+  }
 }
+
+
+- (BOOL)validarValorRecarga:(float)valorMinimo {
+  [self updateTextField];
+  [self.view endEditing:YES];
+
+  NSString *numberString;
+  NSScanner *scanner = [NSScanner scannerWithString:boletoDataModel.valorRecarga];
+  NSCharacterSet *numbers = [NSCharacterSet characterSetWithCharactersInString:@"0123456789,."];
+  
+  [scanner scanUpToCharactersFromSet:numbers intoString:NULL];
+  [scanner scanCharactersFromSet:numbers intoString:&numberString];
+  
+  float valorRecarga = [numberString floatValue];
+  if ((valorRecarga >= valorMinimo) && (valorRecarga <= 200)) {
+    return true;
+  } else {
+    [SVProgressHUD showErrorWithStatus:@"Insira um valor entre R$ 20,00 e R$ 200,00"];
+    return false;
+  }
+
+}
+
+
+- (void)updateTextField {
+  NSString *numberString;
+  NSScanner *scanner = [NSScanner scannerWithString:_maisCreditos.text];
+  NSCharacterSet *numbers = [NSCharacterSet characterSetWithCharactersInString:@"0123456789,."];
+  [scanner scanUpToCharactersFromSet:numbers intoString:NULL];
+  [scanner scanCharactersFromSet:numbers intoString:&numberString];
+
+  [_maisCreditos setText:numberString];
+  [boletoDataModel setValorRecarga:[_maisCreditos text]];
+
+  NSString *value = [[boletoDataModel valorRecarga]stringByReplacingOccurrencesOfString:@"," withString:@"."];
+  [_maisCreditos setText:[[NSString stringWithFormat:@"R$ %.2f", [value floatValue]]stringByReplacingOccurrencesOfString:@"." withString:@","]];
+}
+
+- (void)clearTextField {
+  [_maisCreditos setText:@""];
+}
+
 
 - (void)didCreateBill:(NSNotification *)notification {
   [SVProgressHUD dismiss];
+  [self clearTextField];
   if (!boletoViewController) {
     boletoViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"boletoViewController"];
   }
@@ -139,9 +203,19 @@
 }
 
 - (void)didRegisterUser:(NSNotification *)notification {
+  
   [SVProgressHUD dismiss];
   [dataModel getCreditoRUCard];
+  
 }
+
+- (void)didCreatePix:(NSNotification *)notification {
+  [SVProgressHUD dismiss];
+  [self clearTextField];
+  [self performSegueWithIdentifier:@"showPix" sender:self];
+  
+}
+
 
 
 
@@ -150,16 +224,29 @@
   [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (IBAction)dismiss:(id)sender {
-  [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-
 #pragma mark - SWRevealViewControllerDelegate
 
 // Implement this to return NO when you want the pan gesture recognizer to be ignored
 - (BOOL)revealControllerPanGestureShouldBegin:(SWRevealViewController *)revealController {
   return NO;
 }
+
+
+#pragma mark - Text Field Delegate
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+  //validar valores
+  [self updateTextField];
+}
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+  return YES;
+}
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
+  [textField resignFirstResponder];
+  return YES;
+}
+
 
 @end
