@@ -21,7 +21,7 @@
   BoletoViewController *boletoViewController;
   OAuthUSP *oauth;
   LoginWebViewController *loginViewController;
-
+  NSNumberFormatter *currencyFormatter;
 }
 
 @end
@@ -40,7 +40,12 @@
   UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"OK" style:UIBarButtonItemStylePlain target:self action:@selector(doneClicked:)];
   [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:doneButton, nil]];
   _maisCreditos.inputAccessoryView = keyboardDoneButtonView;
-
+  
+  currencyFormatter = [[NSNumberFormatter alloc] init];
+  [currencyFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+  [currencyFormatter setMaximumSignificantDigits:9];
+  [currencyFormatter setLenient:YES];
+  [currencyFormatter setGeneratesDecimalNumbers:YES];
   
   //Modelo
   dataModel = [DataModel getInstance];
@@ -65,18 +70,18 @@
     [self.revealViewController tapGestureRecognizer];
     self.revealViewController.delegate = self;
   }
-
+  
   
 }
 
 - (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+  [super didReceiveMemoryWarning];
+  // Dispose of any resources that can be recreated.
 }
 
 - (void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
-
+  
   if (![oauth isLoggedIn]) {
     loginViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"loginWebViewController"];
     [self presentViewController:loginViewController animated:YES completion:nil];
@@ -98,14 +103,14 @@
 
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 - (void)didRecieveCredits:(NSNotification *)notification {
   NSMutableString *message = [NSMutableString stringWithFormat: @"R$ %@", [dataModel ruCardCredit]];
@@ -147,7 +152,7 @@
 - (BOOL)validarValorRecarga:(float)valorMinimo {
   [self updateTextField];
   [self.view endEditing:YES];
-
+  
   NSString *numberString;
   NSScanner *scanner = [NSScanner scannerWithString:boletoDataModel.valorRecarga];
   NSCharacterSet *numbers = [NSCharacterSet characterSetWithCharactersInString:@"0123456789,."];
@@ -162,7 +167,7 @@
     [SVProgressHUD showErrorWithStatus:@"Insira um valor entre R$ 20,00 e R$ 200,00"];
     return false;
   }
-
+  
 }
 
 
@@ -172,10 +177,10 @@
   NSCharacterSet *numbers = [NSCharacterSet characterSetWithCharactersInString:@"0123456789,."];
   [scanner scanUpToCharactersFromSet:numbers intoString:NULL];
   [scanner scanCharactersFromSet:numbers intoString:&numberString];
-
+  
   [_maisCreditos setText:numberString];
   [boletoDataModel setValorRecarga:[_maisCreditos text]];
-
+  
   NSString *value = [[boletoDataModel valorRecarga]stringByReplacingOccurrencesOfString:@"," withString:@"."];
   [_maisCreditos setText:[[NSString stringWithFormat:@"R$ %.2f", [value floatValue]]stringByReplacingOccurrencesOfString:@"." withString:@","]];
 }
@@ -248,5 +253,39 @@
   return YES;
 }
 
-
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+  NSString *replaced = [textField.text stringByReplacingCharactersInRange:range withString:string];
+  NSDecimalNumber *amount = (NSDecimalNumber*) [currencyFormatter numberFromString:replaced];
+  if (amount == nil) {
+    // Something screwed up the parsing. Probably an alpha character.
+    return NO;
+  }
+  // If the field is empty (the inital case) the number should be shifted to
+  // start in the right most decimal place.
+  short powerOf10 = 0;
+  if ([textField.text isEqualToString:@""]) {
+    powerOf10 = -currencyFormatter.maximumFractionDigits;
+  }
+  // If the edit point is to the right of the decimal point we need to do
+  // some shifting.
+  else if (range.location + currencyFormatter.maximumFractionDigits >= textField.text.length) {
+    // If there's a range of text selected, it'll delete part of the number
+    // so shift it back to the right.
+    if (range.length) {
+      powerOf10 = -range.length;
+    }
+    else if ([replaced length] > currencyFormatter.maximumSignificantDigits) {
+      textField.text = replaced;
+    }
+    // Otherwise they're adding this many characters so shift left.
+    else {
+      powerOf10 = [string length];
+    }
+  }
+  amount = [amount decimalNumberByMultiplyingByPowerOf10:powerOf10];
+  
+  // Replace the value and then cancel this change.
+  textField.text = [currencyFormatter stringFromNumber:amount];
+  return NO;
+}
 @end

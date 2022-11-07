@@ -63,7 +63,7 @@
   NSArray *activityItems = @[data];
 
   UIActivityViewController *activityViewControntroller = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
-  [activityViewControntroller setValue:@"Look at what I found" forKey:@"subject"];
+  [activityViewControntroller setValue:@"Código QR para pagamento Pix/RUCard" forKey:@"subject"];
   activityViewControntroller.excludedActivityTypes = @[];
   [self presentViewController:activityViewControntroller animated:true completion:nil];
   
