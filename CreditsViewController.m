@@ -142,7 +142,7 @@
 }
 
 - (IBAction)gerarPix:(id)sender {
-  if ([self validarValorRecarga:20]) {
+  if ([self validarValorRecarga:0]) {
     [SVProgressHUD show];
     [boletoDataModel createPix];
   }
