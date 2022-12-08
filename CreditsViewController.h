@@ -8,17 +8,18 @@
 
 #import <UIKit/UIKit.h>
 #import "SWRevealViewController.h"
+#import "MyTextField.h"
 
-@interface CreditsViewController : UIViewController <SWRevealViewControllerDelegate>
+@interface CreditsViewController : UIViewController <SWRevealViewControllerDelegate, UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *username;
 @property (weak, nonatomic) IBOutlet UILabel *saldoLabel;
+@property (weak, nonatomic) IBOutlet MyTextField *maisCreditos;
 
 - (IBAction)gerarNovoBoleto:(id)sender;
-- (IBAction)visualizarBoleto:(id)sender;
+- (IBAction)gerarPix:(id)sender;
 - (IBAction)listarBoletos:(id)sender;
 
 - (IBAction)logout:(id)sender;
-- (IBAction)dismiss:(id)sender;
 
 @end

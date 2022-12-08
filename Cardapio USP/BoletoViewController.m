@@ -24,8 +24,8 @@
 @implementation BoletoViewController
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
+  [super viewDidLoad];
+  // Do any additional setup after loading the view.
   boletoDataModel = [BoletoDataModel sharedInstance];
   dataModel = [DataModel getInstance];
   
@@ -65,6 +65,7 @@
     [_valorLabel setText:[NSString stringWithFormat:@"R$ %@", valor]];
   else
     [_valorLabel setText:@"R$ 0,00"];
+
   
   if (codBarras != (id)[NSNull null])
     [_codBarrasLabel setText:codBarras];

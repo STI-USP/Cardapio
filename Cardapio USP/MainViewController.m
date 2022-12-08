@@ -53,7 +53,7 @@
   self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
 
   
-  [self.navigationItem.backBarButtonItem setImage:[UIImage imageNamed:@"home"]];
+//  [self.navigationItem.backBarButtonItem setImage:[UIImage imageNamed:@"home"]];
   
   //[[UINavigationBar appearance] setBackIndicatorImage:[UIImage systemImageNamed:@"homekit"]];
   //[[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:[UIImage systemImageNamed:@"homekit"]];

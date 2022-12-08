@@ -52,5 +52,13 @@
   [dataAccess deleteBill];
 }
 
+- (void)createPix {
+  [dataAccess createPix];
+}
+
+- (void)checkPix:(NSString *)pixId {
+  [dataAccess checkPix:pixId];
+}
+
 
 @end
