@@ -54,18 +54,18 @@
   manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/x-www-form-urlencoded"];
   manager.responseSerializer = [AFHTTPResponseSerializer serializer];
   
-  NSString *webServicePath = @"https://uspdigital.usp.br/rucard20/servicos/pixgerar";
-
-
   //configura parametros
   NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
                               kHash, @"hash",
-                              [oauth.userData valueForKey:@"loginUsuario"], @"codpes",
+                              [oauth.userData valueForKey:@"wsuserid"] , @"token",
                               [[_boletoDataModel valorRecarga] stringByReplacingOccurrencesOfString:@"," withString:@"."], @"valor",
                               @"APP", @"tipoapp",
                               nil];
 
   
+  NSString *path = @"pixgerar";
+  NSString *webServicePath = [NSString stringWithFormat:@"%@%@", kBaseSTIURL, path];
+
   [manager POST:webServicePath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
     // Parse da resposta
@@ -97,17 +97,15 @@
   manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/x-www-form-urlencoded"];
   manager.responseSerializer = [AFHTTPResponseSerializer serializer];
   
-  NSString *webServicePath = @"https://uspdigital.usp.br/rucard20/servicos/pixverificar";
-
-
   //configura parametros
   NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
                               kHash, @"hash",
                               pixId, @"idfpix",
-//                              @"8c6ad30563ffef1d3613162f189e265e", @"idfpix",
                               nil];
 
-  
+  NSString *path = @"pixverificar";
+  NSString *webServicePath = [NSString stringWithFormat:@"%@%@", kBaseSTIURL, path];
+
   [manager POST:webServicePath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
     // Parse da resposta
@@ -143,7 +141,7 @@
                               nil];
   
   NSString *path = @"gerarBoleto";
-  NSData* params = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
+  NSData *params = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
   NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", kBaseSTIURL, path]];
   NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
   [urlRequest setHTTPMethod:@"POST"];
