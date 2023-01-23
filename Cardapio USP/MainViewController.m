@@ -242,11 +242,19 @@ static void setupView(MainViewController *object) {
     [object->_restaurante setText:[(NSString *)[object->dataModel.currentRestaurant valueForKey:@"name"] uppercaseString]];
     [object->_restauranteExp setText:[(NSString *)[object->dataModel.currentRestaurant valueForKey:@"name"] uppercaseString]];
   } else if (object->dataModel.preferredRestaurant) {
-    [object->_restaurante setText:[(NSString *)[object->dataModel.preferredRestaurant valueForKey:@"name"] uppercaseString]];
-    [object->_restauranteExp setText:[(NSString *)[object->dataModel.preferredRestaurant valueForKey:@"name"] uppercaseString]];
+
+    for (id campus in object->dataModel.restaurants) {
+      for (id rest in campus) {
+        if ([[object->dataModel.preferredRestaurant valueForKey:@"id"] isEqualToString:[rest valueForKey:@"id"]]) {
+          [object->_restaurante setText:[[rest valueForKey:@"name"] uppercaseString]];
+          [object->_restauranteExp setText:[[rest valueForKey:@"name"] uppercaseString]];
+        }
+      }
+    }
+    
   } else {
-    [object->_restaurante setText:@"CENTRAL"];
-    [object->_restauranteExp setText:@"CENTRAL"];
+    [object->_restaurante setText:@"CENTRAL - CAMPUS BUTANTÃ"];
+    [object->_restauranteExp setText:@"CENTRAL - CAMPUS BUTANTÃ"];
   }
   
   //Periodo
