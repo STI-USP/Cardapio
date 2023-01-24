@@ -495,7 +495,7 @@ alpha:1.0]
   [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)didReceiveRestaurants{
+- (void)didReceiveRestaurants {
   [self.tableView reloadData];
 }
 
