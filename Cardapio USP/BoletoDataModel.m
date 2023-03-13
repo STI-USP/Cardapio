@@ -17,6 +17,7 @@
 
 @implementation BoletoDataModel
 
+// - Lifecycle
 + (BoletoDataModel *)sharedInstance {
   static BoletoDataModel *instance = nil;
   static dispatch_once_t once;
@@ -35,6 +36,24 @@
   return self;
 }
 
+
+// - Getters and Setters
+
+- (void)setPix:(NSMutableDictionary *)pix {
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  [defaults setObject:[NSKeyedArchiver archivedDataWithRootObject:pix requiringSecureCoding:NO error:nil] forKey:@"pix"];
+  [defaults synchronize];
+}
+
+- (NSMutableDictionary *)pix {
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  NSData *data = [defaults objectForKey:@"pix"];
+  NSMutableDictionary *pix = [[NSKeyedUnarchiver unarchiveTopLevelObjectWithData:data error:nil] mutableCopy];
+  return pix;
+}
+
+
+// - API
 - (void)getBoleto {
   [dataAccess getBoleto];
 }
@@ -59,6 +78,5 @@
 - (void)checkPix:(NSString *)pixId {
   [dataAccess checkPix:pixId];
 }
-
 
 @end
