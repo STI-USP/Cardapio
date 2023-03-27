@@ -109,16 +109,28 @@
   [manager POST:webServicePath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
     // Parse da resposta
-    NSMutableDictionary *json = [NSJSONSerialization JSONObjectWithData:responseObject options: NSJSONReadingMutableContainers error: nil];
+    NSError *error;
+    NSMutableDictionary *json = [NSJSONSerialization JSONObjectWithData:responseObject options: NSJSONReadingMutableContainers error:&error];
 
     NSInteger statusCode = [operation.response statusCode];
     if (statusCode == 200) {
-      if ([[json valueForKey:@"situacao"] isEqualToString:@"CONCLUIDA"]) {
-        // Notifica atualizações
-        [SVProgressHUD showSuccessWithStatus:@"Recebemos o pagamento!"];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"DidPaidPix" object:self];
+
+      if (json) {
+        NSString *status = [json valueForKey:@"situacao"];
+        if (status && ![status isEqualToString:@""]) {
+          if ([status isEqualToString:@"CONCLUIDA"]) {
+            // Notifica atualizações
+            [SVProgressHUD showSuccessWithStatus:@"Recebemos o pagamento!"];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"DidPaidPix" object:self];
+          } else {
+            [SVProgressHUD dismiss];
+          }
+        } else {
+          [SVProgressHUD dismiss];
+        }
       } else {
         [SVProgressHUD dismiss];
+        NSLog(@"Error deserializing JSON: %@", error.localizedDescription);
       }
     } else {
       [SVProgressHUD showErrorWithStatus:@"Não foi possível gerar o código. Tente novamente mais tarde."];
