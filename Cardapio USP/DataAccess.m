@@ -117,11 +117,15 @@
 
       if (json) {
         NSString *status = [json valueForKey:@"situacao"];
-        if (status && ![status isEqualToString:@""]) {
-          if ([status isEqualToString:@"CONCLUIDA"]) {
-            // Notifica atualizações
-            [SVProgressHUD showSuccessWithStatus:@"Recebemos o pagamento!"];
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"DidPaidPix" object:self];
+        if (status != (id)[NSNull null]) {
+          if ((status) && !([status isEqualToString:@""])) {
+            if ([status isEqualToString:@"CONCLUIDA"]) {
+              // Notifica atualizações
+              [SVProgressHUD showSuccessWithStatus:@"Recebemos o pagamento!"];
+              [[NSNotificationCenter defaultCenter] postNotificationName:@"DidPaidPix" object:self];
+            } else {
+              [SVProgressHUD dismiss];
+            }
           } else {
             [SVProgressHUD dismiss];
           }
