@@ -63,8 +63,8 @@
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRecieveCredits:) name:@"DidReceiveCredits" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChangeRestaurant:) name:@"DidChangeRestaurant" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRecieveCreditsError:) name:@"DidReceiveCreditsError" object:nil];
-  
-  
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveRestaurants:) name:@"DidReceiveRestaurants" object:nil];
+
   //Reveal View Controller ----------------
   SWRevealViewController *revealViewController = self.revealViewController;
   if (revealViewController) {
@@ -86,13 +86,11 @@
   
   [super viewWillAppear:animated];
   self.revealViewController.delegate = self;
-
   [_expandMenuView setHidden:YES];
   
-  [dataModel getMenu];
-  NSString *name;
-  name = [[dataModel currentRestaurant] valueForKey:@"name"];
-  [self.navigationController.navigationItem setTitle: name];
+  if ([dataModel currentRestaurant]) {
+    [self fetchMenu];
+  }
   
   if ([oauth isLoggedIn])
     [dataModel getCreditoRUCard];
@@ -102,21 +100,13 @@
 
 - (void)viewDidAppear:(BOOL)animated {
   [super viewDidAppear:animated];
-  
-  /*
-  //DEV
-  NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:@"https://uspdigital.usp.br/mobile/json/sas.json"]];
-  NSError *error = nil;
-  
-  if (data) {
-    dcResponse = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingMutableContainers | NSJSONReadingMutableLeaves error:&error];
-  }
+}
 
-  if (error) {
-    NSLog(@"%@",[error localizedDescription]);
-  }
-   */
-
+- (void)fetchMenu {
+  [dataModel getMenu];
+  NSString *name;
+  name = [[dataModel currentRestaurant] valueForKey:@"name"];
+  [self.navigationController.navigationItem setTitle: name];
 }
 
 
@@ -125,14 +115,6 @@
 
   if (longpress.state == UIGestureRecognizerStateBegan) {
 
-    /*
-    //verifica se texto está truncado
-    CGSize size = [_cardapioAtual.text sizeWithAttributes:@{NSFontAttributeName:_cardapioAtual.font}];
-    if (size.height > _cardapioAtual.bounds.size.height) {
-    }
-     */
-
-    //only apply the blur if the user hasn't disabled transparency effects
     if (!UIAccessibilityIsReduceTransparencyEnabled()) {
 
       UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleSystemMaterial];
@@ -475,7 +457,11 @@ static void setupView(MainViewController *object) {
 }
 
 - (void)didChangeRestaurant:(NSNotification *)notification {
-  [dataModel getMenu];
+  [self fetchMenu];
+}
+
+- (void)didReceiveRestaurants:(NSNotification *)notification {
+  [self fetchMenu];
 }
 
 
