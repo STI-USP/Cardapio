@@ -357,13 +357,13 @@ alpha:1.0]
       [label setText:stringForLunch];
       myImage = [UIImage imageNamed:@"almoco"];
       imageView = [[UIImageView alloc] initWithImage:myImage];
-      imageView.frame = CGRectMake(12, 2 , 18, 18);
+      imageView.frame = CGRectMake(12, 4 , 18, 18);
       break;
     case 1:
       [label setText:@"JANTAR"];
       myImage = [UIImage imageNamed:@"jantar"];
       imageView = [[UIImageView alloc] initWithImage:myImage];
-      imageView.frame = CGRectMake(12, 2 , 18, 18);
+      imageView.frame = CGRectMake(12, 4 , 18, 18);
       break;
     case 2:
       [label setText:@"OBSERVAÇÃO"];

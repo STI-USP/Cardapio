@@ -43,7 +43,7 @@
 - (void)getMenu;
 - (void)getRestaurantList;
 - (void)getCreditoRUCard;
-- (void)setDefault;
+//- (void)setDefault;
 - (NSMutableDictionary *) cleanDictionary: (NSMutableDictionary *)dictionary;
 
 
