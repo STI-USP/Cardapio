@@ -43,7 +43,7 @@
   static dispatch_once_t once;
   dispatch_once(&once, ^{
     instance = [[DataModel alloc] init];
-    [instance setDefault];
+    //    [instance setDefault];
   });
   return instance;
 }
@@ -87,7 +87,6 @@
     
     NSInteger statusCode = [operation.response statusCode];
     if (statusCode == 200) {
-      // Parse da resposta
       NSMutableDictionary *json = [NSJSONSerialization JSONObjectWithData:responseObject options: NSJSONReadingMutableContainers error: nil];
       for (NSMutableDictionary *campus in json){
         [self.restaurants addObject:campus];
@@ -96,7 +95,6 @@
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         [defaults setObject:self.restaurants forKey:@"Restaurants"];
         
-        // Seu código original reescrito para preferir as propriedades.
         for (NSDictionary *campus in self.restaurants) {
           NSArray *restaurantsArray = campus[@"restaurants"];
           for (NSMutableDictionary *restaurant in restaurantsArray) {
@@ -112,11 +110,32 @@
         }
         
         if (!self.currentRestaurant && self.restaurants.count > 0) {
-          NSDictionary *firstCampus = [self.restaurants firstObject];
-          NSArray *restaurantsArray = firstCampus[@"restaurants"];
+          // Inicialmente assumimos que o restaurante "CUASO" não foi encontrado.
+          BOOL cuasoFound = NO;
           
-          if (restaurantsArray.count > 0) {
-            self.currentRestaurant = [restaurantsArray firstObject];
+          // Itera sobre os campi e restaurantes para encontrar "CUASO".
+          for (NSDictionary *campus in self.restaurants) {
+            NSArray *restaurantsArray = campus[@"restaurants"];
+            for (NSDictionary *restaurant in restaurantsArray) {
+              NSNumber *restaurantId = restaurant[@"id"];
+              if (restaurantId.intValue == 6) { // Restaurante central
+                self.currentRestaurant = [restaurant mutableCopy];
+                break; // Sai do loop interno uma vez que o restaurante com ID 6 foi encontrado.
+              }
+            }
+            if (cuasoFound) {
+              break; // Interrompe o loop externo se "CUASO" foi encontrado.
+            }
+          }
+          
+          // Se Central não foi encontrado, então define o primeiro restaurante como current.
+          if (!cuasoFound) {
+            NSDictionary *firstCampus = [self.restaurants firstObject];
+            NSArray *restaurantsArray = firstCampus[@"restaurants"];
+            
+            if (restaurantsArray.count > 0) {
+              self.currentRestaurant = [restaurantsArray firstObject];
+            }
           }
         }
         
@@ -221,50 +240,8 @@
 }
 
 
-- (void)getCreditoRUCard{
-  
+- (void)getCreditoRUCard {
   [dataAccess consultarSaldo];
-  
-  /*
-   [SVProgressHUD show];
-   
-   self.menuArray = [[NSMutableArray alloc] init];
-   
-   //Recupera dados do usuario
-   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-   NSData *data = [defaults objectForKey:@"userData"];
-   NSData *userData;
-   
-   if (data) {
-   userData = [NSJSONSerialization JSONObjectWithData:[data copy] options: NSJSONReadingMutableContainers error: nil];
-   }
-   
-   AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-   manager.requestSerializer = [AFHTTPRequestSerializer serializer];
-   manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/x-www-form-urlencoded"];
-   manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-   
-   
-   NSString *webServicePath;
-   webServicePath = [NSString stringWithFormat:@"%@saldo", kBaseSTIURL];
-   
-   NSDictionary *parameters = nil;
-   parameters = [NSDictionary dictionaryWithObjectsAndKeys:
-   kToken , @"hash",
-   [userData valueForKey:@"loginUsuario"], @"nusp",
-   nil];
-   
-   [manager POST: webServicePath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-   NSString *credit = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-   [self setRuCardCredit:credit];
-   [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveCredits" object:self];
-   [SVProgressHUD dismiss];
-   
-   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-   [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveCreditsError" object:self];
-   [SVProgressHUD dismiss];
-   }];
-   */
 }
 
 - (NSMutableArray *)getCampiList{
@@ -301,24 +278,6 @@
 }
 
 #pragma mark Setters
-
-- (void)setDefault { //restaurante default para quando não houver nenhum selecionado
-  
-  NSError *jsonError;
-  NSString *defString = @"{\"alias\" : \"Central\",\"address\" : \"Praça do Relógio Solar, travessa 8, no 300, Campus Butantã, São Paulo - SP\",\"name\" : \"Central - Campus Butantã\",\"phones\" : \"(11) 3091-3318\",\"id\" : \"6\",\"latitude\" : \"-23.56021110\",\"longitude\" : \"-46.7218170\",\"photourl\" : \"https://uspdigital.usp.br/comumwebdev/imagens/cardapio/central.jpg\",\"workinghours\" : {\"sunday\" : {\"lunch\" : \"12:00 às 14:15\",\"breakfast\" : \"08:00 às 09:30\",\"dinner\" : \"\"},\"saturday\" : {\"lunch\" : \"11:15 às 14:15\",\"breakfast\" : \"07:30 às 09:00\",\"dinner\" : \"\"},\"weekdays\" : {\"lunch\" : \"11:15 às 14:15\",\"breakfast\" : \"07:00 às 08:30\",\"dinner\" : \"17:30 às 19:45\"}},\"cashiers\" : [ {\"address\" : \"Rua do Anfiteatro, nº 295 - Cidade Universitária - São Paulo - CEP 05508-060\",\"prices\" : {\"special\" : {\"dinner\" : \"6,00\",\"lunch\" : \"6,00\",\"breakfast\" : \"\"},\"students\" : {\"dinner\" : \"1,90\",\"lunch\" : \"1,90\",\"breakfast\" : \"\"},\"visiting\" : {\"dinner\" : \"12,00\",\"lunch\" : \"12,00\",\"breakfast\" : \"\"},\"employees\" : {\"dinner\" : \"12,00\",\"lunch\" : \"12,00\",\"breakfast\" : \"\"}},\"longitude\" : \"-46.7216980\",\"latitude\" : \"-23.5594340\",\"workinghours\" : \"Segunda à Sexta - 7h as 19h30\"} ],\"hasCashier\" : \"false\"}";
-  
-  NSData *objectData = [defString dataUsingEncoding:NSUTF8StringEncoding];
-  NSMutableDictionary *defaultRestaurant = [NSJSONSerialization JSONObjectWithData:objectData
-                                                                           options:NSJSONReadingMutableContainers
-                                                                             error:&jsonError];
-  
-  if (!jsonError) {
-    //[self setCurrentRestaurant:defaultRestaurant];
-  } else {
-    NSLog(@"%@", [jsonError description]);
-  }
-  
-}
 
 - (void)setCurrentRestaurant:(NSDictionary *)currentRestaurant {
   _currentRestaurant = [currentRestaurant copy];
