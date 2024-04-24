@@ -268,6 +268,7 @@
 		E9E4BCD71B7BFBFC005633AD /* TelephoneUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TelephoneUtils.m; sourceTree = "<group>"; };
 		E9E4BCDB1B7BFC33005633AD /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		E9E543651B84C3DC00BC81B8 /* Carriers.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Carriers.plist; sourceTree = "<group>"; };
+		E9E55A022BD9519B00AB8797 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		E9E55FB91B55933F00994BCB /* DetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailCell.h; sourceTree = "<group>"; };
 		E9E55FBA1B55933F00994BCB /* DetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailCell.m; sourceTree = "<group>"; };
 		E9E55FBC1B55944F00994BCB /* ThumbnailViewImageProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThumbnailViewImageProxy.h; sourceTree = "<group>"; };
@@ -410,6 +411,7 @@
 			isa = PBXGroup;
 			children = (
 				E9E543651B84C3DC00BC81B8 /* Carriers.plist */,
+				E9E55A022BD9519B00AB8797 /* PrivacyInfo.xcprivacy */,
 				BFAC6E84192A54E100921494 /* Cardapio USP-Info.plist */,
 				E97B390B225556FE0070AC9B /* GoogleService-Info.plist */,
 				BFAC6E88192A54E100921494 /* main.m */,
