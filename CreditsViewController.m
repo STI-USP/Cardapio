@@ -142,7 +142,7 @@
 }
 
 - (IBAction)gerarPix:(id)sender {
-  if ([self validarValorRecarga:20]) {
+  if ([self validarValorRecarga:10]) {
     [SVProgressHUD show];
     [boletoDataModel createPix];
   }
@@ -164,7 +164,7 @@
   if ((valorRecarga >= valorMinimo) && (valorRecarga <= 200)) {
     return true;
   } else {
-    [SVProgressHUD showErrorWithStatus:@"Insira um valor entre R$ 20,00 e R$ 200,00"];
+    [SVProgressHUD showErrorWithStatus:@"Insira um valor entre R$ 10,00 e R$ 200,00"];
     return false;
   }
   
