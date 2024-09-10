@@ -73,22 +73,26 @@
 #pragma mark - Helpers
 
 - (void)configureUI {
-  
   NSString *valor = [[NSString stringWithFormat:@"%@", [boletoDataModel.pix valueForKey:@"vlrpix"]] stringByReplacingOccurrencesOfString:@"," withString:@"."];
   NSString *chave = [boletoDataModel.pix valueForKey:@"qrcpix"];
   
-  //valor
-  if (valor != (id)[NSNull null]) {
+  // Valor
+  if (valor != (id)[NSNull null] && valor.length > 0) {
     NSString *titulo = [[NSString stringWithFormat:@"R$ %.2f", [valor floatValue]] stringByReplacingOccurrencesOfString:@"." withString:@","];
     [_valorPix setText:titulo];
   } else {
     [_valorPix setText:@"R$ 0,00"];
   }
-
-  //qrCode
-  [_qrCodePix setImage:[UIImage imageWithCIImage:[self createQRForString:chave]]];
+  
+  // qrCode
+  if (chave != nil && ![chave isEqualToString:@""]) {
+    [_qrCodePix setImage:[UIImage imageWithCIImage:[self createQRForString:chave]]];
+  } else {
+    // Caso o QR code seja nulo ou inválido
+    [_qrCodePix setImage:[UIImage systemImageNamed:@"qrcode"]];
+    [SVProgressHUD showErrorWithStatus:@"Chave PIX inválida, tente novamente mais tarde"];
+  }
   [self copyToPB];
-
 }
 
 - (CIImage *)createQRForString:(NSString *)qrString {
