@@ -63,6 +63,10 @@
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didCreatePix:) name:@"DidCreatePix" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRegisterUser:) name:@"DidRegisterUser" object:nil];
   
+  // Registrar para as notificações do teclado
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+  
   //Reveal View Controller ----------------
   SWRevealViewController *revealViewController = self.revealViewController;
   if (revealViewController) {
@@ -70,7 +74,6 @@
     [self.revealViewController tapGestureRecognizer];
     self.revealViewController.delegate = self;
   }
-  
   
 }
 
@@ -101,7 +104,10 @@
   [self updateTextField];
 }
 
-
+- (void)dealloc {
+  [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+  [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+}
 /*
  #pragma mark - Navigation
  
@@ -288,4 +294,33 @@
   textField.text = [currencyFormatter stringFromNumber:amount];
   return NO;
 }
+
+- (void)keyboardWillShow:(NSNotification *)notification {
+  NSDictionary *userInfo = notification.userInfo;
+  CGRect keyboardFrame = [userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+  NSTimeInterval animationDuration = [userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+  
+  CGRect textFieldFrameInView = [self.view convertRect:self.maisCreditos.frame fromView:self.maisCreditos.superview];
+  CGFloat textFieldBottomY = CGRectGetMaxY(textFieldFrameInView);
+  CGFloat visibleHeight = self.view.frame.size.height - keyboardFrame.size.height;
+  
+  if (textFieldBottomY > visibleHeight) {
+    CGFloat offsetY = textFieldBottomY - visibleHeight;
+    [UIView animateWithDuration:animationDuration animations:^{
+      self.view.frame = CGRectMake(0, -offsetY, self.view.frame.size.width, self.view.frame.size.height);
+    }];
+  }
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification {
+  NSDictionary *userInfo = notification.userInfo;
+  NSTimeInterval animationDuration = [userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+  
+  // Restaurar a posição original da view
+  [UIView animateWithDuration:animationDuration animations:^{
+    self.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+  }];
+}
+
+
 @end

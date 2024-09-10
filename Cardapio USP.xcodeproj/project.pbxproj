@@ -90,6 +90,7 @@
 		E9DF35D11B3DD306009B92B6 /* MDPinAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = E9DF35CE1B3DD306009B92B6 /* MDPinAnnotationView.m */; };
 		E9E1843E1B792C1700637771 /* ImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E9E1843D1B792C1700637771 /* ImageCell.m */; };
 		E9E184411B7931D900637771 /* PreferredCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E9E184401B7931D900637771 /* PreferredCell.m */; };
+		E9E1B96F2C6F9B3E00CF51F6 /* PaddedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = E9E1B96E2C6F9B3E00CF51F6 /* PaddedLabel.m */; };
 		E9E4BCD81B7BFBFC005633AD /* CarrierDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E9E4BCD51B7BFBFC005633AD /* CarrierDataModel.m */; };
 		E9E4BCD91B7BFBFC005633AD /* TelephoneUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = E9E4BCD71B7BFBFC005633AD /* TelephoneUtils.m */; };
 		E9E4BCDC1B7BFC33005633AD /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E9E4BCDB1B7BFC33005633AD /* Settings.bundle */; };
@@ -262,6 +263,8 @@
 		E9E1843D1B792C1700637771 /* ImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCell.m; sourceTree = "<group>"; };
 		E9E1843F1B7931D900637771 /* PreferredCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferredCell.h; sourceTree = "<group>"; };
 		E9E184401B7931D900637771 /* PreferredCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferredCell.m; sourceTree = "<group>"; };
+		E9E1B96D2C6F9B3E00CF51F6 /* PaddedLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PaddedLabel.h; sourceTree = "<group>"; };
+		E9E1B96E2C6F9B3E00CF51F6 /* PaddedLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PaddedLabel.m; sourceTree = "<group>"; };
 		E9E4BCD41B7BFBFC005633AD /* CarrierDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarrierDataModel.h; sourceTree = "<group>"; };
 		E9E4BCD51B7BFBFC005633AD /* CarrierDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarrierDataModel.m; sourceTree = "<group>"; };
 		E9E4BCD61B7BFBFC005633AD /* TelephoneUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TelephoneUtils.h; sourceTree = "<group>"; };
@@ -624,6 +627,8 @@
 				E9818EC2198033A800F741B0 /* DKScrollingTabController.m */,
 				E9D76F9C2910175B00DCF59A /* MyTextField.h */,
 				E9D76F9D2910175B00DCF59A /* MyTextField.m */,
+				E9E1B96D2C6F9B3E00CF51F6 /* PaddedLabel.h */,
+				E9E1B96E2C6F9B3E00CF51F6 /* PaddedLabel.m */,
 			);
 			name = ViewHelper;
 			sourceTree = "<group>";
@@ -916,6 +921,7 @@
 				E9CDD1BB1AD81E5100BB2E36 /* RestaurantsFilterController.m in Sources */,
 				E92D5EA51C19B32B00ECA5D1 /* hmac.c in Sources */,
 				E9CDD1EB1AD86BFF00BB2E36 /* AFURLConnectionOperation.m in Sources */,
+				E9E1B96F2C6F9B3E00CF51F6 /* PaddedLabel.m in Sources */,
 				E90555B11E01D42F00B8516E /* STIOauth.m in Sources */,
 				E9818EC3198033A800F741B0 /* DKScrollingTabController.m in Sources */,
 				E9E55FC11B55970E00994BCB /* RWLabel.m in Sources */,
