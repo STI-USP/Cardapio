@@ -306,8 +306,20 @@
                                     <action selector="gerarPix:" destination="AxZ-1C-gpO" eventType="touchUpInside" id="d8l-NQ-lhS"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pIl-E8-YUc">
-                                <rect key="frame" x="16" y="525" width="343" height="36"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gdg-aD-g8I">
+                                <rect key="frame" x="16" y="611" width="343" height="36"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                                <state key="normal" title="Visualizar boletos em aberto">
+                                    <color key="titleColor" name="usp_green"/>
+                                </state>
+                                <connections>
+                                    <action selector="listarBoletos:" destination="AxZ-1C-gpO" eventType="touchUpInside" id="ixQ-ZG-fm6"/>
+                                    <segue destination="wUD-80-GnS" kind="push" id="d05-Bn-Oay"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7wz-fJ-YuW">
+                                <rect key="frame" x="16" y="517" width="343" height="36"/>
                                 <color key="backgroundColor" name="usp_green"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                                 <state key="normal" title="Gerar Boleto">
@@ -327,32 +339,19 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="gerarNovoBoleto:" destination="AxZ-1C-gpO" eventType="touchUpInside" id="3Wa-n6-XlJ"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gdg-aD-g8I">
-                                <rect key="frame" x="16" y="611" width="343" height="36"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
-                                <state key="normal" title="Visualizar boletos em aberto">
-                                    <color key="titleColor" name="usp_green"/>
-                                </state>
-                                <connections>
-                                    <action selector="listarBoletos:" destination="AxZ-1C-gpO" eventType="touchUpInside" id="ixQ-ZG-fm6"/>
-                                    <segue destination="wUD-80-GnS" kind="push" id="d05-Bn-Oay"/>
+                                    <action selector="gerarNovoBoleto:" destination="AxZ-1C-gpO" eventType="touchUpInside" id="a4c-qc-J23"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="pIl-E8-YUc" firstAttribute="leading" secondItem="clS-K1-Ayq" secondAttribute="leading" constant="16" id="1nT-ky-yZ1"/>
+                            <constraint firstItem="7wz-fJ-YuW" firstAttribute="leading" secondItem="clS-K1-Ayq" secondAttribute="leading" constant="16" id="7bI-OR-ubc"/>
                             <constraint firstItem="ArG-b8-jlq" firstAttribute="top" secondItem="n4R-zz-qNE" secondAttribute="bottom" constant="12" id="8GI-iA-RYw"/>
+                            <constraint firstItem="7wz-fJ-YuW" firstAttribute="top" secondItem="Csr-5k-GsC" secondAttribute="bottom" constant="8" symbolic="YES" id="8oW-ZV-jgc"/>
                             <constraint firstAttribute="trailing" secondItem="s62-6r-P96" secondAttribute="trailing" constant="16" id="8qB-yZ-IBa"/>
                             <constraint firstItem="HmJ-s0-Eic" firstAttribute="centerX" secondItem="clS-K1-Ayq" secondAttribute="centerX" id="AIG-vA-Ecm"/>
-                            <constraint firstAttribute="trailing" secondItem="pIl-E8-YUc" secondAttribute="trailing" constant="16" id="Hbz-Uq-Wel"/>
                             <constraint firstItem="HmJ-s0-Eic" firstAttribute="leading" secondItem="clS-K1-Ayq" secondAttribute="leading" constant="16" id="HnY-Ti-AXD"/>
                             <constraint firstAttribute="trailing" secondItem="Csr-5k-GsC" secondAttribute="trailing" constant="16" id="KOo-cR-EYd"/>
-                            <constraint firstItem="pIl-E8-YUc" firstAttribute="top" secondItem="Csr-5k-GsC" secondAttribute="bottom" constant="16" id="QAN-nm-31B"/>
                             <constraint firstItem="n4R-zz-qNE" firstAttribute="leading" secondItem="clS-K1-Ayq" secondAttribute="leading" constant="16" id="R2s-pP-2LZ"/>
                             <constraint firstItem="3bO-ZN-jbT" firstAttribute="top" secondItem="Gdg-aD-g8I" secondAttribute="bottom" constant="20" id="RA2-8c-ved"/>
                             <constraint firstAttribute="trailing" secondItem="ArG-b8-jlq" secondAttribute="trailing" constant="16" id="Tyg-cu-0c5"/>
@@ -367,6 +366,7 @@
                             <constraint firstItem="ArG-b8-jlq" firstAttribute="leading" secondItem="clS-K1-Ayq" secondAttribute="leading" constant="16" id="jeQ-bu-TQz"/>
                             <constraint firstItem="Csr-5k-GsC" firstAttribute="leading" secondItem="clS-K1-Ayq" secondAttribute="leading" constant="16" id="nzY-oz-fvW"/>
                             <constraint firstAttribute="trailing" secondItem="HmJ-s0-Eic" secondAttribute="trailing" constant="16" id="oGF-5S-UbD"/>
+                            <constraint firstAttribute="trailing" secondItem="7wz-fJ-YuW" secondAttribute="trailing" constant="16" id="ptn-jh-LXC"/>
                             <constraint firstItem="n4R-zz-qNE" firstAttribute="top" secondItem="n2q-iF-lP2" secondAttribute="bottom" constant="24" id="qZg-HJ-AxO"/>
                             <constraint firstItem="Gdg-aD-g8I" firstAttribute="leading" secondItem="clS-K1-Ayq" secondAttribute="leading" constant="16" id="wst-Q7-a4f"/>
                             <constraint firstAttribute="trailing" secondItem="7da-90-RZ6" secondAttribute="trailing" constant="16" id="yDZ-a4-vkK"/>

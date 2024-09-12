@@ -172,7 +172,7 @@
     if ([data length] > 0 && error == nil) {
       if ([httpResponse statusCode] == 200) {
         
-        NSDictionary* json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
         if ([[json valueForKey:@"erro"] boolValue]) {
           [SVProgressHUD showErrorWithStatus:[json valueForKey:@"mensagemErro"]];
         } else {

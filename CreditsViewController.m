@@ -132,13 +132,11 @@
   [SVProgressHUD showErrorWithStatus:message];
 }
 
-- (IBAction)visualizarBoleto:(id)sender {
-  [SVProgressHUD show];
-  [boletoDataModel getBoleto];
-}
-
-- (IBAction)listarBoletos:(id)sender {
-  [boletoDataModel getBoletos];
+- (IBAction)gerarPix:(id)sender {
+  if ([self validarValorRecarga:10]) {
+    [SVProgressHUD show];
+    [boletoDataModel createPix];
+  }
 }
 
 - (IBAction)gerarNovoBoleto:(id)sender {
@@ -147,13 +145,14 @@
   }
 }
 
-- (IBAction)gerarPix:(id)sender {
-  if ([self validarValorRecarga:10]) {
-    [SVProgressHUD show];
-    [boletoDataModel createPix];
-  }
+- (IBAction)listarBoletos:(id)sender {
+  [boletoDataModel getBoletos];
 }
 
+- (IBAction)visualizarBoleto:(id)sender {
+  [SVProgressHUD show];
+  [boletoDataModel getBoleto];
+}
 
 - (BOOL)validarValorRecarga:(float)valorMinimo {
   [self updateTextField];
@@ -170,10 +169,10 @@
   if ((valorRecarga >= valorMinimo) && (valorRecarga <= 200)) {
     return true;
   } else {
-    [SVProgressHUD showErrorWithStatus:@"Insira um valor entre R$ 10,00 e R$ 200,00"];
+    NSString *errorMessage = [[NSString stringWithFormat:@"Insira um valor entre R$ %.2f e R$ 200,00", valorMinimo] stringByReplacingOccurrencesOfString:@"." withString:@","];
+    [SVProgressHUD showErrorWithStatus:errorMessage];
     return false;
   }
-  
 }
 
 
