@@ -152,6 +152,7 @@
   float valorRecarga = [valorString floatValue];
   
   if (valorRecarga >= valorMinimo && valorRecarga <= 200.0f) {
+    [boletoDataModel setValorRecarga:valorString];
     return YES;
   } else {
     NSString *errorMessage = [NSString stringWithFormat:@"Insira um valor entre R$ %.2f e R$ 200,00", valorMinimo];
