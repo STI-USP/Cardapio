@@ -10,10 +10,11 @@
 #import "AppDelegate.h"
 #import "OAuth1Controller.h"
 #import "LoginWebViewController.h"
+#import "MyMutableURLRequest.h"
 
 #define AppKey @"AppCardapi"
-//#define OAuthServiceURL @"https://dev.uspdigital.usp.br/mobile/servicos/oauth" //dev
-#define OAuthServiceURL @"https://uspdigital.usp.br/mobile/servicos/oauth" //prod
+#define OAuthServiceURL @"https://dev.uspdigital.usp.br/mobile/servicos/oauth" //dev
+//#define OAuthServiceURL @"https://uspdigital.usp.br/mobile/servicos/oauth" //prod
 
 @interface OAuthUSP () {
   LoginWebViewController *loginViewController;
@@ -131,7 +132,7 @@
   NSString *path = @"/registrar";
   NSData* params = [NSJSONSerialization dataWithJSONObject:dict options:0 error:nil];
   NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", OAuthServiceURL, path]];
-  NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
+  NSMutableURLRequest *urlRequest = (NSMutableURLRequest*)[MyMutableURLRequest requestWithURL:url];
   [urlRequest setHTTPMethod:@"POST"];
   [urlRequest setHTTPBody:params];
   [urlRequest setValue:@"application/json; charset=UTF-8" forHTTPHeaderField:@"Content-Type"];
@@ -182,7 +183,7 @@
   NSString *path = @"/sair";
   NSData* params = [NSJSONSerialization dataWithJSONObject:dict options:0 error:nil];
   NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", OAuthServiceURL, path]];
-  NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
+  NSMutableURLRequest *urlRequest = (NSMutableURLRequest*)[MyMutableURLRequest requestWithURL:url];
   [urlRequest setHTTPMethod:@"POST"];
   [urlRequest setHTTPBody:params];
   [urlRequest setValue:@"application/json; charset=UTF-8" forHTTPHeaderField:@"Content-Type"];
@@ -219,7 +220,7 @@
   NSString *path = @"/consultar";
   NSData* params = [NSJSONSerialization dataWithJSONObject:dict options:0 error:nil];
   NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", OAuthServiceURL, path]];
-  NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
+  NSMutableURLRequest *urlRequest = (NSMutableURLRequest*)[MyMutableURLRequest requestWithURL:url];
   [urlRequest setHTTPMethod:@"POST"];
   [urlRequest setHTTPBody:params];
   [urlRequest setValue:@"application/json; charset=UTF-8" forHTTPHeaderField:@"Content-Type"];
@@ -243,50 +244,6 @@
   [dataTask resume];
 }
 
-/*
-- (void)checkUser {
-  // USP Digital POST Request
-  NSString *path = @"https://dev.uspdigital.usp.br/wsusuario/oauth/validar";
-  NSDictionary *parameters;
-  if (self.userData) {
-    parameters = @{@"wsuserid" : [self.userData objectForKey:@"wsuserid"]};
-    
-    //configura parametros
-    NSData* params = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", OAuthServiceURL, path]];
-    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
-    [urlRequest setHTTPMethod:@"POST"];
-    [urlRequest setHTTPBody:params];
-    
-    //Executa requisição
-    NSURLSessionDataTask *dataTask = [[self session] dataTaskWithRequest:urlRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-      
-      if (error) { //Erro na execuçao da API
-        //NSLog(@"Error in API request: %@", error.localizedDescription);
-      } else if ([data length] == 0) { // não passou pela validação
-        [defaults setObject:nil forKey:@"userData"];
-        [defaults setObject:nil forKey:@"oauthToken"];
-        [defaults setObject:nil forKey:@"oauthTokenSecret"];
-        
-        [self setOauthToken: nil];
-        [self setOauthTokenSecret: nil];
-        //[self setMessage:[json valueForKey:@"message"]];
-      } else { // Usuário válido
-        //NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
-      }
-    }];
-    [dataTask resume];
-  } else {
-    [defaults setObject:nil forKey:@"userData"];
-    [defaults setObject:nil forKey:@"oauthToken"];
-    [defaults setObject:nil forKey:@"oauthTokenSecret"];
-    
-    [self setOauthToken: nil];
-    [self setOauthTokenSecret: nil];
-    //[self setMessage:[json valueForKey:@"message"]];
-  }
-}
- */
 
 - (NSURLSession *)session {
   static dispatch_once_t onceToken;

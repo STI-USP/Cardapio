@@ -70,6 +70,7 @@
 		E99837FD1E201B540065ED08 /* BoletoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E99837FC1E201B540065ED08 /* BoletoTableViewCell.m */; };
 		E99838001E201B710065ED08 /* SwipeableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E99837FF1E201B710065ED08 /* SwipeableCell.m */; };
 		E9B61B55260BA3E700A52672 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9B61B54260BA3E700A52672 /* CoreServices.framework */; };
+		E9BF538E2C947F49004ED570 /* MyMutableURLRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E9BF538D2C947F49004ED570 /* MyMutableURLRequest.m */; };
 		E9CDD1BB1AD81E5100BB2E36 /* RestaurantsFilterController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9CDD1BA1AD81E5100BB2E36 /* RestaurantsFilterController.m */; };
 		E9CDD1CF1AD8682900BB2E36 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9CDD1CE1AD8682900BB2E36 /* SystemConfiguration.framework */; };
 		E9CDD1D11AD86B6800BB2E36 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9CDD1D01AD86B6800BB2E36 /* Security.framework */; };
@@ -224,6 +225,8 @@
 		E99837FF1E201B710065ED08 /* SwipeableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwipeableCell.m; sourceTree = "<group>"; };
 		E998B8422551D9800028B3C5 /* libFirebaseCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9B61B54260BA3E700A52672 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
+		E9BF538C2C947F48004ED570 /* MyMutableURLRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMutableURLRequest.h; sourceTree = "<group>"; };
+		E9BF538D2C947F49004ED570 /* MyMutableURLRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMutableURLRequest.m; sourceTree = "<group>"; };
 		E9CDD1B91AD81E5100BB2E36 /* RestaurantsFilterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestaurantsFilterController.h; sourceTree = "<group>"; };
 		E9CDD1BA1AD81E5100BB2E36 /* RestaurantsFilterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestaurantsFilterController.m; sourceTree = "<group>"; };
 		E9CDD1CC1AD8681800BB2E36 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -665,6 +668,8 @@
 				E9E9B1311B0E7D1C005BE8A1 /* DataModel.m */,
 				E90555B21E030EEA00B8516E /* BoletoDataModel.h */,
 				E90555B31E030EEA00B8516E /* BoletoDataModel.m */,
+				E9BF538C2C947F48004ED570 /* MyMutableURLRequest.h */,
+				E9BF538D2C947F49004ED570 /* MyMutableURLRequest.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -900,6 +905,7 @@
 				E990FE7626279E41005FF207 /* CALayer+XibConfiguration.m in Sources */,
 				E9CDD1E81AD86BFF00BB2E36 /* AFHTTPSessionManager.m in Sources */,
 				BFAC6EDB192A587900921494 /* NSString+HTML.m in Sources */,
+				E9BF538E2C947F49004ED570 /* MyMutableURLRequest.m in Sources */,
 				E90555BA1E099B6900B8516E /* BoletosPendentesTableViewController.m in Sources */,
 				BFAC6E96192A54E100921494 /* MenuViewController.m in Sources */,
 				E9E55FBB1B55933F00994BCB /* DetailCell.m in Sources */,

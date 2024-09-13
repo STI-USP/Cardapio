@@ -18,10 +18,10 @@ typedef void (^WebWiewDelegateHandler)(NSDictionary *oauthParams);
 //API Keys
 #define OAUTH_CALLBACK       @"localhost"
 #define CONSUMER_KEY         @"cardapio_usp"
-//#define CONSUMER_SECRET      @"foZyLmFVYO73aqUUkuIA6iloqbcVBm6V85lOaEYf" //dev
-//#define AUTH_URL             @"https://dev.uspdigital.usp.br" //dev
-#define CONSUMER_SECRET      @"EYagzAlOL3O0EFHMRtWAwSgIju5RtkAghDuqOXop" //prod
-#define AUTH_URL             @"https://uspdigital.usp.br" //prod
+#define CONSUMER_SECRET      @"foZyLmFVYO73aqUUkuIA6iloqbcVBm6V85lOaEYf" //dev
+#define AUTH_URL             @"https://dev.uspdigital.usp.br" //dev
+//#define CONSUMER_SECRET      @"EYagzAlOL3O0EFHMRtWAwSgIju5RtkAghDuqOXop" //prod
+//#define AUTH_URL             @"https://uspdigital.usp.br" //prod
 #define REQUEST_TOKEN_URL    @"/wsusuario/oauth/request_token"
 #define AUTHENTICATE_URL     @"/wsusuario/oauth/authorize"
 #define ACCESS_TOKEN_URL     @"/wsusuario/oauth/access_token"

@@ -10,10 +10,11 @@
 #import "SVProgressHUD.h"
 #import "OAuthUSP.h"
 #import "AFNetworking.h"
+#import "MyMutableURLRequest.h"
 
 
-//#define kBaseSTIURL @"https://dev.uspdigital.usp.br/mobile/servicos/cardapio/" //dev
-#define kBaseSTIURL @"https://uspdigital.usp.br/mobile/servicos/cardapio/" //prod
+#define kBaseSTIURL @"https://dev.uspdigital.usp.br/mobile/servicos/cardapio/" //dev
+//#define kBaseSTIURL @"https://uspdigital.usp.br/mobile/servicos/cardapio/" //prod
 
 #define kToken @"596df9effde6f877717b4e81fdb2ca9f"
 #define kHash @"rcuectairldq2017"
@@ -159,7 +160,7 @@
   NSString *path = @"gerarBoleto";
   NSData *params = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
   NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", kBaseSTIURL, path]];
-  NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
+  NSMutableURLRequest *urlRequest = (NSMutableURLRequest*)[MyMutableURLRequest requestWithURL:url];
   [urlRequest setHTTPMethod:@"POST"];
   [urlRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
   [urlRequest setHTTPBody:params];
@@ -171,7 +172,6 @@
     
     if ([data length] > 0 && error == nil) {
       if ([httpResponse statusCode] == 200) {
-        
         NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
         if ([[json valueForKey:@"erro"] boolValue]) {
           [SVProgressHUD showErrorWithStatus:[json valueForKey:@"mensagemErro"]];
@@ -206,7 +206,7 @@
   NSString *path = @"cancelarBoleto";
   NSData* params = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
   NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", kBaseSTIURL, path]];
-  NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
+  NSMutableURLRequest *urlRequest = (NSMutableURLRequest*)[MyMutableURLRequest requestWithURL:url];
   [urlRequest setHTTPMethod:@"POST"];
   [urlRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
   [urlRequest setHTTPBody:params];
@@ -248,7 +248,7 @@
   NSString *path = @"visualizarUltimoBoleto";
   NSData* params = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
   NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", kBaseSTIURL, path]];
-  NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
+  NSMutableURLRequest *urlRequest = (NSMutableURLRequest*)[MyMutableURLRequest requestWithURL:url];
   [urlRequest setHTTPMethod:@"POST"];
   [urlRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
   [urlRequest setHTTPBody:params];
@@ -296,7 +296,7 @@
   NSString *path = @"boletosEmAberto";
   NSData *params = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
   NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", kBaseSTIURL, path]];
-  NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
+  NSMutableURLRequest *urlRequest = (NSMutableURLRequest*)[MyMutableURLRequest requestWithURL:url];
   [urlRequest setHTTPMethod:@"POST"];
   [urlRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
   [urlRequest setHTTPBody:params];
@@ -348,7 +348,7 @@
   NSString *path = @"consultarSaldo";
   NSData* params = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
   NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", kBaseSTIURL, path]];
-  NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
+  NSMutableURLRequest *urlRequest = (NSMutableURLRequest*)[MyMutableURLRequest requestWithURL:url];
   [urlRequest setHTTPMethod:@"POST"];
   [urlRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
   [urlRequest setHTTPBody:params];

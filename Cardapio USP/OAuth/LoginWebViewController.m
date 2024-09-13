@@ -12,8 +12,8 @@
 #import "OAuthUSP.h"
 #import "SVProgressHUD.h"
 
-//#define UserURLString    @"https://dev.uspdigital.usp.br/wsusuario/oauth/usuariousp" //dev
-#define UserURLString    @"https://uspdigital.usp.br/wsusuario/oauth/usuariousp" //prod
+#define UserURLString    @"https://dev.uspdigital.usp.br/wsusuario/oauth/usuariousp" //dev
+//#define UserURLString    @"https://uspdigital.usp.br/wsusuario/oauth/usuariousp" //prod
 
 @interface LoginWebViewController ()
 
