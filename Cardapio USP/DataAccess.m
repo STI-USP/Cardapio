@@ -11,10 +11,8 @@
 #import "OAuthUSP.h"
 #import "AFNetworking.h"
 #import "MyMutableURLRequest.h"
+#import "Constants.h"
 
-
-#define kBaseSTIURL @"https://dev.uspdigital.usp.br/mobile/servicos/cardapio/" //dev
-//#define kBaseSTIURL @"https://uspdigital.usp.br/mobile/servicos/cardapio/" //prod
 
 #define kToken @"596df9effde6f877717b4e81fdb2ca9f"
 #define kHash @"rcuectairldq2017"
@@ -46,353 +44,275 @@
   }
   return self;
 }
+//
+//- (void)consultarSaldo {
+//  //configura parametros
+//  NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
+//                              [oauth.userData valueForKey:@"wsuserid"] , @"token",
+//                              nil];
+//  
+//  NSString *path = @"consultarSaldo";
+//  NSData* params = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
+//  NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", kBaseSTIURL, path]];
+//  NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
+//  [urlRequest setHTTPMethod:@"POST"];
+//  [urlRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+//  [urlRequest setHTTPBody:params];
+//  
+//  //Executa requisição
+//  NSURLSessionDataTask *dataTask = [[self session] dataTaskWithRequest:urlRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+//    
+//    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+//    
+//    if ([data length] > 0 && error == nil) {
+//      if ([httpResponse statusCode] == 200) {
+//        
+//        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+//        
+//        if ([[json valueForKey:@"erro"] boolValue]) {
+//          [self->_dataModel setRuCardCredit:@"--,--"];
+//          [SVProgressHUD showErrorWithStatus:[json valueForKey:@"mensagemErro"]];
+//
+//          if ([[json valueForKey:@"mensagemErro"] isEqualToString:@"Usuário não está logado!"])
+//            [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveLoginError" object:self];
+//
+//        } else {
+//          [self->_dataModel setRuCardCredit:[json valueForKey:@"saldo"]];
+//          [SVProgressHUD dismiss];
+//        }
+//      } else {
+//        [SVProgressHUD showErrorWithStatus:@"Não foi possível obter o saldo. Tente novamente mais tarde."];
+//        [self->_dataModel setRuCardCredit:@"--,--"];
+//      }
+//    } else if (error) {
+//      [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+//      [self->_dataModel setRuCardCredit:@"--,--"];
+//    }
+//
+//    // Notifica atualizações
+//    //[SVProgressHUD dismiss];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveCredits" object:self];
+//  }];
+//  
+//  [dataTask resume];
+//  
+//}
 
+- (void)consultarSaldo {
+    // Configura parâmetros
+    NSDictionary *parameters = @{
+        @"token": [oauth.userData valueForKey:@"wsuserid"]
+    };
+    
+    NSError *error;
+    NSData *params = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:&error];
+    
+    if (error) {
+        NSLog(@"Erro ao serializar parâmetros: %@", error.localizedDescription);
+        [SVProgressHUD showErrorWithStatus:@"Erro ao preparar os dados de solicitação."];
+        return;
+    }
+
+    NSString *path = @"consultarSaldo";
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", kBaseSTIURL, path]];
+    
+    // Cria a requisição
+    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
+    [urlRequest setHTTPMethod:@"POST"];
+    [urlRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [urlRequest setHTTPBody:params];
+    
+    // Cria a sessão e executa a requisição
+    NSURLSessionDataTask *dataTask = [[self session] dataTaskWithRequest:urlRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            NSLog(@"Erro na requisição: %@", error.localizedDescription);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [SVProgressHUD showErrorWithStatus:error.localizedDescription];
+                [self->_dataModel setRuCardCredit:@"--,--"];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveCredits" object:self];
+            });
+            return;
+        }
+        
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+        if (httpResponse.statusCode == 200 && data.length > 0) {
+            NSError *jsonError;
+            NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&jsonError];
+            
+            if (jsonError) {
+                NSLog(@"Erro ao parsear JSON: %@", jsonError.localizedDescription);
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [SVProgressHUD showErrorWithStatus:@"Erro ao processar a resposta do servidor."];
+                    [self->_dataModel setRuCardCredit:@"--,--"];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveCredits" object:self];
+                });
+                return;
+            }
+            
+            // Processa a resposta JSON
+            if ([[json valueForKey:@"erro"] boolValue]) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self->_dataModel setRuCardCredit:@"--,--"];
+                    [SVProgressHUD showErrorWithStatus:[json valueForKey:@"mensagemErro"]];
+                    
+                    if ([[json valueForKey:@"mensagemErro"] isEqualToString:@"Usuário não está logado!"]) {
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveLoginError" object:self];
+                    }
+                    
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveCredits" object:self];
+                });
+            } else {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self->_dataModel setRuCardCredit:[json valueForKey:@"saldo"]];
+                    [SVProgressHUD dismiss];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveCredits" object:self];
+                });
+            }
+        } else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [SVProgressHUD showErrorWithStatus:@"Não foi possível obter o saldo. Tente novamente mais tarde."];
+                [self->_dataModel setRuCardCredit:@"--,--"];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveCredits" object:self];
+            });
+        }
+    }];
+    
+    // Inicia a tarefa
+    [dataTask resume];
+}
 
 - (void)createPix {
-  
-  AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-  manager.requestSerializer = [AFHTTPRequestSerializer serializer];
-  manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/x-www-form-urlencoded"];
-  manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-  
-  //configura parametros
-  NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
-                              kHash, @"hash",
-                              [oauth.userData valueForKey:@"wsuserid"] , @"token",
-                              [[_boletoDataModel valorRecarga] stringByReplacingOccurrencesOfString:@"," withString:@"."], @"valor",
-                              @"APP", @"tipoapp",
-                              nil];
+    // Configura parâmetros
+    NSDictionary *parameters = @{
+        @"hash": kHash,
+        @"token": [oauth.userData valueForKey:@"wsuserid"],
+        @"valor": [[_boletoDataModel valorRecarga] stringByReplacingOccurrencesOfString:@"," withString:@"."],
+        @"tipoapp": @"APP"
+    };
+    
+    NSString *path = @"pixgerar";
+    NSString *webServicePath = [NSString stringWithFormat:@"%@%@", kBaseSTIURL, path];
+    
+    // Configura a requisição
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:webServicePath]];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    
+    // Serializa os parâmetros para o formato de "application/x-www-form-urlencoded"
+    NSString *bodyString = [self urlEncodedStringFromDictionary:parameters];
+    [request setHTTPBody:[bodyString dataUsingEncoding:NSUTF8StringEncoding]];
 
-  
-  NSString *path = @"pixgerar";
-  NSString *webServicePath = [NSString stringWithFormat:@"%@%@", kBaseSTIURL, path];
-
-  [manager POST:webServicePath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-
-    // Parse da resposta
-    NSMutableDictionary *json = [NSJSONSerialization JSONObjectWithData:responseObject options: NSJSONReadingMutableContainers error: nil];
-
-    NSInteger statusCode = [operation.response statusCode];
-    if (statusCode == 200) {
-      if (![[json valueForKey:@"msgErro"] isEqualToString:@""]) {
-        [SVProgressHUD showErrorWithStatus:[json valueForKey:@"msgErro"]];
-      } else {
-        // Notifica atualizações
-        [self->_boletoDataModel setPix:[NSMutableDictionary dictionaryWithDictionary:json]];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"DidCreatePix" object:self];
-      }
-    } else {
-      [SVProgressHUD showErrorWithStatus:@"Não foi possível gerar o código. Tente novamente mais tarde."];
-    }
-  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-    NSLog(@"%@", error);
-    [SVProgressHUD showErrorWithStatus:error.localizedDescription];
-  }];
-
+    // Cria uma sessão e faz a requisição
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        
+        if (error) {
+            NSLog(@"%@", error);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [SVProgressHUD showErrorWithStatus:error.localizedDescription];
+            });
+            return;
+        }
+        
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+        if (httpResponse.statusCode == 200) {
+            NSError *jsonError;
+            NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&jsonError];
+            
+            if (jsonError) {
+                NSLog(@"Error deserializing JSON: %@", jsonError.localizedDescription);
+                return;
+            }
+            
+            NSString *msgErro = json[@"msgErro"];
+            if (msgErro && ![msgErro isEqualToString:@""]) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [SVProgressHUD showErrorWithStatus:msgErro];
+                });
+            } else {
+                // Notifica atualizações
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self->_boletoDataModel setPix:[NSMutableDictionary dictionaryWithDictionary:json]];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"DidCreatePix" object:self];
+                });
+            }
+        } else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [SVProgressHUD showErrorWithStatus:@"Não foi possível gerar o código. Tente novamente mais tarde."];
+            });
+        }
+    }];
+    
+    [dataTask resume];
 }
 
 - (void)checkPix:(NSString *)pixId {
-
-  AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-  manager.requestSerializer = [AFHTTPRequestSerializer serializer];
-  manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/x-www-form-urlencoded"];
-  manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-  
-  //configura parametros
-  NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
-                              kHash, @"hash",
-                              pixId, @"idfpix",
-                              nil];
-
-  NSString *path = @"pixverificar";
-  NSString *webServicePath = [NSString stringWithFormat:@"%@%@", kBaseSTIURL, path];
-
-  [manager POST:webServicePath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-
-    // Parse da resposta
-    NSError *error;
-    NSMutableDictionary *json = [NSJSONSerialization JSONObjectWithData:responseObject options: NSJSONReadingMutableContainers error:&error];
-
-    NSInteger statusCode = [operation.response statusCode];
-    if (statusCode == 200) {
-
-      if (json) {
-        NSString *status = [json valueForKey:@"situacao"];
-        if (status != (id)[NSNull null]) {
-          if ((status) && !([status isEqualToString:@""])) {
-            if ([status isEqualToString:@"CONCLUIDA"]) {
-              // Notifica atualizações
-              [SVProgressHUD showSuccessWithStatus:@"Recebemos o pagamento!"];
-              [[NSNotificationCenter defaultCenter] postNotificationName:@"DidPaidPix" object:self];
-            } else {
-              [SVProgressHUD dismiss];
+    // Configura parâmetros
+    NSDictionary *parameters = @{
+        @"hash": kHash,
+        @"idfpix": pixId
+    };
+    
+    NSString *path = @"pixverificar";
+    NSString *webServicePath = [NSString stringWithFormat:@"%@%@", kBaseSTIURL, path];
+    
+    // Configura a requisição
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:webServicePath]];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    
+    // Serializa os parâmetros para o formato de "application/x-www-form-urlencoded"
+    NSString *bodyString = [self urlEncodedStringFromDictionary:parameters];
+    [request setHTTPBody:[bodyString dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    // Cria uma sessão e faz a requisição
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        
+        if (error) {
+            NSLog(@"%@", error);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [SVProgressHUD showErrorWithStatus:error.localizedDescription];
+            });
+            return;
+        }
+        
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+        if (httpResponse.statusCode == 200) {
+            NSError *jsonError;
+            NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&jsonError];
+            
+            if (jsonError) {
+                NSLog(@"Error deserializing JSON: %@", jsonError.localizedDescription);
+                return;
             }
-          } else {
-            [SVProgressHUD dismiss];
-          }
+            
+            NSString *status = json[@"situacao"];
+            if (status && ![status isEqual:[NSNull null]]) {
+                if ([status isEqualToString:@"CONCLUIDA"]) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [SVProgressHUD showSuccessWithStatus:@"Recebemos o pagamento!"];
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"DidPaidPix" object:self];
+                    });
+                } else {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [SVProgressHUD dismiss];
+                    });
+                }
+            } else {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [SVProgressHUD dismiss];
+                });
+            }
         } else {
-          [SVProgressHUD dismiss];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [SVProgressHUD showErrorWithStatus:@"Não foi possível verificar o status do Pix. Tente novamente mais tarde."];
+            });
         }
-      } else {
-        [SVProgressHUD dismiss];
-        NSLog(@"Error deserializing JSON: %@", error.localizedDescription);
-      }
-    } else {
-      [SVProgressHUD showErrorWithStatus:@"Não foi possível gerar o código. Tente novamente mais tarde."];
-    }
-  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-    NSLog(@"%@", error);
-    [SVProgressHUD showErrorWithStatus:error.localizedDescription];
-  }];
+    }];
+    
+    [dataTask resume];
 }
-
-
-
-- (void)createBill {
-  [SVProgressHUD show];
-  
-  //configura parametros
-  NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
-                              [oauth.userData valueForKey:@"wsuserid"] , @"token",
-                              [[[[_boletoDataModel valorRecarga] stringByReplacingOccurrencesOfString:@"R" withString:@""] stringByReplacingOccurrencesOfString:@"$" withString:@""] stringByReplacingOccurrencesOfString:@"." withString:@","], @"valor",
-                              nil];
-  
-  NSString *path = @"gerarBoleto";
-  NSData *params = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
-  NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", kBaseSTIURL, path]];
-  NSMutableURLRequest *urlRequest = (NSMutableURLRequest*)[MyMutableURLRequest requestWithURL:url];
-  [urlRequest setHTTPMethod:@"POST"];
-  [urlRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-  [urlRequest setHTTPBody:params];
-  
-  //Executa requisição
-  NSURLSessionDataTask *dataTask = [[self session] dataTaskWithRequest:urlRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-    
-    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-    
-    if ([data length] > 0 && error == nil) {
-      if ([httpResponse statusCode] == 200) {
-        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-        if ([[json valueForKey:@"erro"] boolValue]) {
-          [SVProgressHUD showErrorWithStatus:[json valueForKey:@"mensagemErro"]];
-        } else {
-          [self->_boletoDataModel setBoleto:[NSMutableDictionary dictionaryWithDictionary:json]];
-          [[NSNotificationCenter defaultCenter] postNotificationName:@"DidCreateBill" object:self];
-        }
-      } else {
-        [SVProgressHUD showErrorWithStatus:@"Não foi possível gerar o boleto. Tente novamente mais tarde."];
-      }
-    } else if (error) {
-      [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
-    }
-    
-    // Notifica atualizações
-    //[SVProgressHUD dismiss];
-    
-  }];
-  
-  [dataTask resume];
-}
-
-- (void)deleteBill {
-  [SVProgressHUD show];
-  
-  //configura parametros
-  NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
-                              [oauth.userData valueForKey:@"wsuserid"] , @"token",
-                              [_boletoDataModel.boleto valueForKey:@"id"], @"id",
-                              nil];
-  
-  NSString *path = @"cancelarBoleto";
-  NSData* params = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
-  NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", kBaseSTIURL, path]];
-  NSMutableURLRequest *urlRequest = (NSMutableURLRequest*)[MyMutableURLRequest requestWithURL:url];
-  [urlRequest setHTTPMethod:@"POST"];
-  [urlRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-  [urlRequest setHTTPBody:params];
-  
-  //Executa requisição
-  NSURLSessionDataTask *dataTask = [[self session] dataTaskWithRequest:urlRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-    
-    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-    
-    if ([data length] > 0 && error == nil) {
-      if ([httpResponse statusCode] == 200) {
-        
-        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-        
-        if ([[json valueForKey:@"erro"] boolValue]) {
-          [SVProgressHUD showErrorWithStatus:[json valueForKey:@"mensagemErro"]];
-        }
-      } else {
-        [SVProgressHUD showErrorWithStatus:@"Não foi possível apagar o boleto. Tente novamente mais tarde."];
-      }
-    } else if (error) {
-      [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
-    }
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"DidDeleteBill" object:self];
-
-  }];
-  
-  [dataTask resume];
-}
-
-- (void)getBoleto {
-
-  //configura parametros
-  NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
-                              [oauth.userData valueForKey:@"wsuserid"] , @"token",
-                              nil];
-  
-  NSString *path = @"visualizarUltimoBoleto";
-  NSData* params = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
-  NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", kBaseSTIURL, path]];
-  NSMutableURLRequest *urlRequest = (NSMutableURLRequest*)[MyMutableURLRequest requestWithURL:url];
-  [urlRequest setHTTPMethod:@"POST"];
-  [urlRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-  [urlRequest setHTTPBody:params];
-  
-  //Executa requisição
-  NSURLSessionDataTask *dataTask = [[self session] dataTaskWithRequest:urlRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-    
-    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-    
-    if ([data length] > 0 && error == nil) {
-      if ([httpResponse statusCode] == 200) {
-  
-        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-        
-        if ([[json valueForKey:@"erro"] boolValue]) {
-          [SVProgressHUD showErrorWithStatus:[json valueForKey:@"mensagemErro"]];
-        } else {
-          [self->_boletoDataModel setBoleto:[NSMutableDictionary dictionaryWithDictionary:json]];
-          [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveBill" object:self];
-        }
-      } else {
-        [SVProgressHUD showErrorWithStatus:@"Não foi possível obter o boleto. Tente novamente mais tarde."];
-      }
-    } else if (error) {
-      [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
-    }
-    
-    // Notifica atualizações
-    //[SVProgressHUD dismiss];
-
-  }];
-  
-  [dataTask resume];
-}
-
-
-- (void)getBoletos {
-  [SVProgressHUD show];
-
-  //configura parametros
-  NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
-                              [oauth.userData valueForKey:@"wsuserid"] , @"token",
-                              nil];
-  
-  NSString *path = @"boletosEmAberto";
-  NSData *params = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
-  NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", kBaseSTIURL, path]];
-  NSMutableURLRequest *urlRequest = (NSMutableURLRequest*)[MyMutableURLRequest requestWithURL:url];
-  [urlRequest setHTTPMethod:@"POST"];
-  [urlRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-  [urlRequest setHTTPBody:params];
-  
-  //Executa requisição
-  NSURLSessionDataTask *dataTask = [[self session] dataTaskWithRequest:urlRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-    
-    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-    
-    if ([data length] > 0 && error == nil) {
-      if ([httpResponse statusCode] == 200) {
-        
-        NSDictionary* json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-        
-        if ([[json valueForKey:@"erro"] boolValue]) {
-          [SVProgressHUD showErrorWithStatus:[json valueForKey:@"mensagemErro"]];
-        } else {
-          
-          NSMutableArray *boletos = [[NSMutableArray alloc] init];
-          for (NSMutableDictionary *boleto in [json objectForKey:@"boletos"]) {
-            [boletos addObject:boleto];
-          }
-          [self->_boletoDataModel setBoletosPendentes:boletos];
-          [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveBills" object:self];
-        }
-      } else {
-        [SVProgressHUD showErrorWithStatus:@"Não foi possível obter o boleto. Tente novamente mais tarde."];
-      }
-    } else if (error) {
-      [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
-    }
-    
-    // Notifica atualizações
-    //[SVProgressHUD dismiss];
-    
-  }];
-  
-  [dataTask resume];
-
-}
-
-
-- (void)consultarSaldo {
-  //configura parametros
-  NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
-                              [oauth.userData valueForKey:@"wsuserid"] , @"token",
-                              nil];
-  
-  NSString *path = @"consultarSaldo";
-  NSData* params = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
-  NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", kBaseSTIURL, path]];
-  NSMutableURLRequest *urlRequest = (NSMutableURLRequest*)[MyMutableURLRequest requestWithURL:url];
-  [urlRequest setHTTPMethod:@"POST"];
-  [urlRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-  [urlRequest setHTTPBody:params];
-  
-  //Executa requisição
-  NSURLSessionDataTask *dataTask = [[self session] dataTaskWithRequest:urlRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-    
-    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-    
-    if ([data length] > 0 && error == nil) {
-      if ([httpResponse statusCode] == 200) {
-        
-        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-        
-        if ([[json valueForKey:@"erro"] boolValue]) {
-          [self->_dataModel setRuCardCredit:@"--,--"];
-          [SVProgressHUD showErrorWithStatus:[json valueForKey:@"mensagemErro"]];
-
-          if ([[json valueForKey:@"mensagemErro"] isEqualToString:@"Usuário não está logado!"])
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveLoginError" object:self];
-
-        } else {
-          [self->_dataModel setRuCardCredit:[json valueForKey:@"saldo"]];
-          [SVProgressHUD dismiss];
-        }
-      } else {
-        [SVProgressHUD showErrorWithStatus:@"Não foi possível obter o saldo. Tente novamente mais tarde."];
-        [self->_dataModel setRuCardCredit:@"--,--"];
-      }
-    } else if (error) {
-      [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
-      [self->_dataModel setRuCardCredit:@"--,--"];
-    }
-
-    // Notifica atualizações
-    //[SVProgressHUD dismiss];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveCredits" object:self];
-  }];
-  
-  [dataTask resume];
-  
-}
-
-
 
 - (NSURLSession *)session {
   static dispatch_once_t onceToken;
@@ -405,5 +325,21 @@
   });
   return _session;
 }
+
+- (NSString *)urlEncodedStringFromDictionary:(NSDictionary *)dict {
+    NSMutableArray *parts = [NSMutableArray array];
+    for (NSString *key in dict) {
+        NSString *encodedKey = [self urlEncode:key];
+        NSString *encodedValue = [self urlEncode:[dict objectForKey:key]];
+        NSString *part = [NSString stringWithFormat:@"%@=%@", encodedKey, encodedValue];
+        [parts addObject:part];
+    }
+    return [parts componentsJoinedByString:@"&"];
+}
+
+- (NSString *)urlEncode:(NSString *)string {
+    return [string stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+}
+
 
 @end

@@ -11,10 +11,11 @@
 #import "OAuth1Controller.h"
 #import "LoginWebViewController.h"
 #import "MyMutableURLRequest.h"
+#import "Constants.h"
+
 
 #define AppKey @"AppCardapi"
-#define OAuthServiceURL @"https://dev.uspdigital.usp.br/mobile/servicos/oauth" //dev
-//#define OAuthServiceURL @"https://uspdigital.usp.br/mobile/servicos/oauth" //prod
+
 
 @interface OAuthUSP () {
   LoginWebViewController *loginViewController;

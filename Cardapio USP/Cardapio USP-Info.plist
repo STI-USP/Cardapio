@@ -105,5 +105,13 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+    <key>BASE_URL</key>
+    <string>${BASE_URL}</string>
+    <key>RUCARD_URL</key>
+    <string>${RUCARD_URL}</string>
+    <key>OAUTH_SERVICE_URL</key>
+    <string>${OAUTH_SERVICE_URL}</string>
+    <key>USER_URL_STRING</key>
+    <string>${USER_URL_STRING}</string>
 </dict>
 </plist>

@@ -7,10 +7,7 @@
 //
 
 #import "STIOauth.h"
-
-//#define OAuthServiceURL @"https://dev.uspdigital.usp.br/mobile/servicos/oauth" //dev
-#define OAuthServiceURL @"https://uspdigital.usp.br/mobile/servicos/oauth" //prod
-
+#import "Constants.h"
 
 @implementation STIOauth
 

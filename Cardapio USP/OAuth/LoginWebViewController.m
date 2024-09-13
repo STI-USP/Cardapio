@@ -11,9 +11,7 @@
 #import "OAuth1Controller.h"
 #import "OAuthUSP.h"
 #import "SVProgressHUD.h"
-
-#define UserURLString    @"https://dev.uspdigital.usp.br/wsusuario/oauth/usuariousp" //dev
-//#define UserURLString    @"https://uspdigital.usp.br/wsusuario/oauth/usuariousp" //prod
+#import "Constants.h"
 
 @interface LoginWebViewController ()
 
@@ -22,7 +20,6 @@
 @property (nonatomic, strong) OAuthUSP *oAuthUSP;
 
 @end
-
 
 
 @implementation LoginWebViewController

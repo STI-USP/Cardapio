@@ -71,6 +71,7 @@
 		E99838001E201B710065ED08 /* SwipeableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E99837FF1E201B710065ED08 /* SwipeableCell.m */; };
 		E9B61B55260BA3E700A52672 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9B61B54260BA3E700A52672 /* CoreServices.framework */; };
 		E9BF538E2C947F49004ED570 /* MyMutableURLRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E9BF538D2C947F49004ED570 /* MyMutableURLRequest.m */; };
+		E9BF53912C94C4F4004ED570 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = E9BF53902C94C4F4004ED570 /* Constants.m */; };
 		E9CDD1BB1AD81E5100BB2E36 /* RestaurantsFilterController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9CDD1BA1AD81E5100BB2E36 /* RestaurantsFilterController.m */; };
 		E9CDD1CF1AD8682900BB2E36 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9CDD1CE1AD8682900BB2E36 /* SystemConfiguration.framework */; };
 		E9CDD1D11AD86B6800BB2E36 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9CDD1D01AD86B6800BB2E36 /* Security.framework */; };
@@ -227,6 +228,8 @@
 		E9B61B54260BA3E700A52672 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
 		E9BF538C2C947F48004ED570 /* MyMutableURLRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMutableURLRequest.h; sourceTree = "<group>"; };
 		E9BF538D2C947F49004ED570 /* MyMutableURLRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMutableURLRequest.m; sourceTree = "<group>"; };
+		E9BF538F2C94C4F4004ED570 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		E9BF53902C94C4F4004ED570 /* Constants.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		E9CDD1B91AD81E5100BB2E36 /* RestaurantsFilterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestaurantsFilterController.h; sourceTree = "<group>"; };
 		E9CDD1BA1AD81E5100BB2E36 /* RestaurantsFilterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestaurantsFilterController.m; sourceTree = "<group>"; };
 		E9CDD1CC1AD8681800BB2E36 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -670,6 +673,8 @@
 				E90555B31E030EEA00B8516E /* BoletoDataModel.m */,
 				E9BF538C2C947F48004ED570 /* MyMutableURLRequest.h */,
 				E9BF538D2C947F49004ED570 /* MyMutableURLRequest.m */,
+				E9BF538F2C94C4F4004ED570 /* Constants.h */,
+				E9BF53902C94C4F4004ED570 /* Constants.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -947,6 +952,7 @@
 				E9DF35CF1B3DD306009B92B6 /* MapViewController.m in Sources */,
 				E92D5EA61C19B32B00ECA5D1 /* sha1.c in Sources */,
 				BFAC6ECA192A586B00921494 /* RECommonFunctions.m in Sources */,
+				E9BF53912C94C4F4004ED570 /* Constants.m in Sources */,
 				E90555B71E086AAF00B8516E /* CreditsNavigationViewController.m in Sources */,
 				ADB2DCB319374FCE0068417F /* Restaurant.m in Sources */,
 				E92D5EA41C19B32B00ECA5D1 /* Base64Transcoder.c in Sources */,
@@ -1128,6 +1134,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				BASE_URL = "https://dev.uspdigital.usp.br/mobile/servicos/cardapio/";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 74;
@@ -1141,6 +1148,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MARKETING_VERSION = 3.1.6;
+				OAUTH_SERVICE_URL = "https://dev.uspdigital.usp.br/mobile/servicos/oauth";
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -1150,7 +1158,9 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				RUCARD_URL = "https://dev.uspdigital.usp.br/rucard/servicos/";
 				TARGETED_DEVICE_FAMILY = 1;
+				USER_URL_STRING = "https://dev.uspdigital.usp.br/wsusuario/oauth/usuariousp";
 				VALID_ARCHS = "$(ARCHS_STANDARD)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1162,6 +1172,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				BASE_URL = "https://uspdigital.usp.br/mobile/servicos/cardapio/";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 74;
@@ -1175,6 +1186,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MARKETING_VERSION = 3.1.6;
+				OAUTH_SERVICE_URL = "https://uspdigital.usp.br/mobile/servicos/oauth";
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -1184,7 +1196,9 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				RUCARD_URL = "https://uspdigital.usp.br/rucard/servicos/";
 				TARGETED_DEVICE_FAMILY = 1;
+				USER_URL_STRING = "https://uspdigital.usp.br/wsusuario/oauth/usuariousp";
 				VALID_ARCHS = "$(ARCHS_STANDARD)";
 				WRAPPER_EXTENSION = app;
 			};

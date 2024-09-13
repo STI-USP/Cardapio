@@ -13,14 +13,12 @@
 #import "SVProgressHUD.h"
 #import "OAuthUSP.h"
 #import "DataAccess.h"
+#import "Constants.h"
 
 @import Firebase;
 
 #define kRestaurantsURL @"http://kaimbu2.uspnet.usp.br:8080/cardapio/"
-#define kBaseURL @"http://kaimbu2.uspnet.usp.br:8080/"
-
-#define kBaseSTIURL @"https://dev.uspdigital.usp.br/rucard/servicos/" //dev
-//#define kBaseSTIURL @"https://uspdigital.usp.br/rucard/servicos/" //prod
+//#define kBaseURL @"http://kaimbu2.uspnet.usp.br:8080/"
 
 #define kToken @"596df9effde6f877717b4e81fdb2ca9f"
 
@@ -77,7 +75,7 @@
   manager.responseSerializer = [AFHTTPResponseSerializer serializer];
   
   NSString *webServicePath;
-  webServicePath = [NSString stringWithFormat:@"%@restaurants", kBaseSTIURL];
+  webServicePath = [NSString stringWithFormat:@"%@restaurants", kBaseRUCardURL];
   
   NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys: kToken , @"hash", nil];
   
@@ -172,7 +170,7 @@
   manager.responseSerializer = [AFHTTPResponseSerializer serializer];
   
   NSString *webServicePath;
-  webServicePath = [NSString stringWithFormat:@"%@menu/%@", kBaseSTIURL, [self.currentRestaurant valueForKey:@"id"]];
+  webServicePath = [NSString stringWithFormat:@"%@menu/%@", kBaseRUCardURL, [self.currentRestaurant valueForKey:@"id"]];
   
   //NSLog(@"%@", webServicePath);
   
@@ -239,6 +237,191 @@
   }];
 }
 
+//- (void)getRestaurantList {
+//    NSString *webServicePath = [NSString stringWithFormat:@"%@restaurants", kBaseRUCardURL];
+//    
+//    // Configura os parâmetros
+//    NSDictionary *parameters = @{ @"hash": kToken };
+//    
+//    // Cria a requisição
+//    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:webServicePath]];
+//    [request setHTTPMethod:@"POST"];
+//    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+//    
+//    // Serializa os parâmetros
+//    NSError *error;
+//    NSData *bodyData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:&error];
+//    if (error) {
+//        NSLog(@"Erro ao serializar parâmetros: %@", error.localizedDescription);
+//        return;
+//    }
+//    [request setHTTPBody:bodyData];
+//    
+//    // Cria a sessão e a tarefa de requisição
+//    NSURLSession *session = [NSURLSession sharedSession];
+//    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+//        if (error) {
+//            NSLog(@"Erro na requisição: %@", error.localizedDescription);
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//                self.restaurants = [defaults objectForKey:@"Restaurants"];
+//                [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveRestaurants" object:self];
+//            });
+//            return;
+//        }
+//        
+//        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+//        if (httpResponse.statusCode == 200) {
+//            NSError *jsonError;
+//            NSMutableDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&jsonError];
+//            
+//            if (jsonError) {
+//                NSLog(@"Erro ao parsear JSON: %@", jsonError.localizedDescription);
+//                return;
+//            }
+//            
+//            self.restaurants = [[NSMutableArray alloc] init];
+//            for (NSMutableDictionary *campus in json) {
+//                [self.restaurants addObject:campus];
+//            }
+//            
+//            if ([self.restaurants count] != 0) {
+//                NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//                [defaults setObject:self.restaurants forKey:@"Restaurants"];
+//                [defaults synchronize];
+//                
+//                // Seleciona o restaurante preferido
+//                for (NSDictionary *campus in self.restaurants) {
+//                    NSArray *restaurantsArray = campus[@"restaurants"];
+//                    for (NSMutableDictionary *restaurant in restaurantsArray) {
+//                        NSString *restaurantId = restaurant[@"id"];
+//                        NSString *preferredRestaurantId = [[defaults objectForKey:@"preferredRestaurant"] valueForKey:@"id"];
+//                        
+//                        if ([restaurantId isEqualToString:preferredRestaurantId]) {
+//                            self.preferredRestaurant = restaurant;
+//                            self.currentRestaurant = restaurant;
+//                            break;
+//                        }
+//                    }
+//                }
+//                
+//                // Caso o restaurante preferido não tenha sido encontrado
+//                if (!self.currentRestaurant && self.restaurants.count > 0) {
+//                    BOOL cuasoFound = NO;
+//                    for (NSDictionary *campus in self.restaurants) {
+//                        NSArray *restaurantsArray = campus[@"restaurants"];
+//                        for (NSDictionary *restaurant in restaurantsArray) {
+//                            NSNumber *restaurantId = restaurant[@"id"];
+//                            if (restaurantId.intValue == 6) { // Restaurante central
+//                                self.currentRestaurant = [restaurant mutableCopy];
+//                                cuasoFound = YES;
+//                                break;
+//                            }
+//                        }
+//                        if (cuasoFound) break;
+//                    }
+//                    
+//                    // Se "CUASO" não foi encontrado, define o primeiro restaurante
+//                    if (!cuasoFound) {
+//                        NSDictionary *firstCampus = [self.restaurants firstObject];
+//                        NSArray *restaurantsArray = firstCampus[@"restaurants"];
+//                        if (restaurantsArray.count > 0) {
+//                            self.currentRestaurant = [restaurantsArray firstObject];
+//                        }
+//                    }
+//                }
+//            }
+//            
+//            // Notifica atualizações
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveRestaurants" object:self];
+//            });
+//        }
+//    }];
+//    
+//    // Inicia a tarefa
+//    [dataTask resume];
+//}
+//
+//- (void)getMenu {
+//    [SVProgressHUD show];
+//    self.menuArray = [[NSMutableArray alloc] init];
+//    
+//    NSString *webServicePath = [NSString stringWithFormat:@"%@menu/%@", kBaseRUCardURL, [self.currentRestaurant valueForKey:@"id"]];
+//    NSDictionary *parameters = @{ @"hash": kToken };
+//    
+//    // Cria a requisição
+//    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:webServicePath]];
+//    [request setHTTPMethod:@"POST"];
+//    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+//    
+//    // Serializa os parâmetros
+//    NSError *error;
+//    NSData *bodyData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:&error];
+//    if (error) {
+//        NSLog(@"Erro ao serializar parâmetros: %@", error.localizedDescription);
+//        return;
+//    }
+//    [request setHTTPBody:bodyData];
+//    
+//    // Cria a sessão e a tarefa de requisição
+//    NSURLSession *session = [NSURLSession sharedSession];
+//    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+//        if (error) {
+//            NSLog(@"Erro na requisição: %@", error.localizedDescription);
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                [SVProgressHUD showErrorWithStatus:@"Não foi possível obter o cardápio. Tente novamente mais tarde."];
+//            });
+//            return;
+//        }
+//        
+//        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+//        if (httpResponse.statusCode == 200) {
+//            NSError *jsonError;
+//            NSMutableDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&jsonError];
+//            
+//            if (jsonError) {
+//                NSLog(@"Erro ao parsear JSON: %@", jsonError.localizedDescription);
+//                return;
+//            }
+//            
+//            if (![[[json valueForKey:@"message"] valueForKey:@"error"] boolValue]) {
+//                for (NSMutableDictionary *rawItem in [json valueForKey:@"meals"]) {
+//                    NSMutableDictionary *item = [self cleanDictionary:rawItem];
+//                    NSMutableArray *period = [[NSMutableArray alloc] init];
+//                    
+//                    if (![item[@"lunch"] isKindOfClass:[NSString class]]) {
+//                        Period *lunch = [[Period alloc] initWithPeriod:@"lunch" andMenu:item[@"lunch"][@"menu"] andCalories:item[@"lunch"][@"calories"]];
+//                        [period addObject:lunch];
+//                    }
+//                    
+//                    if (![item[@"dinner"] isKindOfClass:[NSString class]]) {
+//                        Period *dinner = [[Period alloc] initWithPeriod:@"dinner" andMenu:item[@"dinner"][@"menu"] andCalories:item[@"dinner"][@"calories"]];
+//                        [period addObject:dinner];
+//                    }
+//                    
+//                    Menu *menu = [[Menu alloc] initWithDate:item[@"date"] andPeriod:period];
+//                    [self.menuArray addObject:menu];
+//                }
+//                
+//                self.observation = json[@"observation"][@"observation"];
+//                dispatch_async(dispatch_get_main_queue(), ^{
+//                    [SVProgressHUD dismiss];
+//                    [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveMenu" object:self];
+//                });
+//            } else {
+//                dispatch_async(dispatch_get_main_queue(), ^{
+//                    [SVProgressHUD showErrorWithStatus:@"Não foi possível obter o cardápio. Tente novamente mais tarde."];
+//                });
+//            }
+//        } else {
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                [SVProgressHUD showErrorWithStatus:@"Não foi possível obter o cardápio. Tente novamente mais tarde."];
+//            });
+//        }
+//    }];
+//    [dataTask resume];
+//}
 
 - (void)getCreditoRUCard {
   [dataAccess consultarSaldo];
@@ -258,7 +441,7 @@
   return json;
 }
 
-- (Cash *)cash{
+- (Cash *)cash {
   NSMutableArray *items = [[NSMutableArray alloc] init];
   NSDictionary *json = (NSDictionary *)[self iniciar_JSONBinding: [NSString stringWithFormat:@"%@restaurantes.json", kRestaurantsURL]];
   if (!json) {

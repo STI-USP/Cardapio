@@ -15,15 +15,10 @@
 @property (nonatomic, weak) BoletoDataModel *boletoDataModel;
 @property (nonatomic, weak) DataModel *dataModel;
 
+
 + (DataAccess *)sharedInstance;
-- (void)getBoleto;
-- (void)getBoletos;
-- (void)createBill;
-- (void)deleteBill;
 - (void)consultarSaldo;
 - (void)createPix;
 - (void)checkPix:(NSString *)pixId;
-
-
 
 @end

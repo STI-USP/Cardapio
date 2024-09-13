@@ -54,22 +54,6 @@
 
 
 // - API
-- (void)getBoleto {
-  [dataAccess getBoleto];
-}
-
-- (void)getBoletos {
-  [dataAccess getBoletos];
-}
-
-
-- (void)createBill {
-  [dataAccess createBill];
-}
-
-- (void)deleteBill {
-  [dataAccess deleteBill];
-}
 
 - (void)createPix {
   [dataAccess createPix];
