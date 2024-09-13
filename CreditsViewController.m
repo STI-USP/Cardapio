@@ -14,47 +14,57 @@
 #import "BoletoViewController.h"
 #import "LoginWebViewController.h"
 
-
 @interface CreditsViewController () {
   DataModel *dataModel;
   BoletoDataModel *boletoDataModel;
-  BoletoViewController *boletoViewController;
   OAuthUSP *oauth;
   LoginWebViewController *loginViewController;
   NSNumberFormatter *currencyFormatter;
+  BoletoViewController *boletoViewController; // Declaração correta de boletoViewController
 }
-
 @end
 
 @implementation CreditsViewController
 
+#pragma mark - Lifecycle
+
 - (void)viewDidLoad {
   [super viewDidLoad];
-  // Do any additional setup after loading the view.
-  
-  [_username setText:@""];
-  
+  [self setupUI];
+  [self setupModels];
+  [self registerNotifications];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+  [super viewWillAppear:animated];
+  [self checkLoginStatus]; // Agora o método está implementado
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+  [self.navigationItem setTitle:@""];
+  [super viewWillDisappear:animated];
+}
+
+- (void)dealloc {
+  [self removeKeyboardNotifications];
+}
+
+#pragma mark - Setup
+
+- (void)setupUI {
   _maisCreditos.delegate = self;
-  UIToolbar *keyboardDoneButtonView = [[UIToolbar alloc] init];
-  [keyboardDoneButtonView sizeToFit];
-  UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"OK" style:UIBarButtonItemStylePlain target:self action:@selector(doneClicked:)];
-  [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:doneButton, nil]];
-  _maisCreditos.inputAccessoryView = keyboardDoneButtonView;
-  
-  currencyFormatter = [[NSNumberFormatter alloc] init];
-  [currencyFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
-  [currencyFormatter setMaximumSignificantDigits:9];
-  [currencyFormatter setLenient:YES];
-  [currencyFormatter setGeneratesDecimalNumbers:YES];
-  
-  //Modelo
+  _maisCreditos.inputAccessoryView = [self createKeyboardDoneButton];
+  [_saldoLabel setText:@"R$ --,--"];
+  currencyFormatter = [self createCurrencyFormatter];
+}
+
+- (void)setupModels {
   dataModel = [DataModel getInstance];
   boletoDataModel = [BoletoDataModel sharedInstance];
   oauth = [OAuthUSP sharedInstance];
-  
-  [_saldoLabel setText:@"R$ --,--"];
-  
-  //Notificacoes
+}
+
+- (void)registerNotifications {
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRecieveCredits:) name:@"DidReceiveCredits" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRecieveCreditsError:) name:@"DidReceiveCreditsError" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logout:) name:@"DidReceiveLoginError" object:nil];
@@ -63,73 +73,43 @@
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didCreatePix:) name:@"DidCreatePix" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRegisterUser:) name:@"DidRegisterUser" object:nil];
   
-  // Registrar para as notificações do teclado
+  [self registerKeyboardNotifications];
+}
+
+- (void)registerKeyboardNotifications {
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-  
-  //Reveal View Controller ----------------
-  SWRevealViewController *revealViewController = self.revealViewController;
-  if (revealViewController) {
-    [self.revealViewController panGestureRecognizer];
-    [self.revealViewController tapGestureRecognizer];
-    self.revealViewController.delegate = self;
-  }
-  
 }
 
-- (void)didReceiveMemoryWarning {
-  [super didReceiveMemoryWarning];
-  // Dispose of any resources that can be recreated.
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-  [super viewWillAppear:animated];
-  
-  if (![oauth isLoggedIn]) {
-    loginViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"loginWebViewController"];
-    [self presentViewController:loginViewController animated:YES completion:nil];
-  } else {
-    [dataModel getCreditoRUCard];
-    [_username setText:[dataModel.userData objectForKey:@"nomeUsuario"]];
-    //[self.navigationItem setTitle:[[[dataModel.userData objectForKey:@"nomeUsuario"] componentsSeparatedByString:@" "] objectAtIndex:0]];
-  }
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-  [self.navigationItem setTitle:@""];
-}
-
-- (void)doneClicked:(id)sender {
-  [[self maisCreditos] resignFirstResponder];
-  [self updateTextField];
-}
-
-- (void)dealloc {
+- (void)removeKeyboardNotifications {
   [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
   [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
-- (void)didRecieveCredits:(NSNotification *)notification {
-  NSMutableString *message = [NSMutableString stringWithFormat: @"R$ %@", [dataModel ruCardCredit]];
-  [_saldoLabel setNumberOfLines:0];
-  [_saldoLabel setLineBreakMode:NSLineBreakByWordWrapping];
-  [_saldoLabel setText:message];
-  
-  [_username setText:[dataModel.userData objectForKey:@"nomeUsuario"]];
+#pragma mark - UI Helpers
+
+- (UIToolbar *)createKeyboardDoneButton {
+  UIToolbar *keyboardDoneButtonView = [[UIToolbar alloc] init];
+  [keyboardDoneButtonView sizeToFit];
+  UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"OK" style:UIBarButtonItemStylePlain target:self action:@selector(doneClicked:)];
+  [keyboardDoneButtonView setItems:@[doneButton]];
+  return keyboardDoneButtonView;
 }
 
-- (void)didRecieveCreditsError:(NSNotification *)notification {
-  NSString *message = @"Não foi possível obter o saldo. \nTente novamente mais tarde.";
-  [SVProgressHUD showErrorWithStatus:message];
+- (NSNumberFormatter *)createCurrencyFormatter {
+  NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+  [formatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+  [formatter setMaximumSignificantDigits:9];
+  [formatter setLenient:YES];
+  [formatter setGeneratesDecimalNumbers:YES];
+  return formatter;
+}
+
+#pragma mark - Actions
+
+- (IBAction)doneClicked:(id)sender {
+  [_maisCreditos resignFirstResponder];
+  [self updateTextField];
 }
 
 - (IBAction)gerarPix:(id)sender {
@@ -154,172 +134,175 @@
   [boletoDataModel getBoleto];
 }
 
+- (IBAction)logout:(id)sender {
+  [oauth logout];
+  [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark - Validation
+
 - (BOOL)validarValorRecarga:(float)valorMinimo {
   [self updateTextField];
   [self.view endEditing:YES];
   
-  NSString *numberString;
-  NSScanner *scanner = [NSScanner scannerWithString:boletoDataModel.valorRecarga];
-  NSCharacterSet *numbers = [NSCharacterSet characterSetWithCharactersInString:@"0123456789,."];
+  NSString *valorString = [_maisCreditos.text stringByReplacingOccurrencesOfString:@"R$" withString:@""];
+  valorString = [valorString stringByReplacingOccurrencesOfString:@"." withString:@""];
+  valorString = [valorString stringByReplacingOccurrencesOfString:@"," withString:@"."];
   
-  [scanner scanUpToCharactersFromSet:numbers intoString:NULL];
-  [scanner scanCharactersFromSet:numbers intoString:&numberString];
+  float valorRecarga = [valorString floatValue];
   
-  float valorRecarga = [numberString floatValue];
-  if ((valorRecarga >= valorMinimo) && (valorRecarga <= 200)) {
-    return true;
+  if (valorRecarga >= valorMinimo && valorRecarga <= 200.0f) {
+    return YES;
   } else {
-    NSString *errorMessage = [[NSString stringWithFormat:@"Insira um valor entre R$ %.2f e R$ 200,00", valorMinimo] stringByReplacingOccurrencesOfString:@"." withString:@","];
-    [SVProgressHUD showErrorWithStatus:errorMessage];
-    return false;
+    NSString *errorMessage = [NSString stringWithFormat:@"Insira um valor entre R$ %.2f e R$ 200,00", valorMinimo];
+    [SVProgressHUD showErrorWithStatus:[errorMessage stringByReplacingOccurrencesOfString:@"." withString:@","]];
+    return NO;
   }
 }
 
-
-- (void)updateTextField {
-  NSString *numberString;
-  NSScanner *scanner = [NSScanner scannerWithString:_maisCreditos.text];
+- (NSString *)extractNumericString:(NSString *)input {
+  NSScanner *scanner = [NSScanner scannerWithString:input];
   NSCharacterSet *numbers = [NSCharacterSet characterSetWithCharactersInString:@"0123456789,."];
-  [scanner scanUpToCharactersFromSet:numbers intoString:NULL];
+  NSString *numberString;
+  [scanner scanUpToCharactersFromSet:numbers intoString:nil];
   [scanner scanCharactersFromSet:numbers intoString:&numberString];
-  
-  [_maisCreditos setText:numberString];
-  [boletoDataModel setValorRecarga:[_maisCreditos text]];
-  
-  NSString *value = [[boletoDataModel valorRecarga]stringByReplacingOccurrencesOfString:@"," withString:@"."];
-  [_maisCreditos setText:[[NSString stringWithFormat:@"R$ %.2f", [value floatValue]]stringByReplacingOccurrencesOfString:@"." withString:@","]];
+  return numberString;
 }
 
-- (void)clearTextField {
-  [_maisCreditos setText:@""];
+#pragma mark - Notifications Handlers
+
+- (void)didRecieveCredits:(NSNotification *)notification {
+  NSString *message = [NSString stringWithFormat:@"R$ %@", [dataModel ruCardCredit]];
+  [_saldoLabel setText:message];
+  [_username setText:[dataModel.userData objectForKey:@"nomeUsuario"]];
 }
 
+- (void)didRecieveCreditsError:(NSNotification *)notification {
+  [SVProgressHUD showErrorWithStatus:@"Não foi possível obter o saldo. Tente novamente mais tarde."];
+}
 
 - (void)didCreateBill:(NSNotification *)notification {
   [SVProgressHUD dismiss];
   [self clearTextField];
-  if (!boletoViewController) {
-    boletoViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"boletoViewController"];
-  }
-  [self presentViewController:boletoViewController animated:YES completion:nil];
+  [self showBoletoViewController];
 }
 
 - (void)didReceiveBill:(NSNotification *)notification {
   [SVProgressHUD dismiss];
-  if (!boletoViewController) {
-    boletoViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"boletoViewController"];
-  }
-  [self presentViewController:boletoViewController animated:YES completion:nil];
-}
-
-- (void)didRegisterUser:(NSNotification *)notification {
-  
-  [SVProgressHUD dismiss];
-  [dataModel getCreditoRUCard];
-  
+  [self showBoletoViewController];
 }
 
 - (void)didCreatePix:(NSNotification *)notification {
   [SVProgressHUD dismiss];
   [self clearTextField];
   [self performSegueWithIdentifier:@"showPix" sender:self];
-  
 }
 
-
-
-
-- (IBAction)logout:(id)sender {
-  [oauth logout];
-  [self.navigationController popViewControllerAnimated:YES];
+- (void)didRegisterUser:(NSNotification *)notification {
+  [SVProgressHUD dismiss];
+  [dataModel getCreditoRUCard];
 }
 
-#pragma mark - SWRevealViewControllerDelegate
+#pragma mark - Helpers
 
-// Implement this to return NO when you want the pan gesture recognizer to be ignored
-- (BOOL)revealControllerPanGestureShouldBegin:(SWRevealViewController *)revealController {
-  return NO;
+- (void)clearTextField {
+  [_maisCreditos setText:@""];
 }
 
+- (void)showBoletoViewController {
+  if (!boletoViewController) {
+    boletoViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"boletoViewController"];
+  }
+  [self presentViewController:boletoViewController animated:YES completion:nil];
+}
 
 #pragma mark - Text Field Delegate
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
-  //validar valores
   [self updateTextField];
 }
 
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
-  return YES;
-}
-
-- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
-  [textField resignFirstResponder];
-  return YES;
-}
-
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+  
+  if ([string isEqualToString:@""]) {
+    return YES;
+  }
+  
   NSString *replaced = [textField.text stringByReplacingCharactersInRange:range withString:string];
-  NSDecimalNumber *amount = (NSDecimalNumber*) [currencyFormatter numberFromString:replaced];
+  NSDecimalNumber *amount = (NSDecimalNumber*)[currencyFormatter numberFromString:replaced];
   if (amount == nil) {
-    // Something screwed up the parsing. Probably an alpha character.
     return NO;
   }
-  // If the field is empty (the inital case) the number should be shifted to
-  // start in the right most decimal place.
-  short powerOf10 = 0;
-  if ([textField.text isEqualToString:@""]) {
-    powerOf10 = -currencyFormatter.maximumFractionDigits;
-  }
-  // If the edit point is to the right of the decimal point we need to do
-  // some shifting.
-  else if (range.location + currencyFormatter.maximumFractionDigits >= textField.text.length) {
-    // If there's a range of text selected, it'll delete part of the number
-    // so shift it back to the right.
-    if (range.length) {
-      powerOf10 = -range.length;
-    }
-    else if ([replaced length] > currencyFormatter.maximumSignificantDigits) {
-      textField.text = replaced;
-    }
-    // Otherwise they're adding this many characters so shift left.
-    else {
-      powerOf10 = [string length];
-    }
-  }
+  
+  short powerOf10 = ([textField.text isEqualToString:@""]) ? -currencyFormatter.maximumFractionDigits : (short)[string length];
   amount = [amount decimalNumberByMultiplyingByPowerOf10:powerOf10];
   
-  // Replace the value and then cancel this change.
   textField.text = [currencyFormatter stringFromNumber:amount];
+  
   return NO;
 }
+
+- (void)updateTextField {
+  NSString *text = _maisCreditos.text;
+  
+  NSScanner *scanner = [NSScanner scannerWithString:text];
+  NSCharacterSet *numbers = [NSCharacterSet characterSetWithCharactersInString:@"0123456789,."];
+  
+  NSString *numberString;
+  [scanner scanUpToCharactersFromSet:numbers intoString:NULL];
+  [scanner scanCharactersFromSet:numbers intoString:&numberString];
+  
+  NSString *value = [numberString stringByReplacingOccurrencesOfString:@"," withString:@"."];
+  float floatValue = [value floatValue];
+  
+  if ([value hasPrefix:@"."]) {
+    value = [@"0" stringByAppendingString:value];
+    floatValue = [value floatValue];
+  }
+  
+  NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+  [formatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+  [formatter setCurrencySymbol:@"R$"];
+  [formatter setLocale:[NSLocale localeWithLocaleIdentifier:@"pt_BR"]];
+  
+  NSString *formattedValue = [formatter stringFromNumber:@(floatValue)];
+  
+  _maisCreditos.text = formattedValue;
+}
+
+
+#pragma mark - Keyboard Notifications
 
 - (void)keyboardWillShow:(NSNotification *)notification {
   NSDictionary *userInfo = notification.userInfo;
   CGRect keyboardFrame = [userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
   NSTimeInterval animationDuration = [userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-  
-  CGRect textFieldFrameInView = [self.view convertRect:self.maisCreditos.frame fromView:self.maisCreditos.superview];
-  CGFloat textFieldBottomY = CGRectGetMaxY(textFieldFrameInView);
-  CGFloat visibleHeight = self.view.frame.size.height - keyboardFrame.size.height;
-  
-  if (textFieldBottomY > visibleHeight) {
-    CGFloat offsetY = textFieldBottomY - visibleHeight;
-    [UIView animateWithDuration:animationDuration animations:^{
-      self.view.frame = CGRectMake(0, -offsetY, self.view.frame.size.width, self.view.frame.size.height);
-    }];
-  }
+  [self adjustViewForKeyboardAppearance:YES keyboardFrame:keyboardFrame animationDuration:animationDuration];
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification {
   NSDictionary *userInfo = notification.userInfo;
   NSTimeInterval animationDuration = [userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-  
-  // Restaurar a posição original da view
+  [self adjustViewForKeyboardAppearance:NO keyboardFrame:CGRectZero animationDuration:animationDuration];
+}
+
+- (void)adjustViewForKeyboardAppearance:(BOOL)isVisible keyboardFrame:(CGRect)keyboardFrame animationDuration:(NSTimeInterval)animationDuration {
+  CGFloat offsetY = isVisible ? CGRectGetMaxY([self.view convertRect:_maisCreditos.frame fromView:_maisCreditos.superview]) - (self.view.frame.size.height - keyboardFrame.size.height) : 0;
   [UIView animateWithDuration:animationDuration animations:^{
-    self.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+    self.view.frame = CGRectMake(0, -offsetY, self.view.frame.size.width, self.view.frame.size.height);
   }];
 }
 
+#pragma mark - Login Check
+
+- (void)checkLoginStatus {
+  if (![oauth isLoggedIn]) {
+    loginViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"loginWebViewController"];
+    [self presentViewController:loginViewController animated:YES completion:nil];
+  } else {
+    [dataModel getCreditoRUCard];
+    [_username setText:[dataModel.userData objectForKey:@"nomeUsuario"]];
+  }
+}
 
 @end
