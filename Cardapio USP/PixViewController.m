@@ -17,7 +17,6 @@
   DataModel *dataModel;
 }
 
-
 @end
 
 @implementation PixViewController
@@ -85,12 +84,12 @@
   }
   
   // qrCode
-  if (chave != nil && ![chave isEqualToString:@""]) {
-    [_qrCodePix setImage:[UIImage imageWithCIImage:[self createQRForString:chave]]];
+  if (![chave ?: @"" isEqualToString:@""]) {
+      [_qrCodePix setImage:[UIImage imageWithCIImage:[self createQRForString:chave]]];
   } else {
-    // Caso o QR code seja nulo ou inválido
-    [_qrCodePix setImage:[UIImage systemImageNamed:@"qrcode"]];
-    [SVProgressHUD showErrorWithStatus:@"Chave PIX inválida, tente novamente mais tarde"];
+      // Caso o QR code seja nulo ou inválido
+      [_qrCodePix setImage:[UIImage systemImageNamed:@"qrcode"]];
+      [SVProgressHUD showErrorWithStatus:@"Chave PIX inválida, tente novamente mais tarde"];
   }
   [self copyToPB];
 }
