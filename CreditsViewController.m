@@ -33,11 +33,13 @@
   [self setupUI];
   [self setupModels];
   [self registerNotifications];
+  
+  [self setupListarBoletosButton];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
-  [self checkLoginStatus]; // Agora o método está implementado
+  [self checkLoginStatus];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -68,8 +70,7 @@
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRecieveCredits:) name:@"DidReceiveCredits" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRecieveCreditsError:) name:@"DidReceiveCreditsError" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logout:) name:@"DidReceiveLoginError" object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didCreateBill:) name:@"DidCreateBill" object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveBill:) name:@"DidReceiveBill" object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveBills:) name:@"DidReceiveBills" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didCreatePix:) name:@"DidCreatePix" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRegisterUser:) name:@"DidRegisterUser" object:nil];
   
@@ -119,19 +120,8 @@
   }
 }
 
-- (IBAction)gerarNovoBoleto:(id)sender {
-  if ([self validarValorRecarga:20]) {
-    [boletoDataModel createBill];
-  }
-}
-
 - (IBAction)listarBoletos:(id)sender {
   [boletoDataModel getBoletos];
-}
-
-- (IBAction)visualizarBoleto:(id)sender {
-  [SVProgressHUD show];
-  [boletoDataModel getBoleto];
 }
 
 - (IBAction)logout:(id)sender {
@@ -180,17 +170,6 @@
 
 - (void)didRecieveCreditsError:(NSNotification *)notification {
   [SVProgressHUD showErrorWithStatus:@"Não foi possível obter o saldo. Tente novamente mais tarde."];
-}
-
-- (void)didCreateBill:(NSNotification *)notification {
-  [SVProgressHUD dismiss];
-  [self clearTextField];
-  [self showBoletoViewController];
-}
-
-- (void)didReceiveBill:(NSNotification *)notification {
-  [SVProgressHUD dismiss];
-  [self showBoletoViewController];
 }
 
 - (void)didCreatePix:(NSNotification *)notification {
@@ -302,8 +281,52 @@
     [self presentViewController:loginViewController animated:YES completion:nil];
   } else {
     [dataModel getCreditoRUCard];
+    [self fetchBoletos];
     [_username setText:[dataModel.userData objectForKey:@"nomeUsuario"]];
   }
+}
+
+#pragma mark - Boletos
+// Configurando o botão
+- (void)setupListarBoletosButton {
+  self.listarBoletosButton = [UIButton buttonWithType:UIButtonTypeSystem];
+  self.listarBoletosButton.titleLabel.font = [UIFont systemFontOfSize:20];
+  [self.listarBoletosButton setTitle:@"Listar boletos em aberto" forState:UIControlStateNormal];
+  [self.listarBoletosButton addTarget:self action:@selector(listarBoletosPendentes:) forControlEvents:UIControlEventTouchUpInside];
+  
+  [self.view addSubview:self.listarBoletosButton];
+
+  self.listarBoletosButton.translatesAutoresizingMaskIntoConstraints = NO;
+  [NSLayoutConstraint activateConstraints:@[
+    [self.listarBoletosButton.bottomAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.bottomAnchor constant:-20],
+    [self.listarBoletosButton.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor]
+  ]];
+}
+
+// Método que chama o serviço de boletos
+- (void)fetchBoletos {
+  [SVProgressHUD show];
+  [boletoDataModel getBoletos];
+}
+
+// Handler para o retorno do serviço de boletos
+- (void)didReceiveBills:(NSNotification *)notification {
+  [SVProgressHUD dismiss];
+  
+  // Verifica se existem boletos no retorno
+  NSArray *boletos = [boletoDataModel boletosPendentes];
+  
+  if (boletos.count > 0) {
+    // Mostra o botão caso existam boletos
+    self.listarBoletosButton.hidden = NO;
+  } else {
+    // Esconde o botão caso não existam boletos
+    self.listarBoletosButton.hidden = YES;
+  }
+}
+
+- (void)listarBoletosPendentes:(id)sender {
+  [self performSegueWithIdentifier:@"listarBoletosPendentes" sender:self];
 }
 
 @end

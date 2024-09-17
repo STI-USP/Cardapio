@@ -63,4 +63,8 @@
   [dataAccess checkPix:pixId];
 }
 
+- (void)getBoletos {
+  [dataAccess getBoletos];
+}
+
 @end

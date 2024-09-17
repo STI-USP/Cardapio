@@ -270,6 +270,58 @@
     [dataTask resume];
 }
 
+- (void)getBoletos {
+  //configura parametros
+  NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
+                              [oauth.userData valueForKey:@"wsuserid"] , @"token",
+                              nil];
+  
+  NSString *path = @"boletosEmAberto";
+  NSData *params = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
+  NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", kBaseSTIURL, path]];
+  NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
+  [urlRequest setHTTPMethod:@"POST"];
+  [urlRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+  [urlRequest setHTTPBody:params];
+  
+  //Executa requisição
+  NSURLSessionDataTask *dataTask = [[self session] dataTaskWithRequest:urlRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+    
+    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+    
+    if ([data length] > 0 && error == nil) {
+      if ([httpResponse statusCode] == 200) {
+        
+        NSDictionary* json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+        
+        if ([[json valueForKey:@"erro"] boolValue]) {
+          [SVProgressHUD showErrorWithStatus:[json valueForKey:@"mensagemErro"]];
+        } else {
+          
+          NSMutableArray *boletos = [[NSMutableArray alloc] init];
+          for (NSMutableDictionary *boleto in [json objectForKey:@"boletos"]) {
+            [boletos addObject:boleto];
+          }
+          [self->_boletoDataModel setBoletosPendentes:boletos];
+          [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveBills" object:self];
+        }
+      } else {
+        [SVProgressHUD showErrorWithStatus:@"Não foi possível obter o boleto. Tente novamente mais tarde."];
+      }
+    } else if (error) {
+      [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }
+    
+    // Notifica atualizações
+    //[SVProgressHUD dismiss];
+    
+  }];
+  
+  [dataTask resume];
+
+}
+
+
 - (NSURLSession *)session {
   static dispatch_once_t onceToken;
   dispatch_once(&onceToken, ^{

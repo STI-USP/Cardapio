@@ -21,4 +21,6 @@
 - (void)createPix;
 - (void)checkPix:(NSString *)pixId;
 
+- (void)getBoletos;
+
 @end
