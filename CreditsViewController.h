@@ -16,7 +16,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *saldoLabel;
 @property (weak, nonatomic) IBOutlet MyTextField *maisCreditos;
 
-- (IBAction)gerarNovoBoleto:(id)sender;
+@property (nonatomic, strong) UIButton *listarBoletosButton;
+
 - (IBAction)gerarPix:(id)sender;
 - (IBAction)listarBoletos:(id)sender;
 

@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "DataModel.h"
+#import "Constants.h"
 
 @import Firebase;
 
@@ -30,6 +31,7 @@ DataModel *dataModel;
     // Override point for customization after application launch.
   //[Fabric with:@[[Crashlytics class]]];
   [FIRApp configure];
+  [Constants class];
   
   dataModel = [DataModel getInstance];
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -37,9 +39,7 @@ DataModel *dataModel;
   [dataModel getRestaurantList];
   
   [self.window setTintColor:UIColorFromRGB(0x1094AB)];
-  //[[UIView appearance] setTintColor:UIColorFromRGB(0x1094AB)];
 
-  
   return YES;
 }
 							

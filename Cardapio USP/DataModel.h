@@ -31,8 +31,6 @@
 
 @property (nonatomic, copy) NSDictionary *userData;
 
-//@property (nonatomic, strong) NSString *date;
-//@property (nonatomic, strong) NSString *restaurantId;
 @property (nonatomic, strong) NSString *restaurantName;
 @property (nonatomic, strong) NSMutableDictionary *campus;
 
@@ -43,7 +41,6 @@
 - (void)getMenu;
 - (void)getRestaurantList;
 - (void)getCreditoRUCard;
-//- (void)setDefault;
 - (NSMutableDictionary *) cleanDictionary: (NSMutableDictionary *)dictionary;
 
 

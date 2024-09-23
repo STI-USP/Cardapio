@@ -17,7 +17,6 @@
   DataModel *dataModel;
 }
 
-
 @end
 
 @implementation PixViewController
@@ -85,17 +84,20 @@
   }
   
   // qrCode
-  if (chave != nil && ![chave isEqualToString:@""]) {
-    [_qrCodePix setImage:[UIImage imageWithCIImage:[self createQRForString:chave]]];
+  if (![chave ?: @"" isEqualToString:@""]) {
+      [_qrCodePix setImage:[UIImage imageWithCIImage:[self createQRForString:chave]]];
   } else {
-    // Caso o QR code seja nulo ou inválido
-    [_qrCodePix setImage:[UIImage systemImageNamed:@"qrcode"]];
-    [SVProgressHUD showErrorWithStatus:@"Chave PIX inválida, tente novamente mais tarde"];
+      // Caso o QR code seja nulo ou inválido
+      [_qrCodePix setImage:[UIImage systemImageNamed:@"qrcode"]];
+      [SVProgressHUD showErrorWithStatus:@"Chave PIX inválida, tente novamente mais tarde"];
   }
   [self copyToPB];
 }
 
 - (CIImage *)createQRForString:(NSString *)qrString {
+  if (qrString == nil || [qrString isEqualToString:@""]) {
+    return nil; // Retorna nil caso a string seja nula ou inválida
+  }
   
   NSData *stringData = [qrString dataUsingEncoding:NSISOLatin1StringEncoding];
   CIFilter *qrFilter = [CIFilter filterWithName:@"CIQRCodeGenerator"];

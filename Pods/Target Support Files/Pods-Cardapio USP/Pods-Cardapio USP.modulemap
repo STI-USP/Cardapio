@@ -1,0 +1,6 @@
+module Pods_Cardapio_USP {
+  umbrella header "Pods-Cardapio USP-umbrella.h"
+
+  export *
+  module * { export * }
+}
