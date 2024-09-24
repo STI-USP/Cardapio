@@ -105,9 +105,9 @@
   [SVProgressHUD showSuccessWithStatus:@"copiado"];
 }
 
-- (IBAction)deleteBill:(id)sender {
-  [boletoDataModel deleteBill];
-}
+//- (IBAction)deleteBill:(id)sender {
+//  [boletoDataModel deleteBill];
+//}
 
 - (void)didDeleteBill:(NSNotification *)notification {
 

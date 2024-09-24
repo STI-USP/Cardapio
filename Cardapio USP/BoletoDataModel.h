@@ -16,13 +16,10 @@
 @property (nonatomic, strong) NSString *valorRecarga;
 
 + (BoletoDataModel *)sharedInstance;
-- (void)getBoleto;
-- (void)getBoletos;
-- (void)createBill;
-- (void)deleteBill;
 - (void)createPix;
 - (void)checkPix:(NSString *)pixId;
 
-
+- (void)getBoleto;
+- (void)getBoletos;
 
 @end
