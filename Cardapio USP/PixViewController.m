@@ -84,7 +84,7 @@
   }
   
   // qrCode
-  if (![chave ?: @"" isEqualToString:@""]) {
+  if (chave != nil && ![chave isEqualToString:@""]) {
       [_qrCodePix setImage:[UIImage imageWithCIImage:[self createQRForString:chave]]];
   } else {
       // Caso o QR code seja nulo ou inválido
