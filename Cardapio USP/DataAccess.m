@@ -46,228 +46,242 @@
 }
 
 - (void)consultarSaldo {
-    // Configura parâmetros
-    NSDictionary *parameters = @{
-        @"token": [oauth.userData valueForKey:@"wsuserid"]
-    };
-    
-    NSError *error;
-    NSData *params = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:&error];
-    
+  // Configura parâmetros
+  NSDictionary *parameters = @{
+    @"token": [oauth.userData valueForKey:@"wsuserid"]
+  };
+  
+  NSError *error;
+  NSData *params = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:&error];
+  
+  if (error) {
+    NSLog(@"Erro ao serializar parâmetros: %@", error.localizedDescription);
+    [SVProgressHUD showErrorWithStatus:@"Erro ao preparar os dados de solicitação."];
+    return;
+  }
+  
+  NSString *path = @"consultarSaldo";
+  NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", kBaseSTIURL, path]];
+  
+  // Cria a requisição
+  NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
+  [urlRequest setHTTPMethod:@"POST"];
+  [urlRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+  [urlRequest setHTTPBody:params];
+  
+  // Cria a sessão e executa a requisição
+  NSURLSessionDataTask *dataTask = [[self session] dataTaskWithRequest:urlRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
     if (error) {
-        NSLog(@"Erro ao serializar parâmetros: %@", error.localizedDescription);
-        [SVProgressHUD showErrorWithStatus:@"Erro ao preparar os dados de solicitação."];
-        return;
+      NSLog(@"Erro na requisição: %@", error.localizedDescription);
+      dispatch_async(dispatch_get_main_queue(), ^{
+        [SVProgressHUD showErrorWithStatus:error.localizedDescription];
+        [self->_dataModel setRuCardCredit:@"--,--"];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveCredits" object:self];
+      });
+      return;
     }
-
-    NSString *path = @"consultarSaldo";
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", kBaseSTIURL, path]];
     
-    // Cria a requisição
-    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
-    [urlRequest setHTTPMethod:@"POST"];
-    [urlRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [urlRequest setHTTPBody:params];
-    
-    // Cria a sessão e executa a requisição
-    NSURLSessionDataTask *dataTask = [[self session] dataTaskWithRequest:urlRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        if (error) {
-            NSLog(@"Erro na requisição: %@", error.localizedDescription);
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [SVProgressHUD showErrorWithStatus:error.localizedDescription];
-                [self->_dataModel setRuCardCredit:@"--,--"];
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveCredits" object:self];
-            });
-            return;
-        }
-        
-        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-        if (httpResponse.statusCode == 200 && data.length > 0) {
-            NSError *jsonError;
-            NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&jsonError];
-            
-            if (jsonError) {
-                NSLog(@"Erro ao parsear JSON: %@", jsonError.localizedDescription);
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [SVProgressHUD showErrorWithStatus:@"Erro ao processar a resposta do servidor."];
-                    [self->_dataModel setRuCardCredit:@"--,--"];
-                    [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveCredits" object:self];
-                });
-                return;
-            }
-            
-            // Processa a resposta JSON
-            if ([[json valueForKey:@"erro"] boolValue]) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self->_dataModel setRuCardCredit:@"--,--"];
-                    [SVProgressHUD showErrorWithStatus:[json valueForKey:@"mensagemErro"]];
-                    
-                    if ([[json valueForKey:@"mensagemErro"] isEqualToString:@"Usuário não está logado!"]) {
-                        [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveLoginError" object:self];
-                    }
-                    
-                    [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveCredits" object:self];
-                });
-            } else {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self->_dataModel setRuCardCredit:[json valueForKey:@"saldo"]];
-                    [SVProgressHUD dismiss];
-                    [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveCredits" object:self];
-                });
-            }
-        } else {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [SVProgressHUD showErrorWithStatus:@"Não foi possível obter o saldo. Tente novamente mais tarde."];
-                [self->_dataModel setRuCardCredit:@"--,--"];
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveCredits" object:self];
-            });
-        }
-    }];
-    
-    // Inicia a tarefa
-    [dataTask resume];
+    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+    if (httpResponse.statusCode == 200 && data.length > 0) {
+      NSError *jsonError;
+      NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&jsonError];
+      
+      if (jsonError) {
+        NSLog(@"Erro ao parsear JSON: %@", jsonError.localizedDescription);
+        dispatch_async(dispatch_get_main_queue(), ^{
+          [SVProgressHUD showErrorWithStatus:@"Erro ao processar a resposta do servidor."];
+          [self->_dataModel setRuCardCredit:@"--,--"];
+          [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveCredits" object:self];
+        });
+        return;
+      }
+      
+      // Processa a resposta JSON
+      if ([[json valueForKey:@"erro"] boolValue]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+          [self->_dataModel setRuCardCredit:@"--,--"];
+          [SVProgressHUD showErrorWithStatus:[json valueForKey:@"mensagemErro"]];
+          
+          if ([[json valueForKey:@"mensagemErro"] isEqualToString:@"Usuário não está logado!"]) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveLoginError" object:self];
+          }
+          
+          [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveCredits" object:self];
+        });
+      } else {
+        dispatch_async(dispatch_get_main_queue(), ^{
+          [self->_dataModel setRuCardCredit:[json valueForKey:@"saldo"]];
+          [SVProgressHUD dismiss];
+          [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveCredits" object:self];
+        });
+      }
+    } else {
+      dispatch_async(dispatch_get_main_queue(), ^{
+        [SVProgressHUD showErrorWithStatus:@"Não foi possível obter o saldo. Tente novamente mais tarde."];
+        [self->_dataModel setRuCardCredit:@"--,--"];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveCredits" object:self];
+      });
+    }
+  }];
+  
+  // Inicia a tarefa
+  [dataTask resume];
 }
 
 - (void)createPix {
-    // Configura parâmetros
-    NSDictionary *parameters = @{
-        @"hash": kHash,
-        @"token": [oauth.userData valueForKey:@"wsuserid"],
-        @"valor": [[_boletoDataModel valorRecarga] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]],
-        @"tipoapp": @"APP"
-    };
-
-    // Serializa os parâmetros para o formato "application/x-www-form-urlencoded"
-    NSString *bodyString = [self urlEncodedStringFromDictionary:parameters];
-    NSData *params = [bodyString dataUsingEncoding:NSUTF8StringEncoding];
-
-    NSString *path = @"pixgerar";
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", kBaseSTIURL, path]];
-
-    // Cria a requisição
-    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
-    [urlRequest setHTTPMethod:@"POST"];
-    [urlRequest setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    [urlRequest setHTTPBody:params];
+  // Obtém os valores necessários
+  NSString *token = [oauth.userData valueForKey:@"wsuserid"];
+  NSString *valorRecarga = [[_boletoDataModel valorRecarga] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+  NSString *hash = kHash;
+  
+  // Verifica se algum dos valores essenciais é nulo
+  if (token == nil || valorRecarga == nil || hash == nil) {
+    NSLog(@"Erro: Um ou mais valores obrigatórios estão nulos.");
+    dispatch_async(dispatch_get_main_queue(), ^{
+      [SVProgressHUD showErrorWithStatus:@"Erro interno. Tente novamente mais tarde."];
+    });
+    return;
+  }
+  
+  // Configura parâmetros
+  NSDictionary *parameters = @{
+    @"hash": hash,
+    @"token": token,
+    @"valor": valorRecarga,
+    @"tipoapp": @"APP"
+  };
+  
+  // Serializa os parâmetros para o formato "application/x-www-form-urlencoded"
+  NSString *bodyString = [self urlEncodedStringFromDictionary:parameters];
+  NSData *params = [bodyString dataUsingEncoding:NSUTF8StringEncoding];
+  
+  NSString *path = @"pixgerar";
+  NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", kBaseSTIURL, path]];
+  
+  // Cria a requisição
+  NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
+  [urlRequest setHTTPMethod:@"POST"];
+  [urlRequest setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+  [urlRequest setHTTPBody:params];
+  
+  NSLog(@"URL: %@", url.absoluteString);
+  NSLog(@"Body: %@", bodyString);
+  
+  // Cria a sessão e executa a requisição
+  NSURLSessionDataTask *dataTask = [[self session] dataTaskWithRequest:urlRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+    if (error) {
+      NSLog(@"Erro na requisição: %@", error.localizedDescription);
+      dispatch_async(dispatch_get_main_queue(), ^{
+        [SVProgressHUD showErrorWithStatus:error.localizedDescription];
+      });
+      return;
+    }
     
-    NSLog(@"URL: %@", url.absoluteString);
-    NSLog(@"Body: %@", bodyString);
-
-    // Cria a sessão e executa a requisição
-    NSURLSessionDataTask *dataTask = [[self session] dataTaskWithRequest:urlRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        if (error) {
-            NSLog(@"Erro na requisição: %@", error.localizedDescription);
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [SVProgressHUD showErrorWithStatus:error.localizedDescription];
-            });
-            return;
-        }
-
-        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-        NSLog(@"Status Code: %ld", (long)httpResponse.statusCode);
-
-        if (httpResponse.statusCode == 200 && data.length > 0) {
-            NSError *jsonError;
-            NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&jsonError];
-
-            if (jsonError) {
-                NSLog(@"Erro ao parsear JSON: %@", jsonError.localizedDescription);
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [SVProgressHUD showErrorWithStatus:@"Erro ao processar a resposta do servidor."];
-                });
-                return;
-            }
-
-            NSString *msgErro = json[@"msgErro"];
-            if (msgErro && ![msgErro isEqualToString:@""]) {
-                NSLog(@"Erro recebido: %@", msgErro);
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [SVProgressHUD showErrorWithStatus:msgErro];
-                });
-            } else {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self->_boletoDataModel setPix:[NSMutableDictionary dictionaryWithDictionary:json]];
-                    [[NSNotificationCenter defaultCenter] postNotificationName:@"DidCreatePix" object:self];
-                });
-            }
-        } else {
-            NSLog(@"Resposta não esperada: %@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [SVProgressHUD showErrorWithStatus:@"Não foi possível gerar o código. Tente novamente mais tarde."];
-            });
-        }
-    }];
-
-    // Inicia a tarefa
-    [dataTask resume];
+    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+    NSLog(@"Status Code: %ld", (long)httpResponse.statusCode);
+    
+    if (httpResponse.statusCode == 200 && data.length > 0) {
+      NSError *jsonError;
+      NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&jsonError];
+      
+      if (jsonError) {
+        NSLog(@"Erro ao parsear JSON: %@", jsonError.localizedDescription);
+        dispatch_async(dispatch_get_main_queue(), ^{
+          [SVProgressHUD showErrorWithStatus:@"Erro ao processar a resposta do servidor."];
+        });
+        return;
+      }
+      
+      NSString *msgErro = json[@"msgErro"];
+      if (msgErro && ![msgErro isEqualToString:@""]) {
+        NSLog(@"Erro recebido: %@", msgErro);
+        dispatch_async(dispatch_get_main_queue(), ^{
+          [SVProgressHUD showErrorWithStatus:msgErro];
+        });
+      } else {
+        dispatch_async(dispatch_get_main_queue(), ^{
+          [self->_boletoDataModel setPix:[NSMutableDictionary dictionaryWithDictionary:json]];
+          [[NSNotificationCenter defaultCenter] postNotificationName:@"DidCreatePix" object:self];
+        });
+      }
+    } else {
+      NSLog(@"Resposta não esperada: %@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+      dispatch_async(dispatch_get_main_queue(), ^{
+        [SVProgressHUD showErrorWithStatus:@"Não foi possível gerar o código. Tente novamente mais tarde."];
+      });
+    }
+  }];
+  
+  // Inicia a tarefa
+  [dataTask resume];
 }
 
 - (void)checkPix:(NSString *)pixId {
-    // Configura parâmetros
-    NSDictionary *parameters = @{
-        @"hash": kHash,
-        @"idfpix": pixId
-    };
+  // Configura parâmetros
+  NSDictionary *parameters = @{
+    @"hash": kHash,
+    @"idfpix": pixId
+  };
+  
+  NSString *path = @"pixverificar";
+  NSString *webServicePath = [NSString stringWithFormat:@"%@%@", kBaseSTIURL, path];
+  
+  // Configura a requisição
+  NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:webServicePath]];
+  [request setHTTPMethod:@"POST"];
+  [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+  
+  // Serializa os parâmetros para o formato de "application/x-www-form-urlencoded"
+  NSString *bodyString = [self urlEncodedStringFromDictionary:parameters];
+  [request setHTTPBody:[bodyString dataUsingEncoding:NSUTF8StringEncoding]];
+  
+  // Cria uma sessão e faz a requisição
+  NSURLSession *session = [NSURLSession sharedSession];
+  NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
     
-    NSString *path = @"pixverificar";
-    NSString *webServicePath = [NSString stringWithFormat:@"%@%@", kBaseSTIURL, path];
+    if (error) {
+      NSLog(@"%@", error);
+      dispatch_async(dispatch_get_main_queue(), ^{
+        [SVProgressHUD showErrorWithStatus:error.localizedDescription];
+      });
+      return;
+    }
     
-    // Configura a requisição
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:webServicePath]];
-    [request setHTTPMethod:@"POST"];
-    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    
-    // Serializa os parâmetros para o formato de "application/x-www-form-urlencoded"
-    NSString *bodyString = [self urlEncodedStringFromDictionary:parameters];
-    [request setHTTPBody:[bodyString dataUsingEncoding:NSUTF8StringEncoding]];
-    
-    // Cria uma sessão e faz a requisição
-    NSURLSession *session = [NSURLSession sharedSession];
-    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        
-        if (error) {
-            NSLog(@"%@", error);
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [SVProgressHUD showErrorWithStatus:error.localizedDescription];
-            });
-            return;
-        }
-        
-        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-        if (httpResponse.statusCode == 200) {
-            NSError *jsonError;
-            NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&jsonError];
-            
-            if (jsonError) {
-                NSLog(@"Error deserializing JSON: %@", jsonError.localizedDescription);
-                return;
-            }
-            
-            NSString *status = json[@"situacao"];
-            if (status && ![status isEqual:[NSNull null]]) {
-                if ([status isEqualToString:@"CONCLUIDA"]) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [SVProgressHUD showSuccessWithStatus:@"Recebemos o pagamento!"];
-                        [[NSNotificationCenter defaultCenter] postNotificationName:@"DidPaidPix" object:self];
-                    });
-                } else {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [SVProgressHUD dismiss];
-                    });
-                }
-            } else {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [SVProgressHUD dismiss];
-                });
-            }
+    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+    if (httpResponse.statusCode == 200) {
+      NSError *jsonError;
+      NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&jsonError];
+      
+      if (jsonError) {
+        NSLog(@"Error deserializing JSON: %@", jsonError.localizedDescription);
+        return;
+      }
+      
+      NSString *status = json[@"situacao"];
+      if (status && ![status isEqual:[NSNull null]]) {
+        if ([status isEqualToString:@"CONCLUIDA"]) {
+          dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD showSuccessWithStatus:@"Recebemos o pagamento!"];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"DidPaidPix" object:self];
+          });
         } else {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [SVProgressHUD showErrorWithStatus:@"Não foi possível verificar o status do Pix. Tente novamente mais tarde."];
-            });
+          dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+          });
         }
-    }];
-    
-    [dataTask resume];
+      } else {
+        dispatch_async(dispatch_get_main_queue(), ^{
+          [SVProgressHUD dismiss];
+        });
+      }
+    } else {
+      dispatch_async(dispatch_get_main_queue(), ^{
+        [SVProgressHUD showErrorWithStatus:@"Não foi possível verificar o status do Pix. Tente novamente mais tarde."];
+      });
+    }
+  }];
+  
+  [dataTask resume];
 }
 
 - (void)getBoletos {
@@ -318,7 +332,7 @@
   }];
   
   [dataTask resume];
-
+  
 }
 
 
@@ -335,18 +349,18 @@
 }
 
 - (NSString *)urlEncodedStringFromDictionary:(NSDictionary *)dict {
-    NSMutableArray *parts = [NSMutableArray array];
-    for (NSString *key in dict) {
-        NSString *encodedKey = [self urlEncode:key];
-        NSString *encodedValue = [self urlEncode:[dict objectForKey:key]];
-        NSString *part = [NSString stringWithFormat:@"%@=%@", encodedKey, encodedValue];
-        [parts addObject:part];
-    }
-    return [parts componentsJoinedByString:@"&"];
+  NSMutableArray *parts = [NSMutableArray array];
+  for (NSString *key in dict) {
+    NSString *encodedKey = [self urlEncode:key];
+    NSString *encodedValue = [self urlEncode:[dict objectForKey:key]];
+    NSString *part = [NSString stringWithFormat:@"%@=%@", encodedKey, encodedValue];
+    [parts addObject:part];
+  }
+  return [parts componentsJoinedByString:@"&"];
 }
 
 - (NSString *)urlEncode:(NSString *)string {
-    return [string stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+  return [string stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
 }
 
 
