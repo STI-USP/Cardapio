@@ -93,6 +93,7 @@
   UIToolbar *keyboardDoneButtonView = [[UIToolbar alloc] init];
   [keyboardDoneButtonView sizeToFit];
   UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"OK" style:UIBarButtonItemStylePlain target:self action:@selector(doneClicked:)];
+  [doneButton setTintColor:[UIColor colorNamed:@"usp_green"]];
   [keyboardDoneButtonView setItems:@[doneButton]];
   return keyboardDoneButtonView;
 }

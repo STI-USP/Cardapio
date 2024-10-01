@@ -24,12 +24,6 @@
 
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
-#define UIColorFromRGB(rgbValue) \
-[UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
-green:((float)((rgbValue & 0x00FF00) >>  8))/255.0 \
-blue:((float)((rgbValue & 0x0000FF) >>  0))/255.0 \
-alpha:1.0]
-
 #define kWIDTH UIScreen.mainScreen.bounds.size.width
 
 
@@ -136,7 +130,7 @@ alpha:1.0]
   }
   
   _dateTabController.underlineIndicator = YES;
-  _dateTabController.underlineIndicatorColor = UIColorFromRGB(0xFCB421);
+  _dateTabController.underlineIndicatorColor = [UIColor colorNamed:@"usp_orange"];
   _dateTabController.buttonsScrollView.showsHorizontalScrollIndicator = NO;
   _dateTabController.selectedBackgroundColor = [UIColor clearColor];
   if (@available(iOS 13.0, *)) {
