@@ -53,30 +53,7 @@
 }
 */
 
-//- (IBAction)gerarBoleto:(id)sender {
-//  //[self dismissViewControllerAnimated:NO completion:nil];
-//  
-//  [self.view endEditing:YES];
-//
-//  
-//  NSString *numberString;
-//  
-//  NSScanner *scanner = [NSScanner scannerWithString:boletoDataModel.valorRecarga];
-//  NSCharacterSet *numbers = [NSCharacterSet characterSetWithCharactersInString:@"0123456789,."];
-//  
-//  [scanner scanUpToCharactersFromSet:numbers intoString:NULL];
-//  [scanner scanCharactersFromSet:numbers intoString:&numberString];
-//  
-//  float valorRecarga = [numberString floatValue];
-//  if ((valorRecarga >= 20) && (valorRecarga <= 200)) {
-//    [self.navigationController popViewControllerAnimated:YES];
-//    [boletoDataModel createBill];
-//  } else {
-//    [SVProgressHUD showErrorWithStatus:@"Insira um valor entre R$ 20,00 e R$ 200,00"];
-//  }
-//  
-//}
-//
+
 - (void)doneClicked:(id)sender {
   [self.view endEditing:YES];
   [[self maisCreditos] resignFirstResponder];
