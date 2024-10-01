@@ -28,13 +28,6 @@
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
 
-#define UIColorFromRGB(rgbValue) \
-[UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
-green:((float)((rgbValue & 0x00FF00) >>  8))/255.0 \
-blue:((float)((rgbValue & 0x0000FF) >>  0))/255.0 \
-alpha:1.0]
-
-
 @interface InfoViewController () {
   DataModel *dataModel;
   PreferredCell *prefCell;
@@ -61,8 +54,7 @@ alpha:1.0]
   
   self.tableView.estimatedRowHeight = 44.0;
   self.tableView.rowHeight = UITableViewAutomaticDimension;
-  [[UITableViewCell appearance] setTintColor:UIColorFromRGB(0x1094AB)];
-
+  [[UITableViewCell appearance] setTintColor:[UIColor colorNamed:@"usp_green"]];
   dataModel = [DataModel getInstance];
 
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveRestaurants) name:@"DidReceiveRestaurants" object:nil];
@@ -233,7 +225,7 @@ alpha:1.0]
         UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         button.frame = CGRectMake(0.0, 0.0, 25., 30.);
         [button setImage:[UIImage imageNamed:@"phone.png"] forState:UIControlStateNormal];
-        [button setTintColor:UIColorFromRGB(0x1094AB)];
+        [button setTintColor:[UIColor colorNamed:@"usp_green"]];
         [button addTarget:self action:@selector(callButtonTapped:event:) forControlEvents:UIControlEventTouchUpInside];
         cell.accessoryView = button;
         break;
