@@ -12,7 +12,7 @@
 #import "MenuViewController.h"
 #import "REFrostedViewController.h"
 #import "DKScrollingTabController.h"
-#import "RestaurantDataModel.h"  
+#import "RestaurantDataModel.h"
 #import "DataModel.h"
 #import "SVProgressHUD.h"
 #import "OAuthUSP.h"
@@ -28,9 +28,9 @@
 
 
 @interface MenuViewController () <DKScrollingTabControllerDelegate> {
-
+  
   //DKScrollingTabController *dateTabController;
-
+  
   RestaurantDataModel *_restaurantDataModel;
   MenuDataModel *_menuDataModel;
   DataModel *dataModel;
@@ -55,13 +55,13 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-
+  
   dataModel = [DataModel getInstance];
   oauth = [OAuthUSP sharedInstance];
   stringForLunch = [NSMutableString stringWithFormat:@""];
   
   [dataModel getMenu];
-
+  
   self.revealViewController.delegate = self;
   [self.rightButton setAction: @selector(rightRevealToggle:)];
   
@@ -71,7 +71,8 @@
   [_dateTabController didMoveToParentViewController:self];
   [self.view addSubview:_dateTabController.view];
   
-  
+  self.tableView.contentInset = UIEdgeInsetsMake(8, 0, 0, 0);
+
   CGFloat topPadding = 0.0;
   CGFloat bottomPadding = 0.0;
   
@@ -82,26 +83,7 @@
     
     _dateTabController.view.frame = CGRectMake(0, topPadding+40., CGRectGetWidth(self.view.bounds), 56);
   }
-
   
-  /*
-  if([[UIDevice currentDevice]userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-    CGFloat topPadding = 65.;
-    if (((int)[[UIScreen mainScreen] nativeBounds].size.height == 2436) || ((int)[[UIScreen mainScreen] nativeBounds].size.height == 2688)) {
-      UIWindow *window = UIApplication.sharedApplication.keyWindow;
-      if (@available(iOS 11.0, *)) {
-        topPadding += window.safeAreaInsets.top - 40;
-      }
-    }
-    
-    UIWindow *window = UIApplication.sharedApplication.keyWindow;
-    if (@available(iOS 13.0, *)) {
-      topPadding += window.safeAreaInsets.top - 20;
-    }
-
-    _dateTabController.view.frame = CGRectMake(0, topPadding, CGRectGetWidth(self.view.bounds), 56);
-  }
-   */
   
   if (@available(iOS 13.0, *)) {
     _dateTabController.view.backgroundColor = [UIColor systemGroupedBackgroundColor];
@@ -148,26 +130,77 @@
                                    @"           \n0",
                                    @"           \n0",
                                    @"           \n0"
-                                   ];
-
+  ];
+  
   //Notification
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChangeRestaurant:) name:@"DidChangeRestaurant" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveMenu:) name:@"DidReceiveMenu" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRecieveUserData:) name:@"DidRecieveUserData" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveBill:) name:@"DidReceiveBill" object:nil];
-
   
   //Float Button - info
-  CGFloat width = [UIScreen mainScreen].bounds.size.width - 40;
-  CGFloat height = ([UIScreen mainScreen].bounds.size.height - (40 + bottomPadding));
-  self.infoButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
-  self.infoButton.frame = CGRectMake(width, height, 24., 24.);
-  self.infoButton.layer.cornerRadius = self.infoButton.layer.frame.size.width/2;
-  self.infoButton.backgroundColor = [UIColor colorNamed:@"usp_green"];
-  self.infoButton.tintColor = [UIColor whiteColor];
-  //[self.infoButton setImage:[UIImage imageNamed:@"CameraButton56x56.png"] forState:UIControlStateNormal];
-  [self.infoButton addTarget:self action:@selector(showInfo) forControlEvents:UIControlEventTouchUpInside];
-  [self.view insertSubview:self.infoButton aboveSubview:self.view];
+  [self setupInfoButton];
+}
+
+// Função para configurar o botão de info
+- (void)setupInfoButton {
+  
+  // Define o tamanho do botão
+  CGFloat buttonSize = 32;
+  
+  // Inicializa o botão apenas se ele ainda não foi criado
+  if (!self.infoButton) {
+    self.infoButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    // Estilização do botão
+    self.infoButton.layer.cornerRadius = buttonSize / 2; // Botão circular
+    self.infoButton.backgroundColor = [UIColor colorNamed:@"usp_green"];
+    self.infoButton.tintColor = [UIColor whiteColor];
+    
+    // Adiciona ação ao botão
+    [self.infoButton addTarget:self action:@selector(showInfo) forControlEvents:UIControlEventTouchUpInside];
+    
+    // Adiciona o botão na hierarquia da view
+    [self.view insertSubview:self.infoButton aboveSubview:self.view];
+  }
+
+  // Obtém as insets da Safe Area
+  UIEdgeInsets safeAreaInsets = self.view.safeAreaInsets;
+  
+  // Define a nova posição do botão, levando em conta a safe area
+  CGFloat xPosition = [UIScreen mainScreen].bounds.size.width - buttonSize - safeAreaInsets.right - 20;
+  CGFloat yPosition = [UIScreen mainScreen].bounds.size.height - buttonSize - safeAreaInsets.bottom - 20;
+  self.infoButton.frame = CGRectMake(xPosition, yPosition, buttonSize, buttonSize);
+  
+  // Atualiza a imagem com base no modo claro/escuro
+  UIImage *infoImage;
+  if (@available(iOS 12.0, *)) {
+    if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
+      infoImage = [UIImage systemImageNamed:@"info.circle.fill"];
+    } else {
+      infoImage = [UIImage systemImageNamed:@"info.circle"];
+    }
+  }
+  
+  [self.infoButton setImage:infoImage forState:UIControlStateNormal];
+}
+
+// Atualiza a imagem do botão e seu posicionamento quando o modo de interface mudar ou a safe area for alterada
+- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
+  [super traitCollectionDidChange:previousTraitCollection];
+  
+  // Verifica se houve mudança no tema claro/escuro
+  if (@available(iOS 13.0, *)) {
+    if ([self.traitCollection userInterfaceStyle] != [previousTraitCollection userInterfaceStyle]) {
+      [self setupInfoButton];
+    }
+  }
+}
+
+// Observa mudanças na safe area para reposicionar o botão corretamente
+- (void)viewSafeAreaInsetsDidChange {
+  [super viewSafeAreaInsetsDidChange];
+  [self setupInfoButton];
 }
 
 
@@ -202,7 +235,7 @@
   } else {
     diaDaSemana = (int)weekday;
   }
-
+  
   
   NSString *monButtonName = [[NSString stringWithFormat:@"S\n%@", [[menuArray objectAtIndex:0] date]] substringToIndex:4];
   NSString *tueButtonName = [[NSString stringWithFormat:@"T\n%@", [[menuArray objectAtIndex:1] date]] substringToIndex:4];
@@ -211,7 +244,7 @@
   NSString *friButtonName = [[NSString stringWithFormat:@"S\n%@", [[menuArray objectAtIndex:4] date]] substringToIndex:4];
   NSString *satButtonName = [[NSString stringWithFormat:@"S\n%@", [[menuArray objectAtIndex:5] date]] substringToIndex:4];
   NSString *sunButtonName = [[NSString stringWithFormat:@"D\n%@", [[menuArray objectAtIndex:6] date]] substringToIndex:4];
-
+  
   [_dateTabController setButtonName:monButtonName atIndex:0];
   [_dateTabController setButtonName:tueButtonName atIndex:1];
   [_dateTabController setButtonName:wedButtonName atIndex:2];
@@ -236,7 +269,7 @@
     //[button setAttributedTitle:attributedString forState:UIControlStateNormal];
     [button.viewForFirstBaselineLayout setNeedsDisplay];
   }];
-
+  
   _dateTabController.delegate = self;
   [_dateTabController selectButtonWithIndex:diaDaSemana];
 }
@@ -335,7 +368,7 @@
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
   UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 22)];
-
+  
   //imagem
   UIImage *myImage = nil;
   UIImageView *imageView = nil;
@@ -344,7 +377,7 @@
   UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(34, 0, tableView.frame.size.width, 22)];
   [label setFont:[UIFont systemFontOfSize:13]];
   [label setTextColor:[UIColor grayColor]];
-
+  
   //posiciona imagem e texto
   switch (section) {
     case 0:
@@ -370,7 +403,7 @@
   [imageView setTintColor:[UIColor grayColor]];
   [view addSubview:imageView];
   [view addSubview:label];
-
+  
   return view;
 }
 
@@ -404,11 +437,11 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-
+  
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MenuCell" forIndexPath:indexPath];
   
   self.tableView.estimatedRowHeight = 150.;
-
+  
   if (menu) {
     NSString *menuString = @"";
     switch ([indexPath section]) {
@@ -451,7 +484,7 @@
         return 66.;
       }
       break;
-  
+      
     default:
       if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")) {
         return UITableViewAutomaticDimension;
@@ -465,13 +498,13 @@
 #pragma mark - Button
 
 - (IBAction)showRestaurantSelector:(id)sender {
-
+  
 }
 
 - (IBAction)showCredits:(id)sender {
   creditsViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"creditsViewController"];
   
-
+  
   if (![oauth isLoggedIn]) {
     loginViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"loginWebViewController"];
     [self presentViewController:loginViewController animated:YES completion:nil];
@@ -498,22 +531,22 @@
 }
 
 - (void)didReceiveMenu:(NSNotification *)notification {
-
+  
   menuArray = [dataModel menuArray];
-
+  
   if ([menuArray count] > 0) {
     [self setupWeekView:menuArray];
     [self setupDayLabel:diaDaSemana];
-
+    
     menu = [menuArray objectAtIndex:diaDaSemana];
-
+    
     [self viewDidAppear:YES];
     [self.tableView reloadData];
   } else {
     [SVProgressHUD showInfoWithStatus:@"Não foi possível obter o cardápio. \nTente novamente mais tarde."];
   }
   stringForLunch = [NSMutableString stringWithFormat:@"ALMOÇO"];
-
+  
 }
 
 - (void)didRecieveUserData:(NSNotification *)notification {
@@ -528,9 +561,9 @@
 
 - (BOOL)isClosed {
   NSString *strLunch = [[[[NSString stringWithFormat:@"%@", [[[menu period] objectAtIndex:0] menu]] capitalizedString] stringByReplacingOccurrencesOfString:@" " withString:@""] stringByReplacingOccurrencesOfString:@"." withString:@""];
-
+  
   NSString *strDinner = [[[[NSString stringWithFormat:@"%@", [[[menu period] objectAtIndex:1] menu]] capitalizedString] stringByReplacingOccurrencesOfString:@" " withString:@""] stringByReplacingOccurrencesOfString:@"." withString:@""];
-
+  
   
   if ([strLunch isEqualToString:@"Fechado"] || [strLunch isEqualToString:@""]) {
     if ([strDinner isEqualToString:@"Fechado"] || [strDinner isEqualToString:@""]) {
@@ -547,7 +580,7 @@
     
     //esconde info
     [_infoButton setHidden:YES];
-
+    
     //desabilita swipe na tela
     if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
       self.navigationController.interactivePopGestureRecognizer.enabled = NO;
