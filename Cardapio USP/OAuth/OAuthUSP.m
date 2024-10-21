@@ -47,13 +47,35 @@
 
 #pragma mark - Getters
 
-- (NSDictionary *)userData {
-  if ([self isLoggedIn]) {
-    return [NSJSONSerialization JSONObjectWithData:[[defaults objectForKey:@"userData"] copy] options: NSJSONReadingMutableContainers error: nil];
+- (NSMutableDictionary *)userData {
+  if ([[OAuthUSP sharedInstance] isLoggedIn]) {
+    id data = [defaults objectForKey:@"userData"];
+    
+    if ([data isKindOfClass:[NSData class]]) {
+      NSError *error = nil;
+      NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[data copy] options:NSJSONReadingMutableContainers error:&error];
+      
+      if (error) {
+        NSLog(@"Erro ao converter JSON: %@", error.localizedDescription);
+        return nil;
+      }
+      
+      if (![json isKindOfClass:[NSDictionary class]]) {
+        NSLog(@"Erro: o JSON não é um dicionário válido");
+        return nil;
+      }
+      
+      return [json mutableCopy];
+
+    } else {
+      NSLog(@"Erro: userData não é do tipo NSData");
+      return nil;
+    }
   } else {
     return nil;
   }
 }
+
 
 #pragma mark - Setters
 
