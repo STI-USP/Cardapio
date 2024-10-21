@@ -136,10 +136,7 @@
 #pragma mark - STI Data
 
 - (void)saveUserData {
-  // Taking oauthToken and oauthTokenSecret
-  //[_oAuthUSP setOauthToken: [_keychainWrapper objectForKey:(__bridge id)(kSecAttrAccount)]];
-  //[_oAuthUSP setOauthTokenSecret: [_keychainWrapper objectForKey:(__bridge id)(kSecValueData)]];
-  
+
   // USP Digital POST Request
   NSDictionary *parameters = nil;
   
@@ -160,11 +157,15 @@
       NSLog(@"Error in API request: %@", error.localizedDescription);
     } else {
       self.userData = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingMutableContainers error: nil];
-      NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-      [defaults setObject:data forKey:@"userData"];
-      [defaults synchronize];
-      [self->_oAuthUSP setUserData:self.userData];
-      [self->_oAuthUSP registrarToken];
+      if (self.userData) {
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setObject:data forKey:@"userData"];
+        [defaults synchronize];
+        [self->_oAuthUSP setUserData:self.userData];
+        [self->_oAuthUSP registrarToken];
+      } else {
+        NSLog(@"Received nil or invalid JSON data, not saving to defaults.");
+      }
     }
   }] resume];
 }
