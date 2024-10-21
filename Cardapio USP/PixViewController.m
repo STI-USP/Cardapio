@@ -86,12 +86,12 @@
   // qrCode
   if (chave != nil && ![chave isEqual:[NSNull null]] && ![chave isEqualToString:@""]) {
       [_qrCodePix setImage:[UIImage imageWithCIImage:[self createQRForString:chave]]];
+    [self copyToPB];
   } else {
       // Caso o QR code seja nulo ou inválido
       [_qrCodePix setImage:[UIImage systemImageNamed:@"qrcode"]];
-      [SVProgressHUD showErrorWithStatus:@"Chave PIX inválida, tente novamente mais tarde"];
+      [SVProgressHUD showErrorWithStatus:@"Sistema temporariamente indisponível. Tente novamente mais tarde"];
   }
-  [self copyToPB];
 }
 
 - (CIImage *)createQRForString:(NSString *)qrString {
@@ -110,7 +110,12 @@
 
 
 - (void)copyToPB {
-  [[UIPasteboard generalPasteboard] setString:[boletoDataModel.pix valueForKey:@"qrcpix"]];
+  NSString *chave = [boletoDataModel.pix valueForKey:@"qrcpix"];
+  if (chave != nil && ![chave isEqual:[NSNull null]] && ![chave isEqualToString:@""]) {
+    [[UIPasteboard generalPasteboard] setString:chave];
+  } else {
+    [SVProgressHUD showInfoWithStatus:@"Sistema temporariamente indisponível. Tente novamente mais tarde"];
+  }
 }
 
 
