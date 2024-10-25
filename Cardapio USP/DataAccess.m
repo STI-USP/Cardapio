@@ -360,7 +360,11 @@
 }
 
 - (NSString *)urlEncode:(NSString *)string {
-  return [string stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    if ([string isKindOfClass:[NSString class]] && string.length > 0) {
+        return [string stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    } else {
+        return @"";
+    }
 }
 
 
