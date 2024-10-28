@@ -137,37 +137,53 @@
 
 - (void)saveUserData {
 
-  // USP Digital POST Request
-  NSDictionary *parameters = nil;
-  
-  // Build authorized request based on path, parameters, tokens, timestamp etc.
-  NSURLRequest *preparedRequest = [OAuth1Controller preparedRequestForPath:UserURLString
+    // USP Digital POST Request
+    NSDictionary *parameters = nil;
+    
+    // Verifica se UserURLString é válida
+    if (UserURLString == nil || [UserURLString length] == 0) {
+        NSLog(@"Error: UserURLString is nil or empty.");
+        return;
+    }
+
+    // Verifica se os tokens de autenticação não são nil
+    if (_oAuthUSP.oauthToken == nil || _oAuthUSP.oauthTokenSecret == nil) {
+        NSLog(@"Error: OAuth token or secret is nil.");
+        return;
+    }
+
+    // Build authorized request based on path, parameters, tokens, timestamp etc.
+    NSURLRequest *preparedRequest = [OAuth1Controller preparedRequestForPath:UserURLString
                                                                 parameters:parameters
                                                                 HTTPmethod:@"POST"
                                                                 oauthToken:_oAuthUSP.oauthToken
                                                                oauthSecret:_oAuthUSP.oauthTokenSecret];
-  
-  
-  NSURLSession *session = [NSURLSession sharedSession];
-  [[session dataTaskWithRequest:preparedRequest completionHandler:^(NSData *data,
+    // Verifica se preparedRequest não é nil
+    if (preparedRequest == nil) {
+        NSLog(@"Error: Failed to create preparedRequest.");
+        return;
+    }
+    
+    NSURLSession *session = [NSURLSession sharedSession];
+    [[session dataTaskWithRequest:preparedRequest completionHandler:^(NSData *data,
                                 NSURLResponse *response,
                                 NSError *error) {
-    // handle response
-    if (error) {
-      NSLog(@"Error in API request: %@", error.localizedDescription);
-    } else {
-      self.userData = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingMutableContainers error: nil];
-      if (self.userData) {
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        [defaults setObject:data forKey:@"userData"];
-        [defaults synchronize];
-        [self->_oAuthUSP setUserData:self.userData];
-        [self->_oAuthUSP registrarToken];
-      } else {
-        NSLog(@"Received nil or invalid JSON data, not saving to defaults.");
-      }
-    }
-  }] resume];
+        // handle response
+        if (error) {
+            NSLog(@"Error in API request: %@", error.localizedDescription);
+        } else {
+            self.userData = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingMutableContainers error: nil];
+            if (self.userData) {
+                NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                [defaults setObject:data forKey:@"userData"];
+                [defaults synchronize];
+                [self->_oAuthUSP setUserData:self.userData];
+                [self->_oAuthUSP registrarToken];
+            } else {
+                NSLog(@"Received nil or invalid JSON data, not saving to defaults.");
+            }
+        }
+    }] resume];
 }
 
 @end

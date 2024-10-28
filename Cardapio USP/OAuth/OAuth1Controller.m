@@ -283,34 +283,28 @@ static inline NSDictionary *CHParametersFromQueryString(NSString *queryString) {
 #pragma mark Used to detect call back in step 2
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction
 decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
-  
-  
-  //this is a 'new window action' (aka target="_blank") > open this URL externally. If we´re doing nothing here, WKWebView will also just do nothing. Maybe this will change in a later stage of the iOS 8 Beta
-  NSString *urlWithoutQueryString = [webView.URL.absoluteString componentsSeparatedByString:@"?"][0];
-  if ([urlWithoutQueryString rangeOfString:OAUTH_CALLBACK].location != NSNotFound) {
-      NSString *queryString = [webView.URL.absoluteString substringFromIndex:[webView.URL.absoluteString rangeOfString:@"?"].location + 1];
-      NSDictionary *parameters = CHParametersFromQueryString(queryString);
-      parameters = [self removeAppendedSubstringOnVerifierIfPresent:parameters];
-      
-      _delegateHandler(parameters);
-      _delegateHandler = nil;
-  }
-  decisionHandler(WKNavigationActionPolicyAllow);
 
-  /*
-  if (_delegateHandler) {
-      // For other Oauth 1.0a service providers than LinkedIn, the callback URL might be part of the query of the URL (after the "?"). In this case use index 1 below. In any case NSLog the request URL after the user taps 'Allow'/'Authenticate' after he/she entered his/her username and password and see where in the URL the call back is. Note for some services the callback URL is set once on their website when registering an app, and the OAUTH_CALLBACK set here is ignored.
-      NSString *urlWithoutQueryString = [webView.URL.absoluteString componentsSeparatedByString:@"?"][0];
-      if ([urlWithoutQueryString rangeOfString:OAUTH_CALLBACK].location != NSNotFound) {
-          NSString *queryString = [webView.URL.absoluteString substringFromIndex:[webView.URL.absoluteString rangeOfString:@"?"].location + 1];
-          NSDictionary *parameters = CHParametersFromQueryString(queryString);
-          parameters = [self removeAppendedSubstringOnVerifierIfPresent:parameters];
-          
-          _delegateHandler(parameters);
-          _delegateHandler = nil;
-      }
-  }
-   */
+    NSString *urlString = webView.URL.absoluteString;
+    if (urlString == nil) {
+        decisionHandler(WKNavigationActionPolicyAllow);
+        return;
+    }
+
+    NSString *urlWithoutQueryString = [urlString componentsSeparatedByString:@"?"].firstObject;
+    if ([urlWithoutQueryString rangeOfString:OAUTH_CALLBACK].location != NSNotFound) {
+        NSRange queryRange = [urlString rangeOfString:@"?"];
+        if (queryRange.location != NSNotFound) {
+            NSString *queryString = [urlString substringFromIndex:queryRange.location + 1];
+            NSDictionary *parameters = CHParametersFromQueryString(queryString);
+            parameters = [self removeAppendedSubstringOnVerifierIfPresent:parameters];
+
+            if (_delegateHandler) {
+                _delegateHandler(parameters);
+                _delegateHandler = nil;
+            }
+        }
+    }
+    decisionHandler(WKNavigationActionPolicyAllow);
 }
 
 - (BOOL)webView:(WKWebView *)webView decidePolicyForNavigationAction:decisionHandler {
