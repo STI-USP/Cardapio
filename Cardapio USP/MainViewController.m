@@ -13,6 +13,7 @@
 #import "OAuthUSP.h"
 #import "SVProgressHUD.h"
 #import "WebViewController.h"
+#import <FirebaseAnalytics/FirebaseAnalytics.h>
 
 #define kWIDTH UIScreen.mainScreen.bounds.size.width
 
@@ -156,8 +157,7 @@
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-  
-  
+
   //Web Content
   if ([[segue identifier] isEqualToString:@"showWebContent"]) {
     
@@ -167,6 +167,7 @@
     UIButton *btn = (UIButton *)sender;
     switch (btn.tag) {
       case 0: //RUCard
+        [FIRAnalytics logEventWithName:@"click_button_rucard" parameters:nil];
         break;
         
       case 1:
@@ -211,6 +212,7 @@
     webViewController.urlString = urlString;
     //webViewController.navTitle = title;
   } else if ([[segue identifier] isEqualToString:@"showWeekMenu"]) {
+    [FIRAnalytics logEventWithName:@"click_button_cardapio" parameters:nil];
     [blurEffectView removeFromSuperview];
     [_expandMenuView setHidden:YES];
   }
@@ -282,7 +284,6 @@ static void setupView(MainViewController *object) {
   NSArray *array = [str componentsSeparatedByString:@" "];
   
   // Now you can check it by 12. If < 12 means Its morning > 12 means its evening or night
-  
   NSString *message;
   NSString *timeInHour;
   NSString *am_pm;
@@ -392,47 +393,8 @@ static void setupView(MainViewController *object) {
   
 }
 
-- (IBAction)showAcolhe:(id)sender {
-  if ([self shouldPerformSegueWithIdentifier:@"showWebContent" sender:self]) {
-    [self performSegueWithIdentifier:@"showWebContent" sender:(UIButton *)sender];
-  } else {
-    [SVProgressHUD showInfoWithStatus:@"Serviço indisponível. Tente novamente mais tarde."];
-  }
-}
-
-- (IBAction)showServicoSocial:(id)sender {
-  if ([self shouldPerformSegueWithIdentifier:@"showWebContent" sender:self]) {
-    [self performSegueWithIdentifier:@"showWebContent" sender:(UIButton *)sender];
-  } else {
-    [SVProgressHUD showInfoWithStatus:@"Serviço indisponível. Tente novamente mais tarde."];
-  }
-}
-
-- (IBAction)showCreche:(id)sender {
-  if ([self shouldPerformSegueWithIdentifier:@"showWebContent" sender:self]) {
-    [self performSegueWithIdentifier:@"showWebContent" sender:(UIButton *)sender];
-  } else {
-    [SVProgressHUD showInfoWithStatus:@"Serviço indisponível. Tente novamente mais tarde."];
-  }
-}
-
-- (IBAction)showMoradia:(id)sender {
-  if ([self shouldPerformSegueWithIdentifier:@"showWebContent" sender:self]) {
-    [self performSegueWithIdentifier:@"showWebContent" sender:(UIButton *)sender];
-  } else {
-    [SVProgressHUD showInfoWithStatus:@"Serviço indisponível. Tente novamente mais tarde."];
-  }
-}
-
-- (IBAction)showSaudeMental:(id)sender {
-  if ([self shouldPerformSegueWithIdentifier:@"showWebContent" sender:self]) {
-    [self performSegueWithIdentifier:@"showWebContent" sender:(UIButton *)sender];
-  } else {
-    [SVProgressHUD showInfoWithStatus:@"Serviço indisponível. Tente novamente mais tarde."];
-  }
-}
-
-- (IBAction)showAvisos:(id)sender {
+- (IBAction)showInstitucional:(id)sender {
+  [FIRAnalytics logEventWithName:@"click_button_apoio_estudantil" parameters:nil];
   if ([self shouldPerformSegueWithIdentifier:@"showWebContent" sender:self]) {
     [self performSegueWithIdentifier:@"showWebContent" sender:(UIButton *)sender];
   } else {
@@ -441,6 +403,7 @@ static void setupView(MainViewController *object) {
 }
 
 - (IBAction)showTransporte:(id)sender {
+  [FIRAnalytics logEventWithName:@"click_button_transporte" parameters:nil];
   if ([self shouldPerformSegueWithIdentifier:@"showWebContent" sender:self]) {
     [self performSegueWithIdentifier:@"showWebContent" sender:(UIButton *)sender];
   } else {
@@ -448,7 +411,53 @@ static void setupView(MainViewController *object) {
   }
 }
 
-- (IBAction)showInstitucional:(id)sender {
+- (IBAction)showAvisos:(id)sender {
+  [FIRAnalytics logEventWithName:@"click_button_avisos" parameters:nil];
+  if ([self shouldPerformSegueWithIdentifier:@"showWebContent" sender:self]) {
+    [self performSegueWithIdentifier:@"showWebContent" sender:(UIButton *)sender];
+  } else {
+    [SVProgressHUD showInfoWithStatus:@"Serviço indisponível. Tente novamente mais tarde."];
+  }
+}
+
+- (IBAction)showSaudeMental:(id)sender {
+  [FIRAnalytics logEventWithName:@"click_saude_mental" parameters:nil];
+  if ([self shouldPerformSegueWithIdentifier:@"showWebContent" sender:self]) {
+    [self performSegueWithIdentifier:@"showWebContent" sender:(UIButton *)sender];
+  } else {
+    [SVProgressHUD showInfoWithStatus:@"Serviço indisponível. Tente novamente mais tarde."];
+  }
+}
+
+- (IBAction)showMoradia:(id)sender {
+  [FIRAnalytics logEventWithName:@"click_button_moradia" parameters:nil];
+  if ([self shouldPerformSegueWithIdentifier:@"showWebContent" sender:self]) {
+    [self performSegueWithIdentifier:@"showWebContent" sender:(UIButton *)sender];
+  } else {
+    [SVProgressHUD showInfoWithStatus:@"Serviço indisponível. Tente novamente mais tarde."];
+  }
+}
+
+- (IBAction)showCreche:(id)sender {
+  [FIRAnalytics logEventWithName:@"click_button_creche" parameters:nil];
+  if ([self shouldPerformSegueWithIdentifier:@"showWebContent" sender:self]) {
+    [self performSegueWithIdentifier:@"showWebContent" sender:(UIButton *)sender];
+  } else {
+    [SVProgressHUD showInfoWithStatus:@"Serviço indisponível. Tente novamente mais tarde."];
+  }
+}
+
+- (IBAction)showServicoSocial:(id)sender {
+  [FIRAnalytics logEventWithName:@"click_button_servico_social" parameters:nil];
+  if ([self shouldPerformSegueWithIdentifier:@"showWebContent" sender:self]) {
+    [self performSegueWithIdentifier:@"showWebContent" sender:(UIButton *)sender];
+  } else {
+    [SVProgressHUD showInfoWithStatus:@"Serviço indisponível. Tente novamente mais tarde."];
+  }
+}
+
+- (IBAction)showAcolhe:(id)sender {
+  [FIRAnalytics logEventWithName:@"click_button_programa_ecos" parameters:nil];
   if ([self shouldPerformSegueWithIdentifier:@"showWebContent" sender:self]) {
     [self performSegueWithIdentifier:@"showWebContent" sender:(UIButton *)sender];
   } else {
