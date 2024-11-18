@@ -421,7 +421,7 @@ static void setupView(MainViewController *object) {
 }
 
 - (IBAction)showSaudeMental:(id)sender {
-  [FIRAnalytics logEventWithName:@"click_saude_mental" parameters:nil];
+  [FIRAnalytics logEventWithName:@"click_button_saude_mental" parameters:nil];
   if ([self shouldPerformSegueWithIdentifier:@"showWebContent" sender:self]) {
     [self performSegueWithIdentifier:@"showWebContent" sender:(UIButton *)sender];
   } else {
