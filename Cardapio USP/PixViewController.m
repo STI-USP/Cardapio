@@ -16,6 +16,7 @@
   BoletoDataModel *boletoDataModel;
   DataModel *dataModel;
 }
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *shareButton;
 
 @end
 
@@ -32,7 +33,7 @@
   
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(becomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didPaidPix:) name:@"DidPaidPix" object:nil];
-
+  
   [self configureUI];
 }
 
@@ -53,19 +54,29 @@
 }
 
 - (IBAction)share:(id)sender {
-  
   NSString *valor = [[NSString stringWithFormat:@"%@", [boletoDataModel.pix valueForKey:@"vlrpix"]] stringByReplacingOccurrencesOfString:@"," withString:@"."];
   NSString *titulo = [[NSString stringWithFormat:@"R$ %.2f", [valor floatValue]] stringByReplacingOccurrencesOfString:@"." withString:@","];
-
-  UIImage *image = [UIImage imageWithCIImage:_qrCodePix.image.CIImage];
-  NSData *data = UIImageJPEGRepresentation (image, 0.8);
-  NSArray *activityItems = @[data];
-
-  UIActivityViewController *activityViewControntroller = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
-  [activityViewControntroller setValue:@"Código QR para pagamento Pix/RUCard" forKey:@"subject"];
-  activityViewControntroller.excludedActivityTypes = @[];
-  [self presentViewController:activityViewControntroller animated:true completion:nil];
   
+  UIImage *image = nil;
+  if (_qrCodePix.image.CIImage) {
+    image = [UIImage imageWithCIImage:_qrCodePix.image.CIImage];
+  }
+  
+  NSData *data = nil;
+  if (image) {
+    data = UIImageJPEGRepresentation(image, 0.8);
+  }
+  
+  if (data) {
+    NSArray *activityItems = @[data];
+    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
+    [activityViewController setValue:@"Código QR para pagamento Pix/RUCard" forKey:@"subject"];
+    activityViewController.excludedActivityTypes = @[];
+    [self presentViewController:activityViewController animated:YES completion:nil];
+  } else {
+    NSLog(@"Erro: A imagem ou os dados do QR Code estão inválidos.");
+    // Opcional: exiba um alerta para o usuário
+  }
 }
 
 
@@ -85,12 +96,16 @@
   
   // qrCode
   if (chave != nil && ![chave isEqual:[NSNull null]] && ![chave isEqualToString:@""]) {
-      [_qrCodePix setImage:[UIImage imageWithCIImage:[self createQRForString:chave]]];
+    [_qrCodePix setImage:[UIImage imageWithCIImage:[self createQRForString:chave]]];
     [self copyToPB];
+    [_shareButton setEnabled:true];
+    [_pasteboardButton setEnabled:true];
   } else {
-      // Caso o QR code seja nulo ou inválido
-      [_qrCodePix setImage:[UIImage systemImageNamed:@"qrcode"]];
-      [SVProgressHUD showErrorWithStatus:@"Sistema temporariamente indisponível. Tente novamente mais tarde"];
+    // Caso o QR code seja nulo ou inválido
+    [_qrCodePix setImage:[UIImage systemImageNamed:@"qrcode"]];
+    [SVProgressHUD showErrorWithStatus:@"Sistema temporariamente indisponível. Tente novamente mais tarde"];
+    [_shareButton setEnabled:false];
+    [_pasteboardButton setEnabled:false];
   }
 }
 
@@ -136,14 +151,14 @@
 
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 
 

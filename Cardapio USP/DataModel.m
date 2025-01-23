@@ -57,15 +57,26 @@
 }
 
 - (NSDictionary *)userData {
-  if ([self isLoggedIn]) {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    _userData = [NSJSONSerialization JSONObjectWithData:[[defaults objectForKey:@"userData"] copy] options: NSJSONReadingMutableContainers error: nil];
-    
-    return _userData;
-  } else {
-    return nil;
-  }
+    if ([self isLoggedIn]) {
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSData *userDataRaw = [defaults objectForKey:@"userData"];
+        
+        if (userDataRaw == nil || [userDataRaw isKindOfClass:[NSNull class]]) {
+            return nil; // Retorna nil se os dados não existirem ou forem NSNull
+        }
+        
+        NSError *error = nil;
+        NSDictionary *userData = [NSJSONSerialization JSONObjectWithData:userDataRaw options:NSJSONReadingMutableContainers error:&error];
+        
+        if (error || ![userData isKindOfClass:[NSDictionary class]]) {
+            // Retorna nil se houver erro na desserialização ou se o formato não for um NSDictionary
+            return nil;
+        }
+        
+        return userData;
+    } else {
+        return nil; // Retorna nil se o usuário não estiver logado
+    }
 }
 
 - (void)getRestaurantList {

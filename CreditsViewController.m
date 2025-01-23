@@ -34,7 +34,7 @@
   [self setupModels];
   [self registerNotifications];
   
-  [self setupListarBoletosButton];
+  //[self setupListarBoletosButton];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
