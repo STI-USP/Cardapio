@@ -98,11 +98,14 @@
   if (chave != nil && ![chave isEqual:[NSNull null]] && ![chave isEqualToString:@""]) {
     [_qrCodePix setImage:[UIImage imageWithCIImage:[self createQRForString:chave]]];
     [self copyToPB];
+    _qrCodePix.tintColor = nil;
     [_shareButton setEnabled:true];
     [_pasteboardButton setEnabled:true];
   } else {
     // Caso o QR code seja nulo ou inválido
     [_qrCodePix setImage:[UIImage systemImageNamed:@"qrcode"]];
+    [_qrCodePix setAlpha:0.37];
+    _qrCodePix.tintColor = [UIColor lightGrayColor];
     [SVProgressHUD showErrorWithStatus:@"Sistema temporariamente indisponível. Tente novamente mais tarde"];
     [_shareButton setEnabled:false];
     [_pasteboardButton setEnabled:false];
