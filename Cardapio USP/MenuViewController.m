@@ -465,7 +465,7 @@
         [cell.textLabel setText:[NSString stringWithFormat:@"%@", dataModel.observation]];
         [cell.textLabel setTextColor:[UIColor grayColor]];
         [cell.textLabel setFont:[UIFont systemFontOfSize:14]];
-        [cell setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
+        [cell setBackgroundColor:[UIColor systemGroupedBackgroundColor]];
         break;
         
       default:
