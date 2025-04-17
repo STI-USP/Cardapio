@@ -47,7 +47,7 @@
 		BFBE4D911A1276EF002EDADE /* restaurants_old.json in Resources */ = {isa = PBXBuildFile; fileRef = BFBE4D901A1276EF002EDADE /* restaurants_old.json */; };
 		E90555B01E01D42F00B8516E /* OAuthUSP.m in Sources */ = {isa = PBXBuildFile; fileRef = E90555AD1E01D42F00B8516E /* OAuthUSP.m */; };
 		E90555B11E01D42F00B8516E /* STIOauth.m in Sources */ = {isa = PBXBuildFile; fileRef = E90555AF1E01D42F00B8516E /* STIOauth.m */; };
-		E90555B41E030EEA00B8516E /* BoletoDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E90555B31E030EEA00B8516E /* BoletoDataModel.m */; };
+		E90555B41E030EEA00B8516E /* CheckoutDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E90555B31E030EEA00B8516E /* CheckoutDataModel.m */; };
 		E90555B71E086AAF00B8516E /* CreditsNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E90555B61E086AAF00B8516E /* CreditsNavigationViewController.m */; };
 		E90555BA1E099B6900B8516E /* BoletosPendentesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E90555B91E099B6900B8516E /* BoletosPendentesTableViewController.m */; };
 		E92D5EA41C19B32B00ECA5D1 /* Base64Transcoder.c in Sources */ = {isa = PBXBuildFile; fileRef = E92D5E941C19B32B00ECA5D1 /* Base64Transcoder.c */; };
@@ -61,6 +61,7 @@
 		E9387BF91DF727C0005BC821 /* BoletoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9387BF81DF727C0005BC821 /* BoletoViewController.m */; };
 		E9490C74262F54B5000A035B /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9490C73262F54B5000A035B /* WebViewController.m */; };
 		E9490C78262F5C10000A035B /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9490C77262F5C0F000A035B /* WebKit.framework */; };
+		E96EBA3B2DB18D8500265407 /* VMPix.m in Sources */ = {isa = PBXBuildFile; fileRef = E96EBA3A2DB18D8500265407 /* VMPix.m */; };
 		E97B390C225556FE0070AC9B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E97B390B225556FE0070AC9B /* GoogleService-Info.plist */; };
 		E9818EC3198033A800F741B0 /* DKScrollingTabController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9818EC2198033A800F741B0 /* DKScrollingTabController.m */; };
 		E990FE6E262751F0005FF207 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E990FE6D262751F0005FF207 /* MainViewController.m */; };
@@ -182,8 +183,8 @@
 		E90555AD1E01D42F00B8516E /* OAuthUSP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAuthUSP.m; sourceTree = "<group>"; };
 		E90555AE1E01D42F00B8516E /* STIOauth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STIOauth.h; sourceTree = "<group>"; };
 		E90555AF1E01D42F00B8516E /* STIOauth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STIOauth.m; sourceTree = "<group>"; };
-		E90555B21E030EEA00B8516E /* BoletoDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoletoDataModel.h; sourceTree = "<group>"; };
-		E90555B31E030EEA00B8516E /* BoletoDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoletoDataModel.m; sourceTree = "<group>"; };
+		E90555B21E030EEA00B8516E /* CheckoutDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckoutDataModel.h; sourceTree = "<group>"; };
+		E90555B31E030EEA00B8516E /* CheckoutDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckoutDataModel.m; sourceTree = "<group>"; };
 		E90555B51E086AAF00B8516E /* CreditsNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditsNavigationViewController.h; sourceTree = "<group>"; };
 		E90555B61E086AAF00B8516E /* CreditsNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreditsNavigationViewController.m; sourceTree = "<group>"; };
 		E90555B81E099B6900B8516E /* BoletosPendentesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoletosPendentesTableViewController.h; sourceTree = "<group>"; };
@@ -209,6 +210,8 @@
 		E9490C72262F54B5000A035B /* WebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
 		E9490C73262F54B5000A035B /* WebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		E9490C77262F5C0F000A035B /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		E96EBA392DB18D8500265407 /* VMPix.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VMPix.h; sourceTree = "<group>"; };
+		E96EBA3A2DB18D8500265407 /* VMPix.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VMPix.m; sourceTree = "<group>"; };
 		E97B390B225556FE0070AC9B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E9818EC1198033A800F741B0 /* DKScrollingTabController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DKScrollingTabController.h; sourceTree = "<group>"; };
 		E9818EC2198033A800F741B0 /* DKScrollingTabController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DKScrollingTabController.m; sourceTree = "<group>"; };
@@ -663,12 +666,14 @@
 				E9E9B12E1B0E7CC6005BE8A1 /* DataAccess.m */,
 				E9E9B1301B0E7D1C005BE8A1 /* DataModel.h */,
 				E9E9B1311B0E7D1C005BE8A1 /* DataModel.m */,
-				E90555B21E030EEA00B8516E /* BoletoDataModel.h */,
-				E90555B31E030EEA00B8516E /* BoletoDataModel.m */,
+				E90555B21E030EEA00B8516E /* CheckoutDataModel.h */,
+				E90555B31E030EEA00B8516E /* CheckoutDataModel.m */,
 				E9BF538C2C947F48004ED570 /* MyMutableURLRequest.h */,
 				E9BF538D2C947F49004ED570 /* MyMutableURLRequest.m */,
 				E9BF538F2C94C4F4004ED570 /* Constants.h */,
 				E9BF53902C94C4F4004ED570 /* Constants.m */,
+				E96EBA392DB18D8500265407 /* VMPix.h */,
+				E96EBA3A2DB18D8500265407 /* VMPix.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -906,9 +911,10 @@
 				E90555BA1E099B6900B8516E /* BoletosPendentesTableViewController.m in Sources */,
 				BFAC6E96192A54E100921494 /* MenuViewController.m in Sources */,
 				E9E55FBB1B55933F00994BCB /* DetailCell.m in Sources */,
+				E96EBA3B2DB18D8500265407 /* VMPix.m in Sources */,
 				E9CDD1EE1AD86BFF00BB2E36 /* AFURLSessionManager.m in Sources */,
 				E92D5EAA1C19B32B00ECA5D1 /* OAuth1Controller.m in Sources */,
-				E90555B41E030EEA00B8516E /* BoletoDataModel.m in Sources */,
+				E90555B41E030EEA00B8516E /* CheckoutDataModel.m in Sources */,
 				E9CDD1EA1AD86BFF00BB2E36 /* AFSecurityPolicy.m in Sources */,
 				E9CDD1ED1AD86BFF00BB2E36 /* AFURLResponseSerialization.m in Sources */,
 				E99838001E201B710065ED08 /* SwipeableCell.m in Sources */,
@@ -1132,7 +1138,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MARKETING_VERSION = 3.1.17;
+				OAUTH_CONSUMER_SECRET = foZyLmFVYO73aqUUkuIA6iloqbcVBm6V85lOaEYf;
 				OAUTH_SERVICE_URL = "https://dev.uspdigital.usp.br/mobile/servicos/oauth";
+				OAUTH_URL = "https://dev.uspdigital.usp.br/";
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -1170,7 +1178,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MARKETING_VERSION = 3.1.17;
+				OAUTH_CONSUMER_SECRET = EYagzAlOL3O0EFHMRtWAwSgIju5RtkAghDuqOXop;
 				OAUTH_SERVICE_URL = "https://uspdigital.usp.br/mobile/servicos/oauth";
+				OAUTH_URL = "https://uspdigital.usp.br/";
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"$(inherited)",

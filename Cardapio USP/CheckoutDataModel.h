@@ -8,18 +8,19 @@
 
 #import <Foundation/Foundation.h>
 
-@interface BoletoDataModel : NSObject
+@interface CheckoutDataModel : NSObject
 
 @property (nonatomic, strong) NSMutableDictionary *boleto;
 @property (nonatomic, strong) NSMutableDictionary *pix;
 @property (nonatomic, strong) NSMutableArray *boletosPendentes;
 @property (nonatomic, strong) NSString *valorRecarga;
 
-+ (BoletoDataModel *)sharedInstance;
++ (CheckoutDataModel *)sharedInstance;
 - (void)createPix;
 - (void)checkPix:(NSString *)pixId;
+- (void)getLastPix;
 
-- (void)getBoleto;
-- (void)getBoletos;
+//- (void)getBoleto;
+//- (void)getBoletos;
 
 @end

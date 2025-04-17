@@ -16,6 +16,12 @@
 @property (weak, nonatomic) IBOutlet UILabel *saldoLabel;
 @property (weak, nonatomic) IBOutlet MyTextField *maisCreditos;
 
+@property (weak, nonatomic) IBOutlet UILabel *lastPixValue;
+@property (weak, nonatomic) IBOutlet UILabel *lastPixStatus;
+@property (weak, nonatomic) IBOutlet UIButton *cpPixButton;
+- (IBAction)copyPixToPB:(id)sender;
+
+
 @property (nonatomic, strong) UIButton *listarBoletosButton;
 
 - (IBAction)gerarPix:(id)sender;

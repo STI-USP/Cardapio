@@ -10,17 +10,19 @@
 #import "DataModel.h"
 #import "SVProgressHUD.h"
 #import "OAuthUSP.h"
-#import "BoletoDataModel.h"
+#import "CheckoutDataModel.h"
 #import "BoletoViewController.h"
 #import "LoginWebViewController.h"
+#import "VMPix.h"
 
 @interface CreditsViewController () {
   DataModel *dataModel;
-  BoletoDataModel *boletoDataModel;
+  CheckoutDataModel *boletoDataModel;
   OAuthUSP *oauth;
   LoginWebViewController *loginViewController;
   NSNumberFormatter *currencyFormatter;
-  BoletoViewController *boletoViewController; // Declaração correta de boletoViewController
+  BoletoViewController *boletoViewController;
+  VMPix *pix;
 }
 @end
 
@@ -62,8 +64,10 @@
 
 - (void)setupModels {
   dataModel = [DataModel getInstance];
-  boletoDataModel = [BoletoDataModel sharedInstance];
+  boletoDataModel = [CheckoutDataModel sharedInstance];
   oauth = [OAuthUSP sharedInstance];
+  pix = [VMPix modelWithDictionary:boletoDataModel.pix];
+
 }
 
 - (void)registerNotifications {
@@ -72,6 +76,7 @@
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logout:) name:@"DidReceiveLoginError" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveBills:) name:@"DidReceiveBills" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didCreatePix:) name:@"DidCreatePix" object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveLastPix:) name:@"DidReceiveLastPix" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRegisterUser:) name:@"DidRegisterUser" object:nil];
   
   [self registerKeyboardNotifications];
@@ -122,7 +127,7 @@
 }
 
 - (IBAction)listarBoletos:(id)sender {
-  [boletoDataModel getBoletos];
+  //[boletoDataModel getBoletos];
 }
 
 - (IBAction)logout:(id)sender {
@@ -177,6 +182,16 @@
   [SVProgressHUD dismiss];
   [self clearTextField];
   [self performSegueWithIdentifier:@"showPix" sender:self];
+}
+
+- (void)didReceiveLastPix:(NSNotification *)notification {
+  [SVProgressHUD dismiss];
+  [_lastPixValue setText:pix.valorFormatado];
+  [_lastPixStatus setText:pix.statusDescricao];
+  
+  [_lastPixValue setText:[NSString stringWithFormat:@"Valor: %@", pix.valorFormatado]];
+  [_lastPixStatus setText:[NSString stringWithFormat:@"Status: %@", pix.statusDescricao]];
+
 }
 
 - (void)didRegisterUser:(NSNotification *)notification {
@@ -282,10 +297,13 @@
     [self presentViewController:loginViewController animated:YES completion:nil];
   } else {
     [dataModel getCreditoRUCard];
-    [self fetchBoletos];
+    //[self fetchBoletos];
+    [self fetchLastPix];
     [_username setText:[dataModel.userData objectForKey:@"nomeUsuario"]];
   }
 }
+
+
 
 #pragma mark - Boletos
 // Configurando o botão
@@ -304,10 +322,32 @@
   ]];
 }
 
+// Método que chama o serviço de pix
+- (void)fetchLastPix {
+  //[SVProgressHUD show];
+  [boletoDataModel getLastPix];
+}
+
+// Handler para o retorno do serviço de boletos
+- (void)didReceivePix:(NSNotification *)notification {
+  [SVProgressHUD dismiss];
+  
+  // Verifica se existem boletos no retorno
+  NSArray *boletos = [boletoDataModel boletosPendentes];
+  
+  if (boletos.count > 0) {
+    // Mostra o botão caso existam boletos
+    self.listarBoletosButton.hidden = NO;
+  } else {
+    // Esconde o botão caso não existam boletos
+    self.listarBoletosButton.hidden = YES;
+  }
+}
+
 // Método que chama o serviço de boletos
 - (void)fetchBoletos {
   [SVProgressHUD show];
-  [boletoDataModel getBoletos];
+  //[boletoDataModel getBoletos];
 }
 
 // Handler para o retorno do serviço de boletos
@@ -330,4 +370,13 @@
   [self performSegueWithIdentifier:@"listarBoletosPendentes" sender:self];
 }
 
+- (IBAction)copyPixToPB:(id)sender {
+  if (pix.qrcpix.length) {
+    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+    pasteboard.string = pix.qrcpix;
+    
+    [SVProgressHUD showSuccessWithStatus:@"copiado"];
+  }
+}
 @end
+

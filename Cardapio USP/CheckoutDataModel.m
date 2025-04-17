@@ -6,23 +6,23 @@
 //  Copyright © 2016 EPUSP. All rights reserved.
 //
 
-#import "BoletoDataModel.h"
+#import "CheckoutDataModel.h"
 #import "DataAccess.h"
 
-@interface BoletoDataModel () {
+@interface CheckoutDataModel () {
   DataAccess *dataAccess;
 }
 
 @end
 
-@implementation BoletoDataModel
+@implementation CheckoutDataModel
 
 // - Lifecycle
-+ (BoletoDataModel *)sharedInstance {
-  static BoletoDataModel *instance = nil;
++ (CheckoutDataModel *)sharedInstance {
+  static CheckoutDataModel *instance = nil;
   static dispatch_once_t once;
   dispatch_once(&once, ^{
-    instance = [[BoletoDataModel alloc] init];
+    instance = [[CheckoutDataModel alloc] init];
   });
   return instance;
 }
@@ -65,6 +65,10 @@
 
 - (void)getBoletos {
   [dataAccess getBoletos];
+}
+
+- (void)getLastPix {
+  [dataAccess getLastPix];
 }
 
 @end

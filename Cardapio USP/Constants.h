@@ -14,9 +14,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 extern NSString * kBaseSTIURL;
 extern NSString * kBaseRUCardURL;
-extern NSString * OAuthServiceURL;
+extern NSString * kOAuthServiceURL;
+extern NSString * kOAuthURL;
+extern NSString * kOAuthConsumerSecret;
 extern NSString * UserURLString;
-
 
 @end
 
