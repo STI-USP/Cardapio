@@ -2,6 +2,7 @@
 //  Cardapio USP
 //
 //  Created by Vagner Machado on 05/12/16.
+//  Refatorado por Vagner Machado on 23/04/25.
 //  Copyright © 2016 EPUSP. All rights reserved.
 //
 
@@ -50,13 +51,27 @@
   [self removeKeyboardNotifications];
 }
 
+#pragma mark - Login Check
+
+- (void)checkLoginStatus {
+  if (![oauth isLoggedIn]) {
+    loginViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"loginWebViewController"];
+    [self presentViewController:loginViewController animated:YES completion:nil];
+  } else {
+    [dataModel getCreditoRUCard];
+    //[self fetchBoletos];
+    [self fetchLastPix];
+    [_username setText:[dataModel.userData objectForKey:@"nomeUsuario"]];
+  }
+}
+
 #pragma mark - Setup
 
 - (void)setupUI {
   _maisCreditos.delegate = self;
   _maisCreditos.inputAccessoryView = [self createKeyboardDoneButton];
-  [_saldoLabel setText:@"R$ --,--"];
   currencyFormatter = [self createCurrencyFormatter];
+  [_saldoLabel setText:@"R$ --,--"];
 }
 
 - (void)setupModels {
@@ -69,7 +84,7 @@
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRecieveCredits:) name:@"DidReceiveCredits" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRecieveCreditsError:) name:@"DidReceiveCreditsError" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logout:) name:@"DidReceiveLoginError" object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveBills:) name:@"DidReceiveBills" object:nil];
+//  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveBills:) name:@"DidReceiveBills" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didCreatePix:) name:@"DidCreatePix" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveLastPix:) name:@"DidReceiveLastPix" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRegisterUser:) name:@"DidRegisterUser" object:nil];
@@ -109,6 +124,11 @@
   [self updateTextField];
 }
 
+- (IBAction)logout:(id)sender {
+  [oauth logout];
+  [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (IBAction)gerarPix:(id)sender {
   if ([self validarValorRecarga:10]) {
     [SVProgressHUD show];
@@ -116,14 +136,14 @@
   }
 }
 
-- (IBAction)listarBoletos:(id)sender {
-  //[boletoDataModel getBoletos];
+- (void)fetchLastPix {
+//  [SVProgressHUD show];
+  [boletoDataModel getLastPix];
 }
 
-- (IBAction)logout:(id)sender {
-  [oauth logout];
-  [self.navigationController popViewControllerAnimated:YES];
-}
+//- (IBAction)listarBoletos:(id)sender {
+//  [boletoDataModel getBoletos];
+//}
 
 #pragma mark - Validation
 
@@ -170,22 +190,14 @@
 
 - (void)didCreatePix:(NSNotification *)notification {
   [SVProgressHUD dismiss];
-  [self clearTextField];
   [self updatePixUI];
+  [self clearTextField];
   [self performSegueWithIdentifier:@"showPix" sender:self];
 }
 
 - (void)didReceiveLastPix:(NSNotification *)notification {
   [SVProgressHUD dismiss];
   [self updatePixUI];
-}
-
-- (void)updatePixUI {
-  pix = [VMPix modelWithDictionary:boletoDataModel.pix];
-  [_lastPixValue setText:pix.valorFormatado];
-  [_lastPixStatus setText:pix.statusDescricao];
-  [_lastPixValue setText:[NSString stringWithFormat:@"Valor: %@", pix.valorFormatado]];
-  [_lastPixStatus setText:[NSString stringWithFormat:@"Situação: %@", pix.statusDescricao]];
 }
 
 - (void)didRegisterUser:(NSNotification *)notification {
@@ -195,15 +207,27 @@
 
 #pragma mark - Helpers
 
+- (void)updatePixUI {
+  dispatch_async(dispatch_get_main_queue(), ^{
+    self->pix = [VMPix modelWithDictionary:self->boletoDataModel.pix];
+    [self->_lastPixValue setText:self->pix.valorFormatado];
+    [self->_lastPixStatus setText:self->pix.statusDescricao];
+    [self->_lastPixValue setText:[NSString stringWithFormat:@"Valor: %@", self->pix.valorFormatado]];
+    [self->_lastPixStatus setText:[NSString stringWithFormat:@"Situação: %@", self->pix.statusDescricao]];
+  });
+}
+
 - (void)clearTextField {
   [_maisCreditos setText:@""];
 }
 
-- (void)showBoletoViewController {
-  if (!boletoViewController) {
-    boletoViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"boletoViewController"];
+- (IBAction)copyPixToPB:(id)sender {
+  if (pix.qrcpix.length) {
+    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+    pasteboard.string = pix.qrcpix;
+    
+    [SVProgressHUD showSuccessWithStatus:@"copiado"];
   }
-  [self presentViewController:boletoViewController animated:YES completion:nil];
 }
 
 #pragma mark - Text Field Delegate
@@ -282,83 +306,62 @@
   }];
 }
 
-#pragma mark - Login Check
-
-- (void)checkLoginStatus {
-  if (![oauth isLoggedIn]) {
-    loginViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"loginWebViewController"];
-    [self presentViewController:loginViewController animated:YES completion:nil];
-  } else {
-    [dataModel getCreditoRUCard];
-    //[self fetchBoletos];
-    [self fetchLastPix];
-    [_username setText:[dataModel.userData objectForKey:@"nomeUsuario"]];
-  }
-}
-
 #pragma mark - Boletos
 
-- (void)setupListarBoletosButton {
-  self.listarBoletosButton = [UIButton buttonWithType:UIButtonTypeSystem];
-  self.listarBoletosButton.titleLabel.font = [UIFont systemFontOfSize:20];
-  [self.listarBoletosButton setTitle:@"Listar boletos em aberto" forState:UIControlStateNormal];
-  [self.listarBoletosButton addTarget:self action:@selector(listarBoletosPendentes:) forControlEvents:UIControlEventTouchUpInside];
-  
-  [self.view addSubview:self.listarBoletosButton];
+//- (void)showBoletoViewController {
+//  if (!boletoViewController) {
+//    boletoViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"boletoViewController"];
+//  }
+//  [self presentViewController:boletoViewController animated:YES completion:nil];
+//}
 
-  self.listarBoletosButton.translatesAutoresizingMaskIntoConstraints = NO;
-  [NSLayoutConstraint activateConstraints:@[
-    [self.listarBoletosButton.bottomAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.bottomAnchor constant:-20],
-    [self.listarBoletosButton.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor]
-  ]];
-}
+//- (void)setupListarBoletosButton {
+//  self.listarBoletosButton = [UIButton buttonWithType:UIButtonTypeSystem];
+//  self.listarBoletosButton.titleLabel.font = [UIFont systemFontOfSize:20];
+//  [self.listarBoletosButton setTitle:@"Listar boletos em aberto" forState:UIControlStateNormal];
+//  [self.listarBoletosButton addTarget:self action:@selector(listarBoletosPendentes:) forControlEvents:UIControlEventTouchUpInside];
+//  
+//  [self.view addSubview:self.listarBoletosButton];
+//
+//  self.listarBoletosButton.translatesAutoresizingMaskIntoConstraints = NO;
+//  [NSLayoutConstraint activateConstraints:@[
+//    [self.listarBoletosButton.bottomAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.bottomAnchor constant:-20],
+//    [self.listarBoletosButton.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor]
+//  ]];
+//}
 
-- (void)fetchLastPix {
-  //[SVProgressHUD show];
-  [boletoDataModel getLastPix];
-}
+//- (void)didReceivePix:(NSNotification *)notification {
+//  [SVProgressHUD dismiss];
+//  
+//  // Verifica se existem boletos no retorno
+//  NSArray *boletos = [boletoDataModel boletosPendentes];
+//  
+//  if (boletos.count > 0) {
+//    // Mostra o botão caso existam boletos
+//    self.listarBoletosButton.hidden = NO;
+//  } else {
+//    // Esconde o botão caso não existam boletos
+//    self.listarBoletosButton.hidden = YES;
+//  }
+//}
 
-- (void)didReceivePix:(NSNotification *)notification {
-  [SVProgressHUD dismiss];
-  
-  // Verifica se existem boletos no retorno
-  NSArray *boletos = [boletoDataModel boletosPendentes];
-  
-  if (boletos.count > 0) {
-    // Mostra o botão caso existam boletos
-    self.listarBoletosButton.hidden = NO;
-  } else {
-    // Esconde o botão caso não existam boletos
-    self.listarBoletosButton.hidden = YES;
-  }
-}
+//- (void)didReceiveBills:(NSNotification *)notification {
+//  [SVProgressHUD dismiss];
+//  
+//  // Verifica se existem boletos no retorno
+//  NSArray *boletos = [boletoDataModel boletosPendentes];
+//  
+//  if (boletos.count > 0) {
+//    // Mostra o botão caso existam boletos
+//    self.listarBoletosButton.hidden = NO;
+//  } else {
+//    // Esconde o botão caso não existam boletos
+//    self.listarBoletosButton.hidden = YES;
+//  }
+//}
 
-- (void)didReceiveBills:(NSNotification *)notification {
-  [SVProgressHUD dismiss];
-  
-  // Verifica se existem boletos no retorno
-  NSArray *boletos = [boletoDataModel boletosPendentes];
-  
-  if (boletos.count > 0) {
-    // Mostra o botão caso existam boletos
-    self.listarBoletosButton.hidden = NO;
-  } else {
-    // Esconde o botão caso não existam boletos
-    self.listarBoletosButton.hidden = YES;
-  }
-}
-
-- (void)listarBoletosPendentes:(id)sender {
-  [self performSegueWithIdentifier:@"listarBoletosPendentes" sender:self];
-}
-
-- (IBAction)copyPixToPB:(id)sender {
-  if (pix.qrcpix.length) {
-    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-    pasteboard.string = pix.qrcpix;
-    
-    [SVProgressHUD showSuccessWithStatus:@"copiado"];
-  }
-}
+//- (void)listarBoletosPendentes:(id)sender {
+//  [self performSegueWithIdentifier:@"listarBoletosPendentes" sender:self];
+//}
 
 @end

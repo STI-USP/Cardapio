@@ -21,7 +21,7 @@
 
 - (IBAction)copyPixToPB:(id)sender;
 - (IBAction)gerarPix:(id)sender;
-- (IBAction)listarBoletos:(id)sender;
 - (IBAction)logout:(id)sender;
+//- (IBAction)listarBoletos:(id)sender;
 
 @end
