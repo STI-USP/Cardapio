@@ -434,11 +434,11 @@
                     </navigationItem>
                     <connections>
                         <outlet property="cpPixButton" destination="Yc3-mj-Jj3" id="LZD-dE-fqt"/>
-                        <outlet property="lastPixStatus" destination="6E3-63-IMp" id="GKS-GY-BMQ"/>
-                        <outlet property="lastPixValue" destination="5So-yc-xGa" id="396-SG-4bo"/>
-                        <outlet property="maisCreditos" destination="NVu-Ol-uq7" id="ITO-X7-Cha"/>
+                        <outlet property="lastPixStatus" destination="6E3-63-IMp" id="Ft5-Op-3Wz"/>
+                        <outlet property="lastPixValue" destination="5So-yc-xGa" id="Yfi-de-FNE"/>
+                        <outlet property="maisCreditos" destination="NVu-Ol-uq7" id="Ya5-h3-Zho"/>
                         <outlet property="saldoLabel" destination="Nwn-hH-S3C" id="VY0-DW-hIf"/>
-                        <outlet property="username" destination="n4R-zz-qNE" id="rXf-z8-u2n"/>
+                        <outlet property="username" destination="n4R-zz-qNE" id="EgG-3J-V9a"/>
                         <segue destination="WAZ-Gz-sxq" kind="modal" identifier="showPix" id="4v9-1D-cfn"/>
                         <segue destination="wUD-80-GnS" kind="push" identifier="listarBoletosPendentes" id="BCz-HH-GXg"/>
                     </connections>

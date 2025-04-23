@@ -1,4 +1,3 @@
-//
 //  CreditsViewController.m
 //  Cardapio USP
 //
@@ -32,11 +31,9 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  [self setupUI];
   [self setupModels];
+  [self setupUI];
   [self registerNotifications];
-  
-  //[self setupListarBoletosButton];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -66,8 +63,6 @@
   dataModel = [DataModel getInstance];
   boletoDataModel = [CheckoutDataModel sharedInstance];
   oauth = [OAuthUSP sharedInstance];
-  pix = [VMPix modelWithDictionary:boletoDataModel.pix];
-
 }
 
 - (void)registerNotifications {
@@ -78,11 +73,6 @@
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didCreatePix:) name:@"DidCreatePix" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveLastPix:) name:@"DidReceiveLastPix" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRegisterUser:) name:@"DidRegisterUser" object:nil];
-  
-  [self registerKeyboardNotifications];
-}
-
-- (void)registerKeyboardNotifications {
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
@@ -181,17 +171,21 @@
 - (void)didCreatePix:(NSNotification *)notification {
   [SVProgressHUD dismiss];
   [self clearTextField];
+  [self updatePixUI];
   [self performSegueWithIdentifier:@"showPix" sender:self];
 }
 
 - (void)didReceiveLastPix:(NSNotification *)notification {
   [SVProgressHUD dismiss];
+  [self updatePixUI];
+}
+
+- (void)updatePixUI {
+  pix = [VMPix modelWithDictionary:boletoDataModel.pix];
   [_lastPixValue setText:pix.valorFormatado];
   [_lastPixStatus setText:pix.statusDescricao];
-  
   [_lastPixValue setText:[NSString stringWithFormat:@"Valor: %@", pix.valorFormatado]];
-  [_lastPixStatus setText:[NSString stringWithFormat:@"Status: %@", pix.statusDescricao]];
-
+  [_lastPixStatus setText:[NSString stringWithFormat:@"Situação: %@", pix.statusDescricao]];
 }
 
 - (void)didRegisterUser:(NSNotification *)notification {
@@ -266,7 +260,6 @@
   _maisCreditos.text = formattedValue;
 }
 
-
 #pragma mark - Keyboard Notifications
 
 - (void)keyboardWillShow:(NSNotification *)notification {
@@ -303,10 +296,8 @@
   }
 }
 
-
-
 #pragma mark - Boletos
-// Configurando o botão
+
 - (void)setupListarBoletosButton {
   self.listarBoletosButton = [UIButton buttonWithType:UIButtonTypeSystem];
   self.listarBoletosButton.titleLabel.font = [UIFont systemFontOfSize:20];
@@ -322,13 +313,11 @@
   ]];
 }
 
-// Método que chama o serviço de pix
 - (void)fetchLastPix {
   //[SVProgressHUD show];
   [boletoDataModel getLastPix];
 }
 
-// Handler para o retorno do serviço de boletos
 - (void)didReceivePix:(NSNotification *)notification {
   [SVProgressHUD dismiss];
   
@@ -344,13 +333,6 @@
   }
 }
 
-// Método que chama o serviço de boletos
-- (void)fetchBoletos {
-  [SVProgressHUD show];
-  //[boletoDataModel getBoletos];
-}
-
-// Handler para o retorno do serviço de boletos
 - (void)didReceiveBills:(NSNotification *)notification {
   [SVProgressHUD dismiss];
   
@@ -378,5 +360,5 @@
     [SVProgressHUD showSuccessWithStatus:@"copiado"];
   }
 }
-@end
 
+@end
