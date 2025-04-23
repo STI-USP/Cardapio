@@ -84,7 +84,7 @@
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRecieveCredits:) name:@"DidReceiveCredits" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRecieveCreditsError:) name:@"DidReceiveCreditsError" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logout:) name:@"DidReceiveLoginError" object:nil];
-//  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveBills:) name:@"DidReceiveBills" object:nil];
+  //  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveBills:) name:@"DidReceiveBills" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didCreatePix:) name:@"DidCreatePix" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveLastPix:) name:@"DidReceiveLastPix" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRegisterUser:) name:@"DidRegisterUser" object:nil];
@@ -98,6 +98,29 @@
 }
 
 #pragma mark - UI Helpers
+
+- (void)updatePixUI {
+  dispatch_async(dispatch_get_main_queue(), ^{
+    self->pix = [VMPix modelWithDictionary:self->boletoDataModel.pix];
+    [self->_lastPixValue setText:self->pix.valorFormatado];
+    [self->_lastPixStatus setText:self->pix.statusDescricao];
+    [self->_lastPixValue setText:[NSString stringWithFormat:@"Valor: %@", self->pix.valorFormatado]];
+    [self->_lastPixStatus setText:[NSString stringWithFormat:@"Situação: %@", self->pix.statusDescricao]];
+    
+    // Habilita ou desabilita o botão cpPixButton com base no status
+    NSString *statusDescricao = [self->pix statusDescricao];
+    
+    if ([statusDescricao isEqualToString:@"Em aberto"]) {
+      [self.cpPixButton setEnabled:YES];  // Habilita o botão
+    } else {
+      [self.cpPixButton setEnabled:NO];  // Desabilita o botão
+    }
+  });
+}
+
+- (void)clearTextField {
+  [_maisCreditos setText:@""];
+}
 
 - (UIToolbar *)createKeyboardDoneButton {
   UIToolbar *keyboardDoneButtonView = [[UIToolbar alloc] init];
@@ -137,8 +160,17 @@
 }
 
 - (void)fetchLastPix {
-//  [SVProgressHUD show];
+  //  [SVProgressHUD show];
   [boletoDataModel getLastPix];
+}
+
+- (IBAction)copyPixToPB:(id)sender {
+  if (pix.qrcpix.length) {
+    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+    pasteboard.string = pix.qrcpix;
+    
+    [SVProgressHUD showSuccessWithStatus:@"copiado"];
+  }
 }
 
 //- (IBAction)listarBoletos:(id)sender {
@@ -203,31 +235,6 @@
 - (void)didRegisterUser:(NSNotification *)notification {
   [SVProgressHUD dismiss];
   [dataModel getCreditoRUCard];
-}
-
-#pragma mark - Helpers
-
-- (void)updatePixUI {
-  dispatch_async(dispatch_get_main_queue(), ^{
-    self->pix = [VMPix modelWithDictionary:self->boletoDataModel.pix];
-    [self->_lastPixValue setText:self->pix.valorFormatado];
-    [self->_lastPixStatus setText:self->pix.statusDescricao];
-    [self->_lastPixValue setText:[NSString stringWithFormat:@"Valor: %@", self->pix.valorFormatado]];
-    [self->_lastPixStatus setText:[NSString stringWithFormat:@"Situação: %@", self->pix.statusDescricao]];
-  });
-}
-
-- (void)clearTextField {
-  [_maisCreditos setText:@""];
-}
-
-- (IBAction)copyPixToPB:(id)sender {
-  if (pix.qrcpix.length) {
-    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-    pasteboard.string = pix.qrcpix;
-    
-    [SVProgressHUD showSuccessWithStatus:@"copiado"];
-  }
 }
 
 #pragma mark - Text Field Delegate
@@ -320,7 +327,7 @@
 //  self.listarBoletosButton.titleLabel.font = [UIFont systemFontOfSize:20];
 //  [self.listarBoletosButton setTitle:@"Listar boletos em aberto" forState:UIControlStateNormal];
 //  [self.listarBoletosButton addTarget:self action:@selector(listarBoletosPendentes:) forControlEvents:UIControlEventTouchUpInside];
-//  
+//
 //  [self.view addSubview:self.listarBoletosButton];
 //
 //  self.listarBoletosButton.translatesAutoresizingMaskIntoConstraints = NO;
@@ -332,10 +339,10 @@
 
 //- (void)didReceivePix:(NSNotification *)notification {
 //  [SVProgressHUD dismiss];
-//  
+//
 //  // Verifica se existem boletos no retorno
 //  NSArray *boletos = [boletoDataModel boletosPendentes];
-//  
+//
 //  if (boletos.count > 0) {
 //    // Mostra o botão caso existam boletos
 //    self.listarBoletosButton.hidden = NO;
@@ -347,10 +354,10 @@
 
 //- (void)didReceiveBills:(NSNotification *)notification {
 //  [SVProgressHUD dismiss];
-//  
+//
 //  // Verifica se existem boletos no retorno
 //  NSArray *boletos = [boletoDataModel boletosPendentes];
-//  
+//
 //  if (boletos.count > 0) {
 //    // Mostra o botão caso existam boletos
 //    self.listarBoletosButton.hidden = NO;
