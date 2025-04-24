@@ -7,13 +7,13 @@
 //
 
 #import "BoletosPendentesTableViewController.h"
-#import "BoletoDataModel.h"
+#import "CheckoutDataModel.h"
 #import "DataModel.h"
 #import "SVProgressHUD.h"
 #import "SwipeableCell.h"
 
 @interface BoletosPendentesTableViewController () <SwipeableCellDelegate> {
-  BoletoDataModel *boletoDataModel;
+  CheckoutDataModel *boletoDataModel;
   DataModel *dataModel;
   SwipeableCell *openedCell;
 }
@@ -27,7 +27,7 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
 
-  boletoDataModel = [BoletoDataModel sharedInstance];
+  boletoDataModel = [CheckoutDataModel sharedInstance];
   dataModel = [DataModel getInstance];
   self.cellsCurrentlyEditing = [NSMutableSet new];
 
@@ -39,7 +39,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
-  [boletoDataModel getBoletos];
+  //[boletoDataModel getBoletos];
 }
 
 - (void)didReceiveMemoryWarning {

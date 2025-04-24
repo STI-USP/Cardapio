@@ -154,7 +154,7 @@
   
   NSString *path = @"/registrar";
   NSData* params = [NSJSONSerialization dataWithJSONObject:dict options:0 error:nil];
-  NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", OAuthServiceURL, path]];
+  NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", kOAuthServiceURL, path]];
   NSMutableURLRequest *urlRequest = (NSMutableURLRequest*)[MyMutableURLRequest requestWithURL:url];
   [urlRequest setHTTPMethod:@"POST"];
   [urlRequest setHTTPBody:params];
@@ -205,7 +205,7 @@
   
   NSString *path = @"/sair";
   NSData* params = [NSJSONSerialization dataWithJSONObject:dict options:0 error:nil];
-  NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", OAuthServiceURL, path]];
+  NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", kOAuthServiceURL, path]];
   NSMutableURLRequest *urlRequest = (NSMutableURLRequest*)[MyMutableURLRequest requestWithURL:url];
   [urlRequest setHTTPMethod:@"POST"];
   [urlRequest setHTTPBody:params];
@@ -242,7 +242,7 @@
   
   NSString *path = @"/consultar";
   NSData* params = [NSJSONSerialization dataWithJSONObject:dict options:0 error:nil];
-  NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", OAuthServiceURL, path]];
+  NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", kOAuthServiceURL, path]];
   NSMutableURLRequest *urlRequest = (NSMutableURLRequest*)[MyMutableURLRequest requestWithURL:url];
   [urlRequest setHTTPMethod:@"POST"];
   [urlRequest setHTTPBody:params];

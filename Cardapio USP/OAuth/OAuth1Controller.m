@@ -12,6 +12,8 @@
 #include "hmac.h"
 #include "Base64Transcoder.h"
 #import <WebKit/WebKit.h>
+#import "Constants.h"
+
 
 typedef void (^WebWiewDelegateHandler)(NSDictionary *oauthParams);
 
@@ -20,8 +22,8 @@ typedef void (^WebWiewDelegateHandler)(NSDictionary *oauthParams);
 #define CONSUMER_KEY         @"cardapio_usp"
 //#define CONSUMER_SECRET      @"foZyLmFVYO73aqUUkuIA6iloqbcVBm6V85lOaEYf" //dev
 //#define AUTH_URL             @"https://dev.uspdigital.usp.br" //dev
-#define CONSUMER_SECRET      @"EYagzAlOL3O0EFHMRtWAwSgIju5RtkAghDuqOXop" //prod
-#define AUTH_URL             @"https://uspdigital.usp.br" //prod
+//#define CONSUMER_SECRET      @"EYagzAlOL3O0EFHMRtWAwSgIju5RtkAghDuqOXop" //prod
+//#define AUTH_URL             @"https://uspdigital.usp.br" //prod
 #define REQUEST_TOKEN_URL    @"/wsusuario/oauth/request_token"
 #define AUTHENTICATE_URL     @"/wsusuario/oauth/authorize"
 #define ACCESS_TOKEN_URL     @"/wsusuario/oauth/access_token"
@@ -206,8 +208,8 @@ static inline NSDictionary *CHParametersFromQueryString(NSString *queryString) {
 #pragma mark - Step 1 Obtaining a request token
 - (void)obtainRequestTokenWithCompletion:(void (^)(NSError *error, NSDictionary *responseParams))completion
 {
-    NSString *request_url = [AUTH_URL stringByAppendingString:REQUEST_TOKEN_URL];
-    NSString *oauth_consumer_secret = CONSUMER_SECRET;
+    NSString *request_url = [kOAuthURL stringByAppendingString:REQUEST_TOKEN_URL];
+    NSString *oauth_consumer_secret = kOAuthConsumerSecret;
     
     NSMutableDictionary *allParameters = [self.class standardOauthParameters];
     if ([OAUTH_SCOPE_PARAM length] > 0) [allParameters setValue:OAUTH_SCOPE_PARAM forKey:@"scope"];
@@ -248,7 +250,7 @@ static inline NSDictionary *CHParametersFromQueryString(NSString *queryString) {
 - (void)authenticateToken:(NSString *)oauthToken withCompletion:(void (^)(NSError *error, NSDictionary *responseParams))completion
 {
     NSString *oauth_callback = OAUTH_CALLBACK;
-    NSString *authenticate_url = [AUTH_URL stringByAppendingString:AUTHENTICATE_URL];
+    NSString *authenticate_url = [kOAuthURL stringByAppendingString:AUTHENTICATE_URL];
     authenticate_url = [authenticate_url stringByAppendingFormat:@"?oauth_token=%@", oauthToken];
     authenticate_url = [authenticate_url stringByAppendingFormat:@"&oauth_callback=%@", oauth_callback.utf8AndURLEncode];
   
@@ -344,8 +346,8 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
              oauthVerifier:(NSString *)oauth_verifier
                 completion:(void (^)(NSError *error, NSDictionary *responseParams))completion
 {
-    NSString *access_url = [AUTH_URL stringByAppendingString:ACCESS_TOKEN_URL];
-    NSString *oauth_consumer_secret = CONSUMER_SECRET;
+    NSString *access_url = [kOAuthURL stringByAppendingString:ACCESS_TOKEN_URL];
+    NSString *oauth_consumer_secret = kOAuthConsumerSecret;
     
     NSMutableDictionary *allParameters = [self.class standardOauthParameters];
     [allParameters setValue:oauth_verifier forKey:@"oauth_verifier"];
@@ -431,7 +433,7 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
     
     NSString *request_url = API_URL;
     if (path) request_url = [request_url stringByAppendingString:path];
-    NSString *oauth_consumer_secret = CONSUMER_SECRET;
+    NSString *oauth_consumer_secret = kOAuthConsumerSecret;
     NSString *baseString = [HTTPmethod stringByAppendingFormat:@"&%@&%@", request_url.utf8AndURLEncode, parametersString.utf8AndURLEncode];
     NSString *secretString = [oauth_consumer_secret.utf8AndURLEncode stringByAppendingFormat:@"&%@", oauth_token_secret.utf8AndURLEncode];
     NSString *oauth_signature = [self.class signClearText:baseString withSecret:secretString];
