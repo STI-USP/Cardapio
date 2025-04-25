@@ -170,10 +170,9 @@ typedef void (^DAJSONCompletion)(NSDictionary *json, NSError *error);
                                                             NSURLResponse *resp,
                                                             NSError *error) {
     
-    [trace stop];
-    
     if (error) {
       [trace setValue:@"error" forAttribute:@"status"];
+      [trace stop];
       completion(nil, error);
       return;
     }
@@ -187,6 +186,7 @@ typedef void (^DAJSONCompletion)(NSDictionary *json, NSError *error);
     if (http.statusCode != 200 || !data.length) {
       
       [trace setValue:@"failure" forAttribute:@"status"];
+      [trace stop];
 
       NSError *e = [NSError errorWithDomain:NSURLErrorDomain code:http.statusCode userInfo:@{NSLocalizedDescriptionKey: [NSString stringWithFormat:@"HTTP %ld", (long)http.statusCode]}];
       completion(nil, e);
@@ -195,6 +195,7 @@ typedef void (^DAJSONCompletion)(NSDictionary *json, NSError *error);
     }
     
     [trace setValue:@"success" forAttribute:@"status"];
+    [trace stop];
 
     NSError *jsonError;
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&jsonError];
