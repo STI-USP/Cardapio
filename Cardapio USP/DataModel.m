@@ -256,15 +256,15 @@
   return self.restaurantList;
 }
 
-- (NSMutableArray *)iniciar_JSONBinding:(NSString *)_url {
-  NSURL *url1 = [NSURL URLWithString:_url];
-  NSMutableURLRequest *req1 = [NSMutableURLRequest requestWithURL:url1];
-  NSError *error;
-  NSURLResponse *resp = nil;
-  NSData *data = [NSURLConnection sendSynchronousRequest:req1 returningResponse:&resp error:&error];
-  NSMutableArray* json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers  error:&error];
-  return json;
-}
+//- (NSMutableArray *)iniciar_JSONBinding:(NSString *)_url {
+//  NSURL *url1 = [NSURL URLWithString:_url];
+//  NSMutableURLRequest *req1 = [NSMutableURLRequest requestWithURL:url1];
+//  NSError *error;
+//  NSURLResponse *resp = nil;
+//  NSData *data = [NSURLConnection sendSynchronousRequest:req1 returningResponse:&resp error:&error];
+//  NSMutableArray* json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers  error:&error];
+//  return json;
+//}
 
 //- (Cash *)cash {
 //  NSMutableArray *items = [[NSMutableArray alloc] init];
