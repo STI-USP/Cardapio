@@ -8,13 +8,13 @@
 
 #import "BoletoFormViewController.h"
 #import "DataModel.h"
-#import "BoletoDataModel.h"
+#import "CheckoutDataModel.h"
 #import "SVProgressHUD.h"
 
 
 @interface BoletoFormViewController () {
   DataModel *dataModel;
-  BoletoDataModel *boletoDataModel;
+  CheckoutDataModel *boletoDataModel;
 }
 
 @end
@@ -25,7 +25,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
   dataModel = [DataModel getInstance];
-  boletoDataModel = [BoletoDataModel sharedInstance];
+  boletoDataModel = [CheckoutDataModel sharedInstance];
   
   [_username setText:@""];
 

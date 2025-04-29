@@ -9,6 +9,11 @@ PODS:
   - Firebase/Crashlytics (10.24.0):
     - Firebase/CoreOnly
     - FirebaseCrashlytics (~> 10.24.0)
+  - Firebase/Performance (10.24.0):
+    - Firebase/CoreOnly
+    - FirebasePerformance (~> 10.24.0)
+  - FirebaseABTesting (10.29.0):
+    - FirebaseCore (~> 10.0)
   - FirebaseAnalytics (10.24.0):
     - FirebaseAnalytics/AdIdSupport (= 10.24.0)
     - FirebaseCore (~> 10.0)
@@ -49,6 +54,24 @@ PODS:
     - GoogleUtilities/Environment (~> 7.8)
     - GoogleUtilities/UserDefaults (~> 7.8)
     - PromisesObjC (~> 2.1)
+  - FirebasePerformance (10.24.0):
+    - FirebaseCore (~> 10.5)
+    - FirebaseInstallations (~> 10.0)
+    - FirebaseRemoteConfig (~> 10.0)
+    - FirebaseSessions (~> 10.5)
+    - GoogleDataTransport (~> 9.2)
+    - GoogleUtilities/Environment (~> 7.8)
+    - GoogleUtilities/ISASwizzler (~> 7.8)
+    - GoogleUtilities/MethodSwizzler (~> 7.8)
+    - nanopb (< 2.30911.0, >= 2.30908.0)
+  - FirebaseRemoteConfig (10.29.0):
+    - FirebaseABTesting (~> 10.0)
+    - FirebaseCore (~> 10.0)
+    - FirebaseInstallations (~> 10.0)
+    - FirebaseRemoteConfigInterop (~> 10.23)
+    - FirebaseSharedSwift (~> 10.0)
+    - GoogleUtilities/Environment (~> 7.8)
+    - "GoogleUtilities/NSData+zlib (~> 7.8)"
   - FirebaseRemoteConfigInterop (10.24.0)
   - FirebaseSessions (10.24.0):
     - FirebaseCore (~> 10.5)
@@ -58,6 +81,7 @@ PODS:
     - GoogleUtilities/Environment (~> 7.10)
     - nanopb (< 2.30911.0, >= 2.30908.0)
     - PromisesSwift (~> 2.1)
+  - FirebaseSharedSwift (10.29.0)
   - GoogleAppMeasurement (10.24.0):
     - GoogleAppMeasurement/AdIdSupport (= 10.24.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
@@ -90,6 +114,8 @@ PODS:
   - GoogleUtilities/Environment (7.13.0):
     - GoogleUtilities/Privacy
     - PromisesObjC (< 3.0, >= 1.2)
+  - GoogleUtilities/ISASwizzler (7.13.0):
+    - GoogleUtilities/Privacy
   - GoogleUtilities/Logger (7.13.0):
     - GoogleUtilities/Environment
     - GoogleUtilities/Privacy
@@ -127,20 +153,25 @@ DEPENDENCIES:
   - Firebase/Analytics
   - Firebase/Core
   - Firebase/Crashlytics
+  - Firebase/Performance
   - SVProgressHUD
   - SWRevealViewController (~> 2.3)
 
 SPEC REPOS:
   trunk:
     - Firebase
+    - FirebaseABTesting
     - FirebaseAnalytics
     - FirebaseCore
     - FirebaseCoreExtension
     - FirebaseCoreInternal
     - FirebaseCrashlytics
     - FirebaseInstallations
+    - FirebasePerformance
+    - FirebaseRemoteConfig
     - FirebaseRemoteConfigInterop
     - FirebaseSessions
+    - FirebaseSharedSwift
     - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleUtilities
@@ -152,14 +183,18 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Firebase: 91fefd38712feb9186ea8996af6cbdef41473442
+  FirebaseABTesting: d87f56707159bae64e269757a6e963d490f2eebe
   FirebaseAnalytics: b5efc493eb0f40ec560b04a472e3e1a15d39ca13
   FirebaseCore: 11dc8a16dfb7c5e3c3f45ba0e191a33ac4f50894
   FirebaseCoreExtension: af5fd85e817ea9d19f9a2659a376cf9cf99f03c0
   FirebaseCoreInternal: bcb5acffd4ea05e12a783ecf835f2210ce3dc6af
   FirebaseCrashlytics: af38ea4adfa606f6e63fcc22091b61e7938fcf66
   FirebaseInstallations: 8f581fca6478a50705d2bd2abd66d306e0f5736e
+  FirebasePerformance: 78fed7cf7907f67af3c1e9667d2d1881765f11e2
+  FirebaseRemoteConfig: 48ef3f243742a8d72422ccfc9f986e19d7de53fd
   FirebaseRemoteConfigInterop: 6c349a466490aeace3ce9c091c86be1730711634
   FirebaseSessions: 2651b464e241c93fd44112f995d5ab663c970487
+  FirebaseSharedSwift: 20530f495084b8d840f78a100d8c5ee613375f6e
   GoogleAppMeasurement: f3abf08495ef2cba7829f15318c373b8d9226491
   GoogleDataTransport: 6c09b596d841063d76d4288cc2d2f42cc36e1e2a
   GoogleUtilities: d053d902a8edaa9904e1bd00c37535385b8ed152
@@ -169,6 +204,6 @@ SPEC CHECKSUMS:
   SVProgressHUD: 4837c74bdfe2e51e8821c397825996a8d7de6e22
   SWRevealViewController: 6d3fd97f70112fd7cef9de14df4260eacce4c63a
 
-PODFILE CHECKSUM: 82b4bc9b9ac3990dae27a2c6762a495d2c9315ca
+PODFILE CHECKSUM: 9bcf4ef54b44372f2d64ca35d7a812defd123522
 
-COCOAPODS: 1.15.2
+COCOAPODS: 1.16.2

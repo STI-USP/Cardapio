@@ -7,12 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "BoletoDataModel.h"
+#import "CheckoutDataModel.h"
 #import "DataModel.h"
 
 @interface DataAccess : NSObject
 
-@property (nonatomic, weak) BoletoDataModel *boletoDataModel;
+@property (nonatomic, weak) CheckoutDataModel *boletoDataModel;
 @property (nonatomic, weak) DataModel *dataModel;
 
 
@@ -21,6 +21,7 @@
 - (void)createPix;
 - (void)checkPix:(NSString *)pixId;
 
+- (void)getLastPix;
 - (void)getBoletos;
 
 @end

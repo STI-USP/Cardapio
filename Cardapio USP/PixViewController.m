@@ -7,13 +7,13 @@
 //
 
 #import "PixViewController.h"
-#import "BoletoDataModel.h"
+#import "CheckoutDataModel.h"
 #import "DataModel.h"
 #import "SVProgressHUD.h"
 
 
 @interface PixViewController () {
-  BoletoDataModel *boletoDataModel;
+  CheckoutDataModel *boletoDataModel;
   DataModel *dataModel;
 }
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *shareButton;
@@ -28,7 +28,7 @@
   [super viewDidLoad];
   // Do any additional setup after loading the view.
   
-  boletoDataModel = [BoletoDataModel sharedInstance];
+  boletoDataModel = [CheckoutDataModel sharedInstance];
   dataModel = [DataModel getInstance];
   
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(becomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];

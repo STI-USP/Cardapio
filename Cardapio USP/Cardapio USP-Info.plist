@@ -113,5 +113,9 @@
 	<string>${OAUTH_SERVICE_URL}</string>
 	<key>USER_URL_STRING</key>
 	<string>${USER_URL_STRING}</string>
+	<key>OAUTH_CONSUMER_SECRET</key>
+	<string>$(OAUTH_CONSUMER_SECRET)</string>
+	<key>OAUTH_URL</key>
+	<string>$(OAUTH_URL)</string>
 </dict>
 </plist>

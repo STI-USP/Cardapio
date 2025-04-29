@@ -8,14 +8,14 @@
 
 #import "BoletoViewController.h"
 #import "SVProgressHUD.h"
-#import "BoletoDataModel.h"
+#import "CheckoutDataModel.h"
 #import "DataModel.h"
 #import "CreditsNavigationViewController.h"
 #import "BoletosPendentesTableViewController.h"
 
 
 @interface BoletoViewController () {
-  BoletoDataModel *boletoDataModel;
+  CheckoutDataModel *boletoDataModel;
   DataModel *dataModel;
 }
 
@@ -26,7 +26,7 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   // Do any additional setup after loading the view.
-  boletoDataModel = [BoletoDataModel sharedInstance];
+  boletoDataModel = [CheckoutDataModel sharedInstance];
   dataModel = [DataModel getInstance];
   
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didDeleteBill:) name:@"DidDeleteBill" object:nil];
