@@ -10,6 +10,7 @@ target 'Cardapio USP' do
   pod 'Firebase/Core'
   pod 'Firebase/Crashlytics'
   pod 'Firebase/Analytics'
+  pod 'Firebase/Performance'
   pod 'SVProgressHUD'
   pod 'SWRevealViewController', '~> 2.3'
   

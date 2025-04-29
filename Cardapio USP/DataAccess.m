@@ -10,6 +10,8 @@
 #import "OAuthUSP.h"
 #import "Constants.h"
 
+@import FirebasePerformance;
+
 static NSString * const kHash  = @"rcuectairldq2017";
 static NSString * const kPathConsultarSaldo  = @"consultarSaldo";
 static NSString * const kPathPixGerar        = @"pixgerar";
@@ -147,6 +149,9 @@ typedef void (^DAJSONCompletion)(NSDictionary *json, NSError *error);
 #pragma mark - Helpers de Rede
 - (void)POST:(NSString *)path parameters:(NSDictionary *)parameters contentType:(DAContentType)type completion:(DAJSONCompletion)completion {
   
+  FIRTrace *trace = [FIRPerformance startTraceWithName:@"post_request_trace"];
+  [trace setValue:path forAttribute:@"path"];
+  
   NSURL *url = [NSURL URLWithString:[kBaseSTIURL stringByAppendingString:path]];
   NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:url];
   req.HTTPMethod = @"POST";
@@ -164,7 +169,13 @@ typedef void (^DAJSONCompletion)(NSDictionary *json, NSError *error);
   [self.session dataTaskWithRequest:req completionHandler:^(NSData *data,
                                                             NSURLResponse *resp,
                                                             NSError *error) {
-    if (error) { completion(nil, error); return; }
+    
+    if (error) {
+      [trace setValue:@"error" forAttribute:@"status"];
+      [trace stop];
+      completion(nil, error);
+      return;
+    }
     
     NSHTTPURLResponse *http = (NSHTTPURLResponse *)resp;
     NSLog(@"🛰️  %@ %@ — status: %ld", req.HTTPMethod, url.absoluteString, (long)http.statusCode);
@@ -173,14 +184,19 @@ typedef void (^DAJSONCompletion)(NSDictionary *json, NSError *error);
     NSLog(@"⬅️  Corpo: %@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
     
     if (http.statusCode != 200 || !data.length) {
-      NSError *e = [NSError errorWithDomain:NSURLErrorDomain
-                                       code:http.statusCode
-                                   userInfo:@{NSLocalizedDescriptionKey:
-                                                [NSString stringWithFormat:@"HTTP %ld", (long)http.statusCode]}];
+      
+      [trace setValue:@"failure" forAttribute:@"status"];
+      [trace stop];
+
+      NSError *e = [NSError errorWithDomain:NSURLErrorDomain code:http.statusCode userInfo:@{NSLocalizedDescriptionKey: [NSString stringWithFormat:@"HTTP %ld", (long)http.statusCode]}];
       completion(nil, e);
+
       return;
     }
     
+    [trace setValue:@"success" forAttribute:@"status"];
+    [trace stop];
+
     NSError *jsonError;
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&jsonError];
     completion(json, jsonError);
