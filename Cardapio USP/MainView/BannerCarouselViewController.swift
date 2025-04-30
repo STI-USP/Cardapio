@@ -14,10 +14,7 @@ struct Banner {
   let textColor: UIColor
 }
 
-final class BannerCarouselViewController: UIViewController,
-                                          UICollectionViewDelegate,
-                                          UICollectionViewDataSource,
-                                          UICollectionViewDelegateFlowLayout {
+final class BannerCarouselViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
   
   // MARK: – Constants
   private let sideInset: CGFloat = 20 // tamanho do “peek”

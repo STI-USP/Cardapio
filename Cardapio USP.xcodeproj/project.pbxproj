@@ -113,6 +113,10 @@
 		E9F9739B2DC26E64007BC228 /* UIFont+USP.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F973982DC26E64007BC228 /* UIFont+USP.swift */; };
 		E9F9739C2DC26E64007BC228 /* USPCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F973992DC26E64007BC228 /* USPCardView.swift */; };
 		E9F9739D2DC26E64007BC228 /* UIColor+USP.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F973972DC26E64007BC228 /* UIColor+USP.swift */; };
+		E9F973AE2DC29D1A007BC228 /* CardapioViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F973AD2DC29D1A007BC228 /* CardapioViewModel.swift */; };
+		E9F973B02DC29D3E007BC228 /* SaldoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F973AF2DC29D3E007BC228 /* SaldoViewModel.swift */; };
+		E9F973B32DC29D94007BC228 /* ServiceWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F973B22DC29D94007BC228 /* ServiceWrapper.swift */; };
+		E9F973B52DC29DD6007BC228 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F973B42DC29DD6007BC228 /* Model.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -311,6 +315,10 @@
 		E9F973972DC26E64007BC228 /* UIColor+USP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+USP.swift"; sourceTree = "<group>"; };
 		E9F973982DC26E64007BC228 /* UIFont+USP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+USP.swift"; sourceTree = "<group>"; };
 		E9F973992DC26E64007BC228 /* USPCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = USPCardView.swift; sourceTree = "<group>"; };
+		E9F973AD2DC29D1A007BC228 /* CardapioViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardapioViewModel.swift; sourceTree = "<group>"; };
+		E9F973AF2DC29D3E007BC228 /* SaldoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaldoViewModel.swift; sourceTree = "<group>"; };
+		E9F973B22DC29D94007BC228 /* ServiceWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceWrapper.swift; sourceTree = "<group>"; };
+		E9F973B42DC29DD6007BC228 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -414,6 +422,8 @@
 				BFAC6E8C192A54E100921494 /* AppDelegate.m */,
 				BFAC6E8E192A54E100921494 /* Main_iPhone.storyboard */,
 				BFAC6E97192A54E100921494 /* Images.xcassets */,
+				E9F973B12DC29D4A007BC228 /* Service */,
+				E9F973AC2DC29D03007BC228 /* ViewModel */,
 				E9F9739A2DC26E64007BC228 /* Extensions */,
 				E9F0976F1E007D8500C6A464 /* Model */,
 				E990FE7126275210005FF207 /* View */,
@@ -687,10 +697,7 @@
 		E9F0976F1E007D8500C6A464 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				E9E9B12D1B0E7CC6005BE8A1 /* DataAccess.h */,
-				E9E9B12E1B0E7CC6005BE8A1 /* DataAccess.m */,
-				E9E9B1301B0E7D1C005BE8A1 /* DataModel.h */,
-				E9E9B1311B0E7D1C005BE8A1 /* DataModel.m */,
+				E9F973B42DC29DD6007BC228 /* Model.swift */,
 				E90555B21E030EEA00B8516E /* CheckoutDataModel.h */,
 				E90555B31E030EEA00B8516E /* CheckoutDataModel.m */,
 				E9BF538C2C947F48004ED570 /* MyMutableURLRequest.h */,
@@ -724,6 +731,27 @@
 				E9F973992DC26E64007BC228 /* USPCardView.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		E9F973AC2DC29D03007BC228 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				E9F973AD2DC29D1A007BC228 /* CardapioViewModel.swift */,
+				E9F973AF2DC29D3E007BC228 /* SaldoViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		E9F973B12DC29D4A007BC228 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				E9E9B12D1B0E7CC6005BE8A1 /* DataAccess.h */,
+				E9E9B12E1B0E7CC6005BE8A1 /* DataAccess.m */,
+				E9E9B1301B0E7D1C005BE8A1 /* DataModel.h */,
+				E9E9B1311B0E7D1C005BE8A1 /* DataModel.m */,
+				E9F973B22DC29D94007BC228 /* ServiceWrapper.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -964,6 +992,8 @@
 				E90555BA1E099B6900B8516E /* BoletosPendentesTableViewController.m in Sources */,
 				BFAC6E96192A54E100921494 /* MenuViewController.m in Sources */,
 				E9E55FBB1B55933F00994BCB /* DetailCell.m in Sources */,
+				E9F973B02DC29D3E007BC228 /* SaldoViewModel.swift in Sources */,
+				E9F973AE2DC29D1A007BC228 /* CardapioViewModel.swift in Sources */,
 				E9F9738F2DC26E48007BC228 /* VerticalButtonListSection.swift in Sources */,
 				E9F973902DC26E48007BC228 /* CardapioSectionView.swift in Sources */,
 				E9F973912DC26E48007BC228 /* SaldoSectionView.swift in Sources */,
@@ -1019,10 +1049,12 @@
 				E9F9739D2DC26E64007BC228 /* UIColor+USP.swift in Sources */,
 				E9F973962DC26E54007BC228 /* AddCreditsViewController.swift in Sources */,
 				AD66F7D91933C4A8005A31BE /* MenuStub.m in Sources */,
+				E9F973B52DC29DD6007BC228 /* Model.swift in Sources */,
 				E9D76F9E2910175B00DCF59A /* MyTextField.m in Sources */,
 				E9DF35D11B3DD306009B92B6 /* MDPinAnnotationView.m in Sources */,
 				ADB2DCB619374FE20068417F /* WeeklyPeriod.m in Sources */,
 				E9DF35D01B3DD306009B92B6 /* PlaceAnnotation.m in Sources */,
+				E9F973B32DC29D94007BC228 /* ServiceWrapper.swift in Sources */,
 				E9387BF91DF727C0005BC821 /* BoletoViewController.m in Sources */,
 				AD66F7CD1933B2E8005A31BE /* Menu.m in Sources */,
 				E9F097691E007CD200C6A464 /* BoletoFormViewController.m in Sources */,

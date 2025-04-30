@@ -7,8 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MenuDataModel.h"
-#import "RestaurantDataModel.h"
 #import "Restaurant.h"
 #import "Menu.h"
 #import "Cash.h"

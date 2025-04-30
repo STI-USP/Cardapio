@@ -6,12 +6,15 @@
 //
 
 import UIKit
+import Combine
 
 class SaldoSectionView: UIView {
   private let saldoTitleLabel = UILabel()
   private let saldoValueLabel = UILabel()
   private let addCreditButton = UIButton(type: .system)
-  
+
+  private var cancellables = Set<AnyCancellable>()
+
   var onAddCreditTapped: (() -> Void)?
   
   
@@ -22,6 +25,10 @@ class SaldoSectionView: UIView {
   
   required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
   
+  func bind(to vm: SaldoViewModel) {
+      vm.$balanceText.assign(to: \.text, on: saldoValueLabel).store(in: &cancellables)
+  }
+
   private func setup() {
     backgroundColor = UIColor.uspPrimary.withAlphaComponent(0.1)
     layer.cornerRadius = 12

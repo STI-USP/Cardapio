@@ -6,12 +6,15 @@
 //
 
 import UIKit
+import Combine
 
 class CardapioSectionView: UIView {
   private let restauranteLabel = UILabel()
   private let dataLabel = UILabel()
   private let refeicaoLabel = UILabel()
   private let pratosStack = UIStackView()
+
+  private var cancellables = Set<AnyCancellable>()
   
   init() {
     super.init(frame: .zero)
@@ -19,6 +22,21 @@ class CardapioSectionView: UIView {
   }
   
   required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+  
+  func bind(to vm: CardapioViewModel) {
+         vm.$restaurantName.assign(to: \.text, on: restauranteLabel).store(in: &cancellables)
+         vm.$formattedDate.assign(to: \.text, on: dataLabel).store(in: &cancellables)
+         vm.$mealPeriod.assign(to: \.text, on: refeicaoLabel).store(in: &cancellables)
+
+         vm.$items.sink { [weak self] itens in
+             guard let self else { return }
+             pratosStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
+             itens.forEach {
+                 let l = UILabel(); l.font = .uspRegular(ofSize: 15); l.text = $0
+                 pratosStack.addArrangedSubview(l)
+             }
+         }.store(in: &cancellables)
+     }
   
   private func setup() {
     layer.cornerRadius = 12
