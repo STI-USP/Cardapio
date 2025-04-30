@@ -10,6 +10,8 @@
 #import "DataModel.h"
 #import "Constants.h"
 
+#import "Cardapio_USP-Swift.h"
+
 @import Firebase;
 
 @interface AppDelegate()
@@ -22,20 +24,26 @@ DataModel *dataModel;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
-  //[Fabric with:@[[Crashlytics class]]];
-  [FIRApp configure];
-  [Constants class];
-  
-  dataModel = [DataModel getInstance];
-  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  [dataModel setPreferredRestaurant:[defaults objectForKey:@"preferredRestaurant"]];
-  [dataModel getRestaurantList];  
-  [self.window setTintColor: [UIColor colorNamed:@"usp_green"]];
+    [FIRApp configure];
+    [Constants class];
+    
+    dataModel = [DataModel getInstance];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [dataModel setPreferredRestaurant:[defaults objectForKey:@"preferredRestaurant"]];
+    [dataModel getRestaurantList];
 
-  return YES;
+    [self.window setTintColor:[UIColor colorNamed:@"usp_green"]];
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    
+    MainViewController *mainViewController = [[MainViewController alloc] init];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:mainViewController];
+    
+    self.window.rootViewController = navController;
+    [self.window makeKeyAndVisible];
+
+    return YES;
 }
-							
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
   // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

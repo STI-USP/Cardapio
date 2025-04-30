@@ -1072,7 +1072,7 @@
         <!--CARDÁPIO +-->
         <scene sceneID="DoM-at-i68">
             <objects>
-                <viewController id="5nO-Wp-Wxb" customClass="MainViewController" sceneMemberID="viewController">
+                <viewController id="5nO-Wp-Wxb" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="zba-f9-ij2"/>
                         <viewControllerLayoutGuide type="bottom" id="yTL-Cw-hFr"/>

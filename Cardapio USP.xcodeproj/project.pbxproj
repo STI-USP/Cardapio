@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -103,6 +103,16 @@
 		E9E9B12F1B0E7CC6005BE8A1 /* DataAccess.m in Sources */ = {isa = PBXBuildFile; fileRef = E9E9B12E1B0E7CC6005BE8A1 /* DataAccess.m */; };
 		E9E9B1321B0E7D1C005BE8A1 /* DataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E9E9B1311B0E7D1C005BE8A1 /* DataModel.m */; };
 		E9F097691E007CD200C6A464 /* BoletoFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F097681E007CD200C6A464 /* BoletoFormViewController.m */; };
+		E9F973892DC26BFA007BC228 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F973882DC26BFA007BC228 /* MainViewController.swift */; };
+		E9F9738F2DC26E48007BC228 /* VerticalButtonListSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F9738E2DC26E48007BC228 /* VerticalButtonListSection.swift */; };
+		E9F973902DC26E48007BC228 /* CardapioSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F9738C2DC26E48007BC228 /* CardapioSectionView.swift */; };
+		E9F973912DC26E48007BC228 /* SaldoSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F9738D2DC26E48007BC228 /* SaldoSectionView.swift */; };
+		E9F973922DC26E48007BC228 /* BannerCarouselViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F9738B2DC26E48007BC228 /* BannerCarouselViewController.swift */; };
+		E9F973952DC26E54007BC228 /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F973942DC26E54007BC228 /* WebViewViewController.swift */; };
+		E9F973962DC26E54007BC228 /* AddCreditsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F973932DC26E54007BC228 /* AddCreditsViewController.swift */; };
+		E9F9739B2DC26E64007BC228 /* UIFont+USP.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F973982DC26E64007BC228 /* UIFont+USP.swift */; };
+		E9F9739C2DC26E64007BC228 /* USPCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F973992DC26E64007BC228 /* USPCardView.swift */; };
+		E9F9739D2DC26E64007BC228 /* UIColor+USP.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F973972DC26E64007BC228 /* UIColor+USP.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -290,6 +300,17 @@
 		E9E9B1311B0E7D1C005BE8A1 /* DataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataModel.m; sourceTree = "<group>"; };
 		E9F097671E007CD200C6A464 /* BoletoFormViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoletoFormViewController.h; sourceTree = "<group>"; };
 		E9F097681E007CD200C6A464 /* BoletoFormViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoletoFormViewController.m; sourceTree = "<group>"; };
+		E9F973872DC26BFA007BC228 /* Cardapio-USP-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Cardapio-USP-Bridging-Header.h"; sourceTree = "<group>"; };
+		E9F973882DC26BFA007BC228 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		E9F9738B2DC26E48007BC228 /* BannerCarouselViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerCarouselViewController.swift; sourceTree = "<group>"; };
+		E9F9738C2DC26E48007BC228 /* CardapioSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardapioSectionView.swift; sourceTree = "<group>"; };
+		E9F9738D2DC26E48007BC228 /* SaldoSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaldoSectionView.swift; sourceTree = "<group>"; };
+		E9F9738E2DC26E48007BC228 /* VerticalButtonListSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalButtonListSection.swift; sourceTree = "<group>"; };
+		E9F973932DC26E54007BC228 /* AddCreditsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCreditsViewController.swift; sourceTree = "<group>"; };
+		E9F973942DC26E54007BC228 /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
+		E9F973972DC26E64007BC228 /* UIColor+USP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+USP.swift"; sourceTree = "<group>"; };
+		E9F973982DC26E64007BC228 /* UIFont+USP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+USP.swift"; sourceTree = "<group>"; };
+		E9F973992DC26E64007BC228 /* USPCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = USPCardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -388,11 +409,12 @@
 				BFAAC4741C217E37004F2700 /* LaunchImage.png */,
 				E9E8C5A71B18C5710042DC81 /* fav.png */,
 				AD66F7C71933B239005A31BE /* model */,
+				E9F973872DC26BFA007BC228 /* Cardapio-USP-Bridging-Header.h */,
 				BFAC6E8B192A54E100921494 /* AppDelegate.h */,
 				BFAC6E8C192A54E100921494 /* AppDelegate.m */,
 				BFAC6E8E192A54E100921494 /* Main_iPhone.storyboard */,
 				BFAC6E97192A54E100921494 /* Images.xcassets */,
-				E960B4012DEF8CE700312AEA /* Network */,
+				E9F9739A2DC26E64007BC228 /* Extensions */,
 				E9F0976F1E007D8500C6A464 /* Model */,
 				E990FE7126275210005FF207 /* View */,
 				E9F0976D1E007D4E00C6A464 /* ViewHelper */,
@@ -526,16 +548,10 @@
 			path = Crypto;
 			sourceTree = "<group>";
 		};
-		E960B4012DEF8CE700312AEA /* Network */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Network;
-			sourceTree = "<group>";
-		};
 		E990FE7126275210005FF207 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E9F9738A2DC26E1B007BC228 /* MainView */,
 				E990FE6C262751F0005FF207 /* MainViewController.h */,
 				E990FE6D262751F0005FF207 /* MainViewController.m */,
 				E9490C72262F54B5000A035B /* WebViewController.h */,
@@ -647,6 +663,7 @@
 		E9F0976E1E007D7700C6A464 /* RUCard */ = {
 			isa = PBXGroup;
 			children = (
+				E9F973932DC26E54007BC228 /* AddCreditsViewController.swift */,
 				E9387BF11DF5F476005BC821 /* CreditsViewController.h */,
 				E9387BF21DF5F476005BC821 /* CreditsViewController.m */,
 				E9D76F972909CF4600DCF59A /* PixViewController.h */,
@@ -684,6 +701,29 @@
 				E96EBA3A2DB18D8500265407 /* VMPix.m */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		E9F9738A2DC26E1B007BC228 /* MainView */ = {
+			isa = PBXGroup;
+			children = (
+				E9F973882DC26BFA007BC228 /* MainViewController.swift */,
+				E9F9738B2DC26E48007BC228 /* BannerCarouselViewController.swift */,
+				E9F9738C2DC26E48007BC228 /* CardapioSectionView.swift */,
+				E9F9738D2DC26E48007BC228 /* SaldoSectionView.swift */,
+				E9F9738E2DC26E48007BC228 /* VerticalButtonListSection.swift */,
+				E9F973942DC26E54007BC228 /* WebViewViewController.swift */,
+			);
+			path = MainView;
+			sourceTree = "<group>";
+		};
+		E9F9739A2DC26E64007BC228 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E9F973972DC26E64007BC228 /* UIColor+USP.swift */,
+				E9F973982DC26E64007BC228 /* UIFont+USP.swift */,
+				E9F973992DC26E64007BC228 /* USPCardView.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -739,6 +779,7 @@
 				TargetAttributes = {
 					BFAC6E78192A54E100921494 = {
 						DevelopmentTeam = SYF585KJR7;
+						LastSwiftMigration = 1630;
 						ProvisioningStyle = Automatic;
 					};
 					BFAC6E9C192A54E100921494 = {
@@ -748,7 +789,7 @@
 				};
 			};
 			buildConfigurationList = BFAC6E74192A54E100921494 /* Build configuration list for PBXProject "Cardapio USP" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 15.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -923,6 +964,10 @@
 				E90555BA1E099B6900B8516E /* BoletosPendentesTableViewController.m in Sources */,
 				BFAC6E96192A54E100921494 /* MenuViewController.m in Sources */,
 				E9E55FBB1B55933F00994BCB /* DetailCell.m in Sources */,
+				E9F9738F2DC26E48007BC228 /* VerticalButtonListSection.swift in Sources */,
+				E9F973902DC26E48007BC228 /* CardapioSectionView.swift in Sources */,
+				E9F973912DC26E48007BC228 /* SaldoSectionView.swift in Sources */,
+				E9F973922DC26E48007BC228 /* BannerCarouselViewController.swift in Sources */,
 				E96EBA3B2DB18D8500265407 /* VMPix.m in Sources */,
 				E9CDD1EE1AD86BFF00BB2E36 /* AFURLSessionManager.m in Sources */,
 				E92D5EAA1C19B32B00ECA5D1 /* OAuth1Controller.m in Sources */,
@@ -933,6 +978,7 @@
 				BFAC6ECD192A586B00921494 /* UIImage+REFrostedViewController.m in Sources */,
 				E92D5EA91C19B32B00ECA5D1 /* NSString+URLEncoding.m in Sources */,
 				BFAC6EE6192A71A000921494 /* InfoViewController.m in Sources */,
+				E9F973892DC26BFA007BC228 /* MainViewController.swift in Sources */,
 				E9490C74262F54B5000A035B /* WebViewController.m in Sources */,
 				BFAC6E8D192A54E100921494 /* AppDelegate.m in Sources */,
 				E9387BED1DF5F024005BC821 /* LoginWebViewController.m in Sources */,
@@ -967,6 +1013,11 @@
 				ADB2DCB319374FCE0068417F /* Restaurant.m in Sources */,
 				E92D5EA41C19B32B00ECA5D1 /* Base64Transcoder.c in Sources */,
 				E9E4BCD81B7BFBFC005633AD /* CarrierDataModel.m in Sources */,
+				E9F973952DC26E54007BC228 /* WebViewViewController.swift in Sources */,
+				E9F9739B2DC26E64007BC228 /* UIFont+USP.swift in Sources */,
+				E9F9739C2DC26E64007BC228 /* USPCardView.swift in Sources */,
+				E9F9739D2DC26E64007BC228 /* UIColor+USP.swift in Sources */,
+				E9F973962DC26E54007BC228 /* AddCreditsViewController.swift in Sources */,
 				AD66F7D91933C4A8005A31BE /* MenuStub.m in Sources */,
 				E9D76F9E2910175B00DCF59A /* MyTextField.m in Sources */,
 				E9DF35D11B3DD306009B92B6 /* MDPinAnnotationView.m in Sources */,
@@ -1067,7 +1118,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "c1d53b8b-73b8-4a58-8e1e-3b1c1535aa5e";
@@ -1119,7 +1170,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "ce355316-16b1-4de8-b0da-d380e9e3ef30";
@@ -1137,9 +1188,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				BASE_URL = "https://dev.uspdigital.usp.br/mobile/servicos/cardapio/";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 90;
+				CURRENT_PROJECT_VERSION = 88;
 				DEVELOPMENT_TEAM = SYF585KJR7;
 				EXCLUDED_ARCHS = x86_64;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
@@ -1147,9 +1199,9 @@
 				GCC_PREFIX_HEADER = "Cardapio USP/Cardapio USP-Prefix.pch";
 				INFOPLIST_FILE = "Cardapio USP/Cardapio USP-Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 3.2.2;
+				MARKETING_VERSION = 3.2.0;
 				OAUTH_CONSUMER_SECRET = foZyLmFVYO73aqUUkuIA6iloqbcVBm6V85lOaEYf;
 				OAUTH_SERVICE_URL = "https://dev.uspdigital.usp.br/mobile/servicos/oauth";
 				OAUTH_URL = "https://dev.uspdigital.usp.br/";
@@ -1163,6 +1215,9 @@
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				RUCARD_URL = "https://dev.uspdigital.usp.br/rucard/servicos/";
+				SWIFT_OBJC_BRIDGING_HEADER = "Cardapio USP/Cardapio-USP-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_URL_STRING = "https://dev.uspdigital.usp.br/wsusuario/oauth/usuariousp";
 				VALID_ARCHS = "$(ARCHS_STANDARD)";
@@ -1177,9 +1232,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				BASE_URL = "https://uspdigital.usp.br/mobile/servicos/cardapio/";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 90;
+				CURRENT_PROJECT_VERSION = 88;
 				DEVELOPMENT_TEAM = SYF585KJR7;
 				EXCLUDED_ARCHS = "";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
@@ -1187,9 +1243,9 @@
 				GCC_PREFIX_HEADER = "Cardapio USP/Cardapio USP-Prefix.pch";
 				INFOPLIST_FILE = "Cardapio USP/Cardapio USP-Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 3.2.2;
+				MARKETING_VERSION = 3.2.0;
 				OAUTH_CONSUMER_SECRET = EYagzAlOL3O0EFHMRtWAwSgIju5RtkAghDuqOXop;
 				OAUTH_SERVICE_URL = "https://uspdigital.usp.br/mobile/servicos/oauth";
 				OAUTH_URL = "https://uspdigital.usp.br/";
@@ -1203,6 +1259,8 @@
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				RUCARD_URL = "https://uspdigital.usp.br/rucard/servicos/";
+				SWIFT_OBJC_BRIDGING_HEADER = "Cardapio USP/Cardapio-USP-Bridging-Header.h";
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_URL_STRING = "https://uspdigital.usp.br/wsusuario/oauth/usuariousp";
 				VALID_ARCHS = "$(ARCHS_STANDARD)";
