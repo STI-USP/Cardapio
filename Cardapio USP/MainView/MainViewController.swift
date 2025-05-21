@@ -14,9 +14,10 @@ class MainViewController: UIViewController {
   
   // MARK: – ViewModels
   private let cardapioVM = CardapioViewModel(
-    restaurantName: "Restaurante Central",
+    restaurantName: "Central - Campus Butantã",
     restaurantId: "central"
   )
+
   private let saldoVM   = SaldoViewModel()
   
   

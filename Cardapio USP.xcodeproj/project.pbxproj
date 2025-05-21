@@ -117,6 +117,7 @@
 		E9F973B02DC29D3E007BC228 /* SaldoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F973AF2DC29D3E007BC228 /* SaldoViewModel.swift */; };
 		E9F973B32DC29D94007BC228 /* ServiceWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F973B22DC29D94007BC228 /* ServiceWrapper.swift */; };
 		E9F973B52DC29DD6007BC228 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F973B42DC29DD6007BC228 /* Model.swift */; };
+		E9F973B72DC2BA27007BC228 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F973B62DC2BA27007BC228 /* Restaurant.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -319,6 +320,7 @@
 		E9F973AF2DC29D3E007BC228 /* SaldoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaldoViewModel.swift; sourceTree = "<group>"; };
 		E9F973B22DC29D94007BC228 /* ServiceWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceWrapper.swift; sourceTree = "<group>"; };
 		E9F973B42DC29DD6007BC228 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		E9F973B62DC2BA27007BC228 /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -698,12 +700,9 @@
 			isa = PBXGroup;
 			children = (
 				E9F973B42DC29DD6007BC228 /* Model.swift */,
+				E9F973B62DC2BA27007BC228 /* Restaurant.swift */,
 				E90555B21E030EEA00B8516E /* CheckoutDataModel.h */,
 				E90555B31E030EEA00B8516E /* CheckoutDataModel.m */,
-				E9BF538C2C947F48004ED570 /* MyMutableURLRequest.h */,
-				E9BF538D2C947F49004ED570 /* MyMutableURLRequest.m */,
-				E9BF538F2C94C4F4004ED570 /* Constants.h */,
-				E9BF53902C94C4F4004ED570 /* Constants.m */,
 				E96EBA392DB18D8500265407 /* VMPix.h */,
 				E96EBA3A2DB18D8500265407 /* VMPix.m */,
 			);
@@ -745,11 +744,15 @@
 		E9F973B12DC29D4A007BC228 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				E9F973B22DC29D94007BC228 /* ServiceWrapper.swift */,
 				E9E9B12D1B0E7CC6005BE8A1 /* DataAccess.h */,
 				E9E9B12E1B0E7CC6005BE8A1 /* DataAccess.m */,
 				E9E9B1301B0E7D1C005BE8A1 /* DataModel.h */,
 				E9E9B1311B0E7D1C005BE8A1 /* DataModel.m */,
-				E9F973B22DC29D94007BC228 /* ServiceWrapper.swift */,
+				E9BF538C2C947F48004ED570 /* MyMutableURLRequest.h */,
+				E9BF538D2C947F49004ED570 /* MyMutableURLRequest.m */,
+				E9BF538F2C94C4F4004ED570 /* Constants.h */,
+				E9BF53902C94C4F4004ED570 /* Constants.m */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -1057,6 +1060,7 @@
 				E9F973B32DC29D94007BC228 /* ServiceWrapper.swift in Sources */,
 				E9387BF91DF727C0005BC821 /* BoletoViewController.m in Sources */,
 				AD66F7CD1933B2E8005A31BE /* Menu.m in Sources */,
+				E9F973B72DC2BA27007BC228 /* Restaurant.swift in Sources */,
 				E9F097691E007CD200C6A464 /* BoletoFormViewController.m in Sources */,
 				ADB2DCBC19375F0E0068417F /* Items.m in Sources */,
 				BFAC6ECC192A586B00921494 /* REFrostedViewController.m in Sources */,

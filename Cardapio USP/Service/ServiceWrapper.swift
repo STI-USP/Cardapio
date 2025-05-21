@@ -20,14 +20,32 @@ struct MenuServiceImpl: MenuService {
   }
 }
 
-// CreditService.swift
+// CreditService
 protocol CreditService {
   func fetchBalance(completion: @escaping (Result<Decimal, Error>) -> Void)
 }
 
 struct CreditServiceImpl: CreditService {
+  private let auth: AuthService
+  init(auth: AuthService = OAuthAuthService()) { self.auth = auth }
+  
   func fetchBalance(completion: @escaping (Result<Decimal, Error>) -> Void) {
-    // TODO: chamada ao seu backend
+    guard auth.isLoggedIn, let token = auth.token else {
+      completion(.failure(NSError(domain: "notLogged", code: 0)))
+      return
+    }
+    // chamada HTTP POST kPathConsultarSaldo com token …
     completion(.success(20.00))
   }
+}
+
+// AuthService
+protocol AuthService {
+  var isLoggedIn: Bool { get }
+  var token: String? { get }
+}
+
+struct OAuthAuthService: AuthService {
+  var isLoggedIn: Bool { OAuthUSP.sharedInstance().isLoggedIn() }
+  var token: String?  { OAuthUSP.sharedInstance().userData["wsuserid"] as? String }
 }
