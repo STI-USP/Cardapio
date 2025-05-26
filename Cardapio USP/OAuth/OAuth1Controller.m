@@ -24,9 +24,9 @@ typedef void (^WebWiewDelegateHandler)(NSDictionary *oauthParams);
 //#define AUTH_URL             @"https://dev.uspdigital.usp.br" //dev
 //#define CONSUMER_SECRET      @"EYagzAlOL3O0EFHMRtWAwSgIju5RtkAghDuqOXop" //prod
 //#define AUTH_URL             @"https://uspdigital.usp.br" //prod
-#define REQUEST_TOKEN_URL    @"/wsusuario/oauth/request_token"
-#define AUTHENTICATE_URL     @"/wsusuario/oauth/authorize"
-#define ACCESS_TOKEN_URL     @"/wsusuario/oauth/access_token"
+#define REQUEST_TOKEN_URL    @"wsusuario/oauth/request_token"
+#define AUTHENTICATE_URL     @"wsusuario/oauth/authorize"
+#define ACCESS_TOKEN_URL     @"wsusuario/oauth/access_token"
 #define API_URL              @""
 #define OAUTH_SCOPE_PARAM    @""
 
