@@ -200,10 +200,10 @@
 		E90555AF1E01D42F00B8516E /* STIOauth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STIOauth.m; sourceTree = "<group>"; };
 		E90555B21E030EEA00B8516E /* CheckoutDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckoutDataModel.h; sourceTree = "<group>"; };
 		E90555B31E030EEA00B8516E /* CheckoutDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckoutDataModel.m; sourceTree = "<group>"; };
-		E90555B51E086AAF00B8516E /* CreditsNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditsNavigationViewController.h; sourceTree = "<group>"; };
-		E90555B61E086AAF00B8516E /* CreditsNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreditsNavigationViewController.m; sourceTree = "<group>"; };
-		E90555B81E099B6900B8516E /* BoletosPendentesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoletosPendentesTableViewController.h; sourceTree = "<group>"; };
-		E90555B91E099B6900B8516E /* BoletosPendentesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoletosPendentesTableViewController.m; sourceTree = "<group>"; };
+		E90555B51E086AAF00B8516E /* CreditsNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CreditsNavigationViewController.h; path = ../CreditsNavigationViewController.h; sourceTree = "<group>"; };
+		E90555B61E086AAF00B8516E /* CreditsNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CreditsNavigationViewController.m; path = ../CreditsNavigationViewController.m; sourceTree = "<group>"; };
+		E90555B81E099B6900B8516E /* BoletosPendentesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BoletosPendentesTableViewController.h; path = ../BoletosPendentesTableViewController.h; sourceTree = "<group>"; };
+		E90555B91E099B6900B8516E /* BoletosPendentesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BoletosPendentesTableViewController.m; path = ../BoletosPendentesTableViewController.m; sourceTree = "<group>"; };
 		E92D5E941C19B32B00ECA5D1 /* Base64Transcoder.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Base64Transcoder.c; sourceTree = "<group>"; };
 		E92D5E951C19B32B00ECA5D1 /* Base64Transcoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64Transcoder.h; sourceTree = "<group>"; };
 		E92D5E961C19B32B00ECA5D1 /* hmac.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hmac.c; sourceTree = "<group>"; };
@@ -218,10 +218,10 @@
 		E92D5EA11C19B32B00ECA5D1 /* OAuth1Controller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAuth1Controller.m; sourceTree = "<group>"; };
 		E9387BEB1DF5F024005BC821 /* LoginWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginWebViewController.h; sourceTree = "<group>"; };
 		E9387BEC1DF5F024005BC821 /* LoginWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginWebViewController.m; sourceTree = "<group>"; };
-		E9387BF11DF5F476005BC821 /* CreditsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CreditsViewController.h; path = ../CreditsViewController.h; sourceTree = "<group>"; };
-		E9387BF21DF5F476005BC821 /* CreditsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CreditsViewController.m; path = ../CreditsViewController.m; sourceTree = "<group>"; };
-		E9387BF71DF727C0005BC821 /* BoletoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoletoViewController.h; sourceTree = "<group>"; };
-		E9387BF81DF727C0005BC821 /* BoletoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoletoViewController.m; sourceTree = "<group>"; };
+		E9387BF11DF5F476005BC821 /* CreditsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CreditsViewController.h; path = ../../CreditsViewController.h; sourceTree = "<group>"; };
+		E9387BF21DF5F476005BC821 /* CreditsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CreditsViewController.m; path = ../../CreditsViewController.m; sourceTree = "<group>"; };
+		E9387BF71DF727C0005BC821 /* BoletoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BoletoViewController.h; path = ../BoletoViewController.h; sourceTree = "<group>"; };
+		E9387BF81DF727C0005BC821 /* BoletoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BoletoViewController.m; path = ../BoletoViewController.m; sourceTree = "<group>"; };
 		E9490C72262F54B5000A035B /* WebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
 		E9490C73262F54B5000A035B /* WebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		E9490C77262F5C0F000A035B /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
@@ -234,10 +234,10 @@
 		E990FE6D262751F0005FF207 /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		E990FE7426279E41005FF207 /* CALayer+XibConfiguration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CALayer+XibConfiguration.h"; sourceTree = "<group>"; };
 		E990FE7526279E41005FF207 /* CALayer+XibConfiguration.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "CALayer+XibConfiguration.m"; sourceTree = "<group>"; };
-		E99837FB1E201B540065ED08 /* BoletoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoletoTableViewCell.h; sourceTree = "<group>"; };
-		E99837FC1E201B540065ED08 /* BoletoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoletoTableViewCell.m; sourceTree = "<group>"; };
-		E99837FE1E201B710065ED08 /* SwipeableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwipeableCell.h; sourceTree = "<group>"; };
-		E99837FF1E201B710065ED08 /* SwipeableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwipeableCell.m; sourceTree = "<group>"; };
+		E99837FB1E201B540065ED08 /* BoletoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BoletoTableViewCell.h; path = ../BoletoTableViewCell.h; sourceTree = "<group>"; };
+		E99837FC1E201B540065ED08 /* BoletoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BoletoTableViewCell.m; path = ../BoletoTableViewCell.m; sourceTree = "<group>"; };
+		E99837FE1E201B710065ED08 /* SwipeableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SwipeableCell.h; path = ../SwipeableCell.h; sourceTree = "<group>"; };
+		E99837FF1E201B710065ED08 /* SwipeableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SwipeableCell.m; path = ../SwipeableCell.m; sourceTree = "<group>"; };
 		E998B8422551D9800028B3C5 /* libFirebaseCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9B61B54260BA3E700A52672 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
 		E9BF538C2C947F48004ED570 /* MyMutableURLRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMutableURLRequest.h; sourceTree = "<group>"; };
@@ -268,8 +268,8 @@
 		E9CDD1E31AD86BFF00BB2E36 /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
 		E9CDD1E41AD86BFF00BB2E36 /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
 		E9CDD1E51AD86BFF00BB2E36 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
-		E9D76F972909CF4600DCF59A /* PixViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PixViewController.h; sourceTree = "<group>"; };
-		E9D76F982909CF4600DCF59A /* PixViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PixViewController.m; sourceTree = "<group>"; };
+		E9D76F972909CF4600DCF59A /* PixViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PixViewController.h; path = ../PixViewController.h; sourceTree = "<group>"; };
+		E9D76F982909CF4600DCF59A /* PixViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = PixViewController.m; path = ../PixViewController.m; sourceTree = "<group>"; };
 		E9D76F9C2910175B00DCF59A /* MyTextField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyTextField.h; sourceTree = "<group>"; };
 		E9D76F9D2910175B00DCF59A /* MyTextField.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyTextField.m; sourceTree = "<group>"; };
 		E9DEA0221B4DC1FC00422524 /* restaurants.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = restaurants.json; sourceTree = "<group>"; };
@@ -303,15 +303,15 @@
 		E9E9B12E1B0E7CC6005BE8A1 /* DataAccess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataAccess.m; sourceTree = "<group>"; };
 		E9E9B1301B0E7D1C005BE8A1 /* DataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataModel.h; sourceTree = "<group>"; };
 		E9E9B1311B0E7D1C005BE8A1 /* DataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataModel.m; sourceTree = "<group>"; };
-		E9F097671E007CD200C6A464 /* BoletoFormViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoletoFormViewController.h; sourceTree = "<group>"; };
-		E9F097681E007CD200C6A464 /* BoletoFormViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoletoFormViewController.m; sourceTree = "<group>"; };
+		E9F097671E007CD200C6A464 /* BoletoFormViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BoletoFormViewController.h; path = ../BoletoFormViewController.h; sourceTree = "<group>"; };
+		E9F097681E007CD200C6A464 /* BoletoFormViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BoletoFormViewController.m; path = ../BoletoFormViewController.m; sourceTree = "<group>"; };
 		E9F973872DC26BFA007BC228 /* Cardapio-USP-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Cardapio-USP-Bridging-Header.h"; sourceTree = "<group>"; };
 		E9F973882DC26BFA007BC228 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		E9F9738B2DC26E48007BC228 /* BannerCarouselViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerCarouselViewController.swift; sourceTree = "<group>"; };
 		E9F9738C2DC26E48007BC228 /* CardapioSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardapioSectionView.swift; sourceTree = "<group>"; };
 		E9F9738D2DC26E48007BC228 /* SaldoSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaldoSectionView.swift; sourceTree = "<group>"; };
 		E9F9738E2DC26E48007BC228 /* VerticalButtonListSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalButtonListSection.swift; sourceTree = "<group>"; };
-		E9F973932DC26E54007BC228 /* AddCreditsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCreditsViewController.swift; sourceTree = "<group>"; };
+		E9F973932DC26E54007BC228 /* AddCreditsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddCreditsViewController.swift; path = ../AddCreditsViewController.swift; sourceTree = "<group>"; };
 		E9F973942DC26E54007BC228 /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
 		E9F973972DC26E64007BC228 /* UIColor+USP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+USP.swift"; sourceTree = "<group>"; };
 		E9F973982DC26E64007BC228 /* UIFont+USP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+USP.swift"; sourceTree = "<group>"; };
@@ -353,7 +353,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		AD66F7C71933B239005A31BE /* model */ = {
+		AD66F7C71933B239005A31BE /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				ADB2DCB419374FE20068417F /* WeeklyPeriod.h */,
@@ -371,7 +371,7 @@
 				ADB2DCBA19375F0E0068417F /* Items.h */,
 				ADB2DCBB19375F0E0068417F /* Items.m */,
 			);
-			name = model;
+			name = Model;
 			sourceTree = "<group>";
 		};
 		BFAC6E70192A54E100921494 = {
@@ -416,34 +416,24 @@
 		BFAC6E82192A54E100921494 /* Cardapio USP */ = {
 			isa = PBXGroup;
 			children = (
+				E9F973872DC26BFA007BC228 /* Cardapio-USP-Bridging-Header.h */,
 				BFAAC4741C217E37004F2700 /* LaunchImage.png */,
 				E9E8C5A71B18C5710042DC81 /* fav.png */,
-				AD66F7C71933B239005A31BE /* model */,
-				E9F973872DC26BFA007BC228 /* Cardapio-USP-Bridging-Header.h */,
-				BFAC6E8B192A54E100921494 /* AppDelegate.h */,
-				BFAC6E8C192A54E100921494 /* AppDelegate.m */,
 				BFAC6E8E192A54E100921494 /* Main_iPhone.storyboard */,
 				BFAC6E97192A54E100921494 /* Images.xcassets */,
-				E9F973B12DC29D4A007BC228 /* Service */,
-				E9F973AC2DC29D03007BC228 /* ViewModel */,
-				E9F9739A2DC26E64007BC228 /* Extensions */,
-				E9F0976F1E007D8500C6A464 /* Model */,
+				E9E9839D2DE8A50C0042311D /* App */,
+				E9E9839E2DE8A5510042311D /* Core */,
+				E9E983A32DE8A6240042311D /* DesignSystem */,
+				E9E983A42DE8A6870042311D /* Features */,
+				E92D5E921C19B32B00ECA5D1 /* OAuth */,
+				AD66F7C71933B239005A31BE /* Model */,
 				E990FE7126275210005FF207 /* View */,
 				E9F0976D1E007D4E00C6A464 /* ViewHelper */,
 				BFAC6ED0192A587900921494 /* Categories */,
-				BFAC6ED5192A587900921494 /* SVProgressHUD */,
+				E9E4BCDA1B7BFC05005633AD /* Telephony */,
+				BFAC6E83192A54E100921494 /* Supporting Files */,
 				BFAC6EBD192A586B00921494 /* REFrostedViewController */,
 				E9CDD1D21AD86BE000BB2E36 /* AFNetworking */,
-				BFAC6E83192A54E100921494 /* Supporting Files */,
-				E9E4BCDA1B7BFC05005633AD /* Telephony */,
-				E92D5E921C19B32B00ECA5D1 /* OAuth */,
-				BFAC6EB4192A566200921494 /* central.json */,
-				BFBE4D8C1A126003002EDADE /* central.plist */,
-				BFBE1E75192FB038004C403C /* restaurantes.json */,
-				BFAC6EEA192AB50F00921494 /* central.jpg */,
-				BFBE4D8E1A126797002EDADE /* restaurants_old.plist */,
-				BFBE4D901A1276EF002EDADE /* restaurants_old.json */,
-				E9DEA0221B4DC1FC00422524 /* restaurants.json */,
 			);
 			path = "Cardapio USP";
 			sourceTree = "<group>";
@@ -457,6 +447,13 @@
 				E97B390B225556FE0070AC9B /* GoogleService-Info.plist */,
 				BFAC6E88192A54E100921494 /* main.m */,
 				BFAC6E8A192A54E100921494 /* Cardapio USP-Prefix.pch */,
+				BFAC6EB4192A566200921494 /* central.json */,
+				BFBE4D8C1A126003002EDADE /* central.plist */,
+				BFBE1E75192FB038004C403C /* restaurantes.json */,
+				BFAC6EEA192AB50F00921494 /* central.jpg */,
+				BFBE4D8E1A126797002EDADE /* restaurants_old.plist */,
+				BFBE4D901A1276EF002EDADE /* restaurants_old.json */,
+				E9DEA0221B4DC1FC00422524 /* restaurants.json */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -509,13 +506,6 @@
 			path = Categories;
 			sourceTree = "<group>";
 		};
-		BFAC6ED5192A587900921494 /* SVProgressHUD */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = SVProgressHUD;
-			sourceTree = "<group>";
-		};
 		E0162C335702D1DC2F80DBCE /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -563,15 +553,10 @@
 		E990FE7126275210005FF207 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				E9F9738A2DC26E1B007BC228 /* MainView */,
 				E990FE6C262751F0005FF207 /* MainViewController.h */,
 				E990FE6D262751F0005FF207 /* MainViewController.m */,
 				E9490C72262F54B5000A035B /* WebViewController.h */,
 				E9490C73262F54B5000A035B /* WebViewController.m */,
-				E9F0976A1E007CE300C6A464 /* Cardapio */,
-				E9F0976E1E007D7700C6A464 /* RUCard */,
-				E9F0976B1E007D0C00C6A464 /* Restaurantes */,
-				E9F0976C1E007D4400C6A464 /* Mapas */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -614,9 +599,100 @@
 			name = Telephony;
 			sourceTree = "<group>";
 		};
+		E9E9839D2DE8A50C0042311D /* App */ = {
+			isa = PBXGroup;
+			children = (
+				BFAC6E8B192A54E100921494 /* AppDelegate.h */,
+				BFAC6E8C192A54E100921494 /* AppDelegate.m */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		E9E9839E2DE8A5510042311D /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				E9F0976F1E007D8500C6A464 /* Models */,
+				E9E9839F2DE8A5A30042311D /* Network */,
+				E9F973B12DC29D4A007BC228 /* Service */,
+				E9E983A22DE8A6100042311D /* UseCases */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		E9E9839F2DE8A5A30042311D /* Network */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		E9E983A02DE8A5CA0042311D /* Implementation */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Implementation;
+			sourceTree = "<group>";
+		};
+		E9E983A12DE8A5D50042311D /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		E9E983A22DE8A6100042311D /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
+		E9E983A32DE8A6240042311D /* DesignSystem */ = {
+			isa = PBXGroup;
+			children = (
+				E9F973972DC26E64007BC228 /* UIColor+USP.swift */,
+				E9F973982DC26E64007BC228 /* UIFont+USP.swift */,
+				E9F973992DC26E64007BC228 /* USPCardView.swift */,
+			);
+			path = DesignSystem;
+			sourceTree = "<group>";
+		};
+		E9E983A42DE8A6870042311D /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				E9F973882DC26BFA007BC228 /* MainViewController.swift */,
+				E9F0976A1E007CE300C6A464 /* Cardapio */,
+				E9F0976B1E007D0C00C6A464 /* Restaurantes */,
+				E9F0976E1E007D7700C6A464 /* RUCard */,
+				E9E983A52DE8A6FD0042311D /* Banners */,
+				E9F0976C1E007D4400C6A464 /* Mapas */,
+				E9E983A62DE8A79D0042311D /* Servicos */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		E9E983A52DE8A6FD0042311D /* Banners */ = {
+			isa = PBXGroup;
+			children = (
+				E9F9738B2DC26E48007BC228 /* BannerCarouselViewController.swift */,
+			);
+			path = Banners;
+			sourceTree = "<group>";
+		};
+		E9E983A62DE8A79D0042311D /* Servicos */ = {
+			isa = PBXGroup;
+			children = (
+				E9F9738E2DC26E48007BC228 /* VerticalButtonListSection.swift */,
+				E9F973942DC26E54007BC228 /* WebViewViewController.swift */,
+			);
+			path = Servicos;
+			sourceTree = "<group>";
+		};
 		E9F0976A1E007CE300C6A464 /* Cardapio */ = {
 			isa = PBXGroup;
 			children = (
+				E9F9738C2DC26E48007BC228 /* CardapioSectionView.swift */,
+				E9F973AD2DC29D1A007BC228 /* CardapioViewModel.swift */,
 				BFAC6E94192A54E100921494 /* MenuViewController.h */,
 				BFAC6E95192A54E100921494 /* MenuViewController.m */,
 				E9CDD1B91AD81E5100BB2E36 /* RestaurantsFilterController.h */,
@@ -675,6 +751,8 @@
 		E9F0976E1E007D7700C6A464 /* RUCard */ = {
 			isa = PBXGroup;
 			children = (
+				E9F9738D2DC26E48007BC228 /* SaldoSectionView.swift */,
+				E9F973AF2DC29D3E007BC228 /* SaldoViewModel.swift */,
 				E9F973932DC26E54007BC228 /* AddCreditsViewController.swift */,
 				E9387BF11DF5F476005BC821 /* CreditsViewController.h */,
 				E9387BF21DF5F476005BC821 /* CreditsViewController.m */,
@@ -696,7 +774,7 @@
 			name = RUCard;
 			sourceTree = "<group>";
 		};
-		E9F0976F1E007D8500C6A464 /* Model */ = {
+		E9F0976F1E007D8500C6A464 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				E9F973B42DC29DD6007BC228 /* Model.swift */,
@@ -706,44 +784,14 @@
 				E96EBA392DB18D8500265407 /* VMPix.h */,
 				E96EBA3A2DB18D8500265407 /* VMPix.m */,
 			);
-			name = Model;
-			sourceTree = "<group>";
-		};
-		E9F9738A2DC26E1B007BC228 /* MainView */ = {
-			isa = PBXGroup;
-			children = (
-				E9F973882DC26BFA007BC228 /* MainViewController.swift */,
-				E9F9738B2DC26E48007BC228 /* BannerCarouselViewController.swift */,
-				E9F9738C2DC26E48007BC228 /* CardapioSectionView.swift */,
-				E9F9738D2DC26E48007BC228 /* SaldoSectionView.swift */,
-				E9F9738E2DC26E48007BC228 /* VerticalButtonListSection.swift */,
-				E9F973942DC26E54007BC228 /* WebViewViewController.swift */,
-			);
-			path = MainView;
-			sourceTree = "<group>";
-		};
-		E9F9739A2DC26E64007BC228 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				E9F973972DC26E64007BC228 /* UIColor+USP.swift */,
-				E9F973982DC26E64007BC228 /* UIFont+USP.swift */,
-				E9F973992DC26E64007BC228 /* USPCardView.swift */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
-		E9F973AC2DC29D03007BC228 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				E9F973AD2DC29D1A007BC228 /* CardapioViewModel.swift */,
-				E9F973AF2DC29D3E007BC228 /* SaldoViewModel.swift */,
-			);
-			path = ViewModel;
+			name = Models;
 			sourceTree = "<group>";
 		};
 		E9F973B12DC29D4A007BC228 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				E9E983A12DE8A5D50042311D /* Protocols */,
+				E9E983A02DE8A5CA0042311D /* Implementation */,
 				E9F973B22DC29D94007BC228 /* ServiceWrapper.swift */,
 				E9E9B12D1B0E7CC6005BE8A1 /* DataAccess.h */,
 				E9E9B12E1B0E7CC6005BE8A1 /* DataAccess.m */,
