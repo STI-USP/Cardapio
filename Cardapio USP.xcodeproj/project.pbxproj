@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -23,7 +23,6 @@
 		BFAC6E89192A54E100921494 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAC6E88192A54E100921494 /* main.m */; };
 		BFAC6E8D192A54E100921494 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAC6E8C192A54E100921494 /* AppDelegate.m */; };
 		BFAC6E90192A54E100921494 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFAC6E8E192A54E100921494 /* Main_iPhone.storyboard */; };
-		BFAC6E96192A54E100921494 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAC6E95192A54E100921494 /* MenuViewController.m */; };
 		BFAC6E98192A54E100921494 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFAC6E97192A54E100921494 /* Images.xcassets */; };
 		BFAC6E9F192A54E100921494 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFAC6E9E192A54E100921494 /* XCTest.framework */; };
 		BFAC6EA0192A54E100921494 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFAC6E7C192A54E100921494 /* Foundation.framework */; };
@@ -39,7 +38,6 @@
 		BFAC6ECF192A586B00921494 /* UIViewController+REFrostedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAC6EC9192A586B00921494 /* UIViewController+REFrostedViewController.m */; };
 		BFAC6EDA192A587900921494 /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAC6ED2192A587900921494 /* GTMNSString+HTML.m */; };
 		BFAC6EDB192A587900921494 /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAC6ED4192A587900921494 /* NSString+HTML.m */; };
-		BFAC6EE6192A71A000921494 /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAC6EE5192A71A000921494 /* InfoViewController.m */; };
 		BFAC6EEB192AB50F00921494 /* central.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BFAC6EEA192AB50F00921494 /* central.jpg */; };
 		BFBE1E76192FB038004C403C /* restaurantes.json in Resources */ = {isa = PBXBuildFile; fileRef = BFBE1E75192FB038004C403C /* restaurantes.json */; };
 		BFBE4D8D1A126003002EDADE /* central.plist in Resources */ = {isa = PBXBuildFile; fileRef = BFBE4D8C1A126003002EDADE /* central.plist */; };
@@ -48,8 +46,6 @@
 		E90555B01E01D42F00B8516E /* OAuthUSP.m in Sources */ = {isa = PBXBuildFile; fileRef = E90555AD1E01D42F00B8516E /* OAuthUSP.m */; };
 		E90555B11E01D42F00B8516E /* STIOauth.m in Sources */ = {isa = PBXBuildFile; fileRef = E90555AF1E01D42F00B8516E /* STIOauth.m */; };
 		E90555B41E030EEA00B8516E /* CheckoutDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E90555B31E030EEA00B8516E /* CheckoutDataModel.m */; };
-		E90555B71E086AAF00B8516E /* CreditsNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E90555B61E086AAF00B8516E /* CreditsNavigationViewController.m */; };
-		E90555BA1E099B6900B8516E /* BoletosPendentesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E90555B91E099B6900B8516E /* BoletosPendentesTableViewController.m */; };
 		E92D5EA41C19B32B00ECA5D1 /* Base64Transcoder.c in Sources */ = {isa = PBXBuildFile; fileRef = E92D5E941C19B32B00ECA5D1 /* Base64Transcoder.c */; };
 		E92D5EA51C19B32B00ECA5D1 /* hmac.c in Sources */ = {isa = PBXBuildFile; fileRef = E92D5E961C19B32B00ECA5D1 /* hmac.c */; };
 		E92D5EA61C19B32B00ECA5D1 /* sha1.c in Sources */ = {isa = PBXBuildFile; fileRef = E92D5E981C19B32B00ECA5D1 /* sha1.c */; };
@@ -57,21 +53,15 @@
 		E92D5EA91C19B32B00ECA5D1 /* NSString+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = E92D5E9F1C19B32B00ECA5D1 /* NSString+URLEncoding.m */; };
 		E92D5EAA1C19B32B00ECA5D1 /* OAuth1Controller.m in Sources */ = {isa = PBXBuildFile; fileRef = E92D5EA11C19B32B00ECA5D1 /* OAuth1Controller.m */; };
 		E9387BED1DF5F024005BC821 /* LoginWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9387BEC1DF5F024005BC821 /* LoginWebViewController.m */; };
-		E9387BF31DF5F476005BC821 /* CreditsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9387BF21DF5F476005BC821 /* CreditsViewController.m */; };
-		E9387BF91DF727C0005BC821 /* BoletoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9387BF81DF727C0005BC821 /* BoletoViewController.m */; };
 		E9490C74262F54B5000A035B /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9490C73262F54B5000A035B /* WebViewController.m */; };
 		E9490C78262F5C10000A035B /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9490C77262F5C0F000A035B /* WebKit.framework */; };
 		E96EBA3B2DB18D8500265407 /* VMPix.m in Sources */ = {isa = PBXBuildFile; fileRef = E96EBA3A2DB18D8500265407 /* VMPix.m */; };
 		E97B390C225556FE0070AC9B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E97B390B225556FE0070AC9B /* GoogleService-Info.plist */; };
-		E9818EC3198033A800F741B0 /* DKScrollingTabController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9818EC2198033A800F741B0 /* DKScrollingTabController.m */; };
 		E990FE6E262751F0005FF207 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E990FE6D262751F0005FF207 /* MainViewController.m */; };
 		E990FE7626279E41005FF207 /* CALayer+XibConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = E990FE7526279E41005FF207 /* CALayer+XibConfiguration.m */; };
-		E99837FD1E201B540065ED08 /* BoletoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E99837FC1E201B540065ED08 /* BoletoTableViewCell.m */; };
-		E99838001E201B710065ED08 /* SwipeableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E99837FF1E201B710065ED08 /* SwipeableCell.m */; };
 		E9B61B55260BA3E700A52672 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9B61B54260BA3E700A52672 /* CoreServices.framework */; };
 		E9BF538E2C947F49004ED570 /* MyMutableURLRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E9BF538D2C947F49004ED570 /* MyMutableURLRequest.m */; };
 		E9BF53912C94C4F4004ED570 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = E9BF53902C94C4F4004ED570 /* Constants.m */; };
-		E9CDD1BB1AD81E5100BB2E36 /* RestaurantsFilterController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9CDD1BA1AD81E5100BB2E36 /* RestaurantsFilterController.m */; };
 		E9CDD1CF1AD8682900BB2E36 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9CDD1CE1AD8682900BB2E36 /* SystemConfiguration.framework */; };
 		E9CDD1D11AD86B6800BB2E36 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9CDD1D01AD86B6800BB2E36 /* Security.framework */; };
 		E9CDD1E61AD86BFF00BB2E36 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = E9CDD1D41AD86BFF00BB2E36 /* AFHTTPRequestOperation.m */; };
@@ -83,38 +73,21 @@
 		E9CDD1EC1AD86BFF00BB2E36 /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = E9CDD1E11AD86BFF00BB2E36 /* AFURLRequestSerialization.m */; };
 		E9CDD1ED1AD86BFF00BB2E36 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = E9CDD1E31AD86BFF00BB2E36 /* AFURLResponseSerialization.m */; };
 		E9CDD1EE1AD86BFF00BB2E36 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E9CDD1E51AD86BFF00BB2E36 /* AFURLSessionManager.m */; };
-		E9D76F992909CF4600DCF59A /* PixViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D76F982909CF4600DCF59A /* PixViewController.m */; };
 		E9D76F9E2910175B00DCF59A /* MyTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D76F9D2910175B00DCF59A /* MyTextField.m */; };
 		E9DEA0231B4DC1FC00422524 /* restaurants.json in Resources */ = {isa = PBXBuildFile; fileRef = E9DEA0221B4DC1FC00422524 /* restaurants.json */; };
-		E9DF35CF1B3DD306009B92B6 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9DF35CA1B3DD306009B92B6 /* MapViewController.m */; };
-		E9DF35D01B3DD306009B92B6 /* PlaceAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = E9DF35CC1B3DD306009B92B6 /* PlaceAnnotation.m */; };
-		E9DF35D11B3DD306009B92B6 /* MDPinAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = E9DF35CE1B3DD306009B92B6 /* MDPinAnnotationView.m */; };
-		E9E1843E1B792C1700637771 /* ImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E9E1843D1B792C1700637771 /* ImageCell.m */; };
-		E9E184411B7931D900637771 /* PreferredCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E9E184401B7931D900637771 /* PreferredCell.m */; };
 		E9E1B96F2C6F9B3E00CF51F6 /* PaddedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = E9E1B96E2C6F9B3E00CF51F6 /* PaddedLabel.m */; };
 		E9E4BCD81B7BFBFC005633AD /* CarrierDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E9E4BCD51B7BFBFC005633AD /* CarrierDataModel.m */; };
 		E9E4BCD91B7BFBFC005633AD /* TelephoneUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = E9E4BCD71B7BFBFC005633AD /* TelephoneUtils.m */; };
 		E9E4BCDC1B7BFC33005633AD /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E9E4BCDB1B7BFC33005633AD /* Settings.bundle */; };
 		E9E543661B84C3DC00BC81B8 /* Carriers.plist in Resources */ = {isa = PBXBuildFile; fileRef = E9E543651B84C3DC00BC81B8 /* Carriers.plist */; };
-		E9E55FBB1B55933F00994BCB /* DetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E9E55FBA1B55933F00994BCB /* DetailCell.m */; };
-		E9E55FBE1B55944F00994BCB /* ThumbnailViewImageProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = E9E55FBD1B55944F00994BCB /* ThumbnailViewImageProxy.m */; };
 		E9E55FC11B55970E00994BCB /* RWLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = E9E55FC01B55970E00994BCB /* RWLabel.m */; };
 		E9E8C5A81B18C5710042DC81 /* fav.png in Resources */ = {isa = PBXBuildFile; fileRef = E9E8C5A71B18C5710042DC81 /* fav.png */; };
 		E9E9B12F1B0E7CC6005BE8A1 /* DataAccess.m in Sources */ = {isa = PBXBuildFile; fileRef = E9E9B12E1B0E7CC6005BE8A1 /* DataAccess.m */; };
 		E9E9B1321B0E7D1C005BE8A1 /* DataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E9E9B1311B0E7D1C005BE8A1 /* DataModel.m */; };
-		E9F097691E007CD200C6A464 /* BoletoFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F097681E007CD200C6A464 /* BoletoFormViewController.m */; };
 		E9F973892DC26BFA007BC228 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F973882DC26BFA007BC228 /* MainViewController.swift */; };
-		E9F9738F2DC26E48007BC228 /* VerticalButtonListSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F9738E2DC26E48007BC228 /* VerticalButtonListSection.swift */; };
-		E9F973902DC26E48007BC228 /* CardapioSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F9738C2DC26E48007BC228 /* CardapioSectionView.swift */; };
-		E9F973912DC26E48007BC228 /* SaldoSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F9738D2DC26E48007BC228 /* SaldoSectionView.swift */; };
-		E9F973922DC26E48007BC228 /* BannerCarouselViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F9738B2DC26E48007BC228 /* BannerCarouselViewController.swift */; };
-		E9F973952DC26E54007BC228 /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F973942DC26E54007BC228 /* WebViewViewController.swift */; };
-		E9F973962DC26E54007BC228 /* AddCreditsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F973932DC26E54007BC228 /* AddCreditsViewController.swift */; };
 		E9F9739B2DC26E64007BC228 /* UIFont+USP.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F973982DC26E64007BC228 /* UIFont+USP.swift */; };
 		E9F9739C2DC26E64007BC228 /* USPCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F973992DC26E64007BC228 /* USPCardView.swift */; };
 		E9F9739D2DC26E64007BC228 /* UIColor+USP.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F973972DC26E64007BC228 /* UIColor+USP.swift */; };
-		E9F973AE2DC29D1A007BC228 /* CardapioViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F973AD2DC29D1A007BC228 /* CardapioViewModel.swift */; };
-		E9F973B02DC29D3E007BC228 /* SaldoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F973AF2DC29D3E007BC228 /* SaldoViewModel.swift */; };
 		E9F973B32DC29D94007BC228 /* ServiceWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F973B22DC29D94007BC228 /* ServiceWrapper.swift */; };
 		E9F973B52DC29DD6007BC228 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F973B42DC29DD6007BC228 /* Model.swift */; };
 		E9F973B72DC2BA27007BC228 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F973B62DC2BA27007BC228 /* Restaurant.swift */; };
@@ -161,8 +134,6 @@
 		BFAC6E8B192A54E100921494 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		BFAC6E8C192A54E100921494 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		BFAC6E8F192A54E100921494 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
-		BFAC6E94192A54E100921494 /* MenuViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
-		BFAC6E95192A54E100921494 /* MenuViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
 		BFAC6E97192A54E100921494 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		BFAC6E9D192A54E100921494 /* Cardapio USPTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Cardapio USPTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFAC6E9E192A54E100921494 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -186,8 +157,6 @@
 		BFAC6ED2192A587900921494 /* GTMNSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GTMNSString+HTML.m"; sourceTree = "<group>"; };
 		BFAC6ED3192A587900921494 /* NSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HTML.h"; sourceTree = "<group>"; };
 		BFAC6ED4192A587900921494 /* NSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HTML.m"; sourceTree = "<group>"; };
-		BFAC6EE4192A71A000921494 /* InfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoViewController.h; sourceTree = "<group>"; };
-		BFAC6EE5192A71A000921494 /* InfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoViewController.m; sourceTree = "<group>"; };
 		BFAC6EEA192AB50F00921494 /* central.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = central.jpg; sourceTree = "<group>"; };
 		BFBE1E75192FB038004C403C /* restaurantes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = restaurantes.json; sourceTree = "<group>"; };
 		BFBE4D8C1A126003002EDADE /* central.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = central.plist; sourceTree = "<group>"; };
@@ -200,10 +169,6 @@
 		E90555AF1E01D42F00B8516E /* STIOauth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STIOauth.m; sourceTree = "<group>"; };
 		E90555B21E030EEA00B8516E /* CheckoutDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckoutDataModel.h; sourceTree = "<group>"; };
 		E90555B31E030EEA00B8516E /* CheckoutDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckoutDataModel.m; sourceTree = "<group>"; };
-		E90555B51E086AAF00B8516E /* CreditsNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CreditsNavigationViewController.h; path = ../CreditsNavigationViewController.h; sourceTree = "<group>"; };
-		E90555B61E086AAF00B8516E /* CreditsNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CreditsNavigationViewController.m; path = ../CreditsNavigationViewController.m; sourceTree = "<group>"; };
-		E90555B81E099B6900B8516E /* BoletosPendentesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BoletosPendentesTableViewController.h; path = ../BoletosPendentesTableViewController.h; sourceTree = "<group>"; };
-		E90555B91E099B6900B8516E /* BoletosPendentesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BoletosPendentesTableViewController.m; path = ../BoletosPendentesTableViewController.m; sourceTree = "<group>"; };
 		E92D5E941C19B32B00ECA5D1 /* Base64Transcoder.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Base64Transcoder.c; sourceTree = "<group>"; };
 		E92D5E951C19B32B00ECA5D1 /* Base64Transcoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64Transcoder.h; sourceTree = "<group>"; };
 		E92D5E961C19B32B00ECA5D1 /* hmac.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hmac.c; sourceTree = "<group>"; };
@@ -218,34 +183,22 @@
 		E92D5EA11C19B32B00ECA5D1 /* OAuth1Controller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAuth1Controller.m; sourceTree = "<group>"; };
 		E9387BEB1DF5F024005BC821 /* LoginWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginWebViewController.h; sourceTree = "<group>"; };
 		E9387BEC1DF5F024005BC821 /* LoginWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginWebViewController.m; sourceTree = "<group>"; };
-		E9387BF11DF5F476005BC821 /* CreditsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CreditsViewController.h; path = ../../CreditsViewController.h; sourceTree = "<group>"; };
-		E9387BF21DF5F476005BC821 /* CreditsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CreditsViewController.m; path = ../../CreditsViewController.m; sourceTree = "<group>"; };
-		E9387BF71DF727C0005BC821 /* BoletoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BoletoViewController.h; path = ../BoletoViewController.h; sourceTree = "<group>"; };
-		E9387BF81DF727C0005BC821 /* BoletoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BoletoViewController.m; path = ../BoletoViewController.m; sourceTree = "<group>"; };
 		E9490C72262F54B5000A035B /* WebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
 		E9490C73262F54B5000A035B /* WebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		E9490C77262F5C0F000A035B /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		E96EBA392DB18D8500265407 /* VMPix.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VMPix.h; sourceTree = "<group>"; };
 		E96EBA3A2DB18D8500265407 /* VMPix.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VMPix.m; sourceTree = "<group>"; };
 		E97B390B225556FE0070AC9B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		E9818EC1198033A800F741B0 /* DKScrollingTabController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DKScrollingTabController.h; sourceTree = "<group>"; };
-		E9818EC2198033A800F741B0 /* DKScrollingTabController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DKScrollingTabController.m; sourceTree = "<group>"; };
 		E990FE6C262751F0005FF207 /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		E990FE6D262751F0005FF207 /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		E990FE7426279E41005FF207 /* CALayer+XibConfiguration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CALayer+XibConfiguration.h"; sourceTree = "<group>"; };
 		E990FE7526279E41005FF207 /* CALayer+XibConfiguration.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "CALayer+XibConfiguration.m"; sourceTree = "<group>"; };
-		E99837FB1E201B540065ED08 /* BoletoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BoletoTableViewCell.h; path = ../BoletoTableViewCell.h; sourceTree = "<group>"; };
-		E99837FC1E201B540065ED08 /* BoletoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BoletoTableViewCell.m; path = ../BoletoTableViewCell.m; sourceTree = "<group>"; };
-		E99837FE1E201B710065ED08 /* SwipeableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SwipeableCell.h; path = ../SwipeableCell.h; sourceTree = "<group>"; };
-		E99837FF1E201B710065ED08 /* SwipeableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SwipeableCell.m; path = ../SwipeableCell.m; sourceTree = "<group>"; };
 		E998B8422551D9800028B3C5 /* libFirebaseCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9B61B54260BA3E700A52672 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
 		E9BF538C2C947F48004ED570 /* MyMutableURLRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMutableURLRequest.h; sourceTree = "<group>"; };
 		E9BF538D2C947F49004ED570 /* MyMutableURLRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMutableURLRequest.m; sourceTree = "<group>"; };
 		E9BF538F2C94C4F4004ED570 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		E9BF53902C94C4F4004ED570 /* Constants.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
-		E9CDD1B91AD81E5100BB2E36 /* RestaurantsFilterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestaurantsFilterController.h; sourceTree = "<group>"; };
-		E9CDD1BA1AD81E5100BB2E36 /* RestaurantsFilterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestaurantsFilterController.m; sourceTree = "<group>"; };
 		E9CDD1CC1AD8681800BB2E36 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		E9CDD1CE1AD8682900BB2E36 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		E9CDD1D01AD86B6800BB2E36 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -268,21 +221,9 @@
 		E9CDD1E31AD86BFF00BB2E36 /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
 		E9CDD1E41AD86BFF00BB2E36 /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
 		E9CDD1E51AD86BFF00BB2E36 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
-		E9D76F972909CF4600DCF59A /* PixViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PixViewController.h; path = ../PixViewController.h; sourceTree = "<group>"; };
-		E9D76F982909CF4600DCF59A /* PixViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = PixViewController.m; path = ../PixViewController.m; sourceTree = "<group>"; };
 		E9D76F9C2910175B00DCF59A /* MyTextField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyTextField.h; sourceTree = "<group>"; };
 		E9D76F9D2910175B00DCF59A /* MyTextField.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyTextField.m; sourceTree = "<group>"; };
 		E9DEA0221B4DC1FC00422524 /* restaurants.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = restaurants.json; sourceTree = "<group>"; };
-		E9DF35C91B3DD306009B92B6 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
-		E9DF35CA1B3DD306009B92B6 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
-		E9DF35CB1B3DD306009B92B6 /* PlaceAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceAnnotation.h; sourceTree = "<group>"; };
-		E9DF35CC1B3DD306009B92B6 /* PlaceAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceAnnotation.m; sourceTree = "<group>"; };
-		E9DF35CD1B3DD306009B92B6 /* MDPinAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDPinAnnotationView.h; sourceTree = "<group>"; };
-		E9DF35CE1B3DD306009B92B6 /* MDPinAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDPinAnnotationView.m; sourceTree = "<group>"; };
-		E9E1843C1B792C1700637771 /* ImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCell.h; sourceTree = "<group>"; };
-		E9E1843D1B792C1700637771 /* ImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCell.m; sourceTree = "<group>"; };
-		E9E1843F1B7931D900637771 /* PreferredCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferredCell.h; sourceTree = "<group>"; };
-		E9E184401B7931D900637771 /* PreferredCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferredCell.m; sourceTree = "<group>"; };
 		E9E1B96D2C6F9B3E00CF51F6 /* PaddedLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PaddedLabel.h; sourceTree = "<group>"; };
 		E9E1B96E2C6F9B3E00CF51F6 /* PaddedLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PaddedLabel.m; sourceTree = "<group>"; };
 		E9E4BCD41B7BFBFC005633AD /* CarrierDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarrierDataModel.h; sourceTree = "<group>"; };
@@ -292,10 +233,6 @@
 		E9E4BCDB1B7BFC33005633AD /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		E9E543651B84C3DC00BC81B8 /* Carriers.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Carriers.plist; sourceTree = "<group>"; };
 		E9E55A022BD9519B00AB8797 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		E9E55FB91B55933F00994BCB /* DetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailCell.h; sourceTree = "<group>"; };
-		E9E55FBA1B55933F00994BCB /* DetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailCell.m; sourceTree = "<group>"; };
-		E9E55FBC1B55944F00994BCB /* ThumbnailViewImageProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThumbnailViewImageProxy.h; sourceTree = "<group>"; };
-		E9E55FBD1B55944F00994BCB /* ThumbnailViewImageProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThumbnailViewImageProxy.m; sourceTree = "<group>"; };
 		E9E55FBF1B55970E00994BCB /* RWLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RWLabel.h; sourceTree = "<group>"; };
 		E9E55FC01B55970E00994BCB /* RWLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RWLabel.m; sourceTree = "<group>"; };
 		E9E8C5A71B18C5710042DC81 /* fav.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fav.png; sourceTree = "<group>"; };
@@ -303,25 +240,24 @@
 		E9E9B12E1B0E7CC6005BE8A1 /* DataAccess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataAccess.m; sourceTree = "<group>"; };
 		E9E9B1301B0E7D1C005BE8A1 /* DataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataModel.h; sourceTree = "<group>"; };
 		E9E9B1311B0E7D1C005BE8A1 /* DataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataModel.m; sourceTree = "<group>"; };
-		E9F097671E007CD200C6A464 /* BoletoFormViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BoletoFormViewController.h; path = ../BoletoFormViewController.h; sourceTree = "<group>"; };
-		E9F097681E007CD200C6A464 /* BoletoFormViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BoletoFormViewController.m; path = ../BoletoFormViewController.m; sourceTree = "<group>"; };
 		E9F973872DC26BFA007BC228 /* Cardapio-USP-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Cardapio-USP-Bridging-Header.h"; sourceTree = "<group>"; };
 		E9F973882DC26BFA007BC228 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		E9F9738B2DC26E48007BC228 /* BannerCarouselViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerCarouselViewController.swift; sourceTree = "<group>"; };
-		E9F9738C2DC26E48007BC228 /* CardapioSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardapioSectionView.swift; sourceTree = "<group>"; };
-		E9F9738D2DC26E48007BC228 /* SaldoSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaldoSectionView.swift; sourceTree = "<group>"; };
-		E9F9738E2DC26E48007BC228 /* VerticalButtonListSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalButtonListSection.swift; sourceTree = "<group>"; };
-		E9F973932DC26E54007BC228 /* AddCreditsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddCreditsViewController.swift; path = ../AddCreditsViewController.swift; sourceTree = "<group>"; };
-		E9F973942DC26E54007BC228 /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
 		E9F973972DC26E64007BC228 /* UIColor+USP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+USP.swift"; sourceTree = "<group>"; };
 		E9F973982DC26E64007BC228 /* UIFont+USP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+USP.swift"; sourceTree = "<group>"; };
 		E9F973992DC26E64007BC228 /* USPCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = USPCardView.swift; sourceTree = "<group>"; };
-		E9F973AD2DC29D1A007BC228 /* CardapioViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardapioViewModel.swift; sourceTree = "<group>"; };
-		E9F973AF2DC29D3E007BC228 /* SaldoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaldoViewModel.swift; sourceTree = "<group>"; };
 		E9F973B22DC29D94007BC228 /* ServiceWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceWrapper.swift; sourceTree = "<group>"; };
 		E9F973B42DC29DD6007BC228 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		E9F973B62DC2BA27007BC228 /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		E9E983B32DE8B0D10042311D /* Cardapio */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Cardapio; sourceTree = "<group>"; };
+		E9E983BF2DE8B1330042311D /* Restaurantes */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Restaurantes; sourceTree = "<group>"; };
+		E9E983C42DE8B1C60042311D /* RUCard */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = RUCard; sourceTree = "<group>"; };
+		E9E983CA2DE8B2A10042311D /* Banners */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Banners; sourceTree = "<group>"; };
+		E9E983CF2DE8B3070042311D /* Mapas */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Mapas; sourceTree = "<group>"; };
+		E9E983D62DE8B41A0042311D /* Servicos */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Servicos; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		BFAC6E76192A54E100921494 /* Frameworks */ = {
@@ -661,117 +597,29 @@
 			isa = PBXGroup;
 			children = (
 				E9F973882DC26BFA007BC228 /* MainViewController.swift */,
-				E9F0976A1E007CE300C6A464 /* Cardapio */,
-				E9F0976B1E007D0C00C6A464 /* Restaurantes */,
-				E9F0976E1E007D7700C6A464 /* RUCard */,
-				E9E983A52DE8A6FD0042311D /* Banners */,
-				E9F0976C1E007D4400C6A464 /* Mapas */,
-				E9E983A62DE8A79D0042311D /* Servicos */,
+				E9E983D62DE8B41A0042311D /* Servicos */,
+				E9E983CF2DE8B3070042311D /* Mapas */,
+				E9E983CA2DE8B2A10042311D /* Banners */,
+				E9E983C42DE8B1C60042311D /* RUCard */,
+				E9E983BF2DE8B1330042311D /* Restaurantes */,
+				E9E983B32DE8B0D10042311D /* Cardapio */,
 			);
 			path = Features;
-			sourceTree = "<group>";
-		};
-		E9E983A52DE8A6FD0042311D /* Banners */ = {
-			isa = PBXGroup;
-			children = (
-				E9F9738B2DC26E48007BC228 /* BannerCarouselViewController.swift */,
-			);
-			path = Banners;
-			sourceTree = "<group>";
-		};
-		E9E983A62DE8A79D0042311D /* Servicos */ = {
-			isa = PBXGroup;
-			children = (
-				E9F9738E2DC26E48007BC228 /* VerticalButtonListSection.swift */,
-				E9F973942DC26E54007BC228 /* WebViewViewController.swift */,
-			);
-			path = Servicos;
-			sourceTree = "<group>";
-		};
-		E9F0976A1E007CE300C6A464 /* Cardapio */ = {
-			isa = PBXGroup;
-			children = (
-				E9F9738C2DC26E48007BC228 /* CardapioSectionView.swift */,
-				E9F973AD2DC29D1A007BC228 /* CardapioViewModel.swift */,
-				BFAC6E94192A54E100921494 /* MenuViewController.h */,
-				BFAC6E95192A54E100921494 /* MenuViewController.m */,
-				E9CDD1B91AD81E5100BB2E36 /* RestaurantsFilterController.h */,
-				E9CDD1BA1AD81E5100BB2E36 /* RestaurantsFilterController.m */,
-			);
-			name = Cardapio;
-			sourceTree = "<group>";
-		};
-		E9F0976B1E007D0C00C6A464 /* Restaurantes */ = {
-			isa = PBXGroup;
-			children = (
-				BFAC6EE4192A71A000921494 /* InfoViewController.h */,
-				BFAC6EE5192A71A000921494 /* InfoViewController.m */,
-				E9E55FB91B55933F00994BCB /* DetailCell.h */,
-				E9E55FBA1B55933F00994BCB /* DetailCell.m */,
-				E9E1843C1B792C1700637771 /* ImageCell.h */,
-				E9E1843D1B792C1700637771 /* ImageCell.m */,
-				E9E55FBC1B55944F00994BCB /* ThumbnailViewImageProxy.h */,
-				E9E55FBD1B55944F00994BCB /* ThumbnailViewImageProxy.m */,
-			);
-			name = Restaurantes;
-			sourceTree = "<group>";
-		};
-		E9F0976C1E007D4400C6A464 /* Mapas */ = {
-			isa = PBXGroup;
-			children = (
-				E9DF35C91B3DD306009B92B6 /* MapViewController.h */,
-				E9DF35CA1B3DD306009B92B6 /* MapViewController.m */,
-				E9DF35CB1B3DD306009B92B6 /* PlaceAnnotation.h */,
-				E9DF35CC1B3DD306009B92B6 /* PlaceAnnotation.m */,
-				E9DF35CD1B3DD306009B92B6 /* MDPinAnnotationView.h */,
-				E9DF35CE1B3DD306009B92B6 /* MDPinAnnotationView.m */,
-			);
-			name = Mapas;
 			sourceTree = "<group>";
 		};
 		E9F0976D1E007D4E00C6A464 /* ViewHelper */ = {
 			isa = PBXGroup;
 			children = (
-				E9E1843F1B7931D900637771 /* PreferredCell.h */,
-				E9E184401B7931D900637771 /* PreferredCell.m */,
 				E990FE7426279E41005FF207 /* CALayer+XibConfiguration.h */,
 				E990FE7526279E41005FF207 /* CALayer+XibConfiguration.m */,
 				E9E55FBF1B55970E00994BCB /* RWLabel.h */,
 				E9E55FC01B55970E00994BCB /* RWLabel.m */,
-				E9818EC1198033A800F741B0 /* DKScrollingTabController.h */,
-				E9818EC2198033A800F741B0 /* DKScrollingTabController.m */,
 				E9D76F9C2910175B00DCF59A /* MyTextField.h */,
 				E9D76F9D2910175B00DCF59A /* MyTextField.m */,
 				E9E1B96D2C6F9B3E00CF51F6 /* PaddedLabel.h */,
 				E9E1B96E2C6F9B3E00CF51F6 /* PaddedLabel.m */,
 			);
 			name = ViewHelper;
-			sourceTree = "<group>";
-		};
-		E9F0976E1E007D7700C6A464 /* RUCard */ = {
-			isa = PBXGroup;
-			children = (
-				E9F9738D2DC26E48007BC228 /* SaldoSectionView.swift */,
-				E9F973AF2DC29D3E007BC228 /* SaldoViewModel.swift */,
-				E9F973932DC26E54007BC228 /* AddCreditsViewController.swift */,
-				E9387BF11DF5F476005BC821 /* CreditsViewController.h */,
-				E9387BF21DF5F476005BC821 /* CreditsViewController.m */,
-				E9D76F972909CF4600DCF59A /* PixViewController.h */,
-				E9D76F982909CF4600DCF59A /* PixViewController.m */,
-				E9387BF71DF727C0005BC821 /* BoletoViewController.h */,
-				E9387BF81DF727C0005BC821 /* BoletoViewController.m */,
-				E90555B51E086AAF00B8516E /* CreditsNavigationViewController.h */,
-				E90555B61E086AAF00B8516E /* CreditsNavigationViewController.m */,
-				E90555B81E099B6900B8516E /* BoletosPendentesTableViewController.h */,
-				E90555B91E099B6900B8516E /* BoletosPendentesTableViewController.m */,
-				E9F097671E007CD200C6A464 /* BoletoFormViewController.h */,
-				E9F097681E007CD200C6A464 /* BoletoFormViewController.m */,
-				E99837FB1E201B540065ED08 /* BoletoTableViewCell.h */,
-				E99837FC1E201B540065ED08 /* BoletoTableViewCell.m */,
-				E99837FE1E201B710065ED08 /* SwipeableCell.h */,
-				E99837FF1E201B710065ED08 /* SwipeableCell.m */,
-			);
-			name = RUCard;
 			sourceTree = "<group>";
 		};
 		E9F0976F1E007D8500C6A464 /* Models */ = {
@@ -822,6 +670,14 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				E9E983B32DE8B0D10042311D /* Cardapio */,
+				E9E983BF2DE8B1330042311D /* Restaurantes */,
+				E9E983C42DE8B1C60042311D /* RUCard */,
+				E9E983CA2DE8B2A10042311D /* Banners */,
+				E9E983CF2DE8B3070042311D /* Mapas */,
+				E9E983D62DE8B41A0042311D /* Servicos */,
 			);
 			name = "Cardapio USP";
 			productName = "Cardapio USP";
@@ -1029,7 +885,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E9E55FBE1B55944F00994BCB /* ThumbnailViewImageProxy.m in Sources */,
 				E9CDD1E61AD86BFF00BB2E36 /* AFHTTPRequestOperation.m in Sources */,
 				BFAC6ECF192A586B00921494 /* UIViewController+REFrostedViewController.m in Sources */,
 				BFAC6ECE192A586B00921494 /* UIView+REFrostedViewController.m in Sources */,
@@ -1040,41 +895,25 @@
 				E9CDD1E81AD86BFF00BB2E36 /* AFHTTPSessionManager.m in Sources */,
 				BFAC6EDB192A587900921494 /* NSString+HTML.m in Sources */,
 				E9BF538E2C947F49004ED570 /* MyMutableURLRequest.m in Sources */,
-				E90555BA1E099B6900B8516E /* BoletosPendentesTableViewController.m in Sources */,
-				BFAC6E96192A54E100921494 /* MenuViewController.m in Sources */,
-				E9E55FBB1B55933F00994BCB /* DetailCell.m in Sources */,
-				E9F973B02DC29D3E007BC228 /* SaldoViewModel.swift in Sources */,
-				E9F973AE2DC29D1A007BC228 /* CardapioViewModel.swift in Sources */,
-				E9F9738F2DC26E48007BC228 /* VerticalButtonListSection.swift in Sources */,
-				E9F973902DC26E48007BC228 /* CardapioSectionView.swift in Sources */,
-				E9F973912DC26E48007BC228 /* SaldoSectionView.swift in Sources */,
-				E9F973922DC26E48007BC228 /* BannerCarouselViewController.swift in Sources */,
 				E96EBA3B2DB18D8500265407 /* VMPix.m in Sources */,
 				E9CDD1EE1AD86BFF00BB2E36 /* AFURLSessionManager.m in Sources */,
 				E92D5EAA1C19B32B00ECA5D1 /* OAuth1Controller.m in Sources */,
 				E90555B41E030EEA00B8516E /* CheckoutDataModel.m in Sources */,
 				E9CDD1EA1AD86BFF00BB2E36 /* AFSecurityPolicy.m in Sources */,
 				E9CDD1ED1AD86BFF00BB2E36 /* AFURLResponseSerialization.m in Sources */,
-				E99838001E201B710065ED08 /* SwipeableCell.m in Sources */,
 				BFAC6ECD192A586B00921494 /* UIImage+REFrostedViewController.m in Sources */,
 				E92D5EA91C19B32B00ECA5D1 /* NSString+URLEncoding.m in Sources */,
-				BFAC6EE6192A71A000921494 /* InfoViewController.m in Sources */,
 				E9F973892DC26BFA007BC228 /* MainViewController.swift in Sources */,
 				E9490C74262F54B5000A035B /* WebViewController.m in Sources */,
 				BFAC6E8D192A54E100921494 /* AppDelegate.m in Sources */,
 				E9387BED1DF5F024005BC821 /* LoginWebViewController.m in Sources */,
 				E990FE6E262751F0005FF207 /* MainViewController.m in Sources */,
-				E9D76F992909CF4600DCF59A /* PixViewController.m in Sources */,
-				E9387BF31DF5F476005BC821 /* CreditsViewController.m in Sources */,
-				E9CDD1BB1AD81E5100BB2E36 /* RestaurantsFilterController.m in Sources */,
 				E92D5EA51C19B32B00ECA5D1 /* hmac.c in Sources */,
 				E9CDD1EB1AD86BFF00BB2E36 /* AFURLConnectionOperation.m in Sources */,
 				E9E1B96F2C6F9B3E00CF51F6 /* PaddedLabel.m in Sources */,
 				E90555B11E01D42F00B8516E /* STIOauth.m in Sources */,
-				E9818EC3198033A800F741B0 /* DKScrollingTabController.m in Sources */,
 				E9E55FC11B55970E00994BCB /* RWLabel.m in Sources */,
 				E9CDD1EC1AD86BFF00BB2E36 /* AFURLRequestSerialization.m in Sources */,
-				E99837FD1E201B540065ED08 /* BoletoTableViewCell.m in Sources */,
 				BFAC6E89192A54E100921494 /* main.m in Sources */,
 				E9E9B1321B0E7D1C005BE8A1 /* DataModel.m in Sources */,
 				E92D5EA71C19B32B00ECA5D1 /* KeychainItemWrapper.m in Sources */,
@@ -1083,33 +922,23 @@
 				AD66F7D01933B3C4005A31BE /* Period.m in Sources */,
 				E9E9B12F1B0E7CC6005BE8A1 /* DataAccess.m in Sources */,
 				E9E4BCD91B7BFBFC005633AD /* TelephoneUtils.m in Sources */,
-				E9E184411B7931D900637771 /* PreferredCell.m in Sources */,
 				E9CDD1E91AD86BFF00BB2E36 /* AFNetworkReachabilityManager.m in Sources */,
-				E9E1843E1B792C1700637771 /* ImageCell.m in Sources */,
-				E9DF35CF1B3DD306009B92B6 /* MapViewController.m in Sources */,
 				E92D5EA61C19B32B00ECA5D1 /* sha1.c in Sources */,
 				BFAC6ECA192A586B00921494 /* RECommonFunctions.m in Sources */,
 				E9BF53912C94C4F4004ED570 /* Constants.m in Sources */,
-				E90555B71E086AAF00B8516E /* CreditsNavigationViewController.m in Sources */,
 				ADB2DCB319374FCE0068417F /* Restaurant.m in Sources */,
 				E92D5EA41C19B32B00ECA5D1 /* Base64Transcoder.c in Sources */,
 				E9E4BCD81B7BFBFC005633AD /* CarrierDataModel.m in Sources */,
-				E9F973952DC26E54007BC228 /* WebViewViewController.swift in Sources */,
 				E9F9739B2DC26E64007BC228 /* UIFont+USP.swift in Sources */,
 				E9F9739C2DC26E64007BC228 /* USPCardView.swift in Sources */,
 				E9F9739D2DC26E64007BC228 /* UIColor+USP.swift in Sources */,
-				E9F973962DC26E54007BC228 /* AddCreditsViewController.swift in Sources */,
 				AD66F7D91933C4A8005A31BE /* MenuStub.m in Sources */,
 				E9F973B52DC29DD6007BC228 /* Model.swift in Sources */,
 				E9D76F9E2910175B00DCF59A /* MyTextField.m in Sources */,
-				E9DF35D11B3DD306009B92B6 /* MDPinAnnotationView.m in Sources */,
 				ADB2DCB619374FE20068417F /* WeeklyPeriod.m in Sources */,
-				E9DF35D01B3DD306009B92B6 /* PlaceAnnotation.m in Sources */,
 				E9F973B32DC29D94007BC228 /* ServiceWrapper.swift in Sources */,
-				E9387BF91DF727C0005BC821 /* BoletoViewController.m in Sources */,
 				AD66F7CD1933B2E8005A31BE /* Menu.m in Sources */,
 				E9F973B72DC2BA27007BC228 /* Restaurant.swift in Sources */,
-				E9F097691E007CD200C6A464 /* BoletoFormViewController.m in Sources */,
 				ADB2DCBC19375F0E0068417F /* Items.m in Sources */,
 				BFAC6ECC192A586B00921494 /* REFrostedViewController.m in Sources */,
 			);
