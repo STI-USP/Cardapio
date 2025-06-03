@@ -83,3 +83,9 @@ class SaldoSectionView: UIView {
   
   
 }
+
+extension SaldoSectionView {
+    func update(balanceText: String) {
+      saldoValueLabel.text = balanceText
+    }
+}

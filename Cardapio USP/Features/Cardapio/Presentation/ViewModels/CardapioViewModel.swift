@@ -7,43 +7,45 @@
 //
 
 import Combine
+import Foundation
 
+@MainActor
 final class CardapioViewModel: ObservableObject {
-  @Published private(set) var restaurantName: String? = nil
-  @Published private(set) var formattedDate: String? = nil
-  @Published private(set) var mealPeriod: String? = nil
-  @Published private(set) var items: [String] = []
-  @Published private(set) var isLoading = false
-  @Published private(set) var error: String?
-  
-  private let menuService: MenuService
-  private var cancellables = Set<AnyCancellable>()
-  
-  init(menuService: MenuService = MenuServiceImpl(),
-       restaurantName: String,
-       restaurantId: String) {
-    self.menuService = menuService
-    self.restaurantName = restaurantName
-    load(restaurantId: restaurantId)
-  }
-  
-  func load(restaurantId: String) {
-    isLoading = true
-    error = nil
-    
-    menuService.fetchToday(for: restaurantId) { [weak self] result in
-      guard let self else { return }
-      self.isLoading = false
-      switch result {
-      case .success(let menu):
-        let df = DateFormatter()
-        df.dateFormat = "dd/MM/yyyy"
-        formattedDate = df.string(from: menu.date)
-        mealPeriod   = menu.meal.rawValue
-        items        = menu.items
-      case .failure(let err):
-        error = err.localizedDescription
-      }
+    // Exposto à View
+    @Published private(set) var restaurantName: String?
+    @Published private(set) var formattedDate: String?
+    @Published private(set) var mealPeriod: String?
+    @Published private(set) var items: [String] = []
+    @Published private(set) var isLoading = false
+    @Published private(set) var error: String?
+
+    // Dependências
+    private let menuService: MenuService
+    private let dateFormatter: DateFormatter
+
+    init(menuService: MenuService = MenuServiceImpl(),
+         restaurantName: String,
+         restaurantId: String) {
+        self.menuService = menuService
+        self.restaurantName = restaurantName
+
+        dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+
+        Task { await load(restaurantId: restaurantId) }
     }
-  }
+
+    func load(restaurantId: String) async {
+        do {
+            isLoading = true; error = nil
+            let menu = try await menuService.fetchToday(for: restaurantId)
+            formattedDate = dateFormatter.string(from: menu.date)
+            mealPeriod = menu.period.localized
+            items = menu.items
+            isLoading = false
+        } catch {
+            self.error = error.localizedDescription
+            isLoading = false
+        }
+    }
 }

@@ -8,7 +8,9 @@
 
 import Combine
 
+@MainActor
 final class SaldoViewModel: ObservableObject {
+  
   @Published private(set) var balanceText: String? = "R$ --,--"
   @Published private(set) var isLoading = false
   @Published private(set) var error: String?
@@ -22,16 +24,12 @@ final class SaldoViewModel: ObservableObject {
   }
   
   func load() {
-    isLoading = true
-    error = nil
-    creditService.fetchBalance { [weak self] result in
-      guard let self else { return }
-      self.isLoading = false
-      switch result {
-      case .success(let value):
+    Task {
+      do {
+        let value = try await creditService.fetchBalance()
         balanceText = "R$ \(value.formatted(.number.precision(.fractionLength(2))))"
-      case .failure(let err):
-        error = err.localizedDescription
+      } catch {
+        self.error = error.localizedDescription
       }
     }
   }
