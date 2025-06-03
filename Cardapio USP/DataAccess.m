@@ -27,9 +27,14 @@ typedef void (^DAJSONCompletion)(NSDictionary *json, NSError *error);
 /// Forward-declaração para evitar “implicit declaration”
 static void logNetworkError(NSURLRequest * _Nullable request, NSHTTPURLResponse * _Nullable response, NSData * _Nullable data, id _Nullable responseObject, NSError * _Nullable error, NSString * endpointName);
 
-@interface DataAccess () {
+static inline int64_t ms(NSDate *start, NSDate *end) {
+  return (start && end) ? (int64_t)([end timeIntervalSinceDate:start] * 1000.0) : -1;
+}
+
+@interface DataAccess () <NSURLSessionDelegate, NSURLSessionTaskDelegate> {
   OAuthUSP *oauth;
 }
+
 @property (nonatomic, strong) NSURLSession *session;
 @end
 
@@ -273,8 +278,10 @@ static void logNetworkError(NSURLRequest * _Nullable request, NSHTTPURLResponse 
 - (NSURLSession *)session {
   static dispatch_once_t onceToken;
   dispatch_once(&onceToken, ^{
-    NSURLSessionConfiguration *config = NSURLSessionConfiguration.defaultSessionConfiguration;
-    _session = [NSURLSession sessionWithConfiguration:config delegate:nil delegateQueue:NSOperationQueue.mainQueue];
+    NSURLSessionConfiguration *cfg = NSURLSessionConfiguration.defaultSessionConfiguration;
+    _session = [NSURLSession sessionWithConfiguration:cfg
+                                             delegate:self
+                                        delegateQueue:NSOperationQueue.mainQueue];
   });
   return _session;
 }
@@ -348,4 +355,27 @@ static void logNetworkError(NSURLRequest * _Nullable request, NSHTTPURLResponse 
     }
   }
 }
+
+#pragma mark - NSURLSessionTaskDelegate
+
+- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didFinishCollectingMetrics:(NSURLSessionTaskMetrics *)metrics {
+  
+  NSURLSessionTaskTransactionMetrics *m = metrics.transactionMetrics.lastObject;
+  if (!m) return;
+  
+  FIRTrace *trace = [FIRPerformance startTraceWithName:@"net_detail"];
+  
+  // -- métricas personalizadas (máx. 32 por trace)
+  [trace incrementMetric:@"dns_ms" byInt:ms(m.domainLookupStartDate, m.domainLookupEndDate)];
+  [trace incrementMetric:@"tcp_ms" byInt:ms(m.connectStartDate, m.connectEndDate)];
+  [trace incrementMetric:@"tls_ms" byInt:ms(m.secureConnectionStartDate, m.secureConnectionEndDate)];
+  [trace incrementMetric:@"transfer_ms" byInt:ms(m.responseStartDate, m.responseEndDate)];
+  
+  // -- atributos (máx. 5 por trace, ≤ 32 chars cada)
+  [trace setValue:task.originalRequest.HTTPMethod forAttribute:@"method"];
+  [trace setValue:task.originalRequest.URL.path ?: @"/" forAttribute:@"endpoint"];
+  
+  [trace stop];
+}
+
 @end
