@@ -392,6 +392,7 @@
 				BFAC6E8C192A54E100921494 /* AppDelegate.m */,
 				BFAC6E8E192A54E100921494 /* Main_iPhone.storyboard */,
 				BFAC6E97192A54E100921494 /* Images.xcassets */,
+				E960B4012DEF8CE700312AEA /* Network */,
 				E9F0976F1E007D8500C6A464 /* Model */,
 				E990FE7126275210005FF207 /* View */,
 				E9F0976D1E007D4E00C6A464 /* ViewHelper */,
@@ -523,6 +524,13 @@
 				E92D5E991C19B32B00ECA5D1 /* sha1.h */,
 			);
 			path = Crypto;
+			sourceTree = "<group>";
+		};
+		E960B4012DEF8CE700312AEA /* Network */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 		E990FE7126275210005FF207 /* View */ = {

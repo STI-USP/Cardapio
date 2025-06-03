@@ -17,9 +17,6 @@
 
 @import Firebase;
 
-//#define kRestaurantsURL @"http://kaimbu2.uspnet.usp.br:8080/cardapio/"
-//#define kBaseURL @"http://kaimbu2.uspnet.usp.br:8080/"
-
 #define kToken @"596df9effde6f877717b4e81fdb2ca9f"
 
 @interface DataModel () {
@@ -57,26 +54,26 @@
 }
 
 - (NSDictionary *)userData {
-    if ([self isLoggedIn]) {
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSData *userDataRaw = [defaults objectForKey:@"userData"];
-        
-        if (userDataRaw == nil || [userDataRaw isKindOfClass:[NSNull class]]) {
-            return nil; // Retorna nil se os dados não existirem ou forem NSNull
-        }
-        
-        NSError *error = nil;
-        NSDictionary *userData = [NSJSONSerialization JSONObjectWithData:userDataRaw options:NSJSONReadingMutableContainers error:&error];
-        
-        if (error || ![userData isKindOfClass:[NSDictionary class]]) {
-            // Retorna nil se houver erro na desserialização ou se o formato não for um NSDictionary
-            return nil;
-        }
-        
-        return userData;
-    } else {
-        return nil; // Retorna nil se o usuário não estiver logado
+  if ([self isLoggedIn]) {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSData *userDataRaw = [defaults objectForKey:@"userData"];
+    
+    if (userDataRaw == nil || [userDataRaw isKindOfClass:[NSNull class]]) {
+      return nil; // Retorna nil se os dados não existirem ou forem NSNull
     }
+    
+    NSError *error = nil;
+    NSDictionary *userData = [NSJSONSerialization JSONObjectWithData:userDataRaw options:NSJSONReadingMutableContainers error:&error];
+    
+    if (error || ![userData isKindOfClass:[NSDictionary class]]) {
+      // Retorna nil se houver erro na desserialização ou se o formato não for um NSDictionary
+      return nil;
+    }
+    
+    return userData;
+  } else {
+    return nil; // Retorna nil se o usuário não estiver logado
+  }
 }
 
 - (void)getRestaurantList {
@@ -152,6 +149,8 @@
       }
       // Notifica atualizações
       [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveRestaurants" object:self];
+    } else {
+      logNetworkError(operation, responseObject, statusCode, @"restaurants", webServicePath);
     }
   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -165,13 +164,6 @@
 - (void)getMenu {
   
   [SVProgressHUD show];
-  [[FIRCrashlytics crashlytics] setCustomValue:@"" forKey:@""];
-  
-//  [FIRAnalytics logEventWithName:@"share_image"
-//                      parameters:@{
-//    @"name": @"",
-//    @"full_text": @""
-//  }];
   
   self.menuArray = [[NSMutableArray alloc] init];
   
@@ -191,8 +183,6 @@
                 nil];
   
   [manager POST:webServicePath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-    
-    
     NSInteger statusCode = [operation.response statusCode];
     if (statusCode == 200) {
       // Parse da resposta
@@ -239,6 +229,7 @@
       // Notifica atualizações
       [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveMenu" object:self];
     } else {
+      logNetworkError(operation, responseObject, statusCode, @"menu", webServicePath);
       [SVProgressHUD showErrorWithStatus:@"Não foi possível obter o cardápio. Tente novamente mais tarde."];
     }
   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -248,6 +239,36 @@
   }];
 }
 
+static void logNetworkError(AFHTTPRequestOperation *operation, id responseObject, NSInteger statusCode, NSString *endpointName, NSString *urlPath) {
+  
+  NSString *logMessage = [NSString stringWithFormat:@"Resposta com status diferente de 200 na chamada ao %@", endpointName];
+  [[FIRCrashlytics crashlytics] log:logMessage];
+  
+  [[FIRCrashlytics crashlytics] setCustomValue:@(statusCode) forKey:[NSString stringWithFormat:@"%@_http_status", endpointName]];
+  [[FIRCrashlytics crashlytics] setCustomValue:urlPath forKey:[NSString stringWithFormat:@"%@_url", endpointName]];
+  
+  NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+  [formatter setDateFormat:@"dd/MM/yyyy HH:mm:ss"];
+  [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"America/Sao_Paulo"]];
+  NSString *timestamp = [formatter stringFromDate:[NSDate date]];
+  [[FIRCrashlytics crashlytics] setCustomValue:timestamp forKey:[NSString stringWithFormat:@"%@_timestamp", endpointName]];
+  
+  // Trecho da resposta
+  if ([responseObject isKindOfClass:[NSData class]]) {
+    NSString *responseString = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+    if (responseString.length > 300) {
+      responseString = [responseString substringToIndex:300];
+    }
+    [[FIRCrashlytics crashlytics] setCustomValue:responseString forKey:[NSString stringWithFormat:@"%@_response_snippet", endpointName]];
+  }
+  
+  // Content-Type (header)
+  NSString *contentType = operation.response.allHeaderFields[@"Content-Type"];
+  if (contentType) {
+    [[FIRCrashlytics crashlytics] setCustomValue:contentType forKey:[NSString stringWithFormat:@"%@_content_type", endpointName]];
+  }
+}
+
 - (void)getCreditoRUCard {
   [dataAccess consultarSaldo];
 }
@@ -255,35 +276,6 @@
 - (NSMutableArray *)getCampiList{
   return self.restaurantList;
 }
-
-//- (NSMutableArray *)iniciar_JSONBinding:(NSString *)_url {
-//  NSURL *url1 = [NSURL URLWithString:_url];
-//  NSMutableURLRequest *req1 = [NSMutableURLRequest requestWithURL:url1];
-//  NSError *error;
-//  NSURLResponse *resp = nil;
-//  NSData *data = [NSURLConnection sendSynchronousRequest:req1 returningResponse:&resp error:&error];
-//  NSMutableArray* json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers  error:&error];
-//  return json;
-//}
-
-//- (Cash *)cash {
-//  NSMutableArray *items = [[NSMutableArray alloc] init];
-//  NSDictionary *json = (NSDictionary *)[self iniciar_JSONBinding: [NSString stringWithFormat:@"%@restaurantes.json", kRestaurantsURL]];
-//  if (!json) {
-//    NSLog(@"Error parsing JSON: %@", nil);
-//  } else {
-//    for(NSDictionary *item in json[@"CAIXA"]) {
-//      for(NSDictionary *i in item[@"items"]) {
-//        NSString *category = i[@"category"];
-//        NSString *price = i[@"price"];
-//        Items *i = [[Items alloc] initWithItems:category andPrice:price];
-//        [items addObject:i];
-//      }
-//      _cash = [[Cash alloc] initWithMenu:item[@"workinghours"] andItems:items];
-//    }
-//  }
-//  return _cash;
-//}
 
 #pragma mark Setters
 
