@@ -392,6 +392,7 @@
 				BFAC6E8C192A54E100921494 /* AppDelegate.m */,
 				BFAC6E8E192A54E100921494 /* Main_iPhone.storyboard */,
 				BFAC6E97192A54E100921494 /* Images.xcassets */,
+				E960B4012DEF8CE700312AEA /* Network */,
 				E9F0976F1E007D8500C6A464 /* Model */,
 				E990FE7126275210005FF207 /* View */,
 				E9F0976D1E007D4E00C6A464 /* ViewHelper */,
@@ -523,6 +524,13 @@
 				E92D5E991C19B32B00ECA5D1 /* sha1.h */,
 			);
 			path = Crypto;
+			sourceTree = "<group>";
+		};
+		E960B4012DEF8CE700312AEA /* Network */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 		E990FE7126275210005FF207 /* View */ = {
@@ -1131,7 +1139,7 @@
 				BASE_URL = "https://dev.uspdigital.usp.br/mobile/servicos/cardapio/";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 89;
+				CURRENT_PROJECT_VERSION = 90;
 				DEVELOPMENT_TEAM = SYF585KJR7;
 				EXCLUDED_ARCHS = x86_64;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
@@ -1141,7 +1149,7 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 3.2.1;
+				MARKETING_VERSION = 3.2.2;
 				OAUTH_CONSUMER_SECRET = foZyLmFVYO73aqUUkuIA6iloqbcVBm6V85lOaEYf;
 				OAUTH_SERVICE_URL = "https://dev.uspdigital.usp.br/mobile/servicos/oauth";
 				OAUTH_URL = "https://dev.uspdigital.usp.br/";
@@ -1171,7 +1179,7 @@
 				BASE_URL = "https://uspdigital.usp.br/mobile/servicos/cardapio/";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 89;
+				CURRENT_PROJECT_VERSION = 90;
 				DEVELOPMENT_TEAM = SYF585KJR7;
 				EXCLUDED_ARCHS = "";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
@@ -1181,7 +1189,7 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 3.2.1;
+				MARKETING_VERSION = 3.2.2;
 				OAUTH_CONSUMER_SECRET = EYagzAlOL3O0EFHMRtWAwSgIju5RtkAghDuqOXop;
 				OAUTH_SERVICE_URL = "https://uspdigital.usp.br/mobile/servicos/oauth";
 				OAUTH_URL = "https://uspdigital.usp.br/";
