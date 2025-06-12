@@ -139,16 +139,15 @@ private extension MainViewController {
   
   /// Calcula pesos 1, 1/φ, 1/φ², 1/φ³  e cria heightAnchors relativos
   func applyGoldenRatioHeights() {
-    let phi: CGFloat = (1 + sqrt(5)) / 2          // ≈ 1,618
-    
     // pesos decrescentes de acordo com a golden ratio
+
     let weights: [CGFloat] = [
-      1,                 // Cardápio (maior)
-      1 / phi,           // Banners
-      pow(1 / phi, 2),   // Botões
-      pow(1 / phi, 3)    // Saldo (menor)
+      1.3,                // Cardápio (mais destaque)
+      0.7,                // Banners (menos altura)
+      0.5,                // Botões
+      0.35                // Saldo
     ]
-    let total = weights.reduce(0, +)              // ≈ √5
+    let total = weights.reduce(0, +)
     
     let views: [UIView] = [
       cardapioView,

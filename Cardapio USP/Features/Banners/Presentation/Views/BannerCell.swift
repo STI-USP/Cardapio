@@ -39,8 +39,9 @@ final class BannerCell: UICollectionViewCell {
 
   private func setupLabels() {
     titleLabel.font = .boldSystemFont(ofSize: 18)
+    titleLabel.numberOfLines = 2
     subtitleLabel.font = .systemFont(ofSize: 14)
-    subtitleLabel.numberOfLines = 2
+    subtitleLabel.numberOfLines = 4
 
     let stack = UIStackView(arrangedSubviews: [titleLabel, subtitleLabel])
     stack.axis = .vertical
