@@ -20,27 +20,26 @@ struct ObservationDTO: Decodable {
 
 /// Cada dia da semana
 struct MealDTO: Decodable {
-    let date: String                 // "29/05/2025"
+    let date: String
     let lunch: PeriodDTO
     let dinner: PeriodDTO
 }
 
 /// Bloco “lunch” ou “dinner”
 struct PeriodDTO: Decodable {
-    let menu: String                 // pratos separados por `\n`
-    let calories: String             // ex.: "965"
+    let menu: String
+    let calories: String
 }
 
 // MARK: - Mapeamento para domínio
 private extension MealDTO {
-
-    /// `DateFormatter` único (GMT, só data)
-    static let df: DateFormatter = {
-        let f = DateFormatter()
-        f.dateFormat = "dd/MM/yyyy"
-        f.timeZone = .gmt
-        return f
-    }()
+  
+  static let df: DateFormatter = {
+    let f = DateFormatter()
+    f.dateFormat = "dd/MM/yyyy"
+    f.timeZone = TimeZone(identifier: "America/Sao_Paulo")!
+    return f
+  }()
 }
 
 extension MealDTO {

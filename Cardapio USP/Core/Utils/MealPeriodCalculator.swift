@@ -9,15 +9,15 @@
 import Foundation
 
 enum CurrentMealPeriod: String, Sendable {
-    case lunch  = "almoço"
-    case dinner = "jantar"
+  case lunch  = "almoço"
+  case dinner = "jantar"
 }
 
 struct MealPeriodCalculator: Sendable {
-    /// Retorna .lunch até 15h; depois .dinner
-    static func now(in calendar: Calendar = .current,
-                    reference: Date = .init()) -> CurrentMealPeriod {
-        let hour = calendar.component(.hour, from: reference)
-        return (hour < 15) ? .lunch : .dinner
-    }
+  /// Retorna .lunch até 15h; depois .dinner
+  static func now(in calendar: Calendar = .current,
+                  reference: Date = .init()) -> CurrentMealPeriod {
+    let hour = calendar.component(.hour, from: reference)
+    return (hour < 15) ? .lunch : .dinner
+  }
 }

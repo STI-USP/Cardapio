@@ -11,25 +11,25 @@ import Foundation
 
 @MainActor
 final class HomeViewModel: ObservableObject {
-    @Published private(set) var state: HomeState?
-    @Published private(set) var isLoading = false
-    @Published private(set) var error: String?
-
-    private let service: HomeService
-
-    init(service: HomeService = HomeServiceImpl()) {
-        self.service = service
-        Task { await load() }
+  @Published private(set) var state: HomeState?
+  @Published private(set) var isLoading = false
+  @Published private(set) var error: String?
+  
+  private let service: HomeService
+  
+  init(service: HomeService = HomeServiceImpl()) {
+    self.service = service
+    Task { await load() }
+  }
+  
+  func load() async {
+    isLoading = true; error = nil
+    do {
+      state = try await service.loadState()
+      isLoading = false
+    } catch {
+      self.error = error.localizedDescription
+      isLoading = false
     }
-
-    func load() async {
-        isLoading = true; error = nil
-        do {
-            state = try await service.loadState()
-            isLoading = false
-        } catch {
-            self.error = error.localizedDescription
-            isLoading = false
-        }
-    }
+  }
 }

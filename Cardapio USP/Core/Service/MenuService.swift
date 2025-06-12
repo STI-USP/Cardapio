@@ -24,8 +24,8 @@ final class MenuServiceImpl: MenuService {
   }
   
   func fetchWeek(for restaurantId: String) async throws -> [Menu] {
-      let dto = try await post(MenuWeekDTO.self, path: "menu/\(restaurantId)")
-      return dto.toDomain()
+    let dto = try await post(MenuWeekDTO.self, path: "menu/\(restaurantId)")
+    return dto.toDomain()
   }
   
   func fetchToday(for restaurantId: String) async throws -> Menu {

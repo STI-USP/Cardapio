@@ -6,8 +6,6 @@
 //  Copyright © 2025 USP. All rights reserved.
 //
 
-//enum MealPeriod: String { case lunch = "Almoço", dinner = "Jantar" }
-
 struct MenuOfDay {
     let date: Date
     let meal: MealPeriod

@@ -44,5 +44,5 @@ struct Prices: Codable, Equatable, Sendable {
 }
 
 struct PriceRow: Codable, Equatable, Sendable {
-    let lunch: String      // mantemos String para compatibilidade
+    let lunch: String // String para compatibilidade
 }

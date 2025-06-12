@@ -22,7 +22,7 @@ import Foundation
         // Captura o serviço fora do MainActor para não travar a UI
         let service = MenuServiceImpl()
 
-        Task.detached(priority: .userInitiated) {           // executor neutro
+        Task.detached(priority: .userInitiated) { // executor neutro
             do {
                 let menu = try await service.fetchToday(for: restaurantId)
 

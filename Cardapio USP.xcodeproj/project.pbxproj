@@ -46,6 +46,7 @@
 		E90555B01E01D42F00B8516E /* OAuthUSP.m in Sources */ = {isa = PBXBuildFile; fileRef = E90555AD1E01D42F00B8516E /* OAuthUSP.m */; };
 		E90555B11E01D42F00B8516E /* STIOauth.m in Sources */ = {isa = PBXBuildFile; fileRef = E90555AF1E01D42F00B8516E /* STIOauth.m */; };
 		E90555B41E030EEA00B8516E /* CheckoutDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E90555B31E030EEA00B8516E /* CheckoutDataModel.m */; };
+		E9152E1D2DFB28F500083E07 /* BannerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9152E1C2DFB28F500083E07 /* BannerService.swift */; };
 		E92D5EA41C19B32B00ECA5D1 /* Base64Transcoder.c in Sources */ = {isa = PBXBuildFile; fileRef = E92D5E941C19B32B00ECA5D1 /* Base64Transcoder.c */; };
 		E92D5EA51C19B32B00ECA5D1 /* hmac.c in Sources */ = {isa = PBXBuildFile; fileRef = E92D5E961C19B32B00ECA5D1 /* hmac.c */; };
 		E92D5EA61C19B32B00ECA5D1 /* sha1.c in Sources */ = {isa = PBXBuildFile; fileRef = E92D5E981C19B32B00ECA5D1 /* sha1.c */; };
@@ -176,6 +177,7 @@
 		E90555AF1E01D42F00B8516E /* STIOauth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STIOauth.m; sourceTree = "<group>"; };
 		E90555B21E030EEA00B8516E /* CheckoutDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckoutDataModel.h; sourceTree = "<group>"; };
 		E90555B31E030EEA00B8516E /* CheckoutDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckoutDataModel.m; sourceTree = "<group>"; };
+		E9152E1C2DFB28F500083E07 /* BannerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerService.swift; sourceTree = "<group>"; };
 		E92D5E941C19B32B00ECA5D1 /* Base64Transcoder.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Base64Transcoder.c; sourceTree = "<group>"; };
 		E92D5E951C19B32B00ECA5D1 /* Base64Transcoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64Transcoder.h; sourceTree = "<group>"; };
 		E92D5E961C19B32B00ECA5D1 /* hmac.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hmac.c; sourceTree = "<group>"; };
@@ -655,6 +657,7 @@
 				E9E9851F2DE8D20B0042311D /* MenuService.swift */,
 				E9E9853B2DE8DEC60042311D /* RestaurantService.swift */,
 				E9E985512DE8E2060042311D /* HomeService.swift */,
+				E9152E1C2DFB28F500083E07 /* BannerService.swift */,
 				E9E985292DE8D57A0042311D /* CreditService.swift */,
 				E9E9B12D1B0E7CC6005BE8A1 /* DataAccess.h */,
 				E9E9B12E1B0E7CC6005BE8A1 /* DataAccess.m */,
@@ -951,6 +954,7 @@
 				E92D5EA41C19B32B00ECA5D1 /* Base64Transcoder.c in Sources */,
 				E9E4BCD81B7BFBFC005633AD /* CarrierDataModel.m in Sources */,
 				E9F9739B2DC26E64007BC228 /* UIFont+USP.swift in Sources */,
+				E9152E1D2DFB28F500083E07 /* BannerService.swift in Sources */,
 				E9E9851E2DE8D1E80042311D /* HTTPClient.swift in Sources */,
 				E9E9852A2DE8D57A0042311D /* CreditService.swift in Sources */,
 				E9F9739C2DC26E64007BC228 /* USPCardView.swift in Sources */,

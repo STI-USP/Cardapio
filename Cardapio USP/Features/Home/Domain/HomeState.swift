@@ -9,9 +9,9 @@
 import Foundation
 
 struct HomeState: Sendable, Equatable {
-    let restaurantName: String
-    let balanceText: String
-    let dateText: String
-    let mealPeriod: String
-    let items: [String]
+  let restaurantName: String
+  let balanceText: String
+  let dateText: String
+  let mealPeriod: String
+  let items: [String]
 }

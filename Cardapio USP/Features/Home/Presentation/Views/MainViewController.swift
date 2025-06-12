@@ -17,37 +17,97 @@ final class MainViewController: UIViewController {
   private var cancellables = Set<AnyCancellable>()
   
   // MARK: – Sub-views
-  private let cardapioView  = CardapioSectionView()
-  private let saldoView     = SaldoSectionView()
-  private let bannerVC      = BannerCarouselViewController()
-  private let actionButtons = VerticalButtonListSection()
+  private let cardapioView = CardapioSectionView()
+  private let saldoView = SaldoSectionView()
+  
+  private let bannerVC = BannerCarouselViewController()
+  //  private let bannerVC = WebCarouselViewController()
+  
+  //  private let actionButtons = VerticalButtonListSection()
+  private let actionButtons = VerticalButtonGridSection()
+  
+  private let mainStack = UIStackView()
+  
   
   // MARK: – Lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
     title = "Cardápio +"
     view.backgroundColor = .secondarySystemBackground
-    setupLayout()
+    setupStack()
+    embedSections()
+    applyGoldenRatioHeights()
     bind()
   }
   
-  // MARK: – Layout igual ao seu código
-  private func setupLayout() {
-    let mainStack = UIStackView()
+  // MARK: – Bind ViewModel → UI
+  private func bind() {
+    // Estado de sucesso
+    homeVM.$state
+      .compactMap { $0 }
+      .sink { [weak self] state in
+        guard let self else { return }
+        cardapioView.update(
+          restaurant: state.restaurantName,
+          dateText: state.dateText,
+          periodText: state.mealPeriod,
+          items: state.items
+        )
+        saldoView.update(balanceText: state.balanceText)
+      }
+      .store(in: &cancellables)
+    
+    // Estado de loading
+    homeVM.$isLoading
+      .sink { [weak self] loading in
+        guard let self else { return }
+        if loading {
+          cardapioView.showLoading()
+          // saldoView.showLoading()
+        }
+      }
+      .store(in: &cancellables)
+
+    // Estado de erro
+    homeVM.$error
+      .compactMap { $0 }
+      .sink { [weak self] msg in
+        guard let self else { return }
+        cardapioView.showError("Erro ao carregar cardápio")
+        // saldoView.showError("Erro ao carregar saldo")
+        showAlert(msg)
+      }
+      .store(in: &cancellables)
+  }
+  private func showAlert(_ msg: String) {
+    let ac = UIAlertController(title: "Erro", message: msg, preferredStyle: .alert)
+    ac.addAction(UIAlertAction(title: "OK", style: .default))
+    present(ac, animated: true)
+  }
+}
+
+// MARK: – Setup helpers
+private extension MainViewController {
+  
+  /// Stack vertical sem espaçamento — cada “pedaço” recebe altura proporcional
+  func setupStack() {
     mainStack.axis = .vertical
-    mainStack.spacing = 12
-    mainStack.isLayoutMarginsRelativeArrangement = true
-    mainStack.layoutMargins = .init(top: 0, left: 16, bottom: 0, right: 16)
+    mainStack.spacing = 8
+    mainStack.alignment = .fill
+    mainStack.distribution = .fill // as alturas virão por constraints
     mainStack.translatesAutoresizingMaskIntoConstraints = false
     view.addSubview(mainStack)
     
     NSLayoutConstraint.activate([
-      mainStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
-      mainStack.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-      mainStack.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-      mainStack.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+      mainStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+      mainStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+      mainStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+      mainStack.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20)
     ])
-    
+  }
+  
+  /// Adiciona cada seção como child-view-controller (ou view simples)
+  func embedSections() {
     // 1. Cardápio
     mainStack.addArrangedSubview(cardapioView)
     
@@ -75,49 +135,42 @@ final class MainViewController: UIViewController {
     // 4. Botões de ação
     actionButtons.heightAnchor.constraint(equalToConstant: 240).isActive = true
     mainStack.addArrangedSubview(actionButtons)
-    
-    // Hugging priorities
-    cardapioView.setContentHuggingPriority(.defaultLow, for: .vertical)
-    saldoView   .setContentHuggingPriority(.defaultHigh, for: .vertical)
-    bannerContainer.setContentHuggingPriority(.defaultLow, for: .vertical)
-    actionButtons .setContentHuggingPriority(.required,  for: .vertical)
-    
-    // O cardápio é o primeiro a encolher; banner e botões nunca se sobrepõem
-    cardapioView   .setContentCompressionResistancePriority(.defaultLow, for: .vertical)
-    saldoView      .setContentCompressionResistancePriority(.required,   for: .vertical)
-    bannerContainer.setContentCompressionResistancePriority(.required,   for: .vertical)
-    actionButtons  .setContentCompressionResistancePriority(.required,   for: .vertical)
   }
   
-  // MARK: – Bind ViewModel → UI
-  private func bind() {
-    homeVM.$state
-      .compactMap { $0 }
-      .sink { [weak self] state in
-        guard let self else { return }
-        // Cardápio
-        cardapioView.update(
-          restaurant: state.restaurantName,
-          dateText:   state.dateText,
-          periodText: state.mealPeriod,
-          items:      state.items
-        )
-        // Saldo
-        saldoView.update(balanceText: state.balanceText)
-      }
-      .store(in: &cancellables)
+  /// Calcula pesos 1, 1/φ, 1/φ², 1/φ³  e cria heightAnchors relativos
+  func applyGoldenRatioHeights() {
+    let phi: CGFloat = (1 + sqrt(5)) / 2          // ≈ 1,618
     
-    homeVM.$error
-      .compactMap { $0 }
-      .sink { [weak self] msg in
-        self?.showAlert(msg)
-      }
-      .store(in: &cancellables)
+    // pesos decrescentes de acordo com a golden ratio
+    let weights: [CGFloat] = [
+      1,                 // Cardápio (maior)
+      1 / phi,           // Banners
+      pow(1 / phi, 2),   // Botões
+      pow(1 / phi, 3)    // Saldo (menor)
+    ]
+    let total = weights.reduce(0, +)              // ≈ √5
+    
+    let views: [UIView] = [
+      cardapioView,
+      bannerVC.view,
+      actionButtons,
+      saldoView
+    ]
+    
+    for (view, weight) in zip(views, weights) {
+      let c = view.heightAnchor.constraint(
+        equalTo: mainStack.heightAnchor,
+        multiplier: weight / total
+      )
+      c.priority = .defaultHigh // evita conflito com heights internos
+      c.isActive = true
+    }
   }
   
-  private func showAlert(_ msg: String) {
-    let ac = UIAlertController(title: "Erro", message: msg, preferredStyle: .alert)
-    ac.addAction(UIAlertAction(title: "OK", style: .default))
-    present(ac, animated: true)
+  /// Pequeno helper p/ embed clássico de child-VC
+  func add(_ child: UIViewController) {
+    addChild(child)
+    mainStack.addArrangedSubview(child.view)
+    child.didMove(toParent: self)
   }
 }
