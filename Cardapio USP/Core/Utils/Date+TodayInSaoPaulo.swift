@@ -12,11 +12,11 @@ extension Date {
   func isTodayInSaoPaulo() -> Bool {
     var calendar = Calendar(identifier: .gregorian)
     calendar.timeZone = TimeZone(identifier: "America/Sao_Paulo")!
-
+    
     let now = Date()
     return calendar.isDate(self.convertToSaoPaulo(), inSameDayAs: now.convertToSaoPaulo())
   }
-
+  
   func convertToSaoPaulo() -> Date {
     let tz = TimeZone(identifier: "America/Sao_Paulo")!
     let seconds = tz.secondsFromGMT(for: self)

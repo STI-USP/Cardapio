@@ -12,11 +12,11 @@ final class BannerViewModel {
   private let service: BannerServiceProtocol
   private(set) var banners: [Banner] = []
   var onUpdate: (() -> Void)?
-
+  
   init(service: BannerServiceProtocol = MockBannerService()) {
     self.service = service
   }
-
+  
   func loadBanners() {
     service.fetchBanners { [weak self] banners in
       self?.banners = banners

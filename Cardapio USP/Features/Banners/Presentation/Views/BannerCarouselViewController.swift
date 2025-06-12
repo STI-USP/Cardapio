@@ -16,7 +16,7 @@ final class BannerCarouselViewController: UIViewController {
   private let autoScrollInterval: TimeInterval = 6
   private var autoScrollTimer: Timer?
   private var cellWidth: CGFloat { collectionView.bounds.width - (sideInset * 2) }
-
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = .clear
@@ -25,12 +25,19 @@ final class BannerCarouselViewController: UIViewController {
     bindViewModel()
     viewModel.loadBanners()
   }
-
+  
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+    DispatchQueue.main.async {
+      self.collectionView.collectionViewLayout.invalidateLayout()
+    }
+  }
+  
   override func viewDidDisappear(_ animated: Bool) {
     super.viewDidDisappear(animated)
     autoScrollTimer?.invalidate()
   }
-
+  
   private func bindViewModel() {
     viewModel.onUpdate = { [weak self] in
       DispatchQueue.main.async {
@@ -39,12 +46,12 @@ final class BannerCarouselViewController: UIViewController {
       }
     }
   }
-
+  
   private func setupCollectionView() {
     let layout = UICollectionViewFlowLayout()
     layout.scrollDirection = .horizontal
     layout.minimumLineSpacing = itemSpacing
-
+    
     collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
     collectionView.register(BannerCell.self, forCellWithReuseIdentifier: BannerCell.reuseId)
     collectionView.backgroundColor = .clear
@@ -54,7 +61,7 @@ final class BannerCarouselViewController: UIViewController {
     collectionView.delegate = self
     collectionView.contentInset = .init(top: 0, left: sideInset, bottom: 0, right: sideInset)
     collectionView.translatesAutoresizingMaskIntoConstraints = false
-
+    
     view.addSubview(collectionView)
     NSLayoutConstraint.activate([
       collectionView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -63,7 +70,7 @@ final class BannerCarouselViewController: UIViewController {
       collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
     ])
   }
-
+  
   private func setupPageControl() {
     pageControl.currentPage = 0
     pageControl.pageIndicatorTintColor = .lightGray
@@ -73,7 +80,7 @@ final class BannerCarouselViewController: UIViewController {
 }
 
 extension BannerCarouselViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate {
-
+  
   // Snap-to-page
   func scrollViewWillEndDragging(_ scrollView: UIScrollView,
                                  withVelocity velocity: CGPoint,
@@ -85,22 +92,22 @@ extension BannerCarouselViewController: UICollectionViewDataSource, UICollection
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     viewModel.banners.count
   }
-
+  
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BannerCell.reuseId, for: indexPath) as! BannerCell
     cell.configure(with: viewModel.banners[indexPath.item])
     return cell
   }
-
+  
   func collectionView(_ collectionView: UICollectionView, layout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     .init(width: cellWidth, height: collectionView.bounds.height)
   }
-
+  
   func scrollViewDidScroll(_ scrollView: UIScrollView) {
     let rawPage = (scrollView.contentOffset.x + sideInset) / (cellWidth + itemSpacing)
     pageControl.currentPage = Int(round(rawPage))
   }
-
+  
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     let banner = viewModel.banners[indexPath.item]
     UIApplication.shared.open(banner.url, options: [:])

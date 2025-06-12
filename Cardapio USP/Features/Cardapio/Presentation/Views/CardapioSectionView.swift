@@ -14,17 +14,15 @@ class CardapioSectionView: UIView {
   private let pratosStack = UIStackView()
   private let statusLabel = UILabel()
   
-  private var maxDishesDisplayed: Int { 6 }
-
   init() {
     super.init(frame: .zero)
     setup()
   }
-
+  
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-
+  
   private func setup() {
     layer.cornerRadius = 12
     layer.borderWidth = 1
@@ -60,6 +58,7 @@ class CardapioSectionView: UIView {
 
     pratosStack.axis = .vertical
     pratosStack.spacing = 1
+    pratosStack.clipsToBounds = true
 
     statusLabel.font = .uspRegular(ofSize: 15)
     statusLabel.textColor = .secondaryLabel
@@ -97,30 +96,48 @@ class CardapioSectionView: UIView {
     pratosStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
   }
 
-  func update(restaurant: String,
-              dateText: String,
-              periodText: String,
-              items: [String]) {
+  func update(restaurant: String, dateText: String, periodText: String, items: [String]) {
     restauranteLabel.text = restaurant
     dataLabel.text = dateText
     refeicaoLabel.text = periodText.capitalized
     statusLabel.isHidden = true
     pratosStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
+    
+    layoutIfNeeded() // garante que o layout esteja atualizado
 
-    for dish in items.prefix(maxDishesDisplayed) {
-      let l = UILabel()
-      l.font = .uspRegular(ofSize: 15)
-      l.text = dish
-      l.numberOfLines = 1
-      l.lineBreakMode = .byTruncatingTail
-      pratosStack.addArrangedSubview(l)
+    // Altura máxima disponível para a stack de pratos
+    let availableHeight = pratosStack.bounds.height > 0
+      ? pratosStack.bounds.height
+      : bounds.height - 120 // fallback caso ainda não tenha layout
+    
+    var usedHeight: CGFloat = 0
+    var labels: [UILabel] = []
+    
+    for dish in items {
+      let label = UILabel()
+      label.font = .uspRegular(ofSize: 15)
+      label.numberOfLines = 1
+      label.lineBreakMode = .byTruncatingTail
+      label.text = dish
+      
+      let fittingSize = label.systemLayoutSizeFitting(
+        CGSize(width: bounds.width - 24, height: .greatestFiniteMagnitude),
+        withHorizontalFittingPriority: .required,
+        verticalFittingPriority: .fittingSizeLevel
+      )
+      
+      let height = fittingSize.height + pratosStack.spacing
+      if usedHeight + height > availableHeight {
+        // último item visível
+        if let last = labels.last {
+          last.text = (last.text ?? "") + " […]"
+        }
+        break
+      }
+      
+      usedHeight += height
+      labels.append(label)
     }
-
-    if items.count > maxDishesDisplayed {
-      let more = UILabel()
-      more.font = .uspRegular(ofSize: 15)
-      more.text = "…"
-      pratosStack.addArrangedSubview(more)
-    }
-  }
-}
+    
+    labels.forEach { pratosStack.addArrangedSubview($0) }
+  }}

@@ -7,7 +7,7 @@
 //
 
 struct MenuOfDay {
-    let date: Date
-    let meal: MealPeriod
-    let items: [String]
+  let date: Date
+  let meal: MealPeriod
+  let items: [String]
 }

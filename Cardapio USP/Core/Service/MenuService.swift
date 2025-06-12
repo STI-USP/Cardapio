@@ -30,10 +30,31 @@ final class MenuServiceImpl: MenuService {
   
   func fetchToday(for restaurantId: String) async throws -> Menu {
     let all = try await fetchWeek(for: restaurantId)
-    guard let today = all.first(where: { Calendar.current.isDateInToday($0.date) }) else {
-      throw NSError(domain: "MenuService", code: 404, userInfo: [NSLocalizedDescriptionKey:"Sem cardápio para hoje"])
+
+    let calendar = Calendar(identifier: .gregorian)
+    let saoPauloTimeZone = TimeZone(identifier: "America/Sao_Paulo")!
+    var calendarSP = calendar
+    calendarSP.timeZone = saoPauloTimeZone
+
+    let now = Date()
+    let targetPeriod: MealPeriod = {
+      switch MealPeriodCalculator.now(in: calendarSP, reference: now) {
+      case .lunch:  return .lunch
+      case .dinner: return .dinner
+      }
+    }()
+
+    guard let menu = all.first(where: {
+      calendarSP.isDate($0.date, inSameDayAs: now) && $0.period == targetPeriod
+    }) else {
+      throw NSError(
+        domain: "MenuService",
+        code: 404,
+        userInfo: [NSLocalizedDescriptionKey:"Sem cardápio para hoje e período atual"]
+      )
     }
-    return today
+
+    return menu
   }
   
   // MARK: – Private helper

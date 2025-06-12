@@ -67,7 +67,7 @@ final class MainViewController: UIViewController {
         }
       }
       .store(in: &cancellables)
-
+    
     // Estado de erro
     homeVM.$error
       .compactMap { $0 }
