@@ -13,7 +13,7 @@
         <!--Restaurante Central-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController storyboardIdentifier="restaurantController" id="vXZ-lx-hvc" customClass="MenuViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="menuViewController" id="vXZ-lx-hvc" customClass="MenuViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="R3T-fW-GaG"/>
                         <viewControllerLayoutGuide type="bottom" id="BSY-Ha-Qn3"/>
