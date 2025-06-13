@@ -108,11 +108,25 @@ extension BannerCarouselViewController: UICollectionViewDataSource, UICollection
   }
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    guard let cell = collectionView.cellForItem(at: indexPath) as? BannerCell else { return }
     
-    let banner = viewModel.banners[indexPath.item]
-    let webVC = WebViewViewController()
-    webVC.urlString = banner.url.absoluteString
-    webVC.title = "PRIP"
-    navigationController?.pushViewController(webVC, animated: true)
+    // Animação de toque visual
+    UIView.animate(withDuration: 0.1, animations: {
+      cell.transform = CGAffineTransform(scaleX: 0.96, y: 0.96)
+    },
+                   completion: { _ in
+      UIView.animate(withDuration: 0.1) {
+        cell.transform = .identity
+      }
+      
+      // Executa o push após a animação
+      DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+        let banner = self.viewModel.banners[indexPath.item]
+        let webVC = WebViewViewController()
+        webVC.urlString = banner.url.absoluteString
+        webVC.title = "PRIP"
+        self.navigationController?.pushViewController(webVC, animated: true)
+      }
+    })
   }
 }

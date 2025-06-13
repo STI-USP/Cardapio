@@ -89,7 +89,7 @@ private extension MainViewController {
   /// Stack vertical sem espaçamento — cada “pedaço” recebe altura proporcional
   func setupStack() {
     mainStack.axis = .vertical
-    mainStack.spacing = 8
+    mainStack.spacing = 12
     mainStack.alignment = .fill
     mainStack.distribution = .fill // as alturas virão por constraints
     mainStack.translatesAutoresizingMaskIntoConstraints = false
@@ -138,9 +138,9 @@ private extension MainViewController {
   func applyGoldenRatioHeights() {
 
     let weights: [CGFloat] = [
-      1.6,  // Cardápio
-      0.6,  // Banners
-      0.5,  // Botões
+      1.5,  // Cardápio
+      0.7,  // Banners
+      0.7,  // Botões
       0.3   // Saldo
     ]
     let total = weights.reduce(0, +)

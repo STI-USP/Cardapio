@@ -134,10 +134,10 @@ final class ButtonGridPageCell: UICollectionViewCell {
     
     contentView.addSubview(gridStack)
     NSLayoutConstraint.activate([
-      gridStack.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
-      gridStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-      gridStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-      gridStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
+      gridStack.topAnchor.constraint(equalTo: contentView.topAnchor),
+      gridStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
+      gridStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
+      gridStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
     ])
   }
   
