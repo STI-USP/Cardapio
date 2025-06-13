@@ -12,23 +12,20 @@ class SaldoSectionView: UIView {
   private let saldoTitleLabel = UILabel()
   private let saldoValueLabel = UILabel()
   private let addCreditButton = UIButton(type: .system)
-
-  private var cancellables = Set<AnyCancellable>()
-
-  var onAddCreditTapped: (() -> Void)?
   
+  private var cancellables = Set<AnyCancellable>()
+  var onAddCreditTapped: (() -> Void)?
   
   init() {
     super.init(frame: .zero)
     setup()
   }
-  
   required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
   
   func bind(to vm: SaldoViewModel) {
-      vm.$balanceText.assign(to: \.text, on: saldoValueLabel).store(in: &cancellables)
+    vm.$balanceText.assign(to: \.text, on: saldoValueLabel).store(in: &cancellables)
   }
-
+  
   private func setup() {
     backgroundColor = UIColor.uspPrimary.withAlphaComponent(0.1)
     layer.cornerRadius = 12
@@ -48,11 +45,9 @@ class SaldoSectionView: UIView {
     
     saldoTitleLabel.text = "Saldo disponível"
     saldoTitleLabel.font = .uspLight(ofSize: 14)
-    //saldoTitleLabel.textColor = .uspAccent
     
-    saldoValueLabel.text = "R$ 15,00"
+    saldoValueLabel.text = "R$ --,--"
     saldoValueLabel.font = .uspBold(ofSize: 24)
-    //saldoValueLabel.textColor = .uspAccent
     
     textStack.addArrangedSubview(saldoTitleLabel)
     textStack.addArrangedSubview(saldoValueLabel)
@@ -81,11 +76,10 @@ class SaldoSectionView: UIView {
     onAddCreditTapped?()
   }
   
-  
 }
 
 extension SaldoSectionView {
-    func update(balanceText: String) {
-      saldoValueLabel.text = balanceText
-    }
+  func update(balanceText: String) {
+    saldoValueLabel.text = balanceText
+  }
 }

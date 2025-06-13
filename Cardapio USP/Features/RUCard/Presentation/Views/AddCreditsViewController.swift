@@ -54,7 +54,7 @@ class AddCreditsViewController: UIViewController {
       stack.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -48)
     ])
     
-    userNameLabel.text = "John Doe"
+    userNameLabel.text = ""
     userNameLabel.font = .uspBold(ofSize: 24)
     userNameLabel.textAlignment = .center
     
@@ -68,7 +68,7 @@ class AddCreditsViewController: UIViewController {
     saldoTitleLabel.font = .uspRegular(ofSize: 14)
     saldoTitleLabel.textColor = .uspAccent
     
-    saldoValueLabel.text = "R$ 15,00"
+    saldoValueLabel.text = "R$ --,--"
     saldoValueLabel.font = .uspBold(ofSize: 24)
     saldoValueLabel.textColor = .uspAccent
     

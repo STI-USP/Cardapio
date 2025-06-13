@@ -1,28 +1,21 @@
 //
-//  MainViewController.h
+//  MenuViewController.h
 //  Cardapio USP
 //
-//  Created by Jun Okamoto Jr. on 19/05/14.
-//  Copyright (c) 2014 EPUSP. All rights reserved.
+//  Criado em 19/05/14 — Atualizado em 13/06/25
 //
 
 #import <UIKit/UIKit.h>
-#import "DKScrollingTabController.h"
 #import "SWRevealViewController.h"
+#import "DKScrollingTabController.h"
 
+@interface MenuViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, DKScrollingTabControllerDelegate, UIScrollViewDelegate, SWRevealViewControllerDelegate>
 
-@interface MenuViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UIAlertViewDelegate, SWRevealViewControllerDelegate>
-
-@property (nonatomic, weak) IBOutlet UITableView *tableView;
-@property (nonatomic, weak) IBOutlet UILabel *diaDaSemanaLabel;
-@property (nonatomic, strong) DKScrollingTabController *dateTabController;
-@property (nonatomic) BOOL isClosed;
-@property (nonatomic, strong) UIButton *infoButton;
-
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UILabel *diaDaSemanaLabel;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *rightButton;
 
-
-- (IBAction)showRestaurantSelector:(id)sender;
-- (IBAction)showCredits:(id)sender;
+@property (strong, nonatomic) DKScrollingTabController *dateTabController;
+@property (strong, nonatomic) UIButton *infoButton;
 
 @end
