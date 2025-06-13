@@ -82,13 +82,12 @@ final class BannerCarouselViewController: UIViewController {
 extension BannerCarouselViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate {
   
   // Snap-to-page
-  func scrollViewWillEndDragging(_ scrollView: UIScrollView,
-                                 withVelocity velocity: CGPoint,
-                                 targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+  func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
     let pageWidth = cellWidth + itemSpacing
     let index = round((targetContentOffset.pointee.x + sideInset) / pageWidth)
     targetContentOffset.pointee.x = index * pageWidth - sideInset
   }
+  
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     viewModel.banners.count
   }
@@ -109,7 +108,11 @@ extension BannerCarouselViewController: UICollectionViewDataSource, UICollection
   }
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    
     let banner = viewModel.banners[indexPath.item]
-    UIApplication.shared.open(banner.url, options: [:])
+    let webVC = WebViewViewController()
+    webVC.urlString = banner.url.absoluteString
+    webVC.title = "PRIP"
+    navigationController?.pushViewController(webVC, animated: true)
   }
 }

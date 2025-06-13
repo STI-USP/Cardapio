@@ -19,13 +19,10 @@ final class MainViewController: UIViewController {
   // MARK: – Sub-views
   private let cardapioView = CardapioSectionView()
   private let saldoView = SaldoSectionView()
-  
   private let bannerVC = BannerCarouselViewController()
-  //  private let bannerVC = WebCarouselViewController()
-  
-  //  private let actionButtons = VerticalButtonListSection()
   private let actionButtons = VerticalButtonGridSection()
-  
+  //  private let actionButtons = VerticalButtonListSection()
+
   private let mainStack = UIStackView()
   
   

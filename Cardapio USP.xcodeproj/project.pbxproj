@@ -74,6 +74,7 @@
 		E9CDD1EC1AD86BFF00BB2E36 /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = E9CDD1E11AD86BFF00BB2E36 /* AFURLRequestSerialization.m */; };
 		E9CDD1ED1AD86BFF00BB2E36 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = E9CDD1E31AD86BFF00BB2E36 /* AFURLResponseSerialization.m */; };
 		E9CDD1EE1AD86BFF00BB2E36 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E9CDD1E51AD86BFF00BB2E36 /* AFURLSessionManager.m */; };
+		E9D075482DFC735E003F2C30 /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D075432DFC735E003F2C30 /* WebViewViewController.swift */; };
 		E9D76F9E2910175B00DCF59A /* MyTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D76F9D2910175B00DCF59A /* MyTextField.m */; };
 		E9DEA0231B4DC1FC00422524 /* restaurants.json in Resources */ = {isa = PBXBuildFile; fileRef = E9DEA0221B4DC1FC00422524 /* restaurants.json */; };
 		E9E1B96F2C6F9B3E00CF51F6 /* PaddedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = E9E1B96E2C6F9B3E00CF51F6 /* PaddedLabel.m */; };
@@ -230,6 +231,7 @@
 		E9CDD1E31AD86BFF00BB2E36 /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
 		E9CDD1E41AD86BFF00BB2E36 /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
 		E9CDD1E51AD86BFF00BB2E36 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
+		E9D075432DFC735E003F2C30 /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
 		E9D76F9C2910175B00DCF59A /* MyTextField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyTextField.h; sourceTree = "<group>"; };
 		E9D76F9D2910175B00DCF59A /* MyTextField.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyTextField.m; sourceTree = "<group>"; };
 		E9DEA0221B4DC1FC00422524 /* restaurants.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = restaurants.json; sourceTree = "<group>"; };
@@ -605,6 +607,7 @@
 				E9E983CA2DE8B2A10042311D /* Banners */,
 				E9E983D62DE8B41A0042311D /* ServicosPRIP */,
 				E9E983CF2DE8B3070042311D /* Mapas */,
+				E9D075432DFC735E003F2C30 /* WebViewViewController.swift */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -959,6 +962,7 @@
 				E9E9852A2DE8D57A0042311D /* CreditService.swift in Sources */,
 				E9F9739C2DC26E64007BC228 /* USPCardView.swift in Sources */,
 				E9F9739D2DC26E64007BC228 /* UIColor+USP.swift in Sources */,
+				E9D075482DFC735E003F2C30 /* WebViewViewController.swift in Sources */,
 				AD66F7D91933C4A8005A31BE /* MenuStub.m in Sources */,
 				E9F973B52DC29DD6007BC228 /* Model.swift in Sources */,
 				E9D76F9E2910175B00DCF59A /* MyTextField.m in Sources */,
