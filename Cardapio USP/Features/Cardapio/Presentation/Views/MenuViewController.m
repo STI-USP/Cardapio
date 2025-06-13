@@ -143,44 +143,46 @@
 
 // Função para configurar o botão de info
 - (void)setupInfoButton {
-  
-  // Define o tamanho do botão
-  CGFloat buttonSize = 32;
-  
-  // Inicializa o botão apenas se ele ainda não foi criado
+  CGFloat buttonSize = 40;
+  CGFloat padding = 20;
+
   if (!self.infoButton) {
     self.infoButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    
-    // Estilização do botão
-    self.infoButton.layer.cornerRadius = buttonSize / 2; // Botão circular
+
+    // Estilo visual
+    self.infoButton.layer.cornerRadius = buttonSize / 2;
     self.infoButton.backgroundColor = [UIColor colorNamed:@"usp_green"];
     self.infoButton.tintColor = [UIColor whiteColor];
-    
-    // Adiciona ação ao botão
+
+    // Sombra para destacar no fundo branco ou escuro
+    self.infoButton.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.infoButton.layer.shadowOpacity = 0.2;
+    self.infoButton.layer.shadowOffset = CGSizeMake(0, 2);
+    self.infoButton.layer.shadowRadius = 4;
+
+    // Centraliza imagem dentro do botão
+    self.infoButton.contentEdgeInsets = UIEdgeInsetsMake(6, 6, 6, 6);
+
     [self.infoButton addTarget:self action:@selector(showInfo) forControlEvents:UIControlEventTouchUpInside];
-    
-    // Adiciona o botão na hierarquia da view
-    [self.view insertSubview:self.infoButton aboveSubview:self.view];
+
+    // Adiciona à hierarquia acima de tudo
+    [self.view addSubview:self.infoButton];
   }
-  
-  // Obtém as insets da Safe Area
+
+  // Usa bounds da view (e não da tela) para calcular posição
   UIEdgeInsets safeAreaInsets = self.view.safeAreaInsets;
-  
-  // Define a nova posição do botão, levando em conta a safe area
-  CGFloat xPosition = [UIScreen mainScreen].bounds.size.width - buttonSize - safeAreaInsets.right - 20;
-  CGFloat yPosition = [UIScreen mainScreen].bounds.size.height - buttonSize - safeAreaInsets.bottom - 20;
-  self.infoButton.frame = CGRectMake(xPosition, yPosition, buttonSize, buttonSize);
-  
-  // Atualiza a imagem com base no modo claro/escuro
-  UIImage *infoImage;
-  if (@available(iOS 12.0, *)) {
-    if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
-      infoImage = [UIImage systemImageNamed:@"info.circle.fill"];
-    } else {
-      infoImage = [UIImage systemImageNamed:@"info.circle"];
-    }
+  CGFloat x = CGRectGetWidth(self.view.bounds) - buttonSize - safeAreaInsets.right - padding;
+  CGFloat y = CGRectGetHeight(self.view.bounds) - buttonSize - safeAreaInsets.bottom - padding;
+
+  self.infoButton.frame = CGRectMake(x, y, buttonSize, buttonSize);
+
+  // Ícone adaptado ao modo claro/escuro
+  UIImage *infoImage = nil;
+  if (@available(iOS 13.0, *)) {
+    infoImage = [UIImage systemImageNamed:@"info.circle"];
+  } else {
+    infoImage = [UIImage imageNamed:@"info"]; // fallback
   }
-  
   [self.infoButton setImage:infoImage forState:UIControlStateNormal];
 }
 
