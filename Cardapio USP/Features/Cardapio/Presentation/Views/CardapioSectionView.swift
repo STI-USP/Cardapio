@@ -8,21 +8,23 @@
 import UIKit
 
 class CardapioSectionView: UIView {
+  
+  // MARK: ­UI
   private let restauranteLabel = UILabel()
   private let dataLabel = UILabel()
   private let refeicaoLabel = UILabel()
   private let pratosStack = UIStackView()
   private let statusLabel = UILabel()
+  private let bottomSpacer = UIView() // empurra conteúdo para cima
   
-  init() {
-    super.init(frame: .zero)
+  // MARK: Init
+  override init(frame: CGRect) {
+    super.init(frame: frame)
     setup()
   }
+  required init?(coder: NSCoder) { fatalError() }
   
-  required init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
-  
+  // MARK: Setup
   private func setup() {
     layer.cornerRadius = 12
     layer.borderWidth = 1
@@ -31,7 +33,8 @@ class CardapioSectionView: UIView {
     
     let mainStack = UIStackView()
     mainStack.axis = .vertical
-    mainStack.spacing = 6
+    mainStack.alignment = .fill
+    mainStack.spacing = 0
     mainStack.translatesAutoresizingMaskIntoConstraints = false
     addSubview(mainStack)
     
@@ -56,19 +59,28 @@ class CardapioSectionView: UIView {
     refeicaoLabel.font = .uspRegular(ofSize: 16)
     refeicaoLabel.textColor = .uspPrimary
     
-    pratosStack.axis = .vertical
-    pratosStack.spacing = 1
-    pratosStack.clipsToBounds = true
-    
     statusLabel.font = .uspRegular(ofSize: 15)
     statusLabel.textColor = .secondaryLabel
     statusLabel.numberOfLines = 0
     statusLabel.textAlignment = .center
     
+    pratosStack.axis = .vertical
+    pratosStack.spacing = 1
+    pratosStack.clipsToBounds = true
+    
+    bottomSpacer.setContentHuggingPriority(.defaultLow,  for: .vertical)
+    bottomSpacer.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
+    
     mainStack.addArrangedSubview(headerStack)
     mainStack.addArrangedSubview(refeicaoLabel)
     mainStack.addArrangedSubview(statusLabel)
     mainStack.addArrangedSubview(pratosStack)
+    mainStack.addArrangedSubview(bottomSpacer)
+    
+    // Espaçamentos customizados
+    mainStack.setCustomSpacing(12, after: headerStack)   // entre header e refeição
+    mainStack.setCustomSpacing(8, after: refeicaoLabel) // entre refeição e itens
+    mainStack.setCustomSpacing(8, after: statusLabel)
     
     NSLayoutConstraint.activate([
       mainStack.topAnchor.constraint(equalTo: topAnchor, constant: 12),
@@ -77,20 +89,19 @@ class CardapioSectionView: UIView {
       mainStack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -12)
     ])
     
-    let tapGesture = UITapGestureRecognizer(target: self, action: #selector(cardTapped))
-    addGestureRecognizer(tapGesture)
-    isUserInteractionEnabled = true
-    
+    let tap = UITapGestureRecognizer(target: self, action: #selector(cardTapped))
+    addGestureRecognizer(tap)
   }
   
+  // MARK: Navegação
   @objc private func cardTapped() {
-    guard let vc = findViewController() else { return }
-
+    guard let hostVC = findViewController() else { return }
     let storyboard = UIStoryboard(name: "Main_iPhone", bundle: nil)
     let menuVC = storyboard.instantiateViewController(withIdentifier: "menuViewController")
-    vc.navigationController?.pushViewController(menuVC, animated: true)
+    hostVC.navigationController?.pushViewController(menuVC, animated: true)
   }
   
+  // MARK: Estados
   func showLoading() {
     restauranteLabel.text = ""
     dataLabel.text = ""
@@ -109,47 +120,44 @@ class CardapioSectionView: UIView {
     pratosStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
   }
   
+  // MARK: Update conteúdo
   func update(restaurant: String, dateText: String, periodText: String, items: [String]) {
+    
     restauranteLabel.text = restaurant
     dataLabel.text = dateText
     refeicaoLabel.text = periodText.capitalized
     statusLabel.isHidden = true
     pratosStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
     
-    layoutIfNeeded() // garante que o layout esteja atualizado
+    layoutIfNeeded()
     
-    // Altura máxima disponível para a stack de pratos
-    let availableHeight = pratosStack.bounds.height > 0
-    ? pratosStack.bounds.height
-    : bounds.height - 120 // fallback caso ainda não tenha layout
+    let availableHeight = pratosStack.bounds.height > 0 ? pratosStack.bounds.height : bounds.height - 120
     
     var usedHeight: CGFloat = 0
     var labels: [UILabel] = []
     
     for dish in items {
-      let label = UILabel()
-      label.font = .uspRegular(ofSize: 15)
-      label.numberOfLines = 1
-      label.lineBreakMode = .byTruncatingTail
-      label.text = dish
+      let lbl = UILabel()
+      lbl.font = .uspRegular(ofSize: 15)
+      lbl.numberOfLines = 1
+      lbl.lineBreakMode = .byTruncatingTail
+      lbl.text = dish
       
-      let fittingSize = label.systemLayoutSizeFitting(
+      let fitting = lbl.systemLayoutSizeFitting(
         CGSize(width: bounds.width - 24, height: .greatestFiniteMagnitude),
         withHorizontalFittingPriority: .required,
-        verticalFittingPriority: .fittingSizeLevel
-      )
+        verticalFittingPriority: .fittingSizeLevel)
       
-      let height = fittingSize.height + pratosStack.spacing
-      if usedHeight + height > availableHeight {
-        // último item visível
+      let h = fitting.height + pratosStack.spacing
+      if usedHeight + h > availableHeight {
+        // coloca reticências no último visível
         if let last = labels.last {
           last.text = (last.text ?? "") + " […]"
         }
         break
       }
-      
-      usedHeight += height
-      labels.append(label)
+      usedHeight += h
+      labels.append(lbl)
     }
     
     labels.forEach { pratosStack.addArrangedSubview($0) }

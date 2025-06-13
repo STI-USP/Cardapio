@@ -137,15 +137,14 @@ private extension MainViewController {
     mainStack.addArrangedSubview(actionButtons)
   }
   
-  /// Calcula pesos 1, 1/φ, 1/φ², 1/φ³  e cria heightAnchors relativos
+  /// Calcula pesos  e cria heightAnchors relativos
   func applyGoldenRatioHeights() {
-    // pesos decrescentes de acordo com a golden ratio
 
     let weights: [CGFloat] = [
-      1.3,                // Cardápio (mais destaque)
-      0.7,                // Banners (menos altura)
-      0.5,                // Botões
-      0.35                // Saldo
+      1.6,  // Cardápio
+      0.6,  // Banners
+      0.5,  // Botões
+      0.3   // Saldo
     ]
     let total = weights.reduce(0, +)
     
@@ -161,7 +160,7 @@ private extension MainViewController {
         equalTo: mainStack.heightAnchor,
         multiplier: weight / total
       )
-      c.priority = .defaultHigh // evita conflito com heights internos
+      c.priority = .defaultHigh
       c.isActive = true
     }
   }
