@@ -15,7 +15,7 @@ class CardapioSectionView: UIView {
   private let refeicaoLabel = UILabel()
   private let pratosStack = UIStackView()
   private let statusLabel = UILabel()
-  private let bottomSpacer = UIView() // empurra conteúdo para cima
+  private let bottomSpacer = UIView()
   
   // MARK: Init
   override init(frame: CGRect) {

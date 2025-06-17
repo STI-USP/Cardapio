@@ -9,6 +9,6 @@
 import Foundation
 
 struct PriceRowDTO: Decodable {
-    let lunch: String?
-    func toDomain() -> PriceRow { .init(lunch: lunch ?? "") }
+  let lunch: String?
+  func toDomain() -> PriceRow { .init(lunch: lunch ?? "") }
 }

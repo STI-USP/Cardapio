@@ -37,6 +37,11 @@ final class MainViewController: UIViewController {
     bind()
   }
   
+//  override func viewWillAppear(_ animated: Bool) {
+//    super.viewWillAppear(animated)
+//    Task { await homeVM.load() }
+//  }
+  
   // MARK: – Bind ViewModel → UI
   private func bind() {
     // Estado de sucesso

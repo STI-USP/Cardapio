@@ -9,10 +9,10 @@
 import Foundation
 
 struct CampusDTO: Decodable {
-    let name: String
-    let restaurants: [RestaurantDTO]
-
-    func toDomain() -> Campus {
-        Campus(name: name, restaurants: restaurants.map { $0.toDomain() })
-    }
+  let name: String
+  let restaurants: [RestaurantDTO]
+  
+  func toDomain() -> Campus {
+    Campus(name: name, restaurants: restaurants.map { $0.toDomain() })
+  }
 }

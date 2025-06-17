@@ -9,11 +9,11 @@
 import Foundation
 
 struct WorkingHoursDTO: Decodable {
-    let weekdays, saturday, sunday: MealHoursDTO
-    func toDomain() -> WorkingHours {
-        .init(weekdays: weekdays.toDomain(),
-              saturday: saturday.toDomain(),
-              sunday:  sunday.toDomain())
-    }
+  let weekdays, saturday, sunday: MealHoursDTO
+  func toDomain() -> WorkingHours {
+    .init(weekdays: weekdays.toDomain(),
+          saturday: saturday.toDomain(),
+          sunday:  sunday.toDomain())
+  }
 }
 

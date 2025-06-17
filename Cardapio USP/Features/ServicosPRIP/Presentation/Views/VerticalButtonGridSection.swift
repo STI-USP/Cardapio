@@ -247,10 +247,3 @@ private final class SquareGridButton: UIView {
     }
   }
 }
-// MARK: – Helper para achar ViewController
-extension UIView {
-  func findViewController() -> UIViewController? {
-    sequence(first: self as UIResponder?) { $0?.next }
-      .first { $0 is UIViewController } as? UIViewController
-  }
-}

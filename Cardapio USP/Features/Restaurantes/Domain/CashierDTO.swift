@@ -9,13 +9,13 @@
 import Foundation
 
 struct CashierDTO: Decodable {
-    let address: String
-    let workinghours: String
-    let prices: PricesDTO
-    func toDomain() -> Cashier {
-        .init(address: address,
-              workingHours: workinghours,
-              prices: prices.toDomain())
-    }
+  let address: String
+  let workinghours: String
+  let prices: PricesDTO
+  func toDomain() -> Cashier {
+    .init(address: address,
+          workingHours: workinghours,
+          prices: prices.toDomain())
+  }
 }
 

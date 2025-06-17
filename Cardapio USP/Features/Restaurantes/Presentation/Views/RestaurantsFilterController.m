@@ -120,9 +120,11 @@
   [dataModel setCurrentRestaurant:[[[campiList objectAtIndex:indexPath.section] valueForKey:@"restaurants"]objectAtIndex:indexPath.row]];
 
   [[NSNotificationCenter defaultCenter] postNotificationName:@"DidChangeRestaurant" object:self];
-  [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-  
-  [self.frostedViewController hideMenuViewController];
+
+  // [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+  // [self.frostedViewController hideMenuViewController];
+
+  [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 

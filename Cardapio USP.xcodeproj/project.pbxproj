@@ -576,6 +576,7 @@
 				E9F0976F1E007D8500C6A464 /* Models */,
 				E9F973B12DC29D4A007BC228 /* Service */,
 				E9E983A22DE8A6100042311D /* UseCases */,
+				E9D075432DFC735E003F2C30 /* WebViewViewController.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -607,7 +608,6 @@
 				E9E983CA2DE8B2A10042311D /* Banners */,
 				E9E983D62DE8B41A0042311D /* ServicosPRIP */,
 				E9E983CF2DE8B3070042311D /* Mapas */,
-				E9D075432DFC735E003F2C30 /* WebViewViewController.swift */,
 			);
 			path = Features;
 			sourceTree = "<group>";

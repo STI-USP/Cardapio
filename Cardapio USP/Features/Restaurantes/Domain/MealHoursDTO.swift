@@ -9,11 +9,11 @@
 import Foundation
 
 struct MealHoursDTO: Decodable {
-    let breakfast, lunch, dinner: String?
-    func toDomain() -> MealHours {
-        .init(breakfast: breakfast ?? "",
-              lunch:     lunch     ?? "",
-              dinner:    dinner    ?? "")
-    }
+  let breakfast, lunch, dinner: String?
+  func toDomain() -> MealHours {
+    .init(breakfast: breakfast ?? "",
+          lunch:     lunch     ?? "",
+          dinner:    dinner    ?? "")
+  }
 }
 

@@ -17,9 +17,9 @@ protocol RestaurantService: Sendable {
 final class RestaurantServiceImpl: RestaurantService, @unchecked Sendable {
 
     private let client: any HTTPClient
-    private let base     = URL(string: "https://uspdigital.usp.br/rucard/servicos/")!
+    private let base = URL(string: "https://uspdigital.usp.br/rucard/servicos/")!
     private let defaults = UserDefaults.standard
-    private let prefKey  = "preferredRestaurant"
+    private let prefKey = "preferredRestaurant"
 
     init(client: any HTTPClient = URLSessionHTTPClient()) {
         self.client = client

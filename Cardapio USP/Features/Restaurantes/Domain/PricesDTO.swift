@@ -9,11 +9,11 @@
 import Foundation
 
 struct PricesDTO: Decodable {
-    let students, special, visiting: PriceRowDTO
-    func toDomain() -> Prices {
-        .init(students: students.toDomain(),
-              special:  special .toDomain(),
-              visiting: visiting.toDomain())
-    }
+  let students, special, visiting: PriceRowDTO
+  func toDomain() -> Prices {
+    .init(students: students.toDomain(),
+          special:  special .toDomain(),
+          visiting: visiting.toDomain())
+  }
 }
 

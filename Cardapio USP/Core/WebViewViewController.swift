@@ -13,6 +13,8 @@ class WebViewViewController: UIViewController, WKNavigationDelegate {
   var urlString: String?
   private var webView: WKWebView!
   
+  // MARK: - Life Cycle
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = .systemBackground
@@ -28,6 +30,12 @@ class WebViewViewController: UIViewController, WKNavigationDelegate {
       webView.load(request)
     }
   }
+  
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+    SVProgressHUD.dismiss()
+  }
+
   
   // MARK: - WKNavigationDelegate
   

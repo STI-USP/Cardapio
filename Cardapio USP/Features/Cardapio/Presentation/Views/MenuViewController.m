@@ -28,8 +28,6 @@
 
 @interface MenuViewController () <DKScrollingTabControllerDelegate> {
   
-  //DKScrollingTabController *dateTabController;
-  
   RestaurantDataModel *_restaurantDataModel;
   MenuDataModel *_menuDataModel;
   DataModel *dataModel;
@@ -59,18 +57,56 @@
   oauth = [OAuthUSP sharedInstance];
   stringForLunch = [NSMutableString stringWithFormat:@""];
   
-  [dataModel getMenu];
-  
-  self.revealViewController.delegate = self;
-  [self.rightButton setAction: @selector(rightRevealToggle:)];
-  
   //DKScrollingTabController
-  _dateTabController = [[DKScrollingTabController alloc] init];
-  [self addChildViewController:_dateTabController];
-  [_dateTabController didMoveToParentViewController:self];
-  [self.view addSubview:_dateTabController.view];
+  setupDKScrollingTabController(self);
   
-  self.tableView.contentInset = UIEdgeInsetsMake(8, 0, 0, 0);
+  //Notification
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChangeRestaurant:) name:@"DidChangeRestaurant" object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveMenu:) name:@"DidReceiveMenu" object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRecieveUserData:) name:@"DidRecieveUserData" object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveBill:) name:@"DidReceiveBill" object:nil];
+  
+  //Filtro de Restaurantes
+  [self setupFilterButton];
+  
+  //Float Button - info
+  [self setupInfoButton];
+}
+
+// Observa mudanças na safe area para reposicionar o botão corretamente
+- (void)viewSafeAreaInsetsDidChange {
+  [super viewSafeAreaInsetsDidChange];
+  [self setupInfoButton];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+  NSString *name;
+  name = [[dataModel currentRestaurant]valueForKey:@"name"];
+  [self.navigationItem setTitle:name];
+  
+  [dataModel getMenu];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+  [super viewWillDisappear:animated];
+  
+  if ([self isMovingFromParentViewController]) {
+    NSLog(@"View controller was popped");
+  }
+}
+
+- (void)didReceiveMemoryWarning {
+  [super didReceiveMemoryWarning];
+  // Dispose of any resources that can be recreated.
+}
+
+static void setupDKScrollingTabController(MenuViewController *object) {
+  object->_dateTabController = [[DKScrollingTabController alloc] init];
+  [object addChildViewController:object->_dateTabController];
+  [object->_dateTabController didMoveToParentViewController:object];
+  [object.view addSubview:object->_dateTabController.view];
+  
+  object.tableView.contentInset = UIEdgeInsetsMake(8, 0, 0, 0);
   
   CGFloat topPadding = 0.0;
   CGFloat bottomPadding = 0.0;
@@ -80,14 +116,14 @@
     topPadding = window.safeAreaInsets.top;
     bottomPadding = window.safeAreaInsets.bottom;
     
-    _dateTabController.view.frame = CGRectMake(0, topPadding+40., CGRectGetWidth(self.view.bounds), 56);
+    object->_dateTabController.view.frame = CGRectMake(0, topPadding+40., CGRectGetWidth(object.view.bounds), 56);
   }
   
   
   if (@available(iOS 13.0, *)) {
-    _dateTabController.view.backgroundColor = [UIColor systemGroupedBackgroundColor];
+    object->_dateTabController.view.backgroundColor = [UIColor systemGroupedBackgroundColor];
   } else {
-    _dateTabController.view.backgroundColor = [UIColor lightTextColor];
+    object->_dateTabController.view.backgroundColor = [UIColor lightTextColor];
   }
   if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ){
     CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
@@ -96,52 +132,48 @@
       screenHeight = screenWidth;
     }
     if( screenHeight > 480 && screenHeight < 667 ){
-      _dateTabController.buttonPadding = 4.2;
+      object->_dateTabController.buttonPadding = 4.2;
     } else if ( screenHeight > 480 && screenHeight < 736 ){
-      _dateTabController.buttonPadding = 8.2;
+      object->_dateTabController.buttonPadding = 8.2;
     } else if ( screenHeight > 480 && screenHeight < 812 ){
-      _dateTabController.buttonPadding = 11;
+      object->_dateTabController.buttonPadding = 11;
     } else if ( screenHeight > 480 && screenHeight < 896){
-      _dateTabController.buttonPadding = 8.2;
+      object->_dateTabController.buttonPadding = 8.2;
     } else if ( screenHeight > 480 ){
-      _dateTabController.buttonPadding = 11;
+      object->_dateTabController.buttonPadding = 11;
     } else {
-      _dateTabController.buttonPadding = 3.2;
+      object->_dateTabController.buttonPadding = 3.2;
     }
   }
   
-  _dateTabController.underlineIndicator = YES;
-  _dateTabController.underlineIndicatorColor = [UIColor colorNamed:@"usp_orange"];
-  _dateTabController.buttonsScrollView.showsHorizontalScrollIndicator = NO;
-  _dateTabController.selectedBackgroundColor = [UIColor clearColor];
+  object->_dateTabController.underlineIndicator = YES;
+  object->_dateTabController.underlineIndicatorColor = [UIColor colorNamed:@"usp_orange"];
+  object->_dateTabController.buttonsScrollView.showsHorizontalScrollIndicator = NO;
+  object->_dateTabController.selectedBackgroundColor = [UIColor clearColor];
   if (@available(iOS 13.0, *)) {
-    _dateTabController.selectedTextColor = [UIColor labelColor];
+    object->_dateTabController.selectedTextColor = [UIColor labelColor];
   } else {
     // Fallback on earlier versions
-    _dateTabController.selectedTextColor = [UIColor blackColor];
+    object->_dateTabController.selectedTextColor = [UIColor blackColor];
   }
-  _dateTabController.unselectedTextColor = [UIColor grayColor];
-  _dateTabController.unselectedBackgroundColor = [UIColor clearColor];
-  _dateTabController.selection = @[@"           \n0",
-                                   @"           \n0",
-                                   @"           \n0",
-                                   @"           \n0",
-                                   @"           \n0",
-                                   @"           \n0",
-                                   @"           \n0"
+  object->_dateTabController.unselectedTextColor = [UIColor grayColor];
+  object->_dateTabController.unselectedBackgroundColor = [UIColor clearColor];
+  object->_dateTabController.selection = @[@"           \n0",
+                                           @"           \n0",
+                                           @"           \n0",
+                                           @"           \n0",
+                                           @"           \n0",
+                                           @"           \n0",
+                                           @"           \n0"
   ];
-  
-  //Notification
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChangeRestaurant:) name:@"DidChangeRestaurant" object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveMenu:) name:@"DidReceiveMenu" object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRecieveUserData:) name:@"DidRecieveUserData" object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveBill:) name:@"DidReceiveBill" object:nil];
-  
-  //Float Button - info
-  [self setupInfoButton];
 }
 
-// Função para configurar o botão de info
+
+- (void)setupFilterButton {
+  UIBarButtonItem *filterButton = [[UIBarButtonItem alloc] initWithImage:[UIImage systemImageNamed:@"slider.horizontal.3"] style:UIBarButtonItemStylePlain target:self action:@selector(showRestaurantsFilter)];
+  self.navigationItem.rightBarButtonItem = filterButton;
+}
+
 - (void)setupInfoButton {
   CGFloat buttonSize = 40;
   CGFloat padding = 20;
@@ -198,30 +230,10 @@
   }
 }
 
-// Observa mudanças na safe area para reposicionar o botão corretamente
-- (void)viewSafeAreaInsetsDidChange {
-  [super viewSafeAreaInsetsDidChange];
-  [self setupInfoButton];
-}
-
-
-- (void)viewWillAppear:(BOOL)animated {
-  NSString *name;
-  name = [[dataModel currentRestaurant]valueForKey:@"name"];
-  [self.navigationItem setTitle:name];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-  [super viewWillDisappear:animated];
-  
-  if ([self isMovingFromParentViewController]) {
-    NSLog(@"View controller was popped");
-  }
-}
-
-- (void)didReceiveMemoryWarning {
-  [super didReceiveMemoryWarning];
-  // Dispose of any resources that can be recreated.
+- (void)showRestaurantsFilter {
+  UIViewController *filterVC = [self.storyboard instantiateViewControllerWithIdentifier:@"RestaurantsFilterController"];
+  filterVC.modalPresentationStyle = UIModalPresentationPageSheet; // ou FormSheet, FullScreen etc.
+  [self presentViewController:filterVC animated:YES completion:nil];
 }
 
 - (void)setupWeekView:(NSArray *)weekMenu {
