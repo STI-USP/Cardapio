@@ -9,9 +9,9 @@
 import Foundation
 
 protocol MenuService : Sendable {
-  /// Cardápio completo da semana
+  // Cardápio completo da semana
   func fetchWeek(for restaurantId: String) async throws -> [Menu]
-  /// Apenas hoje
+  // Apenas hoje
   func fetchToday(for restaurantId: String) async throws -> Menu
 }
 

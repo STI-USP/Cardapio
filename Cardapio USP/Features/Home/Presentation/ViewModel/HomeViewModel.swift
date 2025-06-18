@@ -1,8 +1,9 @@
+//
 //  HomeViewModel.swift
 //  Cardapio USP
 //
-//  Criado em 29/05/25 — Atualizado em 17/06/25
-//  Implementação completa com suporte a troca dinâmica de restaurante.
+//  Criado em 29/05/25 — Atualizado em 18/06/25
+//  Versão reativa assinando o `currentPublisher` do RestaurantService.
 //
 
 import Combine
@@ -16,20 +17,31 @@ final class HomeViewModel: ObservableObject {
   @Published private(set) var isLoading = false
   @Published private(set) var error: String?
   
+  // Convenience para comparação em `viewWillAppear`
+  var currentRestaurantID: String? {
+    restaurantService.currentRestaurant()?.id
+  }
+  
   // MARK: – Dependências
   private let service: HomeService
   private let restaurantService: RestaurantService
-  private let dataModel = DataModel.getInstance() // singleton Obj-C
+  private let dataModel = DataModel.getInstance() // bridge Obj-C (legado)
   private var cancellables = Set<AnyCancellable>()
   
   // MARK: – Init
-  init(service: HomeService = HomeServiceImpl(),
-       restaurantService: RestaurantService = RestaurantServiceImpl()) {
+  init(
+    service: HomeService = HomeServiceImpl(restaurant: RestaurantServiceImpl.shared),
+    restaurantService: RestaurantService = RestaurantServiceImpl.shared
+  ) {
     self.service = service
     self.restaurantService = restaurantService
     
-    setupObservers()
+    observeRestaurantChanges()
     Task { await load() }
+  }
+
+  deinit {
+    print("[VM] deinit")
   }
   
   // MARK: – Public API
@@ -38,13 +50,17 @@ final class HomeViewModel: ObservableObject {
       isLoading = true
       error = nil
     }
+    
     do {
       var loaded = try await service.loadState()
-      // Fallback: se HomeService não conseguiu nome ainda
+      print("[VM] load() concluído para \(loaded.restaurantName)")
+      
+      // Fallback: se HomeService não trouxe nome
       if loaded.restaurantName.isEmpty,
          let pref = restaurantService.preferredRestaurant() {
         loaded = loaded.withRestaurantName(pref.name.uppercased())
       }
+      
       await MainActor.run {
         state = loaded
         isLoading = false
@@ -58,25 +74,23 @@ final class HomeViewModel: ObservableObject {
   }
   
   // MARK: – Observers
-  private func setupObservers() {
-    NotificationCenter.default.publisher(for: Notification.Name("DidChangeRestaurant"))
-      .compactMap { [weak self] _ -> Restaurant? in
-        guard let dict = self?.dataModel?.currentRestaurant as? [String: Any] else { return nil }
-        return Restaurant(dict: dict)
-      }
+  private func observeRestaurantChanges() {
+    restaurantService
+      .currentPublisher
+      .compactMap { $0 }
+      .receive(on: RunLoop.main)
       .sink { [weak self] restaurant in
         guard let self else { return }
-        
-        // 1. Atualiza UI instantaneamente
-        if let current = self.state {
-          self.state = current.withRestaurantName(restaurant.name.uppercased())
+
+        print("[VM] change recebido id = \(restaurant.id)")
+
+        // 1) Atualiza imediatamente o restaurante na UI
+        if let cur = state {
+          state = cur.withRestaurantName(restaurant.name.uppercased())
         }
         
-        // 2. Persiste para próximas sessões
-        self.restaurantService.setPreferred(restaurant)
-        
-        // 3. Faz refresh completo (cardápio, saldo, etc.)
-        Task { await self.load() }
+        // 2) Faz refresh completo (cardápio, saldo etc.)
+        Task { await load() }
       }
       .store(in: &cancellables)
   }

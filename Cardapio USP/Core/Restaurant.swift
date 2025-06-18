@@ -48,51 +48,77 @@ struct PriceRow: Codable, Equatable, Sendable {
 }
 
 
-// MARK: - Bridges p/ Obj-C
+// MARK: - Bridge Obj-C → Swift
 extension Restaurant {
-  /// Constrói a partir do dicionário legado (`NSMutableDictionary`)
-  init?(dict: [String: Any]) {
-    // id pode vir como Int ou String
-    let idValue: String
-    if let idInt = dict["id"] as? Int {
-      idValue = String(idInt)
-    } else if let idStr = dict["id"] as? String {
-      idValue = idStr
-    } else {
-      return nil
+
+    /// Constrói a partir do dicionário legado (`NSMutableDictionary`).
+    /// Não dá `nil` por detalhe de tipo: converte e preenche com default
+    /// sempre que possível.
+    init?(dict: [String: Any]) {
+
+        // ───────────── id ─────────────
+        let id: String
+        switch dict["id"] {
+        case let int as Int:  id = String(int)
+        case let str as String where !str.isEmpty: id = str
+        default: return nil                    // id é obrigatório
+        }
+
+        // ──────────── nome ────────────
+        guard let name = (dict["alias"] as? String) ??
+                         (dict["name"]  as? String) else { return nil }
+
+        // ────────── endereço ──────────
+        let address = dict["address"] as? String ?? ""
+
+        // ───── latitude / longitude ───
+        func toDouble(_ any: Any?) -> Double? {
+            switch any {
+            case let d as Double: return d
+            case let s as String:
+                return Double(s.replacingOccurrences(of: ",", with: "."))
+            default: return nil
+            }
+        }
+        let latitude  = toDouble(dict["latitude"])  ?? 0
+        let longitude = toDouble(dict["longitude"]) ?? 0
+
+        // ─────────── telefones ─────────
+        let phones: [String]
+        if let arr = dict["phones"] as? [String] {
+            phones = arr
+        } else if let str = dict["phones"] as? String {
+            // “(11) 3091-0495, (11) 3091-3318” → dois itens
+            phones = str.components(separatedBy: CharacterSet(charactersIn: ",;|"))
+                         .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+                         .filter { !$0.isEmpty }
+        } else {
+            phones = []
+        }
+
+        // ────── working hours / caixa ───
+        let whDict   = dict["workinghours"] as? [String: Any] ?? [:]
+        let cashArr  = dict["cashiers"]     as? [[String: Any]] ?? []
+
+        let workingHours = WorkingHours(dict: whDict) ?? .empty
+        let cashiers     = cashArr.compactMap(Cashier.init(dict:))
+
+        // ─────────── foto ──────────────
+        let photoStr = (dict["photourl"] as? String) ??
+                       (dict["photoURL"] as? String) ?? ""
+        let photoURL = URL(string: photoStr)
+
+        // ─────────── init final ────────
+        self.init(id:           id,
+                  name:         name,
+                  address:      address,
+                  phones:       phones,
+                  latitude:     latitude,
+                  longitude:    longitude,
+                  workingHours: workingHours,
+                  cashiers:     cashiers,
+                  photoURL:     photoURL)
     }
-    
-    guard
-      let name        = dict["name"]        as? String,
-      let address     = dict["address"]     as? String,
-      let lat         = dict["latitude"]    as? Double,
-      let lng         = dict["longitude"]   as? Double,
-      let whDict      = dict["workinghours"] as? [String: Any],
-      let cashArr     = dict["cashiers"]    as? [[String: Any]]
-    else { return nil }
-    
-    // Fallbacks simples para campos faltantes
-    let phones = dict["phones"] as? [String] ?? []
-    
-    // Converte sub-estruturas (bem direta; ajuste se precisar de validação extra)
-    guard
-      let workingHours = WorkingHours(dict: whDict)
-    else { return nil }
-    
-    let cashiers = cashArr.compactMap(Cashier.init(dict:))
-    
-    self.init(
-      id:         idValue,
-      name:       name,
-      address:    address,
-      phones:     phones,
-      latitude:   lat,
-      longitude:  lng,
-      workingHours: workingHours,
-      cashiers:   cashiers,
-      photoURL:   URL(string: dict["photoURL"] as? String ?? "")
-    )
-  }
 }
 
 extension WorkingHours {
@@ -110,6 +136,15 @@ extension WorkingHours {
       sunday:   meal(from: dict["sunday"]   as? [String: Any])
     )
   }
+}
+
+
+extension WorkingHours {
+    static let empty = WorkingHours(weekdays: .empty, saturday: .empty, sunday: .empty)
+}
+
+extension MealHours {
+    static let empty = MealHours(breakfast: "", lunch: "", dinner: "")
 }
 
 extension Prices {

@@ -9,35 +9,36 @@
 #import "AppDelegate.h"
 #import "DataModel.h"
 #import "Constants.h"
-
 #import "Cardapio_USP-Swift.h"
 
 @import Firebase;
 
 @interface AppDelegate()
-
+@property (nonatomic, strong) DataModel *dataModel;
 @end
-
-DataModel *dataModel;
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+
   [FIRApp configure];
   [Constants class];
   
-  dataModel = [DataModel getInstance];
+  _dataModel = [DataModel getInstance];
+
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  [dataModel setPreferredRestaurant:[defaults objectForKey:@"preferredRestaurant"]];
-  [dataModel getRestaurantList];
+  [_dataModel setPreferredRestaurant:[defaults objectForKey:@"preferredRestaurant"]];
+  [_dataModel getRestaurantList];
   
-  [[UINavigationBar appearance] setTintColor:[UIColor colorNamed:@"usp_green"]];
-  [self.window setTintColor:[UIColor colorNamed:@"usp_green"]];
+  if (_dataModel.currentRestaurant)
+    [[RestaurantBridge shared] setCurrentRestaurantFrom:_dataModel.currentRestaurant];
+  
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-  
-  MainViewController *mainViewController = [[MainViewController alloc] init];
+  self.window.tintColor = [UIColor colorNamed:@"usp_green"];
+  [[UINavigationBar appearance] setTintColor:[UIColor colorNamed:@"usp_green"]];
+
+  MainViewController *mainViewController = [AppFactory makeMainViewController];
   UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:mainViewController];
-  
   self.window.rootViewController = navController;
   [self.window makeKeyAndVisible];
   
@@ -59,15 +60,18 @@ DataModel *dataModel;
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-  dataModel = [DataModel getInstance];
+  _dataModel = [DataModel getInstance];
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  [dataModel setPreferredRestaurant:[defaults objectForKey:@"preferredRestaurant"]];
-  [dataModel getRestaurantList];
+  [_dataModel setPreferredRestaurant:[defaults objectForKey:@"preferredRestaurant"]];
+  [_dataModel getRestaurantList];
   
-  if ([dataModel preferredRestaurant])
-    [dataModel setCurrentRestaurant:dataModel.preferredRestaurant];
-  [dataModel getMenu];
-  
+  if ([_dataModel preferredRestaurant])
+    [_dataModel setCurrentRestaurant:_dataModel.preferredRestaurant];
+  [_dataModel getMenu];
+
+  // Propaga o restaurante corrente ao serviço Swift
+  if (_dataModel.currentRestaurant)
+    [[RestaurantBridge shared] setCurrentRestaurantFrom:_dataModel.currentRestaurant];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

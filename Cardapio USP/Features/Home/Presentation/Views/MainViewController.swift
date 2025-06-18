@@ -9,43 +9,40 @@
 import UIKit
 import Combine
 
-@objcMembers
 final class MainViewController: UIViewController {
   
   // MARK: – ViewModel
-  private let homeVM = HomeViewModel()
+  var viewModel: HomeViewModel!
+  
   private var cancellables = Set<AnyCancellable>()
+  private var lastRestaurantID: String?
   
   // MARK: – Sub-views
   private let cardapioView = CardapioSectionView()
   private let saldoView = SaldoSectionView()
   private let bannerVC = BannerCarouselViewController()
   private let actionButtons = VerticalButtonGridSection()
-  //  private let actionButtons = VerticalButtonListSection()
-
+  // private let actionButtons = VerticalButtonListSection()
   private let mainStack = UIStackView()
-  
   
   // MARK: – Lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
+    precondition(viewModel != nil, "MainViewController deve receber viewModel antes de usar")
+    
     title = "Cardápio +"
     view.backgroundColor = .secondarySystemBackground
+
     setupStack()
     embedSections()
     applyGoldenRatioHeights()
     bind()
   }
   
-//  override func viewWillAppear(_ animated: Bool) {
-//    super.viewWillAppear(animated)
-//    Task { await homeVM.load() }
-//  }
-  
   // MARK: – Bind ViewModel → UI
   private func bind() {
     // Estado de sucesso
-    homeVM.$state
+    viewModel.$state
       .compactMap { $0 }
       .sink { [weak self] state in
         guard let self else { return }
@@ -60,7 +57,7 @@ final class MainViewController: UIViewController {
       .store(in: &cancellables)
     
     // Estado de loading
-    homeVM.$isLoading
+    viewModel.$isLoading
       .sink { [weak self] loading in
         guard let self else { return }
         if loading {
@@ -71,7 +68,7 @@ final class MainViewController: UIViewController {
       .store(in: &cancellables)
     
     // Estado de erro
-    homeVM.$error
+    viewModel.$error
       .compactMap { $0 }
       .sink { [weak self] msg in
         guard let self else { return }
@@ -81,6 +78,7 @@ final class MainViewController: UIViewController {
       }
       .store(in: &cancellables)
   }
+  
   private func showAlert(_ msg: String) {
     let ac = UIAlertController(title: "Erro", message: msg, preferredStyle: .alert)
     ac.addAction(UIAlertAction(title: "OK", style: .default))
@@ -141,7 +139,7 @@ private extension MainViewController {
   
   /// Calcula pesos  e cria heightAnchors relativos
   func applyGoldenRatioHeights() {
-
+    
     let weights: [CGFloat] = [
       1.5,  // Cardápio
       0.7,  // Banners

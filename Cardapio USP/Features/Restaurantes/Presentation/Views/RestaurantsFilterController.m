@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 EPUSP. All rights reserved.
 //
 
+#import "Cardapio_USP-Swift.h"
+
 #import "RestaurantsFilterController.h"
 #import "RestaurantDataModel.h"
 #import "MenuDataModel.h"
@@ -116,16 +118,24 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   
-  [dataModel setCampus:[campiList objectAtIndex:indexPath.section]];
-  [dataModel setCurrentRestaurant:[[[campiList objectAtIndex:indexPath.section] valueForKey:@"restaurants"]objectAtIndex:indexPath.row]];
+  NSMutableDictionary *restDict = [NSMutableDictionary dictionaryWithDictionary: [[[campiList objectAtIndex:indexPath.section] valueForKey:@"restaurants"] objectAtIndex:indexPath.row]];
 
-  [[NSNotificationCenter defaultCenter] postNotificationName:@"DidChangeRestaurant" object:self];
+  [dataModel setCampus:[campiList objectAtIndex:indexPath.section]];
+  [dataModel setCurrentRestaurant:restDict];
+
+  NSDictionary *info = @{ @"restaurant" : dataModel.currentRestaurant };
+  [[NSNotificationCenter defaultCenter] postNotificationName:@"DidChangeRestaurant" object:self userInfo:info];
+
+  NSLog(@"[Filtro] enviando restaurante %@", restDict[@"id"]);
+  [[RestaurantBridge shared] setCurrentRestaurantFrom:restDict];
 
   // [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
   // [self.frostedViewController hideMenuViewController];
 
   [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+
 
 
 - (void)favoriteRestaurant:(id)sender {

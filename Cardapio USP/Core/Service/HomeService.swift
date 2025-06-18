@@ -18,7 +18,7 @@ struct HomeServiceImpl: HomeService, @unchecked Sendable {
   private let menuSvc: MenuService
   private let creditSvc: CreditService
   
-  init(restaurant: RestaurantService = RestaurantServiceImpl(),
+  init(restaurant: RestaurantService = RestaurantServiceImpl.shared,
        menu: MenuService = MenuServiceImpl(),
        credit: CreditService = CreditServiceImpl()) {
     self.restaurantSvc = restaurant
@@ -28,11 +28,14 @@ struct HomeServiceImpl: HomeService, @unchecked Sendable {
   
   func loadState() async throws -> HomeState {
     
-    // MARK: – 1. Restaurante preferido ou primeiro disponível
+    // MARK: – 1. Restaurante atual, preferido ou primeiro disponível
     let restaurant: Restaurant
-    if let preferred = restaurantSvc.preferredRestaurant() {
+    if let current = restaurantSvc.currentRestaurant() {              // sessão
+      restaurant = current
+    } else if let preferred = restaurantSvc.preferredRestaurant() {   // favorito
       restaurant = preferred
-    } else {
+      restaurantSvc.setCurrent(preferred)
+    } else {                                                          // fallback
       let campi = try await restaurantSvc.fetchCampi()
       guard let first = campi.first?.restaurants.first else {
         throw NSError(domain: "HomeService",
@@ -40,9 +43,11 @@ struct HomeServiceImpl: HomeService, @unchecked Sendable {
                       userInfo: [NSLocalizedDescriptionKey: "Sem restaurantes disponíveis"])
       }
       restaurant = first
+      restaurantSvc.setCurrent(first)
     }
     
     // MARK: – 2. Cardápio do dia e período atual
+    print(restaurant.id)
     let todayMenu = try await menuSvc.fetchToday(for: restaurant.id)
     let targetPeriod: MealPeriod = {
       switch MealPeriodCalculator.now() {

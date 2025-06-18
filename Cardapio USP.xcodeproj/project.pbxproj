@@ -60,6 +60,7 @@
 		E97B390C225556FE0070AC9B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E97B390B225556FE0070AC9B /* GoogleService-Info.plist */; };
 		E990FE6E262751F0005FF207 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E990FE6D262751F0005FF207 /* MainViewController.m */; };
 		E990FE7626279E41005FF207 /* CALayer+XibConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = E990FE7526279E41005FF207 /* CALayer+XibConfiguration.m */; };
+		E9A6A7DD2E0307D0003B2061 /* AppFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A6A7DC2E0307D0003B2061 /* AppFactory.swift */; };
 		E9B61B55260BA3E700A52672 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9B61B54260BA3E700A52672 /* CoreServices.framework */; };
 		E9BF538E2C947F49004ED570 /* MyMutableURLRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E9BF538D2C947F49004ED570 /* MyMutableURLRequest.m */; };
 		E9BF53912C94C4F4004ED570 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = E9BF53902C94C4F4004ED570 /* Constants.m */; };
@@ -204,6 +205,7 @@
 		E990FE7426279E41005FF207 /* CALayer+XibConfiguration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CALayer+XibConfiguration.h"; sourceTree = "<group>"; };
 		E990FE7526279E41005FF207 /* CALayer+XibConfiguration.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "CALayer+XibConfiguration.m"; sourceTree = "<group>"; };
 		E998B8422551D9800028B3C5 /* libFirebaseCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		E9A6A7DC2E0307D0003B2061 /* AppFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFactory.swift; sourceTree = "<group>"; };
 		E9B61B54260BA3E700A52672 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
 		E9BF538C2C947F48004ED570 /* MyMutableURLRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMutableURLRequest.h; sourceTree = "<group>"; };
 		E9BF538D2C947F49004ED570 /* MyMutableURLRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMutableURLRequest.m; sourceTree = "<group>"; };
@@ -563,6 +565,7 @@
 			children = (
 				BFAC6E8B192A54E100921494 /* AppDelegate.h */,
 				BFAC6E8C192A54E100921494 /* AppDelegate.m */,
+				E9A6A7DC2E0307D0003B2061 /* AppFactory.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -927,6 +930,7 @@
 				E9CDD1ED1AD86BFF00BB2E36 /* AFURLResponseSerialization.m in Sources */,
 				BFAC6ECD192A586B00921494 /* UIImage+REFrostedViewController.m in Sources */,
 				E92D5EA91C19B32B00ECA5D1 /* NSString+URLEncoding.m in Sources */,
+				E9A6A7DD2E0307D0003B2061 /* AppFactory.swift in Sources */,
 				E9490C74262F54B5000A035B /* WebViewController.m in Sources */,
 				BFAC6E8D192A54E100921494 /* AppDelegate.m in Sources */,
 				E9387BED1DF5F024005BC821 /* LoginWebViewController.m in Sources */,

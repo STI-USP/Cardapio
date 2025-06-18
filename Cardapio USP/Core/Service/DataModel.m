@@ -2,8 +2,8 @@
 //  DataModel.m
 //  Cardapio USP
 //
-//  Created by Vagner Machado on 5/21/15.
-//  Copyright (c) 2015 EPUSP. All rights reserved.
+//  Created by Vagner Machado on 21/05/15.
+//  Revisitado em 18/06/25 — compatível com RestaurantServiceImpl (Swift)
 //
 
 #import "DataModel.h"
@@ -14,11 +14,9 @@
 #import "OAuthUSP.h"
 #import "DataAccess.h"
 #import "Constants.h"
+#import "Cardapio_USP-Swift.h"
 
 @import Firebase;
-
-//#define kRestaurantsURL @"http://kaimbu2.uspnet.usp.br:8080/cardapio/"
-//#define kBaseURL @"http://kaimbu2.uspnet.usp.br:8080/"
 
 #define kToken @"596df9effde6f877717b4e81fdb2ca9f"
 
@@ -27,28 +25,26 @@
   DataAccess *dataAccess;
 }
 
-@property (strong, nonatomic) NSMutableArray *restaurantList;
-@property (strong, nonatomic) NSMutableArray *campiList;
-@property (strong, nonatomic) NSMutableDictionary *restaurantDict;
+//@property (nonatomic, strong) NSMutableArray *restaurants; ///< lista hierárquica (campi+RUs)
+//@property (nonatomic, strong) NSMutableDictionary *currentRestaurant;
+//@property (nonatomic, strong) NSMutableDictionary *preferredRestaurant;
+//
+//@property (nonatomic, strong) NSMutableArray *menuArray;
+//@property (nonatomic, copy) NSString *observation;
+
 @end
 
 @implementation DataModel
-
-
-
-+(DataModel *)getInstance {
+#pragma mark - Singleton
++ (instancetype)getInstance {
   static DataModel *instance = nil;
-  static dispatch_once_t once;
-  dispatch_once(&once, ^{
-    instance = [[DataModel alloc] init];
-    //    [instance setDefault];
-  });
+  static dispatch_once_t onceToken;
+  dispatch_once(&onceToken, ^{ instance = [[self alloc] init]; });
   return instance;
 }
 
 - (instancetype)init {
-  self = [super init];
-  if (self) {
+  if (self = [super init]) {
     oauth = [OAuthUSP sharedInstance];
     dataAccess = [DataAccess sharedInstance];
     [dataAccess setDataModel:self];
@@ -56,256 +52,259 @@
   return self;
 }
 
+#pragma mark - Login & user
+- (BOOL)isLoggedIn { return [oauth isLoggedIn]; }
+
 - (NSDictionary *)userData {
-    if ([self isLoggedIn]) {
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSData *userDataRaw = [defaults objectForKey:@"userData"];
-        
-        if (userDataRaw == nil || [userDataRaw isKindOfClass:[NSNull class]]) {
-            return nil; // Retorna nil se os dados não existirem ou forem NSNull
-        }
-        
-        NSError *error = nil;
-        NSDictionary *userData = [NSJSONSerialization JSONObjectWithData:userDataRaw options:NSJSONReadingMutableContainers error:&error];
-        
-        if (error || ![userData isKindOfClass:[NSDictionary class]]) {
-            // Retorna nil se houver erro na desserialização ou se o formato não for um NSDictionary
-            return nil;
-        }
-        
-        return userData;
-    } else {
-        return nil; // Retorna nil se o usuário não estiver logado
-    }
+  if (![self isLoggedIn]) return nil;
+  NSData *raw = [NSUserDefaults.standardUserDefaults objectForKey:@"userData"];
+  if (![raw isKindOfClass:[NSData class]]) return nil;
+  return [NSJSONSerialization JSONObjectWithData:raw
+                                         options:NSJSONReadingMutableContainers
+                                           error:nil];
 }
 
+#pragma mark - Persistência preferido
+static NSString * const kPrefDictKey = @"preferredRestaurant";
+static NSString * const kPrefJSONKey = @"preferredRestaurantJSON";
+
++ (void)savePreferredRestaurantDict:(NSDictionary *)dict {
+  NSUserDefaults *ud = NSUserDefaults.standardUserDefaults;
+  [ud setObject:dict forKey:kPrefDictKey];                                      // Obj-C legacy
+  NSData *json = [NSJSONSerialization dataWithJSONObject:dict options:0 error:nil];
+  if (json) [ud setObject:json forKey:kPrefJSONKey];                            // Swift
+  [ud synchronize];
+}
+
++ (NSDictionary *)loadPreferredRestaurantDict {
+  NSUserDefaults *ud = NSUserDefaults.standardUserDefaults;
+  
+  id raw = [ud objectForKey:kPrefDictKey];
+  if ([raw isKindOfClass:[NSDictionary class]]) return raw;
+  
+  NSData *json = [ud objectForKey:kPrefJSONKey];
+  if ([json isKindOfClass:[NSData class]]) {
+    id dict = [NSJSONSerialization JSONObjectWithData:json
+                                              options:NSJSONReadingMutableContainers
+                                                error:nil];
+    if ([dict isKindOfClass:[NSDictionary class]]) return dict;
+  }
+  return nil;
+}
+
+#pragma mark - RESTAURANTES
 - (void)getRestaurantList {
-  AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-  manager.requestSerializer = [AFHTTPRequestSerializer serializer];
-  manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/x-www-form-urlencoded"];
-  manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+  AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+  mgr.requestSerializer  = [AFHTTPRequestSerializer serializer];
+  mgr.responseSerializer = [AFHTTPResponseSerializer serializer];
+  mgr.responseSerializer.acceptableContentTypes =
+  [NSSet setWithObject:@"application/x-www-form-urlencoded"];
   
-  NSString *webServicePath;
-  webServicePath = [NSString stringWithFormat:@"%@restaurants", kBaseRUCardURL];
+  NSString *url   = [NSString stringWithFormat:@"%@restaurants", kBaseRUCardURL];
+  NSDictionary *p = @{ @"hash": kToken };
   
-  NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys: kToken , @"hash", nil];
-  
-  [manager POST:webServicePath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject){
-    self.restaurants = [[NSMutableArray alloc] init];
+  [mgr POST:url parameters:p success:^(AFHTTPRequestOperation *op, id resp) {
+    if (op.response.statusCode != 200) { [self notifyRestaurants]; return; }
     
+    self.restaurants = [NSJSONSerialization JSONObjectWithData:resp
+                                                       options:NSJSONReadingMutableContainers
+                                                         error:nil];
+    [NSUserDefaults.standardUserDefaults setObject:self.restaurants
+                                            forKey:@"Restaurants"];
     
-    NSInteger statusCode = [operation.response statusCode];
-    if (statusCode == 200) {
-      NSMutableDictionary *json = [NSJSONSerialization JSONObjectWithData:responseObject options: NSJSONReadingMutableContainers error: nil];
-      for (NSMutableDictionary *campus in json){
-        [self.restaurants addObject:campus];
-      }
-      if ([self.restaurants count] != 0) {
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        [defaults setObject:self.restaurants forKey:@"Restaurants"];
-        
-        for (NSDictionary *campus in self.restaurants) {
-          NSArray *restaurantsArray = campus[@"restaurants"];
-          for (NSMutableDictionary *restaurant in restaurantsArray) {
-            NSString *restaurantId = restaurant[@"id"];
-            NSString *preferredRestaurantId = [[defaults objectForKey:@"preferredRestaurant"] valueForKey:@"id"];
-            
-            if ([restaurantId isEqualToString:preferredRestaurantId]) {
-              self.preferredRestaurant = restaurant;
-              self.currentRestaurant = restaurant;
-              break;
-            }
-          }
+    /* --- seleção de preferido / current --- */
+    NSDictionary *pref = [DataModel loadPreferredRestaurantDict];
+    NSString *prefId   = pref[@"id"];
+    
+    self.currentRestaurant = nil;
+    for (NSDictionary *camp in self.restaurants) {
+      for (NSMutableDictionary *ru in camp[@"restaurants"]) {
+        if ([ru[@"id"] isEqualToString:prefId]) {
+          self.preferredRestaurant = ru;
+          self.currentRestaurant   = ru;
+          break;
         }
-        
-        if (!self.currentRestaurant && self.restaurants.count > 0) {
-          // Inicialmente assumimos que o restaurante "CUASO" não foi encontrado.
-          BOOL cuasoFound = NO;
-          
-          // Itera sobre os campi e restaurantes para encontrar "CUASO".
-          for (NSDictionary *campus in self.restaurants) {
-            NSArray *restaurantsArray = campus[@"restaurants"];
-            for (NSDictionary *restaurant in restaurantsArray) {
-              NSNumber *restaurantId = restaurant[@"id"];
-              if (restaurantId.intValue == 6) { // Restaurante central
-                self.currentRestaurant = [restaurant mutableCopy];
-                break; // Sai do loop interno uma vez que o restaurante com ID 6 foi encontrado.
-              }
-            }
-            if (cuasoFound) {
-              break; // Interrompe o loop externo se "CUASO" foi encontrado.
-            }
-          }
-          
-          // Se Central não foi encontrado, então define o primeiro restaurante como current.
-          if (!cuasoFound) {
-            NSDictionary *firstCampus = [self.restaurants firstObject];
-            NSArray *restaurantsArray = firstCampus[@"restaurants"];
-            
-            if (restaurantsArray.count > 0) {
-              self.currentRestaurant = [restaurantsArray firstObject];
-            }
-          }
-        }
-        
-        [defaults synchronize];
       }
-      // Notifica atualizações
-      [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveRestaurants" object:self];
+      if (self.currentRestaurant) break;
     }
-  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    self.restaurants = [defaults objectForKey:@"Restaurants"];
-    NSLog(@"%@", error);
-    // Notifica atualizações
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveRestaurants" object:self];
+    /* fallback para Central (6) ou primeiro RU */
+    if (!self.currentRestaurant) {
+      for (NSDictionary *camp in self.restaurants) {
+        for (NSMutableDictionary *ru in camp[@"restaurants"]) {
+          if ([ru[@"id"] intValue] == 6) { self.currentRestaurant = ru; break; }
+        }
+        if (self.currentRestaurant) break;
+      }
+      if (!self.currentRestaurant) {
+        NSDictionary *firstCampus = self.restaurants.firstObject;
+        self.currentRestaurant    = [firstCampus[@"restaurants"] firstObject];
+      }
+    }
+    
+    [self notifyRestaurants];
+    
+  } failure:^(AFHTTPRequestOperation *op, NSError *err) {
+    NSLog(@"[DataModel] restaurantes erro: %@", err.localizedDescription);
+    self.restaurants = [NSUserDefaults.standardUserDefaults objectForKey:@"Restaurants"];
+    [self notifyRestaurants];
   }];
 }
 
+#pragma mark - MENU
 - (void)getMenu {
-  
   [SVProgressHUD show];
-//  [[FIRCrashlytics crashlytics] setCustomValue:@"" forKey:@""];
   
-  self.menuArray = [[NSMutableArray alloc] init];
+  self.menuArray = NSMutableArray.new;
+  AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+  mgr.requestSerializer = [AFHTTPRequestSerializer serializer];
+  mgr.responseSerializer = [AFHTTPResponseSerializer serializer];
+  mgr.responseSerializer.acceptableContentTypes =
+  [NSSet setWithObject:@"application/x-www-form-urlencoded"];
   
-  AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-  manager.requestSerializer = [AFHTTPRequestSerializer serializer];
-  manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/x-www-form-urlencoded"];
-  manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+  NSString *url = [NSString stringWithFormat:@"%@menu/%@", kBaseRUCardURL,
+                   self.currentRestaurant[@"id"]];
   
-  NSString *webServicePath;
-  webServicePath = [NSString stringWithFormat:@"%@menu/%@", kBaseRUCardURL, [self.currentRestaurant valueForKey:@"id"]];
-  
-  NSDictionary *parameters = nil;
-  parameters = [NSDictionary dictionaryWithObjectsAndKeys:
-                kToken , @"hash",
-                nil];
-  
-  [manager POST:webServicePath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+  [mgr POST:url parameters:@{@"hash":kToken} success:^(AFHTTPRequestOperation *op, id resp) {
+    if (op.response.statusCode != 200) { [self menuError]; return; }
     
-    NSInteger statusCode = [operation.response statusCode];
-    if (statusCode == 200) {
-      // Parse da resposta
-      NSMutableDictionary *json = [NSJSONSerialization JSONObjectWithData:responseObject options: NSJSONReadingMutableContainers error: nil];
+    NSMutableDictionary *json = [NSJSONSerialization JSONObjectWithData:resp options:NSJSONReadingMutableContainers error:nil];
+    if ([json[@"message"][@"error"] boolValue]) { [self menuError]; return; }
+    
+    for (NSMutableDictionary *raw in json[@"meals"]) {
+      NSMutableDictionary *day = [self cleanDictionary:raw];
+      NSMutableArray *periods  = NSMutableArray.new;
       
-      if (![[[json valueForKey:@"message"] valueForKey:@"error"] boolValue]) {
-        for(NSMutableDictionary *rawItem in [json valueForKey:@"meals"]) {
-          NSMutableDictionary *item = [self cleanDictionary:rawItem];
-          
-          NSMutableArray *period = [[NSMutableArray alloc] init];
-          if (![[item objectForKey:@"lunch"]isKindOfClass:[NSString class]]) {
-            Period *lunch = [[Period alloc ] initWithPeriod:@"lunch" andMenu:[item objectForKey:@"lunch"][@"menu"] andCalories:[item objectForKey:@"lunch"][@"calories"]];
-            [period addObject:lunch];
-          }
-          
-          if (![[item valueForKey:@"dinner"] isKindOfClass:[NSString class]]) {
-            Period *dinner = [[Period alloc ] initWithPeriod:@"dinner" andMenu:[item objectForKey:@"dinner"][@"menu"] andCalories:[item objectForKey:@"dinner"][@"calories"]];
-            [period addObject:dinner];
-          }
-          
-          Menu *menu = [[Menu alloc] initWithDate:[item objectForKey:@"date"] andPeriod:period];
-          [self.menuArray addObject:menu];
-        }
-        self.observation = [[json objectForKey:@"observation"] valueForKey:@"observation"];
-        [SVProgressHUD dismiss];
-      } else {
-        for (int i = 1; i<=7; i++) {
-          NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-          
-          NSDate *today = [NSDate date];
-          NSDate *beginningOfWeek = nil;
-          [gregorian rangeOfUnit:NSCalendarUnitWeekOfMonth startDate:&beginningOfWeek interval:NULL forDate:today];
-          NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-          [dateFormatter setDateFormat:@"dd-MM-yyyy"];
-          NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
-          [dateComponents setDay:i];
-          NSDate *newDate = [[NSCalendar currentCalendar] dateByAddingComponents:dateComponents toDate:beginningOfWeek options:0];
-          
-          Menu *menu = [[Menu alloc] initWithDate:[dateFormatter stringFromDate:newDate] andPeriod:nil];
-          [self.menuArray addObject:menu];
-        }
-        [SVProgressHUD showErrorWithStatus:@"Não foi possível obter o cardápio. Tente novamente mais tarde."];
+      if (![day[@"lunch"] isKindOfClass:[NSString class]]) {
+        [periods addObject:[[Period alloc] initWithPeriod:@"lunch" andMenu:day[@"lunch"][@"menu"] andCalories:day[@"lunch"][@"calories"]]];
       }
-      // Notifica atualizações
-      [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveMenu" object:self];
-    } else {
-      [SVProgressHUD showErrorWithStatus:@"Não foi possível obter o cardápio. Tente novamente mais tarde."];
+      if (![day[@"dinner"] isKindOfClass:[NSString class]]) {
+        [periods addObject:[[Period alloc] initWithPeriod:@"dinner" andMenu:day[@"dinner"][@"menu"] andCalories:day[@"dinner"][@"calories"]]];
+      }
+      [self.menuArray addObject:[[Menu alloc] initWithDate:day[@"date"] andPeriod:periods]];
     }
-  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-    NSLog(@"error::: %@", error.localizedDescription);
-    [SVProgressHUD showErrorWithStatus:@"Não foi possível obter o cardápio. Tente novamente mais tarde."];
-    //NSLog(@"%@", error);
+    self.observation = json[@"observation"][@"observation"];
+    
+    [SVProgressHUD dismiss];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveMenu" object:self];
+    
+  } failure:^(AFHTTPRequestOperation *op, NSError *err) {
+    NSLog(@"[DataModel] menu erro: %@", err.localizedDescription);
+    [self menuError];
   }];
 }
 
-- (void)getCreditoRUCard {
-  [dataAccess consultarSaldo];
+- (void)menuError {
+  [SVProgressHUD showErrorWithStatus:@"Não foi possível obter o cardápio. Tente novamente mais tarde."];
+  [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveMenu" object:self];
 }
 
-- (NSMutableArray *)getCampiList{
-  return self.restaurantList;
-}
-
-
-#pragma mark Setters
-
+#pragma mark - Setters com ponte para Swift
 - (void)setCurrentRestaurant:(NSDictionary *)currentRestaurant {
-  _currentRestaurant = [currentRestaurant copy];
-  
-  NSMutableDictionary *emptyDc = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"", @"", @"", nil] forKeys:[NSArray arrayWithObjects:@"breakfast", @"lunch", @"dinner", nil]];
-  
-  if ([[[_currentRestaurant valueForKey:@"workinghours"] valueForKey:@"weekdays"] isKindOfClass:[NSNull class]]) {
-    [[_currentRestaurant valueForKey:@"workinghours"] setValue:emptyDc forKey:@"weekdays"];
-  }
-  if ([[[_currentRestaurant valueForKey:@"workinghours"] valueForKey:@"saturday"] isKindOfClass:[NSNull class]]) {
-    [[_currentRestaurant valueForKey:@"workinghours"] setValue:emptyDc forKey:@"saturday"];
-  }
-  if ([[[_currentRestaurant valueForKey:@"workinghours"] valueForKey:@"sunday"] isKindOfClass:[NSNull class]]) {
-    [[_currentRestaurant valueForKey:@"workinghours"] setValue:emptyDc forKey:@"sunday"];
-  }
+  _currentRestaurant = [self dictionaryFromPossiblyData:currentRestaurant];
+  [self sanitizeWorkingHours:_currentRestaurant];
+  [[RestaurantBridge shared] setCurrentRestaurantFrom:_currentRestaurant];
 }
 
 - (void)setPreferredRestaurant:(NSDictionary *)preferredRestaurant {
-  _preferredRestaurant = [preferredRestaurant copy];
-  
-  NSMutableDictionary *emptyDc = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"", @"", @"", nil] forKeys:[NSArray arrayWithObjects:@"breakfast", @"lunch", @"dinner", nil]];
-  
-  if ([[[_preferredRestaurant valueForKey:@"workinghours"] valueForKey:@"weekdays"] isKindOfClass:[NSNull class]])
-    [[_preferredRestaurant valueForKey:@"workinghours"] setValue:emptyDc forKey:@"weekdays"];
-  
-  if ([[[_preferredRestaurant valueForKey:@"workinghours"] valueForKey:@"saturday"] isKindOfClass:[NSNull class]])
-    [[_preferredRestaurant valueForKey:@"workinghours"] setValue:emptyDc forKey:@"saturday"];
-  
-  if ([[[_preferredRestaurant valueForKey:@"workinghours"] valueForKey:@"sunday"] isKindOfClass:[NSNull class]])
-    [[_preferredRestaurant valueForKey:@"workinghours"] setValue:emptyDc forKey:@"sunday"];
-  
-  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  [defaults setValue:_preferredRestaurant forKey:@"preferredRestaurant"];
-  [defaults synchronize];
+  _preferredRestaurant = [self dictionaryFromPossiblyData:preferredRestaurant];
+  [self sanitizeWorkingHours:_preferredRestaurant];
+  [DataModel savePreferredRestaurantDict:_preferredRestaurant];
 }
 
-- (void)setRestaurantList:(NSMutableArray *)restaurants {
-  _restaurantList = [restaurants copy]; // copia lista
+#pragma mark - Helpers
+/// Converte 'obj' (NSData / NSDictionary / NSMutableDictionary / nil)
+/// em NSMutableDictionary seguro para mutação.
+- (NSMutableDictionary *)dictionaryFromPossiblyData:(id)obj {
   
-  // Notifica atualizações
-  [[NSNotificationCenter defaultCenter] postNotificationName:@"DidRecieveRestaurants" object:self];
-}
-
-//limpa os objetos com NULL
-- (NSMutableDictionary *)cleanDictionary: (NSMutableDictionary *)dictionary {
-  [dictionary enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-    if (obj == [NSNull null]) {
-      [dictionary setObject:@"" forKey:key];
-    } else if ([obj isKindOfClass:[NSDictionary class]]) {
-      [self cleanDictionary:obj];
+  if (!obj || obj == (id)[NSNull null])
+    return NSMutableDictionary.dictionary;
+  
+  if ([obj isKindOfClass:[NSData class]]) {
+    id decoded = [NSJSONSerialization JSONObjectWithData:obj options:NSJSONReadingMutableContainers error:nil];
+    if (!decoded) {
+      decoded = [NSPropertyListSerialization propertyListWithData:obj options:NSPropertyListMutableContainersAndLeaves format:nil error:nil];
     }
-  }];
-  return dictionary;
+    obj = decoded;
+  }
+  
+  if ([obj isKindOfClass:[NSDictionary class]] &&
+      ![obj isKindOfClass:[NSMutableDictionary class]]) {
+    obj = [obj mutableCopy];
+  }
+  
+  if (![obj isKindOfClass:[NSMutableDictionary class]]) {
+    return NSMutableDictionary.dictionary;
+  }
+  
+  return obj;
 }
 
-- (BOOL) isLoggedIn {
-  return [oauth isLoggedIn];
+- (void)sanitizeWorkingHours:(NSMutableDictionary *)restaurant {
+  
+  NSLog(@"%@", restaurant);
+  id raw = restaurant[@"workinghours"];
+  
+  if ([raw isKindOfClass:[NSData class]]) {
+    NSData *data = raw;
+    id decoded = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+    
+    if (!decoded) {
+      decoded = [NSPropertyListSerialization propertyListWithData:data options:NSPropertyListMutableContainersAndLeaves format:nil error:nil];
+    }
+    raw = decoded ?: @{};
+  }
+  
+  if ([raw isKindOfClass:[NSString class]]) {
+    NSData *data = [raw dataUsingEncoding:NSUTF8StringEncoding];
+    id decoded = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+    raw = decoded ?: @{};
+  }
+  
+  if (![raw isKindOfClass:[NSMutableDictionary class]]) {
+    if ([raw isKindOfClass:[NSDictionary class]]) {
+      raw = [raw mutableCopy];
+    } else {
+      raw = [@{} mutableCopy];
+    }
+  }
+  
+  restaurant[@"workinghours"] = raw;
+  NSMutableDictionary *wh = (NSMutableDictionary *)raw;
+  
+  NSDictionary *empty = @{ @"breakfast":@"",
+                           @"lunch":@"",
+                           @"dinner":@"" };
+  
+  for (NSString *key in @[@"weekdays", @"saturday", @"sunday"]) {
+    id val = wh[key];
+    if (val == (id)[NSNull null] || !val) {
+      wh[key] = [empty mutableCopy];
+    } else if ([val isKindOfClass:[NSDictionary class]] &&
+               ![val isKindOfClass:[NSMutableDictionary class]]) {
+      // garante mutabilidade dos filhos
+      wh[key] = [val mutableCopy];
+    }
+  }
 }
+
+- (NSMutableDictionary *)cleanDictionary:(NSMutableDictionary *)dict {
+  [dict enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+    if (obj == [NSNull null])
+      dict[key] = @"";
+    else if ([obj isKindOfClass:[NSDictionary class]])
+      [self cleanDictionary:(NSMutableDictionary *)obj];
+  }];
+  return dict;
+}
+
+- (void)notifyRestaurants {
+  [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveRestaurants" object:self];
+}
+
+#pragma mark - Crédito
+- (void)getCreditoRUCard { [dataAccess consultarSaldo]; }
+
+#pragma mark - API legada
+- (NSMutableArray *)getCampiList { return self.restaurants; }
 
 @end
