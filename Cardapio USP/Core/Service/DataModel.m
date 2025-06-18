@@ -6,6 +6,7 @@
 //  Revisitado em 18/06/25 — compatível com RestaurantServiceImpl (Swift)
 //
 
+#import "Cardapio_USP-Swift.h"
 #import "DataModel.h"
 #import "Period.h"
 #import "Items.h"
@@ -14,7 +15,6 @@
 #import "OAuthUSP.h"
 #import "DataAccess.h"
 #import "Constants.h"
-#import "Cardapio_USP-Swift.h"
 
 @import Firebase;
 
@@ -153,36 +153,53 @@ static NSString * const kPrefJSONKey = @"preferredRestaurantJSON";
 #pragma mark - MENU
 - (void)getMenu {
   [SVProgressHUD show];
-  
   self.menuArray = NSMutableArray.new;
+  
   AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
-  mgr.requestSerializer = [AFHTTPRequestSerializer serializer];
-  mgr.responseSerializer = [AFHTTPResponseSerializer serializer];
-  mgr.responseSerializer.acceptableContentTypes =
-  [NSSet setWithObject:@"application/x-www-form-urlencoded"];
+  mgr.responseSerializer = [AFHTTPResponseSerializer serializer];     // mantém raw
+  NSMutableSet *types = [mgr.responseSerializer.acceptableContentTypes mutableCopy];
+  [types addObject:@"application/json"];                              // <-- acrescenta
+  mgr.responseSerializer.acceptableContentTypes = types;
   
-  NSString *url = [NSString stringWithFormat:@"%@menu/%@", kBaseRUCardURL,
-                   self.currentRestaurant[@"id"]];
+  NSString *url = [NSString stringWithFormat:@"%@menu/%@", kBaseRUCardURL, self.currentRestaurant[@"id"]];
   
-  [mgr POST:url parameters:@{@"hash":kToken} success:^(AFHTTPRequestOperation *op, id resp) {
-    if (op.response.statusCode != 200) { [self menuError]; return; }
+  NSDictionary *params = @{ @"hash" : kToken };
+  
+  __weak typeof(self) weakSelf = self;
+  [mgr POST:url parameters:params success:^(AFHTTPRequestOperation *op, id resp) {
     
-    NSMutableDictionary *json = [NSJSONSerialization JSONObjectWithData:resp options:NSJSONReadingMutableContainers error:nil];
-    if ([json[@"message"][@"error"] boolValue]) { [self menuError]; return; }
+    __strong typeof(self) self = weakSelf;
+    if (!self) return;
     
-    for (NSMutableDictionary *raw in json[@"meals"]) {
-      NSMutableDictionary *day = [self cleanDictionary:raw];
-      NSMutableArray *periods  = NSMutableArray.new;
-      
-      if (![day[@"lunch"] isKindOfClass:[NSString class]]) {
-        [periods addObject:[[Period alloc] initWithPeriod:@"lunch" andMenu:day[@"lunch"][@"menu"] andCalories:day[@"lunch"][@"calories"]]];
-      }
-      if (![day[@"dinner"] isKindOfClass:[NSString class]]) {
-        [periods addObject:[[Period alloc] initWithPeriod:@"dinner" andMenu:day[@"dinner"][@"menu"] andCalories:day[@"dinner"][@"calories"]]];
-      }
-      [self.menuArray addObject:[[Menu alloc] initWithDate:day[@"date"] andPeriod:periods]];
+    if (op.response.statusCode != 200) {
+      [self menuError];
+      return;
     }
-    self.observation = json[@"observation"][@"observation"];
+    
+    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:resp options:NSJSONReadingMutableContainers error:nil];
+    if (![json isKindOfClass:[NSDictionary class]] ||
+        [json[@"message"][@"error"] boolValue]) {
+      [self menuError];
+      return;
+    }
+    
+    [self.menuArray removeAllObjects];
+    
+    for (NSDictionary *raw in json[@"meals"]) {
+      NSDictionary *day = [self cleanDictionary:[raw mutableCopy]];
+      NSMutableArray *periods = NSMutableArray.new;
+      
+      for (NSString *period in @[@"lunch",@"dinner"]) {
+        id block = day[period];
+        if ([block isKindOfClass:[NSDictionary class]]) {
+          [periods addObject:[[Period alloc] initWithPeriod:period andMenu:block[@"menu"] andCalories:block[@"calories"]]];
+        }
+      }
+      Menu *menu = [[Menu alloc] initWithDate:day[@"date"] andPeriod:periods];
+      [self.menuArray addObject:menu];
+    }
+    
+    self.observation = json[@"observation"][@"observation"] ?: @"";
     
     [SVProgressHUD dismiss];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveMenu" object:self];
@@ -192,6 +209,7 @@ static NSString * const kPrefJSONKey = @"preferredRestaurantJSON";
     [self menuError];
   }];
 }
+
 
 - (void)menuError {
   [SVProgressHUD showErrorWithStatus:@"Não foi possível obter o cardápio. Tente novamente mais tarde."];

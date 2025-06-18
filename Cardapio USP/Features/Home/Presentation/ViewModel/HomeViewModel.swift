@@ -39,7 +39,7 @@ final class HomeViewModel: ObservableObject {
     observeRestaurantChanges()
     Task { await load() }
   }
-
+  
   deinit {
     print("[VM] deinit")
   }
@@ -75,15 +75,14 @@ final class HomeViewModel: ObservableObject {
   
   // MARK: – Observers
   private func observeRestaurantChanges() {
-    restaurantService
-      .currentPublisher
+    restaurantService.currentPublisher
       .compactMap { $0 }
+      .removeDuplicates(by: { $0.id == $1.id })
+      .dropFirst()
       .receive(on: RunLoop.main)
       .sink { [weak self] restaurant in
         guard let self else { return }
-
-        print("[VM] change recebido id = \(restaurant.id)")
-
+        
         // 1) Atualiza imediatamente o restaurante na UI
         if let cur = state {
           state = cur.withRestaurantName(restaurant.name.uppercased())
