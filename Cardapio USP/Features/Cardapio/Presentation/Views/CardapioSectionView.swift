@@ -123,43 +123,48 @@ class CardapioSectionView: UIView {
   // MARK: Update conteúdo
   func update(restaurant: String, dateText: String, periodText: String, items: [String]) {
     
+    // 1. Cabeçalho
     restauranteLabel.text = restaurant
     dataLabel.text = dateText
     refeicaoLabel.text = periodText.capitalized
     statusLabel.isHidden = true
+    
+    // 2. Limpa a lista anterior
     pratosStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
     
+    // 3. Deixa o Auto Layout terminar para sabermos as medidas corretas
     layoutIfNeeded()
     
-    let availableHeight = pratosStack.bounds.height > 0 ? pratosStack.bounds.height : bounds.height - 120
+    // 4. Altura disponível dinamica
+    // posição Y (local) onde começa a stack dos pratos
+    let topOfStack = pratosStack.convert(.zero, to: self).y
+    let bottomInset: CGFloat = 12
+    // espaço útil que sobrou
+    let maxHeight = bounds.height - topOfStack - bottomInset
     
-    var usedHeight: CGFloat = 0
-    var labels: [UILabel] = []
-    
+    // 5. Preenche respeitando o espaço
+    var currentHeight: CGFloat = 0
     for dish in items {
-      let lbl = UILabel()
-      lbl.font = .uspRegular(ofSize: 15)
-      lbl.numberOfLines = 1
-      lbl.lineBreakMode = .byTruncatingTail
-      lbl.text = dish
+      let label = UILabel()
+      label.font = .uspRegular(ofSize: 15)
+      label.lineBreakMode = .byTruncatingTail
+      label.text = dish
       
-      let fitting = lbl.systemLayoutSizeFitting(
-        CGSize(width: bounds.width - 24, height: .greatestFiniteMagnitude),
-        withHorizontalFittingPriority: .required,
-        verticalFittingPriority: .fittingSizeLevel)
+      let labelHeight = label.systemLayoutSizeFitting(
+        CGSize(width: bounds.width - 24, height: .greatestFiniteMagnitude), withHorizontalFittingPriority: .required, verticalFittingPriority: .fittingSizeLevel
+      ).height
       
-      let h = fitting.height + pratosStack.spacing
-      if usedHeight + h > availableHeight {
-        // coloca reticências no último visível
-        if let last = labels.last {
-          last.text = (last.text ?? "") + " […]"
-        }
+      // inclui spacing apenas se já existe algo na stack
+      let spacer = pratosStack.arrangedSubviews.isEmpty ? 0 : pratosStack.spacing
+      if currentHeight + spacer + labelHeight > maxHeight {
+        // adiciona reticências ao último visível
+        (pratosStack.arrangedSubviews.last as? UILabel)?
+          .text?.append(" […]")
         break
       }
-      usedHeight += h
-      labels.append(lbl)
+      
+      if spacer > 0 { currentHeight += spacer }
+      currentHeight += labelHeight
+      pratosStack.addArrangedSubview(label)
     }
-    
-    labels.forEach { pratosStack.addArrangedSubview($0) }
-  }
-}
+  }}
