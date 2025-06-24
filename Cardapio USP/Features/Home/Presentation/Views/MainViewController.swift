@@ -9,21 +9,21 @@
 import UIKit
 import Combine
 
-final class MainViewController: UIViewController {
+final class MainViewController: UIViewController, UIScrollViewDelegate {
   
   // MARK: – ViewModel
   var viewModel: HomeViewModel!
-  
   private var cancellables = Set<AnyCancellable>()
-  private var lastRestaurantID: String?
   
-  // MARK: – Sub-views
+  // MARK: – Sub‑views
+  private let scrollView = UIScrollView()
+  private let refreshCtrl = UIRefreshControl()
+  private let mainStack = UIStackView()
+  
   private let cardapioView = CardapioSectionView()
   private let saldoView = SaldoSectionView()
   private let bannerVC = BannerCarouselViewController()
   private let actionButtons = VerticalButtonGridSection()
-  // private let actionButtons = VerticalButtonListSection()
-  private let mainStack = UIStackView()
   
   // MARK: – Lifecycle
   override func viewDidLoad() {
@@ -32,7 +32,8 @@ final class MainViewController: UIViewController {
     
     title = "Cardápio +"
     view.backgroundColor = UIColor(named: "MainBackground")
-
+    
+    setupScrollView()
     setupStack()
     embedSections()
     applyGoldenRatioHeights()
@@ -40,103 +41,73 @@ final class MainViewController: UIViewController {
     observeAppLifecycle()
   }
   
-  // MARK: – Bind ViewModel → UI
-  private func bind() {
-    // Estado de sucesso
-    viewModel.$state
-      .compactMap { $0 }
-      .sink { [weak self] state in
-        guard let self else { return }
-        cardapioView.update(
-          restaurant: state.restaurantName,
-          dateText: state.dateText,
-          periodText: state.mealPeriod,
-          items: state.items
-        )
-        saldoView.update(balanceText: state.balanceText)
-      }
-      .store(in: &cancellables)
-    
-    // Estado de loading
-    viewModel.$isLoading
-      .sink { [weak self] loading in
-        guard let self else { return }
-        if loading {
-          cardapioView.showLoading()
-          // saldoView.showLoading()
-        }
-      }
-      .store(in: &cancellables)
-    
-    // Estado de erro
-    viewModel.$error
-      .compactMap { $0 }
-      .sink { [weak self] msg in
-        guard let self else { return }
-        cardapioView.showError("Erro ao carregar cardápio")
-        // saldoView.showError("Erro ao carregar saldo")
-        showAlert(msg)
-      }
-      .store(in: &cancellables)
-  }
-
-  // MARK: - Refresh ao voltar p/ foreground
-  private func observeAppLifecycle() {
-    NotificationCenter.default
-      .publisher(for: UIApplication.willEnterForegroundNotification)
-      .sink { [weak self] _ in
-        guard let self else { return }
-        Task { await self.viewModel.load() }
-      }
-      .store(in: &cancellables)
+  // MARK: - UIScrollViewDelegate
+  func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    // Impede rolagem para baixo ou para os lados
+    if scrollView.contentOffset.y > 0 { scrollView.contentOffset.y = 0 }
+    if scrollView.contentOffset.x != 0 { scrollView.contentOffset.x = 0 }
   }
   
-  private func showAlert(_ msg: String) {
-    let ac = UIAlertController(title: "Erro", message: msg, preferredStyle: .alert)
-    ac.addAction(UIAlertAction(title: "OK", style: .default))
-    present(ac, animated: true)
-  }
 }
 
-// MARK: – Setup helpers
+// MARK: – Setup
 private extension MainViewController {
   
-  /// Stack vertical sem espaçamento — cada “pedaço” recebe altura proporcional
+  func setupScrollView() {
+    scrollView.delegate = self
+    
+    scrollView.alwaysBounceVertical = true
+    scrollView.alwaysBounceHorizontal = false
+    scrollView.showsHorizontalScrollIndicator = false
+    scrollView.isDirectionalLockEnabled = true
+    scrollView.translatesAutoresizingMaskIntoConstraints = false
+    view.addSubview(scrollView)
+    NSLayoutConstraint.activate([
+      scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+      scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+      scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+      scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+    ])
+    
+    refreshCtrl.addTarget(self, action: #selector(refreshPulled), for: .valueChanged)
+    scrollView.refreshControl = refreshCtrl
+  }
+  
+  /// Stack vertical dentro do scrollView
   func setupStack() {
     mainStack.axis = .vertical
     mainStack.spacing = 12
     mainStack.alignment = .fill
-    mainStack.distribution = .fill // as alturas virão por constraints
     mainStack.translatesAutoresizingMaskIntoConstraints = false
-    view.addSubview(mainStack)
+    scrollView.addSubview(mainStack)
     
     NSLayoutConstraint.activate([
-      mainStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-      mainStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-      mainStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-      mainStack.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20)
+      mainStack.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
+      mainStack.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor, constant: 16),
+      mainStack.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor, constant: -16),
+      mainStack.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
+      mainStack.widthAnchor.constraint(equalTo: scrollView.frameLayoutGuide.widthAnchor, constant: -32),
+      mainStack.heightAnchor.constraint(equalTo: scrollView.frameLayoutGuide.heightAnchor, constant: -20)
     ])
   }
   
-  /// Adiciona cada seção como child-view-controller (ou view simples)
   func embedSections() {
-    // 1. Cardápio
+    // Cardápio
     mainStack.addArrangedSubview(cardapioView)
     
-    // 2. Saldo
+    // Saldo
     saldoView.onAddCreditTapped = { [weak self] in
-      let vc = AddCreditsViewController()
-      self?.navigationController?.pushViewController(vc, animated: true)
+      self?.navigationController?.pushViewController(AddCreditsViewController(), animated: true)
     }
     mainStack.addArrangedSubview(saldoView)
     
-    // 3. Banners
+    // Banners
     addChild(bannerVC)
     bannerVC.view.translatesAutoresizingMaskIntoConstraints = false
     let bannerContainer = UIView()
     bannerContainer.addSubview(bannerVC.view)
     NSLayoutConstraint.activate([
-      bannerVC.view.topAnchor .constraint(equalTo: bannerContainer.topAnchor),
+      bannerVC.view.topAnchor.constraint(equalTo: bannerContainer.topAnchor),
       bannerVC.view.leadingAnchor.constraint(equalTo: bannerContainer.leadingAnchor, constant: -16),
       bannerVC.view.trailingAnchor.constraint(equalTo: bannerContainer.trailingAnchor, constant: 16),
       bannerVC.view.bottomAnchor.constraint(equalTo: bannerContainer.bottomAnchor)
@@ -144,12 +115,11 @@ private extension MainViewController {
     bannerVC.didMove(toParent: self)
     mainStack.addArrangedSubview(bannerContainer)
     
-    // 4. Botões de ação
+    // Botões
     actionButtons.heightAnchor.constraint(equalToConstant: 240).isActive = true
     mainStack.addArrangedSubview(actionButtons)
   }
   
-  /// Calcula pesos  e cria heightAnchors relativos
   func applyGoldenRatioHeights() {
     
     let weights: [CGFloat] = [
@@ -176,11 +146,56 @@ private extension MainViewController {
       c.isActive = true
     }
   }
-  
-  /// Pequeno helper p/ embed clássico de child-VC
-  func add(_ child: UIViewController) {
-    addChild(child)
-    mainStack.addArrangedSubview(child.view)
-    child.didMove(toParent: self)
+}
+
+// MARK: – Pull‑to‑refresh
+private extension MainViewController {
+  @objc func refreshPulled() {
+    Task { [weak self] in
+      guard let self else { return }
+      await self.viewModel.load()
+      self.refreshCtrl.endRefreshing()
+    }
+  }
+}
+
+// MARK: – Binding ViewModel → UI
+private extension MainViewController {
+  func bind() {
+    viewModel.$state.compactMap { $0 }.sink { [weak self] state in
+      guard let self else { return }
+      cardapioView.update(restaurant: state.restaurantName,
+                          dateText: state.dateText,
+                          periodText: state.mealPeriod,
+                          items: state.items)
+      saldoView.update(balanceText: state.balanceText)
+    }.store(in: &cancellables)
+    
+    viewModel.$isLoading.sink { [weak self] loading in
+      if loading { self?.cardapioView.showLoading() }
+    }.store(in: &cancellables)
+    
+    viewModel.$error.compactMap { $0 }.sink { [weak self] msg in
+      self?.cardapioView.showError("Erro ao carregar cardápio")
+      self?.showAlert(msg)
+    }.store(in: &cancellables)
+  }
+}
+
+// MARK: – App‑lifecycle refresh
+private extension MainViewController {
+  func observeAppLifecycle() {
+    NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)
+      .sink { [weak self] _ in Task { await self?.viewModel.load() } }
+      .store(in: &cancellables)
+  }
+}
+
+// MARK: – Alert helper
+private extension MainViewController {
+  func showAlert(_ msg: String) {
+    let ac = UIAlertController(title: "Erro", message: msg, preferredStyle: .alert)
+    ac.addAction(UIAlertAction(title: "OK", style: .default))
+    present(ac, animated: true)
   }
 }
