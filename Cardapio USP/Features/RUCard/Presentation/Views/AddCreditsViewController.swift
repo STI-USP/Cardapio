@@ -47,6 +47,11 @@ final class AddCreditsViewController: UIViewController, UITextFieldDelegate {
     buildLayout()
     bindViewModel()
     observeNotifications()
+    
+    // Tap‑to‑dismiss
+    let tapBG = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+    tapBG.cancelsTouchesInView = false
+    view.addGestureRecognizer(tapBG)
   }
   
   override func viewWillDisappear(_ animated: Bool) {
@@ -103,6 +108,8 @@ private extension AddCreditsViewController {
     nc.addObserver(forName: .init("DidCreatePix"), object: nil, queue: .main) { [weak self] _ in
       Task { @MainActor in
         SVProgressHUD.dismiss()
+        self?.dismissKeyboard()
+        self?.valueTextField.text = ""
         self?.presentPixModal() }
     }
     
@@ -236,6 +243,7 @@ private extension AddCreditsViewController {
   
   @objc func generatePixTapped() {
     guard validateValueMin(10) else { return }
+    dismissKeyboard()
     SVProgressHUD.show()
     Task { await viewModel.generatePix(amountText: numericText()) }
   }
@@ -244,6 +252,14 @@ private extension AddCreditsViewController {
     guard let code = viewModel.lastPix?.copiaCola, !code.isEmpty else { return }
     UIPasteboard.general.string = code
     SVProgressHUD.showSuccess(withStatus: "Copiado")
+  }
+}
+
+
+// MARK: - Keyboard helpers
+private extension AddCreditsViewController {
+  @objc func dismissKeyboard() {
+    view.endEditing(true)
   }
 }
 
