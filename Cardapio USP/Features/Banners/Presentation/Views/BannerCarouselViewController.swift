@@ -26,6 +26,11 @@ final class BannerCarouselViewController: UIViewController {
     viewModel.loadBanners()
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+     super.viewWillAppear(animated)
+     scrollToRandomCard(animated: true)
+   }
+
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
     DispatchQueue.main.async {
@@ -38,13 +43,29 @@ final class BannerCarouselViewController: UIViewController {
     autoScrollTimer?.invalidate()
   }
   
+  // MARK: - ViewModel binding
   private func bindViewModel() {
     viewModel.onUpdate = { [weak self] in
+      guard let self else { return }
       DispatchQueue.main.async {
-        self?.pageControl.numberOfPages = self?.viewModel.banners.count ?? 0
-        self?.collectionView.reloadData()
+        self.pageControl.numberOfPages = self.viewModel.banners.count
+        self.collectionView.reloadData()
+        self.scrollToRandomCard(animated: false)
       }
     }
+  }
+  
+  // MARK: - Random scroll helper
+  private func scrollToRandomCard(animated: Bool) {
+    guard viewModel.banners.count > 0 else { return }
+    
+    let randomIndex = Int.random(in: 0 ..< viewModel.banners.count)
+    let indexPath   = IndexPath(item: randomIndex, section: 0)
+    
+    // Garante layout pronto para evitar “attempt to scroll to invalid index path”
+    collectionView.layoutIfNeeded()
+    collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: animated)
+    pageControl.currentPage = randomIndex
   }
   
   private func setupCollectionView() {
