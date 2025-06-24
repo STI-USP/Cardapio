@@ -1,8 +1,9 @@
 //
 //  SaldoSectionView.swift
-//  banner
+//  Cardapio USP
 //
-//  Created by Vagner Machado on 15/04/25.
+//  Created by Vagner Machado on 24/06/25.
+//  Copyright © 2025 USP. All rights reserved.
 //
 
 import UIKit

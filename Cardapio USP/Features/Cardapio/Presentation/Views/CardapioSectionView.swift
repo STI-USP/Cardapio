@@ -65,7 +65,7 @@ class CardapioSectionView: UIView {
     statusLabel.textAlignment = .center
     
     pratosStack.axis = .vertical
-    pratosStack.spacing = 1
+    pratosStack.spacing = 0
     pratosStack.clipsToBounds = true
     
     bottomSpacer.setContentHuggingPriority(.defaultLow,  for: .vertical)
@@ -78,7 +78,7 @@ class CardapioSectionView: UIView {
     mainStack.addArrangedSubview(bottomSpacer)
     
     // Espaçamentos customizados
-    mainStack.setCustomSpacing(12, after: headerStack)   // entre header e refeição
+    mainStack.setCustomSpacing(8, after: headerStack)   // entre header e refeição
     mainStack.setCustomSpacing(8, after: refeicaoLabel) // entre refeição e itens
     mainStack.setCustomSpacing(8, after: statusLabel)
     

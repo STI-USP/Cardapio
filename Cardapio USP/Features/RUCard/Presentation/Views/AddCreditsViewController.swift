@@ -1,39 +1,33 @@
 //
-//  AddCreditsViewController.swift
+//  AddCreditsViewModel.swift
 //  Cardapio USP
 //
-//  Criado em 16/04/25 – **atualizado em 24/06/25**
+//  Created by Vagner Machado on 24/06/25.
+//  Copyright © 2025 USP. All rights reserved.
 //
 
 import UIKit
 import Combine
 import SVProgressHUD
 
+@MainActor
 final class AddCreditsViewController: UIViewController, UITextFieldDelegate {
   
-  // MARK: – Dependências
-  private let creditService: CreditService = CreditServiceLegacyAdapter()
-  private let checkoutModel = CheckoutDataModel.sharedInstance()
-  private let dataModel = DataModel.getInstance()
-  
-  // MARK: – State / Combine
+  // MARK: – View-Model
+  private let viewModel = AddCreditsViewModel()
   private var cancellables = Set<AnyCancellable>()
-  @Published private var balance: Double?
-  @Published private var lastPix: Pix?
-  @Published private var isLoading = false
-  @Published private var error: String?
   
   // MARK: – UI
-  private let userNameLabel = UILabel()
-  private let saldoValueLabel = UILabel()
-  private let valueTextField = UITextField()
-  private let generatePixButton = UIButton(type: .system)
-  private let lastPixHeader = UILabel()
-  private let lastPixLabel = UILabel()
+  private let userNameLabel      = UILabel()
+  private let saldoValueLabel    = UILabel()
+  private let valueTextField     = UITextField()
+  private let generateButton     = UIButton(type: .system)
+  private let lastPixHeader      = UILabel()
+  private let lastPixLabel       = UILabel()
   private let lastPixStatusLabel = UILabel()
-  private let copyPixButton = UIButton(type: .system)
+  private let copyButton         = UIButton(type: .system)
   
-  // MARK: – Formatter BRL
+  // Formatter
   private let brlFormatter: NumberFormatter = {
     let f = NumberFormatter()
     f.locale = Locale(identifier: "pt_BR")
@@ -46,154 +40,107 @@ final class AddCreditsViewController: UIViewController, UITextFieldDelegate {
   // MARK: – Lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
+    
     title = "RUCard"
     view.backgroundColor = .secondarySystemBackground
     
     buildLayout()
-    bindState()
-    observeLegacyNotifications()
-    loadData()
+    bindViewModel()
+    observeNotifications()
   }
   
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
     SVProgressHUD.dismiss()
+    NotificationCenter.default.removeObserver(self)
   }
 }
 
-// MARK: – Networking
+// MARK: - Bindings
 private extension AddCreditsViewController {
   
-  func loadData() {
-    Task { @MainActor in
-      isLoading = true
-      do {
-        balance = try await creditService.fetchBalance()
-        fetchLastPix()
-        isLoading = false
-      } catch {
-        self.error = error.localizedDescription
-        isLoading = false
-      }
-    }
-  }
-  
-  func fetchLastPix() { checkoutModel?.getLastPix() }
-}
-
-// MARK: – Combine bindings
-private extension AddCreditsViewController {
-  
-  func bindState() {
+  func bindViewModel() {
     // Saldo
-    $balance
-      .compactMap { $0 }
-      .sink { [weak self] value in
-        self?.saldoValueLabel.text =
-        self?.brlFormatter.string(from: value as NSNumber)
-      }
+    viewModel.$balanceText
+      .map(Optional.init)
+      .receive(on: RunLoop.main)
+      .assign(to: \.text, on: saldoValueLabel)
       .store(in: &cancellables)
     
     // Último Pix
-    $lastPix
-      .compactMap { $0 }
+    viewModel.$lastPix
+      .receive(on: RunLoop.main)
       .sink { [weak self] pix in
-        guard let self else { return }
-        
-        lastPixLabel.text = "Valor: \(brlFormatter.string(from: pix.valor as NSDecimalNumber) ?? "--")"
+        guard let self, let pix else { return }
+        lastPixLabel.text   = "Valor: \(brlFormatter.string(from: pix.valor as NSDecimalNumber) ?? "--")"
         lastPixStatusLabel.text = "Situação: \(pix.situacao)"
-        
-        // habilita só se estiver em aberto
-        let emAberto = pix.situacao == "Em aberto"
-        copyPixButton.isEnabled = emAberto
-        copyPixButton.alpha = emAberto ? 1 : 0.5
-      }
+        let open = pix.situacao == "Em aberto"
+        copyButton.isEnabled = open
+        copyButton.alpha     = open ? 1 : 0.5
+      }.store(in: &cancellables)
+    
+    // Loading HUD
+    viewModel.$isLoading
+      .receive(on: RunLoop.main)
+      .sink { $0 ? SVProgressHUD.show() : SVProgressHUD.dismiss() }
       .store(in: &cancellables)
     
-    // Loading
-    $isLoading
-      .sink { loading in
-        loading ? SVProgressHUD.show() : SVProgressHUD.dismiss()
-      }
-      .store(in: &cancellables)
-    
-    // Erro
-    $error
+    // Error
+    viewModel.$error
       .compactMap { $0 }
-      .sink { [weak self] msg in self?.showAlert(msg) }
+      .receive(on: RunLoop.main)
+      .sink { [weak self] in self?.showAlert($0) }
       .store(in: &cancellables)
   }
 }
 
-// MARK: – Bridge Obj-C
+// MARK: - Legacy notifications (apenas Pix criado & login)
 private extension AddCreditsViewController {
   
-  func observeLegacyNotifications() {
-    
+  func observeNotifications() {
     let nc = NotificationCenter.default
     
-    nc.publisher(for: .init("DidReceiveCredits"))
-      .sink { [weak self] _ in
-        if let txt = self?.dataModel?.ruCardCredit?
-          .replacingOccurrences(of: ",", with: "."),
-           let v = Double(txt) {
-          self?.balance = v
-        }
-      }
-      .store(in: &cancellables)
-    
-    nc.publisher(for: .init("DidReceiveLastPix"))
-      .sink { [weak self] _ in
-        guard let dict = self?.checkoutModel?.pix as? [String: Any] else { return }
-        self?.lastPix = Pix(bridging: VMPix.model(with: dict))
-      }
-      .store(in: &cancellables)
-    
-    nc.publisher(for: .init("DidCreatePix"))
-      .sink { [weak self] _ in
+    nc.addObserver(forName: .init("DidCreatePix"), object: nil, queue: .main) { [weak self] _ in
+      Task { @MainActor in
         SVProgressHUD.dismiss()
-        self?.fetchLastPix()
-        self?.valueTextField.text = ""
-        self?.dismissKeyboard()
-        self?.presentPixModal()
-      }
-      .store(in: &cancellables)
+        self?.presentPixModal() }
+    }
     
-    nc.publisher(for: .init("DidReceiveLoginError"))
-      .sink { [weak self] _ in self?.presentLogin() }
-      .store(in: &cancellables)
+    nc.addObserver(forName: .init("DidReceiveLoginError"), object: nil, queue: .main) { [weak self] _ in
+      Task { @MainActor in self?.presentLogin() }
+    }
   }
   
-  /// Apresenta a tela PixViewController (storyboard "Main_iPhone")
+  @MainActor
   func presentPixModal() {
     let sb = UIStoryboard(name: "Main_iPhone", bundle: nil)
-    if let vc = sb.instantiateViewController(withIdentifier: "pixViewController") as? PixViewController {
-      vc.modalPresentationStyle = .formSheet
-      present(vc, animated: true)
-    }
+    guard let pvc = sb.instantiateViewController(withIdentifier: "pixViewController") as? PixViewController else { return }
+    
+    pvc.modalPresentationStyle = .formSheet
+    present(pvc, animated: true)
   }
 }
 
-// MARK: – Layout
+// MARK: - Layout
 private extension AddCreditsViewController {
   
   func buildLayout() {
-    
+    // Scroll + Stack
     let scroll = UIScrollView()
     scroll.translatesAutoresizingMaskIntoConstraints = false
     view.addSubview(scroll)
     
     let stack = UIStackView()
-    stack.axis  = .vertical
+    stack.axis = .vertical
     stack.spacing = 24
     stack.translatesAutoresizingMaskIntoConstraints = false
     scroll.addSubview(stack)
     
     NSLayoutConstraint.activate([
-      scroll.topAnchor .constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+      scroll.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
       scroll.leadingAnchor.constraint(equalTo: view.leadingAnchor),
       scroll.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-      scroll.bottomAnchor .constraint(equalTo: view.bottomAnchor),
+      scroll.bottomAnchor.constraint(equalTo: view.bottomAnchor),
       
       stack.topAnchor.constraint(equalTo: scroll.topAnchor, constant: 24),
       stack.leadingAnchor.constraint(equalTo: scroll.leadingAnchor, constant: 24),
@@ -206,26 +153,21 @@ private extension AddCreditsViewController {
     userNameLabel.font = .uspBold(ofSize: 24)
     userNameLabel.textAlignment = .center
     userNameLabel.numberOfLines = 2
-    if let nome = OAuthUSP.sharedInstance().userData?["nomeUsuario"] as? String {
-      userNameLabel.text = nome
-    }
+    userNameLabel.text = OAuthUSP.sharedInstance().userData?["nomeUsuario"] as? String
     
-    // 2) Saldo
+    // 2) Saldo card
     let saldoCard = USPCardView()
     let saldoTitle = UILabel(text: "Saldo disponível", font: .uspRegular(ofSize: 14))
     saldoTitle.textColor = .uspAccent
-    
     saldoValueLabel.font = .uspBold(ofSize: 24)
     saldoValueLabel.textColor = .uspAccent
-    saldoValueLabel.text = "R$ --,--"
-    
     let saldoStack = UIStackView(arrangedSubviews: [saldoTitle, saldoValueLabel])
     saldoStack.axis = .vertical
     saldoStack.alignment = .center
     saldoStack.spacing = 4
     saldoStack.pin(in: saldoCard, inset: 12)
     
-    // 3) Recarga
+    // 3) Formulário
     let recargaHeader = UILabel(text: "Recargue seu RUCard", font: .uspBold(ofSize: 20))
     recargaHeader.textColor = .uspSecondary
     
@@ -233,47 +175,52 @@ private extension AddCreditsViewController {
     valueTextField.keyboardType = .decimalPad
     valueTextField.placeholder = "Valor (R$)"
     valueTextField.delegate = self
-    valueTextField.addTarget(self, action: #selector(maskCurrency), for: .editingChanged)
+    valueTextField.addTarget(self, action: #selector(maskCurrency(_:)), for: .editingChanged)
     
-    generatePixButton.configuration = .filled()
-    generatePixButton.configuration?.title = "Gerar código Pix"
-    generatePixButton.configuration?.baseBackgroundColor = .uspPrimary
-    generatePixButton.configuration?.baseForegroundColor = .white
-    generatePixButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
-    generatePixButton.addTarget(self, action: #selector(generatePixTapped), for: .touchUpInside)
+    generateButton.configuration = .filled()
+    generateButton.configuration?.title = "Gerar código Pix"
+    generateButton.configuration?.baseBackgroundColor = .uspPrimary
+    generateButton.configuration?.baseForegroundColor  = .white
+    generateButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
+    generateButton.addTarget(self, action: #selector(generatePixTapped), for: .touchUpInside)
     
-    let formInfo = UILabel(text: "Gere um código de pagamento via Pix para valores entre R$10,00 e R$200,00.", font: .uspRegular(ofSize: 16), lines: 0, alignment: .center)
+    let formInfo = UILabel(text: "Gere um código de pagamento via Pix para valores entre R$10,00 e R$200,00.",
+                           font: .uspRegular(ofSize: 16),
+                           lines: 0,
+                           alignment: .center)
     
-    let formStack = UIStackView(arrangedSubviews: [formInfo,
-                                                   valueTextField,
-                                                   generatePixButton])
+    let formStack = UIStackView(arrangedSubviews: [formInfo, valueTextField, generateButton])
     formStack.axis = .vertical
     formStack.spacing = 12
-    
     let formCard = USPCardView(embed: formStack, inset: 16)
     
-    // 4) Último Pix
-    lastPixHeader.text = "Último Pix gerado";
-    lastPixHeader.font = .uspBold(ofSize: 20);
+    // 4) Último Pix card
+    lastPixHeader.text = "Último Pix gerado"
+    lastPixHeader.font = .uspBold(ofSize: 20)
     lastPixHeader.textColor = .uspSecondary
+    
     lastPixLabel.font = .uspRegular(ofSize: 16)
-    lastPixStatusLabel.font = .uspLight(ofSize: 14);
+    lastPixStatusLabel.font = .uspLight(ofSize: 14)
     lastPixStatusLabel.textColor = .uspSecondary
-    copyPixButton.configuration = .filled();
-    copyPixButton.configuration?.title = "Copiar código Pix";
-    copyPixButton.configuration?.baseBackgroundColor = .uspPrimary;
-    copyPixButton.configuration?.baseForegroundColor = .white;
-    copyPixButton.addTarget(self, action: #selector(copyPixTapped), for: .touchUpInside)
-    let lastInfo = UIStackView(arrangedSubviews: [lastPixLabel, lastPixStatusLabel]);
-    lastInfo.axis = .vertical;
+    
+    copyButton.configuration = .filled()
+    copyButton.configuration?.title = "Copiar código Pix"
+    copyButton.configuration?.baseBackgroundColor = .uspPrimary
+    copyButton.configuration?.baseForegroundColor  = .white
+    copyButton.addTarget(self, action: #selector(copyPixTapped), for: .touchUpInside)
+    
+    let lastInfo = UIStackView(arrangedSubviews: [lastPixLabel, lastPixStatusLabel])
+    lastInfo.axis = .vertical
     lastInfo.spacing = 4
-    let lastRow = UIStackView(arrangedSubviews: [lastInfo, copyPixButton]);
-    lastRow.axis = .horizontal;
-    lastRow.alignment = .center;
+    
+    let lastRow = UIStackView(arrangedSubviews: [lastInfo, copyButton])
+    lastRow.axis = .horizontal
+    lastRow.alignment = .center
     lastRow.distribution = .equalSpacing
+    
     let lastCard = USPCardView(embed: lastRow, style: .outline, inset: 16)
     
-    // 5) Empilha
+    // 5) Add to stack
     stack.addArrangedSubview(userNameLabel)
     stack.addArrangedSubview(saldoCard)
     stack.addArrangedSubview(recargaHeader)
@@ -283,25 +230,34 @@ private extension AddCreditsViewController {
   }
 }
 
-// MARK: – Text-field mask “R$ …”
+// MARK: - Actions
 private extension AddCreditsViewController {
   
-  /// formata enquanto digita
+  @objc func generatePixTapped() {
+    guard validateValueMin(10) else { return }
+    SVProgressHUD.show()
+    Task { await viewModel.generatePix(amountText: numericText()) }
+  }
+  
+  @objc func copyPixTapped() {
+    guard let code = viewModel.lastPix?.copiaCola, !code.isEmpty else { return }
+    UIPasteboard.general.string = code
+    SVProgressHUD.showSuccess(withStatus: "Copiado")
+  }
+}
+
+// MARK: - UITextField helpers
+private extension AddCreditsViewController {
+  
   @objc func maskCurrency(_ tf: UITextField) {
-    // remove tudo que não é dígito
-    let digits = tf.text?
-      .components(separatedBy: CharacterSet.decimalDigits.inverted)
-      .joined() ?? ""
-    
-    // converte para centavos
-    let cents = Decimal(string: digits) ?? 0
-    let value = cents / 100
-    
+    let digits = tf.text?.components(separatedBy: CharacterSet.decimalDigits.inverted).joined() ?? ""
+    let cents  = Decimal(string: digits) ?? 0
+    let value  = cents / 100
     tf.text = brlFormatter.string(from: value as NSNumber)
     
-    // mantém cursor no final
-    let end = tf.endOfDocument
-    if let range = tf.textRange(from: end, to: end) {
+    // mantém cursor no fim
+    if let end = tf.position(from: tf.endOfDocument, offset: 0),
+       let range = tf.textRange(from: end, to: end) {
       tf.selectedTextRange = range
     }
   }
@@ -314,25 +270,7 @@ private extension AddCreditsViewController {
   }
 }
 
-// MARK: – Actions
-private extension AddCreditsViewController {
-  
-  @objc func generatePixTapped() {
-    guard validateValueMin(10) else { return }
-    
-    SVProgressHUD.show()
-    checkoutModel?.valorRecarga = numericText()
-    checkoutModel?.createPix()
-  }
-  
-  @objc func copyPixTapped() {
-    guard let code = lastPix?.copiaCola, !code.isEmpty else { return }
-    UIPasteboard.general.string = code
-    SVProgressHUD.showSuccess(withStatus: "Copiado")
-  }
-}
-
-// MARK: – Helpers
+// MARK: - Validation & alert
 private extension AddCreditsViewController {
   
   func validateValueMin(_ min: Decimal) -> Bool {
@@ -351,7 +289,6 @@ private extension AddCreditsViewController {
     present(ac, animated: true)
   }
   
-  func dismissKeyboard() { view.endEditing(true) }
   
   func presentLogin() {
     if let vc = storyboard?.instantiateViewController(withIdentifier: "loginWebViewController") {
