@@ -446,7 +446,7 @@
         <!--Pagamento Pix-->
         <scene sceneID="Sxu-de-1m4">
             <objects>
-                <viewController id="Z3s-iW-cie" customClass="PixViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="pixViewController" id="Z3s-iW-cie" customClass="PixViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Q3H-8r-7fe"/>
                         <viewControllerLayoutGuide type="bottom" id="DhG-NA-BnE"/>

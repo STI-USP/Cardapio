@@ -187,7 +187,6 @@
   //configura parametros
   NSString *token = self.userData[@"wsuserid"];
   NSString *tokenNotificacao = nil;
-  //tokenNotificacao = [[LibrariesDataModel sharedInstance] pushToken];
   
   NSMutableDictionary *dict;
   

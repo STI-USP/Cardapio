@@ -37,6 +37,7 @@ final class MainViewController: UIViewController {
     embedSections()
     applyGoldenRatioHeights()
     bind()
+    observeAppLifecycle()
   }
   
   // MARK: – Bind ViewModel → UI
@@ -75,6 +76,17 @@ final class MainViewController: UIViewController {
         cardapioView.showError("Erro ao carregar cardápio")
         // saldoView.showError("Erro ao carregar saldo")
         showAlert(msg)
+      }
+      .store(in: &cancellables)
+  }
+
+  // MARK: - Refresh ao voltar p/ foreground
+  private func observeAppLifecycle() {
+    NotificationCenter.default
+      .publisher(for: UIApplication.willEnterForegroundNotification)
+      .sink { [weak self] _ in
+        guard let self else { return }
+        Task { await self.viewModel.load() }
       }
       .store(in: &cancellables)
   }

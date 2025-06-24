@@ -8,6 +8,18 @@
 
 import Foundation
 
+enum CreditServiceError: LocalizedError {
+    case notLoggedIn
+    case server(String)
+
+    var errorDescription: String? {
+        switch self {
+        case .notLoggedIn:             return "Você precisa estar logado para consultar o saldo."
+        case .server(let message):     return message
+        }
+    }
+}
+
 protocol HomeService: Sendable {
   func loadState() async throws -> HomeState
 }
@@ -20,7 +32,7 @@ struct HomeServiceImpl: HomeService, @unchecked Sendable {
   
   init(restaurant: RestaurantService = RestaurantServiceImpl.shared,
        menu: MenuService = MenuServiceImpl(),
-       credit: CreditService = CreditServiceImpl()) {
+       credit: CreditService = CreditServiceLegacyAdapter()) {
     self.restaurantSvc = restaurant
     self.menuSvc = menu
     self.creditSvc = credit

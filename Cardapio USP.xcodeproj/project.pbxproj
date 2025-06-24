@@ -56,7 +56,6 @@
 		E9387BED1DF5F024005BC821 /* LoginWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9387BEC1DF5F024005BC821 /* LoginWebViewController.m */; };
 		E9490C74262F54B5000A035B /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9490C73262F54B5000A035B /* WebViewController.m */; };
 		E9490C78262F5C10000A035B /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9490C77262F5C0F000A035B /* WebKit.framework */; };
-		E96EBA3B2DB18D8500265407 /* VMPix.m in Sources */ = {isa = PBXBuildFile; fileRef = E96EBA3A2DB18D8500265407 /* VMPix.m */; };
 		E97B390C225556FE0070AC9B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E97B390B225556FE0070AC9B /* GoogleService-Info.plist */; };
 		E990FE6E262751F0005FF207 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E990FE6D262751F0005FF207 /* MainViewController.m */; };
 		E990FE7626279E41005FF207 /* CALayer+XibConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = E990FE7526279E41005FF207 /* CALayer+XibConfiguration.m */; };
@@ -197,8 +196,6 @@
 		E9490C72262F54B5000A035B /* WebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
 		E9490C73262F54B5000A035B /* WebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		E9490C77262F5C0F000A035B /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
-		E96EBA392DB18D8500265407 /* VMPix.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VMPix.h; sourceTree = "<group>"; };
-		E96EBA3A2DB18D8500265407 /* VMPix.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VMPix.m; sourceTree = "<group>"; };
 		E97B390B225556FE0070AC9B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E990FE6C262751F0005FF207 /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		E990FE6D262751F0005FF207 /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
@@ -648,8 +645,6 @@
 				E9E9852B2DE8DD2B0042311D /* Campus.swift */,
 				E90555B21E030EEA00B8516E /* CheckoutDataModel.h */,
 				E90555B31E030EEA00B8516E /* CheckoutDataModel.m */,
-				E96EBA392DB18D8500265407 /* VMPix.h */,
-				E96EBA3A2DB18D8500265407 /* VMPix.m */,
 				E9E985172DE8D1450042311D /* MealPeriod.swift */,
 				E9E985192DE8D18A0042311D /* Menu.swift */,
 			);
@@ -922,7 +917,6 @@
 				BFAC6EDB192A587900921494 /* NSString+HTML.m in Sources */,
 				E9E9851A2DE8D18A0042311D /* Menu.swift in Sources */,
 				E9BF538E2C947F49004ED570 /* MyMutableURLRequest.m in Sources */,
-				E96EBA3B2DB18D8500265407 /* VMPix.m in Sources */,
 				E9CDD1EE1AD86BFF00BB2E36 /* AFURLSessionManager.m in Sources */,
 				E92D5EAA1C19B32B00ECA5D1 /* OAuth1Controller.m in Sources */,
 				E90555B41E030EEA00B8516E /* CheckoutDataModel.m in Sources */,

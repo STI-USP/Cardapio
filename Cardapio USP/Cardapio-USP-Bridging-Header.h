@@ -8,3 +8,4 @@
 #import "VMPix.h"
 #import "OAuthUSP.h"
 #import "MenuViewController.h"
+#import "PixViewController.h"
