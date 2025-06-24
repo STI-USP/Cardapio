@@ -42,7 +42,7 @@ final class AddCreditsViewController: UIViewController, UITextFieldDelegate {
     super.viewDidLoad()
     
     title = "RUCard"
-    view.backgroundColor = .secondarySystemBackground
+    view.backgroundColor = UIColor(named: "MainBackground")
     
     buildLayout()
     bindViewModel()

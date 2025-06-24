@@ -61,6 +61,7 @@
 		E990FE7626279E41005FF207 /* CALayer+XibConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = E990FE7526279E41005FF207 /* CALayer+XibConfiguration.m */; };
 		E9A6A7DD2E0307D0003B2061 /* AppFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A6A7DC2E0307D0003B2061 /* AppFactory.swift */; };
 		E9A6AC102E0AC86B003B2061 /* AddCreditsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A6AC0F2E0AC86B003B2061 /* AddCreditsService.swift */; };
+		E9A6AC162E0AF962003B2061 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E9A6AC152E0AF962003B2061 /* Colors.xcassets */; };
 		E9B61B55260BA3E700A52672 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9B61B54260BA3E700A52672 /* CoreServices.framework */; };
 		E9BF538E2C947F49004ED570 /* MyMutableURLRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E9BF538D2C947F49004ED570 /* MyMutableURLRequest.m */; };
 		E9BF53912C94C4F4004ED570 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = E9BF53902C94C4F4004ED570 /* Constants.m */; };
@@ -205,6 +206,7 @@
 		E998B8422551D9800028B3C5 /* libFirebaseCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9A6A7DC2E0307D0003B2061 /* AppFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFactory.swift; sourceTree = "<group>"; };
 		E9A6AC0F2E0AC86B003B2061 /* AddCreditsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCreditsService.swift; sourceTree = "<group>"; };
+		E9A6AC152E0AF962003B2061 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		E9B61B54260BA3E700A52672 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
 		E9BF538C2C947F48004ED570 /* MyMutableURLRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMutableURLRequest.h; sourceTree = "<group>"; };
 		E9BF538D2C947F49004ED570 /* MyMutableURLRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMutableURLRequest.m; sourceTree = "<group>"; };
@@ -380,6 +382,7 @@
 				E9E8C5A71B18C5710042DC81 /* fav.png */,
 				BFAC6E8E192A54E100921494 /* Main_iPhone.storyboard */,
 				BFAC6E97192A54E100921494 /* Images.xcassets */,
+				E9A6AC152E0AF962003B2061 /* Colors.xcassets */,
 				E9E985212DE8D3110042311D /* Tests */,
 				E9E9839D2DE8A50C0042311D /* App */,
 				E9E9839E2DE8A5510042311D /* Core */,
@@ -771,6 +774,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9A6AC162E0AF962003B2061 /* Colors.xcassets in Resources */,
 				BFAAC4751C217E37004F2700 /* LaunchImage.png in Resources */,
 				E9DEA0231B4DC1FC00422524 /* restaurants.json in Resources */,
 				BFAC6E98192A54E100921494 /* Images.xcassets in Resources */,

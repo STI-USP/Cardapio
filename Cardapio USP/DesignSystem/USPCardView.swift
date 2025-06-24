@@ -38,7 +38,7 @@ final class USPCardView: UIView {
   
   // MARK: – Private helpers
   private func configure(style: Style) {
-    backgroundColor = .secondarySystemBackground
+    backgroundColor = UIColor(named: "CardBackground")
     layer.cornerRadius = 12
     switch style {
     case .elevated:
@@ -51,10 +51,10 @@ final class USPCardView: UIView {
   }
   
   private func addShadow() {
-    layer.shadowColor   = UIColor.label.withAlphaComponent(0.15).cgColor
+    layer.shadowColor = UIColor.uspBorder.withAlphaComponent(0.15).cgColor
     layer.shadowOpacity = 1
-    layer.shadowRadius  = 6
-    layer.shadowOffset  = CGSize(width: 0, height: 2)
+    layer.shadowRadius = 6
+    layer.shadowOffset = CGSize(width: 0, height: 2)
   }
   
   override func layoutSubviews() {
