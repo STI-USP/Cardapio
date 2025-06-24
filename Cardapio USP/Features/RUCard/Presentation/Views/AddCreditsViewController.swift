@@ -18,14 +18,14 @@ final class AddCreditsViewController: UIViewController, UITextFieldDelegate {
   private var cancellables = Set<AnyCancellable>()
   
   // MARK: – UI
-  private let userNameLabel      = UILabel()
-  private let saldoValueLabel    = UILabel()
-  private let valueTextField     = UITextField()
-  private let generateButton     = UIButton(type: .system)
-  private let lastPixHeader      = UILabel()
-  private let lastPixLabel       = UILabel()
+  private let userNameLabel = UILabel()
+  private let saldoValueLabel = UILabel()
+  private let valueTextField = UITextField()
+  private let generateButton = UIButton(type: .system)
+  private let lastPixHeader = UILabel()
+  private let lastPixLabel = UILabel()
   private let lastPixStatusLabel = UILabel()
-  private let copyButton         = UIButton(type: .system)
+  private let copyButton = UIButton(type: .system)
   
   // Formatter
   private let brlFormatter: NumberFormatter = {
@@ -113,11 +113,12 @@ private extension AddCreditsViewController {
   
   @MainActor
   func presentPixModal() {
-    let sb = UIStoryboard(name: "Main_iPhone", bundle: nil)
+    let sb  = UIStoryboard(name: "Main_iPhone", bundle: nil)
     guard let pvc = sb.instantiateViewController(withIdentifier: "pixViewController") as? PixViewController else { return }
     
-    pvc.modalPresentationStyle = .formSheet
-    present(pvc, animated: true)
+    let nav = UINavigationController(rootViewController: pvc)
+    nav.modalPresentationStyle = .formSheet
+    present(nav, animated: true)
   }
 }
 

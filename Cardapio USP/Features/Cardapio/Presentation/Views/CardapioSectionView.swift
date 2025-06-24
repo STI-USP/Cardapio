@@ -29,7 +29,7 @@ class CardapioSectionView: UIView {
     layer.cornerRadius = 12
     layer.borderWidth = 1
     layer.borderColor = UIColor.uspPrimary.cgColor
-    backgroundColor = .systemBackground
+    backgroundColor = .secondarySystemBackground
     
     let mainStack = UIStackView()
     mainStack.axis = .vertical

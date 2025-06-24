@@ -181,10 +181,10 @@ private final class SquareGridButton: UIView {
     self.title = title
     super.init(frame: .zero)
     
-    backgroundColor = .systemBackground
+    backgroundColor = .secondarySystemBackground
     layer.cornerRadius = 12
     layer.borderWidth = 0.5
-    layer.borderColor = UIColor.systemGray4.cgColor
+    layer.borderColor = UIColor.separator.cgColor
     translatesAutoresizingMaskIntoConstraints = false
     heightAnchor.constraint(equalTo: widthAnchor).isActive = true // quadrado
 

@@ -31,7 +31,7 @@ final class MainViewController: UIViewController {
     precondition(viewModel != nil, "MainViewController deve receber viewModel antes de usar")
     
     title = "Cardápio +"
-    view.backgroundColor = .secondarySystemBackground
+    view.backgroundColor = .systemGroupedBackground
 
     setupStack()
     embedSections()

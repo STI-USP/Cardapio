@@ -1,8 +1,9 @@
 //
 //  BannerCarouselViewController.swift
-//  banner
+//  Cardapio USP
 //
 //  Created by Vagner Machado on 15/04/25.
+//  Copyright © 2025 USP. All rights reserved.
 //
 
 import UIKit
@@ -26,10 +27,16 @@ final class BannerCarouselViewController: UIViewController {
     viewModel.loadBanners()
   }
   
+
   override func viewWillAppear(_ animated: Bool) {
      super.viewWillAppear(animated)
      scrollToRandomCard(animated: true)
    }
+
+//  override func viewDidAppear(_ animated: Bool) {
+//     super.viewDidAppear(animated)
+//     scrollToRandomCard(animated: true)
+//   }
 
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
