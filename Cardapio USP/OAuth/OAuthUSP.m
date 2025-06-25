@@ -105,9 +105,29 @@
 }
 
 - (void)login {
-  UIViewController *rootViewController = (UIViewController *)[[(AppDelegate *) [[UIApplication sharedApplication] delegate] window] rootViewController];
-  loginViewController = [rootViewController.storyboard instantiateViewControllerWithIdentifier:@"loginWebViewController"];
-  [rootViewController presentViewController:loginViewController animated:YES completion:nil];
+  // 1. Identifica a scene em primeiro-plano
+  UIWindowScene *activeScene = (UIWindowScene *)
+    [[UIApplication sharedApplication].connectedScenes filteredSetUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(UIScene *scene, NSDictionary *bindings) {
+          return scene.activationState == UISceneActivationStateForegroundActive;
+        }]].anyObject;
+  
+  // 2. Obtém a window principal dessa scene
+  UIWindow *window = activeScene.windows.firstObject;
+  UIViewController *topVC = window.rootViewController;
+  while (topVC.presentedViewController) {
+    topVC = topVC.presentedViewController;
+  }
+
+  // 3. Carrega o storyboard explicitamente
+  UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
+  UIViewController *loginVC = [sb instantiateViewControllerWithIdentifier:@"loginWebViewController"];
+  if (!loginVC) {
+    NSLog(@"[OAuthUSP] ⚠️ Identifier 'loginWebViewController' não encontrado");
+    return;
+  }
+
+  [topVC presentViewController:loginVC animated:YES completion:nil];
+  loginViewController = (LoginWebViewController *)loginVC;
 }
 
 - (void)logout {
@@ -122,8 +142,6 @@
   
   _oauthToken = nil;
   _oauthTokenSecret = nil;
-  //[self setOauthToken:nil];
-  //[self setOauthTokenSecret:nil];
 }
 
 #pragma mark - STI

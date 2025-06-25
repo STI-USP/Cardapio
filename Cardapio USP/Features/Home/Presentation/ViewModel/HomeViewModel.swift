@@ -40,9 +40,7 @@ final class HomeViewModel: ObservableObject {
     Task { await load() }
   }
   
-  deinit {
-    print("[VM] deinit")
-  }
+  deinit { print("[VM] deinit") }
   
   // MARK: – Public API
   func load() async {
@@ -52,24 +50,35 @@ final class HomeViewModel: ObservableObject {
     }
     
     do {
-      var loaded = try await service.loadState()
-      print("[VM] load() concluído para \(loaded.restaurantName)")
-      
-      // Fallback: se HomeService não trouxe nome
-      if loaded.restaurantName.isEmpty,
-         let pref = restaurantService.preferredRestaurant() {
-        loaded = loaded.withRestaurantName(pref.name.uppercased())
+          let loaded = try await service.loadState()
+          await MainActor.run {
+            self.state     = self.enrichWithFallbackName(loaded)
+            self.isLoading = false
+          }
+
+        } catch {
+          // se for não‑logado, tenta buscar apenas cardápio público
+          if case HomeServiceError.unauthorized = error {
+            await fetchMenuOnly()
+          } else {
+            await MainActor.run {
+              self.error = error.localizedDescription
+              self.isLoading = false
+            }
+          }
+        }
       }
-      
+
+  // MARK: – Menu público (sem saldo)
+  private func fetchMenuOnly() async {
+    do {
+      let menu = try await service.loadMenuOnly()
       await MainActor.run {
-        state = loaded
-        isLoading = false
-      }
-    } catch {
-      await MainActor.run {
-        self.error = error.localizedDescription
+        self.state = self.enrichWithFallbackName(menu)
         self.isLoading = false
       }
+    } catch {
+      await MainActor.run { self.isLoading = false } // silencia erro
     }
   }
   
@@ -92,6 +101,13 @@ final class HomeViewModel: ObservableObject {
         Task { await load() }
       }
       .store(in: &cancellables)
+  }
+  
+  // MARK: – Helper
+  private func enrichWithFallbackName(_ state: HomeState) -> HomeState {
+    guard state.restaurantName.isEmpty,
+          let pref = restaurantService.preferredRestaurant() else { return state }
+    return state.withRestaurantName(pref.name.uppercased())
   }
 }
 

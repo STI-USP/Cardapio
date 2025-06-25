@@ -54,6 +54,11 @@ final class AddCreditsViewController: UIViewController, UITextFieldDelegate {
     view.addGestureRecognizer(tapBG)
   }
   
+   override func viewDidAppear(_ animated: Bool) {
+     super.viewDidAppear(animated)
+     _ = ensureLogged()
+   }
+
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
     SVProgressHUD.dismiss()
@@ -94,7 +99,16 @@ private extension AddCreditsViewController {
     viewModel.$error
       .compactMap { $0 }
       .receive(on: RunLoop.main)
-      .sink { [weak self] in self?.showAlert($0) }
+      .sink { [weak self] msg in
+        guard let self else { return }
+        // Se o usuário não está logado, apenas chama login; não alerta
+        if !OAuthUSP.sharedInstance().isLoggedIn() {
+          self.presentLogin();
+          return
+        }
+        // Para outros erros legítimos, exibe alerta
+        self.showAlert(msg)
+      }
       .store(in: &cancellables)
   }
 }
@@ -111,6 +125,14 @@ private extension AddCreditsViewController {
         self?.dismissKeyboard()
         self?.valueTextField.text = ""
         self?.presentPixModal() }
+    }
+    
+    // Usuário logado/registrado novamente → recarrega saldo + último Pix
+    nc.addObserver(forName: .init("DidRegisterUser"), object: nil, queue: .main) { [weak self] _ in
+      Task { [weak self] in
+        guard let self else { return }
+        await self.viewModel.load()
+      }
     }
     
     nc.addObserver(forName: .init("DidReceiveLoginError"), object: nil, queue: .main) { [weak self] _ in
@@ -241,7 +263,19 @@ private extension AddCreditsViewController {
 // MARK: - Actions
 private extension AddCreditsViewController {
   
+  @discardableResult
+  func ensureLogged() -> Bool {
+    // ja autenticado
+    if OAuthUSP.sharedInstance().isLoggedIn() {
+      return true
+    } else {
+      presentLogin()
+      return false
+    }
+  }
+  
   @objc func generatePixTapped() {
+    guard ensureLogged() else { return }
     guard validateValueMin(10) else { return }
     dismissKeyboard()
     SVProgressHUD.show()
@@ -308,9 +342,7 @@ private extension AddCreditsViewController {
   
   
   func presentLogin() {
-    if let vc = storyboard?.instantiateViewController(withIdentifier: "loginWebViewController") {
-      present(vc, animated: true)
-    }
+    OAuthUSP.sharedInstance().login()
   }
 }
 

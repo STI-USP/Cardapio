@@ -8,6 +8,20 @@
 
 import Foundation
 
+enum CreditServiceError: LocalizedError {
+    case unauthorized
+    case server(String)
+
+    var errorDescription: String? {
+        switch self {
+        case .unauthorized:
+          return "Você precisa estar logado para consultar o saldo."
+        case .server(let message):
+          return message
+        }
+    }
+}
+
 // MARK: – Contrato
 protocol CreditService : Sendable {
   func fetchBalance() async throws -> Double
@@ -31,7 +45,7 @@ struct CreditServiceLegacyAdapter: CreditService, @unchecked Sendable {
     
     // 1. Garante que há token
     guard (OAuthUSP.sharedInstance().userData?["wsuserid"] as? String) != nil
-    else { throw CreditServiceError.notLoggedIn }
+    else { throw CreditServiceError.unauthorized }
     
     // 2. Fire-and-forget no serviço legado
     dataAccess?.consultarSaldo()
