@@ -68,8 +68,6 @@
   
   _restaurantDc = [dataModel currentRestaurant];
   
-  
-  
   [self setHeaderView];
 }
 
@@ -380,60 +378,59 @@
 }
 
 
-- (void)setHeaderView{
+- (void)setHeaderView {
+  CGFloat width = UIScreen.mainScreen.bounds.size.width;
+  CGFloat imageHeight = width * 9.0 / 16.0;
   
-  //TableView Header
-  UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, self.tableView.frame.size.width*9/16 +30)];
-  //[headerView setBackgroundColor:[UIColor whiteColor]];
+  UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, width, imageHeight + 30)];
   
-  //imagem do restaurante
-  UIView *imageView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, self.tableView.frame.size.width*9/16 -10)];
+  // Criação do container da imagem
+  UIView *imageContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, width, imageHeight)];
+  [headerView addSubview:imageContainer];
+  
   ThumbnailViewImageProxy *imageViewProxy = [[ThumbnailViewImageProxy alloc] init];
   imageViewProxy.aspect = ThumbnailAspectZoom;
   imageViewProxy.hasBorders = NO;
   
-  NSString *photoUrl = [_restaurantDc valueForKey:@"photourl"];
-  if (photoUrl.length != 0) {
+  NSString *photoUrl = nil;
+  if ([_restaurantDc valueForKey:@"photourl"] && [[_restaurantDc valueForKey:@"photourl"] length] > 0) {
+    photoUrl = [_restaurantDc valueForKey:@"photourl"];
+  } else if ([_restaurantDc valueForKey:@"photoURL"] && [[_restaurantDc valueForKey:@"photoURL"] length] > 0) {
+    photoUrl = [_restaurantDc valueForKey:@"photoURL"];
+  }
+  if (photoUrl.length > 0) {
     imageViewProxy.imagePath = photoUrl;
+    
+    [imageViewProxy getImageWithCompletionHandler:^(UIImage *image, NSError *error) {
+      dispatch_async(dispatch_get_main_queue(), ^{
+        if (image) {
+          UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+          imageView.frame = imageContainer.bounds;
+          imageView.contentMode = UIViewContentModeScaleAspectFill;
+          imageView.clipsToBounds = YES;
+          [imageContainer addSubview:imageView];
+        }
+      });
+    }];
   }
   
-  imageView = imageViewProxy;
+  // Texto sobre a imagem (nome do restaurante)
+  UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, width - 20, 40)];
+  label.text = [_restaurantDc valueForKey:@"name"];
+  label.font = [UIFont boldSystemFontOfSize:16];
+  label.textColor = UIColor.whiteColor;
+  label.textAlignment = NSTextAlignmentCenter;
+  label.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
+  label.layer.cornerRadius = 6;
+  label.clipsToBounds = YES;
   
-  [imageViewProxy getImageWithCompletionHandler:^(UIImage *image, NSError *error) {
-    UIImageView *viewForImage = [[UIImageView alloc] initWithImage:imageViewProxy.image];
-    [viewForImage setFrame:CGRectMake(0., 0., self.tableView.frame.size.width, self.tableView.frame.size.width*9/16)];
-    [viewForImage setContentMode: UIViewContentModeScaleToFill];
-    [imageView addSubview:viewForImage];
-  }];
+  [imageContainer addSubview:label];
   
-  CATextLayer *border = [[CATextLayer alloc] init];
-  border.foregroundColor = CFBridgingRetain((__bridge id)[UIColor blackColor].CGColor);
-  border.alignmentMode = kCAAlignmentCenter;
-  border.font = (__bridge CFTypeRef)(@"HelveticaNeue-Bold");
-  border.fontSize = 14.0;
-  border.wrapped = YES;
-  border.frame = CGRectMake(11.0, 11.0, self.tableView.frame.size.width - 11., 40.0);
-  border.string = [_restaurantDc valueForKey:@"name"];
-  border.name = @"border";
-  [imageView.layer addSublayer:border];
-  
-  CATextLayer *label = [[CATextLayer alloc] init];
-  label.foregroundColor = CFBridgingRetain((__bridge id)[UIColor whiteColor].CGColor);
-  label.alignmentMode = kCAAlignmentCenter;
-  label.font = (__bridge CFTypeRef)(@"HelveticaNeue-Bold");
-  label.fontSize = 14.0;
-  label.wrapped = YES;
-  label.frame = CGRectMake(10.0, 10.0, self.tableView.frame.size.width - 10., 40.0);
-  label.string = [_restaurantDc valueForKey:@"name"];
-  label.name = @"text";
-  [imageView.layer addSublayer:label];
-  [headerView addSubview:imageView];
-  
-  //View para o mapa
+  // Botão do mapa
   UIButton *mapButton = [self createMapButton];
   [headerView addSubview:mapButton];
   
-  [self.tableView setTableHeaderView: headerView];
+  self.tableView.tableHeaderView = headerView;
   [SVProgressHUD dismiss];
 }
 
@@ -473,11 +470,6 @@
 
 
 #pragma mark Actions
-
-//- (void)showMap {
-//  MapViewController *mapController = [self.storyboard instantiateViewControllerWithIdentifier:@"MapViewController"];
-//  [self.navigationController pushViewController:mapController animated:YES];
-//}
 
 - (void)showMap {
   UIAlertController *alert = [UIAlertController alertControllerWithTitle:[_restaurantDc valueForKey:@"name"]  message:[_restaurantDc valueForKey:@"address"] preferredStyle:UIAlertControllerStyleActionSheet];
@@ -519,11 +511,8 @@
   [alert addAction:[UIAlertAction actionWithTitle:@"Cancelar" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
     // Cancel button tappped.
   }]];
-  
   [self presentViewController:alert animated:YES completion:nil];
-  
 }
-
 
 - (void)doneButtonTapped:(id)sender {
   [self dismissViewControllerAnimated:YES completion:nil];
