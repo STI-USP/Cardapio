@@ -116,12 +116,15 @@ private extension MainViewController {
     mainStack.addArrangedSubview(bannerContainer)
     
     // Botões
-    actionButtons.heightAnchor.constraint(equalToConstant: 240).isActive = true
+    if UIScreen.main.bounds.height <= 667 { // iPhone SE 3rd e 8
+      actionButtons.heightAnchor.constraint(equalToConstant: 200).isActive = true
+    } else {
+      actionButtons.heightAnchor.constraint(equalToConstant: 240).isActive = true
+    }
     mainStack.addArrangedSubview(actionButtons)
   }
   
   func applyGoldenRatioHeights() {
-    
     let weights: [CGFloat] = [
       1.5,  // Cardápio
       0.7,  // Banners

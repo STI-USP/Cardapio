@@ -27,6 +27,9 @@ final class AddCreditsViewController: UIViewController, UITextFieldDelegate {
   private let lastPixStatusLabel = UILabel()
   private let copyButton = UIButton(type: .system)
   
+  // MARK: – State
+    private var didCheckLogin = false
+  
   // Formatter
   private let brlFormatter: NumberFormatter = {
     let f = NumberFormatter()
@@ -54,10 +57,15 @@ final class AddCreditsViewController: UIViewController, UITextFieldDelegate {
     view.addGestureRecognizer(tapBG)
   }
   
-   override func viewDidAppear(_ animated: Bool) {
-     super.viewDidAppear(animated)
-     _ = ensureLogged()
-   }
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    if !didCheckLogin {
+      didCheckLogin = true
+      if !ensureLogged() {
+        didCheckLogin = false
+      }
+    }
+  }
 
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
@@ -129,9 +137,11 @@ private extension AddCreditsViewController {
     
     // Usuário logado/registrado novamente → recarrega saldo + último Pix
     nc.addObserver(forName: .init("DidRegisterUser"), object: nil, queue: .main) { [weak self] _ in
-      Task { [weak self] in
-        guard let self else { return }
+      guard let self else { return }
+      Task { @MainActor in
         await self.viewModel.load()
+        self.userNameLabel.text = OAuthUSP.sharedInstance().userData?["nomeUsuario"] as? String
+        self.didCheckLogin = true
       }
     }
     
@@ -155,6 +165,15 @@ private extension AddCreditsViewController {
 private extension AddCreditsViewController {
   
   func buildLayout() {
+    
+    // logout button
+    navigationItem.rightBarButtonItem = UIBarButtonItem(
+      title: "Sair",
+      style: .plain,
+      target: self,
+      action: #selector(logoutTapped)
+    )
+    
     // Scroll + Stack
     let scroll = UIScrollView()
     scroll.translatesAutoresizingMaskIntoConstraints = false
@@ -274,6 +293,24 @@ private extension AddCreditsViewController {
     }
   }
   
+  @objc func logoutTapped() {
+    OAuthUSP.sharedInstance().logout()
+
+    // Zera o estado da tela
+    userNameLabel.text = nil
+    saldoValueLabel.text = nil
+    lastPixLabel.text = nil
+    lastPixStatusLabel.text = nil
+    copyButton.isEnabled = false
+    copyButton.alpha = 0.5
+    valueTextField.text = nil
+
+    viewModel.reset()
+    didCheckLogin = false
+
+    presentLogin()
+  }
+  
   @objc func generatePixTapped() {
     guard ensureLogged() else { return }
     guard validateValueMin(10) else { return }
@@ -342,8 +379,11 @@ private extension AddCreditsViewController {
   
   
   func presentLogin() {
+    // já está mostrando login?
+    if presentedViewController != nil { return }
     OAuthUSP.sharedInstance().login()
   }
+  
 }
 
 // MARK: – Extensões utilitárias

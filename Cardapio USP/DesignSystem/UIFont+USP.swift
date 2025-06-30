@@ -1,6 +1,6 @@
 //
 //  UIFont+USP.swift
-//  banner
+//  Cardapio USP
 //
 //  Created by Vagner Machado on 15/04/25.
 //

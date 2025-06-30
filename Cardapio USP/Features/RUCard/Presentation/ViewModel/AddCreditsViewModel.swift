@@ -49,6 +49,13 @@ final class AddCreditsViewModel: ObservableObject {
     }
   }
   
+  func reset() {
+    balanceText = ""
+    lastPix = nil
+    isLoading = false
+    error = nil
+  }
+  
   func generatePix(amountText: String) async {
     isLoading = true
     do {
