@@ -66,7 +66,7 @@
       }
       
       return [json mutableCopy];
-
+      
     } else {
       NSLog(@"Erro: userData não é do tipo NSData");
       return nil;
@@ -107,9 +107,9 @@
 - (void)login {
   // 1. Identifica a scene em primeiro-plano
   UIWindowScene *activeScene = (UIWindowScene *)
-    [[UIApplication sharedApplication].connectedScenes filteredSetUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(UIScene *scene, NSDictionary *bindings) {
-          return scene.activationState == UISceneActivationStateForegroundActive;
-        }]].anyObject;
+  [[UIApplication sharedApplication].connectedScenes filteredSetUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(UIScene *scene, NSDictionary *bindings) {
+    return scene.activationState == UISceneActivationStateForegroundActive;
+  }]].anyObject;
   
   // 2. Obtém a window principal dessa scene
   UIWindow *window = activeScene.windows.firstObject;
@@ -117,7 +117,7 @@
   while (topVC.presentedViewController) {
     topVC = topVC.presentedViewController;
   }
-
+  
   // 3. Carrega o storyboard explicitamente
   UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
   UIViewController *loginVC = [sb instantiateViewControllerWithIdentifier:@"loginWebViewController"];
@@ -125,7 +125,7 @@
     NSLog(@"[OAuthUSP] ⚠️ Identifier 'loginWebViewController' não encontrado");
     return;
   }
-
+  
   [topVC presentViewController:loginVC animated:YES completion:nil];
   loginViewController = (LoginWebViewController *)loginVC;
 }
@@ -154,7 +154,7 @@
   //tokenNotificacao = [[LibrariesDataModel sharedInstance] pushToken];
   
   NSMutableDictionary *dict;
-
+  
   //#warning @":::DEV::: para producao, precisa comentar os 2 ultimos parametros, ainda nao implementados"
   if (tokenNotificacao) {
     dict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
@@ -187,7 +187,7 @@
       if ([httpResponse statusCode] == 200) {
         NSLog(@"registro: %@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
         [[NSNotificationCenter defaultCenter] postNotificationName:@"DidRegisterUser" object:self];
-
+        
       } else {
         NSLog(@"error: %ld", (long)[httpResponse statusCode]);
       }
@@ -251,7 +251,7 @@
 - (void)consultarToken {
   
   NSString *token = self.userData[@"wsuserid"];
-
+  
   //configura parametros
   NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
                                token, @"token",
