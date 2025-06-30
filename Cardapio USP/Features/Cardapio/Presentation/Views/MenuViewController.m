@@ -21,15 +21,12 @@
 #import "CreditsNavigationViewController.h"
 #import "BoletoViewController.h"
 
-
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
 #define kWIDTH UIScreen.mainScreen.bounds.size.width
 
 
 @interface MenuViewController () <DKScrollingTabControllerDelegate> {
-  
-  //DKScrollingTabController *dateTabController;
   
   RestaurantDataModel *_restaurantDataModel;
   MenuDataModel *_menuDataModel;
@@ -60,77 +57,8 @@
   oauth = [OAuthUSP sharedInstance];
   stringForLunch = [NSMutableString stringWithFormat:@""];
   
-  [dataModel getMenu];
-  
-  self.revealViewController.delegate = self;
-  [self.rightButton setAction: @selector(rightRevealToggle:)];
-  
   //DKScrollingTabController
-  _dateTabController = [[DKScrollingTabController alloc] init];
-  [self addChildViewController:_dateTabController];
-  [_dateTabController didMoveToParentViewController:self];
-  [self.view addSubview:_dateTabController.view];
-  
-  self.tableView.contentInset = UIEdgeInsetsMake(8, 0, 0, 0);
-
-  CGFloat topPadding = 0.0;
-  CGFloat bottomPadding = 0.0;
-  
-  if (@available(iOS 11.0, *)) { //Safe Área
-    UIWindow *window = UIApplication.sharedApplication.windows.firstObject;
-    topPadding = window.safeAreaInsets.top;
-    bottomPadding = window.safeAreaInsets.bottom;
-    
-    _dateTabController.view.frame = CGRectMake(0, topPadding+40., CGRectGetWidth(self.view.bounds), 56);
-  }
-  
-  
-  if (@available(iOS 13.0, *)) {
-    _dateTabController.view.backgroundColor = [UIColor systemGroupedBackgroundColor];
-  } else {
-    _dateTabController.view.backgroundColor = [UIColor lightTextColor];
-  }
-  if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ){
-    CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
-    CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
-    if( screenHeight < screenWidth ){
-      screenHeight = screenWidth;
-    }
-    if( screenHeight > 480 && screenHeight < 667 ){
-      _dateTabController.buttonPadding = 4.2;
-    } else if ( screenHeight > 480 && screenHeight < 736 ){
-      _dateTabController.buttonPadding = 8.2;
-    } else if ( screenHeight > 480 && screenHeight < 812 ){
-      _dateTabController.buttonPadding = 11;
-    } else if ( screenHeight > 480 && screenHeight < 896){
-      _dateTabController.buttonPadding = 8.2;
-    } else if ( screenHeight > 480 ){
-      _dateTabController.buttonPadding = 11;
-    } else {
-      _dateTabController.buttonPadding = 3.2;
-    }
-  }
-  
-  _dateTabController.underlineIndicator = YES;
-  _dateTabController.underlineIndicatorColor = [UIColor colorNamed:@"usp_orange"];
-  _dateTabController.buttonsScrollView.showsHorizontalScrollIndicator = NO;
-  _dateTabController.selectedBackgroundColor = [UIColor clearColor];
-  if (@available(iOS 13.0, *)) {
-    _dateTabController.selectedTextColor = [UIColor labelColor];
-  } else {
-    // Fallback on earlier versions
-    _dateTabController.selectedTextColor = [UIColor blackColor];
-  }
-  _dateTabController.unselectedTextColor = [UIColor grayColor];
-  _dateTabController.unselectedBackgroundColor = [UIColor clearColor];
-  _dateTabController.selection = @[@"           \n0",
-                                   @"           \n0",
-                                   @"           \n0",
-                                   @"           \n0",
-                                   @"           \n0",
-                                   @"           \n0",
-                                   @"           \n0"
-  ];
+  setupDKScrollingTabController(self);
   
   //Notification
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChangeRestaurant:) name:@"DidChangeRestaurant" object:nil];
@@ -138,63 +66,11 @@
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRecieveUserData:) name:@"DidRecieveUserData" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveBill:) name:@"DidReceiveBill" object:nil];
   
+  //Filtro de Restaurantes
+  [self setupFilterButton];
+  
   //Float Button - info
   [self setupInfoButton];
-}
-
-// Função para configurar o botão de info
-- (void)setupInfoButton {
-  
-  // Define o tamanho do botão
-  CGFloat buttonSize = 32;
-  
-  // Inicializa o botão apenas se ele ainda não foi criado
-  if (!self.infoButton) {
-    self.infoButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    
-    // Estilização do botão
-    self.infoButton.layer.cornerRadius = buttonSize / 2; // Botão circular
-    self.infoButton.backgroundColor = [UIColor colorNamed:@"usp_green"];
-    self.infoButton.tintColor = [UIColor whiteColor];
-    
-    // Adiciona ação ao botão
-    [self.infoButton addTarget:self action:@selector(showInfo) forControlEvents:UIControlEventTouchUpInside];
-    
-    // Adiciona o botão na hierarquia da view
-    [self.view insertSubview:self.infoButton aboveSubview:self.view];
-  }
-
-  // Obtém as insets da Safe Area
-  UIEdgeInsets safeAreaInsets = self.view.safeAreaInsets;
-  
-  // Define a nova posição do botão, levando em conta a safe area
-  CGFloat xPosition = [UIScreen mainScreen].bounds.size.width - buttonSize - safeAreaInsets.right - 20;
-  CGFloat yPosition = [UIScreen mainScreen].bounds.size.height - buttonSize - safeAreaInsets.bottom - 20;
-  self.infoButton.frame = CGRectMake(xPosition, yPosition, buttonSize, buttonSize);
-  
-  // Atualiza a imagem com base no modo claro/escuro
-  UIImage *infoImage;
-  if (@available(iOS 12.0, *)) {
-    if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
-      infoImage = [UIImage systemImageNamed:@"info.circle.fill"];
-    } else {
-      infoImage = [UIImage systemImageNamed:@"info.circle"];
-    }
-  }
-  
-  [self.infoButton setImage:infoImage forState:UIControlStateNormal];
-}
-
-// Atualiza a imagem do botão e seu posicionamento quando o modo de interface mudar ou a safe area for alterada
-- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
-  [super traitCollectionDidChange:previousTraitCollection];
-  
-  // Verifica se houve mudança no tema claro/escuro
-  if (@available(iOS 13.0, *)) {
-    if ([self.traitCollection userInterfaceStyle] != [previousTraitCollection userInterfaceStyle]) {
-      [self setupInfoButton];
-    }
-  }
 }
 
 // Observa mudanças na safe area para reposicionar o botão corretamente
@@ -203,11 +79,12 @@
   [self setupInfoButton];
 }
 
-
 - (void)viewWillAppear:(BOOL)animated {
   NSString *name;
   name = [[dataModel currentRestaurant]valueForKey:@"name"];
   [self.navigationItem setTitle:name];
+  
+  [dataModel getMenu];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -223,57 +100,213 @@
   // Dispose of any resources that can be recreated.
 }
 
-- (void)setupWeekView: (NSArray *) weekMenu {
+static void setupDKScrollingTabController(MenuViewController *object) {
+  object->_dateTabController = [[DKScrollingTabController alloc] init];
+  [object addChildViewController:object->_dateTabController];
+  [object->_dateTabController didMoveToParentViewController:object];
+  [object.view addSubview:object->_dateTabController.view];
   
-  NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-  [gregorian setFirstWeekday:2];
-  NSDateComponents *weekdayComponents =[gregorian components:NSCalendarUnitWeekday fromDate:[NSDate date]];
-  NSInteger weekday = [weekdayComponents weekday] - 2; //para deixar a segunda feira como 0
+  object.tableView.contentInset = UIEdgeInsetsMake(8, 0, 0, 0);
   
-  if ((int)weekday == -1) {
-    diaDaSemana = 6;
-  } else {
-    diaDaSemana = (int)weekday;
+  CGFloat topPadding = 0.0;
+  CGFloat bottomPadding = 0.0;
+  
+  if (@available(iOS 11.0, *)) { //Safe Área
+    UIWindow *window = UIApplication.sharedApplication.windows.firstObject;
+    topPadding = window.safeAreaInsets.top;
+    bottomPadding = window.safeAreaInsets.bottom;
+    
+    object->_dateTabController.view.frame = CGRectMake(0, topPadding+40., CGRectGetWidth(object.view.bounds), 56);
   }
   
   
-  NSString *monButtonName = [[NSString stringWithFormat:@"S\n%@", [[menuArray objectAtIndex:0] date]] substringToIndex:4];
-  NSString *tueButtonName = [[NSString stringWithFormat:@"T\n%@", [[menuArray objectAtIndex:1] date]] substringToIndex:4];
-  NSString *wedButtonName = [[NSString stringWithFormat:@"Q\n%@", [[menuArray objectAtIndex:2] date]] substringToIndex:4];
-  NSString *thuButtonName = [[NSString stringWithFormat:@"Q\n%@", [[menuArray objectAtIndex:3] date]] substringToIndex:4];
-  NSString *friButtonName = [[NSString stringWithFormat:@"S\n%@", [[menuArray objectAtIndex:4] date]] substringToIndex:4];
-  NSString *satButtonName = [[NSString stringWithFormat:@"S\n%@", [[menuArray objectAtIndex:5] date]] substringToIndex:4];
-  NSString *sunButtonName = [[NSString stringWithFormat:@"D\n%@", [[menuArray objectAtIndex:6] date]] substringToIndex:4];
+  if (@available(iOS 13.0, *)) {
+    object->_dateTabController.view.backgroundColor = [UIColor systemGroupedBackgroundColor];
+  } else {
+    object->_dateTabController.view.backgroundColor = [UIColor lightTextColor];
+  }
+  if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ){
+    CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
+    CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
+    if( screenHeight < screenWidth ){
+      screenHeight = screenWidth;
+    }
+    if( screenHeight > 480 && screenHeight < 667 ){
+      object->_dateTabController.buttonPadding = 4.2;
+    } else if ( screenHeight > 480 && screenHeight < 736 ){
+      object->_dateTabController.buttonPadding = 8.2;
+    } else if ( screenHeight > 480 && screenHeight < 812 ){
+      object->_dateTabController.buttonPadding = 11;
+    } else if ( screenHeight > 480 && screenHeight < 896){
+      object->_dateTabController.buttonPadding = 8.2;
+    } else if ( screenHeight > 480 ){
+      object->_dateTabController.buttonPadding = 11;
+    } else {
+      object->_dateTabController.buttonPadding = 3.2;
+    }
+  }
   
-  [_dateTabController setButtonName:monButtonName atIndex:0];
-  [_dateTabController setButtonName:tueButtonName atIndex:1];
-  [_dateTabController setButtonName:wedButtonName atIndex:2];
-  [_dateTabController setButtonName:thuButtonName atIndex:3];
-  [_dateTabController setButtonName:friButtonName atIndex:4];
-  [_dateTabController setButtonName:satButtonName atIndex:5];
-  [_dateTabController setButtonName:sunButtonName atIndex:6];
-  
-  [_dateTabController.buttons enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-    UIButton *button = obj;
-    button.titleLabel.numberOfLines = 0;
-    button.titleLabel.textAlignment = NSTextAlignmentCenter;
-    
-    NSString *buttonName = button.titleLabel.text;
-    NSString *text =  [buttonName substringWithRange: NSMakeRange(0, [buttonName rangeOfString: @"\n"].location)];
-    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:buttonName];
-    NSDictionary *attributes = @{ NSFontAttributeName : [UIFont systemFontOfSize:8] };
-    NSRange range = [buttonName rangeOfString:text];
-    [attributedString addAttributes:attributes range:range];
-    
-    button.titleLabel.text = @"S";
-    //[button setAttributedTitle:attributedString forState:UIControlStateNormal];
-    [button.viewForFirstBaselineLayout setNeedsDisplay];
-  }];
-  
-  _dateTabController.delegate = self;
-  [_dateTabController selectButtonWithIndex:diaDaSemana];
+  object->_dateTabController.underlineIndicator = YES;
+  object->_dateTabController.underlineIndicatorColor = [UIColor colorNamed:@"usp_orange"];
+  object->_dateTabController.buttonsScrollView.showsHorizontalScrollIndicator = NO;
+  object->_dateTabController.selectedBackgroundColor = [UIColor clearColor];
+  if (@available(iOS 13.0, *)) {
+    object->_dateTabController.selectedTextColor = [UIColor labelColor];
+  } else {
+    // Fallback on earlier versions
+    object->_dateTabController.selectedTextColor = [UIColor blackColor];
+  }
+  object->_dateTabController.unselectedTextColor = [UIColor grayColor];
+  object->_dateTabController.unselectedBackgroundColor = [UIColor clearColor];
+  object->_dateTabController.selection = @[@"           \n0",
+                                           @"           \n0",
+                                           @"           \n0",
+                                           @"           \n0",
+                                           @"           \n0",
+                                           @"           \n0",
+                                           @"           \n0"
+  ];
 }
 
+
+- (void)setupFilterButton {
+  UIBarButtonItem *filterButton = [[UIBarButtonItem alloc] initWithImage:[UIImage systemImageNamed:@"slider.horizontal.3"] style:UIBarButtonItemStylePlain target:self action:@selector(showRestaurantsFilter)];
+  self.navigationItem.rightBarButtonItem = filterButton;
+}
+
+- (void)setupInfoButton {
+  CGFloat buttonSize = 40;
+  CGFloat padding = 20;
+
+  if (!self.infoButton) {
+    self.infoButton = [UIButton buttonWithType:UIButtonTypeCustom];
+
+    // Estilo visual
+    self.infoButton.layer.cornerRadius = buttonSize / 2;
+    self.infoButton.backgroundColor = [UIColor colorNamed:@"usp_green"];
+    self.infoButton.tintColor = [UIColor whiteColor];
+
+    // Sombra para destacar no fundo branco ou escuro
+    self.infoButton.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.infoButton.layer.shadowOpacity = 0.2;
+    self.infoButton.layer.shadowOffset = CGSizeMake(0, 2);
+    self.infoButton.layer.shadowRadius = 4;
+
+    // Centraliza imagem dentro do botão
+    self.infoButton.contentEdgeInsets = UIEdgeInsetsMake(6, 6, 6, 6);
+
+    [self.infoButton addTarget:self action:@selector(showInfo) forControlEvents:UIControlEventTouchUpInside];
+
+    // Adiciona à hierarquia acima de tudo
+    [self.view addSubview:self.infoButton];
+  }
+
+  // Usa bounds da view (e não da tela) para calcular posição
+  UIEdgeInsets safeAreaInsets = self.view.safeAreaInsets;
+  CGFloat x = CGRectGetWidth(self.view.bounds) - buttonSize - safeAreaInsets.right - padding;
+  CGFloat y = CGRectGetHeight(self.view.bounds) - buttonSize - safeAreaInsets.bottom - padding;
+
+  self.infoButton.frame = CGRectMake(x, y, buttonSize, buttonSize);
+
+  // Ícone adaptado ao modo claro/escuro
+  UIImage *infoImage = nil;
+  if (@available(iOS 13.0, *)) {
+    infoImage = [UIImage systemImageNamed:@"info.circle"];
+  } else {
+    infoImage = [UIImage imageNamed:@"info"]; // fallback
+  }
+  [self.infoButton setImage:infoImage forState:UIControlStateNormal];
+}
+
+// Atualiza a imagem do botão e seu posicionamento quando o modo de interface mudar ou a safe area for alterada
+- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
+  [super traitCollectionDidChange:previousTraitCollection];
+  
+  // Verifica se houve mudança no tema claro/escuro
+  if (@available(iOS 13.0, *)) {
+    if ([self.traitCollection userInterfaceStyle] != [previousTraitCollection userInterfaceStyle]) {
+      [self setupInfoButton];
+    }
+  }
+}
+
+- (void)showRestaurantsFilter {
+  UIViewController *filterVC = [self.storyboard instantiateViewControllerWithIdentifier:@"RestaurantsFilterController"];
+  filterVC.modalPresentationStyle = UIModalPresentationPageSheet; // ou FormSheet, FullScreen etc.
+  [self presentViewController:filterVC animated:YES completion:nil];
+}
+
+- (void)setupWeekView:(NSArray *)weekMenu {
+  if (weekMenu.count < 7) return;
+  
+  // Define o dia atual da semana (segunda-feira = 0)
+  NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+  [gregorian setFirstWeekday:2];
+  NSDateComponents *weekdayComponents = [gregorian components:NSCalendarUnitWeekday fromDate:[NSDate date]];
+  NSInteger weekday = [weekdayComponents weekday] - 2;
+  diaDaSemana = (weekday == -1) ? 6 : (int)weekday;
+  
+  // Dias abreviados para exibição
+  NSArray *diasAbreviados = @[@"SEG", @"TER", @"QUA", @"QUI", @"SEX", @"SÁB", @"DOM"];
+  
+  // Formatter para converter string -> NSDate
+  NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
+  inputFormatter.dateFormat = @"dd/MM/yyyy";
+  inputFormatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"pt_BR"];
+  
+  // Formatter para extrair o número do dia
+  NSDateFormatter *diaFormatter = [[NSDateFormatter alloc] init];
+  diaFormatter.dateFormat = @"dd";
+  diaFormatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"pt_BR"];
+  
+  // Cria os títulos dos botões
+  for (int i = 0; i < 7; i++) {
+    NSString *dateString = [[weekMenu objectAtIndex:i] date];
+    NSDate *date = [inputFormatter dateFromString:dateString];
+    if (!date) continue;
+    
+    NSString *diaNumero = [diaFormatter stringFromDate:date]; // "10", "11", etc.
+    NSString *titulo = [NSString stringWithFormat:@"%@\n%@", diasAbreviados[i], diaNumero];
+    [_dateTabController setButtonName:titulo atIndex:i];
+  }
+  
+  // Estiliza visualmente os botões
+  [_dateTabController.buttons enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+    UIButton *button = obj;
+    button.titleLabel.numberOfLines = 2;
+    button.titleLabel.textAlignment = NSTextAlignmentCenter;
+    
+    NSString *titulo = button.titleLabel.text;
+    NSArray *linhas = [titulo componentsSeparatedByString:@"\n"];
+    if (linhas.count != 2) return;
+    
+    NSString *linha1 = linhas[0]; // ex: SEG
+    NSString *linha2 = linhas[1]; // ex: 10
+    
+    BOOL isSelecionado = (idx == diaDaSemana);
+    
+    UIFont *fontDia = isSelecionado ? [UIFont boldSystemFontOfSize:12] : [UIFont systemFontOfSize:12];
+    UIFont *fontNumero = isSelecionado ? [UIFont boldSystemFontOfSize:14] : [UIFont systemFontOfSize:14];
+    UIColor *corTexto = isSelecionado ? [UIColor labelColor] : [UIColor grayColor];
+    
+    NSMutableAttributedString *attributed = [[NSMutableAttributedString alloc] initWithString:titulo];
+    [attributed addAttribute:NSFontAttributeName value:fontDia range:NSMakeRange(0, linha1.length)];
+    [attributed addAttribute:NSFontAttributeName value:fontNumero range:NSMakeRange(linha1.length + 1, linha2.length)];
+    [attributed addAttribute:NSForegroundColorAttributeName value:corTexto range:NSMakeRange(0, titulo.length)];
+    
+    [button setTitle:@"" forState:UIControlStateNormal]; // limpa texto antigo
+    [button setAttributedTitle:attributed forState:UIControlStateNormal];
+  }];
+  
+  // Configurações visuais adicionais do tab
+  _dateTabController.buttonPadding = 12;
+  _dateTabController.underlineIndicator = YES;
+  _dateTabController.underlineIndicatorColor = [UIColor colorNamed:@"usp_orange"];
+  _dateTabController.delegate = self;
+  
+  // Seleciona o botão do dia atual
+  [_dateTabController selectButtonWithIndex:diaDaSemana];
+}
 - (void)setupDayLabel:(int)dia {
   
   NSString *diaSemana;
@@ -310,7 +343,7 @@
   [[self tableView] reloadData];
 }
 
-- (NSString *)dayToString: (NSString *)strMonth{
+- (NSString *)dayToString: (NSString *)strMonth {
   switch ([strMonth intValue]) {
     case 1:
       return @"Janeiro"; break;
@@ -366,75 +399,69 @@
   return 26;
 }
 
--(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-  UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 22)];
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+  CGFloat height = 26;
+  CGFloat imageSize = 18;
+  CGFloat padding = 0;
   
-  //imagem
-  UIImage *myImage = nil;
+  UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, height)];
+  view.backgroundColor = [UIColor clearColor];
+  
+  UILabel *label = [[UILabel alloc] init];
+  label.font = [UIFont boldSystemFontOfSize:15];
+  label.textColor = [UIColor grayColor];
+  
   UIImageView *imageView = nil;
   
-  //texto
-  UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(34, 0, tableView.frame.size.width, 22)];
-  [label setFont:[UIFont systemFontOfSize:13]];
-  [label setTextColor:[UIColor grayColor]];
-  
-  //posiciona imagem e texto
   switch (section) {
-    case 0:
-      [label setText:stringForLunch];
-      myImage = [UIImage imageNamed:@"almoco"];
-      imageView = [[UIImageView alloc] initWithImage:myImage];
-      imageView.frame = CGRectMake(12, 4 , 18, 18);
+    case 0: {
+      label.text = stringForLunch;
+      imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"almoco"]];
       break;
-    case 1:
-      [label setText:@"JANTAR"];
-      myImage = [UIImage imageNamed:@"jantar"];
-      imageView = [[UIImageView alloc] initWithImage:myImage];
-      imageView.frame = CGRectMake(12, 4 , 18, 18);
+    }
+    case 1: {
+      label.text = @"JANTAR";
+      imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"jantar"]];
       break;
-    case 2:
-      [label setText:@"OBSERVAÇÃO"];
-      [label setFrame:CGRectMake(12, 0 , tableView.frame.size.width, 22)];
+    }
+    case 2: {
+      label.text = @"OBSERVAÇÃO";
       break;
-      
+    }
     default:
-      break;
+      return view;
   }
-  [imageView setTintColor:[UIColor grayColor]];
-  [view addSubview:imageView];
-  [view addSubview:label];
   
+  if (imageView) {
+    imageView.tintColor = [UIColor grayColor];
+    imageView.contentMode = UIViewContentModeScaleAspectFit;
+    imageView.frame = CGRectMake(padding, (height - imageSize) / 2, imageSize, imageSize);
+    [view addSubview:imageView];
+    
+    label.frame = CGRectMake(CGRectGetMaxX(imageView.frame) + 8, 0, tableView.frame.size.width - padding - imageSize - 8, height);
+  } else {
+    label.frame = CGRectMake(padding, 0, tableView.frame.size.width - padding * 2, height);
+  }
+  
+  [view addSubview:label];
   return view;
 }
 
-
-
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
-  if (menu) {
-    switch (section) {
-      case 0:
-        if (([[[[menu period] objectAtIndex:0] calories] isEqualToString:@""]) || ([[[[menu period] objectAtIndex:0] calories] isEqualToString:@"0"])) {
-          return @"";
-        } else {
-          return [NSString stringWithFormat:@"Valor calórico para uma refeição: %@ kcal", [[[menu period] objectAtIndex:0] calories]];
-        }
-        break;
-      case 1:
-        if (([[[[menu period] objectAtIndex:1] calories] isEqualToString:@""]) || ([[[[menu period] objectAtIndex:1] calories] isEqualToString:@"0"])) {
-          return @"";
-        } else {
-          return [NSString stringWithFormat:@"Valor calórico para uma refeição: %@ kcal", [[[menu period] objectAtIndex:1] calories]];
-        }
-        break;
-        
-      default:
-        break;
-    }
-  } else {
+  if (!menu) return @"";
+  
+  if (section > 1) return @""; // só trata almoço e jantar (0 e 1)
+  
+  Period *periodo = menu.period[section];
+  NSString *calorias = periodo.calories;
+  
+  if (calorias.length == 0 || [calorias isEqualToString:@"0"]) {
     return @"";
   }
-  return nil;
+  
+  return [NSString stringWithFormat:@"Valor calórico para uma refeição: %@ kcal", calorias];
 }
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   
@@ -521,6 +548,29 @@
 - (void)ScrollingTabController:(DKScrollingTabController *)controller selection:(NSUInteger)selection {
   menu = [menuArray objectAtIndex:selection];
   [self setupDayLabel:(int)selection];
+  
+  // Atualiza o estilo de todos os botões com base no botão selecionado
+  for (NSUInteger i = 0; i < controller.buttons.count; i++) {
+    UIButton *button = controller.buttons[i];
+    NSString *titulo = button.titleLabel.text;
+    if (!titulo || [titulo rangeOfString:@"\n"].location == NSNotFound) continue;
+    
+    NSArray *linhas = [titulo componentsSeparatedByString:@"\n"];
+    NSString *linha1 = linhas[0];
+    NSString *linha2 = linhas[1];
+    
+    BOOL isSelecionado = (i == selection);
+    UIFont *fontDia = isSelecionado ? [UIFont boldSystemFontOfSize:12] : [UIFont systemFontOfSize:12];
+    UIFont *fontNumero = isSelecionado ? [UIFont boldSystemFontOfSize:14] : [UIFont systemFontOfSize:14];
+    UIColor *corTexto = isSelecionado ? [UIColor labelColor] : [UIColor grayColor];
+    
+    NSMutableAttributedString *attributed = [[NSMutableAttributedString alloc] initWithString:titulo];
+    [attributed addAttribute:NSFontAttributeName value:fontDia range:NSMakeRange(0, linha1.length)];
+    [attributed addAttribute:NSFontAttributeName value:fontNumero range:NSMakeRange(linha1.length + 1, linha2.length)];
+    [attributed addAttribute:NSForegroundColorAttributeName value:corTexto range:NSMakeRange(0, titulo.length)];
+    
+    [button setAttributedTitle:attributed forState:UIControlStateNormal];
+  }
 }
 
 #pragma mark - Model

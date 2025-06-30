@@ -89,7 +89,7 @@
 		</dict>
 	</array>
 	<key>UILaunchStoryboardName</key>
-	<string>Main_iPhone</string>
+	<string></string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main_iPhone</string>
 	<key>UIMainStoryboardFile~ipad</key>
