@@ -151,44 +151,94 @@ static NSString * const kPrefJSONKey = @"preferredRestaurantJSON";
 }
 
 #pragma mark - MENU
+
+static inline NSString *CurlFromRequest(NSURLRequest *req) {
+    NSMutableArray *parts = [NSMutableArray arrayWithObject:@"curl -i"];
+    [parts addObject:[NSString stringWithFormat:@"-X %@", req.HTTPMethod]];
+    [req.allHTTPHeaderFields enumerateKeysAndObjectsUsingBlock:^(NSString *k, NSString *v, BOOL *stop) {
+        [parts addObject:[NSString stringWithFormat:@"-H '%@: %@'", k, v]];
+    }];
+    if (req.HTTPBody.length) {
+        NSString *body = [[NSString alloc] initWithData:req.HTTPBody encoding:NSUTF8StringEncoding] ?: @"<binary>";
+        body = [body stringByReplacingOccurrencesOfString:@"'" withString:@"'\"'\"'"]; // escapar '
+        [parts addObject:[NSString stringWithFormat:@"--data '%@'", body]];
+    }
+    [parts addObject:[NSString stringWithFormat:@"'%@'", req.URL.absoluteString]];
+    return [parts componentsJoinedByString:@" "];
+}
+
+static inline void LogAFOperation(AFHTTPRequestOperation *op, NSError *err) {
+    NSString *reqBody = op.request.HTTPBody.length
+        ? [[NSString alloc] initWithData:op.request.HTTPBody encoding:NSUTF8StringEncoding]
+        : @"<empty>";
+    NSLog(@"\n➡️ REQUEST\n  %@ %@\n  Headers: %@\n  Body: %@",
+          op.request.HTTPMethod, op.request.URL.absoluteString,
+          op.request.allHTTPHeaderFields, reqBody);
+
+    NSHTTPURLResponse *http = (NSHTTPURLResponse *)op.response;
+    NSLog(@"\n⬅️ RESPONSE\n  Status: %ld\n  Headers: %@\n  Body: %@",
+          (long)http.statusCode, http.allHeaderFields, op.responseString);
+
+    NSLog(@"\n🔁 cURL\n%@", CurlFromRequest(op.request));
+
+    if (err) {
+        NSLog(@"\n⚠️ ERROR\n  Domain: %@  Code: %ld\n  Desc: %@\n  UserInfo: %@",
+              err.domain, (long)err.code, err.localizedDescription, err.userInfo);
+    }
+}
+
 - (void)getMenu {
   [SVProgressHUD show];
   self.menuArray = NSMutableArray.new;
-  
+
   AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
-  mgr.responseSerializer = [AFHTTPResponseSerializer serializer];     // mantém raw
+  mgr.responseSerializer = [AFHTTPResponseSerializer serializer];
+
+  
+  NSLog(@"🧪 currentRestaurant = %@", self.currentRestaurant);
+  if ([self.currentRestaurant respondsToSelector:@selector(allKeys)]) {
+      NSLog(@"🔑 keys = %@", [self.currentRestaurant allKeys]);
+  }
+  id rawId = self.currentRestaurant[@"id"];
+  NSLog(@"🆔 raw id = %@ (class: %@)", rawId, rawId ? NSStringFromClass([rawId class]) : @"<nil>");
+  
+  
   NSMutableSet *types = [mgr.responseSerializer.acceptableContentTypes mutableCopy];
-  [types addObject:@"application/json"];                              // <-- acrescenta
+  [types addObject:@"application/json"];
   mgr.responseSerializer.acceptableContentTypes = types;
-  
-  NSString *url = [NSString stringWithFormat:@"%@menu/%@", kBaseRUCardURL, self.currentRestaurant[@"id"]];
-  
-  NSDictionary *params = @{ @"hash" : kToken };
-  
+
+  // Garante barra única e id válido
+  NSString *rid = [NSString stringWithFormat:@"%@", self.currentRestaurant[@"id"] ?: @""];
+  if (rid.length == 0) {
+    NSLog(@"❌ currentRestaurant['id'] vazio/nulo");
+    [self menuError];
+    return;
+  }
+  NSString *base = [kBaseRUCardURL hasSuffix:@"/"] ? [kBaseRUCardURL substringToIndex:kBaseRUCardURL.length-1] : kBaseRUCardURL;
+  NSString *url = [NSString stringWithFormat:@"%@/menu/%@", base, rid];
+
+  NSDictionary *params = @{ @"hash": kToken };
+  NSLog(@"🔎 URL final: %@  params: %@", url, params);
+
   __weak typeof(self) weakSelf = self;
   [mgr POST:url parameters:params success:^(AFHTTPRequestOperation *op, id resp) {
-    
+    LogAFOperation(op, nil);
+
     __strong typeof(self) self = weakSelf;
     if (!self) return;
-    
-    if (op.response.statusCode != 200) {
-      [self menuError];
-      return;
-    }
-    
+
+    if (op.response.statusCode != 200) { [self menuError]; return; }
+
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:resp options:NSJSONReadingMutableContainers error:nil];
-    if (![json isKindOfClass:[NSDictionary class]] ||
-        [json[@"message"][@"error"] boolValue]) {
+    if (![json isKindOfClass:[NSDictionary class]] || [json[@"message"][@"error"] boolValue]) {
       [self menuError];
       return;
     }
-    
+
     [self.menuArray removeAllObjects];
-    
     for (NSDictionary *raw in json[@"meals"]) {
       NSDictionary *day = [self cleanDictionary:[raw mutableCopy]];
       NSMutableArray *periods = NSMutableArray.new;
-      
       for (NSString *period in @[@"lunch",@"dinner"]) {
         id block = day[period];
         if ([block isKindOfClass:[NSDictionary class]]) {
@@ -198,17 +248,76 @@ static NSString * const kPrefJSONKey = @"preferredRestaurantJSON";
       Menu *menu = [[Menu alloc] initWithDate:day[@"date"] andPeriod:periods];
       [self.menuArray addObject:menu];
     }
-    
+
     self.observation = json[@"observation"][@"observation"] ?: @"";
-    
     [SVProgressHUD dismiss];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveMenu" object:self];
-    
+
   } failure:^(AFHTTPRequestOperation *op, NSError *err) {
+    LogAFOperation(op, err);
     NSLog(@"[DataModel] menu erro: %@", err.localizedDescription);
     [self menuError];
   }];
 }
+
+//- (void)getMenu {
+//  [SVProgressHUD show];
+//  self.menuArray = NSMutableArray.new;
+//  
+//  AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+//  mgr.responseSerializer = [AFHTTPResponseSerializer serializer];     // mantém raw
+//  NSMutableSet *types = [mgr.responseSerializer.acceptableContentTypes mutableCopy];
+//  [types addObject:@"application/json"];                              // <-- acrescenta
+//  mgr.responseSerializer.acceptableContentTypes = types;
+//  
+//  NSString *url = [NSString stringWithFormat:@"%@menu/%@", kBaseRUCardURL, self.currentRestaurant[@"id"]];
+//  
+//  NSDictionary *params = @{ @"hash" : kToken };
+//  
+//  __weak typeof(self) weakSelf = self;
+//  [mgr POST:url parameters:params success:^(AFHTTPRequestOperation *op, id resp) {
+//    
+//    __strong typeof(self) self = weakSelf;
+//    if (!self) return;
+//    
+//    if (op.response.statusCode != 200) {
+//      [self menuError];
+//      return;
+//    }
+//    
+//    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:resp options:NSJSONReadingMutableContainers error:nil];
+//    if (![json isKindOfClass:[NSDictionary class]] ||
+//        [json[@"message"][@"error"] boolValue]) {
+//      [self menuError];
+//      return;
+//    }
+//    
+//    [self.menuArray removeAllObjects];
+//    
+//    for (NSDictionary *raw in json[@"meals"]) {
+//      NSDictionary *day = [self cleanDictionary:[raw mutableCopy]];
+//      NSMutableArray *periods = NSMutableArray.new;
+//      
+//      for (NSString *period in @[@"lunch",@"dinner"]) {
+//        id block = day[period];
+//        if ([block isKindOfClass:[NSDictionary class]]) {
+//          [periods addObject:[[Period alloc] initWithPeriod:period andMenu:block[@"menu"] andCalories:block[@"calories"]]];
+//        }
+//      }
+//      Menu *menu = [[Menu alloc] initWithDate:day[@"date"] andPeriod:periods];
+//      [self.menuArray addObject:menu];
+//    }
+//    
+//    self.observation = json[@"observation"][@"observation"] ?: @"";
+//    
+//    [SVProgressHUD dismiss];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveMenu" object:self];
+//    
+//  } failure:^(AFHTTPRequestOperation *op, NSError *err) {
+//    NSLog(@"[DataModel] menu erro: %@", err.localizedDescription);
+//    [self menuError];
+//  }];
+//}
 
 
 - (void)menuError {

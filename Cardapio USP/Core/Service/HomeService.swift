@@ -77,6 +77,10 @@ struct HomeServiceImpl: HomeService, @unchecked Sendable {
        restaurantSvc.setCurrent(first)
      }
      
+     await MainActor.run {
+       DataModel.getInstance().currentRestaurant = restaurant.toObjCDictionary()
+     }
+     
      // MARK: – 2. Cardápio do dia e período atual
      print(restaurant.id)
      let todayMenu = try await menuSvc.fetchToday(for: restaurant.id)

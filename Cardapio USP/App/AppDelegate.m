@@ -67,7 +67,7 @@
   
   if ([_dataModel preferredRestaurant])
     [_dataModel setCurrentRestaurant:_dataModel.preferredRestaurant];
-  [_dataModel getMenu];
+//  [_dataModel getMenu];
 
   // Propaga o restaurante corrente ao serviço Swift
   if (_dataModel.currentRestaurant)

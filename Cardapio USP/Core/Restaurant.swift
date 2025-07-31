@@ -171,3 +171,12 @@ extension Cashier {
     self.init(address: addr, workingHours: wh, prices: prices)
   }
 }
+
+extension Restaurant {
+  func toObjCDictionary() -> NSMutableDictionary {
+    let dict = NSMutableDictionary()
+    dict["id"] = "\(self.id)" as NSString
+    dict["name"] = self.name as NSString
+    return dict
+  }
+}
