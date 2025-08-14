@@ -9,10 +9,12 @@
 #import "MainViewController.h"
 #import "RestaurantDataModel.h"
 #import "MenuDataModel.h"
+#import "Period.h"
 #import "DataModel.h"
 #import "OAuthUSP.h"
 #import "SVProgressHUD.h"
 #import "WebViewController.h"
+#import "AFNetworkReachabilityManager.h"
 #import <FirebaseAnalytics/FirebaseAnalytics.h>
 
 #define kWIDTH UIScreen.mainScreen.bounds.size.width
@@ -40,6 +42,55 @@
 @end
 
 @implementation MainViewController
+
+
+// Implementação do método fetchMenu para cache offline e alerta de rede
+// Implementação correta do método fetchMenu
+- (void)fetchMenu {
+  NSString *cachePath = [NSTemporaryDirectory() stringByAppendingPathComponent:@"menu_cache.json"];
+  AFNetworkReachabilityManager *reach = [AFNetworkReachabilityManager sharedManager];
+  [reach startMonitoring];
+
+  if ([reach networkReachabilityStatus] == AFNetworkReachabilityStatusNotReachable) {
+    NSData *cacheData = [NSData dataWithContentsOfFile:cachePath];
+    if (cacheData) {
+      NSError *err;
+      NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:cacheData options:NSJSONReadingMutableContainers error:&err];
+      if (jsonArray && [jsonArray isKindOfClass:[NSArray class]]) {
+        NSMutableArray *menus = [NSMutableArray array];
+        for (NSDictionary *item in jsonArray) {
+          NSMutableArray *periods = [NSMutableArray array];
+          if (item[@"breakfast"]) {
+            Period *breakfast = [[Period alloc] initWithPeriod:@"breakfast" andMenu:item[@"breakfast"][@"menu"] andCalories:item[@"breakfast"][@"calories"]];
+            [periods addObject:breakfast];
+          }
+          if (item[@"lunch"]) {
+            Period *lunch = [[Period alloc] initWithPeriod:@"lunch" andMenu:item[@"lunch"][@"menu"] andCalories:item[@"lunch"][@"calories"]];
+            [periods addObject:lunch];
+          }
+          if (item[@"dinner"]) {
+            Period *dinner = [[Period alloc] initWithPeriod:@"dinner" andMenu:item[@"dinner"][@"menu"] andCalories:item[@"dinner"][@"calories"]];
+            [periods addObject:dinner];
+          }
+          Menu *menu = [[Menu alloc] initWithDate:item[@"date"] andPeriod:periods];
+          [menus addObject:menu];
+        }
+        [MenuDataModel getInstance].menus = menus;
+        [self didReceiveMenu:nil];
+        [SVProgressHUD showInfoWithStatus:@"Você está offline. Exibindo dados salvos."];
+      }
+    } else {
+      [SVProgressHUD showInfoWithStatus:@"Sem conexão e sem dados salvos."];
+    }
+    return;
+  }
+
+  // Online: busca normalmente
+  [dataModel getMenu];
+  // O resultado será tratado pelo observer didReceiveMenu
+  NSString *name = [[dataModel currentRestaurant] valueForKey:@"name"];
+  [self.navigationController.navigationItem setTitle: name];
+}
 
 - (void)viewDidLoad {
   [super viewDidLoad];
@@ -102,14 +153,6 @@
 - (void)viewDidAppear:(BOOL)animated {
   [super viewDidAppear:animated];
 }
-
-- (void)fetchMenu {
-  [dataModel getMenu];
-  NSString *name;
-  name = [[dataModel currentRestaurant] valueForKey:@"name"];
-  [self.navigationController.navigationItem setTitle: name];
-}
-
 
 //expande menu e adiciona transparencia
 - (void)onPress:(UILongPressGestureRecognizer*)longpress {

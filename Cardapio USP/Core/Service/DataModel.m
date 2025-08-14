@@ -96,30 +96,43 @@ static NSString * const kPrefJSONKey = @"preferredRestaurantJSON";
 - (void)getRestaurantList {
   AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
   mgr.requestSerializer  = [AFHTTPRequestSerializer serializer];
-  mgr.responseSerializer = [AFHTTPResponseSerializer serializer];
-  mgr.responseSerializer.acceptableContentTypes =
-  [NSSet setWithObject:@"application/x-www-form-urlencoded"];
-  
-  NSString *url   = [NSString stringWithFormat:@"%@restaurants", kBaseRUCardURL];
+
+  AFJSONResponseSerializer *json = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingMutableContainers];
+  NSMutableSet *types = [json.acceptableContentTypes mutableCopy];
+  [types addObject:@"text/plain"];
+  [types addObject:@"application/x-www-form-urlencoded"];
+  [types addObject:@"application/json; charset=utf-8"];
+  json.acceptableContentTypes = types;
+  mgr.responseSerializer = json;
+
+  NSString *base = [kBaseRUCardURL hasSuffix:@"/"] ? [kBaseRUCardURL substringToIndex:kBaseRUCardURL.length-1] : kBaseRUCardURL;
+  NSString *url   = [NSString stringWithFormat:@"%@/restaurants", base];
   NSDictionary *p = @{ @"hash": kToken };
-  
+
+  __weak typeof(self) weakSelf = self;
   [mgr POST:url parameters:p success:^(AFHTTPRequestOperation *op, id resp) {
-    if (op.response.statusCode != 200) { [self notifyRestaurants]; return; }
-    
-    self.restaurants = [NSJSONSerialization JSONObjectWithData:resp
-                                                       options:NSJSONReadingMutableContainers
-                                                         error:nil];
-    [NSUserDefaults.standardUserDefaults setObject:self.restaurants
-                                            forKey:@"Restaurants"];
-    
-    /* --- seleção de preferido / current --- */
+    __strong typeof(self) self = weakSelf; if (!self) return;
+
+    NSHTTPURLResponse *http = (NSHTTPURLResponse *)op.response;
+    NSLog(@"[DataModel] /restaurants status=%ld content-type=%@",
+          (long)http.statusCode, http.allHeaderFields[@"Content-Type"]);
+
+    if (http.statusCode != 200 || ![resp isKindOfClass:[NSArray class]]) {
+      [self notifyRestaurants];
+      return;
+    }
+
+    self.restaurants = (NSArray *)resp;
+    [NSUserDefaults.standardUserDefaults setObject:self.restaurants forKey:@"Restaurants"];
+
+    // seleção de preferido / current
     NSDictionary *pref = [DataModel loadPreferredRestaurantDict];
     NSString *prefId   = pref[@"id"];
-    
+
     self.currentRestaurant = nil;
     for (NSDictionary *camp in self.restaurants) {
       for (NSMutableDictionary *ru in camp[@"restaurants"]) {
-        if ([ru[@"id"] isEqualToString:prefId]) {
+        if ([[NSString stringWithFormat:@"%@", ru[@"id"]] isEqualToString:[NSString stringWithFormat:@"%@", prefId]]) {
           self.preferredRestaurant = ru;
           self.currentRestaurant   = ru;
           break;
@@ -127,11 +140,11 @@ static NSString * const kPrefJSONKey = @"preferredRestaurantJSON";
       }
       if (self.currentRestaurant) break;
     }
-    /* fallback para Central (6) ou primeiro RU */
+    // fallback para Central (6) ou primeiro RU
     if (!self.currentRestaurant) {
       for (NSDictionary *camp in self.restaurants) {
         for (NSMutableDictionary *ru in camp[@"restaurants"]) {
-          if ([ru[@"id"] intValue] == 6) { self.currentRestaurant = ru; break; }
+          if ([[NSString stringWithFormat:@"%@", ru[@"id"]] intValue] == 6) { self.currentRestaurant = ru; break; }
         }
         if (self.currentRestaurant) break;
       }
@@ -140,11 +153,12 @@ static NSString * const kPrefJSONKey = @"preferredRestaurantJSON";
         self.currentRestaurant    = [firstCampus[@"restaurants"] firstObject];
       }
     }
-    
+
     [self notifyRestaurants];
-    
+
   } failure:^(AFHTTPRequestOperation *op, NSError *err) {
     NSLog(@"[DataModel] restaurantes erro: %@", err.localizedDescription);
+    // fallback cacheado
     self.restaurants = [NSUserDefaults.standardUserDefaults objectForKey:@"Restaurants"];
     [self notifyRestaurants];
   }];

@@ -580,23 +580,40 @@ static void setupDKScrollingTabController(MenuViewController *object) {
   [self.navigationItem setTitle: [[dataModel currentRestaurant]valueForKey:@"name"]];
 }
 
+// Exibe os dias da semana mesmo sem cardápio
 - (void)didReceiveMenu:(NSNotification *)notification {
-  
   menuArray = [dataModel menuArray];
-  
   if ([menuArray count] > 0) {
     [self setupWeekView:menuArray];
     [self setupDayLabel:diaDaSemana];
-    
     menu = [menuArray objectAtIndex:diaDaSemana];
-    
     [self viewDidAppear:YES];
     [self.tableView reloadData];
   } else {
-    [SVProgressHUD showInfoWithStatus:@"Não foi possível obter o cardápio. \nTente novamente mais tarde."];
+    // Monta array de 7 menus vazios com datas da semana corrente
+    NSMutableArray *semanaVazia = [NSMutableArray array];
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    [gregorian setFirstWeekday:2]; // segunda-feira = 2
+    NSDate *hoje = [NSDate date];
+    NSDateComponents *comps = [gregorian components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay|NSCalendarUnitWeekday fromDate:hoje];
+    NSInteger weekday = [comps weekday];
+    // Calcula a data da segunda-feira da semana corrente
+    NSInteger daysToMonday = weekday - 2;
+    if (daysToMonday < 0) daysToMonday += 7;
+    NSDate *monday = [hoje dateByAddingTimeInterval:-(60*60*24*daysToMonday)];
+    NSDateFormatter *fmt = [[NSDateFormatter alloc] init];
+    fmt.dateFormat = @"dd/MM/yyyy";
+    fmt.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"pt_BR"];
+    for (int i = 0; i < 7; i++) {
+      NSDate *dia = [monday dateByAddingTimeInterval:60*60*24*i];
+      NSString *dataStr = [fmt stringFromDate:dia];
+      Menu *menuVazio = [[Menu alloc] initWithDate:dataStr andPeriod:[NSMutableArray array]];
+      [semanaVazia addObject:menuVazio];
+    }
+    [self setupWeekView:semanaVazia];
+    [SVProgressHUD showInfoWithStatus:@"Verifique sua conexão com a internet"];
   }
   stringForLunch = [NSMutableString stringWithFormat:@"ALMOÇO"];
-  
 }
 
 - (void)didRecieveUserData:(NSNotification *)notification {
