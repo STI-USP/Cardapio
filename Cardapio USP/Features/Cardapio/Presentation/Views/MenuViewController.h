@@ -14,10 +14,9 @@
 
 @interface MenuViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, DKScrollingTabControllerDelegate, UIScrollViewDelegate, SWRevealViewControllerDelegate>
 
-@property (weak,   nonatomic) IBOutlet UITableView *tableView;
-@property (weak,   nonatomic) IBOutlet UILabel    *diaDaSemanaLabel;
-
-@property (strong, nonatomic) DKScrollingTabController *dateTabController;
-@property (strong, nonatomic) UIButton                *infoButton;
+// Construídos programaticamente (sem storyboard) ou via storyboard (diaDaSemanaLbl)
+@property (strong, nonatomic) UITableView *tableView;
+@property (strong, nonatomic) UILabel *diaDaSemanaLabel; // fallback programático
+@property (weak,   nonatomic) IBOutlet UILabel *diaDaSemanaLbl; // se existir no storyboard
 
 @end

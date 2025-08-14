@@ -19,16 +19,17 @@
 #import "CreditsViewController.h"
 #import "CreditsNavigationViewController.h"
 #import "BoletoViewController.h"
+#import "MenuViewModel.h" // 🔸 novo
 
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
-
 #define kWIDTH UIScreen.mainScreen.bounds.size.width
 
-@interface MenuViewController () <DKScrollingTabControllerDelegate, SWRevealViewControllerDelegate> {
+@interface MenuViewController () <DKScrollingTabControllerDelegate, SWRevealViewControllerDelegate, MenuViewModelDelegate> {
   RestaurantDataModel *_restaurantDataModel;
   MenuDataModel *_menuDataModel;
   DataModel *dataModel;
 
+  // Mantidos se você quiser compat, mas o VM já expõe week/selectedIndex
   NSMutableArray<Menu *> *menuArray;
   Menu *menu;
   int diaDaSemana;
@@ -41,67 +42,17 @@
 }
 
 // UI
-//@property (nonatomic, strong) DKScrollingTabController *dateTabController;
-//@property (nonatomic, strong) UIButton *infoButton;
+@property (nonatomic, strong) DKScrollingTabController *dateTabController;
+@property (nonatomic, strong) UIButton *infoButton;
+
+// MVVM
+@property (nonatomic, strong) MenuViewModel *viewModel;
 
 @end
 
 @implementation MenuViewController
 
 @synthesize diaDaSemanaLabel;
-
-#pragma mark - Helpers (semana fixa + merge)
-
-/// Cria 7 menus vazios (SEG–DOM) da semana corrente, datas em "dd/MM/yyyy".
-static NSArray<Menu *> *ScaffoldSemanaVazia(void) {
-  NSMutableArray *semana = [NSMutableArray arrayWithCapacity:7];
-
-  NSCalendar *greg = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-  greg.firstWeekday = 2; // segunda
-  NSDate *hoje = [NSDate date];
-
-  NSDateComponents *comps = [greg components:(NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay|NSCalendarUnitWeekday) fromDate:hoje];
-  NSInteger weekday = comps.weekday; // 1=domingo ... 7=sábado
-  NSInteger offsetToMonday = (weekday == 1) ? -6 : (2 - weekday);
-  NSDate *segunda = [greg dateByAddingUnit:NSCalendarUnitDay value:offsetToMonday toDate:hoje options:0];
-
-  NSDateFormatter *fmt = [NSDateFormatter new];
-  fmt.dateFormat = @"dd/MM/yyyy";
-  fmt.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"pt_BR"];
-
-  for (int i=0; i<7; i++) {
-    NSDate *dia = [greg dateByAddingUnit:NSCalendarUnitDay value:i toDate:segunda options:0];
-    NSString *dataStr = [fmt stringFromDate:dia];
-
-    NSMutableArray *periods = [NSMutableArray arrayWithCapacity:2];
-    [periods addObject:[[Period alloc] initWithPeriod:@"lunch"  andMenu:@"" andCalories:@"0"]];
-    [periods addObject:[[Period alloc] initWithPeriod:@"dinner" andMenu:@"" andCalories:@"0"]];
-
-    Menu *m = [[Menu alloc] initWithDate:dataStr andPeriod:periods];
-    [semana addObject:m];
-  }
-  return semana;
-}
-
-/// Junta o que veio do servidor (se existir) dentro do scaffold, casando por data.
-static NSArray<Menu *> *MergeSemana(NSArray<Menu *> *scaffold, NSArray<Menu *> *server) {
-  if (server.count == 0) return scaffold;
-
-  NSMutableDictionary<NSString*, Menu*> *porData = [NSMutableDictionary dictionaryWithCapacity:server.count];
-  for (Menu *m in server) { if (m.date.length) porData[m.date] = m; }
-
-  NSMutableArray<Menu *> *saida = [NSMutableArray arrayWithCapacity:7];
-  for (Menu *base in scaffold) {
-    Menu *srv = porData[base.date];
-    [saida addObject:(srv ?: base)];
-  }
-  return saida;
-}
-
-static UIColor *SecondaryLabelColor(void) {
-  if (@available(iOS 13.0, *)) return [UIColor secondaryLabelColor];
-  return [UIColor grayColor];
-}
 
 #pragma mark - Lifecycle
 
@@ -112,12 +63,14 @@ static UIColor *SecondaryLabelColor(void) {
   oauth = [OAuthUSP sharedInstance];
   stringForLunch = [NSMutableString stringWithFormat:@""];
 
+  // ViewModel
+  self.viewModel = [[MenuViewModel alloc] initWithDataModel:dataModel];
+  self.viewModel.delegate = self;
+
   [self setupDKScrollingTabController];
   self.tableView.contentInset = UIEdgeInsetsMake(8, 0, 0, 0);
 
-  // Notifications
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChangeRestaurant:) name:@"DidChangeRestaurant" object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveMenu:) name:@"DidReceiveMenu" object:nil];
+  // Notifications (somente as que não são do menu; o VM já escuta DidChangeRestaurant/DidReceiveMenu)
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRecieveUserData:) name:@"DidRecieveUserData" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveBill:) name:@"DidReceiveBill" object:nil];
 
@@ -136,8 +89,8 @@ static UIColor *SecondaryLabelColor(void) {
   NSString *name = [[dataModel currentRestaurant] valueForKey:@"name"];
   [self.navigationItem setTitle:(name ?: @"")];
 
-  // Busca o menu; UI já é robusta para estado vazio.
-  [dataModel getMenu];
+  // Dispara carregamento via VM
+  [self.viewModel reloadMenus];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -151,7 +104,7 @@ static UIColor *SecondaryLabelColor(void) {
   [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-#pragma mark - DKScrollingTabController
+#pragma mark - DKScrollingTabController (setup)
 
 - (void)setupDKScrollingTabController {
   self.dateTabController = [[DKScrollingTabController alloc] init];
@@ -205,6 +158,8 @@ static UIColor *SecondaryLabelColor(void) {
   }
   self.dateTabController.unselectedTextColor = [UIColor grayColor];
   self.dateTabController.unselectedBackgroundColor = [UIColor clearColor];
+
+  // Placeholder inicial (7 botões) — será substituído pelo VM quando chegar a semana
   self.dateTabController.selection = @[@"           \n0",
                                        @"           \n0",
                                        @"           \n0",
@@ -218,7 +173,10 @@ static UIColor *SecondaryLabelColor(void) {
 #pragma mark - Botões (Filtro / Info)
 
 - (void)setupFilterButton {
-  UIBarButtonItem *filterButton = [[UIBarButtonItem alloc] initWithImage:[UIImage systemImageNamed:@"slider.horizontal.3"] style:UIBarButtonItemStylePlain target:self action:@selector(showRestaurantsFilter)];
+  UIBarButtonItem *filterButton = [[UIBarButtonItem alloc] initWithImage:[UIImage systemImageNamed:@"slider.horizontal.3"]
+                                                                   style:UIBarButtonItemStylePlain
+                                                                  target:self
+                                                                  action:@selector(showRestaurantsFilter)];
   self.navigationItem.rightBarButtonItem = filterButton;
 }
 
@@ -238,9 +196,7 @@ static UIColor *SecondaryLabelColor(void) {
     self.infoButton.layer.shadowOffset = CGSizeMake(0, 2);
     self.infoButton.layer.shadowRadius = 4;
 
-    // OK usar contentEdgeInsets aqui (botão custom sem configuration)
     self.infoButton.contentEdgeInsets = UIEdgeInsetsMake(6, 6, 6, 6);
-
     [self.infoButton addTarget:self action:@selector(showInfo) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.infoButton];
   }
@@ -279,122 +235,64 @@ static UIColor *SecondaryLabelColor(void) {
   [self performSegueWithIdentifier:@"showInfo" sender:self];
 }
 
-#pragma mark - Semana / Tabs
+#pragma mark - Semana / Tabs (via VM)
 
-- (void)setupWeekView:(NSArray<Menu *> *)weekMenu {
-  // Define o dia atual da semana (segunda = 0)
-  NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-  gregorian.firstWeekday = 2;
-  NSDateComponents *weekdayComponents = [gregorian components:NSCalendarUnitWeekday fromDate:[NSDate date]];
-  NSInteger weekday = [weekdayComponents weekday] - 2;
-  diaDaSemana = (weekday == -1) ? 6 : (int)weekday;
-
-  NSArray *diasAbreviados = @[@"SEG", @"TER", @"QUA", @"QUI", @"SEX", @"SÁB", @"DOM"];
-
-  NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
-  inputFormatter.dateFormat = @"dd/MM/yyyy";
-  inputFormatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"pt_BR"];
-
-  NSDateFormatter *diaFormatter = [[NSDateFormatter alloc] init];
-  diaFormatter.dateFormat = @"dd";
-  diaFormatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"pt_BR"];
-
-  for (int i = 0; i < 7; i++) {
-    NSString *dateString = [[weekMenu objectAtIndex:i] date];
-    NSDate *date = [inputFormatter dateFromString:dateString];
-    if (!date) continue;
-
-    NSString *diaNumero = [diaFormatter stringFromDate:date];
-    NSString *titulo = [NSString stringWithFormat:@"%@\n%@", diasAbreviados[i], diaNumero];
-    [self.dateTabController setButtonName:titulo atIndex:i];
+- (void)setupWeekTabsWithTitles:(NSArray<NSString *> *)titles {
+  for (NSInteger i = 0; i < titles.count; i++) {
+    [self.dateTabController setButtonName:titles[i] atIndex:i];
   }
-
-  [self.dateTabController.buttons enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-    UIButton *button = obj;
+  [self.dateTabController.buttons enumerateObjectsUsingBlock:^(UIButton *button, NSUInteger idx, BOOL *stop) {
     button.titleLabel.numberOfLines = 2;
     button.titleLabel.textAlignment = NSTextAlignmentCenter;
-
-    NSString *titulo = button.titleLabel.text;
-    NSArray *linhas = [titulo componentsSeparatedByString:@"\n"];
-    if (linhas.count != 2) return;
-
-    NSString *linha1 = linhas[0];
-    NSString *linha2 = linhas[1];
-
-    BOOL isSelecionado = (idx == diaDaSemana);
-
-    UIFont *fontDia = isSelecionado ? [UIFont boldSystemFontOfSize:12] : [UIFont systemFontOfSize:12];
-    UIFont *fontNumero = isSelecionado ? [UIFont boldSystemFontOfSize:14] : [UIFont systemFontOfSize:14];
-    UIColor *corTexto = isSelecionado ? ([UIColor respondsToSelector:@selector(labelColor)] ? [UIColor labelColor] : [UIColor blackColor]) : [UIColor grayColor];
-
-    NSMutableAttributedString *attributed = [[NSMutableAttributedString alloc] initWithString:titulo];
-    [attributed addAttribute:NSFontAttributeName value:fontDia range:NSMakeRange(0, linha1.length)];
-    [attributed addAttribute:NSFontAttributeName value:fontNumero range:NSMakeRange(linha1.length + 1, linha2.length)];
-    [attributed addAttribute:NSForegroundColorAttributeName value:corTexto range:NSMakeRange(0, titulo.length)];
-
-    [button setTitle:@"" forState:UIControlStateNormal];
-    [button setAttributedTitle:attributed forState:UIControlStateNormal];
   }];
+
+  [self refreshTabButtonsStyleForSelection:self.viewModel.selectedIndex];
 
   self.dateTabController.buttonPadding = 12;
   self.dateTabController.underlineIndicator = YES;
   self.dateTabController.underlineIndicatorColor = [UIColor colorNamed:@"usp_orange"];
   self.dateTabController.delegate = self;
 
-  [self.dateTabController selectButtonWithIndex:diaDaSemana];
+  [self.dateTabController selectButtonWithIndex:self.viewModel.selectedIndex];
+}
+
+- (void)refreshTabButtonsStyleForSelection:(NSUInteger)selection {
+  [self.dateTabController.buttons enumerateObjectsUsingBlock:^(UIButton *button, NSUInteger idx, BOOL *stop) {
+    NSString *titulo = button.titleLabel.text ?: @"";
+    NSArray *linhas = [titulo componentsSeparatedByString:@"\n"];
+    if (linhas.count != 2) return;
+
+    NSString *linha1 = linhas[0];
+    NSString *linha2 = linhas[1];
+
+    BOOL isSelecionado = (idx == selection);
+    UIFont *fontDia = isSelecionado ? [UIFont boldSystemFontOfSize:12] : [UIFont systemFontOfSize:12];
+    UIFont *fontNumero = isSelecionado ? [UIFont boldSystemFontOfSize:14] : [UIFont systemFontOfSize:14];
+    UIColor *corTexto;
+    if (@available(iOS 13.0, *)) {
+      corTexto = isSelecionado ? [UIColor labelColor] : [UIColor grayColor];
+    } else {
+      corTexto = isSelecionado ? [UIColor blackColor] : [UIColor grayColor];
+    }
+
+    NSMutableAttributedString *attributed = [[NSMutableAttributedString alloc] initWithString:titulo];
+    [attributed addAttribute:NSFontAttributeName value:fontDia range:NSMakeRange(0, linha1.length)];
+    [attributed addAttribute:NSFontAttributeName value:fontNumero range:NSMakeRange(linha1.length + 1, linha2.length)];
+    [attributed addAttribute:NSForegroundColorAttributeName value:corTexto range:NSMakeRange(0, titulo.length)];
+    [button setAttributedTitle:attributed forState:UIControlStateNormal];
+  }];
 }
 
 - (void)setupDayLabel:(int)dia {
-  if (menuArray.count == 0 || dia < 0 || dia >= menuArray.count) return;
-
-  NSString *diaSemana = @"";
-  switch (dia) {
-    case 0: diaSemana = @"Segunda-feira"; break;
-    case 1: diaSemana = @"Terça-feira";   break;
-    case 2: diaSemana = @"Quarta-feira";  break;
-    case 3: diaSemana = @"Quinta-feira";  break;
-    case 4: diaSemana = @"Sexta-feira";   break;
-    case 5: diaSemana = @"Sábado";        break;
-    case 6: diaSemana = @"Domingo";       break;
-    default: break;
-  }
-
-  NSString *strData = [NSString stringWithFormat:@"%@", [[menuArray objectAtIndex:dia] date]];
-  if (strData.length >= 10) {
-    NSString *strDay   = [strData substringToIndex:2];
-    NSString *strMonth = [self dayToString:[NSString stringWithFormat:@"%@", [[strData substringFromIndex:3] substringToIndex:2]]];
-    NSString *strYear  = [NSString stringWithFormat:@"%@", [strData substringFromIndex:6]];
-    [diaDaSemanaLabel setText:[NSString stringWithFormat:@"%@, %@ de %@ de %@", diaSemana, strDay, strMonth, strYear]];
-  } else {
-    [diaDaSemanaLabel setText:diaSemana];
-  }
-
+  if (dia < 0 || dia >= self.viewModel.week.count) return;
+  [diaDaSemanaLabel setText:self.viewModel.dayHeaderTitle];
   [[self tableView] reloadData];
-}
-
-- (NSString *)dayToString:(NSString *)strMonth {
-  switch ([strMonth intValue]) {
-    case 1:  return @"Janeiro";
-    case 2:  return @"Fevereiro";
-    case 3:  return @"Março";
-    case 4:  return @"Abril";
-    case 5:  return @"Maio";
-    case 6:  return @"Junho";
-    case 7:  return @"Julho";
-    case 8:  return @"Agosto";
-    case 9:  return @"Setembro";
-    case 10: return @"Outubro";
-    case 11: return @"Novembro";
-    case 12: return @"Dezembro";
-    default: return @"";
-  }
 }
 
 #pragma mark - Table View
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-  BOOL temObs = (dataModel.observation.length > 0);
-  return 2 + (temObs ? 1 : 0); // 0=Almoço, 1=Jantar, 2=Observação (opcional)
+  return [self.viewModel numberOfSections];
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -438,40 +336,39 @@ static UIColor *SecondaryLabelColor(void) {
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
-  if (!menu || section > 1 || menu.period.count <= section) return @"";
-  NSString *kcal = [menu.period[section] calories];
-  return (kcal.length && ![kcal isEqualToString:@"0"])
-  ? [NSString stringWithFormat:@"Valor calórico para uma refeição: %@ kcal", kcal]
-  : @"";
+  return [self.viewModel footerForSection:section];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MenuCell" forIndexPath:indexPath];
   self.tableView.estimatedRowHeight = 150.;
 
-  if (!menu) { cell.textLabel.text = @""; return cell; }
+  NSString *texto = [self.viewModel textForSection:indexPath.section];
+
+  UIColor* (^SecondaryLabelColor)(void) = ^UIColor *{
+    if (@available(iOS 13.0, *)) return [UIColor secondaryLabelColor];
+    return [UIColor grayColor];
+  };
 
   if (indexPath.section <= 1) {
-    // 0 = almoço, 1 = jantar
-    if (menu.period.count <= indexPath.section) {
-      cell.textLabel.text = @"Sem cardápio publicado";
-      cell.textLabel.textColor = SecondaryLabelColor();
-      cell.textLabel.font = [UIFont systemFontOfSize:15];
+    BOOL hasMenu = (texto.length && ![texto isEqualToString:@"Sem cardápio publicado"]);
+    UIColor *textColor;
+    if (@available(iOS 13.0, *)) {
+      textColor = hasMenu ? [UIColor labelColor] : SecondaryLabelColor();
       cell.backgroundColor = [UIColor systemBackgroundColor];
-      return cell;
+    } else {
+      textColor = hasMenu ? [UIColor blackColor] : SecondaryLabelColor();
     }
-    Period *p = menu.period[indexPath.section];
-    NSString *texto = (p.menu.length ? p.menu : @"Sem cardápio publicado");
     cell.textLabel.text = texto;
-    cell.textLabel.textColor = (p.menu.length ? ([UIColor respondsToSelector:@selector(labelColor)] ? [UIColor labelColor] : [UIColor blackColor]) : SecondaryLabelColor());
+    cell.textLabel.textColor = textColor;
     cell.textLabel.font = [UIFont systemFontOfSize:15];
-    cell.backgroundColor = [UIColor systemBackgroundColor];
   } else {
-    // Observação (opcional)
-    cell.textLabel.text = dataModel.observation ?: @"";
+    cell.textLabel.text = texto ?: @"";
     cell.textLabel.textColor = [UIColor grayColor];
     cell.textLabel.font = [UIFont systemFontOfSize:14];
-    cell.backgroundColor = [UIColor systemGroupedBackgroundColor];
+    if (@available(iOS 13.0, *)) {
+      cell.backgroundColor = [UIColor systemGroupedBackgroundColor];
+    }
   }
   return cell;
 }
@@ -502,59 +399,29 @@ static UIColor *SecondaryLabelColor(void) {
 #pragma mark - DKScrollingTabControllerDelegate
 
 - (void)ScrollingTabController:(DKScrollingTabController *)controller selection:(NSUInteger)selection {
-  if (selection >= menuArray.count) return;
-
-  menu = [menuArray objectAtIndex:selection];
-  [self setupDayLabel:(int)selection];
-
-  // Atualiza o estilo dos botões conforme seleção
-  for (NSUInteger i = 0; i < controller.buttons.count; i++) {
-    UIButton *button = controller.buttons[i];
-    NSString *titulo = button.titleLabel.text;
-    if (!titulo || [titulo rangeOfString:@"\n"].location == NSNotFound) continue;
-
-    NSArray *linhas = [titulo componentsSeparatedByString:@"\n"];
-    NSString *linha1 = linhas[0];
-    NSString *linha2 = linhas[1];
-
-    BOOL isSelecionado = (i == selection);
-    UIFont *fontDia = isSelecionado ? [UIFont boldSystemFontOfSize:12] : [UIFont systemFontOfSize:12];
-    UIFont *fontNumero = isSelecionado ? [UIFont boldSystemFontOfSize:14] : [UIFont systemFontOfSize:14];
-    UIColor *corTexto = isSelecionado ? ([UIColor respondsToSelector:@selector(labelColor)] ? [UIColor labelColor] : [UIColor blackColor]) : [UIColor grayColor];
-
-    NSMutableAttributedString *attributed = [[NSMutableAttributedString alloc] initWithString:titulo];
-    [attributed addAttribute:NSFontAttributeName value:fontDia range:NSMakeRange(0, linha1.length)];
-    [attributed addAttribute:NSFontAttributeName value:fontNumero range:NSMakeRange(linha1.length + 1, linha2.length)];
-    [attributed addAttribute:NSForegroundColorAttributeName value:corTexto range:NSMakeRange(0, titulo.length)];
-
-    [button setAttributedTitle:attributed forState:UIControlStateNormal];
-  }
+  if (selection >= self.viewModel.week.count) return;
+  self.viewModel.selectedIndex = selection; // dispara delegate de dia
+  [self refreshTabButtonsStyleForSelection:selection];
 }
 
-#pragma mark - Model Notifications
+#pragma mark - ViewModel Delegate
 
-- (void)didChangeRestaurant:(NSNotification *)notification {
-  [dataModel getMenu];
-  [self.navigationItem setTitle:[[dataModel currentRestaurant] valueForKey:@"name"]];
+- (void)menuViewModelDidUpdateWeek:(MenuViewModel *)viewModel {
+  // Atualiza Tabs e seleciona o dia atual
+  [self setupWeekTabsWithTitles:self.viewModel.tabTitles];
 }
 
-// Sempre monta 7 dias (com ou sem dados do servidor)
-- (void)didReceiveMenu:(NSNotification *)notification {
-  NSArray<Menu *> *serverWeek = [dataModel menuArray];
-  NSArray<Menu *> *scaffold   = ScaffoldSemanaVazia();
-  menuArray = [[NSMutableArray alloc] initWithArray:MergeSemana(scaffold, serverWeek)];
-
-  [self setupWeekView:menuArray];
-
-  menu = [menuArray objectAtIndex:diaDaSemana];
-  [self setupDayLabel:diaDaSemana];
-
-  if (serverWeek.count == 0) {
-    [SVProgressHUD showInfoWithStatus:@"Sem cardápio publicado para essa semana."];
-  }
-  stringForLunch = [NSMutableString stringWithFormat:@"ALMOÇO"];
+- (void)menuViewModelDidUpdateDay:(MenuViewModel *)viewModel {
+  diaDaSemana = (int)self.viewModel.selectedIndex; // se ainda usa essa var em algum ponto
+  [self setupDayLabel:(int)self.viewModel.selectedIndex];
   [self.tableView reloadData];
 }
+
+- (void)menuViewModelNoServerMenu:(MenuViewModel *)viewModel {
+  [SVProgressHUD showInfoWithStatus:@"Sem cardápio publicado para essa semana."];
+}
+
+#pragma mark - Model Notifications (não relacionadas ao menu)
 
 - (void)didRecieveUserData:(NSNotification *)notification {
   [self presentViewController:creditsViewController animated:YES completion:nil];
@@ -568,17 +435,7 @@ static UIColor *SecondaryLabelColor(void) {
 #pragma mark - Fechamento RU
 
 - (BOOL)isClosed {
-  if (!menu || menu.period.count < 2) return NO;
-
-  NSString *strLunch  = [[[[NSString stringWithFormat:@"%@", [menu.period[0] menu]] capitalizedString] stringByReplacingOccurrencesOfString:@" " withString:@""] stringByReplacingOccurrencesOfString:@"." withString:@""];
-  NSString *strDinner = [[[[NSString stringWithFormat:@"%@", [menu.period[1] menu]] capitalizedString] stringByReplacingOccurrencesOfString:@" " withString:@""] stringByReplacingOccurrencesOfString:@"." withString:@""];
-
-  if ([strLunch isEqualToString:@"Fechado"] || [strLunch isEqualToString:@""]) {
-    if ([strDinner isEqualToString:@"Fechado"] || [strDinner isEqualToString:@""]) {
-      return YES;
-    }
-  }
-  return NO;
+  return [self.viewModel isClosed];
 }
 
 #pragma mark - SWRevealViewControllerDelegate

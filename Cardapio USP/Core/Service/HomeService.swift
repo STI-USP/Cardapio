@@ -40,13 +40,15 @@ struct HomeServiceImpl: HomeService, @unchecked Sendable {
       let balanceStr = balance.formatted(
           .currency(code: "BRL").precision(.fractionLength(2)))
 
-      return HomeState(
+  let state = HomeState(
         restaurantName: menuOnly.restaurantName,
         balanceText: balanceStr,
         dateText: menuOnly.dateText,
         mealPeriod: menuOnly.mealPeriod,
         items: menuOnly.items
       )
+  HomeCache.shared.save(state)
+  return state
 
     } catch {
       if case CreditServiceError.unauthorized = error {
@@ -96,13 +98,14 @@ struct HomeServiceImpl: HomeService, @unchecked Sendable {
      formatter.dateFormat = "dd/MM/yyyy"
      formatter.timeZone = TimeZone(identifier: "America/Sao_Paulo")
      
-     return HomeState(
+  let state = HomeState(
        restaurantName: restaurant.name.uppercased(),
        balanceText: "R$ --,--",          // placeholder (não-logado)
        dateText: formatter.string(from: todayMenu.date),
        mealPeriod: targetPeriod.localized,
        items: todayMenu.items
      )
-     
+  HomeCache.shared.save(state)
+  return state
    }
 }

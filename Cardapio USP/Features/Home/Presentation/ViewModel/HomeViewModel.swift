@@ -64,6 +64,9 @@ final class HomeViewModel: ObservableObject {
             await MainActor.run {
               self.error = error.localizedDescription
               self.isLoading = false
+              if self.state == nil, let cached = HomeCache.shared.load() {
+                self.state = self.enrichWithFallbackName(cached)
+              }
             }
           }
         }
@@ -78,7 +81,12 @@ final class HomeViewModel: ObservableObject {
         self.isLoading = false
       }
     } catch {
-      await MainActor.run { self.isLoading = false } // silencia erro
+      await MainActor.run {
+        self.isLoading = false
+        if self.state == nil, let cached = HomeCache.shared.load() {
+          self.state = self.enrichWithFallbackName(cached)
+        }
+      } // silencia erro
     }
   }
   

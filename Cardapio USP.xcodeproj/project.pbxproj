@@ -580,17 +580,9 @@
 				E9E985162DE8BB1E0042311D /* Network */,
 				E9F0976F1E007D8500C6A464 /* Models */,
 				E9F973B12DC29D4A007BC228 /* Service */,
-				E9E983A22DE8A6100042311D /* UseCases */,
 				E9D075432DFC735E003F2C30 /* WebViewViewController.swift */,
 			);
 			path = Core;
-			sourceTree = "<group>";
-		};
-		E9E983A22DE8A6100042311D /* UseCases */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = UseCases;
 			sourceTree = "<group>";
 		};
 		E9E983A32DE8A6240042311D /* DesignSystem */ = {

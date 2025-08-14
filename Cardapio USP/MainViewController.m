@@ -36,6 +36,8 @@
   NSLayoutConstraint *newHeightConstraint;
   
   UIVisualEffectView *blurEffectView;
+  AFNetworkReachabilityStatus _reachabilityStatus;
+  BOOL _hasShownOfflineHUD;
   
 }
 
@@ -46,50 +48,48 @@
 
 // Implementação do método fetchMenu para cache offline e alerta de rede
 // Implementação correta do método fetchMenu
-- (void)fetchMenu {
+// Carrega menu do cache (retorna YES se conseguiu)
+- (BOOL)loadMenuFromCache {
   NSString *cachePath = [NSTemporaryDirectory() stringByAppendingPathComponent:@"menu_cache.json"];
-  AFNetworkReachabilityManager *reach = [AFNetworkReachabilityManager sharedManager];
-  [reach startMonitoring];
+  NSData *cacheData = [NSData dataWithContentsOfFile:cachePath];
+  if (!cacheData) return NO;
+  NSError *err;
+  NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:cacheData options:NSJSONReadingMutableContainers error:&err];
+  if (!jsonArray || ![jsonArray isKindOfClass:[NSArray class]]) return NO;
+  NSMutableArray *menus = [NSMutableArray array];
+  for (NSDictionary *item in jsonArray) {
+    NSMutableArray *periods = [NSMutableArray array];
+    if (item[@"breakfast"]) {
+      [periods addObject:[[Period alloc] initWithPeriod:@"breakfast" andMenu:item[@"breakfast"][@"menu"] andCalories:item[@"breakfast"][@"calories"]]];
+    }
+    if (item[@"lunch"]) {
+      [periods addObject:[[Period alloc] initWithPeriod:@"lunch" andMenu:item[@"lunch"][@"menu"] andCalories:item[@"lunch"][@"calories"]]];
+    }
+    if (item[@"dinner"]) {
+      [periods addObject:[[Period alloc] initWithPeriod:@"dinner" andMenu:item[@"dinner"][@"menu"] andCalories:item[@"dinner"][@"calories"]]];
+    }
+    Menu *menu = [[Menu alloc] initWithDate:item[@"date"] andPeriod:periods];
+    [menus addObject:menu];
+  }
+  [MenuDataModel getInstance].menus = menus;
+  [self didReceiveMenu:nil];
+  return YES;
+}
 
-  if ([reach networkReachabilityStatus] == AFNetworkReachabilityStatusNotReachable) {
-    NSData *cacheData = [NSData dataWithContentsOfFile:cachePath];
-    if (cacheData) {
-      NSError *err;
-      NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:cacheData options:NSJSONReadingMutableContainers error:&err];
-      if (jsonArray && [jsonArray isKindOfClass:[NSArray class]]) {
-        NSMutableArray *menus = [NSMutableArray array];
-        for (NSDictionary *item in jsonArray) {
-          NSMutableArray *periods = [NSMutableArray array];
-          if (item[@"breakfast"]) {
-            Period *breakfast = [[Period alloc] initWithPeriod:@"breakfast" andMenu:item[@"breakfast"][@"menu"] andCalories:item[@"breakfast"][@"calories"]];
-            [periods addObject:breakfast];
-          }
-          if (item[@"lunch"]) {
-            Period *lunch = [[Period alloc] initWithPeriod:@"lunch" andMenu:item[@"lunch"][@"menu"] andCalories:item[@"lunch"][@"calories"]];
-            [periods addObject:lunch];
-          }
-          if (item[@"dinner"]) {
-            Period *dinner = [[Period alloc] initWithPeriod:@"dinner" andMenu:item[@"dinner"][@"menu"] andCalories:item[@"dinner"][@"calories"]];
-            [periods addObject:dinner];
-          }
-          Menu *menu = [[Menu alloc] initWithDate:item[@"date"] andPeriod:periods];
-          [menus addObject:menu];
-        }
-        [MenuDataModel getInstance].menus = menus;
-        [self didReceiveMenu:nil];
-        [SVProgressHUD showInfoWithStatus:@"Você está offline. Exibindo dados salvos."];
-      }
-    } else {
-      [SVProgressHUD showInfoWithStatus:@"Sem conexão e sem dados salvos."];
+- (void)fetchMenu {
+  // Se status conhecido e offline, evita qualquer chamada de rede
+  if (_reachabilityStatus == AFNetworkReachabilityStatusNotReachable) {
+    BOOL ok = [self loadMenuFromCache];
+    if (!_hasShownOfflineHUD) {
+      [SVProgressHUD showInfoWithStatus: ok ? @"Você está offline. Exibindo dados salvos." : @"Sem conexão e sem dados salvos."];
+      _hasShownOfflineHUD = YES;
     }
     return;
   }
-
-  // Online: busca normalmente
+  // Se ainda desconhecido, não bloqueia a UI, mas evita múltiplas chamadas se já há um HUD
   [dataModel getMenu];
-  // O resultado será tratado pelo observer didReceiveMenu
   NSString *name = [[dataModel currentRestaurant] valueForKey:@"name"];
-  [self.navigationController.navigationItem setTitle: name];
+  [self.navigationController.navigationItem setTitle:name];
 }
 
 - (void)viewDidLoad {
@@ -131,6 +131,26 @@
   //Animate View
   UILongPressGestureRecognizer *recoginzer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(onPress:)];
   [_menuButton addGestureRecognizer:recoginzer];
+
+  // Reachability centralizada
+  AFNetworkReachabilityManager *reach = [AFNetworkReachabilityManager sharedManager];
+  __weak typeof(self) weakSelf = self;
+  [reach setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+    __strong typeof(self) self = weakSelf;
+    if (!self) return;
+    self->_reachabilityStatus = status;
+    if (status != AFNetworkReachabilityStatusNotReachable) {
+      // Quando voltar a conexão, refaz menu e créditos se necessário
+      if (self->menuArray.count == 0) {
+        [self fetchMenu];
+      }
+      if ([self->oauth isLoggedIn]) {
+        [dataModel getCreditoRUCard];
+      }
+      self->_hasShownOfflineHUD = NO; // permite mostrar novamente se cair depois
+    }
+  }];
+  [reach startMonitoring];
   
 }
 
@@ -141,11 +161,15 @@
   [_expandMenuView setHidden:YES];
   
   if ([dataModel currentRestaurant]) {
-    [self fetchMenu];
+    [self fetchMenu]; // já decide se pode ou não chamar rede
   }
   
-  if ([oauth isLoggedIn])
+  if ([oauth isLoggedIn] && _reachabilityStatus != AFNetworkReachabilityStatusNotReachable) {
     [dataModel getCreditoRUCard];
+  } else if (_reachabilityStatus == AFNetworkReachabilityStatusNotReachable && !_hasShownOfflineHUD) {
+    [SVProgressHUD showInfoWithStatus:@"Offline. Algumas informações podem estar desatualizadas."];
+    _hasShownOfflineHUD = YES;
+  }
   else
     [_saldo setText:@"R$ --,--"];
 }
@@ -295,7 +319,49 @@ static void setupView(MainViewController *object) {
 }
 
 - (void)didReceiveMenu:(NSNotification *)notification {
+  // Atualiza UI
   setupView(self);
+
+  // Salva cache somente se temos dados carregados da requisição (evita sobrescrever com vazio)
+  NSArray *menus = [MenuDataModel getInstance].menus;
+  if (!menus || menus.count == 0) return;
+
+  // Monta estrutura JSON semelhante à recebida da API para reuso offline
+  NSMutableArray *jsonArray = [NSMutableArray arrayWithCapacity:menus.count];
+  for (Menu *menu in menus) {
+    if (![menu respondsToSelector:@selector(date)] || ![menu respondsToSelector:@selector(period)]) continue;
+    NSMutableDictionary *dayDict = [NSMutableDictionary dictionary];
+    if (menu.date) dayDict[@"date"] = menu.date;
+    // Periods: lunch / dinner / breakfast (se existirem)
+    if ([menu.period isKindOfClass:[NSArray class]]) {
+      for (Period *p in menu.period) {
+        if (![p respondsToSelector:@selector(period)] || ![p respondsToSelector:@selector(menu)] ) continue;
+        NSString *label = p.period ?: @"";
+        if (label.length == 0) continue;
+        // Normaliza possíveis nomes (server usa lunch/dinner; app pode ter breakfast)
+        NSString *key = [label lowercaseString];
+        NSDictionary *pDict = @{ @"menu": p.menu ?: @"", @"calories": p.calories ?: @"" };
+        dayDict[key] = pDict;
+      }
+    }
+    [jsonArray addObject:dayDict];
+  }
+
+  if (jsonArray.count == 0) return;
+
+  NSError *err = nil;
+  NSData *data = [NSJSONSerialization dataWithJSONObject:jsonArray options:0 error:&err];
+  if (!data || err) {
+    NSLog(@"[Cache] Falha ao serializar menu: %@", err.localizedDescription);
+    return;
+  }
+  NSString *cachePath = [NSTemporaryDirectory() stringByAppendingPathComponent:@"menu_cache.json"];
+  BOOL wrote = [data writeToFile:cachePath atomically:YES];
+  if (!wrote) {
+    NSLog(@"[Cache] Não foi possível gravar em %@", cachePath);
+  } else {
+    NSLog(@"[Cache] Menu salvo em %@ (%lu bytes)", cachePath, (unsigned long)data.length);
+  }
 }
 
 
