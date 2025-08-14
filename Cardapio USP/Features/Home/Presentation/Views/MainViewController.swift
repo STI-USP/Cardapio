@@ -8,6 +8,29 @@
 
 import UIKit
 import Combine
+import Network
+#if canImport(SVProgressHUD)
+import SVProgressHUD
+#endif
+
+@MainActor
+final class NetworkMonitor: @unchecked Sendable {
+  static let shared = NetworkMonitor()
+  private let monitor = NWPathMonitor()
+  private let queue = DispatchQueue(label: "net.monitor")
+  private(set) var isConnected: Bool = true
+
+  private init() {
+    monitor.pathUpdateHandler = { [weak self] path in
+      let ok = (path.status == .satisfied)
+      // hop de volta para o MainActor antes de tocar no estado
+      Task { @MainActor in
+        self?.isConnected = ok
+      }
+    }
+    monitor.start(queue: queue)
+  }
+}
 
 final class MainViewController: UIViewController, UIScrollViewDelegate {
   
@@ -154,7 +177,7 @@ private extension MainViewController {
 // MARK: – Pull‑to‑refresh
 private extension MainViewController {
   @objc func refreshPulled() {
-    Task { [weak self] in
+    runIfOnline { [weak self] in
       guard let self else { return }
       await self.viewModel.load()
       self.refreshCtrl.endRefreshing()
@@ -189,7 +212,11 @@ private extension MainViewController {
 private extension MainViewController {
   func observeAppLifecycle() {
     NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)
-      .sink { [weak self] _ in Task { await self?.viewModel.load() } }
+      .sink { [weak self] _ in
+        self?.runIfOnline { [weak self] in
+          await self?.viewModel.load()
+        }
+      }
       .store(in: &cancellables)
   }
 }
@@ -200,5 +227,31 @@ private extension MainViewController {
     let ac = UIAlertController(title: "Erro", message: msg, preferredStyle: .alert)
     ac.addAction(UIAlertAction(title: "OK", style: .default))
     present(ac, animated: true)
+  }
+}
+
+// MARK: – Connectivity guard & HUD
+private extension MainViewController {
+  func runIfOnline(_ action: @escaping () async -> Void) {
+    if NetworkMonitor.shared.isConnected {
+      Task { await action() }
+    } else {
+      showNoNetworkHUD()
+      refreshCtrl.endRefreshing()
+    }
+  }
+
+  func showNoNetworkHUD() {
+    #if canImport(SVProgressHUD)
+    SVProgressHUD.setDefaultStyle(.dark)
+    SVProgressHUD.showInfo(withStatus: "Sem conexão. Verifique sua rede.")
+    SVProgressHUD.dismiss(withDelay: 1.5)
+    #else
+    let ac = UIAlertController(title: "Sem conexão",
+                               message: "Verifique sua rede.",
+                               preferredStyle: .alert)
+    ac.addAction(UIAlertAction(title: "OK", style: .default))
+    present(ac, animated: true)
+    #endif
   }
 }
