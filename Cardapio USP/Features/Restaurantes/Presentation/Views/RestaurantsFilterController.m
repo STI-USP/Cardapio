@@ -36,6 +36,11 @@
   [self setTitle:@"Restaurantes"];
   
   dataModel = [DataModel getInstance];
+
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(onDidReceiveRestaurants)
+                                               name:@"DidReceiveRestaurants"
+                                             object:nil];
   
   if (!campiList) {
     campiList = [[NSMutableArray alloc] init];
@@ -63,12 +68,15 @@
 }
 
 -(void) viewWillAppear:(BOOL) animated {
-
   // Filter Option
   NSIndexPath *oldFilterOptionIndexPath = [NSIndexPath indexPathForRow:[dataModel restaurantOption] inSection:[dataModel campusOption]];
   [[self.tableView cellForRowAtIndexPath:oldFilterOptionIndexPath] setAccessoryType: UITableViewCellAccessoryCheckmark];
   
   [self.tableView reloadData];  
+}
+
+- (void)dealloc {
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 
@@ -136,7 +144,23 @@
 }
 
 
+- (void)onDidReceiveRestaurants {
+  dispatch_async(dispatch_get_main_queue(), ^{
+    self->campiList = [[NSMutableArray alloc] init];
+    for (id campus in [self->dataModel restaurants]) {
+      [self->dataModel setRestaurantName:[campus objectForKey:@"name"]];
+      [self->campiList addObject:campus];
+    }
 
+    self->restaurantDict  = [[NSMutableDictionary alloc] init];
+    for (int i=0; i<[self->campiList count]; i++) {
+      NSArray *list = [[self->campiList objectAtIndex:i] valueForKey:@"restaurants"];
+      [self->restaurantDict setValue:list forKey:[[self->campiList objectAtIndex:i] objectForKey:@"name"]];
+    }
+
+    [self.tableView reloadData];
+  });
+}
 
 - (void)favoriteRestaurant:(id)sender {
 

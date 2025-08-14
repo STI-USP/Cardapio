@@ -18,10 +18,10 @@ final class URLSessionHTTPClient: HTTPClient {
   func send<T: Decodable>(_ request: URLRequest) async throws -> T {
     
     // MARK: 1) Log de saída (console)
-    //    print("➡️ \(request.httpMethod ?? "") \(request.url!.absoluteString)")
-    //    if let body = request.httpBody {
-    //      print("➡️ Body:", String(data: body, encoding: .utf8) ?? "<bin>")
-    //    }
+        print("➡️ \(request.httpMethod ?? "") \(request.url!.absoluteString)")
+        if let body = request.httpBody {
+          print("➡️ Body:", String(data: body, encoding: .utf8) ?? "<bin>")
+        }
     
     // MARK: 2) Chamada de rede
     let (data, response) = try await URLSession.shared.data(for: request)
@@ -30,9 +30,9 @@ final class URLSessionHTTPClient: HTTPClient {
     guard let http = response as? HTTPURLResponse else {
       throw URLError(.badServerResponse)
     }
-    //    print("⬅️ Status:", http.statusCode)
-    //    print("⬅️ Headers:", http.allHeaderFields)
-    //    print("⬅️ Raw JSON:", String(data: data, encoding: .utf8) ?? "<bin>")
+        print("⬅️ Status:", http.statusCode)
+        print("⬅️ Headers:", http.allHeaderFields)
+        print("⬅️ Raw JSON:", String(data: data, encoding: .utf8) ?? "<bin>")
     
     // MARK: 4) Crashlytics trace
     logToCrashlytics(request: request, response: http, data: data, error: nil)
@@ -49,7 +49,7 @@ final class URLSessionHTTPClient: HTTPClient {
     do {
       return try JSONDecoder().decode(T.self, from: data)
     } catch {
-      //      print("❌ Decoding error:", error)
+            print("❌ Decoding error:", error)
       
       logToCrashlytics(request: request, response: http, data: data, error: error)
       throw error
