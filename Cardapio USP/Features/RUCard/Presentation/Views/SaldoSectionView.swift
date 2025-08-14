@@ -45,10 +45,15 @@ class SaldoSectionView: UIView {
     textStack.spacing = 4
     
     saldoTitleLabel.text = "Saldo disponível"
-    saldoTitleLabel.font = .uspLight(ofSize: 14)
+     saldoTitleLabel.font = UIFontMetrics.default.scaledFont(for: .uspLight(ofSize: 14))
+     saldoTitleLabel.adjustsFontForContentSizeCategory = true
+     saldoTitleLabel.numberOfLines = 2 // ← opcional, ajuda com Acessibilidade
+     saldoTitleLabel.setContentCompressionResistancePriority(.required, for: .vertical)
     
     saldoValueLabel.text = "R$ --,--"
-    saldoValueLabel.font = .uspBold(ofSize: 24)
+    saldoValueLabel.font = UIFontMetrics.default.scaledFont(for: .uspBold(ofSize: 24))
+    saldoValueLabel.adjustsFontForContentSizeCategory = true
+    saldoValueLabel.setContentCompressionResistancePriority(.required, for: .vertical)
     
     textStack.addArrangedSubview(saldoTitleLabel)
     textStack.addArrangedSubview(saldoValueLabel)
