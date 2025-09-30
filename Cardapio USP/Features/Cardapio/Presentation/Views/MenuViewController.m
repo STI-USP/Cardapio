@@ -286,6 +286,7 @@
 - (void)setupDayLabel:(int)dia {
   if (dia < 0 || dia >= self.viewModel.week.count) return;
   [diaDaSemanaLabel setText:self.viewModel.dayHeaderTitle];
+  
   [[self tableView] reloadData];
 }
 
@@ -412,8 +413,12 @@
 }
 
 - (void)menuViewModelDidUpdateDay:(MenuViewModel *)viewModel {
-  diaDaSemana = (int)self.viewModel.selectedIndex; // se ainda usa essa var em algum ponto
+  diaDaSemana = (int)self.viewModel.selectedIndex;
   [self setupDayLabel:(int)self.viewModel.selectedIndex];
+
+  NSString *name = [[dataModel currentRestaurant] valueForKey:@"name"];
+  [self.navigationItem setTitle:(name ?: @"")];
+
   [self.tableView reloadData];
 }
 
