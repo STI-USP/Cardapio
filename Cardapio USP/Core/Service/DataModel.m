@@ -225,7 +225,7 @@ static inline void LogAFOperation(AFHTTPRequestOperation *op, NSError *err) {
   NSString *rid = [NSString stringWithFormat:@"%@", self.currentRestaurant[@"id"] ?: @""];
   if (rid.length == 0) {
     NSLog(@"❌ currentRestaurant['id'] vazio/nulo");
-    [self menuError];
+    [self menuErrorWithMessage:@"Nenhum restaurante selecionado. Por favor, selecione um restaurante."];
     return;
   }
   NSString *base = [kBaseRUCardURL hasSuffix:@"/"] ? [kBaseRUCardURL substringToIndex:kBaseRUCardURL.length-1] : kBaseRUCardURL;
@@ -241,7 +241,13 @@ static inline void LogAFOperation(AFHTTPRequestOperation *op, NSError *err) {
     __strong typeof(self) self = weakSelf;
     if (!self) return;
 
-    if (op.response.statusCode != 200) { [self menuError]; return; }
+    if (op.response.statusCode != 200) { 
+      NSString *msg = (op.response.statusCode == 404) 
+        ? @"O cardápio solicitado não está disponível no momento. Por favor, verifique mais tarde."
+        : @"Erro ao obter o cardápio. Por favor, tente novamente mais tarde.";
+      [self menuErrorWithMessage:msg]; 
+      return; 
+    }
 
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:resp options:NSJSONReadingMutableContainers error:nil];
     if (![json isKindOfClass:[NSDictionary class]] || [json[@"message"][@"error"] boolValue]) {
@@ -250,7 +256,15 @@ static inline void LogAFOperation(AFHTTPRequestOperation *op, NSError *err) {
     }
 
     [self.menuArray removeAllObjects];
-    for (NSDictionary *raw in json[@"meals"]) {
+    
+    // Verifica se há refeições disponíveis
+    NSArray *meals = json[@"meals"];
+    if (![meals isKindOfClass:[NSArray class]] || meals.count == 0) {
+      [self menuErrorWithMessage:@"O cardápio solicitado não está disponível no momento. Por favor, verifique mais tarde."];
+      return;
+    }
+    
+    for (NSDictionary *raw in meals) {
       NSDictionary *day = [self cleanDictionary:[raw mutableCopy]];
       NSMutableArray *periods = NSMutableArray.new;
       for (NSString *period in @[@"lunch",@"dinner"]) {
@@ -262,6 +276,12 @@ static inline void LogAFOperation(AFHTTPRequestOperation *op, NSError *err) {
       Menu *menu = [[Menu alloc] initWithDate:day[@"date"] andPeriod:periods];
       [self.menuArray addObject:menu];
     }
+    
+    // Verifica se conseguiu processar ao menos um menu
+    if (self.menuArray.count == 0) {
+      [self menuErrorWithMessage:@"O cardápio solicitado não está disponível no momento. Por favor, verifique mais tarde."];
+      return;
+    }
 
     self.observation = json[@"observation"][@"observation"] ?: @"";
     [SVProgressHUD dismiss];
@@ -270,7 +290,18 @@ static inline void LogAFOperation(AFHTTPRequestOperation *op, NSError *err) {
   } failure:^(AFHTTPRequestOperation *op, NSError *err) {
     LogAFOperation(op, err);
     NSLog(@"[DataModel] menu erro: %@", err.localizedDescription);
-    [self menuError];
+    
+    // Verifica o tipo de erro para dar mensagem mais específica
+    NSString *errorMessage = nil;
+    if (err.code == NSURLErrorNotConnectedToInternet || 
+        err.code == NSURLErrorNetworkConnectionLost ||
+        err.code == NSURLErrorTimedOut) {
+      errorMessage = @"Não foi possível conectar ao servidor. Verifique sua conexão com a internet e tente novamente.";
+    } else if (op.response.statusCode >= 500) {
+      errorMessage = @"O servidor está temporariamente indisponível. Por favor, tente novamente mais tarde.";
+    }
+    
+    [self menuErrorWithMessage:errorMessage];
   }];
 }
 
@@ -335,7 +366,12 @@ static inline void LogAFOperation(AFHTTPRequestOperation *op, NSError *err) {
 
 
 - (void)menuError {
-  [SVProgressHUD showErrorWithStatus:@"Não foi possível obter o cardápio. Tente novamente mais tarde."];
+  [self menuErrorWithMessage:nil];
+}
+
+- (void)menuErrorWithMessage:(NSString *)customMessage {
+  NSString *message = customMessage ?: @"Não foi possível obter o cardápio. Tente novamente mais tarde.";
+  [SVProgressHUD showErrorWithStatus:message];
   [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveMenu" object:self];
 }
 

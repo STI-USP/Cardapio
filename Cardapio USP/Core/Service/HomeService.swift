@@ -8,9 +8,19 @@
 
 import Foundation
 
-enum HomeServiceError: Error {
+enum HomeServiceError: LocalizedError {
   case unauthorized
   case other(Error)
+  
+  var errorDescription: String? {
+    switch self {
+    case .unauthorized:
+      return "Usuário não autenticado. Faça login para continuar."
+    case .other(let error):
+      // Propaga a mensagem do erro original (ex: MenuServiceError)
+      return error.localizedDescription
+    }
+  }
 }
 
 protocol HomeService: Sendable {

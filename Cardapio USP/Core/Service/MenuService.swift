@@ -8,6 +8,27 @@
 
 import Foundation
 
+// MARK: - Erros customizados
+enum MenuServiceError: LocalizedError {
+  case noMenuAvailable     // Sem cardápio para data/período atual (ex: data antiga)
+  case networkError(Error) // Problemas de conexão
+  case parsingError(Error) // Erro ao decodificar resposta
+  case unknown(Error)      // Outros erros
+  
+  var errorDescription: String? {
+    switch self {
+    case .noMenuAvailable:
+      return "O cardápio solicitado não está disponível no momento. Por favor, verifique mais tarde."
+    case .networkError:
+      return "Não foi possível conectar ao servidor. Verifique sua conexão com a internet e tente novamente."
+    case .parsingError:
+      return "Ocorreu um erro ao processar os dados do cardápio. Por favor, tente novamente mais tarde."
+    case .unknown(let error):
+      return "Erro inesperado: \(error.localizedDescription)"
+    }
+  }
+}
+
 protocol MenuService : Sendable {
   // Cardápio completo da semana
   func fetchWeek(for restaurantId: String) async throws -> [Menu]
@@ -24,8 +45,16 @@ final class MenuServiceImpl: MenuService {
   }
   
   func fetchWeek(for restaurantId: String) async throws -> [Menu] {
-    let dto = try await post(MenuWeekDTO.self, path: "menu/\(restaurantId)")
-    return dto.toDomain()
+    do {
+      let dto = try await post(MenuWeekDTO.self, path: "menu/\(restaurantId)")
+      return dto.toDomain()
+    } catch let error as DecodingError {
+      throw MenuServiceError.parsingError(error)
+    } catch let error as URLError {
+      throw MenuServiceError.networkError(error)
+    } catch {
+      throw MenuServiceError.unknown(error)
+    }
   }
   
   func fetchToday(for restaurantId: String) async throws -> Menu {
@@ -47,11 +76,10 @@ final class MenuServiceImpl: MenuService {
     guard let menu = all.first(where: {
       calendarSP.isDate($0.date, inSameDayAs: now) && $0.period == targetPeriod
     }) else {
-      throw NSError(
-        domain: "MenuService",
-        code: 404,
-        userInfo: [NSLocalizedDescriptionKey:"Sem cardápio para hoje e período atual"]
-      )
+      // Lança erro customizado quando não há cardápio disponível (ex: data antiga)
+      print("⚠️ [MenuService] Cardápio não encontrado para hoje/período atual")
+      print("⚠️ [MenuService] Menus disponíveis: \(all.map { "[\($0.date)] \($0.period)" }.joined(separator: ", "))")
+      throw MenuServiceError.noMenuAvailable
     }
 
     return menu

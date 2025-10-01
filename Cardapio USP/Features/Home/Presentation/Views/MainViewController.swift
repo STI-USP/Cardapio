@@ -202,6 +202,7 @@ private extension MainViewController {
     }.store(in: &cancellables)
     
     viewModel.$error.compactMap { $0 }.sink { [weak self] msg in
+      print("🔔 [MainViewController] Exibindo alerta de erro: \(msg)")
       self?.cardapioView.showError("Erro ao carregar cardápio")
       self?.showAlert(msg)
     }.store(in: &cancellables)

@@ -62,7 +62,10 @@ final class HomeViewModel: ObservableObject {
             await fetchMenuOnly()
           } else {
             await MainActor.run {
-              self.error = error.localizedDescription
+              // MenuServiceError já fornece mensagens amigáveis através de LocalizedError
+              let errorMessage = error.localizedDescription
+              print("🔴 [HomeViewModel] Erro capturado: \(errorMessage)")
+              self.error = errorMessage
               self.isLoading = false
               if self.state == nil, let cached = HomeCache.shared.load() {
                 self.state = self.enrichWithFallbackName(cached)
@@ -82,11 +85,15 @@ final class HomeViewModel: ObservableObject {
       }
     } catch {
       await MainActor.run {
+        // Exibe mensagem amigável em caso de erro (ex: cardápio não disponível)
+        let errorMessage = error.localizedDescription
+        print("🔴 [HomeViewModel.fetchMenuOnly] Erro capturado: \(errorMessage)")
+        self.error = errorMessage
         self.isLoading = false
         if self.state == nil, let cached = HomeCache.shared.load() {
           self.state = self.enrichWithFallbackName(cached)
         }
-      } // silencia erro
+      }
     }
   }
   
