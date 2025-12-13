@@ -2,7 +2,7 @@ coverage_service: cobertura_xml
 xcodeproj: Cardapio USP.xcodeproj
 workspace: Cardapio USP.xcworkspace
 scheme: Cardapio USP
-output_directory: ./metrics-reports
+output_directory: ./metrics/reports
 source_directory: Cardapio USP
 binary_basename: Cardapio USP
 

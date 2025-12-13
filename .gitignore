@@ -24,3 +24,11 @@ build/
 
 # Backup files
 *~.nib
+
+# Metrics
+metrics/reports/
+compile_commands.json
+compile_commands.fixed.json
+.scannerwork/
+.oclint
+.slather.yml

@@ -215,6 +215,7 @@
 		E97B390B225556FE0070AC9B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E9818EC1198033A800F741B0 /* DKScrollingTabController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DKScrollingTabController.h; sourceTree = "<group>"; };
 		E9818EC2198033A800F741B0 /* DKScrollingTabController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DKScrollingTabController.m; sourceTree = "<group>"; };
+		E98C06EF2EEDC24B0021BB3F /* Cardapio USP.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = "Cardapio USP.xctestplan"; path = "../Cardapio USP.xctestplan"; sourceTree = "<group>"; };
 		E990FE6C262751F0005FF207 /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		E990FE6D262751F0005FF207 /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		E990FE7426279E41005FF207 /* CALayer+XibConfiguration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CALayer+XibConfiguration.h"; sourceTree = "<group>"; };
@@ -346,6 +347,7 @@
 		BFAC6E70192A54E100921494 = {
 			isa = PBXGroup;
 			children = (
+				E98C06EF2EEDC24B0021BB3F /* Cardapio USP.xctestplan */,
 				BFAC6E82192A54E100921494 /* Cardapio USP */,
 				BFAC6E7B192A54E100921494 /* Frameworks */,
 				BFAC6EA4192A54E100921494 /* Cardapio USPTests */,
@@ -1217,6 +1219,7 @@
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Cardapio USP.app/Cardapio USP";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = SYF585KJR7;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -1244,6 +1247,7 @@
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Cardapio USP.app/Cardapio USP";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = SYF585KJR7;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
