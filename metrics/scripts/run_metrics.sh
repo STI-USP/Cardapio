@@ -13,7 +13,7 @@ PROJECT_DIR="/Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/
 WORKSPACE="Cardapio USP.xcworkspace"
 SCHEME="Cardapio USP"
 OUTPUT_DIR="./metrics/reports"
-SIMULATOR="platform=iOS Simulator,name=iPhone 15"
+SIMULATOR="platform=iOS Simulator,name=iPhone 17"
 
 # Cores
 RED='\033[0;31m'
@@ -114,6 +114,12 @@ fi
 # =====================================
 log_step "[4/10] Running tests with code coverage..."
 echo "  This may take several minutes..."
+
+# Remove existing test results to avoid conflicts
+if [ -d "$OUTPUT_DIR/TestResults.xcresult" ]; then
+    rm -rf "$OUTPUT_DIR/TestResults.xcresult"
+    echo "  Removed existing TestResults.xcresult"
+fi
 
 xcodebuild test \
     -workspace "$WORKSPACE" \
