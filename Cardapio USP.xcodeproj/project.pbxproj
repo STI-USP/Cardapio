@@ -29,6 +29,8 @@
 		BFAC6EA1192A54E100921494 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFAC6E80192A54E100921494 /* UIKit.framework */; };
 		BFAC6EA9192A54E100921494 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BFAC6EA7192A54E100921494 /* InfoPlist.strings */; };
 		BFAC6EAB192A54E100921494 /* Cardapio_USPTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAC6EAA192A54E100921494 /* Cardapio_USPTests.m */; };
+		E9F0A0012F00000100000011 /* DataAccessTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F0A0012F00000100000001 /* DataAccessTests.m */; };
+		E9F0A0012F00000100000012 /* DataModelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F0A0012F00000100000002 /* DataModelTests.m */; };
 		BFAC6EB5192A566200921494 /* central.json in Resources */ = {isa = PBXBuildFile; fileRef = BFAC6EB4192A566200921494 /* central.json */; };
 		BFAC6ECA192A586B00921494 /* RECommonFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAC6EBF192A586B00921494 /* RECommonFunctions.m */; };
 		BFAC6ECB192A586B00921494 /* REFrostedContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAC6EC1192A586B00921494 /* REFrostedContainerViewController.m */; };
@@ -151,6 +153,8 @@
 		BFAC6EA6192A54E100921494 /* Cardapio USPTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Cardapio USPTests-Info.plist"; sourceTree = "<group>"; };
 		BFAC6EA8192A54E100921494 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		BFAC6EAA192A54E100921494 /* Cardapio_USPTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Cardapio_USPTests.m; sourceTree = "<group>"; };
+		E9F0A0012F00000100000001 /* DataAccessTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DataAccessTests.m; sourceTree = "<group>"; };
+		E9F0A0012F00000100000002 /* DataModelTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DataModelTests.m; sourceTree = "<group>"; };
 		BFAC6EB4192A566200921494 /* central.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; lineEnding = 0; path = central.json; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.javascript; };
 		BFAC6EBE192A586B00921494 /* RECommonFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RECommonFunctions.h; sourceTree = "<group>"; };
 		BFAC6EBF192A586B00921494 /* RECommonFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RECommonFunctions.m; sourceTree = "<group>"; };
@@ -424,6 +428,8 @@
 		BFAC6EA4192A54E100921494 /* Cardapio USPTests */ = {
 			isa = PBXGroup;
 			children = (
+				E9F0A0012F00000100000001 /* DataAccessTests.m */,
+				E9F0A0012F00000100000002 /* DataModelTests.m */,
 				BFAC6EAA192A54E100921494 /* Cardapio_USPTests.m */,
 				BFAC6EA5192A54E100921494 /* Supporting Files */,
 			);
@@ -978,6 +984,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9F0A0012F00000100000011 /* DataAccessTests.m in Sources */,
+				E9F0A0012F00000100000012 /* DataModelTests.m in Sources */,
 				BFAC6EAB192A54E100921494 /* Cardapio_USPTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
