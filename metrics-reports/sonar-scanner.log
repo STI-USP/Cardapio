@@ -1,85 +1,85 @@
-16:50:19.770 INFO  Scanner configuration file: /usr/local/Cellar/sonar-scanner/8.0.1.6346/libexec/conf/sonar-scanner.properties
-16:50:19.774 INFO  Project root configuration file: /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/sonar-project.properties
-16:50:19.790 INFO  SonarScanner CLI 8.0.1.6346
-16:50:19.793 INFO  Mac OS X 26.1 aarch64
-16:50:21.475 INFO  Communicating with SonarQube Community Build 25.11.0.114957
-16:50:21.475 WARN  Use of 'sonar.login' property has been deprecated in favor of 'sonar.token' (or the env variable alternative 'SONAR_TOKEN'). Please use the latter when passing a token.
-16:50:21.476 INFO  JRE provisioning: os[macos], arch[arm64]
-16:50:25.010 INFO  Starting SonarScanner Engine...
-16:50:25.010 INFO  Java 17.0.13 Eclipse Adoptium (64-bit)
-16:50:26.727 INFO  Load global settings
-16:50:26.843 INFO  Load global settings (done) | time=117ms
-16:50:26.845 INFO  Server id: 147B411E-AZsO75rQ--E16cdqbayY
-16:50:26.852 INFO  Loading required plugins
-16:50:26.853 INFO  Load plugins index
-16:50:26.888 INFO  Load plugins index (done) | time=35ms
-16:50:26.889 INFO  Load/download plugins
-16:50:27.192 INFO  Load/download plugins (done) | time=305ms
-16:50:27.368 INFO  Process project properties
-16:50:27.375 INFO  Process project properties (done) | time=6ms
-16:50:27.381 INFO  Project key: cardapio-usp-m1
-16:50:27.381 INFO  Base dir: /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS
-16:50:27.381 INFO  Working dir: /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/.scannerwork
-16:50:27.387 INFO  Load project settings for component key: 'cardapio-usp-m1'
-16:50:27.421 INFO  Load quality profiles
-16:50:27.547 INFO  Load quality profiles (done) | time=126ms
-16:50:27.569 INFO  Load active rules
-16:50:27.965 INFO  Load active rules (done) | time=396ms
-16:50:27.967 INFO  Load analysis cache
-16:50:27.972 INFO  Load analysis cache (404) | time=5ms
-16:50:28.006 WARN  The property 'sonar.login' is deprecated and will be removed in the future. Please use the 'sonar.token' property instead when passing a token.
-16:50:28.027 INFO  Preprocessing files...
-16:50:28.460 INFO  1 language detected in 284 preprocessed files (done) | time=434ms
-16:50:28.461 INFO  21 files ignored because of inclusion/exclusion patterns
-16:50:28.461 INFO  2 files ignored because of scm ignore settings
-16:50:28.462 INFO  Loading plugins for detected languages
-16:50:28.462 INFO  Load/download plugins
-16:50:28.462 INFO  Load/download plugins (done) | time=0ms
-16:50:28.486 INFO  Load project repositories
-16:50:28.497 INFO  Load project repositories (done) | time=12ms
-16:50:28.502 INFO  Indexing files...
-16:50:28.503 INFO  Project configuration:
-16:50:28.503 INFO    Excluded sources: **/Pods/**, **/Index/**, **/*.framework/**, **/Build/**, **/AF*.m, **/AF*.h, **/Crashlytics.framework/**, **/Fabric.framework/**, **/*Tests.m
-16:50:28.503 INFO    Included tests: **/*Tests.m
-16:50:28.543 INFO  284 files indexed (done) | time=41ms
-16:50:28.544 INFO  Quality profile for json: Sonar way
-16:50:28.544 INFO  ------------- Run sensors on module Cardapio USP - M1
-16:50:28.559 INFO  Load metrics repository
-16:50:28.577 INFO  Load metrics repository (done) | time=18ms
-16:50:28.700 INFO  Sensor JaCoCo XML Report Importer [jacoco]
-16:50:28.700 INFO  'sonar.coverage.jacoco.xmlReportPaths' is not defined. Using default locations: target/site/jacoco/jacoco.xml,target/site/jacoco-it/jacoco.xml,build/reports/jacoco/test/jacocoTestReport.xml
-16:50:28.701 INFO  No report imported, no coverage information will be imported by JaCoCo XML Report Importer
-16:50:28.701 INFO  Sensor JaCoCo XML Report Importer [jacoco] (done) | time=1ms
-16:50:28.701 INFO  Sensor IaC CloudFormation Sensor [iac]
-16:50:28.710 WARN  Invalid character encountered in file /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Cardapio USP/restaurants.json at line 2 for encoding UTF-8. Please fix file content or configure the encoding to be used using property 'sonar.sourceEncoding'.
-16:50:28.735 INFO  There are no files to be analyzed for the CloudFormation language
-16:50:28.735 INFO  Sensor IaC CloudFormation Sensor [iac] (done) | time=34ms
-16:50:28.735 INFO  Sensor IaC cfn-lint report Sensor [iac]
-16:50:28.735 INFO  Sensor IaC cfn-lint report Sensor [iac] (done) | time=1ms
-16:50:28.735 INFO  Sensor IaC Docker Sensor [iac]
-16:50:28.737 INFO  There are no files to be analyzed for the Docker language
-16:50:28.737 INFO  Sensor IaC Docker Sensor [iac] (done) | time=1ms
-16:50:28.737 INFO  Sensor IaC hadolint report Sensor [iac]
-16:50:28.737 INFO  Sensor IaC hadolint report Sensor [iac] (done) | time=1ms
-16:50:28.737 INFO  Sensor IaC Azure Resource Manager Sensor [iac]
-16:50:28.741 INFO  There are no files to be analyzed for the Azure Resource Manager language
-16:50:28.747 INFO  Sensor IaC Azure Resource Manager Sensor [iac] (done) | time=4ms
-16:50:28.747 INFO  Sensor Java Config Sensor [iac]
-16:50:28.752 INFO  There are no files to be analyzed for the Java language
-16:50:28.752 INFO  Sensor Java Config Sensor [iac] (done) | time=2ms
-16:50:28.752 INFO  Sensor TextAndSecretsSensor [text]
-16:50:28.800 INFO  Available processors: 8
-16:50:28.800 INFO  Using 8 threads for analysis.
-16:50:29.015 INFO  Start fetching files for the text and secrets analysis
-16:50:29.032 INFO  Using Git CLI to retrieve untracked files
-16:50:29.108 INFO  Retrieving language associated files and files included via "sonar.text.inclusions" that are tracked by git
-16:50:29.121 INFO  Starting the text and secrets analysis
-16:50:29.123 INFO  31 source files to be analyzed for the text and secrets analysis
-16:50:29.139 INFO  31/31 source files have been analyzed for the text and secrets analysis
-16:50:29.144 INFO  Sensor TextAndSecretsSensor [text] (done) | time=400ms
-16:50:29.145 INFO  ------------- Run sensors on project
-16:50:29.221 INFO  Sensor Generic Coverage Report
-16:50:29.221 INFO  Parsing /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/metrics-reports/cobertura.xml
-16:50:29.228 ERROR Error during parsing of the generic coverage report '/Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/metrics-reports/cobertura.xml'. Look at SonarQube documentation to know the expected XML format.
-16:50:29.251 INFO  EXECUTION FAILURE
-16:50:29.256 INFO  Total time: 9.485s
+22:06:59.786 INFO  Scanner configuration file: /usr/local/Cellar/sonar-scanner/8.0.1.6346/libexec/conf/sonar-scanner.properties
+22:06:59.790 INFO  Project root configuration file: /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/sonar-project.properties
+22:06:59.805 INFO  SonarScanner CLI 8.0.1.6346
+22:06:59.808 INFO  Mac OS X 26.1 aarch64
+22:07:01.368 INFO  Communicating with SonarQube Community Build 25.11.0.114957
+22:07:01.373 WARN  Use of 'sonar.login' property has been deprecated in favor of 'sonar.token' (or the env variable alternative 'SONAR_TOKEN'). Please use the latter when passing a token.
+22:07:01.375 INFO  JRE provisioning: os[macos], arch[arm64]
+22:07:01.766 INFO  Starting SonarScanner Engine...
+22:07:01.767 INFO  Java 17.0.13 Eclipse Adoptium (64-bit)
+22:07:03.178 INFO  Load global settings
+22:07:03.260 INFO  Load global settings (done) | time=82ms
+22:07:03.261 INFO  Server id: 147B411E-AZsO75rQ--E16cdqbayY
+22:07:03.266 INFO  Loading required plugins
+22:07:03.266 INFO  Load plugins index
+22:07:03.276 INFO  Load plugins index (done) | time=10ms
+22:07:03.277 INFO  Load/download plugins
+22:07:03.309 INFO  Load/download plugins (done) | time=33ms
+22:07:03.488 INFO  Process project properties
+22:07:03.497 INFO  Process project properties (done) | time=9ms
+22:07:03.505 INFO  Project key: cardapio-usp-m1
+22:07:03.505 INFO  Base dir: /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS
+22:07:03.505 INFO  Working dir: /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/.scannerwork
+22:07:03.510 INFO  Load project settings for component key: 'cardapio-usp-m1'
+22:07:03.532 INFO  Load quality profiles
+22:07:03.606 INFO  Load quality profiles (done) | time=74ms
+22:07:03.633 INFO  Load active rules
+22:07:03.999 INFO  Load active rules (done) | time=366ms
+22:07:04.002 INFO  Load analysis cache
+22:07:04.006 INFO  Load analysis cache (404) | time=4ms
+22:07:04.030 WARN  The property 'sonar.login' is deprecated and will be removed in the future. Please use the 'sonar.token' property instead when passing a token.
+22:07:04.037 INFO  Preprocessing files...
+22:07:04.373 INFO  1 language detected in 284 preprocessed files (done) | time=336ms
+22:07:04.374 INFO  21 files ignored because of inclusion/exclusion patterns
+22:07:04.374 INFO  2 files ignored because of scm ignore settings
+22:07:04.374 INFO  Loading plugins for detected languages
+22:07:04.374 INFO  Load/download plugins
+22:07:04.374 INFO  Load/download plugins (done) | time=0ms
+22:07:04.399 INFO  Load project repositories
+22:07:04.407 INFO  Load project repositories (done) | time=7ms
+22:07:04.412 INFO  Indexing files...
+22:07:04.412 INFO  Project configuration:
+22:07:04.412 INFO    Excluded sources: **/Pods/**, **/Index/**, **/*.framework/**, **/Build/**, **/AF*.m, **/AF*.h, **/Crashlytics.framework/**, **/Fabric.framework/**, **/*Tests.m
+22:07:04.412 INFO    Included tests: **/*Tests.m
+22:07:04.445 INFO  284 files indexed (done) | time=32ms
+22:07:04.445 INFO  Quality profile for json: Sonar way
+22:07:04.445 INFO  ------------- Run sensors on module Cardapio USP - M1
+22:07:04.461 INFO  Load metrics repository
+22:07:04.478 INFO  Load metrics repository (done) | time=17ms
+22:07:04.596 INFO  Sensor JaCoCo XML Report Importer [jacoco]
+22:07:04.596 INFO  'sonar.coverage.jacoco.xmlReportPaths' is not defined. Using default locations: target/site/jacoco/jacoco.xml,target/site/jacoco-it/jacoco.xml,build/reports/jacoco/test/jacocoTestReport.xml
+22:07:04.597 INFO  No report imported, no coverage information will be imported by JaCoCo XML Report Importer
+22:07:04.597 INFO  Sensor JaCoCo XML Report Importer [jacoco] (done) | time=1ms
+22:07:04.597 INFO  Sensor IaC CloudFormation Sensor [iac]
+22:07:04.612 WARN  Invalid character encountered in file /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Cardapio USP/restaurants.json at line 2 for encoding UTF-8. Please fix file content or configure the encoding to be used using property 'sonar.sourceEncoding'.
+22:07:04.631 INFO  There are no files to be analyzed for the CloudFormation language
+22:07:04.631 INFO  Sensor IaC CloudFormation Sensor [iac] (done) | time=35ms
+22:07:04.631 INFO  Sensor IaC cfn-lint report Sensor [iac]
+22:07:04.631 INFO  Sensor IaC cfn-lint report Sensor [iac] (done) | time=0ms
+22:07:04.632 INFO  Sensor IaC Docker Sensor [iac]
+22:07:04.633 INFO  There are no files to be analyzed for the Docker language
+22:07:04.633 INFO  Sensor IaC Docker Sensor [iac] (done) | time=2ms
+22:07:04.633 INFO  Sensor IaC hadolint report Sensor [iac]
+22:07:04.633 INFO  Sensor IaC hadolint report Sensor [iac] (done) | time=0ms
+22:07:04.633 INFO  Sensor IaC Azure Resource Manager Sensor [iac]
+22:07:04.637 INFO  There are no files to be analyzed for the Azure Resource Manager language
+22:07:04.637 INFO  Sensor IaC Azure Resource Manager Sensor [iac] (done) | time=4ms
+22:07:04.637 INFO  Sensor Java Config Sensor [iac]
+22:07:04.640 INFO  There are no files to be analyzed for the Java language
+22:07:04.640 INFO  Sensor Java Config Sensor [iac] (done) | time=2ms
+22:07:04.640 INFO  Sensor TextAndSecretsSensor [text]
+22:07:04.650 INFO  Available processors: 8
+22:07:04.650 INFO  Using 8 threads for analysis.
+22:07:04.879 INFO  Start fetching files for the text and secrets analysis
+22:07:04.898 INFO  Using Git CLI to retrieve untracked files
+22:07:04.983 INFO  Retrieving language associated files and files included via "sonar.text.inclusions" that are tracked by git
+22:07:05.007 INFO  Starting the text and secrets analysis
+22:07:05.008 INFO  31 source files to be analyzed for the text and secrets analysis
+22:07:05.025 INFO  31/31 source files have been analyzed for the text and secrets analysis
+22:07:05.030 INFO  Sensor TextAndSecretsSensor [text] (done) | time=390ms
+22:07:05.031 INFO  ------------- Run sensors on project
+22:07:05.117 INFO  Sensor Generic Coverage Report
+22:07:05.118 INFO  Parsing /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/metrics-reports/cobertura.xml
+22:07:05.126 ERROR Error during parsing of the generic coverage report '/Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/metrics-reports/cobertura.xml'. Look at SonarQube documentation to know the expected XML format.
+22:07:05.145 INFO  EXECUTION FAILURE
+22:07:05.146 INFO  Total time: 5.364s

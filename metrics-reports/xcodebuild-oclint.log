@@ -1,7 +1,7 @@
 Command line invocation:
     /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -workspace "Cardapio USP.xcworkspace" -scheme "Cardapio USP" -configuration Debug -destination "platform=iOS Simulator,name=iPhone 14"
 
-2025-12-11 16:50:12.398 xcodebuild[22902:17420228] Writing error result bundle to /var/folders/81/svyh_dp17pn0qfr_r5fygz4c0000gn/T/ResultBundle_2025-11-12_16-50-0012.xcresult
+2025-12-12 22:06:54.351 xcodebuild[53962:19339355] Writing error result bundle to /var/folders/81/svyh_dp17pn0qfr_r5fygz4c0000gn/T/ResultBundle_2025-12-12_22-06-0054.xcresult
 xcodebuild: error: Unable to find a device matching the provided destination specifier:
 		{ platform:iOS Simulator, OS:latest, name:iPhone 14 }
 

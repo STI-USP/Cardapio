@@ -2,6 +2,25 @@
 
 # Mac OS X
 *.DS_Store
+Thumbs.db
+.Spotlight-V100
+.Trashes
+
+# Editors/IDEs
+.vscode/
+.idea/
+
+# Pods and dependencies
+Pods/
+Carthage/
+Vendor/
+
+# Xcode Derived Data and user state
+DerivedData/
+*.xcuserdatad
+*.xcscmblueprint
+*.xccheckout
+*.xcworkspace/xcuserdata/
 
 # Xcode
 *.pbxuser
@@ -12,9 +31,16 @@
 project.xcworkspace/
 xcuserdata/
 
+# Build outputs
+build/
+*.ipa
+*.dSYM.zip
+*.dSYM
+
 # Generated files
 *.o
 *.pyc
+*.log
 
 
 #Python modules

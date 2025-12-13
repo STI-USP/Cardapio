@@ -1,12 +1,12 @@
 {"header" : {
   "cloc_url"           : "github.com/AlDanial/cloc",
   "cloc_version"       : "2.06",
-  "elapsed_seconds"    : 0.115947008132935,
+  "elapsed_seconds"    : 0.125500917434692,
   "n_files"            : 187,
   "n_lines"            : 27203,
-  "files_per_second"   : 1612.80573782122,
-  "lines_per_second"   : 234615.79939011,
-  "report_file"        : "./metrics-reports/cloc-report.json"},
+  "files_per_second"   : 1490.02894817331,
+  "lines_per_second"   : 216755.387578388,
+  "report_file"        : "/Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/metrics-reports/cloc-report.json"},
 "Objective-C" :{
   "nFiles": 71,
   "blank": 3206,
