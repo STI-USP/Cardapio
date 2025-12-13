@@ -283,19 +283,24 @@ fi
 log_step "[9/10] Extracting test metrics..."
 
 if [ -d "$OUTPUT_DIR/TestResults.xcresult" ]; then
-    xcrun xcresulttool get \
-        --path "$OUTPUT_DIR/TestResults.xcresult" \
-        --format json \
+    # Use the new xcresulttool test-results summary command
+    xcrun xcresulttool get test-results summary --path "$OUTPUT_DIR/TestResults.xcresult" \
         > "$OUTPUT_DIR/test-results-raw.json" 2>/dev/null
 
-    if [ $? -eq 0 ]; then
+    if [ $? -eq 0 ] && [ -s "$OUTPUT_DIR/test-results-raw.json" ]; then
         echo -e "  ${GREEN}✓${NC} Test results extracted"
 
         if command -v jq &> /dev/null; then
-            TOTAL_TESTS=$(jq -r '.metrics.testsCount.value // "N/A"' "$OUTPUT_DIR/test-results-raw.json" 2>/dev/null)
-            FAILED_TESTS=$(jq -r '.metrics.testsFailedCount.value // "0"' "$OUTPUT_DIR/test-results-raw.json" 2>/dev/null)
+            # Sum all passed and failed tests from all configurations
+            PASSED_TESTS=$(jq '[.devicesAndConfigurations[].passedTests] | add' "$OUTPUT_DIR/test-results-raw.json" 2>/dev/null)
+            FAILED_TESTS=$(jq '[.devicesAndConfigurations[].failedTests] | add' "$OUTPUT_DIR/test-results-raw.json" 2>/dev/null)
+            SKIPPED_TESTS=$(jq '[.devicesAndConfigurations[].skippedTests] | add' "$OUTPUT_DIR/test-results-raw.json" 2>/dev/null)
+            TOTAL_TESTS=$((PASSED_TESTS + FAILED_TESTS + SKIPPED_TESTS))
+            
             echo -e "     Total Tests: $TOTAL_TESTS"
-            echo -e "     Failed Tests: $FAILED_TESTS"
+            echo -e "     Passed: $PASSED_TESTS"
+            echo -e "     Failed: $FAILED_TESTS"
+            echo -e "     Skipped: $SKIPPED_TESTS"
         fi
     else
         log_warning "Failed to extract test results with xcresulttool."
