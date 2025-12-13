@@ -1,0 +1,19 @@
+Slathering...
+/Users/vagner/.gem/ruby/3.4.0/gems/slather-2.8.5/lib/slather/project.rb:607:in 'Slather::Project#find_binary_files': No product binary found in /Users/vagner/Library/Developer/Xcode/DerivedData/Jornal_da_USP-gvzrndbkpmqpcmbhvkkwjldrtekx/Build/ProfileData/EB5FD295-E787-4C53-AB27-CC29D27D4788. (StandardError)
+	from /Users/vagner/.gem/ruby/3.4.0/gems/slather-2.8.5/lib/slather/project.rb:472:in 'Slather::Project#configure_binary_file'
+	from /Users/vagner/.gem/ruby/3.4.0/gems/slather-2.8.5/lib/slather/project.rb:347:in 'Slather::Project#configure'
+	from /Users/vagner/.gem/ruby/3.4.0/gems/slather-2.8.5/lib/slather/command/coverage_command.rb:62:in 'CoverageCommand#execute'
+	from /Users/vagner/.gem/ruby/3.4.0/gems/clamp-1.3.3/lib/clamp/command.rb:66:in 'Clamp::Command#run'
+	from /Users/vagner/.gem/ruby/3.4.0/gems/clamp-1.3.3/lib/clamp/subcommand/execution.rb:18:in 'Clamp::Subcommand::Execution#execute'
+	from /Users/vagner/.gem/ruby/3.4.0/gems/clamp-1.3.3/lib/clamp/command.rb:66:in 'Clamp::Command#run'
+	from /Users/vagner/.gem/ruby/3.4.0/gems/clamp-1.3.3/lib/clamp/command.rb:140:in 'Clamp::Command.run'
+	from /Users/vagner/.gem/ruby/3.4.0/gems/slather-2.8.5/bin/slather:17:in '<top (required)>'
+	from /Users/vagner/.gem/ruby/3.4.0/bin/slather:25:in 'Kernel#load'
+	from /Users/vagner/.gem/ruby/3.4.0/bin/slather:25:in '<main>'
+No product binary found in /Users/vagner/Library/Developer/Xcode/DerivedData/Jornal_da_USP-gvzrndbkpmqpcmbhvkkwjldrtekx/Build/ProfileData/EB5FD295-E787-4C53-AB27-CC29D27D4788.
+
+	Are you sure your project is generating coverage? Make sure you enable code coverage in the Test section of your Xcode scheme.
+	Did you specify your Xcode scheme? (--scheme or 'scheme' in .slather.yml)
+	If you're using a workspace, did you specify it? (--workspace or 'workspace' in .slather.yml)
+	If you use a different Xcode configuration, did you specify it? (--configuration or 'configuration' in .slather.yml)
+

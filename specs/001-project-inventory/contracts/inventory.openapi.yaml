@@ -1,0 +1,133 @@
+openapi: 3.0.3
+info:
+  title: Cardapio USP Inventory API (documentation surface)
+  version: 0.1.0
+  description: Read-only endpoints that expose the documented inventory for modules, flows, services, screens, dependencies, and risks.
+servers:
+  - url: https://inventory.local
+paths:
+  /inventory:
+    get:
+      summary: Retrieve full inventory snapshot
+      tags: [inventory]
+      responses:
+        '200':
+          description: Inventory with modules, flows, services, screens, dependencies, risks
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Inventory'
+  /inventory/services:
+    get:
+      summary: List documented service endpoints
+      tags: [services]
+      responses:
+        '200':
+          description: Service endpoints with auth and base URLs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ServiceEndpoint'
+  /inventory/risks:
+    get:
+      summary: List technical risks and gaps
+      tags: [risks]
+      responses:
+        '200':
+          description: Risks covering secrets, legacy deps, missing tests
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Risk'
+  /inventory/screens:
+    get:
+      summary: List primary screens and navigation entries
+      tags: [screens]
+      responses:
+        '200':
+          description: Screens/ViewControllers and their flows
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Screen'
+components:
+  schemas:
+    Inventory:
+      type: object
+      properties:
+        modules:
+          type: array
+          items:
+            $ref: '#/components/schemas/Module'
+        flows:
+          type: array
+          items:
+            $ref: '#/components/schemas/Flow'
+        services:
+          type: array
+          items:
+            $ref: '#/components/schemas/ServiceEndpoint'
+        screens:
+          type: array
+          items:
+            $ref: '#/components/schemas/Screen'
+        dependencies:
+          type: array
+          items:
+            $ref: '#/components/schemas/Dependency'
+        risks:
+          type: array
+          items:
+            $ref: '#/components/schemas/Risk'
+    Module:
+      type: object
+      properties:
+        name: { type: string }
+        domain: { type: string, enum: [menu, saldo, boleto, pix, map, info, auth] }
+        keyFiles: { type: array, items: { type: string } }
+        dependencies: { type: array, items: { type: string } }
+    Flow:
+      type: object
+      properties:
+        name: { type: string }
+        domain: { type: string }
+        servicesUsed: { type: array, items: { type: string } }
+        viewControllers: { type: array, items: { type: string } }
+        notificationsEmitted: { type: array, items: { type: string } }
+    ServiceEndpoint:
+      type: object
+      properties:
+        name: { type: string }
+        method: { type: string, enum: [POST] }
+        path: { type: string }
+        baseURL: { type: string, enum: [BASE_URL, RUCARD_URL, OAUTH_SERVICE_URL, USER_URL_STRING] }
+        auth: { type: string, enum: [token, token_plus_hash, oauth] }
+        contentType: { type: string, enum: [application/json, application/x-www-form-urlencoded] }
+        requestSchema: { type: object }
+        responseSchema: { type: object }
+    Screen:
+      type: object
+      properties:
+        name: { type: string }
+        storyboard: { type: string }
+        navigationEntry: { type: string }
+        domain: { type: string }
+    Dependency:
+      type: object
+      properties:
+        name: { type: string }
+        type: { type: string, enum: [pod, vendor, framework] }
+        version: { type: string }
+        notes: { type: string }
+    Risk:
+      type: object
+      properties:
+        description: { type: string }
+        impact: { type: string }
+        mitigation: { type: string }

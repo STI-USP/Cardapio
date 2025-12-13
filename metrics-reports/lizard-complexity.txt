@@ -1,0 +1,987 @@
+================================================
+  NLOC    CCN   token  PARAM  length  location  
+------------------------------------------------
+       2      1      3      0       2 writeToKeychain.genericPasswordQuery@97-98@Cardapio USP/OAuth/KeychainItemWrapper.m
+      32      8    237      0      71 initWithIdentifier: accessGroup: ;@100-170@Cardapio USP/OAuth/KeychainItemWrapper.m
+      10      3     59      0      10 setObject: forKey:@172-181@Cardapio USP/OAuth/KeychainItemWrapper.m
+       4      1     16      0       4 objectForKey:@183-186@Cardapio USP/OAuth/KeychainItemWrapper.m
+      18      4    128      0      22 resetKeychainItem@188-209@Cardapio USP/OAuth/KeychainItemWrapper.m
+       8      1     75      0      18 dictionaryToSecItemFormat:@211-228@Cardapio USP/OAuth/KeychainItemWrapper.m
+      20      3    167      0      33 secItemFormatToDictionary:@230-262@Cardapio USP/OAuth/KeychainItemWrapper.m
+      22      4    176      0      46 writeToKeychain@264-309@Cardapio USP/OAuth/KeychainItemWrapper.m
+       4      1     13      0       4 OAuthUSP@13-16@Cardapio USP/OAuth/_OAuthUSP.m
+       6      1     37      0       8 sharedInstance@22-29@Cardapio USP/OAuth/_OAuthUSP.m
+       9      2     46      0       9 init@31-39@Cardapio USP/OAuth/_OAuthUSP.m
+       8      2     49      0       8 userData@43-50@Cardapio USP/OAuth/_OAuthUSP.m
+       3      1     23      0       3 setUserData:@54-56@Cardapio USP/OAuth/_OAuthUSP.m
+       5      1     29      0       5 setOauthToken:@58-62@Cardapio USP/OAuth/_OAuthUSP.m
+       5      1     29      0       5 setOauthTokenSecret:@64-68@Cardapio USP/OAuth/_OAuthUSP.m
+       7      2     20      0       7 isLoggedIn@72-78@Cardapio USP/OAuth/_OAuthUSP.m
+       2      1      3      0       3 login@80-82@Cardapio USP/OAuth/_OAuthUSP.m
+       9      1     61      0      12 logout@84-95@Cardapio USP/OAuth/_OAuthUSP.m
+      33      4    227      0      45 checkUser@97-141@Cardapio USP/OAuth/_OAuthUSP.m
+       4      1     13      0       4 OAuthUSP@20-23@Cardapio USP/OAuth/OAuthUSP.m
+       6      1     37      0       8 sharedInstance@29-36@Cardapio USP/OAuth/OAuthUSP.m
+       9      2     46      0       9 init@38-46@Cardapio USP/OAuth/OAuthUSP.m
+      23      5    134      0      28 userData@50-77@Cardapio USP/OAuth/OAuthUSP.m
+       3      1     23      0       3 setUserData:@82-84@Cardapio USP/OAuth/OAuthUSP.m
+       5      1     29      0       5 setOauthToken:@86-90@Cardapio USP/OAuth/OAuthUSP.m
+       5      1     29      0       5 setOauthTokenSecret:@92-96@Cardapio USP/OAuth/OAuthUSP.m
+       6      2     14      0       6 isLoggedIn@100-105@Cardapio USP/OAuth/OAuthUSP.m
+       5      1     54      0       5 login@107-111@Cardapio USP/OAuth/OAuthUSP.m
+       3      1      8      0       3 logout@113-115@Cardapio USP/OAuth/OAuthUSP.m
+       8      1     50      0      11 apagarCredenciais@117-127@Cardapio USP/OAuth/OAuthUSP.m
+      39      6    317      0      52 registrarToken@131-182@Cardapio USP/OAuth/OAuthUSP.m
+      36      6    279      0      48 invalidarToken@185-232@Cardapio USP/OAuth/OAuthUSP.m
+      26      4    238      0      35 consultarToken@234-268@Cardapio USP/OAuth/OAuthUSP.m
+       8      1     47      0      11 session@271-281@Cardapio USP/OAuth/OAuthUSP.m
+       8      1     34      0       8 utf8AndURLEncode@14-21@Cardapio USP/OAuth/NSString+URLEncoding.m
+       7      1     35      0       7 getUUID@24-30@Cardapio USP/OAuth/NSString+URLEncoding.m
+       5      1     32      0       6 getNonce@33-38@Cardapio USP/OAuth/NSString+URLEncoding.m
+       5      1     63      2       6 CHPercentEscapedQueryStringPairMemberFromStringWithEncoding@38-43@Cardapio USP/OAuth/OAuth1Controller.m
+       9      2     46      0      11 initWithField: value:@61-71@Cardapio USP/OAuth/OAuth1Controller.m
+       7      3     78      0       7 URLEncodedStringValueWithEncoding:@73-79@Cardapio USP/OAuth/OAuth1Controller.m
+       7      2     54      2       8 CHQueryStringFromParametersWithEncoding@88-95@Cardapio USP/OAuth/OAuth1Controller.m
+       3      1     16      1       3 CHQueryStringPairsFromDictionary@97-99@Cardapio USP/OAuth/OAuth1Controller.m
+      19      5    213      2      22 CHQueryStringPairsFromKeyAndValue@101-122@Cardapio USP/OAuth/OAuth1Controller.m
+      21      5    150      1      25 CHParametersFromQueryString@125-149@Cardapio USP/OAuth/OAuth1Controller.m
+      21      2     88      1      21 loginWithWebView: completion: NSDictionary.loginWithWebView: completion: NSDictionary.alloc.if@178-198@Cardapio USP/OAuth/OAuth1Controller.m
+       1      1     21      0       1 loginWithWebView: completion: NSDictionary.loginWithWebView: completion: NSDictionary.alloc.error@201-201@Cardapio USP/OAuth/OAuth1Controller.m
+       3      1      3      0       3 loginWithWebView: completion: NSDictionary.loginWithWebView: completion: NSDictionary.alloc.;@202-204@Cardapio USP/OAuth/OAuth1Controller.m
+       2      1     21      0      43 loginWithWebView: completion: NSDictionary@163-205@Cardapio USP/OAuth/OAuth1Controller.m
+      13      2    145      3      17 obtainRequestTokenWithCompletion: NSError.CHQueryStringFromParametersWithEncoding@217-233@Cardapio USP/OAuth/OAuth1Controller.m
+      11      1    108      4      38 obtainRequestTokenWithCompletion: NSError@209-246@Cardapio USP/OAuth/OAuth1Controller.m
+       7      2     37      0       8 initWithNibName: bundle:@27-34@Cardapio USP/OAuth/LoginWebViewController.m
+      13      1    122      0      20 viewDidLoad@36-55@Cardapio USP/OAuth/LoginWebViewController.m
+       3      1      8      0       4 didReceiveMemoryWarning@57-60@Cardapio USP/OAuth/LoginWebViewController.m
+       3      1      6      0       3 shouldAutorotate@62-64@Cardapio USP/OAuth/LoginWebViewController.m
+       3      1      6      0       3 supportedInterfaceOrientations@66-68@Cardapio USP/OAuth/LoginWebViewController.m
+       3      1      6      0       3 preferredInterfaceOrientationForPresentation@70-72@Cardapio USP/OAuth/LoginWebViewController.m
+       5      2     22      0       6 oauthController@74-79@Cardapio USP/OAuth/LoginWebViewController.m
+       3      1     13      0       3 cancelar@83-85@Cardapio USP/OAuth/LoginWebViewController.m
+      16      2    104      0      24 login@89-112@Cardapio USP/OAuth/LoginWebViewController.m
+      15      3    100      0      22 logout@113-134@Cardapio USP/OAuth/LoginWebViewController.m
+      39      8    233      0      50 saveUserData@138-187@Cardapio USP/OAuth/LoginWebViewController.m
+       6      1     37      0       8 sharedInstance@15-22@Cardapio USP/OAuth/STIOauth.m
+      27      5    251      0      35 registrarToken:@26-60@Cardapio USP/OAuth/STIOauth.m
+      25      5    238      0      33 invalidarToken:@63-95@Cardapio USP/OAuth/STIOauth.m
+      25      5    238      0      33 consultarToken:@97-129@Cardapio USP/OAuth/STIOauth.m
+       8      1     47      0      11 session@132-142@Cardapio USP/OAuth/STIOauth.m
+       6      1     43      0       6 sharedView@79-84@Cardapio USP/SVProgressHUD/SVProgressHUD.m
+       3      1     19      0       3 setStatus:@88-90@Cardapio USP/SVProgressHUD/SVProgressHUD.m
+       4      1     24      0       4 setBackgroundColor:@92-95@Cardapio USP/SVProgressHUD/SVProgressHUD.m
+       4      1     18      0       4 setForegroundColor:@97-100@Cardapio USP/SVProgressHUD/SVProgressHUD.m
+       4      1     18      0       4 setFont:@102-105@Cardapio USP/SVProgressHUD/SVProgressHUD.m
+       4      1     17      0       4 setRingThickness:@107-110@Cardapio USP/SVProgressHUD/SVProgressHUD.m
+       4      1     18      0       4 setSuccessImage:@112-115@Cardapio USP/SVProgressHUD/SVProgressHUD.m
+       4      1     18      0       4 setErrorImage:@117-120@Cardapio USP/SVProgressHUD/SVProgressHUD.m
+       3      1     20      0       3 show@124-126@Cardapio USP/SVProgressHUD/SVProgressHUD.m
+       3      1     26      0       3 showWithStatus:@128-130@Cardapio USP/SVProgressHUD/SVProgressHUD.m
+       3      1     25      0       3 showWithMaskType:@132-134@Cardapio USP/SVProgressHUD/SVProgressHUD.m
+       3      1     32      0       3 showWithStatus: maskType:@136-138@Cardapio USP/SVProgressHUD/SVProgressHUD.m
+       3      1     24      0       3 showProgress:@140-142@Cardapio USP/SVProgressHUD/SVProgressHUD.m
+       3      1     31      0       3 showProgress: status:@144-146@Cardapio USP/SVProgressHUD/SVProgressHUD.m
+       3      1     37      0       3 showProgress: status: maskType:@148-150@Cardapio USP/SVProgressHUD/SVProgressHUD.m
+       4      1     24      0       4 showSuccessWithStatus:@154-157@Cardapio USP/SVProgressHUD/SVProgressHUD.m
+       4      1     24      0       4 showErrorWithStatus:@159-162@Cardapio USP/SVProgressHUD/SVProgressHUD.m
+       4      1     45      0       4 showImage: status:@164-167@Cardapio USP/SVProgressHUD/SVProgressHUD.m
+       5      2     30      0       5 popActivity@172-176@Cardapio USP/SVProgressHUD/SVProgressHUD.m
+       5      2     20      0       5 dismiss@178-182@Cardapio USP/SVProgressHUD/SVProgressHUD.m
+       3      1     17      0       3 setOffsetFromCenter:@187-189@Cardapio USP/SVProgressHUD/SVProgressHUD.m
+       3      1     10      0       3 resetOffsetFromCenter@191-193@Cardapio USP/SVProgressHUD/SVProgressHUD.m
+      27      4    207      0      31 initWithFrame:@197-227@Cardapio USP/SVProgressHUD/SVProgressHUD.m
+      24      3    215      0      32 drawRect:@229-260@Cardapio USP/SVProgressHUD/SVProgressHUD.m
+      62     12    569      0      80 updatePosition@262-341@Cardapio USP/SVProgressHUD/SVProgressHUD.m
+       4      1     22      0       6 setStatus:@343-348@Cardapio USP/SVProgressHUD/SVProgressHUD.m
+       6      3     30      0       8 setFadeOutTimer:@350-357@Cardapio USP/SVProgressHUD/SVProgressHUD.m
+      22      1    123      0      26 registerNotifications@360-385@Cardapio USP/SVProgressHUD/SVProgressHUD.m
+       4      2     25      0       4 notificationUserInfo@388-391@Cardapio USP/SVProgressHUD/SVProgressHUD.m
+      66     11    410      0      81 positionHUD:@394-474@Cardapio USP/SVProgressHUD/SVProgressHUD.m
+       4      1     54      0       4 moveToPoint: rotateAngle:@476-479@Cardapio USP/SVProgressHUD/SVProgressHUD.m
+       3      1     28      0       3 overlayViewDidReceiveTouchEvent: forEvent:@481-483@Cardapio USP/SVProgressHUD/SVProgressHUD.m
+      74     11    482      0      90 showProgress: status: maskType:@487-576@Cardapio USP/SVProgressHUD/SVProgressHUD.m
+      12      1    104      0      12 image: withTintColor:@579-590@Cardapio USP/SVProgressHUD/SVProgressHUD.m
+      27      4    225      0      34 showImage: status: duration:@592-625@Cardapio USP/SVProgressHUD/SVProgressHUD.m
+      39      5    234      0      50 dismiss@627-676@Cardapio USP/SVProgressHUD/SVProgressHUD.m
+      52      3    449      0      62 indefiniteAnimatedLayer@681-742@Cardapio USP/SVProgressHUD/SVProgressHUD.m
+      11      2     66      0      11 ringLayer@744-754@Cardapio USP/SVProgressHUD/SVProgressHUD.m
+      12      2     77      0      12 backgroundRingLayer@756-767@Cardapio USP/SVProgressHUD/SVProgressHUD.m
+      15      3     68      0      18 cancelRingLayerAnimation@769-786@Cardapio USP/SVProgressHUD/SVProgressHUD.m
+      13      1    156      0      15 createRingLayerWithCenter: radius: lineWidth: color:@788-802@Cardapio USP/SVProgressHUD/SVProgressHUD.m
+       3      1     15      0       3 isVisible@806-808@Cardapio USP/SVProgressHUD/SVProgressHUD.m
+       3      1     26      0       3 displayDurationForString:@813-815@Cardapio USP/SVProgressHUD/SVProgressHUD.m
+       3      2     18      0       3 isClear@817-819@Cardapio USP/SVProgressHUD/SVProgressHUD.m
+       9      2     67      0       9 overlayView@821-829@Cardapio USP/SVProgressHUD/SVProgressHUD.m
+      22      3    172      0      27 hudView@831-857@Cardapio USP/SVProgressHUD/SVProgressHUD.m
+      15      3     87      0      17 stringLabel@859-875@Cardapio USP/SVProgressHUD/SVProgressHUD.m
+       7      3     49      0       9 imageView@877-885@Cardapio USP/SVProgressHUD/SVProgressHUD.m
+      14      6     99      0      17 visibleKeyboardHeight@888-904@Cardapio USP/SVProgressHUD/SVProgressHUD.m
+       7      2     24      0       7 init@48-54@Cardapio USP/REFrostedViewController/REFrostedViewController.m
+       7      2     32      0       7 initWithCoder:@56-62@Cardapio USP/REFrostedViewController/REFrostedViewController.m
+      14      2     95      0      18 commonInit@64-81@Cardapio USP/REFrostedViewController/REFrostedViewController.m
+       8      2     40      0       8 initWithContentViewController: menuViewController:@83-90@Cardapio USP/REFrostedViewController/REFrostedViewController.m
+       4      1     24      0       4 viewDidLoad@92-95@Cardapio USP/REFrostedViewController/REFrostedViewController.m
+       3      1     20      0       3 viewWillAppear:@97-99@Cardapio USP/REFrostedViewController/REFrostedViewController.m
+       3      1     15      0       3 viewDidAppear:@101-103@Cardapio USP/REFrostedViewController/REFrostedViewController.m
+       3      1     20      0       3 viewWillDisappear:@105-107@Cardapio USP/REFrostedViewController/REFrostedViewController.m
+       3      1     15      0       3 viewDidDisappear:@109-111@Cardapio USP/REFrostedViewController/REFrostedViewController.m
+       3      1      8      0       3 childViewControllerForStatusBarStyle@113-115@Cardapio USP/REFrostedViewController/REFrostedViewController.m
+       3      1      8      0       3 childViewControllerForStatusBarHidden@117-119@Cardapio USP/REFrostedViewController/REFrostedViewController.m
+       6      2     39      0       6 setContentViewController:@124-129@Cardapio USP/REFrostedViewController/REFrostedViewController.m
+      17      3     98      0      18 setMenuViewController:@131-148@Cardapio USP/REFrostedViewController/REFrostedViewController.m
+       4      1     18      0       4 setMenuViewSize:@150-153@Cardapio USP/REFrostedViewController/REFrostedViewController.m
+       3      1     10      0       3 presentMenuViewController@157-159@Cardapio USP/REFrostedViewController/REFrostedViewController.m
+      23     13    317      0      42 presentMenuViewControllerWithAnimatedApperance:@161-202@Cardapio USP/REFrostedViewController/REFrostedViewController.m
+       7      2     61      0       7 hideMenuViewController@204-210@Cardapio USP/REFrostedViewController/REFrostedViewController.m
+      10      5     87      0      13 panGestureRecognized:@212-224@Cardapio USP/REFrostedViewController/REFrostedViewController.m
+       3      1     10      0       3 shouldAutorotate@229-231@Cardapio USP/REFrostedViewController/REFrostedViewController.m
+      15     11    226      0      17 willAnimateRotationToInterfaceOrientation: duration:@233-249@Cardapio USP/REFrostedViewController/REFrostedViewController.m
+       6      2     30      0       6 didRotateFromInterfaceOrientation:@251-256@Cardapio USP/REFrostedViewController/REFrostedViewController.m
+      21      2    151      0      24 re_screenshot@30-53@Cardapio USP/REFrostedViewController/UIView+REFrostedViewController.m
+       7      1     48      0       7 re_displayController: frame:@31-37@Cardapio USP/REFrostedViewController/UIViewController+REFrostedViewController.m
+       6      1     28      0       6 re_hideController:@39-44@Cardapio USP/REFrostedViewController/UIViewController+REFrostedViewController.m
+      14      5     69      0      14 frostedViewController@46-59@Cardapio USP/REFrostedViewController/UIViewController+REFrostedViewController.m
+      35      5    359      0      41 viewDidLoad@51-91@Cardapio USP/REFrostedViewController/REFrostedContainerViewController.m
+      21      6    261      0      27 viewWillAppear:@93-119@Cardapio USP/REFrostedViewController/REFrostedContainerViewController.m
+       4      1     17      0       4 viewDidAppear:@121-124@Cardapio USP/REFrostedViewController/REFrostedContainerViewController.m
+       4      1     22      0       4 viewWillDisappear:@126-129@Cardapio USP/REFrostedViewController/REFrostedContainerViewController.m
+       4      1     17      0       4 viewDidDisappear:@131-134@Cardapio USP/REFrostedViewController/REFrostedContainerViewController.m
+      13      1    251      0      16 setContainerFrame:@136-151@Cardapio USP/REFrostedViewController/REFrostedContainerViewController.m
+       6      2     26      0       6 setBackgroundViewsAlpha:@153-158@Cardapio USP/REFrostedViewController/REFrostedContainerViewController.m
+      32      7    378      0      36 show@160-195@Cardapio USP/REFrostedViewController/REFrostedContainerViewController.m
+      51      9    532      0      56 hide@197-252@Cardapio USP/REFrostedViewController/REFrostedContainerViewController.m
+       4      1     13      0       4 refreshBackgroundImage@254-257@Cardapio USP/REFrostedViewController/REFrostedContainerViewController.m
+       4      1     14      0       4 tapGestureRecognized:@262-265@Cardapio USP/REFrostedViewController/REFrostedContainerViewController.m
+      91     31    837      0     107 panGestureRecognized:@267-373@Cardapio USP/REFrostedViewController/REFrostedContainerViewController.m
+      19      5    232      0      22 fixLayoutWithDuration:@375-396@Cardapio USP/REFrostedViewController/REFrostedContainerViewController.m
+       4      1     31      0       4 willAnimateRotationToInterfaceOrientation: duration:@398-401@Cardapio USP/REFrostedViewController/REFrostedContainerViewController.m
+      99     18    825      0     129 re_applyBlurWithRadius: tintColor: saturationDeltaFactor: maskImage:@100-228@Cardapio USP/REFrostedViewController/UIImage+REFrostedViewController.m
+      15      3     91      0      17 REUIKitIsFlatMode@28-44@Cardapio USP/REFrostedViewController/RECommonFunctions.m
+      50     23    453      0      87 stringByConvertingHTMLToPlainText@42-128@Cardapio USP/Categories/NSString+HTML.m
+       3      1     14      0       4 stringByDecodingHTMLEntities@131-134@Cardapio USP/Categories/NSString+HTML.m
+       3      1     14      0       4 stringByEncodingHTMLEntities@137-140@Cardapio USP/Categories/NSString+HTML.m
+      25      7    192      0      49 stringWithNewLinesAsBRs@143-191@Cardapio USP/Categories/NSString+HTML.m
+      19      6    151      0      38 stringByRemovingNewLinesAndWhitespace@194-231@Cardapio USP/Categories/NSString+HTML.m
+       8      2     71      0       8 stringByLinkifyingURLs@239-246@Cardapio USP/Categories/NSString+HTML.m
+      41     13    281      0      63 stringByStrippingTags@250-312@Cardapio USP/Categories/NSString+HTML.m
+      13      3     83      2      13 EscapeMapCompare@359-371@Cardapio USP/Categories/GTMNSString+HTML.m
+      52     13    314      0      68 gtm_stringByEscapingHTMLUsingTable: ofSize: escapingUnicode:@375-442@Cardapio USP/Categories/GTMNSString+HTML.m
+       5      1     20      0       5 gtm_stringByEscapingForHTML@444-448@Cardapio USP/Categories/GTMNSString+HTML.m
+       5      1     20      0       5 gtm_stringByEscapingForAsciiHTML@450-454@Cardapio USP/Categories/GTMNSString+HTML.m
+      55     19    484      0      63 gtm_stringByUnescapingFromHTML@456-518@Cardapio USP/Categories/GTMNSString+HTML.m
+       8      2     42      0       8 initWithMenu: andItems:@14-21@Cardapio USP/Cash.m
+       7      2     47      0       7 initWithCoder:@23-29@Cardapio USP/Cash.m
+       4      1     35      0       4 encodeWithCoder:@31-34@Cardapio USP/Cash.m
+       4      1     13      0       4 BoletoViewController@17-20@Cardapio USP/BoletoViewController.m
+      12      2     83      0      17 viewDidLoad@26-42@Cardapio USP/BoletoViewController.m
+       3      1      8      0       4 didReceiveMemoryWarning@44-47@Cardapio USP/BoletoViewController.m
+      29      7    269      0      39 viewWillAppear:@49-87@Cardapio USP/BoletoViewController.m
+       3      1     18      0       3 dismiss:@99-101@Cardapio USP/BoletoViewController.m
+       4      1     28      0       4 copyToPasteboard:@103-106@Cardapio USP/BoletoViewController.m
+       8      2     52      0       9 didDeleteBill:@112-120@Cardapio USP/BoletoViewController.m
+       3      1     12      0       3 revealControllerPanGestureShouldBegin:@125-127@Cardapio USP/BoletoViewController.m
+       7      2     31      0       7 initWithFrame:@13-19@Cardapio USP/PaddedLabel.m
+       4      1     13      0       4 awakeFromNib@21-24@Cardapio USP/PaddedLabel.m
+      13      2     92      0      16 commonInit@26-41@Cardapio USP/PaddedLabel.m
+       4      1     27      0       4 drawTextInRect:@43-46@Cardapio USP/PaddedLabel.m
+       8      1     95      0      10 intrinsicContentSize@48-57@Cardapio USP/PaddedLabel.m
+      13      5    111      0      14 initialize@21-34@Cardapio USP/Constants.m
+       4      1     13      0       4 InfoViewController@31-34@Cardapio USP/InfoViewController.m
+       7      2     37      0       8 initWithNibName: bundle:@41-48@Cardapio USP/InfoViewController.m
+       9      1     79      0      12 viewDidLoad@50-61@Cardapio USP/InfoViewController.m
+       8      2     46      0      12 viewWillAppear:@63-74@Cardapio USP/InfoViewController.m
+       4      1      8      0       5 didReceiveMemoryWarning@76-80@Cardapio USP/InfoViewController.m
+       3      1     12      0       3 numberOfSectionsInTableView:@84-86@Cardapio USP/InfoViewController.m
+      13      3     44      0      14 tableView: numberOfRowsInSection:@88-101@Cardapio USP/InfoViewController.m
+       7      2     40      0       7 tableView: heightForRowAtIndexPath:@103-109@Cardapio USP/InfoViewController.m
+      18      3     99      0      20 heightForBasicCellAtIndexPath:@111-130@Cardapio USP/InfoViewController.m
+       9      1     77      0      13 calculateHeightForConfiguredSizingCell:@133-145@Cardapio USP/InfoViewController.m
+       3      1     24      0       3 tableView: cellForRowAtIndexPath:@148-150@Cardapio USP/InfoViewController.m
+      35      5    219      0      45 basicCellAtIndexPath:@153-197@Cardapio USP/InfoViewController.m
+      37      7    206      0      40 configureBasicCell: atIndexPath:@199-238@Cardapio USP/InfoViewController.m
+      15      4     99      0      17 formattedTelephones@240-256@Cardapio USP/InfoViewController.m
+       8      1     81      0       8 createPhoneButton@258-265@Cardapio USP/InfoViewController.m
+      22      4    249      0      29 formattedWorkingHours@267-295@Cardapio USP/InfoViewController.m
+       6      3     79      0       6 appendMealPeriod: fromDays: toString: withLabel:@297-302@Cardapio USP/InfoViewController.m
+       7      4     75      0       7 hasMealsForDay:@304-310@Cardapio USP/InfoViewController.m
+       3      2     24      0       3 isEmptyString:@312-314@Cardapio USP/InfoViewController.m
+      13      3    199      0      13 formattedPrices@316-328@Cardapio USP/InfoViewController.m
+      17      3    212      0      17 configureCashierCell:@330-346@Cardapio USP/InfoViewController.m
+      14      4    169      0      21 tableView: accessoryButtonTappedForRowWithIndexPath:@350-370@Cardapio USP/InfoViewController.m
+       8      2     75      0       9 callButtonTapped: event:@372-380@Cardapio USP/InfoViewController.m
+      43      2    498      0      56 setHeaderView@383-438@Cardapio USP/InfoViewController.m
+      16      1    142      0      32 createMapButton@441-472@Cardapio USP/InfoViewController.m
+      27      4    429      0      44 showMap@482-525@Cardapio USP/InfoViewController.m
+       3      1     18      0       3 doneButtonTapped:@528-530@Cardapio USP/InfoViewController.m
+       3      1     10      0       3 didReceiveRestaurants@532-534@Cardapio USP/InfoViewController.m
+       4      1     22      0       4 setAsPreferred:@536-539@Cardapio USP/InfoViewController.m
+       4      1     22      0       4 resetPreferred:@541-544@Cardapio USP/InfoViewController.m
+       3      1     17      0       3 setBorderUIColor:@13-15@Cardapio USP/CALayer+XibConfiguration.m
+       3      1     13      0       3 borderUIColor@17-19@Cardapio USP/CALayer+XibConfiguration.m
+       9      2     44      0      13 viewDidLoad@17-29@Cardapio USP/CreditsNavigationViewController.m
+       3      1      8      0       4 didReceiveMemoryWarning@31-34@Cardapio USP/CreditsNavigationViewController.m
+       3      1     12      0       3 revealControllerPanGestureShouldBegin:@49-51@Cardapio USP/CreditsNavigationViewController.m
+      11      4     78      2      14 AFErrorWithUnderlyingError@35-48@Cardapio USP/AFURLResponseSerialization.m
+       8      4     67      3       9 AFErrorOrUnderlyingErrorHasCodeInDomain@50-58@Cardapio USP/AFURLResponseSerialization.m
+      21     11    225      2      24 AFJSONObjectByRemovingKeysWithNullValues@60-83@Cardapio USP/AFURLResponseSerialization.m
+       3      1     12      0       3 serializer@87-89@Cardapio USP/AFURLResponseSerialization.m
+      10      2     51      0      13 init@91-103@Cardapio USP/AFURLResponseSerialization.m
+      39     12    299      0      48 validateResponse: data: error:@107-154@Cardapio USP/AFURLResponseSerialization.m
+       7      1     45      0       8 responseObjectForResponse: data: error:@158-165@Cardapio USP/AFURLResponseSerialization.m
+       3      1      6      0       3 supportsSecureCoding@169-171@Cardapio USP/AFURLResponseSerialization.m
+       9      2     77      0      11 initWithCoder:@173-183@Cardapio USP/AFURLResponseSerialization.m
+       4      1     47      0       4 encodeWithCoder:@185-188@Cardapio USP/AFURLResponseSerialization.m
+       6      1     55      0       7 copyWithZone:@192-198@Cardapio USP/AFURLResponseSerialization.m
+       3      1     14      0       3 serializer@206-208@Cardapio USP/AFURLResponseSerialization.m
+       5      1     29      0       6 serializerWithReadingOptions:@210-215@Cardapio USP/AFURLResponseSerialization.m
+       8      2     43      0      10 init@217-226@Cardapio USP/AFURLResponseSerialization.m
+      45     13    306      0      56 responseObjectForResponse: data: error:@230-285@Cardapio USP/AFURLResponseSerialization.m
+       9      2     85      0      11 initWithCoder:@289-299@Cardapio USP/AFURLResponseSerialization.m
+       5      1     60      0       6 encodeWithCoder:@301-306@Cardapio USP/AFURLResponseSerialization.m
+       6      1     45      0       7 copyWithZone:@310-316@Cardapio USP/AFURLResponseSerialization.m
+       4      1     18      0       5 serializer@324-328@Cardapio USP/AFURLResponseSerialization.m
+       8      2     43      0      10 init@330-339@Cardapio USP/AFURLResponseSerialization.m
+      11      4     78      0      12 responseObjectForResponse: data: error:@343-354@Cardapio USP/AFURLResponseSerialization.m
+       3      1     11      0       3 serializer@364-366@Cardapio USP/AFURLResponseSerialization.m
+       5      1     29      0       6 serializerWithXMLDocumentOptions:@368-373@Cardapio USP/AFURLResponseSerialization.m
+       8      2     43      0      10 init@375-384@Cardapio USP/AFURLResponseSerialization.m
+      16      5    116      0      19 responseObjectForResponse: data: error:@388-406@Cardapio USP/AFURLResponseSerialization.m
+       8      2     58      0      10 initWithCoder:@410-419@Cardapio USP/AFURLResponseSerialization.m
+       4      1     38      0       5 encodeWithCoder:@421-425@Cardapio USP/AFURLResponseSerialization.m
+       5      1     37      0       6 copyWithZone:@429-434@Cardapio USP/AFURLResponseSerialization.m
+       3      1     14      0       3 serializer@444-446@Cardapio USP/AFURLResponseSerialization.m
+       8      1     41      0       9 serializerWithFormat: readOptions:@448-456@Cardapio USP/AFURLResponseSerialization.m
+       8      2     40      0      10 init@458-467@Cardapio USP/AFURLResponseSerialization.m
+      19      6    123      0      23 responseObjectForResponse: data: error:@471-493@Cardapio USP/AFURLResponseSerialization.m
+       9      2     85      0      11 initWithCoder:@497-507@Cardapio USP/AFURLResponseSerialization.m
+       5      1     60      0       6 encodeWithCoder:@509-514@Cardapio USP/AFURLResponseSerialization.m
+       6      1     45      0       7 copyWithZone:@518-524@Cardapio USP/AFURLResponseSerialization.m
+       4      1     47      2       5 AFImageWithDataAtScale@533-537@Cardapio USP/AFURLResponseSerialization.m
+      65     18    441      3      89 AFInflatedImageFromResponseWithDataAtScale@539-627@Cardapio USP/AFURLResponseSerialization.m
+      10      3     85      0      15 init@633-647@Cardapio USP/AFURLResponseSerialization.m
+      20      7    156      0      27 responseObjectForResponse: data: error:@651-677@Cardapio USP/AFURLResponseSerialization.m
+      11      4     91      0      19 initWithCoder:@681-699@Cardapio USP/AFURLResponseSerialization.m
+       5      2     57      0       8 encodeWithCoder:@701-708@Cardapio USP/AFURLResponseSerialization.m
+       6      2     45      0      10 copyWithZone:@712-721@Cardapio USP/AFURLResponseSerialization.m
+       5      1     30      0       6 compoundSerializerWithResponseSerializers:@733-738@Cardapio USP/AFURLResponseSerialization.m
+      19      5    119      0      22 responseObjectForResponse: data: error:@742-763@Cardapio USP/AFURLResponseSerialization.m
+       8      2     55      0      10 initWithCoder:@767-776@Cardapio USP/AFURLResponseSerialization.m
+       4      1     35      0       5 encodeWithCoder:@778-782@Cardapio USP/AFURLResponseSerialization.m
+       5      1     37      0       6 copyWithZone:@786-791@Cardapio USP/AFURLResponseSerialization.m
+       2      1      3      0       3 awakeFromNib@13-15@Cardapio USP/DetailCell.m
+       3      1     24      0       5 setSelected: animated:@17-21@Cardapio USP/DetailCell.m
+       5      1     25      0       6 setBounds:@23-28@Cardapio USP/DetailCell.m
+       8      1     52      0      10 layoutSubviews@30-39@Cardapio USP/DetailCell.m
+       8      2     42      0       9 initWithItems: andPrice:@14-22@Cardapio USP/Items.m
+       7      2     42      0       7 initWithNibName: bundle:@17-23@Cardapio USP/DKScrollingTabController.m
+      75     13    581      0      94 setSelection:@26-119@Cardapio USP/DKScrollingTabController.m
+       8      1     64      0       8 addTopBorder:@124-131@Cardapio USP/DKScrollingTabController.m
+       8      1     67      0       9 addBottomBorder:@133-141@Cardapio USP/DKScrollingTabController.m
+       3      1     18      0       3 selectButtonWithIndex:@144-146@Cardapio USP/DKScrollingTabController.m
+       7      2     48      0       8 selectButtonWithIndex: delegate:@149-156@Cardapio USP/DKScrollingTabController.m
+      25      4    134      0      29 selectNone@159-187@Cardapio USP/DKScrollingTabController.m
+       5      1     46      0       5 setButtonAttributedString: atIndex:@190-194@Cardapio USP/DKScrollingTabController.m
+       4      1     36      0       6 setButtonName: atIndex:@197-202@Cardapio USP/DKScrollingTabController.m
+      12      1     98      0      17 dk_commonInitialization@207-223@Cardapio USP/DKScrollingTabController.m
+       4      1     28      0       5 dk_actionButton:@226-230@Cardapio USP/DKScrollingTabController.m
+      55      9    345      0      65 dk_controlSelect:@233-297@Cardapio USP/DKScrollingTabController.m
+       4      1     13      0       5 viewDidLoad@303-307@Cardapio USP/DKScrollingTabController.m
+       3      1      9      0       3 RestaurantDataModel@12-14@Cardapio USP/RestaurantDataModel.m
+       8      1     37      0       9 getInstance@27-35@Cardapio USP/RestaurantDataModel.m
+      14      2    121      0      17 init@37-53@Cardapio USP/RestaurantDataModel.m
+       3      1     14      0       3 preferencesFile@55-57@Cardapio USP/RestaurantDataModel.m
+       5      1     37      0       5 setCampusOption:@59-63@Cardapio USP/RestaurantDataModel.m
+       5      1     37      0       5 setRestaurantOption:@65-69@Cardapio USP/RestaurantDataModel.m
+       7      2     42      0       8 initWithDate: andPeriod:@20-27@Cardapio USP/Menu.m
+       7      2     47      0       7 initWithCoder:@29-35@Cardapio USP/Menu.m
+       4      1     35      0       4 encodeWithCoder:@37-40@Cardapio USP/Menu.m
+      11      1     39      0      11 RestaurantsFilterController@15-25@Cardapio USP/RestaurantsFilterController.m
+      20      5    151      0      25 viewDidLoad@32-56@Cardapio USP/RestaurantsFilterController.m
+       3      1      8      0       4 didReceiveMemoryWarning@58-61@Cardapio USP/RestaurantsFilterController.m
+       5      1     49      0       8 viewWillAppear:@63-70@Cardapio USP/RestaurantsFilterController.m
+       3      1     15      0       3 numberOfSectionsInTableView:@75-77@Cardapio USP/RestaurantsFilterController.m
+       3      1     32      0       4 tableView: numberOfRowsInSection:@79-82@Cardapio USP/RestaurantsFilterController.m
+       3      1     29      0       3 tableView: titleForHeaderInSection:@84-86@Cardapio USP/RestaurantsFilterController.m
+      19      2    262      0      27 tableView: cellForRowAtIndexPath:@88-114@Cardapio USP/RestaurantsFilterController.m
+       7      1     90      0      10 tableView: didSelectRowAtIndexPath:@117-126@Cardapio USP/RestaurantsFilterController.m
+      11      3    103      0      17 favoriteRestaurant:@129-145@Cardapio USP/RestaurantsFilterController.m
+       9      3     51      0      15 layoutSubviews@12-26@Cardapio USP/RWLabel.m
+       7      2     30      0      13 intrinsicContentSize@28-40@Cardapio USP/RWLabel.m
+      10      2     68      0      10 initWithWeeklyPeriod: andBreakfast: andLunch: andDinner:@14-23@Cardapio USP/WeeklyPeriod.m
+       9      2     71      0       9 initWithCoder:@25-33@Cardapio USP/WeeklyPeriod.m
+       6      1     61      0       6 encodeWithCoder:@35-40@Cardapio USP/WeeklyPeriod.m
+      14      2    133      0      15 initWithId: andTitle: andName: andAddress: andPhone: andLatitude: andLongitude: andPhotoURL: andWeeklyPeriod:@18-32@Cardapio USP/Restaurant.m
+      14      2    131      0      14 initWithCoder:@34-47@Cardapio USP/Restaurant.m
+      11      1    126      0      11 encodeWithCoder:@49-59@Cardapio USP/Restaurant.m
+       4      1     13      0       4 CarrierDataModel@13-16@Cardapio USP/CarrierDataModel.m
+       6      1     35      0       6 allocInitSingleton@26-31@Cardapio USP/CarrierDataModel.m
+      26      7    187      0      44 init@33-76@Cardapio USP/CarrierDataModel.m
+       4      1     16      0       4 currentCarrierCode@96-99@Cardapio USP/CarrierDataModel.m
+      21      2    289      0      28 viewDidLoad@86-113@Cardapio USP/MapViewController.m
+       3      1      8      0       4 didReceiveMemoryWarning@115-118@Cardapio USP/MapViewController.m
+       3      1     15      0       3 viewWillAppear:@120-122@Cardapio USP/MapViewController.m
+       3      1     13      0       3 startUserLocation:@124-126@Cardapio USP/MapViewController.m
+       1      2     27      0       1 cuaso@130-130@Cardapio USP/MapViewController.m
+       1      2     27      0       1 fm@131-131@Cardapio USP/MapViewController.m
+       1      2     27      0       1 fauMaranhao@132-132@Cardapio USP/MapViewController.m
+       1      2     27      0       1 mz@133-133@Cardapio USP/MapViewController.m
+       1      2     27      0       1 each@134-134@Cardapio USP/MapViewController.m
+       1      2     27      0       1 esalq@135-135@Cardapio USP/MapViewController.m
+       1      2     27      0       1 sci@136-136@Cardapio USP/MapViewController.m
+       1      2     27      0       1 scii@137-137@Cardapio USP/MapViewController.m
+       1      2     27      0       1 pirassununga@138-138@Cardapio USP/MapViewController.m
+       1      2     27      0       1 rp@139-139@Cardapio USP/MapViewController.m
+      35     12    372      0      42 locationManager: didUpdateLocations:@143-184@Cardapio USP/MapViewController.m
+       7      2     68      0      36 mapView: viewForAnnotation:@189-224@Cardapio USP/MapViewController.m
+       2      1     23      0       8 mapView: annotationView: calloutAccessoryControlTapped:@227-234@Cardapio USP/MapViewController.m
+       5      2     31      0       6 locationUpdate:@236-241@Cardapio USP/MapViewController.m
+       2      1     15      0       8 prepareForSegue: sender:@248-255@Cardapio USP/MapViewController.m
+       4      1     13      0       4 BoletoFormViewController@15-18@Cardapio USP/BoletoFormViewController.m
+      12      1    102      0      16 viewDidLoad@24-39@Cardapio USP/BoletoFormViewController.m
+       3      1      8      0       4 didReceiveMemoryWarning@41-44@Cardapio USP/BoletoFormViewController.m
+       4      1     25      0       4 doneClicked:@57-60@Cardapio USP/BoletoFormViewController.m
+       3      1     18      0       3 dismiss:@62-64@Cardapio USP/BoletoFormViewController.m
+      15      3    156      0      23 textFieldDidEndEditing:@68-90@Cardapio USP/BoletoFormViewController.m
+       4      1     20      0       4 textFieldShouldBeginEditing:@92-95@Cardapio USP/BoletoFormViewController.m
+       4      1     17      0       4 textFieldShouldEndEditing:@97-100@Cardapio USP/BoletoFormViewController.m
+       2      1      3      0       2 <.openedCell@18-19@Cardapio USP/BoletosPendentesTableViewController.m
+       8      1     72      0      12 viewDidLoad@27-38@Cardapio USP/BoletosPendentesTableViewController.m
+       3      1     15      0       4 viewWillAppear:@40-43@Cardapio USP/BoletosPendentesTableViewController.m
+       3      1      8      0       4 didReceiveMemoryWarning@45-48@Cardapio USP/BoletosPendentesTableViewController.m
+       3      1     12      0       3 numberOfSectionsInTableView:@51-53@Cardapio USP/BoletosPendentesTableViewController.m
+       3      1     24      0       3 tableView: numberOfRowsInSection:@55-57@Cardapio USP/BoletosPendentesTableViewController.m
+      10      2    134      0      15 tableView: cellForRowAtIndexPath:@59-73@Cardapio USP/BoletosPendentesTableViewController.m
+       5      1     54      0       5 tableView: didSelectRowAtIndexPath:@75-79@Cardapio USP/BoletosPendentesTableViewController.m
+       3      1     20      0       3 tableView: heightForRowAtIndexPath:@81-83@Cardapio USP/BoletosPendentesTableViewController.m
+       3      1     14      0       3 buttonOneActionForItemText:@96-98@Cardapio USP/BoletosPendentesTableViewController.m
+       2      1      9      0       2 buttonTwoActionForItemText:@100-101@Cardapio USP/BoletosPendentesTableViewController.m
+       3      1     13      0       3 closeModal@103-105@Cardapio USP/BoletosPendentesTableViewController.m
+      10      2     72      0      10 cellDidOpen:@107-116@Cardapio USP/BoletosPendentesTableViewController.m
+       3      1     25      0       3 cellDidClose:@118-120@Cardapio USP/BoletosPendentesTableViewController.m
+       4      1     21      0       4 didReceiveBills:@123-126@Cardapio USP/BoletosPendentesTableViewController.m
+       3      1     18      0       3 dismiss:@128-130@Cardapio USP/BoletosPendentesTableViewController.m
+       4      1     21      0       4 copyToPasteboard@132-135@Cardapio USP/BoletosPendentesTableViewController.m
+       3      1      8      0       4 awakeFromNib@15-18@Cardapio USP/PreferredCell.m
+       3      1     24      0       5 setSelected: animated:@20-24@Cardapio USP/PreferredCell.m
+       9      2     50      0       9 initWithTitle: subtitle: andCoordinate:@13-21@Cardapio USP/PlaceAnnotation.m
+      12      2     65      0      17 viewDidLoad@18-34@Cardapio USP/WebViewController.m
+       7      1     45      0       9 viewWillAppear:@36-44@Cardapio USP/WebViewController.m
+       5      1     44      0       7 viewDidAppear:@46-52@Cardapio USP/WebViewController.m
+       3      1     13      0       3 forwardPressed:@64-66@Cardapio USP/WebViewController.m
+       3      1     13      0       3 backPressed:@68-70@Cardapio USP/WebViewController.m
+       3      1     22      0       3 webView: didCommitNavigation:@72-74@Cardapio USP/WebViewController.m
+       7      2     61      0       9 webView: didFinishNavigation:@76-84@Cardapio USP/WebViewController.m
+       4      1     38      0       4 webView: didFailNavigation: withError:@86-89@Cardapio USP/WebViewController.m
+      14      4    111      1      14 webView: decidePolicyForNavigationAction: decisionHandler: WKNavigationActionPolicy.if@93-106@Cardapio USP/WebViewController.m
+       3      1      3      0       3 webView: decidePolicyForNavigationAction: decisionHandler: WKNavigationActionPolicy.;@107-109@Cardapio USP/WebViewController.m
+       3      1     12      0       3 revealControllerPanGestureShouldBegin:@114-116@Cardapio USP/WebViewController.m
+       3      1      8      0       4 awakeFromNib@13-16@Cardapio USP/BoletoTableViewCell.m
+       3      1     24      0       5 setSelected: animated:@18-22@Cardapio USP/BoletoTableViewCell.m
+       8      2     55      0       9 initWithPeriod: andMenu: andCalories:@18-26@Cardapio USP/Period.m
+       8      2     59      0       8 initWithCoder:@28-35@Cardapio USP/Period.m
+       5      1     48      0       5 encodeWithCoder:@37-41@Cardapio USP/Period.m
+       9      1     37      0      15 getInstance@29-43@Cardapio USP/MenuDataModel.m
+      10      1     81      0      12 iniciar_JSONBinding:@49-60@Cardapio USP/MenuDataModel.m
+      27      6    299      0      38 menus@62-99@Cardapio USP/MenuDataModel.m
+       7      3     37      0       8 menu@101-108@Cardapio USP/MenuDataModel.m
+       7      3     37      0       8 restaurant@110-117@Cardapio USP/MenuDataModel.m
+      16      4    125      0      24 restaurantsByCampus@119-142@Cardapio USP/MenuDataModel.m
+      21      4    150      0      21 cash@144-164@Cardapio USP/MenuDataModel.m
+       5      1     36      0       5 awakeFromNib@17-21@Cardapio USP/FrostedViewController.m
+       3      1     17      0       3 manager@51-53@Cardapio USP/AFHTTPSessionManager.m
+       3      1     11      0       3 init@55-57@Cardapio USP/AFHTTPSessionManager.m
+       3      1     20      0       3 initWithBaseURL:@59-61@Cardapio USP/AFHTTPSessionManager.m
+       3      1     20      0       3 initWithSessionConfiguration:@63-65@Cardapio USP/AFHTTPSessionManager.m
+      15      4     98      0      20 initWithBaseURL: sessionConfiguration:@67-86@Cardapio USP/AFHTTPSessionManager.m
+       4      1     21      0       5 setRequestSerializer:@93-97@Cardapio USP/AFHTTPSessionManager.m
+       4      1     24      0       5 setResponseSerializer:@99-103@Cardapio USP/AFHTTPSessionManager.m
+       6      1     35      0       8 failure@110-117@Cardapio USP/AFHTTPSessionManager.m
+      10      2     57      0      12 failure@122-133@Cardapio USP/AFHTTPSessionManager.m
+       6      1     35      0       8 failure@138-145@Cardapio USP/AFHTTPSessionManager.m
+      26      7    163      0      33 failure@151-183@Cardapio USP/AFHTTPSessionManager.m
+       6      1     35      0       8 failure@188-195@Cardapio USP/AFHTTPSessionManager.m
+       6      1     35      0       8 failure@200-207@Cardapio USP/AFHTTPSessionManager.m
+       6      1     35      0       8 failure@212-219@Cardapio USP/AFHTTPSessionManager.m
+      26      7    155      0      32 failure@225-256@Cardapio USP/AFHTTPSessionManager.m
+       3      1     37      0       3 description@260-262@Cardapio USP/AFHTTPSessionManager.m
+       3      1      6      0       3 supportsSecureCoding@266-268@Cardapio USP/AFHTTPSessionManager.m
+      18      5    173      0      24 initWithCoder:@270-293@Cardapio USP/AFHTTPSessionManager.m
+      11      2    127      0      12 encodeWithCoder:@295-306@Cardapio USP/AFHTTPSessionManager.m
+       6      1     66      0       8 copyWithZone:@310-317@Cardapio USP/AFHTTPSessionManager.m
+      13      1     47      0      19 MainViewController@20-38@Cardapio USP/MainViewController.m
+      24      3    271      0      41 viewDidLoad@44-84@Cardapio USP/MainViewController.m
+      12      3     65      0      15 viewWillAppear:@86-100@Cardapio USP/MainViewController.m
+       3      1     15      0       3 viewDidAppear:@102-104@Cardapio USP/MainViewController.m
+       6      1     36      0       6 fetchMenu@106-111@Cardapio USP/MainViewController.m
+      16      6    136      0      28 onPress:@115-142@Cardapio USP/MainViewController.m
+       6      2     47      0       8 touchesBegan: withEvent:@145-152@Cardapio USP/MainViewController.m
+      46     12    230      0      61 prepareForSegue: sender:@159-219@Cardapio USP/MainViewController.m
+      22      6    232      1      31 setupView@222-252@Cardapio USP/MainViewController.m
+       3      1     14      0       3 didReceiveMenu:@254-256@Cardapio USP/MainViewController.m
+       4      1     45      0       4 didRecieveCredits:@259-262@Cardapio USP/MainViewController.m
+       4      1     23      0       4 didRecieveCreditsError:@264-267@Cardapio USP/MainViewController.m
+      52     28    494      0      72 period@271-342@Cardapio USP/MainViewController.m
+      40      6    368      0      51 setupMenuView@344-394@Cardapio USP/MainViewController.m
+       8      2     60      0       8 showInstitucional:@396-403@Cardapio USP/MainViewController.m
+       8      2     60      0       8 showTransporte:@405-412@Cardapio USP/MainViewController.m
+       8      2     60      0       8 showAvisos:@414-421@Cardapio USP/MainViewController.m
+       8      2     60      0       8 showSaudeMental:@423-430@Cardapio USP/MainViewController.m
+       8      2     60      0       8 showMoradia:@432-439@Cardapio USP/MainViewController.m
+       8      2     60      0       8 showCreche:@441-448@Cardapio USP/MainViewController.m
+       8      2     60      0       8 showServicoSocial:@450-457@Cardapio USP/MainViewController.m
+       8      2     60      0       8 showAcolhe:@459-466@Cardapio USP/MainViewController.m
+       3      1     14      0       3 didChangeRestaurant:@468-470@Cardapio USP/MainViewController.m
+       3      1     14      0       3 didReceiveRestaurants:@472-474@Cardapio USP/MainViewController.m
+       7      2     35      0       7 revealControllerPanGestureShouldBegin:@481-487@Cardapio USP/MainViewController.m
+      14      4     94      0      22 revealController: willMoveToPosition:@491-512@Cardapio USP/MainViewController.m
+       2      1      8      0       2 menuBtnExpClicked:@514-515@Cardapio USP/MainViewController.m
+       8      1     32      0       9 url_request_operation_completion_group@47-55@Cardapio USP/AFURLConnectionOperation.m
+       8      1     35      0       9 url_request_operation_completion_queue@57-65@Cardapio USP/AFURLConnectionOperation.m
+      15      5     49      1      18 AFKeyPathFromOperationState@77-94@Cardapio USP/AFURLConnectionOperation.m
+      37     14    115      3      40 AFStateTransitionIsValid@96-135@Cardapio USP/AFURLConnectionOperation.m
+       8      1     51      0       9 networkRequestThreadEntryPoint: object@163-171@Cardapio USP/AFURLConnectionOperation.m
+       9      1     55      0      10 networkRequestThread@173-182@Cardapio USP/AFURLConnectionOperation.m
+      15      2     90      0      23 initWithRequest:@184-206@Cardapio USP/AFURLConnectionOperation.m
+      10      4     38      0      13 dealloc@208-220@Cardapio USP/AFURLConnectionOperation.m
+       9      2     53      0       9 setResponseData:@224-232@Cardapio USP/AFURLConnectionOperation.m
+       8      4     56      0       9 responseString@234-242@Cardapio USP/AFURLConnectionOperation.m
+      15      5     83      0      17 responseStringEncoding@244-260@Cardapio USP/AFURLConnectionOperation.m
+       3      1     10      0       3 inputStream@262-264@Cardapio USP/AFURLConnectionOperation.m
+       5      1     32      0       5 setInputStream:@266-270@Cardapio USP/AFURLConnectionOperation.m
+       6      2     22      0       7 outputStream@272-278@Cardapio USP/AFURLConnectionOperation.m
+      10      3     46      0      11 setOutputStream:@280-290@Cardapio USP/AFURLConnectionOperation.m
+      15      3     85      1      18 setShouldExecuteAsBackgroundTaskWithExpirationHandler: void.if@295-312@Cardapio USP/AFURLConnectionOperation.m
+       3      1     20      0      22 setShouldExecuteAsBackgroundTaskWithExpirationHandler: void@293-314@Cardapio USP/AFURLConnectionOperation.m
+      14      2     95      0      16 setState:@319-334@Cardapio USP/AFURLConnectionOperation.m
+      15      5    117      0      18 pause@336-353@Cardapio USP/AFURLConnectionOperation.m
+       5      1     24      0       5 operationDidPause@355-359@Cardapio USP/AFURLConnectionOperation.m
+       3      1     10      0       3 isPaused@361-363@Cardapio USP/AFURLConnectionOperation.m
+       9      2     40      0      11 resume@365-375@Cardapio USP/AFURLConnectionOperation.m
+       2      1      3      0       2 setUploadProgressBlock: NSUInteger.block@380-381@Cardapio USP/AFURLConnectionOperation.m
+       2      1      3      0       2 setDownloadProgressBlock: NSUInteger.block@384-385@Cardapio USP/AFURLConnectionOperation.m
+       2      1      3      0       2 setWillSendRequestForAuthenticationChallengeBlock: NSURLConnection.block@388-389@Cardapio USP/AFURLConnectionOperation.m
+       2      1      3      0       2 setCacheResponseBlock: NSURLConnection.block@392-393@Cardapio USP/AFURLConnectionOperation.m
+       2      1      3      0       2 setRedirectResponseBlock: NSURLConnection.block@396-397@Cardapio USP/AFURLConnectionOperation.m
+       3      1     14      1       3 setCompletionBlock: void.if@403-405@Cardapio USP/AFURLConnectionOperation.m
+      12      3     77      0      18 setCompletionBlock: void.self@406-423@Cardapio USP/AFURLConnectionOperation.m
+       4      1     24      0      26 setCompletionBlock: void@401-426@Cardapio USP/AFURLConnectionOperation.m
+       3      2     15      0       3 isReady@428-430@Cardapio USP/AFURLConnectionOperation.m
+       3      1     10      0       3 isExecuting@432-434@Cardapio USP/AFURLConnectionOperation.m
+       3      1     10      0       3 isFinished@436-438@Cardapio USP/AFURLConnectionOperation.m
+       3      1      6      0       3 isConcurrent@440-442@Cardapio USP/AFURLConnectionOperation.m
+      10      3    110      0      11 start@444-454@Cardapio USP/AFURLConnectionOperation.m
+      17      3    132      0      20 operationDidStart@456-475@Cardapio USP/AFURLConnectionOperation.m
+       8      1     47      0       9 finish@477-485@Cardapio USP/AFURLConnectionOperation.m
+      10      4     81      0      11 cancel@487-497@Cardapio USP/AFURLConnectionOperation.m
+      16      4    115      0      18 cancelConnection@499-516@Cardapio USP/AFURLConnectionOperation.m
+      44      9    266      0      54 completionBlock@522-575@Cardapio USP/AFURLConnectionOperation.m
+       3      2     50      0       3 description@579-581@Cardapio USP/AFURLConnectionOperation.m
+      26      6    178      0      27 connection: willSendRequestForAuthenticationChallenge:@585-611@Cardapio USP/AFURLConnectionOperation.m
+       3      1     15      0       3 connectionShouldUseCredentialStorage:@613-615@Cardapio USP/AFURLConnectionOperation.m
+      10      2     49      0      10 connection: willSendRequest: redirectResponse:@617-626@Cardapio USP/AFURLConnectionOperation.m
+      11      2     61      0      11 connection: didSendBodyData: totalBytesWritten: totalBytesExpectedToWrite:@628-638@Cardapio USP/AFURLConnectionOperation.m
+       5      1     23      0       5 connection: didReceiveResponse:@640-644@Cardapio USP/AFURLConnectionOperation.m
+      31      7    213      0      37 connection: didReceiveData:@646-682@Cardapio USP/AFURLConnectionOperation.m
+       9      2     55      0      12 connectionDidFinishLoading:@684-695@Cardapio USP/AFURLConnectionOperation.m
+      11      2     55      0      14 connection: didFailWithError:@697-710@Cardapio USP/AFURLConnectionOperation.m
+      12      3     52      0      13 connection: willCacheResponse:@712-724@Cardapio USP/AFURLConnectionOperation.m
+       3      1      6      0       3 supportsSecureCoding@728-730@Cardapio USP/AFURLConnectionOperation.m
+      13      2    181      0      16 initWithCoder:@732-747@Cardapio USP/AFURLConnectionOperation.m
+      17      3    165      0      20 encodeWithCoder:@749-768@Cardapio USP/AFURLConnectionOperation.m
+      11      1     93      0      13 copyWithZone:@772-784@Cardapio USP/AFURLConnectionOperation.m
+       8      1     35      0       9 url_session_manager_creation_queue@27-35@Cardapio USP/AFURLSessionManager.m
+       8      1     35      0       9 url_session_manager_processing_queue@37-45@Cardapio USP/AFURLSessionManager.m
+       8      1     32      0       9 url_session_manager_completion_group@47-55@Cardapio USP/AFURLSessionManager.m
+       9      2     43      0      12 init@119-130@Cardapio USP/AFURLSessionManager.m
+       9      1     53      0       9 URLSession: task: didSendBodyData: totalBytesSent: totalBytesExpectedToSend:@134-142@Cardapio USP/AFURLSessionManager.m
+      47     13    344      0      61 URLSession: task: didCompleteWithError:@144-204@Cardapio USP/AFURLSessionManager.m
+       6      1     34      0       6 URLSession: dataTask: didReceiveData:@208-213@Cardapio USP/AFURLSessionManager.m
+      16      4    109      0      18 URLSession: downloadTask: didFinishDownloadingToURL:@217-234@Cardapio USP/AFURLSessionManager.m
+       9      1     53      0       9 URLSession: downloadTask: didWriteData: totalBytesWritten: totalBytesExpectedToWrite:@236-244@Cardapio USP/AFURLSessionManager.m
+       7      1     46      0       7 URLSession: downloadTask: didResumeAtOffset: expectedTotalBytes:@246-252@Cardapio USP/AFURLSessionManager.m
+       3      1     11      0       3 init@283-285@Cardapio USP/AFURLSessionManager.m
+      31      6    242      0      44 initWithSessionConfiguration:@287-330@Cardapio USP/AFURLSessionManager.m
+       8      1     51      0      10 delegateForTask:@334-343@Cardapio USP/AFURLSessionManager.m
+      10      1     84      0      11 setDelegate: forTask:@345-355@Cardapio USP/AFURLSessionManager.m
+       3      1     13      0       4 addDelegateForDataTask: completionHandler: NSURLResponse.completionHandler@362-365@Cardapio USP/AFURLSessionManager.m
+       6      2     38      1       6 addDelegateForUploadTask: progress: completionHandler: NSURLResponse.if@376-381@Cardapio USP/AFURLSessionManager.m
+       3      1     13      1       3 addDelegateForUploadTask: progress: completionHandler: NSURLResponse.if@391-393@Cardapio USP/AFURLSessionManager.m
+       6      1     39      0      30 addDelegateForUploadTask: progress: completionHandler: NSURLResponse@367-396@Cardapio USP/AFURLSessionManager.m
+      15      3     90      0      18 completionHandler@401-418@Cardapio USP/AFURLSessionManager.m
+       7      1     62      0       8 removeDelegateForTask:@420-427@Cardapio USP/AFURLSessionManager.m
+       5      1     24      0       5 removeAllDelegates@429-433@Cardapio USP/AFURLSessionManager.m
+      18      5    167      0      21 tasksForKeyPath:@437-457@Cardapio USP/AFURLSessionManager.m
+       3      1     14      0       3 tasks@459-461@Cardapio USP/AFURLSessionManager.m
+       3      1     14      0       3 dataTasks@463-465@Cardapio USP/AFURLSessionManager.m
+       3      1     14      0       3 uploadTasks@467-469@Cardapio USP/AFURLSessionManager.m
+       3      1     14      0       3 downloadTasks@471-473@Cardapio USP/AFURLSessionManager.m
+       9      2     42      0       9 invalidateSessionCancelingTasks:@477-485@Cardapio USP/AFURLSessionManager.m
+       4      1     20      0       5 setResponseSerializer:@489-493@Cardapio USP/AFURLSessionManager.m
+       2      1      3      0       2 dataTaskWithRequest: completionHandler: NSURLResponse.dataTask@507-508@Cardapio USP/AFURLSessionManager.m
+       6      3     53      1       7 uploadTaskWithRequest: fromFile: progress: completionHandler: NSURLResponse.;@520-526@Cardapio USP/AFURLSessionManager.m
+       2      1      3      0       2 uploadTaskWithRequest: fromFile: progress: completionHandler: NSURLResponse.uploadTask@530-531@Cardapio USP/AFURLSessionManager.m
+       2      1      3      0       2 uploadTaskWithRequest: fromData: progress: completionHandler: NSURLResponse.uploadTask@545-546@Cardapio USP/AFURLSessionManager.m
+       2      1      3      0       2 uploadTaskWithStreamedRequest: progress: completionHandler: NSURLResponse.uploadTask@559-560@Cardapio USP/AFURLSessionManager.m
+       9      1     51      0      11 completionHandler@567-577@Cardapio USP/AFURLSessionManager.m
+       9      1     51      0      11 completionHandler@582-592@Cardapio USP/AFURLSessionManager.m
+       3      1     20      0       3 uploadProgressForTask:@596-598@Cardapio USP/AFURLSessionManager.m
+       3      1     20      0       3 downloadProgressForTask:@600-602@Cardapio USP/AFURLSessionManager.m
+       2      1      3      0       2 setSessionDidBecomeInvalidBlock: NSURLSession.block@607-608@Cardapio USP/AFURLSessionManager.m
+       2      1      3      0       2 setSessionDidReceiveAuthenticationChallengeBlock: NSURLSession.block@611-612@Cardapio USP/AFURLSessionManager.m
+       2      1      3      0       2 setDidFinishEventsForBackgroundURLSessionBlock: NSURLSession.block@615-616@Cardapio USP/AFURLSessionManager.m
+       2      1      3      0       2 setTaskNeedNewBodyStreamBlock: NSURLSession.block@621-622@Cardapio USP/AFURLSessionManager.m
+       2      1      3      0       2 setTaskWillPerformHTTPRedirectionBlock: NSURLSession.block@625-626@Cardapio USP/AFURLSessionManager.m
+       2      1      3      0       2 setTaskDidReceiveAuthenticationChallengeBlock: NSURLSession.block@629-630@Cardapio USP/AFURLSessionManager.m
+       2      1      3      0       2 setTaskDidSendBodyDataBlock: NSURLSession.block@633-634@Cardapio USP/AFURLSessionManager.m
+       2      1      3      0       2 setTaskDidCompleteBlock: NSURLSession.block@637-638@Cardapio USP/AFURLSessionManager.m
+       2      1      3      0       2 setDataTaskDidReceiveResponseBlock: NSURLSession.block@643-644@Cardapio USP/AFURLSessionManager.m
+       2      1      3      0       2 setDataTaskDidBecomeDownloadTaskBlock: NSURLSession.block@647-648@Cardapio USP/AFURLSessionManager.m
+       2      1      3      0       2 setDataTaskDidReceiveDataBlock: NSURLSession.block@651-652@Cardapio USP/AFURLSessionManager.m
+       2      1      3      0       2 setDataTaskWillCacheResponseBlock: NSURLSession.block@655-656@Cardapio USP/AFURLSessionManager.m
+       2      1      3      0       2 setDownloadTaskDidFinishDownloadingBlock: NSURLSession.block@661-662@Cardapio USP/AFURLSessionManager.m
+       2      1      3      0       2 setDownloadTaskDidWriteDataBlock: NSURLSession.block@665-666@Cardapio USP/AFURLSessionManager.m
+       2      1      3      0       2 setDownloadTaskDidResumeBlock: NSURLSession.block@669-670@Cardapio USP/AFURLSessionManager.m
+       3      1     30      0       3 description@674-676@Cardapio USP/AFURLSessionManager.m
+      12      5    122      0      13 respondsToSelector:@678-690@Cardapio USP/AFURLSessionManager.m
+      30     10    167      0      33 observeValueForKeyPath: ofObject: change: context:@694-726@Cardapio USP/AFURLSessionManager.m
+      15      3    124      0      18 URLSession: didBecomeInvalidWithError:@730-747@Cardapio USP/AFURLSessionManager.m
+       3      1     22      1       3 URLSession: didReceiveChallenge: completionHandler: NSURLSessionAuthChallengeDisposition.if@756-758@Cardapio USP/AFURLSessionManager.m
+      12      3     76      1      12 URLSession: didReceiveChallenge: completionHandler: NSURLSessionAuthChallengeDisposition.if@759-770@Cardapio USP/AFURLSessionManager.m
+       3      1     13      1       3 URLSession: didReceiveChallenge: completionHandler: NSURLSessionAuthChallengeDisposition.if@775-777@Cardapio USP/AFURLSessionManager.m
+       4      1     29      0      30 URLSession: didReceiveChallenge: completionHandler: NSURLSessionAuthChallengeDisposition@749-778@Cardapio USP/AFURLSessionManager.m
+       3      1     23      1       3 URLSession: task: willPerformHTTPRedirection: newRequest: completionHandler: NSURLRequest.if@790-792@Cardapio USP/AFURLSessionManager.m
+       3      1     11      1       3 URLSession: task: willPerformHTTPRedirection: newRequest: completionHandler: NSURLRequest.if@794-796@Cardapio USP/AFURLSessionManager.m
+       7      2     43      0      16 URLSession: task: willPerformHTTPRedirection: newRequest: completionHandler: NSURLRequest@782-797@Cardapio USP/AFURLSessionManager.m
+       3      1     24      1       3 URLSession: task: didReceiveChallenge: completionHandler: NSURLSessionAuthChallengeDisposition.if@807-809@Cardapio USP/AFURLSessionManager.m
+       8      2     63      1       8 URLSession: task: didReceiveChallenge: completionHandler: NSURLSessionAuthChallengeDisposition.if@810-817@Cardapio USP/AFURLSessionManager.m
+       3      1     13      1       3 URLSession: task: didReceiveChallenge: completionHandler: NSURLSessionAuthChallengeDisposition.if@822-824@Cardapio USP/AFURLSessionManager.m
+       5      1     36      0      27 URLSession: task: didReceiveChallenge: completionHandler: NSURLSessionAuthChallengeDisposition@799-825@Cardapio USP/AFURLSessionManager.m
+       3      1     19      1       3 URLSession: task: needNewBodyStream: NSInputStream.if@833-835@Cardapio USP/AFURLSessionManager.m
+       3      1     36      1       3 URLSession: task: needNewBodyStream: NSInputStream.if@835-837@Cardapio USP/AFURLSessionManager.m
+       3      1     11      1       3 URLSession: task: needNewBodyStream: NSInputStream.if@839-841@Cardapio USP/AFURLSessionManager.m
+       5      2     28      0      16 URLSession: task: needNewBodyStream: NSInputStream@827-842@Cardapio USP/AFURLSessionManager.m
+      19      4    130      0      22 URLSession: task: didSendBodyData: totalBytesSent: totalBytesExpectedToSend:@844-865@Cardapio USP/AFURLSessionManager.m
+      13      3     79      0      18 URLSession: task: didCompleteWithError:@867-884@Cardapio USP/AFURLSessionManager.m
+       3      1     21      1       3 URLSession: dataTask: didReceiveResponse: completionHandler: NSURLSessionResponseDisposition.if@895-897@Cardapio USP/AFURLSessionManager.m
+       3      1     11      1       3 URLSession: dataTask: didReceiveResponse: completionHandler: NSURLSessionResponseDisposition.if@899-901@Cardapio USP/AFURLSessionManager.m
+       6      2     36      0      15 URLSession: dataTask: didReceiveResponse: completionHandler: NSURLSessionResponseDisposition@888-902@Cardapio USP/AFURLSessionManager.m
+      13      3     76      0      14 URLSession: dataTask: didBecomeDownloadTask:@904-917@Cardapio USP/AFURLSessionManager.m
+      10      2     66      0      11 URLSession: dataTask: didReceiveData:@919-929@Cardapio USP/AFURLSessionManager.m
+       3      1     21      1       3 URLSession: dataTask: willCacheResponse: completionHandler: NSCachedURLResponse.if@938-940@Cardapio USP/AFURLSessionManager.m
+       3      1     11      1       3 URLSession: dataTask: willCacheResponse: completionHandler: NSCachedURLResponse.if@942-944@Cardapio USP/AFURLSessionManager.m
+       6      2     34      0      15 URLSession: dataTask: willCacheResponse: completionHandler: NSCachedURLResponse@931-945@Cardapio USP/AFURLSessionManager.m
+       7      2     35      0       7 URLSessionDidFinishEventsForBackgroundURLSession:@947-953@Cardapio USP/AFURLSessionManager.m
+      20      5    131      0      22 URLSession: downloadTask: didFinishDownloadingToURL:@957-978@Cardapio USP/AFURLSessionManager.m
+      12      2     87      0      13 URLSession: downloadTask: didWriteData: totalBytesWritten: totalBytesExpectedToWrite:@980-992@Cardapio USP/AFURLSessionManager.m
+      11      2     76      0      12 URLSession: downloadTask: didResumeAtOffset: expectedTotalBytes:@994-1005@Cardapio USP/AFURLSessionManager.m
+       3      1      6      0       3 supportsSecureCoding@1009-1011@Cardapio USP/AFURLSessionManager.m
+       8      2     49      0      10 initWithCoder:@1013-1022@Cardapio USP/AFURLSessionManager.m
+       3      1     24      0       3 encodeWithCoder:@1024-1026@Cardapio USP/AFURLSessionManager.m
+       3      1     29      0       3 copyWithZone:@1030-1032@Cardapio USP/AFURLSessionManager.m
+       3      1     14      0       3 manager@41-43@Cardapio USP/AFHTTPRequestOperationManager.m
+       3      1     11      0       3 init@45-47@Cardapio USP/AFHTTPRequestOperationManager.m
+      17      4    125      0      26 initWithBaseURL:@49-74@Cardapio USP/AFHTTPRequestOperationManager.m
+       4      1     21      0       5 setRequestSerializer:@81-85@Cardapio USP/AFHTTPRequestOperationManager.m
+       4      1     21      0       5 setResponseSerializer:@87-91@Cardapio USP/AFHTTPRequestOperationManager.m
+      12      1     78      0      14 failure@97-110@Cardapio USP/AFHTTPRequestOperationManager.m
+       7      1     68      0       9 failure@117-125@Cardapio USP/AFHTTPRequestOperationManager.m
+      11      2     90      0      13 failure@130-142@Cardapio USP/AFHTTPRequestOperationManager.m
+       7      1     68      0       9 failure@147-155@Cardapio USP/AFHTTPRequestOperationManager.m
+       7      1     71      0       9 failure@161-169@Cardapio USP/AFHTTPRequestOperationManager.m
+       7      1     68      0       9 failure@174-182@Cardapio USP/AFHTTPRequestOperationManager.m
+       7      1     68      0       9 failure@187-195@Cardapio USP/AFHTTPRequestOperationManager.m
+       7      1     68      0       9 failure@200-208@Cardapio USP/AFHTTPRequestOperationManager.m
+       3      1     33      0       3 description@212-214@Cardapio USP/AFHTTPRequestOperationManager.m
+       3      1      6      0       3 supportsSecureCoding@218-220@Cardapio USP/AFHTTPRequestOperationManager.m
+      10      2     97      0      13 initWithCoder:@222-234@Cardapio USP/AFHTTPRequestOperationManager.m
+       5      1     66      0       5 encodeWithCoder:@236-240@Cardapio USP/AFHTTPRequestOperationManager.m
+       6      1     59      0       8 copyWithZone:@244-251@Cardapio USP/AFHTTPRequestOperationManager.m
+      23      6    280      1      28 AFBase64EncodedStringFromString@36-63@Cardapio USP/AFURLRequestSerialization.m
+       4      1     54      2       5 AFPercentEscapedQueryStringKeyFromStringWithEncoding@67-71@Cardapio USP/AFURLRequestSerialization.m
+       3      1     41      2       3 AFPercentEscapedQueryStringValueFromStringWithEncoding@73-75@Cardapio USP/AFURLRequestSerialization.m
+       9      2     46      0      11 initWithField: value:@90-100@Cardapio USP/AFURLRequestSerialization.m
+       7      3     78      0       7 URLEncodedStringValueWithEncoding:@102-108@Cardapio USP/AFURLRequestSerialization.m
+       7      2     54      2       8 AFQueryStringFromParametersWithEncoding@117-124@Cardapio USP/AFURLRequestSerialization.m
+       3      1     16      1       3 AFQueryStringPairsFromDictionary@126-128@Cardapio USP/AFURLRequestSerialization.m
+      26      9    250      2      30 AFQueryStringPairsFromKeyAndValue@130-159@Cardapio USP/AFURLRequestSerialization.m
+       8      1     88      0       9 AFHTTPRequestSerializerObservedKeyPaths@172-180@Cardapio USP/AFURLRequestSerialization.m
+       3      1     12      0       3 serializer@193-195@Cardapio USP/AFURLRequestSerialization.m
+      35     13    462      0      51 init@197-247@Cardapio USP/AFURLRequestSerialization.m
+       7      3     42      0       7 dealloc@249-255@Cardapio USP/AFURLRequestSerialization.m
+       3      1     13      0       3 HTTPRequestHeaders@259-261@Cardapio USP/AFURLRequestSerialization.m
+       5      1     28      0       5 setValue: forHTTPHeaderField:@263-267@Cardapio USP/AFURLRequestSerialization.m
+       3      1     19      0       3 valueForHTTPHeaderField:@269-271@Cardapio USP/AFURLRequestSerialization.m
+       6      1     54      0       6 setAuthorizationHeaderFieldWithUsername: password:@273-278@Cardapio USP/AFURLRequestSerialization.m
+       3      1     28      0       3 setAuthorizationHeaderFieldWithToken:@280-282@Cardapio USP/AFURLRequestSerialization.m
+       3      1     13      0       3 clearAuthorizationHeader@284-286@Cardapio USP/AFURLRequestSerialization.m
+       4      1     20      0       4 setQueryStringSerializationWithStyle:@290-293@Cardapio USP/AFURLRequestSerialization.m
+       2      1      3      0       2 setQueryStringSerializationWithBlock: NSURLRequest.block@296-297@Cardapio USP/AFURLRequestSerialization.m
+       6      1     39      0       6 requestWithMethod: URLString: parameters:@301-306@Cardapio USP/AFURLRequestSerialization.m
+      19      3    138      0      25 requestWithMethod: URLString: parameters: error:@308-332@Cardapio USP/AFURLRequestSerialization.m
+       2      1     21      0       2 multipartFormRequestWithMethod: URLString: parameters: constructingBodyWithBlock: id.return@339-340@Cardapio USP/AFURLRequestSerialization.m
+      26      8    195      0      32 error@346-377@Cardapio USP/AFURLRequestSerialization.m
+       3      1     15      1       3 requestWithMultipartFormRequest: writingStreamContentsToFile: completionHandler: NSError.if@383-385@Cardapio USP/AFURLRequestSerialization.m
+      29     10    183      2      36 requestWithMultipartFormRequest: writingStreamContentsToFile: completionHandler: NSError.dispatch_async@393-428@Cardapio USP/AFURLRequestSerialization.m
+       2      1      3      0       2 requestWithMultipartFormRequest: writingStreamContentsToFile: completionHandler: NSError.mutableRequest@433-434@Cardapio USP/AFURLRequestSerialization.m
+      40     10    265      0      47 requestBySerializingRequest: withParameters: error:@438-484@Cardapio USP/AFURLRequestSerialization.m
+      13      3     76      0      13 observeValueForKeyPath: ofObject: change: context:@488-500@Cardapio USP/AFURLRequestSerialization.m
+       3      1      6      0       3 supportsSecureCoding@504-506@Cardapio USP/AFURLRequestSerialization.m
+       9      2     83      0      11 initWithCoder:@508-518@Cardapio USP/AFURLRequestSerialization.m
+       4      1     47      0       4 encodeWithCoder:@520-523@Cardapio USP/AFURLRequestSerialization.m
+       7      1     58      0       8 copyWithZone:@527-534@Cardapio USP/AFURLRequestSerialization.m
+       3      1     22      0       3 AFCreateMultipartFormBoundary@540-542@Cardapio USP/AFURLRequestSerialization.m
+       3      1     21      0       3 AFMultipartFormInitialBoundary@546-548@Cardapio USP/AFURLRequestSerialization.m
+       3      1     23      0       3 AFMultipartFormEncapsulationBoundary@550-552@Cardapio USP/AFURLRequestSerialization.m
+       3      1     23      0       3 AFMultipartFormFinalBoundary@554-556@Cardapio USP/AFURLRequestSerialization.m
+      10      3     71      0      14 AFContentTypeForPathExtension@558-571@Cardapio USP/AFURLRequestSerialization.m
+      13      2     69      0      15 initWithURLRequest: stringEncoding:@617-631@Cardapio USP/AFURLRequestSerialization.m
+      10      1     76      0      12 appendPartWithFileURL: name: error:@633-644@Cardapio USP/AFURLRequestSerialization.m
+      39      6    316      0      46 appendPartWithFileURL: name: fileName: mimeType: error:@646-691@Cardapio USP/AFURLRequestSerialization.m
+      20      1    152      0      24 appendPartWithInputStream: name: fileName: length: mimeType:@693-716@Cardapio USP/AFURLRequestSerialization.m
+      13      1     96      0      15 appendPartWithFileData: name: fileName: mimeType:@718-732@Cardapio USP/AFURLRequestSerialization.m
+       8      1     59      0      10 appendPartWithFormData: name:@734-743@Cardapio USP/AFURLRequestSerialization.m
+      12      1     79      0      14 appendPartWithHeaders: body:@745-758@Cardapio USP/AFURLRequestSerialization.m
+       6      1     30      0       6 throttleBandwidthWithPacketSize: delay:@760-765@Cardapio USP/AFURLRequestSerialization.m
+      10      2     91      0      14 requestByFinalizingMultipartFormData@767-780@Cardapio USP/AFURLRequestSerialization.m
+      10      2     49      0      12 initWithStringEncoding:@810-821@Cardapio USP/AFURLRequestSerialization.m
+      10      3     66      0      11 setInitialAndFinalBoundaries@823-833@Cardapio USP/AFURLRequestSerialization.m
+       3      1     18      0       3 appendHTTPBodyPart:@835-837@Cardapio USP/AFURLRequestSerialization.m
+       3      1     13      0       3 isEmpty@839-841@Cardapio USP/AFURLRequestSerialization.m
+      28      8    174      0      35 read: maxLength:@845-879@Cardapio USP/AFURLRequestSerialization.m
+       5      1     21      0       5 getBuffer: length:@881-885@Cardapio USP/AFURLRequestSerialization.m
+       3      1     11      0       3 hasBytesAvailable@887-889@Cardapio USP/AFURLRequestSerialization.m
+       8      2     37      0      10 open@893-902@Cardapio USP/AFURLRequestSerialization.m
+       3      1      9      0       3 close@904-906@Cardapio USP/AFURLRequestSerialization.m
+       3      1     13      0       3 propertyForKey:@908-910@Cardapio USP/AFURLRequestSerialization.m
+       5      1     20      0       5 setProperty: forKey:@912-916@Cardapio USP/AFURLRequestSerialization.m
+       3      1     18      0       3 scheduleInRunLoop: forMode:@918-920@Cardapio USP/AFURLRequestSerialization.m
+       3      1     18      0       3 removeFromRunLoop: forMode:@922-924@Cardapio USP/AFURLRequestSerialization.m
+       7      2     32      0       8 contentLength@926-933@Cardapio USP/AFURLRequestSerialization.m
+       3      1     16      0       3 _scheduleInCFRunLoop: forMode:@937-939@Cardapio USP/AFURLRequestSerialization.m
+       3      1     16      0       3 _unscheduleFromCFRunLoop: forMode:@941-943@Cardapio USP/AFURLRequestSerialization.m
+       5      1     27      0       5 _setCFClientFlags: callback: context:@945-949@Cardapio USP/AFURLRequestSerialization.m
+       8      2     60      0      11 copyWithZone:@953-963@Cardapio USP/AFURLRequestSerialization.m
+       2      1      3      0       2 <._phaseReadOffset@979-980@Cardapio USP/AFURLRequestSerialization.m
+       8      2     28      0      10 init@990-999@Cardapio USP/AFURLRequestSerialization.m
+       6      2     18      0       6 dealloc@1001-1006@Cardapio USP/AFURLRequestSerialization.m
+      14      5    106      0      15 inputStream@1008-1022@Cardapio USP/AFURLRequestSerialization.m
+       8      2     68      0       9 stringForHeaders@1024-1032@Cardapio USP/AFURLRequestSerialization.m
+      11      3    116      0      16 contentLength@1034-1049@Cardapio USP/AFURLRequestSerialization.m
+      18     10     56      0      23 hasBytesAvailable@1051-1073@Cardapio USP/AFURLRequestSerialization.m
+      30      9    279      0      37 read: maxLength:@1075-1111@Cardapio USP/AFURLRequestSerialization.m
+      12      2     95      0      18 readData: intoBuffer: maxLength:@1113-1130@Cardapio USP/AFURLRequestSerialization.m
+      26      6    116      0      31 transitionToNextPhase@1132-1162@Cardapio USP/AFURLRequestSerialization.m
+       9      1     69      0      11 copyWithZone:@1166-1176@Cardapio USP/AFURLRequestSerialization.m
+       3      1     14      0       3 serializer@1184-1186@Cardapio USP/AFURLRequestSerialization.m
+       6      1     29      0       7 serializerWithWritingOptions:@1188-1194@Cardapio USP/AFURLRequestSerialization.m
+      23      5    194      0      29 requestBySerializingRequest: withParameters: error:@1198-1226@Cardapio USP/AFURLRequestSerialization.m
+       8      2     58      0      10 initWithCoder:@1230-1239@Cardapio USP/AFURLRequestSerialization.m
+       4      1     35      0       5 encodeWithCoder:@1241-1245@Cardapio USP/AFURLRequestSerialization.m
+       5      1     31      0       6 copyWithZone:@1249-1254@Cardapio USP/AFURLRequestSerialization.m
+       3      1     14      0       3 serializer@1262-1264@Cardapio USP/AFURLRequestSerialization.m
+       8      1     41      0       9 serializerWithFormat: writeOptions:@1266-1274@Cardapio USP/AFURLRequestSerialization.m
+      23      5    199      0      29 requestBySerializingRequest: withParameters: error:@1278-1306@Cardapio USP/AFURLRequestSerialization.m
+       9      2     85      0      11 initWithCoder:@1310-1320@Cardapio USP/AFURLRequestSerialization.m
+       5      1     57      0       6 encodeWithCoder:@1322-1327@Cardapio USP/AFURLRequestSerialization.m
+       6      1     39      0       7 copyWithZone:@1331-1337@Cardapio USP/AFURLRequestSerialization.m
+       8      1     35      0       9 http_request_operation_processing_queue@25-33@Cardapio USP/AFHTTPRequestOperation.m
+       8      1     32      0       9 http_request_operation_completion_group@35-43@Cardapio USP/AFHTTPRequestOperation.m
+       8      2     40      0      10 initWithRequest:@62-71@Cardapio USP/AFHTTPRequestOperation.m
+       8      1     47      0       9 setResponseSerializer:@73-81@Cardapio USP/AFHTTPRequestOperation.m
+      12      5     79      0      13 responseObject@83-95@Cardapio USP/AFHTTPRequestOperation.m
+       7      2     21      0       7 error@97-103@Cardapio USP/AFHTTPRequestOperation.m
+      35     14    199      0      42 failure@108-149@Cardapio USP/AFHTTPRequestOperation.m
+      15      4    153      0      17 pause@153-169@Cardapio USP/AFHTTPRequestOperation.m
+       3      1      6      0       3 supportsSecureCoding@173-175@Cardapio USP/AFHTTPRequestOperation.m
+       8      2     55      0      10 initWithCoder:@177-186@Cardapio USP/AFHTTPRequestOperation.m
+       4      1     35      0       5 encodeWithCoder:@188-192@Cardapio USP/AFHTTPRequestOperation.m
+       7      1     52      0       9 copyWithZone:@196-204@Cardapio USP/AFHTTPRequestOperation.m
+       4      1     13      0       4 DataModel@22-25@Cardapio USP/DataModel.m
+       8      1     37      0       9 getInstance@36-44@Cardapio USP/DataModel.m
+       9      2     40      0       9 init@46-54@Cardapio USP/DataModel.m
+      17      6    107      0      22 userData@56-77@Cardapio USP/DataModel.m
+      67     15    518      0      84 getRestaurantList@79-162@Cardapio USP/DataModel.m
+      60      7    653      0      77 getMenu@164-240@Cardapio USP/DataModel.m
+      22      4    271      5      29 logNetworkError@242-270@Cardapio USP/DataModel.m
+       3      1      8      0       3 getCreditoRUCard@272-274@Cardapio USP/DataModel.m
+       3      1      8      0       3 getCampiList@276-278@Cardapio USP/DataModel.m
+      13      4    187      0      15 setCurrentRestaurant:@282-296@Cardapio USP/DataModel.m
+      13      4    206      0      18 setPreferredRestaurant:@298-315@Cardapio USP/DataModel.m
+       4      1     30      0       6 setRestaurantList:@317-322@Cardapio USP/DataModel.m
+      10      3     76      0      10 cleanDictionary:@325-334@Cardapio USP/DataModel.m
+       3      1      9      0       3 isLoggedIn@336-338@Cardapio USP/DataModel.m
+      13      5     75      1      13 AFStringFromNetworkReachabilityStatus@42-54@Cardapio USP/AFNetworkReachabilityManager.m
+      18      8    131      1      22 AFNetworkReachabilityStatusForFlags@56-77@Cardapio USP/AFNetworkReachabilityManager.m
+      11      2     84      3      14 AFNetworkReachabilityCallback@79-92@Cardapio USP/AFNetworkReachabilityManager.m
+       3      1     15      1       3 AFNetworkReachabilityRetainCallback@94-96@Cardapio USP/AFNetworkReachabilityManager.m
+       5      2     20      1       5 AFNetworkReachabilityReleaseCallback@98-102@Cardapio USP/AFNetworkReachabilityManager.m
+      12      1     67      0      14 sharedManager@113-126@Cardapio USP/AFNetworkReachabilityManager.m
+       6      1     45      0       8 managerForDomain:@128-135@Cardapio USP/AFNetworkReachabilityManager.m
+       6      1     49      0       8 managerForAddress:@137-144@Cardapio USP/AFNetworkReachabilityManager.m
+       9      2     40      0      11 initWithReachability:@146-156@Cardapio USP/AFNetworkReachabilityManager.m
+       7      2     23      0       8 dealloc@158-165@Cardapio USP/AFNetworkReachabilityManager.m
+       3      2     14      0       3 isReachable@169-171@Cardapio USP/AFNetworkReachabilityManager.m
+       3      1     10      0       3 isReachableViaWWAN@173-175@Cardapio USP/AFNetworkReachabilityManager.m
+       3      1     10      0       3 isReachableViaWiFi@177-179@Cardapio USP/AFNetworkReachabilityManager.m
+      36      6    220      0      45 startMonitoring@183-227@Cardapio USP/AFNetworkReachabilityManager.m
+       6      2     27      0       7 stopMonitoring@229-235@Cardapio USP/AFNetworkReachabilityManager.m
+       3      1     11      0       3 localizedNetworkReachabilityStatusString@239-241@Cardapio USP/AFNetworkReachabilityManager.m
+       2      1      3      0       2 setReachabilityStatusChangeBlock: AFNetworkReachabilityStatus.block@246-247@Cardapio USP/AFNetworkReachabilityManager.m
+       6      4     54      0       7 keyPathsForValuesAffectingValueForKey:@251-257@Cardapio USP/AFNetworkReachabilityManager.m
+       5      1     35      1       5 main@12-16@Cardapio USP/main.m
+      10      2     55      1      14 AFSecKeyGetData@46-59@Cardapio USP/AFSecurityPolicy.m
+       4      2     40      2       7 AFSecKeyIsEqualToKey@62-68@Cardapio USP/AFSecurityPolicy.m
+      31      5    181      1      40 AFPublicKeyForCertificate@70-109@Cardapio USP/AFSecurityPolicy.m
+       8      2     45      1      10 AFServerTrustIsValid@111-120@Cardapio USP/AFSecurityPolicy.m
+       9      2     78      1      11 AFCertificateTrustChainForServerTrust@122-132@Cardapio USP/AFSecurityPolicy.m
+      25      4    177      1      33 AFPublicKeyTrustChainForServerTrust@134-166@Cardapio USP/AFSecurityPolicy.m
+      15      2    111      0      18 defaultPinnedCertificates@176-193@Cardapio USP/AFSecurityPolicy.m
+       5      1     24      0       6 defaultPolicy@195-200@Cardapio USP/AFSecurityPolicy.m
+       7      1     45      0       8 policyWithPinningMode:@202-209@Cardapio USP/AFSecurityPolicy.m
+       8      2     29      0      10 init@211-220@Cardapio USP/AFSecurityPolicy.m
+      16      4     93      0      17 setPinnedCertificates:@224-240@Cardapio USP/AFSecurityPolicy.m
+       3      1     19      0       3 evaluateServerTrust:@244-246@Cardapio USP/AFSecurityPolicy.m
+      55     21    363      0      65 evaluateServerTrust: forDomain:@248-312@Cardapio USP/AFSecurityPolicy.m
+       3      1     12      0       3 keyPathsForValuesAffectingPinnedPublicKeys@316-318@Cardapio USP/AFSecurityPolicy.m
+       6      1     49      0       8 awakeFromNib@31-38@Cardapio USP/SwipeableCell.m
+       4      1     18      0       4 prepareForReuse@40-43@Cardapio USP/SwipeableCell.m
+       4      1     25      0       5 setBounds:@45-49@Cardapio USP/SwipeableCell.m
+       7      1     52      0       9 layoutSubviews@51-59@Cardapio USP/SwipeableCell.m
+       3      1     13      0       3 openCell@61-63@Cardapio USP/SwipeableCell.m
+       3      1     13      0       3 closeCell@65-67@Cardapio USP/SwipeableCell.m
+       6      2     32      0       7 buttonClicked:@69-75@Cardapio USP/SwipeableCell.m
+       5      1     44      0       5 setTitle:@77-81@Cardapio USP/SwipeableCell.m
+       4      1     21      0       4 setSubTitle:@83-86@Cardapio USP/SwipeableCell.m
+       4      1     22      0       4 setValue:@88-91@Cardapio USP/SwipeableCell.m
+       4      1     19      0       7 setItemText:@93-99@Cardapio USP/SwipeableCell.m
+       3      1     20      0       3 buttonTotalWidth@101-103@Cardapio USP/SwipeableCell.m
+      78     17    481      0      95 panThisCell:@105-199@Cardapio USP/SwipeableCell.m
+       3      1     10      1       3 updateConstraintsIfNeeded: completion: BOOL.if@203-205@Cardapio USP/SwipeableCell.m
+       2      1      4      0       2 updateConstraintsIfNeeded: completion: BOOL.completion@209-210@Cardapio USP/SwipeableCell.m
+      18      4    124      0      23 resetConstraintContstantsToZero: notifyDelegateDidClose:@213-235@Cardapio USP/SwipeableCell.m
+      18      4    147      0      25 setConstraintsToShowAllButtons: notifyDelegateDidOpen:@238-262@Cardapio USP/SwipeableCell.m
+       3      1     19      0       3 gestureRecognizer: shouldRecognizeSimultaneouslyWithGestureRecognizer:@265-267@Cardapio USP/SwipeableCell.m
+       3      1      6      0       3 image@36-38@Cardapio USP/ThumbnailViewImageProxy.m
+      12      2     86      0      13 getImageWithCompletionHandler:@40-52@Cardapio USP/ThumbnailViewImageProxy.m
+      74     11    548      0     106 drawRect:@60-165@Cardapio USP/ThumbnailViewImageProxy.m
+       6      1     26      0      19 forwadImageLoadingThread@176-194@Cardapio USP/ThumbnailViewImageProxy.m
+       7      1     60      0       7 stringByReplacingLineBreaks:@26-32@Cardapio USP/RestaurantDetailTableViewController.m
+       3      1      9      0       3 RestaurantDetailTableViewController@45-47@Cardapio USP/RestaurantDetailTableViewController.m
+       7      1     65      0      10 viewDidLoad@53-62@Cardapio USP/RestaurantDetailTableViewController.m
+       7      2     41      0       7 viewWillAppear:@64-70@Cardapio USP/RestaurantDetailTableViewController.m
+       3      1      8      0       4 didReceiveMemoryWarning@72-75@Cardapio USP/RestaurantDetailTableViewController.m
+       3      1     15      0       4 viewDidAppear:@77-80@Cardapio USP/RestaurantDetailTableViewController.m
+      28      2    257      0      34 configureUI@82-115@Cardapio USP/RestaurantDetailTableViewController.m
+       3      1     12      0       4 numberOfSectionsInTableView:@119-122@Cardapio USP/RestaurantDetailTableViewController.m
+      13      3     44      0      14 tableView: numberOfRowsInSection:@124-137@Cardapio USP/RestaurantDetailTableViewController.m
+       3      1     24      0       3 tableView: cellForRowAtIndexPath:@139-141@Cardapio USP/RestaurantDetailTableViewController.m
+      24      5    163      0      25 cellAtIndexPath:@143-167@Cardapio USP/RestaurantDetailTableViewController.m
+      87     25    938      0     103 configureCell: atIndexPath:@169-271@Cardapio USP/RestaurantDetailTableViewController.m
+       8      2     75      0       9 checkButtonTapped: event:@275-283@Cardapio USP/RestaurantDetailTableViewController.m
+       3      1     18      0       3 doneButtonTapped:@345-347@Cardapio USP/RestaurantDetailTableViewController.m
+       3      1     10      0       3 didReceiveRestaurants@349-351@Cardapio USP/RestaurantDetailTableViewController.m
+       4      1     24      0       5 setAsPreferred:@353-357@Cardapio USP/RestaurantDetailTableViewController.m
+       4      1     22      0       4 resetPreferred:@359-362@Cardapio USP/RestaurantDetailTableViewController.m
+      11      1     78      0      15 application: didFinishLaunchingWithOptions:@23-37@Cardapio USP/AppDelegate.m
+       3      1      9      0       5 applicationWillResignActive:@39-43@Cardapio USP/AppDelegate.m
+       3      1      9      0       5 applicationDidEnterBackground:@45-49@Cardapio USP/AppDelegate.m
+       3      1      9      0       4 applicationWillEnterForeground:@51-54@Cardapio USP/AppDelegate.m
+      10      2     64      0      12 applicationDidBecomeActive:@56-67@Cardapio USP/AppDelegate.m
+       3      1      9      0       4 applicationWillTerminate:@69-72@Cardapio USP/AppDelegate.m
+       8      1     30      0       9 getInstance@24-32@Cardapio USP/MenuStub.m
+      10      1     81      0      12 iniciar_JSONBinding:@38-49@Cardapio USP/MenuStub.m
+      21      3    215      0      24 loadMenus: ;@51-74@Cardapio USP/MenuStub.m
+       7      3     47      0       8 loadMenu: Date:@81-88@Cardapio USP/MenuStub.m
+       7      3     52      0       8 loadRestaurantInformation: Restaurant:@91-98@Cardapio USP/MenuStub.m
+      21      4    220      0      25 loadRestaurantsInformation:@100-124@Cardapio USP/MenuStub.m
+      22      4    147      0      22 loadCashInformation@130-151@Cardapio USP/MenuStub.m
+      75     14    765      0      95 modelWithDictionary:@13-107@Cardapio USP/VMPix.m
+      13      2     82      0      14 valorFormatado@109-122@Cardapio USP/VMPix.m
+      19      8    133      0      25 statusDescricao@124-148@Cardapio USP/VMPix.m
+       4      1     13      0       4 PixViewController@15-18@Cardapio USP/PixViewController.m
+       8      1     76      0      12 viewDidLoad@27-38@Cardapio USP/PixViewController.m
+       4      1     31      0       4 viewDidDisappear:@40-43@Cardapio USP/PixViewController.m
+       4      1     21      0       4 copyToPasteboard:@47-50@Cardapio USP/PixViewController.m
+       3      1     18      0       3 dismiss:@52-54@Cardapio USP/PixViewController.m
+      21      4    191      0      25 share:@56-80@Cardapio USP/PixViewController.m
+      24      6    238      0      29 configureUI@85-113@Cardapio USP/PixViewController.m
+      11      3     90      0      13 createQRForString:@115-127@Cardapio USP/PixViewController.m
+       8      4     66      0       8 copyToPB@130-137@Cardapio USP/PixViewController.m
+       3      1     24      0       3 becomeActive:@142-144@Cardapio USP/PixViewController.m
+       8      1     56      0       8 didPaidPix:@146-153@Cardapio USP/PixViewController.m
+       2      1      3      0       2 <.boletoViewController@47-48@Cardapio USP/MenuViewController.m
+      71     15    595      0      88 viewDidLoad@56-143@Cardapio USP/MenuViewController.m
+      24      4    234      0      41 setupInfoButton@146-186@Cardapio USP/MenuViewController.m
+       8      3     50      0      10 traitCollectionDidChange:@189-198@Cardapio USP/MenuViewController.m
+       4      1     13      0       4 viewSafeAreaInsetsDidChange@201-204@Cardapio USP/MenuViewController.m
+       5      1     34      0       5 viewWillAppear:@207-211@Cardapio USP/MenuViewController.m
+       6      2     30      0       7 viewWillDisappear:@213-219@Cardapio USP/MenuViewController.m
+       3      1      8      0       4 didReceiveMemoryWarning@221-224@Cardapio USP/MenuViewController.m
+      40      2    499      0      50 setupWeekView:@226-275@Cardapio USP/MenuViewController.m
+      27      8    213      0      35 setupDayLabel:@277-311@Cardapio USP/MenuViewController.m
+      30     13    134      0      31 dayToString:@313-343@Cardapio USP/MenuViewController.m
+       4      1     19      0       4 showInfo@345-348@Cardapio USP/MenuViewController.m
+       7      2     39      0       7 numberOfSectionsInTableView:@353-359@Cardapio USP/MenuViewController.m
+       3      1     18      0       3 tableView: numberOfRowsInSection:@361-363@Cardapio USP/MenuViewController.m
+       3      1     18      0       3 tableView: heightForHeaderInSection:@365-367@Cardapio USP/MenuViewController.m
+      32      4    278      0      40 tableView: viewForHeaderInSection:@369-408@Cardapio USP/MenuViewController.m
+      25      8    201      0      26 tableView: titleForFooterInSection:@412-437@Cardapio USP/MenuViewController.m
+      34      7    248      0      38 tableView: cellForRowAtIndexPath:@439-476@Cardapio USP/MenuViewController.m
+      18      4     72      0      19 tableView: heightForRowAtIndexPath:@478-496@Cardapio USP/MenuViewController.m
+       2      1      8      0       3 showRestaurantSelector:@500-502@Cardapio USP/MenuViewController.m
+      11      2     90      0      14 showCredits:@504-517@Cardapio USP/MenuViewController.m
+       4      1     34      0       4 ScrollingTabController: selection:@521-524@Cardapio USP/MenuViewController.m
+       4      1     32      0       4 didChangeRestaurant:@528-531@Cardapio USP/MenuViewController.m
+      13      2     85      0      18 didReceiveMenu:@533-550@Cardapio USP/MenuViewController.m
+       3      1     22      0       3 didRecieveUserData:@552-554@Cardapio USP/MenuViewController.m
+       4      1     34      0       4 didReceiveBill:@556-559@Cardapio USP/MenuViewController.m
+      10      5    145      0      13 isClosed@562-574@Cardapio USP/MenuViewController.m
+      14      4     94      0      21 revealController: willMoveToPosition:@578-598@Cardapio USP/MenuViewController.m
+       3      1      8      0       4 awakeFromNib@13-16@Cardapio USP/ImageCell.m
+       3      1     24      0       5 setSelected: animated:@18-22@Cardapio USP/ImageCell.m
+       3      3     36      2       3 ms@30-32@Cardapio USP/DataAccess.m
+       2      1      3      0       2 <.oauth@35-36@Cardapio USP/DataAccess.m
+       6      1     35      0       6 sharedInstance@43-48@Cardapio USP/DataAccess.m
+       6      2     26      0       6 init@50-55@Cardapio USP/DataAccess.m
+      20      4    147      0      23 consultarSaldo@58-80@Cardapio USP/DataAccess.m
+      19      5    176      0      22 createPix@82-103@Cardapio USP/DataAccess.m
+      20      6    188      0      26 getLastPix@105-130@Cardapio USP/DataAccess.m
+      16      4    130      0      18 checkPix:@132-149@Cardapio USP/DataAccess.m
+      17      5    153      0      20 getBoletos@151-170@Cardapio USP/DataAccess.m
+      56      6    467      0      72 POST: parameters: contentType: completion:@173-244@Cardapio USP/DataAccess.m
+       8      3     74      0       9 handleNetworkError: fallbackText: creditValue:@247-255@Cardapio USP/DataAccess.m
+      10      2     96      0      11 handleServerError: creditValue: loginErrorNotif:@257-267@Cardapio USP/DataAccess.m
+       3      1     11      0       3 showAuthError@269-271@Cardapio USP/DataAccess.m
+       3      1     11      0       3 showGenericInternalError@273-275@Cardapio USP/DataAccess.m
+      10      1     45      0      10 session@278-287@Cardapio USP/DataAccess.m
+       9      1     90      0       9 urlEncodedStringFromDictionary:@290-298@Cardapio USP/DataAccess.m
+       3      2     23      0       3 urlEncode:@300-302@Cardapio USP/DataAccess.m
+      40     11    394      6      53 logNetworkError@305-357@Cardapio USP/DataAccess.m
+      12      3    173      0      19 URLSession: task: didFinishCollectingMetrics:@361-379@Cardapio USP/DataAccess.m
+       2      1      5      0       3 TelephoneUtils@12-14@Cardapio USP/TelephoneUtils.m
+      17      3    140      0      21 telephoneListForString:@37-57@Cardapio USP/TelephoneUtils.m
+      13      2    125      0      15 telephoneFromString:@59-73@Cardapio USP/TelephoneUtils.m
+      11      3     81      0      13 telephoneListFromArray:@75-87@Cardapio USP/TelephoneUtils.m
+       6      1     81      0       8 telephoneWithCarrierFromString:@89-96@Cardapio USP/TelephoneUtils.m
+       7      1    124      0      18 dialToTelephone:@98-115@Cardapio USP/TelephoneUtils.m
+       8      1     28      0      10 SelectorViewController@15-24@Cardapio USP/SelectorViewController.m
+       6      2     26      0       7 initWithStyle:@30-36@Cardapio USP/SelectorViewController.m
+      26      6    187      0      32 viewDidLoad@38-69@Cardapio USP/SelectorViewController.m
+       5      1     41      0       8 viewWillAppear:@71-78@Cardapio USP/SelectorViewController.m
+       3      1      8      0       4 didReceiveMemoryWarning@80-83@Cardapio USP/SelectorViewController.m
+       3      1     15      0       3 numberOfSectionsInTableView:@87-89@Cardapio USP/SelectorViewController.m
+       6      2     48      0       6 tableView: numberOfRowsInSection:@91-96@Cardapio USP/SelectorViewController.m
+      18      2    192      0      23 tableView: viewForHeaderInSection:@98-120@Cardapio USP/SelectorViewController.m
+       4      1     32      0       4 tableView: viewForFooterInSection:@122-125@Cardapio USP/SelectorViewController.m
+       3      1     18      0       3 tableView: heightForHeaderInSection:@127-129@Cardapio USP/SelectorViewController.m
+       3      1     18      0       3 tableView: heightForFooterInSection:@131-133@Cardapio USP/SelectorViewController.m
+       6      2     38      0       6 tableView: heightForRowAtIndexPath:@135-140@Cardapio USP/SelectorViewController.m
+      12      2    113      0      18 tableView: cellForRowAtIndexPath:@142-159@Cardapio USP/SelectorViewController.m
+      13      2    130      0      15 tableView: didSelectRowAtIndexPath:@161-175@Cardapio USP/SelectorViewController.m
+      11      2    109      0      13 sectionHeaderTapped:@178-190@Cardapio USP/SelectorViewController.m
+       5      1     39      0       6 requestWithURL:@13-18@Cardapio USP/MyMutableURLRequest.m
+       4      1     19      0       4 textRectForBounds:@23-26@Cardapio USP/MyTextField.m
+       4      1     19      0       5 editingRectForBounds:@28-32@Cardapio USP/MyTextField.m
+       3      1      9      0       3 CheckoutDataModel@12-14@Cardapio USP/CheckoutDataModel.m
+       8      1     37      0       8 sharedInstance@21-28@Cardapio USP/CheckoutDataModel.m
+       8      2     33      0       8 init@30-37@Cardapio USP/CheckoutDataModel.m
+       5      1     45      0       5 setPix:@42-46@Cardapio USP/CheckoutDataModel.m
+       6      1     44      0       6 pix@48-53@Cardapio USP/CheckoutDataModel.m
+       3      1      8      0       3 createPix@58-60@Cardapio USP/CheckoutDataModel.m
+       3      1     16      0       3 checkPix:@62-64@Cardapio USP/CheckoutDataModel.m
+       3      1      8      0       3 getBoletos@66-68@Cardapio USP/CheckoutDataModel.m
+       3      1      8      0       3 getLastPix@70-72@Cardapio USP/CheckoutDataModel.m
+71 file analyzed.
+==============================================================
+NLOC    Avg.NLOC  AvgCCN  Avg.token  function_cnt    file
+--------------------------------------------------------------
+    125      14.5     3.1      107.6         8     Cardapio USP/OAuth/KeychainItemWrapper.m
+     94       8.3     1.5       48.8        11     Cardapio USP/OAuth/_OAuthUSP.m
+    189      12.4     2.3       87.9        15     Cardapio USP/OAuth/OAuthUSP.m
+     22       6.7     1.0       33.7         3     Cardapio USP/OAuth/NSString+URLEncoding.m
+    336       9.4     2.1       77.4        13     Cardapio USP/OAuth/OAuth1Controller.m
+    117      10.0     2.1       59.7        11     Cardapio USP/OAuth/LoginWebViewController.m
+     93      18.2     3.4      162.2         5     Cardapio USP/OAuth/STIOauth.m
+    681      13.0     2.4       94.2        49     Cardapio USP/SVProgressHUD/SVProgressHUD.m
+    164       7.2     2.7       57.0        21     Cardapio USP/REFrostedViewController/REFrostedViewController.m
+     23      21.0     2.0      151.0         1     Cardapio USP/REFrostedViewController/UIView+REFrostedViewController.m
+     29       9.0     2.3       48.3         3     Cardapio USP/REFrostedViewController/UIViewController+REFrostedViewController.m
+    304      20.9     5.1      213.6        14     Cardapio USP/REFrostedViewController/REFrostedContainerViewController.m
+    101      99.0    18.0      825.0         1     Cardapio USP/REFrostedViewController/UIImage+REFrostedViewController.m
+     15      15.0     3.0       91.0         1     Cardapio USP/REFrostedViewController/RECommonFunctions.m
+    151      21.3     7.6      168.0         7     Cardapio USP/Categories/NSString+HTML.m
+    426      26.0     7.4      184.2         5     Cardapio USP/Categories/GTMNSString+HTML.m
+     22       6.3     1.7       41.3         3     Cardapio USP/Cash.m
+     69       8.2     2.0       60.4         8     Cardapio USP/BoletoViewController.m
+     38       7.2     1.4       51.6         5     Cardapio USP/PaddedLabel.m
+     21      13.0     5.0      111.0         1     Cardapio USP/Constants.m
+    373      12.3     2.4      110.2        30     Cardapio USP/InfoViewController.m
+      8       3.0     1.0       15.0         2     Cardapio USP/CALayer+XibConfiguration.m
+     19       5.0     1.3       21.3         3     Cardapio USP/CreditsNavigationViewController.m
+    514      10.5     3.0       77.0        47     Cardapio USP/AFURLResponseSerialization.m
+     20       4.5     1.0       26.0         4     Cardapio USP/DetailCell.m
+     11       8.0     2.0       42.0         1     Cardapio USP/Items.m
+    223      16.7     2.9      116.9        13     Cardapio USP/DKScrollingTabController.m
+     46       6.3     1.2       42.5         6     Cardapio USP/RestaurantDataModel.m
+     21       6.0     1.7       41.3         3     Cardapio USP/Menu.m
+     88       8.5     1.7       77.8        10     Cardapio USP/RestaurantsFilterController.m
+     18       8.0     2.5       40.5         2     Cardapio USP/RWLabel.m
+     28       8.3     1.7       66.7         3     Cardapio USP/WeeklyPeriod.m
+     42      13.0     1.7      130.0         3     Cardapio USP/Restaurant.m
+     44      10.0     2.5       62.8         4     Cardapio USP/CarrierDataModel.m
+    121       4.8     2.3       58.1        19     Cardapio USP/MapViewController.m
+     52       6.1     1.2       44.9         8     Cardapio USP/BoletoFormViewController.m
+     79       4.2     1.1       31.5        17     Cardapio USP/BoletosPendentesTableViewController.m
+      9       3.0     1.0       16.0         2     Cardapio USP/PreferredCell.m
+     11       9.0     2.0       50.0         1     Cardapio USP/PlaceAnnotation.m
+     69       5.8     1.5       38.8        11     Cardapio USP/WebViewController.m
+      8       3.0     1.0       16.0         2     Cardapio USP/BoletoTableViewCell.m
+     24       7.0     1.7       54.0         3     Cardapio USP/Period.m
+     99      13.9     3.1      109.4         7     Cardapio USP/MenuDataModel.m
+      9       5.0     1.0       36.0         1     Cardapio USP/FrostedViewController.m
+    199       8.4     2.0       58.5        20     Cardapio USP/AFHTTPSessionManager.m
+    347      12.7     3.6       98.8        27     Cardapio USP/MainViewController.m
+    589      10.0     2.5       60.7        54     Cardapio USP/AFURLConnectionOperation.m
+    770       6.8     1.8       42.7        89     Cardapio USP/AFURLSessionManager.m
+    152       6.8     1.3       57.3        18     Cardapio USP/AFHTTPRequestOperationManager.m
+    960       9.5     2.4       70.8        88     Cardapio USP/AFURLRequestSerialization.m
+    137      10.2     2.9       62.8        12     Cardapio USP/AFHTTPRequestOperation.m
+    243      16.9     3.6      154.5        14     Cardapio USP/DataModel.m
+    169       8.4     2.4       49.9        18     Cardapio USP/AFNetworkReachabilityManager.m
+      5       5.0     1.0       35.0         1     Cardapio USP/main.m
+    204      14.2     3.6       90.9        14     Cardapio USP/AFSecurityPolicy.m
+    194       9.7     2.3       61.8        18     Cardapio USP/SwipeableCell.m
+    104      23.8     3.8      166.5         4     Cardapio USP/ThumbnailViewImageProxy.m
+    218      12.4     2.9      105.0        17     Cardapio USP/RestaurantDetailTableViewController.m
+     39       5.5     1.2       29.7         6     Cardapio USP/AppDelegate.m
+    100      13.7     2.7      113.1         7     Cardapio USP/MenuStub.m
+    109      35.7     8.0      326.7         3     Cardapio USP/VMPix.m
+      2       0.0     0.0        0.0         0     Cardapio USP/MDPinAnnotationView.m
+    102       8.9     2.2       74.9        11     Cardapio USP/PixViewController.m
+    427      14.7     3.5      116.1        28     Cardapio USP/MenuViewController.m
+      8       3.0     1.0       16.0         2     Cardapio USP/ImageCell.m
+    279      13.8     3.3      119.9        19     Cardapio USP/DataAccess.m
+     59       9.3     1.8       92.7         6     Cardapio USP/TelephoneUtils.m
+    130       8.5     1.8       66.9        15     Cardapio USP/SelectorViewController.m
+      7       5.0     1.0       39.0         1     Cardapio USP/MyMutableURLRequest.m
+     11       4.0     1.0       19.0         2     Cardapio USP/MyTextField.m
+     45       4.7     1.1       23.1         9     Cardapio USP/CheckoutDataModel.m
+
+===========================================================================================================
+!!!! Warnings (cyclomatic_complexity > 15 or length > 1000 or nloc > 1000000 or parameter_count > 100) !!!!
+================================================
+  NLOC    CCN   token  PARAM  length  location  
+------------------------------------------------
+      91     31    837      0     107 panGestureRecognized:@267-373@Cardapio USP/REFrostedViewController/REFrostedContainerViewController.m
+      99     18    825      0     129 re_applyBlurWithRadius: tintColor: saturationDeltaFactor: maskImage:@100-228@Cardapio USP/REFrostedViewController/UIImage+REFrostedViewController.m
+      50     23    453      0      87 stringByConvertingHTMLToPlainText@42-128@Cardapio USP/Categories/NSString+HTML.m
+      55     19    484      0      63 gtm_stringByUnescapingFromHTML@456-518@Cardapio USP/Categories/GTMNSString+HTML.m
+      65     18    441      3      89 AFInflatedImageFromResponseWithDataAtScale@539-627@Cardapio USP/AFURLResponseSerialization.m
+      52     28    494      0      72 period@271-342@Cardapio USP/MainViewController.m
+      55     21    363      0      65 evaluateServerTrust: forDomain:@248-312@Cardapio USP/AFSecurityPolicy.m
+      78     17    481      0      95 panThisCell:@105-199@Cardapio USP/SwipeableCell.m
+      87     25    938      0     103 configureCell: atIndexPath:@169-271@Cardapio USP/RestaurantDetailTableViewController.m
+==========================================================================================
+Total nloc   Avg.NLOC  AvgCCN  Avg.token   Fun Cnt  Warning cnt   Fun Rt   nloc Rt
+------------------------------------------------------------------------------------------
+     10565      10.4     2.5       78.3      890            9      0.01    0.07

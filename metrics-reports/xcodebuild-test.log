@@ -1,0 +1,5 @@
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild test -workspace "Cardapio USP.xcworkspace" -scheme "Cardapio USP" -destination "platform=iOS Simulator,name=iPhone 14" -enableCodeCoverage YES -resultBundlePath "/Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/metrics-reports/TestResults.xcresult"
+
+xcodebuild: error: Scheme Cardapio USP is not currently configured for the test action.
+
