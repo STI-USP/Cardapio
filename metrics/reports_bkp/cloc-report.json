@@ -1,0 +1,39 @@
+{"header" : {
+  "cloc_url"           : "github.com/AlDanial/cloc",
+  "cloc_version"       : "2.06",
+  "elapsed_seconds"    : 0.2052161693573,
+  "n_files"            : 187,
+  "n_lines"            : 27203,
+  "files_per_second"   : 911.2342394152,
+  "lines_per_second"   : 132557.78082787,
+  "report_file"        : "./metrics/reports/cloc-report.json"},
+"Objective-C" :{
+  "nFiles": 71,
+  "blank": 3206,
+  "comment": 1775,
+  "code": 11193},
+"XML" :{
+  "nFiles": 9,
+  "blank": 0,
+  "comment": 18,
+  "code": 3402},
+"JSON" :{
+  "nFiles": 30,
+  "blank": 7,
+  "comment": 0,
+  "code": 2428},
+"C/C++ Header" :{
+  "nFiles": 74,
+  "blank": 1118,
+  "comment": 2419,
+  "code": 1152},
+"C" :{
+  "nFiles": 3,
+  "blank": 45,
+  "comment": 99,
+  "code": 341},
+"SUM": {
+  "blank": 4376,
+  "comment": 4311,
+  "code": 18516,
+  "nFiles": 187} }

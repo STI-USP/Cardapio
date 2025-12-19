@@ -1,0 +1,1278 @@
+▸ Clean Succeeded
+▸ Processing ResourceBundle-nanopb_Privacy-nanopb-Info.plist
+▸ Copying /Users/vagner/Library/Developer/Xcode/DerivedData/Cardapio_USP-exuqwenqoybjqmbmwtzdenmyefje/Build/Products/Debug-iphonesimulator/nanopb/nanopb_Privacy.bundle/PrivacyInfo.xcprivacy
+▸ Copying /Users/vagner/Library/Developer/Xcode/DerivedData/Cardapio_USP-exuqwenqoybjqmbmwtzdenmyefje/Build/Products/Debug-iphonesimulator/PromisesSwift/Promises_Privacy.bundle/PrivacyInfo.xcprivacy
+▸ Processing ResourceBundle-Promises_Privacy-PromisesSwift-Info.plist
+▸ Copying /Users/vagner/Library/Developer/Xcode/DerivedData/Cardapio_USP-exuqwenqoybjqmbmwtzdenmyefje/Build/Products/Debug-iphonesimulator/PromisesObjC/FBLPromises_Privacy.bundle/PrivacyInfo.xcprivacy
+▸ Processing ResourceBundle-FBLPromises_Privacy-PromisesObjC-Info.plist
+▸ Processing ResourceBundle-GoogleUtilities_Privacy-GoogleUtilities-Info.plist
+▸ Copying /Users/vagner/Library/Developer/Xcode/DerivedData/Cardapio_USP-exuqwenqoybjqmbmwtzdenmyefje/Build/Products/Debug-iphonesimulator/GoogleUtilities/GoogleUtilities_Privacy.bundle/PrivacyInfo.xcprivacy
+▸ Processing ResourceBundle-GoogleDataTransport_Privacy-GoogleDataTransport-Info.plist
+▸ Copying /Users/vagner/Library/Developer/Xcode/DerivedData/Cardapio_USP-exuqwenqoybjqmbmwtzdenmyefje/Build/Products/Debug-iphonesimulator/GoogleDataTransport/GoogleDataTransport_Privacy.bundle/PrivacyInfo.xcprivacy
+▸ Processing ResourceBundle-FirebaseRemoteConfig_Privacy-FirebaseRemoteConfig-Info.plist
+▸ Copying /Users/vagner/Library/Developer/Xcode/DerivedData/Cardapio_USP-exuqwenqoybjqmbmwtzdenmyefje/Build/Products/Debug-iphonesimulator/FirebaseRemoteConfig/FirebaseRemoteConfig_Privacy.bundle/PrivacyInfo.xcprivacy
+▸ Processing ResourceBundle-FirebaseInstallations_Privacy-FirebaseInstallations-Info.plist
+▸ Copying /Users/vagner/Library/Developer/Xcode/DerivedData/Cardapio_USP-exuqwenqoybjqmbmwtzdenmyefje/Build/Products/Debug-iphonesimulator/FirebaseInstallations/FirebaseInstallations_Privacy.bundle/PrivacyInfo.xcprivacy
+▸ Touching nanopb_Privacy.bundle (in target 'nanopb-nanopb_Privacy' from project 'Pods')
+▸ Processing ResourceBundle-FirebaseCrashlytics_Privacy-FirebaseCrashlytics-Info.plist
+▸ Copying /Users/vagner/Library/Developer/Xcode/DerivedData/Cardapio_USP-exuqwenqoybjqmbmwtzdenmyefje/Build/Products/Debug-iphonesimulator/FirebaseCrashlytics/FirebaseCrashlytics_Privacy.bundle/PrivacyInfo.xcprivacy
+▸ Processing ResourceBundle-FirebaseCoreInternal_Privacy-FirebaseCoreInternal-Info.plist
+▸ Copying /Users/vagner/Library/Developer/Xcode/DerivedData/Cardapio_USP-exuqwenqoybjqmbmwtzdenmyefje/Build/Products/Debug-iphonesimulator/FirebaseCoreInternal/FirebaseCoreInternal_Privacy.bundle/PrivacyInfo.xcprivacy
+▸ Touching Promises_Privacy.bundle (in target 'PromisesSwift-Promises_Privacy' from project 'Pods')
+▸ Touching GoogleUtilities_Privacy.bundle (in target 'GoogleUtilities-GoogleUtilities_Privacy' from project 'Pods')
+▸ Touching GoogleDataTransport_Privacy.bundle (in target 'GoogleDataTransport-GoogleDataTransport_Privacy' from project 'Pods')
+▸ Touching FBLPromises_Privacy.bundle (in target 'PromisesObjC-FBLPromises_Privacy' from project 'Pods')
+▸ Copying /Users/vagner/Library/Developer/Xcode/DerivedData/Cardapio_USP-exuqwenqoybjqmbmwtzdenmyefje/Build/Products/Debug-iphonesimulator/FirebaseCoreExtension/FirebaseCoreExtension_Privacy.bundle/PrivacyInfo.xcprivacy
+▸ Processing ResourceBundle-FirebaseCoreExtension_Privacy-FirebaseCoreExtension-Info.plist
+▸ Copying /Users/vagner/Library/Developer/Xcode/DerivedData/Cardapio_USP-exuqwenqoybjqmbmwtzdenmyefje/Build/Products/Debug-iphonesimulator/FirebaseCore/FirebaseCore_Privacy.bundle/PrivacyInfo.xcprivacy
+▸ Processing ResourceBundle-FirebaseCore_Privacy-FirebaseCore-Info.plist
+▸ Touching FirebaseRemoteConfig_Privacy.bundle (in target 'FirebaseRemoteConfig-FirebaseRemoteConfig_Privacy' from project 'Pods')
+▸ Processing ResourceBundle-FirebaseABTesting_Privacy-FirebaseABTesting-Info.plist
+▸ Copying /Users/vagner/Library/Developer/Xcode/DerivedData/Cardapio_USP-exuqwenqoybjqmbmwtzdenmyefje/Build/Products/Debug-iphonesimulator/FirebaseABTesting/FirebaseABTesting_Privacy.bundle/PrivacyInfo.xcprivacy
+▸ Touching FirebaseInstallations_Privacy.bundle (in target 'FirebaseInstallations-FirebaseInstallations_Privacy' from project 'Pods')
+▸ Touching FirebaseCrashlytics_Privacy.bundle (in target 'FirebaseCrashlytics-FirebaseCrashlytics_Privacy' from project 'Pods')
+▸ Touching FirebaseCoreInternal_Privacy.bundle (in target 'FirebaseCoreInternal-FirebaseCoreInternal_Privacy' from project 'Pods')
+▸ Touching FirebaseCore_Privacy.bundle (in target 'FirebaseCore-FirebaseCore_Privacy' from project 'Pods')
+▸ Touching FirebaseCoreExtension_Privacy.bundle (in target 'FirebaseCoreExtension-FirebaseCoreExtension_Privacy' from project 'Pods')
+▸ Touching FirebaseABTesting_Privacy.bundle (in target 'FirebaseABTesting-FirebaseABTesting_Privacy' from project 'Pods')
+▸ Compiling pb_encode.c
+▸ Compiling pb_decode.c
+▸ Compiling pb_common.c
+▸ Compiling pb_encode.c
+▸ Compiling pb_decode.c
+▸ Compiling pb_common.c
+▸ Compiling SWRevealViewController.m
+▸ Compiling SWRevealViewController-dummy.m
+▸ Compiling SVRadialGradientLayer.m
+▸ Compiling SVProgressHUD.m
+▸ Compiling SVProgressHUD-dummy.m
+▸ Compiling SVProgressAnimatedView.m
+▸ Compiling SVIndefiniteAnimatedView.m
+▸ Building library libSVProgressHUD.a
+▸ Building library libSWRevealViewController.a
+▸ Compiling SVRadialGradientLayer.m
+▸ Compiling SVProgressHUD.m
+▸ Compiling SVProgressHUD-dummy.m
+▸ Compiling SVProgressAnimatedView.m
+▸ Compiling SVIndefiniteAnimatedView.m
+▸ Compiling nanopb-dummy.m
+▸ Compiling SWRevealViewController.m
+▸ Compiling SWRevealViewController-dummy.m
+▸ Building library libnanopb.a
+▸ Building library libSVProgressHUD.a
+▸ Building library libSWRevealViewController.a
+▸ Compiling nanopb-dummy.m
+▸ Building library libnanopb.a
+▸ Compiling IsAppEncrypted.m
+▸ Compiling PromisesObjC-dummy.m
+▸ Compiling FBLPromiseError.m
+▸ Compiling FBLPromise.m
+▸ Compiling FBLPromise+Wrap.m
+▸ Compiling FBLPromise+Validate.m
+▸ Compiling FBLPromise+Timeout.m
+▸ Compiling FBLPromise+Then.m
+▸ Compiling FBLPromise+Testing.m
+▸ Compiling FBLPromise+Retry.m
+▸ Compiling FBLPromise+Reduce.m
+▸ Compiling FBLPromise+Recover.m
+▸ Compiling FBLPromise+Race.m
+▸ Compiling FBLPromise+Do.m
+▸ Compiling FBLPromise+Delay.m
+▸ Compiling FBLPromise+Catch.m
+▸ Compiling FBLPromise+Await.m
+▸ Compiling FBLPromise+Async.m
+▸ Compiling FBLPromise+Any.m
+▸ Compiling FBLPromise+Always.m
+▸ Compiling FBLPromise+All.m
+▸ Building library libPromisesObjC.a
+▸ Compiling IsAppEncrypted.m
+▸ Compiling external_privacy_context.nanopb.c
+▸ Compiling external_prequest_context.nanopb.c
+▸ Compiling compliance.nanopb.c
+▸ Compiling client_metrics.nanopb.c
+▸ Compiling cct.nanopb.c
+▸ Compiling PromisesObjC-dummy.m
+▸ Compiling FBLPromiseError.m
+▸ Compiling FBLPromise.m
+▸ Compiling FBLPromise+Wrap.m
+▸ Compiling FBLPromise+Validate.m
+▸ Compiling FBLPromise+Timeout.m
+▸ Compiling FBLPromise+Then.m
+▸ Compiling FBLPromise+Testing.m
+▸ Compiling FBLPromise+Retry.m
+▸ Compiling FBLPromise+Reduce.m
+▸ Compiling FBLPromise+Recover.m
+▸ Compiling FBLPromise+Race.m
+▸ Compiling FBLPromise+Do.m
+▸ Compiling FBLPromise+Delay.m
+▸ Compiling FBLPromise+Catch.m
+▸ Compiling FBLPromise+Await.m
+▸ Compiling FBLPromise+Async.m
+▸ Compiling FBLPromise+Any.m
+▸ Compiling FBLPromise+Always.m
+▸ Compiling FBLPromise+All.m
+▸ Building library libPromisesObjC.a
+▸ Compiling NSURLSession+GULPromises.m
+▸ Compiling GoogleUtilities-dummy.m
+▸ Compiling GULUserDefaults.m
+▸ Compiling GULURLSessionDataResponse.m
+▸ Compiling GULSwizzler.m
+▸ Compiling GULSwizzledObject.m
+▸ Compiling GULSecureCoding.m
+▸ Compiling GULReachabilityChecker.m
+▸ Compiling GULObjectSwizzler.m
+▸ Compiling GULNetworkURLSession.m
+▸ Compiling GULNetworkConstants.m
+▸ Compiling GULNetwork.m
+▸ Compiling GULNSData+zlib.m
+▸ Compiling GULMutableDictionary.m
+▸ Compiling GULLogger.m
+▸ Compiling GULKeychainUtils.m
+▸ Compiling GULKeychainStorage.m
+▸ Compiling GULHeartbeatDateStorageUserDefaults.m
+▸ Compiling GULHeartbeatDateStorage.m
+▸ Compiling GULNetworkInfo.m
+▸ Compiling NSURLSession+GULPromises.m
+▸ Compiling GoogleUtilities-dummy.m
+▸ Compiling GULUserDefaults.m
+▸ Compiling GULURLSessionDataResponse.m
+▸ Compiling GULSwizzler.m
+▸ Compiling GULSwizzledObject.m
+▸ Compiling GULSecureCoding.m
+▸ Compiling GULReachabilityChecker.m
+▸ Compiling GULObjectSwizzler.m
+▸ Compiling GULNetworkURLSession.m
+▸ Compiling GULNetworkConstants.m
+▸ Compiling GULNetwork.m
+▸ Compiling GULNSData+zlib.m
+▸ Compiling GULMutableDictionary.m
+▸ Compiling GULLogger.m
+▸ Compiling GULKeychainUtils.m
+▸ Compiling GULKeychainStorage.m
+▸ Compiling GULHeartbeatDateStorageUserDefaults.m
+▸ Compiling GULHeartbeatDateStorage.m
+▸ Compiling external_privacy_context.nanopb.c
+▸ Compiling external_prequest_context.nanopb.c
+▸ Compiling compliance.nanopb.c
+▸ Compiling client_metrics.nanopb.c
+▸ Compiling cct.nanopb.c
+▸ Compiling GULNetworkInfo.m
+▸ Compiling GoogleDataTransport-dummy.m
+▸ Compiling GDTCORUploadBatch.m
+▸ Compiling GDTCORStorageMetadata.m
+▸ Compiling GDTCORStorageEventSelector.m
+▸ Compiling GDTCORProductData.m
+▸ Compiling GDTCORMetricsMetadata.m
+▸ Compiling GDTCORMetrics.m
+▸ Compiling GDTCORLogSourceMetrics.m
+▸ Compiling GDTCOREvent+GDTMetricsSupport.m
+▸ Compiling GDTCOREvent+GDTCCTSupport.m
+▸ Compiling GDTCOREndpoints.m
+▸ Compiling GDTCORConsoleLogger.m
+▸ Compiling GDTCORClock.m
+▸ Compiling GDTCORAssert.m
+▸ Compiling GDTCCTCompressionHelper.m
+▸ Compiling GULSceneDelegateSwizzler.m
+▸ Compiling GULAppEnvironmentUtil.m
+▸ Compiling GULAppDelegateSwizzler.m
+▸ Compiling GoogleDataTransport-dummy.m
+▸ Compiling GDTCORUploadBatch.m
+▸ Compiling GULSceneDelegateSwizzler.m
+▸ Compiling GULAppEnvironmentUtil.m
+▸ Compiling GULAppDelegateSwizzler.m
+▸ Compiling GDTCORStorageMetadata.m
+▸ Compiling GDTCORStorageEventSelector.m
+▸ Compiling GDTCORProductData.m
+▸ Compiling GDTCORMetricsMetadata.m
+▸ Compiling GDTCORMetrics.m
+▸ Compiling GDTCORLogSourceMetrics.m
+▸ Compiling GDTCOREvent+GDTMetricsSupport.m
+▸ Compiling GDTCORUploadCoordinator.m
+▸ Compiling GDTCORTransport.m
+▸ Compiling GDTCORTransformer.m
+▸ Compiling GDTCORRegistrar.m
+▸ Compiling GDTCORReachability.m
+▸ Compiling GDTCORPlatform.m
+▸ Compiling GDTCORMetricsController.m
+▸ Compiling GDTCORMetrics+GDTCCTSupport.m
+▸ Compiling GDTCORLifecycle.m
+▸ Compiling GDTCORFlatFileStorage.m
+▸ Compiling GDTCORFlatFileStorage+Promises.m
+▸ Compiling GDTCOREvent.m
+▸ Compiling GDTCORDirectorySizeTracker.m
+▸ Compiling GDTCCTUploader.m
+▸ Compiling GDTCCTUploadOperation.m
+▸ Compiling GDTCCTNanopbHelpers.m
+▸ Compiling GDTCOREvent+GDTCCTSupport.m
+▸ Compiling GDTCOREndpoints.m
+▸ Compiling GDTCORConsoleLogger.m
+▸ Compiling GDTCORClock.m
+▸ Compiling GDTCORAssert.m
+▸ Compiling GDTCCTCompressionHelper.m
+▸ Compiling GDTCORUploadCoordinator.m
+▸ Compiling GDTCORTransport.m
+▸ Compiling GDTCORTransformer.m
+▸ Compiling GDTCORRegistrar.m
+▸ Compiling GDTCORReachability.m
+▸ Compiling GDTCORPlatform.m
+▸ Compiling GDTCORMetricsController.m
+▸ Compiling GDTCORMetrics+GDTCCTSupport.m
+▸ Compiling GDTCORLifecycle.m
+▸ Compiling GDTCORFlatFileStorage.m
+▸ Compiling GDTCORFlatFileStorage+Promises.m
+▸ Compiling GDTCOREvent.m
+▸ Compiling GDTCORDirectorySizeTracker.m
+▸ Compiling GDTCCTUploader.m
+▸ Compiling GDTCCTUploadOperation.m
+▸ Compiling GDTCCTNanopbHelpers.m
+▸ Building library libGoogleUtilities.a
+▸ Building library libGoogleUtilities.a
+▸ Building library libGoogleDataTransport.a
+▸ Building library libGoogleDataTransport.a
+▸ Running script '[CP] Copy XCFrameworks'
+▸ Compiling PromisesSwift-dummy.m
+▸ Building library libPromisesSwift.a
+▸ Compiling PromisesSwift-dummy.m
+▸ Building library libPromisesSwift.a
+▸ Running script 'Copy generated compatibility header'
+▸ Compiling FirebaseSharedSwift-dummy.m
+▸ Compiling FirebaseRemoteConfigInterop-dummy.m
+▸ Building library libFirebaseSharedSwift.a
+▸ Building library libFirebaseRemoteConfigInterop.a
+▸ Compiling FirebaseRemoteConfigInterop-dummy.m
+▸ Compiling FirebaseSharedSwift-dummy.m
+▸ Building library libFirebaseSharedSwift.a
+▸ Building library libFirebaseRemoteConfigInterop.a
+▸ Running script 'Copy generated compatibility header'
+▸ Running script 'Copy generated compatibility header'
+▸ Compiling FirebaseCoreInternal-dummy.m
+▸ Compiling FirebaseCoreInternal-dummy.m
+▸ Building library libFirebaseCoreInternal.a
+▸ Building library libFirebaseCoreInternal.a
+▸ Running script 'Copy generated compatibility header'
+▸ Compiling dummy.m
+▸ Compiling FirebaseCoreExtension-dummy.m
+▸ Compiling dummy.m
+▸ Compiling FirebaseCoreExtension-dummy.m
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/ApplicationInfo.swift:18:22: using '@_implementationOnly' without enabling library evolution for 'FirebaseSessions' may lead to instability during execution
+
+@_implementationOnly import FirebaseCore
+                     ^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/ApplicationInfo.swift:27:24: using '@_implementationOnly' without enabling library evolution for 'FirebaseSessions' may lead to instability during execution
+
+  @_implementationOnly import GoogleUtilities
+                       ^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/EventGDTLogger.swift:18:22: using '@_implementationOnly' without enabling library evolution for 'FirebaseSessions' may lead to instability during execution
+
+@_implementationOnly import GoogleDataTransport
+                     ^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/FirebaseSessions.swift:18:22: using '@_implementationOnly' without enabling library evolution for 'FirebaseSessions' may lead to instability during execution
+
+@_implementationOnly import FirebaseCoreExtension
+                     ^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/FirebaseSessions.swift:19:22: using '@_implementationOnly' without enabling library evolution for 'FirebaseSessions' may lead to instability during execution
+
+@_implementationOnly import FirebaseInstallations
+                     ^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/FirebaseSessions.swift:20:22: using '@_implementationOnly' without enabling library evolution for 'FirebaseSessions' may lead to instability during execution
+
+@_implementationOnly import GoogleDataTransport
+                     ^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/FirebaseSessions.swift:21:22: using '@_implementationOnly' without enabling library evolution for 'FirebaseSessions' may lead to instability during execution
+
+@_implementationOnly import Promises
+                     ^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/GoogleDataTransport+GoogleDataTransportProtocol.swift:18:22: using '@_implementationOnly' without enabling library evolution for 'FirebaseSessions' may lead to instability during execution
+
+@_implementationOnly import GoogleDataTransport
+                     ^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/Installations+InstallationsProtocol.swift:18:22: using '@_implementationOnly' without enabling library evolution for 'FirebaseSessions' may lead to instability during execution
+
+@_implementationOnly import FirebaseInstallations
+                     ^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/Logger.swift:18:22: using '@_implementationOnly' without enabling library evolution for 'FirebaseSessions' may lead to instability during execution
+
+@_implementationOnly import FirebaseCoreExtension
+                     ^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/NetworkInfo.swift:25:24: using '@_implementationOnly' without enabling library evolution for 'FirebaseSessions' may lead to instability during execution
+
+  @_implementationOnly import GoogleUtilities
+                       ^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/SessionGenerator.swift:18:22: using '@_implementationOnly' without enabling library evolution for 'FirebaseSessions' may lead to instability during execution
+
+@_implementationOnly import FirebaseInstallations
+                     ^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/SessionStartEvent.swift:18:22: using '@_implementationOnly' without enabling library evolution for 'FirebaseSessions' may lead to instability during execution
+
+@_implementationOnly import GoogleDataTransport
+                     ^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/SessionStartEvent.swift:27:24: using '@_implementationOnly' without enabling library evolution for 'FirebaseSessions' may lead to instability during execution
+
+  @_implementationOnly import GoogleUtilities
+                       ^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/Settings/SettingsDownloadClient.swift:21:24: using '@_implementationOnly' without enabling library evolution for 'FirebaseSessions' may lead to instability during execution
+
+  @_implementationOnly import GoogleUtilities
+                       ^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/Installations+InstallationsProtocol.swift:79:1: sendability of function types in instance method 'authToken(completion:)' does not match requirement in protocol 'InstallationsProtocol'; this is an error in the Swift 6 language mode
+
+extension Installations: InstallationsProtocol {}
+^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/Installations+InstallationsProtocol.swift:79:1: sendability of function types in instance method 'installationID(completion:)' does not match requirement in protocol 'InstallationsProtocol'; this is an error in the Swift 6 language mode
+
+extension Installations: InstallationsProtocol {}
+       ^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/Development/NanoPB+CustomStringConvertible.swift:109:1: extension declares a conformance of imported type 'UnsafeMutablePointer' to imported protocol 'CustomStringConvertible'; this will not behave correctly if the owners of 'Swift' introduce this conformance in the future
+
+extension UnsafeMutablePointer: CustomStringConvertible where Pointee == pb_bytes_array_t {
+       ^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/Development/NanoPB+CustomStringConvertible.swift:123:1: extension declares a conformance of imported type 'Optional' to imported protocol 'CustomStringConvertible'; this will not behave correctly if the owners of 'Swift' introduce this conformance in the future
+
+extension Optional: CustomStringConvertible
+^                               ~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/ApplicationInfo.swift:18:22: using '@_implementationOnly' without enabling library evolution for 'FirebaseSessions' may lead to instability during execution
+
+@_implementationOnly import FirebaseCore
+^                   ~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/ApplicationInfo.swift:27:24: using '@_implementationOnly' without enabling library evolution for 'FirebaseSessions' may lead to instability during execution
+
+  @_implementationOnly import GoogleUtilities
+                     ^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/EventGDTLogger.swift:18:22: using '@_implementationOnly' without enabling library evolution for 'FirebaseSessions' may lead to instability during execution
+
+@_implementationOnly import GoogleDataTransport
+                       ^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/FirebaseSessions.swift:18:22: using '@_implementationOnly' without enabling library evolution for 'FirebaseSessions' may lead to instability during execution
+
+@_implementationOnly import FirebaseCoreExtension
+                     ^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/FirebaseSessions.swift:19:22: using '@_implementationOnly' without enabling library evolution for 'FirebaseSessions' may lead to instability during execution
+
+@_implementationOnly import FirebaseInstallations
+                     ^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/FirebaseSessions.swift:20:22: using '@_implementationOnly' without enabling library evolution for 'FirebaseSessions' may lead to instability during execution
+
+@_implementationOnly import GoogleDataTransport
+                     ^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/FirebaseSessions.swift:21:22: using '@_implementationOnly' without enabling library evolution for 'FirebaseSessions' may lead to instability during execution
+
+@_implementationOnly import Promises
+                     ^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/GoogleDataTransport+GoogleDataTransportProtocol.swift:18:22: using '@_implementationOnly' without enabling library evolution for 'FirebaseSessions' may lead to instability during execution
+
+@_implementationOnly import GoogleDataTransport
+                     ^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/Installations+InstallationsProtocol.swift:18:22: using '@_implementationOnly' without enabling library evolution for 'FirebaseSessions' may lead to instability during execution
+
+@_implementationOnly import FirebaseInstallations
+                     ^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/Logger.swift:18:22: using '@_implementationOnly' without enabling library evolution for 'FirebaseSessions' may lead to instability during execution
+
+@_implementationOnly import FirebaseCoreExtension
+                     ^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/NetworkInfo.swift:25:24: using '@_implementationOnly' without enabling library evolution for 'FirebaseSessions' may lead to instability during execution
+
+  @_implementationOnly import GoogleUtilities
+                     ^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/SessionGenerator.swift:18:22: using '@_implementationOnly' without enabling library evolution for 'FirebaseSessions' may lead to instability during execution
+
+@_implementationOnly import FirebaseInstallations
+                       ^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/SessionStartEvent.swift:18:22: using '@_implementationOnly' without enabling library evolution for 'FirebaseSessions' may lead to instability during execution
+
+@_implementationOnly import GoogleDataTransport
+                     ^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/SessionStartEvent.swift:27:24: using '@_implementationOnly' without enabling library evolution for 'FirebaseSessions' may lead to instability during execution
+
+  @_implementationOnly import GoogleUtilities
+                     ^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/Settings/SettingsDownloadClient.swift:21:24: using '@_implementationOnly' without enabling library evolution for 'FirebaseSessions' may lead to instability during execution
+
+  @_implementationOnly import GoogleUtilities
+                       ^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/Installations+InstallationsProtocol.swift:79:1: sendability of function types in instance method 'authToken(completion:)' does not match requirement in protocol 'InstallationsProtocol'; this is an error in the Swift 6 language mode
+
+extension Installations: InstallationsProtocol {}
+                       ^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/Installations+InstallationsProtocol.swift:79:1: sendability of function types in instance method 'installationID(completion:)' does not match requirement in protocol 'InstallationsProtocol'; this is an error in the Swift 6 language mode
+
+extension Installations: InstallationsProtocol {}
+       ^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/Development/NanoPB+CustomStringConvertible.swift:109:1: extension declares a conformance of imported type 'UnsafeMutablePointer' to imported protocol 'CustomStringConvertible'; this will not behave correctly if the owners of 'Swift' introduce this conformance in the future
+
+extension UnsafeMutablePointer: CustomStringConvertible where Pointee == pb_bytes_array_t {
+       ^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/Development/NanoPB+CustomStringConvertible.swift:123:1: extension declares a conformance of imported type 'Optional' to imported protocol 'CustomStringConvertible'; this will not behave correctly if the owners of 'Swift' introduce this conformance in the future
+
+extension Optional: CustomStringConvertible
+^                               ~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/Logger.swift:18:22: using '@_implementationOnly' without enabling library evolution for 'FirebaseSessions' may lead to instability during execution
+
+@_implementationOnly import FirebaseCoreExtension
+^                   ~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/Development/NanoPB+CustomStringConvertible.swift:109:1: extension declares a conformance of imported type 'UnsafeMutablePointer' to imported protocol 'CustomStringConvertible'; this will not behave correctly if the owners of 'Swift' introduce this conformance in the future
+
+extension UnsafeMutablePointer: CustomStringConvertible where Pointee == pb_bytes_array_t {
+                     ^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/Development/NanoPB+CustomStringConvertible.swift:123:1: extension declares a conformance of imported type 'Optional' to imported protocol 'CustomStringConvertible'; this will not behave correctly if the owners of 'Swift' introduce this conformance in the future
+
+extension Optional: CustomStringConvertible
+^                               ~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/NetworkInfo.swift:25:24: using '@_implementationOnly' without enabling library evolution for 'FirebaseSessions' may lead to instability during execution
+
+  @_implementationOnly import GoogleUtilities
+^                   ~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/SessionGenerator.swift:18:22: using '@_implementationOnly' without enabling library evolution for 'FirebaseSessions' may lead to instability during execution
+
+@_implementationOnly import FirebaseInstallations
+                       ^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/GoogleDataTransport+GoogleDataTransportProtocol.swift:18:22: using '@_implementationOnly' without enabling library evolution for 'FirebaseSessions' may lead to instability during execution
+
+@_implementationOnly import GoogleDataTransport
+                     ^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/Installations+InstallationsProtocol.swift:18:22: using '@_implementationOnly' without enabling library evolution for 'FirebaseSessions' may lead to instability during execution
+
+@_implementationOnly import FirebaseInstallations
+                     ^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/Installations+InstallationsProtocol.swift:79:1: sendability of function types in instance method 'authToken(completion:)' does not match requirement in protocol 'InstallationsProtocol'; this is an error in the Swift 6 language mode
+
+extension Installations: InstallationsProtocol {}
+                     ^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/Installations+InstallationsProtocol.swift:79:1: sendability of function types in instance method 'installationID(completion:)' does not match requirement in protocol 'InstallationsProtocol'; this is an error in the Swift 6 language mode
+
+extension Installations: InstallationsProtocol {}
+       ^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/GoogleDataTransport+GoogleDataTransportProtocol.swift:18:22: using '@_implementationOnly' without enabling library evolution for 'FirebaseSessions' may lead to instability during execution
+
+@_implementationOnly import GoogleDataTransport
+       ^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/Installations+InstallationsProtocol.swift:18:22: using '@_implementationOnly' without enabling library evolution for 'FirebaseSessions' may lead to instability during execution
+
+@_implementationOnly import FirebaseInstallations
+                     ^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/Installations+InstallationsProtocol.swift:79:1: sendability of function types in instance method 'authToken(completion:)' does not match requirement in protocol 'InstallationsProtocol'; this is an error in the Swift 6 language mode
+
+extension Installations: InstallationsProtocol {}
+                     ^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/Installations+InstallationsProtocol.swift:79:1: sendability of function types in instance method 'installationID(completion:)' does not match requirement in protocol 'InstallationsProtocol'; this is an error in the Swift 6 language mode
+
+extension Installations: InstallationsProtocol {}
+       ^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/Logger.swift:18:22: using '@_implementationOnly' without enabling library evolution for 'FirebaseSessions' may lead to instability during execution
+
+@_implementationOnly import FirebaseCoreExtension
+       ^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/Development/NanoPB+CustomStringConvertible.swift:109:1: extension declares a conformance of imported type 'UnsafeMutablePointer' to imported protocol 'CustomStringConvertible'; this will not behave correctly if the owners of 'Swift' introduce this conformance in the future
+
+extension UnsafeMutablePointer: CustomStringConvertible where Pointee == pb_bytes_array_t {
+                     ^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/Development/NanoPB+CustomStringConvertible.swift:123:1: extension declares a conformance of imported type 'Optional' to imported protocol 'CustomStringConvertible'; this will not behave correctly if the owners of 'Swift' introduce this conformance in the future
+
+extension Optional: CustomStringConvertible
+^                               ~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/NetworkInfo.swift:25:24: using '@_implementationOnly' without enabling library evolution for 'FirebaseSessions' may lead to instability during execution
+
+  @_implementationOnly import GoogleUtilities
+^                   ~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/SessionGenerator.swift:18:22: using '@_implementationOnly' without enabling library evolution for 'FirebaseSessions' may lead to instability during execution
+
+@_implementationOnly import FirebaseInstallations
+                       ^
+
+
+▸ Compiling FirebaseInstallations-dummy.m
+▸ Compiling FIRInstallationsStore.m
+▸ Compiling FIRInstallationsSingleOperationPromiseCache.m
+▸ Compiling FIRInstallationsItem.m
+▸ Compiling FIRInstallationsItem+RegisterInstallationAPI.m
+▸ Compiling FIRInstallationsIIDTokenStore.m
+▸ Compiling FIRInstallationsIIDStore.m
+▸ Compiling FIRInstallationsHTTPError.m
+▸ Compiling FIRInstallationsErrorUtil.m
+▸ Compiling FIRInstallationsBackoffController.m
+▸ Compiling FIRInstallationsAuthTokenResult.m
+▸ Compiling FIRCurrentDateProvider.m
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/ApplicationInfo.swift:18:22: using '@_implementationOnly' without enabling library evolution for 'FirebaseSessions' may lead to instability during execution
+
+@_implementationOnly import FirebaseCore
+                     ^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/ApplicationInfo.swift:27:24: using '@_implementationOnly' without enabling library evolution for 'FirebaseSessions' may lead to instability during execution
+
+  @_implementationOnly import GoogleUtilities
+                     ^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/EventGDTLogger.swift:18:22: using '@_implementationOnly' without enabling library evolution for 'FirebaseSessions' may lead to instability during execution
+
+@_implementationOnly import GoogleDataTransport
+                       ^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/FirebaseSessions.swift:18:22: using '@_implementationOnly' without enabling library evolution for 'FirebaseSessions' may lead to instability during execution
+
+@_implementationOnly import FirebaseCoreExtension
+                     ^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/FirebaseSessions.swift:19:22: using '@_implementationOnly' without enabling library evolution for 'FirebaseSessions' may lead to instability during execution
+
+@_implementationOnly import FirebaseInstallations
+                     ^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/FirebaseSessions.swift:20:22: using '@_implementationOnly' without enabling library evolution for 'FirebaseSessions' may lead to instability during execution
+
+@_implementationOnly import GoogleDataTransport
+                     ^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/FirebaseSessions.swift:21:22: using '@_implementationOnly' without enabling library evolution for 'FirebaseSessions' may lead to instability during execution
+
+@_implementationOnly import Promises
+                     ^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/SessionStartEvent.swift:18:22: using '@_implementationOnly' without enabling library evolution for 'FirebaseSessions' may lead to instability during execution
+
+@_implementationOnly import GoogleDataTransport
+                     ^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/SessionStartEvent.swift:27:24: using '@_implementationOnly' without enabling library evolution for 'FirebaseSessions' may lead to instability during execution
+
+  @_implementationOnly import GoogleUtilities
+                     ^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/Settings/SettingsDownloadClient.swift:21:24: using '@_implementationOnly' without enabling library evolution for 'FirebaseSessions' may lead to instability during execution
+
+  @_implementationOnly import GoogleUtilities
+                       ^
+
+
+▸ Compiling FirebaseInstallations-dummy.m
+▸ Compiling FIRInstallationsStore.m
+▸ Compiling FIRInstallationsSingleOperationPromiseCache.m
+▸ Compiling FIRInstallationsItem.m
+▸ Compiling FIRInstallationsItem+RegisterInstallationAPI.m
+▸ Compiling FIRInstallationsIIDTokenStore.m
+▸ Compiling FIRInstallationsIIDStore.m
+▸ Compiling FIRInstallationsHTTPError.m
+▸ Compiling FIRInstallationsErrorUtil.m
+▸ Compiling FIRInstallationsBackoffController.m
+▸ Compiling FIRInstallationsAuthTokenResult.m
+▸ Compiling FIRCurrentDateProvider.m
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/SessionStartEvent.swift:18:22: using '@_implementationOnly' without enabling library evolution for 'FirebaseSessions' may lead to instability during execution
+
+@_implementationOnly import GoogleDataTransport
+                       ^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/SessionStartEvent.swift:27:24: using '@_implementationOnly' without enabling library evolution for 'FirebaseSessions' may lead to instability during execution
+
+  @_implementationOnly import GoogleUtilities
+                     ^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/Settings/SettingsDownloadClient.swift:21:24: using '@_implementationOnly' without enabling library evolution for 'FirebaseSessions' may lead to instability during execution
+
+  @_implementationOnly import GoogleUtilities
+                       ^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/ApplicationInfo.swift:18:22: using '@_implementationOnly' without enabling library evolution for 'FirebaseSessions' may lead to instability during execution
+
+@_implementationOnly import FirebaseCore
+                       ^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/ApplicationInfo.swift:27:24: using '@_implementationOnly' without enabling library evolution for 'FirebaseSessions' may lead to instability during execution
+
+  @_implementationOnly import GoogleUtilities
+                     ^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/EventGDTLogger.swift:18:22: using '@_implementationOnly' without enabling library evolution for 'FirebaseSessions' may lead to instability during execution
+
+@_implementationOnly import GoogleDataTransport
+                       ^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/FirebaseSessions.swift:18:22: using '@_implementationOnly' without enabling library evolution for 'FirebaseSessions' may lead to instability during execution
+
+@_implementationOnly import FirebaseCoreExtension
+                     ^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/FirebaseSessions.swift:19:22: using '@_implementationOnly' without enabling library evolution for 'FirebaseSessions' may lead to instability during execution
+
+@_implementationOnly import FirebaseInstallations
+                     ^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/FirebaseSessions.swift:20:22: using '@_implementationOnly' without enabling library evolution for 'FirebaseSessions' may lead to instability during execution
+
+@_implementationOnly import GoogleDataTransport
+                     ^
+
+
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseSessions/FirebaseSessions/Sources/FirebaseSessions.swift:21:22: using '@_implementationOnly' without enabling library evolution for 'FirebaseSessions' may lead to instability during execution
+
+@_implementationOnly import Promises
+                     ^
+
+
+▸ Compiling FirebaseCore-dummy.m
+▸ Compiling FIRVersion.m
+▸ Compiling FIROptions.m
+▸ Compiling FIRLogger.m
+▸ Compiling FIRFirebaseUserAgent.m
+▸ Compiling FIRDependency.m
+▸ Compiling FIRInstallationsStoredItem.m
+▸ Compiling FIRInstallationsStoredAuthToken.m
+▸ Compiling FIRInstallationsLogger.m
+▸ Compiling FIRInstallationsIDController.m
+▸ Compiling FIRInstallationsAPIService.m
+▸ Compiling FIRInstallations.m
+▸ Compiling FIRConfiguration.m
+▸ Compiling FIRComponentType.m
+▸ Compiling FIRComponentContainer.m
+▸ Compiling FIRComponent.m
+▸ Compiling FIRBundleUtil.m
+▸ Compiling FIRInstallationsStoredItem.m
+▸ Compiling FIRInstallationsStoredAuthToken.m
+▸ Compiling FIRInstallationsLogger.m
+▸ Compiling FIRInstallationsIDController.m
+▸ Compiling FIRInstallationsAPIService.m
+▸ Compiling FIRInstallations.m
+▸ Compiling FIRAnalyticsConfiguration.m
+▸ Compiling sessions.nanopb.c
+▸ Compiling sessions.nanopb.c
+▸ Compiling FIRApp.m
+▸ Compiling FIRHeartbeatLogger.m
+▸ Building library libFirebaseCore.a
+▸ Compiling FIRBundleUtil.m
+▸ Compiling FIRComponent.m
+▸ Compiling FIRAnalyticsConfiguration.m
+▸ Compiling FirebaseCore-dummy.m
+▸ Compiling FIRVersion.m
+▸ Compiling FIROptions.m
+▸ Compiling FIRLogger.m
+▸ Compiling FirebaseSessions-dummy.m
+▸ Compiling FIRFirebaseUserAgent.m
+▸ Compiling FIRDependency.m
+▸ Compiling FIRConfiguration.m
+▸ Compiling FIRComponentType.m
+▸ Compiling FIRComponentContainer.m
+▸ Compiling FirebaseSessions-dummy.m
+▸ Compiling RCNPersonalization.m
+▸ Compiling RCNConstants3P.m
+▸ Compiling FirebaseRemoteConfig-dummy.m
+▸ Compiling FIRRemoteConfigUpdate.m
+▸ Compiling FirebaseABTesting-dummy.m
+▸ Compiling FIRLifecycleEvents.m
+▸ Compiling ABTExperimentPayload.m
+▸ Compiling RCNPersonalization.m
+▸ Compiling RCNConstants3P.m
+▸ Compiling FirebaseRemoteConfig-dummy.m
+▸ Compiling FIRRemoteConfigUpdate.m
+▸ Compiling FirebaseABTesting-dummy.m
+▸ Compiling FIRLifecycleEvents.m
+▸ Compiling ABTExperimentPayload.m
+▸ Compiling FIRApp.m
+▸ Compiling FIRHeartbeatLogger.m
+▸ Compiling FIRSESNanoPBHelpers.m
+▸ Compiling RCNUserDefaultsManager.m
+▸ Compiling RCNDevice.m
+▸ Compiling RCNConfigSettings.m
+▸ Compiling RCNConfigRealtime.m
+▸ Compiling RCNConfigFetch.m
+▸ Compiling RCNConfigExperiment.m
+▸ Building library libFirebaseCore.a
+▸ Compiling RCNConfigDBManager.m
+▸ Compiling RCNConfigContent.m
+
+⚠️  /Users/vagner/Library/CloudStorage/Dropbox/_MBA Esalq/_TCC/Projeto/iOS/Pods/FirebaseRemoteConfig/FirebaseRemoteConfig/Sources/RCNConfigContent.m:201:18: comparison of different enumeration types ('RCNDBSource' (aka 'enum RCNDBSource') and 'enum FIRRemoteConfigSource') [-Wenum-compare]
+
+  201 |     if (DBSource == FIRRemoteConfigSourceDefault) {
+                     ^
+
+
+▸ Compiling FIRRemoteConfigComponent.m
+▸ Compiling FIRRemoteConfig.m
+▸ Compiling FIRConfigValue.m
+▸ Compiling FIRExperimentController.m
+▸ Compiling ABTConditionalUserPropertyController.m
+▸ Building library libFirebaseInstallations.a
+▸ Building library libFirebaseInstallations.a
+▸ Building library libFirebaseCoreExtension.a
+▸ Building library libFirebaseCoreExtension.a
+▸ Running script '[CP] Copy XCFrameworks'
+▸ Building library libFirebaseSessions.a
+▸ Compiling FIRSESNanoPBHelpers.m
+▸ Building library libFirebaseABTesting.a
+▸ Building library libFirebaseSessions.a
+▸ Running script 'Copy generated compatibility header'
+▸ Compiling FIRConfigValue.m
+▸ Compiling FIRExperimentController.m
+▸ Compiling ABTConditionalUserPropertyController.m
+▸ Compiling RCNConfigContent.m
+▸ Compiling FIRRemoteConfig.m
+▸ Compiling FIRRemoteConfigComponent.m
+▸ Compiling RCNUserDefaultsManager.m
+▸ Compiling RCNDevice.m
+▸ Compiling RCNConfigSettings.m
+▸ Compiling RCNConfigRealtime.m
+▸ Compiling RCNConfigFetch.m
+▸ Building library libFirebaseABTesting.a
+▸ Compiling RCNConfigExperiment.m
+▸ Compiling RCNConfigDBManager.m
+▸ Building library libFirebaseRemoteConfig.a
+▸ Building library libFirebaseRemoteConfig.a
+▸ Running script 'Copy generated compatibility header'
+▸ Compiling perf_metric.nanopb.c
+▸ Compiling perf_metric.nanopb.c
+▸ Compiling FIRCLSException.mm
+▸ Compiling FIRCLSDemangleOperation.mm
+▸ Compiling FIRCLSException.mm
+▸ Compiling FIRCLSDemangleOperation.mm
+▸ Compiling FirebasePerformance-dummy.m
+▸ Compiling FPRURLFilter.m
+▸ Compiling FPRSessionDetails.m
+▸ Compiling FPRSelectorInstrumentor.m
+▸ Compiling FPRProxyObjectHelper.m
+▸ Compiling FPRPerfDate.m
+▸ Compiling FPRObjectInstrumentor.m
+▸ Compiling FPRNetworkTrace.m
+▸ Compiling FPRNetworkInstrumentHelpers.m
+▸ Compiling FPRNSURLSessionInstrument.m
+▸ Compiling FPRNSURLSessionDelegateInstrument.m
+▸ Compiling FPRNSURLSessionDelegate.m
+▸ Compiling FPRNSURLConnectionInstrument.m
+▸ Compiling FPRNSURLConnectionDelegateInstrument.m
+▸ Compiling FPRNSURLConnectionDelegate.m
+▸ Compiling FPRMemoryGaugeData.m
+▸ Compiling FPRMemoryGaugeCollector.m
+▸ Compiling FPRInstrumentation.m
+▸ Compiling FPRInstrument.m
+▸ Compiling FPRGDTLogger.m
+▸ Compiling FPRGDTLogSampler.m
+▸ Compiling FPRGDTEvent.m
+▸ Compiling FPRDiagnostics.m
+▸ Compiling FPRDataUtils.m
+▸ Compiling FPRCounterList.m
+▸ Compiling FPRConstants.m
+▸ Compiling FPRConsoleURLGenerator.m
+▸ Compiling FPRConsoleLogger.m
+▸ Compiling FPRConfiguration.m
+▸ Compiling FPRClassInstrumentor.m
+▸ Compiling FPRCPUGaugeData.m
+▸ Compiling FPRCPUGaugeCollector.m
+▸ Compiling FIRTrace.m
+▸ Compiling FIRPerformance.m
+▸ Compiling FIRHTTPMetric.m
+▸ Compiling FPRNanoPbUtils.m
+▸ Compiling crashlytics.nanopb.c
+▸ Compiling FirebasePerformance-dummy.m
+▸ Compiling FPRURLFilter.m
+▸ Compiling FPRSessionDetails.m
+▸ Compiling FPRSelectorInstrumentor.m
+▸ Compiling FPRProxyObjectHelper.m
+▸ Compiling FPRPerfDate.m
+▸ Compiling FPRObjectInstrumentor.m
+▸ Compiling FPRNetworkTrace.m
+▸ Compiling FPRNetworkInstrumentHelpers.m
+▸ Compiling FPRNSURLSessionInstrument.m
+▸ Compiling FPRNSURLSessionDelegateInstrument.m
+▸ Compiling FPRNSURLSessionDelegate.m
+▸ Compiling FPRNSURLConnectionInstrument.m
+▸ Compiling FPRNSURLConnectionDelegateInstrument.m
+▸ Compiling FPRNSURLConnectionDelegate.m
+▸ Compiling FPRMemoryGaugeData.m
+▸ Compiling FPRMemoryGaugeCollector.m
+▸ Compiling FPRInstrumentation.m
+▸ Compiling FPRInstrument.m
+▸ Compiling FPRGDTLogger.m
+▸ Compiling FPRGDTLogSampler.m
+▸ Compiling FPRGDTEvent.m
+▸ Compiling FPRDiagnostics.m
+▸ Compiling FPRDataUtils.m
+▸ Compiling FPRCounterList.m
+▸ Compiling FPRConstants.m
+▸ Compiling FPRConsoleURLGenerator.m
+▸ Compiling FPRConsoleLogger.m
+▸ Compiling FPRConfiguration.m
+▸ Compiling FPRClassInstrumentor.m
+▸ Compiling FPRCPUGaugeData.m
+▸ Compiling FPRCPUGaugeCollector.m
+▸ Compiling FIRTrace.m
+▸ Compiling FIRPerformance.m
+▸ Compiling FIRHTTPMetric.m
+▸ Compiling FPRNanoPbUtils.m
+▸ Compiling FIRCLSUnwind_x86.c
+▸ Compiling FPRUIViewControllerInstrument.m
+▸ Compiling FPRTraceBackgroundActivityTracker.m
+▸ Compiling FPRSessionManager.m
+▸ Compiling FPRScreenTraceTracker.m
+▸ Compiling FPRGaugeManager.m
+▸ Compiling FPRGDTRateLimiter.m
+▸ Compiling FPRAppActivityTracker.m
+▸ Compiling FIRCLSUnwind_arm.c
+▸ Compiling FIRCLSUnwind.c
+▸ Compiling FIRCLSThreadState.c
+▸ Compiling FIRCLSSignal.c
+▸ Compiling FIRCLSProcess.c
+▸ Compiling FIRCLSMachException.c
+▸ Compiling FPRRemoteConfigFlags.m
+▸ Compiling FPRConfigurations.m
+▸ Compiling FPRClient.m
+▸ Compiling FIRCLSInternalLogging.c
+▸ Compiling FIRCLSDwarfUnwind.c
+▸ Compiling FIRCLSDwarfExpressionMachine.c
+▸ Compiling FIRCLSDataParsing.c
+▸ Compiling FIRCLSCrashedMarkerFile.c
+▸ Compiling FIRCLSCompactUnwind.c
+▸ Compiling FirebaseCrashlytics-dummy.m
+▸ Compiling FIRStackFrame.m
+▸ Compiling FIRExceptionModel.m
+▸ Compiling FIRCrashlyticsReport.m
+▸ Compiling FIRCLSdSYM.m
+▸ Compiling FIRCLSUtility.m
+▸ Compiling FIRCLSUserLogging.m
+▸ Compiling FIRCLSUserDefaults.m
+▸ Compiling FIRCLSUUID.m
+▸ Compiling FIRCLSURLBuilder.m
+▸ Compiling FIRCLSThreadArrayOperation.m
+▸ Compiling FIRCLSSymbolicationOperation.m
+▸ Compiling FIRCLSSymbolResolver.m
+▸ Compiling FIRCLSSettings.m
+▸ Compiling FIRCLSSerializeSymbolicatedFramesOperation.m
+▸ Compiling FIRCLSRolloutsPersistenceManager.m
+▸ Compiling FIRCLSReportUploader.m
+▸ Compiling FIRCLSReportAdapter.m
+▸ Compiling FIRCLSRecordIdentity.m
+▸ Compiling FIRCLSRecordHost.m
+▸ Compiling FIRCLSRecordBase.m
+▸ Compiling FIRCLSRecordApplication.m
+▸ Compiling FIRCLSProcessReportOperation.m
+▸ Compiling FIRCLSOnDemandModel.m
+▸ Compiling FIRCLSNetworkResponseHandler.m
+▸ Compiling FIRCLSNetworkOperation.m
+▸ Compiling FIRCLSMultipartMimeStreamEncoder.m
+▸ Compiling FIRCLSManagerData.m
+▸ Compiling FIRCLSMachOSlice.m
+▸ Compiling FIRCLSMachOBinary.m
+▸ Compiling FIRCLSMachO.m
+▸ Compiling FIRCLSLaunchMarkerModel.m
+▸ Compiling FIRCLSInternalReport.m
+▸ Compiling FIRCLSInstallIdentifierModel.m
+▸ Compiling FIRCLSHandler.m
+▸ Compiling FIRCLSFileManager.m
+▸ Compiling FIRCLSFile.m
+▸ Compiling FIRCLSFABNetworkClient.m
+▸ Compiling FIRCLSFABAsyncOperation.m
+▸ Compiling FIRCLSExistingReportManager.m
+▸ Compiling FIRCLSExecutionIdentifierModel.m
+▸ Compiling FIRCLSDownloadAndSaveSettingsOperation.m
+▸ Compiling FIRCLSDataCollectionToken.m
+▸ Compiling FIRCLSContextManager.m
+▸ Compiling FIRCLSContextInitData.m
+▸ Compiling FIRCLSCompoundOperation.m
+▸ Compiling FIRCLSCodeMapping.m
+▸ Compiling FIRCLSByteUtility.m
+▸ Compiling FIRCLSBinaryImage.m
+▸ Compiling FPRUIViewControllerInstrument.m
+▸ Compiling FPRTraceBackgroundActivityTracker.m
+▸ Compiling FPRSessionManager.m
+▸ Compiling FPRScreenTraceTracker.m
+▸ Compiling FPRGaugeManager.m
+▸ Compiling FPRGDTRateLimiter.m
+▸ Compiling FPRAppActivityTracker.m
+▸ Compiling FIRCLSAsyncOperation.m
+▸ Compiling FIRCLSApplicationIdentifierModel.m
+▸ Compiling FIRCLSAnalyticsManager.m
+▸ Compiling FIRCLSAllocate.c
+▸ Compiling FPRRemoteConfigFlags.m
+▸ Compiling FPRConfigurations.m
+▸ Compiling FIRCLSMetricKitManager.m
+▸ Compiling FIRCLSCallStackTree.m
+▸ Compiling FPRClient.m
+▸ Compiling crashlytics.nanopb.c
+▸ Building library libFirebasePerformance.a
+▸ Building library libFirebasePerformance.a
+▸ Compiling FIRCLSCrashedMarkerFile.c
+▸ Compiling FIRCLSDataParsing.c
+▸ Compiling FIRCLSDwarfUnwind.c
+▸ Compiling FIRCLSCompactUnwind.c
+▸ Compiling FIRCLSAllocate.c
+▸ Compiling FIRCLSUnwind_x86.c
+▸ Compiling FIRCLSUnwind_arm.c
+▸ Compiling FIRCLSUnwind.c
+▸ Compiling FIRCLSThreadState.c
+▸ Compiling FIRCLSSignal.c
+▸ Compiling FIRCLSProcess.c
+▸ Compiling FIRCLSMachException.c
+▸ Compiling FIRCLSInternalLogging.c
+▸ Compiling FIRCLSDwarfExpressionMachine.c
+▸ Compiling FIRCLSReportManager.m
+▸ Compiling FIRCLSFABHost.m
+▸ Compiling FIRCLSNotificationManager.m
+▸ Compiling FIRCLSContext.m
+▸ Compiling FIRCLSHost.m
+▸ Compiling FIRCLSSettingsManager.m
+▸ Compiling FIRCLSApplication.m
+▸ Compiling FIRCLSDataCollectionArbiter.m
+▸ Compiling FIRCLSLogger.m
+▸ Compiling FIRCLSConstants.m
+▸ Compiling FIRCrashlytics.m
+▸ Compiling FIRCLSExistingReportManager.m
+▸ Compiling FIRCLSDataCollectionToken.m
+▸ Compiling FIRCLSFABAsyncOperation.m
+▸ Compiling FIRCLSDownloadAndSaveSettingsOperation.m
+▸ Compiling FIRCLSContextManager.m
+▸ Compiling FIRCLSRecordBase.m
+▸ Compiling FIRCLSRecordHost.m
+▸ Compiling FirebaseCrashlytics-dummy.m
+▸ Building library libFirebaseCrashlytics.a
+▸ Compiling FIRStackFrame.m
+▸ Compiling FIRExceptionModel.m
+▸ Compiling FIRCrashlyticsReport.m
+▸ Compiling FIRCLSdSYM.m
+▸ Compiling FIRCLSUtility.m
+▸ Compiling FIRCLSUserLogging.m
+▸ Compiling FIRCLSUserDefaults.m
+▸ Compiling FIRCLSUUID.m
+▸ Compiling FIRCLSURLBuilder.m
+▸ Compiling FIRCLSThreadArrayOperation.m
+▸ Compiling FIRCLSSymbolicationOperation.m
+▸ Compiling FIRCLSSymbolResolver.m
+▸ Compiling FIRCLSSettings.m
+▸ Compiling FIRCLSSerializeSymbolicatedFramesOperation.m
+▸ Compiling FIRCLSRolloutsPersistenceManager.m
+▸ Compiling FIRCLSReportUploader.m
+▸ Compiling FIRCLSReportAdapter.m
+▸ Compiling FIRCLSRecordIdentity.m
+▸ Compiling FIRCLSRecordApplication.m
+▸ Compiling FIRCLSProcessReportOperation.m
+▸ Compiling FIRCLSOnDemandModel.m
+▸ Compiling FIRCLSNetworkResponseHandler.m
+▸ Compiling FIRCLSNetworkOperation.m
+▸ Compiling FIRCLSMultipartMimeStreamEncoder.m
+▸ Compiling FIRCLSManagerData.m
+▸ Compiling FIRCLSMachOSlice.m
+▸ Compiling FIRCLSMachOBinary.m
+▸ Compiling FIRCLSMachO.m
+▸ Compiling FIRCLSLaunchMarkerModel.m
+▸ Compiling FIRCLSInternalReport.m
+▸ Compiling FIRCLSInstallIdentifierModel.m
+▸ Compiling FIRCLSHandler.m
+▸ Compiling FIRCLSFileManager.m
+▸ Compiling FIRCLSFile.m
+▸ Compiling FIRCLSFABNetworkClient.m
+▸ Compiling FIRCLSExecutionIdentifierModel.m
+▸ Compiling FIRCLSContextInitData.m
+▸ Compiling FIRCLSCompoundOperation.m
+▸ Compiling FIRCLSCodeMapping.m
+▸ Compiling FIRCLSByteUtility.m
+▸ Compiling FIRCLSBinaryImage.m
+▸ Compiling FIRCLSAsyncOperation.m
+▸ Compiling FIRCLSApplicationIdentifierModel.m
+▸ Compiling FIRCLSAnalyticsManager.m
+▸ Compiling FIRCLSMetricKitManager.m
+▸ Compiling FIRCLSCallStackTree.m
+▸ Compiling FIRCLSFABHost.m
+▸ Compiling FIRCLSHost.m
+▸ Compiling FIRCLSReportManager.m
+▸ Compiling FIRCLSNotificationManager.m
+▸ Compiling FIRCLSContext.m
+▸ Compiling FIRCLSSettingsManager.m
+▸ Compiling FIRCLSApplication.m
+▸ Compiling FIRCLSDataCollectionArbiter.m
+▸ Compiling FIRCLSLogger.m
+▸ Compiling FIRCLSConstants.m
+▸ Compiling FIRCrashlytics.m
+▸ Building library libFirebaseCrashlytics.a
+▸ Running script 'Copy generated compatibility header'
+▸ Compiling Pods-Cardapio\ USP-dummy.m
+▸ Compiling Pods-Cardapio\ USP-dummy.m
+▸ Building library libPods-Cardapio\ USP.a
+▸ Building library libPods-Cardapio\ USP.a
+▸ Running script '[CP] Check Pods Manifest.lock'
+▸ Copying /Users/vagner/Library/Developer/Xcode/DerivedData/Cardapio_USP-exuqwenqoybjqmbmwtzdenmyefje/Build/Products/Debug-iphonesimulator/Cardapio\ USP.app/restaurants_old.json
+▸ Copying /Users/vagner/Library/Developer/Xcode/DerivedData/Cardapio_USP-exuqwenqoybjqmbmwtzdenmyefje/Build/Products/Debug-iphonesimulator/Cardapio\ USP.app/restaurants.json
+▸ Copying /Users/vagner/Library/Developer/Xcode/DerivedData/Cardapio_USP-exuqwenqoybjqmbmwtzdenmyefje/Build/Products/Debug-iphonesimulator/Cardapio\ USP.app/restaurantes.json
+▸ Copying /Users/vagner/Library/Developer/Xcode/DerivedData/Cardapio_USP-exuqwenqoybjqmbmwtzdenmyefje/Build/Products/Debug-iphonesimulator/Cardapio\ USP.app/central.json
+▸ Copying /Users/vagner/Library/Developer/Xcode/DerivedData/Cardapio_USP-exuqwenqoybjqmbmwtzdenmyefje/Build/Products/Debug-iphonesimulator/Cardapio\ USP.app/central.jpg
+▸ Copying /Users/vagner/Library/Developer/Xcode/DerivedData/Cardapio_USP-exuqwenqoybjqmbmwtzdenmyefje/Build/Products/Debug-iphonesimulator/Cardapio\ USP.app/Settings.bundle
+▸ Copying restaurants_old.plist
+▸ Copying central.plist
+▸ Copying GoogleService-Info.plist
+▸ Copying Carriers.plist
+▸ Compiling Main_iPhone.storyboard
+▸ Precompiling USP-Prefix.pch
+▸ Compiling sha1.c
+▸ Compiling hmac.c
+▸ Compiling Base64Transcoder.c
+▸ Precompiling USP-Prefix.pch
+▸ Compiling UIViewController+REFrostedViewController.m
+▸ Compiling WeeklyPeriod.m
+▸ Compiling VMPix.m
+▸ Compiling main.m
+▸ Compiling UIView+REFrostedViewController.m
+▸ Compiling ThumbnailViewImageProxy.m
+▸ Compiling TelephoneUtils.m
+▸ Compiling STIOauth.m
+▸ Compiling SwipeableCell.m
+▸ Compiling RestaurantsFilterController.m
+▸ Compiling Restaurant.m
+▸ Compiling RWLabel.m
+▸ Compiling RECommonFunctions.m
+▸ Compiling PreferredCell.m
+▸ Compiling Period.m
+▸ Compiling PixViewController.m
+▸ Compiling WebViewController.m
+▸ Compiling PaddedLabel.m
+▸ Compiling OAuthUSP.m
+▸ Compiling OAuth1Controller.m
+▸ Compiling NSString+URLEncoding.m
+▸ Compiling NSString+HTML.m
+▸ Compiling MyTextField.m
+▸ Compiling MyMutableURLRequest.m
+▸ Compiling MenuViewController.m
+▸ Compiling PlaceAnnotation.m
+▸ Compiling MenuStub.m
+▸ Compiling Menu.m
+▸ Compiling MapViewController.m
+▸ Compiling MDPinAnnotationView.m
+▸ Compiling LoginWebViewController.m
+▸ Compiling KeychainItemWrapper.m
+▸ Compiling MainViewController.m
+▸ Compiling Items.m
+▸ Compiling ImageCell.m
+▸ Compiling InfoViewController.m
+▸ Compiling GTMNSString+HTML.m
+▸ Compiling DetailCell.m
+▸ Compiling DKScrollingTabController.m
+▸ Compiling CreditsViewController.m
+▸ Compiling CreditsNavigationViewController.m
+▸ Compiling Constants.m
+▸ Compiling CheckoutDataModel.m
+▸ Compiling DataModel.m
+▸ Compiling DataAccess.m
+▸ Compiling Cash.m
+▸ Compiling UIImage+REFrostedViewController.m
+▸ Compiling REFrostedViewController.m
+▸ Compiling REFrostedContainerViewController.m
+▸ Compiling CALayer+XibConfiguration.m
+▸ Compiling BoletosPendentesTableViewController.m
+▸ Compiling BoletoViewController.m
+▸ Compiling CarrierDataModel.m
+▸ Compiling BoletoTableViewCell.m
+▸ Compiling BoletoFormViewController.m
+▸ Compiling AppDelegate.m
+▸ Compiling AFURLSessionManager.m
+▸ Compiling AFURLResponseSerialization.m
+▸ Compiling AFURLRequestSerialization.m
+▸ Compiling AFURLConnectionOperation.m
+▸ Compiling AFSecurityPolicy.m
+▸ Compiling AFNetworkReachabilityManager.m
+▸ Compiling AFHTTPSessionManager.m
+▸ Compiling AFHTTPRequestOperationManager.m
+▸ Compiling AFHTTPRequestOperation.m
+▸ Linking Cardapio\
+▸ Processing Cardapio USP-Info.plist
+    'UILaunchImages' has been deprecated, use launch storyboards instead. (in target 'Cardapio USP' from project 'Cardapio USP')
+▸ Generating 'Cardapio\ USP.app.dSYM'
+▸ Running script 'Run Script'
+▸ Running script '[CP] Copy Pods Resources'
+▸ Touching Cardapio\ USP.app (in target 'Cardapio USP' from project 'Cardapio USP')
+    Run script build phase 'Run Script' will be run during every build because it does not specify any outputs. To address this issue, either add output dependencies to the script phase, or configure it to run in every build by unchecking "Based on dependency analysis" in the script phase. (in target 'Cardapio USP' from project 'Cardapio USP')
+▸ Build Succeeded
